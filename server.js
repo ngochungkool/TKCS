@@ -1633,6 +1633,19 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Lightweight ping endpoint for 24/7 Keep-Alive
+  if (pathname === '/api/ping') {
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, status: 'awake', ts: Date.now() }));
+    return;
+  }
+
+  // Auto-detect public cloud URL (e.g. https://tkcs.onrender.com) if not set in env
+  const reqHost = req.headers['x-forwarded-host'] || req.headers.host || '';
+  if (reqHost && !reqHost.includes('localhost') && !reqHost.includes('127.0.0.1')) {
+    detectedPublicUrl = `https://${reqHost}`;
+  }
+
   // Static file serving with clean routes for Home & Subpages
   let cleanRoute = pathname;
   if (cleanRoute === '/') cleanRoute = '/index.html';
@@ -1653,6 +1666,35 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
+// ============================================================================
+// 24/7 AUTO KEEP-AWAKE (Giữ máy chủ Render luôn thức - dùng ~720-744h / 750h miễn phí mỗi tháng)
+// ============================================================================
+let detectedPublicUrl = process.env.RENDER_EXTERNAL_URL || '';
+
+// 1. Giữ luồng SSE luôn thông suốt mỗi 25 giây
+setInterval(() => {
+  for (const res of sseClients) {
+    try {
+      res.write(`: keepalive ${Date.now()}\n\n`);
+    } catch (e) {
+      sseClients.delete(res);
+    }
+  }
+}, 25 * 1000);
+
+// 2. Tự động gõ cửa (Self-Ping) qua Internet mỗi 10 phút (< 15 phút giới hạn nghỉ của Render)
+setInterval(async () => {
+  const targetOrigin = process.env.RENDER_EXTERNAL_URL || detectedPublicUrl;
+  if (!targetOrigin) return;
+  try {
+    const cleanUrl = targetOrigin.replace(/\/+$/, '') + '/api/ping';
+    await fetch(cleanUrl, { headers: { 'User-Agent': 'TKCS-KeepAlive-Ping' } });
+  } catch (e) {
+    // Ignore transient network errors
+  }
+}, 10 * 60 * 1000);
+
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Realtime Timeline Server running at http://localhost:${PORT}`);
 });
+
