@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hành chính khoa | Khoa Ngoại Thần Kinh - Cột Sống (BVĐK Trung Tâm Tỉnh Gia Lai)</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Thư viện đọc file Excel (.xlsx, .xls, .csv) trực tiếp trên trình duyệt -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Official Department Header (100% đồng bộ với trang Quản lý User & Trang chủ) -->
+    <header class="dept-header-bar">
+      <div class="dept-brand">
+        <a href="/" title="Về Trang chủ Khoa" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="logo.png" alt="Logo Khoa Ngoại Thần Kinh - Cột Sống" class="dept-logo-img" width="54" height="54" />
+        </a>
+        <div class="dept-brand-text">
+          <div class="hospital-subtitle">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+          <h1 class="dept-main-title">KHOA NGOẠI THẦN KINH - CỘT SỐNG</h1>
+        </div>
+      </div>
+
+      <!-- Right Header Group: Realtime Clock -->
+      <div class="header-right-group">
+        <div class="header-clock-box">
+          <div class="header-clock-time" id="header-clock-time">00:00:00</div>
+          <div class="header-clock-date" id="header-clock-date">Thứ Hai, 28/09/2026</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- THANH CHỌN 3 TAB + BỘ CHỌN NGÀY CHẤM CÔNG / QUẢN LÝ KHOA -->
+    <div class="admin-top-controls-row">
+      <div class="admin-tabs-bar" role="tablist" aria-label="Phân hệ Hành chính khoa">
+        <button
+          type="button"
+          class="admin-tab-btn active"
+          id="tab-btn-cham-cong"
+          role="tab"
+          aria-selected="true"
+          onclick="switchAdminTab('cham-cong')"
+        >
+          Chấm công
+        </button>
+        <button
+          type="button"
+          class="admin-tab-btn"
+          id="tab-btn-benh-nhan"
+          role="tab"
+          aria-selected="false"
+          onclick="switchAdminTab('benh-nhan')"
+        >
+          Số liệu bệnh nhân
+        </button>
+        <button
+          type="button"
+          class="admin-tab-btn"
+          id="tab-btn-so-lieu"
+          role="tab"
+          aria-selected="false"
+          onclick="switchAdminTab('so-lieu')"
+        >
+          Số liệu khoa
+        </button>
+      </div>
+
+      <!-- BỘ CHỌN NGÀY CHẤM CÔNG & QUẢN LÝ SỐ LIỆU KHOA -->
+      <div class="admin-date-picker-bar">
+        <button type="button" class="btn-date-nav" onclick="shiftSelectedDate(-1)" title="Lùi 1 ngày">
+          ◀ Hôm trước
+        </button>
+        <div class="admin-date-input-wrap">
+          <input
+            type="date"
+            id="admin-selected-date"
+            class="admin-date-input"
+            onchange="onSelectedDateChange(this.value)"
+          />
+          <span class="admin-date-badge" id="admin-date-human-label">HÔM NAY</span>
+        </div>
+        <button type="button" class="btn-date-nav" onclick="shiftSelectedDate(1)" title="Tiến 1 ngày">
+          Ngày sau ▶
+        </button>
+        <button type="button" class="btn-date-today" onclick="resetSelectedDateToToday()">
+          Hôm nay
+        </button>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         TAB 1: CHẤM CÔNG & LỊCH LÀM VIỆC BÁC SĨ (THEO NGÀY ĐANG CHỌN)
+         ======================================================================= -->
+    <section id="tab-panel-cham-cong" class="admin-tab-panel active">
+      <div class="admin-table-section">
+        <div class="admin-chamcong-toolbar">
+          <div class="admin-toolbar-title-wrap">
+            <h3 class="admin-main-heading" id="chamcong-heading-with-date">Bảng Phân Công &amp; Chấm Công Bác Sĩ</h3>
+            <button type="button" class="btn-add-doctor" onclick="autoFillScheduleFromPrevDay()" title="Chuyển các bác sĩ Trực ngày hôm trước sang Ra trực cho ngày đang chọn">
+              ⚡ Lấy Ra trực từ hôm trước
+            </button>
+            <button type="button" class="btn-add-doctor" id="btn-open-add-doctor">
+              + Thêm Bác Sĩ
+            </button>
+            <button type="button" class="btn-export-attendance-img" id="btn-export-attendance">
+              📸 Tạo &amp; Tải Ảnh Bảng Chấm Công
+            </button>
+          </div>
+
+          <div class="admin-hero-stats" id="adminQuickStats">
+            <div class="admin-stat-box">
+              <span class="stat-num" id="statDutyCount">0</span>
+              <span class="stat-lbl">Trực (24h)</span>
+            </div>
+            <div class="admin-stat-box">
+              <span class="stat-num" id="statWorkCount">0</span>
+              <span class="stat-lbl">Làm ngày</span>
+            </div>
+            <div class="admin-stat-box">
+              <span class="stat-num" id="statClinicCount">0</span>
+              <span class="stat-lbl">Phòng khám</span>
+            </div>
+            <div class="admin-stat-box">
+              <span class="stat-num" id="statPostDutyCount">0</span>
+              <span class="stat-lbl">Ra trực</span>
+            </div>
+            <div class="admin-stat-box">
+              <span class="stat-num" id="statOffCount">0</span>
+              <span class="stat-lbl">Nghỉ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-roster-table">
+            <thead>
+              <tr>
+                <th style="width: 72px; text-align: center;">STT</th>
+                <th style="width: 260px;">Bác sĩ / Tài khoản HIS</th>
+                <th style="width: 210px;">Phòng phụ trách</th>
+                <th>Chọn Lịch Làm Việc / Chấm Công Hôm Nay</th>
+                <th style="width: 145px; text-align: center;">Thông tin BS</th>
+              </tr>
+            </thead>
+            <tbody id="adminRosterBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 2: SỐ LIỆU BỆNH NHÂN (9 CHỈ SỐ + CÔNG CỤ ĐỌC FILE EXCEL TỪ HIS)
+         ======================================================================= -->
+    <section id="tab-panel-benh-nhan" class="admin-tab-panel">
+      <div class="admin-table-section">
+        <!-- KHU VỰC UPLOAD & BÓC TÁCH FILE EXCEL XUẤT TỪ HIS -->
+        <div class="his-excel-upload-card">
+          <div class="his-upload-left">
+            <h3 class="his-upload-title">Công cụ đọc dữ liệu từ HIS</h3>
+            <p class="his-upload-desc">
+              Tải lên các file exel chứa thông tin bệnh nhân đang điều trị, vào khoa, chuyển khoa, ra viện vào đây
+            </p>
+            <div id="his-uploaded-files-list" class="his-files-list"></div>
+          </div>
+
+          <div class="his-upload-right">
+            <label for="his-excel-file-input" class="btn-upload-his-excel">
+              📥 Chọn File Excel từ HIS
+            </label>
+            <input
+              type="file"
+              id="his-excel-file-input"
+              accept=".xlsx,.xls,.csv"
+              multiple
+              style="display: none;"
+            />
+            <span class="his-upload-hint">Hỗ trợ chọn nhiều file cùng lúc</span>
+          </div>
+        </div>
+
+        <!-- THANH CÔNG CỤ QUẢN LÝ 9 CHỈ SỐ BỆNH NHÂN TOÀN KHOA -->
+        <div class="admin-chamcong-toolbar" style="margin-top: 1.25rem;">
+          <div class="admin-toolbar-title-wrap">
+            <h3 class="admin-main-heading">9 Chỉ Số Bệnh Nhân Toàn Khoa Hôm Nay</h3>
+            <button type="button" class="btn-add-doctor" onclick="autoCalculateHienCo()">
+              ⚡ Tự tính Hiện có = Đầu ca + Vào + Chuyển đến - Ra - Chuyển đi - Tử vong
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+            <button type="button" class="btn-export-attendance-img" onclick="savePatientStatsToServer()">
+              💾 Lưu Số Liệu Bệnh Nhân
+            </button>
+          </div>
+        </div>
+
+        <!-- 9 Ô CHỈ SỐ BỆNH NHÂN (CÓ THỂ NHẬP TRỰC TIẾP HOẶC BẤM +/-) -->
+        <div class="patient-9metrics-grid">
+          <!-- 1. ĐẦU CA -->
+          <div class="patient-metric-card">
+            <span class="pm-label">1. Đầu ca</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('dauCa', -1)">−</button>
+              <input type="number" id="pm-dauCa" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('dauCa', 1)">+</button>
+            </div>
+            <span class="pm-sub">Bệnh nhân tồn đầu ca</span>
+          </div>
+
+          <!-- 2. BỆNH VÀO -->
+          <div class="patient-metric-card pm-card-in">
+            <span class="pm-label">2. Bệnh vào</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('benhVao', -1)">−</button>
+              <input type="number" id="pm-benhVao" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('benhVao', 1)">+</button>
+            </div>
+            <span class="pm-sub">Nhập khoa mới trong ngày</span>
+          </div>
+
+          <!-- 3. RA VIỆN -->
+          <div class="patient-metric-card pm-card-out">
+            <span class="pm-label">3. Ra viện</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('raVien', -1)">−</button>
+              <input type="number" id="pm-raVien" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('raVien', 1)">+</button>
+            </div>
+            <span class="pm-sub">Xuất viện trong ngày</span>
+          </div>
+
+          <!-- 4. CHUYỂN ĐẾN -->
+          <div class="patient-metric-card pm-card-in">
+            <span class="pm-label">4. Chuyển đến</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('chuyenDen', -1)">−</button>
+              <input type="number" id="pm-chuyenDen" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('chuyenDen', 1)">+</button>
+            </div>
+            <span class="pm-sub">Từ khoa khác chuyển sang</span>
+          </div>
+
+          <!-- 5. CHUYỂN ĐI -->
+          <div class="patient-metric-card pm-card-out">
+            <span class="pm-label">5. Chuyển đi</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('chuyenDi', -1)">−</button>
+              <input type="number" id="pm-chuyenDi" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('chuyenDi', 1)">+</button>
+            </div>
+            <span class="pm-sub">Chuyển khoa / Chuyển viện</span>
+          </div>
+
+          <!-- 6. TỬ VONG -->
+          <div class="patient-metric-card pm-card-danger">
+            <span class="pm-label">6. Tử vong</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('tuVong', -1)">−</button>
+              <input type="number" id="pm-tuVong" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('tuVong', 1)">+</button>
+            </div>
+            <span class="pm-sub">Tử vong / Nặng xin về</span>
+          </div>
+
+          <!-- 7. BỆNH MỔ -->
+          <div class="patient-metric-card pm-card-surgery">
+            <span class="pm-label">7. Bệnh mổ</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('benhMo', -1)">−</button>
+              <input type="number" id="pm-benhMo" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('benhMo', 1)">+</button>
+            </div>
+            <span class="pm-sub">Phẫu thuật phiên &amp; cấp cứu</span>
+          </div>
+
+          <!-- 8. HIỆN CÓ -->
+          <div class="patient-metric-card pm-card-highlight">
+            <span class="pm-label">8. Hiện có</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('hienCo', -1)">−</button>
+              <input type="number" id="pm-hienCo" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('hienCo', 1)">+</button>
+            </div>
+            <span class="pm-sub" id="pm-hienCo-formula-note">Tổng bệnh nhân đang điều trị</span>
+          </div>
+
+          <!-- 9. BẢO HIỂM -->
+          <div class="patient-metric-card pm-card-insurance">
+            <span class="pm-label">9. Bảo hiểm</span>
+            <div class="pm-input-row">
+              <button type="button" class="pm-step-btn" onclick="stepMetric('baoHiem', -1)">−</button>
+              <input type="number" id="pm-baoHiem" class="pm-num-input" value="0" min="0" onchange="onMetricInputChange()" />
+              <button type="button" class="pm-step-btn" onclick="stepMetric('baoHiem', 1)">+</button>
+            </div>
+            <span class="pm-sub" id="pm-baoHiem-pct">Tỷ lệ BHYT: --%</span>
+          </div>
+        </div>
+
+        <!-- BẢNG PHÂN BỔ 9 CHỈ SỐ THEO 5 PHÒNG NỘI TRÚ TRONG KHOA -->
+        <div class="admin-section-header" style="margin-top: 1.6rem;">
+          <div>
+            <h3>Chi Tiết 9 Chỉ Số Theo 5 Phòng Trong Khoa</h3>
+          </div>
+          <button type="button" class="btn-add-doctor" onclick="sumRoomsToDepartmentTotal()">
+            ∑ Cộng tổng 5 phòng lên Toàn Khoa
+          </button>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-roster-table patient-room-table">
+            <thead>
+              <tr>
+                <th style="width: 185px;">Phòng bệnh</th>
+                <th>Đầu ca</th>
+                <th>Bệnh vào</th>
+                <th>Ra viện</th>
+                <th>Chuyển đến</th>
+                <th>Chuyển đi</th>
+                <th>Tử vong</th>
+                <th>Bệnh mổ</th>
+                <th>Hiện có</th>
+                <th>Bảo hiểm</th>
+              </tr>
+            </thead>
+            <tbody id="patientRoomTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 3: SỐ LIỆU KHOA (KHOA NGOẠI THẦN KINH - CỘT SỐNG)
+         ======================================================================= -->
+    <section id="tab-panel-so-lieu" class="admin-tab-panel">
+      <div class="admin-table-section">
+        <div class="admin-section-header">
+          <div>
+            <h3>Số Liệu Khoa Ngoại Thần Kinh - Cột Sống</h3>
+            <p class="section-sub-note">Tổng hợp số liệu hoạt động chuyên môn, nhân lực và phân bổ theo 5 buồng bệnh trong Khoa.</p>
+          </div>
+        </div>
+
+        <div class="dept-metrics-overview-grid">
+          <div class="dept-kpi-card kpi-blue">
+            <span class="dept-kpi-label">Tổng số Bác sĩ trong Khoa</span>
+            <span class="dept-kpi-value" id="metricTotalDoctors">14</span>
+            <span class="dept-kpi-sub">5 phòng nội trú (TK1 – TK4, HSTK)</span>
+          </div>
+          <div class="dept-kpi-card kpi-green">
+            <span class="dept-kpi-label">Bác sĩ có mặt / Làm việc hôm nay</span>
+            <span class="dept-kpi-value" id="metricActiveDoctors">--</span>
+            <span class="dept-kpi-sub" id="metricActiveSub">Làm ngày, Trực &amp; Phòng khám</span>
+          </div>
+          <div class="dept-kpi-card kpi-red">
+            <span class="dept-kpi-label">Số bác sĩ đang mổ / Tổng lượt mổ</span>
+            <span class="dept-kpi-value" id="metricSurgeryStats">--</span>
+            <span class="dept-kpi-sub">Cập nhật trực tiếp từ Báo mổ</span>
+          </div>
+          <div class="dept-kpi-card kpi-amber">
+            <span class="dept-kpi-label">Phiên sử dụng User HIS trong ngày</span>
+            <span class="dept-kpi-value" id="metricTotalSessions">--</span>
+            <span class="dept-kpi-sub" id="metricInUseSub">Đang dùng trực tiếp: --</span>
+          </div>
+        </div>
+
+        <div class="admin-table-wrapper" style="margin-top: 1.25rem;">
+          <table class="admin-roster-table">
+            <thead>
+              <tr>
+                <th style="width: 220px;">Phòng thuộc Khoa</th>
+                <th>Bác sĩ phụ trách cố định</th>
+                <th style="width: 170px;">Số BS có mặt hôm nay</th>
+                <th style="width: 190px;">User đang nhận tại phòng</th>
+                <th style="width: 160px;">Tổng lượt nhận User</th>
+              </tr>
+            </thead>
+            <tbody id="deptRoomMetricsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 1: CHỈNH SỬA HOẶC THÊM MỚI BÁC SĨ
+       ========================================================================= -->
+  <dialog id="edit-doctor-dialog" class="modal-dialog" style="max-width: 540px;">
+    <form method="dialog" id="edit-doctor-form">
+      <div class="modal-header">
+        <h4 id="doctor-modal-title">✏️ Chỉnh Sửa Thông Tin Bác Sĩ</h4>
+        <button type="button" class="btn-secondary" id="btn-close-edit-doctor">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-doc-mode" value="edit" />
+        <input type="hidden" id="edit-doc-id" />
+
+        <div class="time-field">
+          <label for="edit-doc-name">Họ và tên Bác sĩ</label>
+          <input type="text" id="edit-doc-name" class="date-input" required placeholder="VD: Đào Văn Nhân" />
+        </div>
+
+        <div class="time-form-row">
+          <div class="time-field">
+            <label for="edit-doc-short">Tên gọi ngắn (hiện ở nút Báo mổ)</label>
+            <input type="text" id="edit-doc-short" class="date-input" required placeholder="VD: Nhân" />
+          </div>
+          <div class="time-field">
+            <label for="edit-doc-handle">Tài khoản HIS (@username)</label>
+            <input type="text" id="edit-doc-handle" class="date-input" required placeholder="VD: @dvnhan" />
+          </div>
+        </div>
+
+        <div class="time-form-row">
+          <div class="time-field">
+            <label for="edit-doc-room">Phòng phụ trách trong Khoa</label>
+            <select id="edit-doc-room" class="date-input">
+              <option value="Thần kinh 1">Thần kinh 1</option>
+              <option value="Thần kinh 2">Thần kinh 2</option>
+              <option value="Thần kinh 3">Thần kinh 3</option>
+              <option value="Thần kinh 4">Thần kinh 4</option>
+              <option value="Hồi sức thần kinh">Hồi sức thần kinh</option>
+            </select>
+          </div>
+          <div class="time-field">
+            <label for="edit-doc-seniority">Thứ tự ưu tiên</label>
+            <input type="number" id="edit-doc-seniority" class="date-input" min="1" max="50" required />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="btn-cancel-edit-doctor">Hủy</button>
+        <button type="submit" class="btn-primary-sm" id="btn-submit-doctor-form">💾 Lưu thay đổi</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- =========================================================================
+       MODAL 2: XEM TRƯỚC & TẢI XUỐNG HÌNH ẢNH BẢNG CHẤM CÔNG TỔNG HỢP
+       ========================================================================= -->
+  <dialog id="attendance-image-dialog" class="modal-dialog" style="max-width: 920px;">
+    <div class="modal-header">
+      <h4>📸 Bảng Chấm Công Tổng Hợp (Hình ảnh chất lượng cao)</h4>
+      <button type="button" class="btn-secondary" id="btn-close-img-dialog">✕</button>
+    </div>
+    <div class="modal-body" style="align-items: center; background: #f1f5f9;">
+      <div class="attendance-preview-scroll">
+        <img id="attendance-preview-img" alt="Bảng chấm công tổng hợp" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 8px 24px rgba(15,23,42,0.15);" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-secondary" id="btn-cancel-img-dialog">Đóng</button>
+      <a id="btn-download-img-link" class="btn-export-attendance-img" download="Bang_Cham_Cong_Khoa_Ngoai_TKCS.png" style="text-decoration: none;">
+        ⬇️ Tải Ảnh Về Máy (.PNG)
+      </a>
+    </div>
+  </dialog>
+
+  <div class="toast-box" id="toast-box"></div>
+
+  <script>
+    let currentDoctors = [];
+    const DEPT_ROOMS = [
+      'Thần kinh 1',
+      'Thần kinh 2',
+      'Thần kinh 3',
+      'Thần kinh 4',
+      'Hồi sức thần kinh'
+    ];
+
+    const METRIC_KEYS = [
+      'dauCa',
+      'benhVao',
+      'raVien',
+      'chuyenDen',
+      'chuyenDi',
+      'tuVong',
+      'benhMo',
+      'hienCo',
+      'baoHiem'
+    ];
+
+    let patientStatsState = {
+      total: { dauCa: 0, benhVao: 0, raVien: 0, chuyenDen: 0, chuyenDi: 0, tuVong: 0, benhMo: 0, hienCo: 0, baoHiem: 0 },
+      byRoom: {}
+    };
+
+    DEPT_ROOMS.forEach(r => {
+      patientStatsState.byRoom[r] = { dauCa: 0, benhVao: 0, raVien: 0, chuyenDen: 0, chuyenDi: 0, tuVong: 0, benhMo: 0, hienCo: 0, baoHiem: 0 };
+    });
+
+    const SCHEDULE_OPTIONS = [
+      { code: 'LAM_NGAY', label: 'Làm ngày', cls: 'sched-btn-work', badgeBg: '#059669', badgeText: '#ffffff' },
+      { code: 'TRUC', label: 'Trực (24h)', cls: 'sched-btn-duty', badgeBg: '#dc2626', badgeText: '#ffffff' },
+      { code: 'RA_TRUC', label: 'Ra trực', cls: 'sched-btn-postduty', badgeBg: '#d97706', badgeText: '#ffffff' },
+      { code: 'PHONG_KHAM', label: 'Phòng khám', cls: 'sched-btn-clinic', badgeBg: '#0284c7', badgeText: '#ffffff' },
+      { code: 'NGHI', label: 'Nghỉ', cls: 'sched-btn-off', badgeBg: '#475569', badgeText: '#ffffff' }
+    ];
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      if (!box) return;
+      const item = document.createElement('div');
+      item.className = 'toast-msg';
+      item.textContent = msg;
+      box.appendChild(item);
+      setTimeout(() => item.remove(), 3400);
+    }
+
+    function switchAdminTab(tabName) {
+      const tabs = [
+        { key: 'cham-cong', btn: 'tab-btn-cham-cong', panel: 'tab-panel-cham-cong' },
+        { key: 'benh-nhan', btn: 'tab-btn-benh-nhan', panel: 'tab-panel-benh-nhan' },
+        { key: 'so-lieu', btn: 'tab-btn-so-lieu', panel: 'tab-panel-so-lieu' }
+      ];
+      tabs.forEach(t => {
+        const active = t.key === tabName;
+        document.getElementById(t.btn).classList.toggle('active', active);
+        document.getElementById(t.btn).setAttribute('aria-selected', active ? 'true' : 'false');
+        document.getElementById(t.panel).classList.toggle('active', active);
+      });
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const timeEl = document.getElementById('header-clock-time');
+      const dateEl = document.getElementById('header-clock-date');
+      if (timeEl) timeEl.textContent = now.toLocaleTimeString('vi-VN', { hour12: false });
+      if (dateEl) {
+        const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+        const d = String(now.getDate()).padStart(2, '0');
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        dateEl.textContent = `${days[now.getDay()]}, ${d}/${m}/${now.getFullYear()}`;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // =========================================================================
+    // QUẢN LÝ 9 CHỈ SỐ BỆNH NHÂN & ĐỌC FILE EXCEL TỪ HIS
+    // =========================================================================
+    function renderPatientRoomTable() {
+      const tbody = document.getElementById('patientRoomTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = DEPT_ROOMS.map(roomName => {
+        const rm = patientStatsState.byRoom[roomName] || {};
+        const cells = METRIC_KEYS.map(k => `
+          <td>
+            <input
+              type="number"
+              class="room-pm-input"
+              min="0"
+              value="${Number(rm[k] || 0)}"
+              onchange="updateRoomMetric('${roomName}', '${k}', this.value)"
+            />
+          </td>
+        `).join('');
+        return `
+          <tr>
+            <td><strong>🏥 ${roomName}</strong></td>
+            ${cells}
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function syncPatientInputsFromState() {
+      const t = patientStatsState.total || {};
+      METRIC_KEYS.forEach(k => {
+        const el = document.getElementById(`pm-${k}`);
+        if (el) el.value = Number(t[k] || 0);
+      });
+      updateInsuranceSubtitle();
+      renderPatientRoomTable();
+    }
+
+    function updateInsuranceSubtitle() {
+      const hc = Number(document.getElementById('pm-hienCo')?.value || 0);
+      const bh = Number(document.getElementById('pm-baoHiem')?.value || 0);
+      const pctEl = document.getElementById('pm-baoHiem-pct');
+      if (pctEl) {
+        const pct = hc > 0 ? Math.min(100, Math.round((bh / hc) * 1000) / 10) : 0;
+        pctEl.textContent = `Tỷ lệ BHYT: ${pct}% (${bh}/${hc} BN)`;
+      }
+    }
+
+    function onMetricInputChange() {
+      METRIC_KEYS.forEach(k => {
+        const el = document.getElementById(`pm-${k}`);
+        if (el) patientStatsState.total[k] = Math.max(0, Number(el.value || 0));
+      });
+      updateInsuranceSubtitle();
+    }
+
+    function stepMetric(key, delta) {
+      const el = document.getElementById(`pm-${key}`);
+      if (!el) return;
+      const nextVal = Math.max(0, Number(el.value || 0) + delta);
+      el.value = nextVal;
+      patientStatsState.total[key] = nextVal;
+      updateInsuranceSubtitle();
+    }
+
+    function autoCalculateHienCo() {
+      const t = patientStatsState.total;
+      const calc = Math.max(
+        0,
+        Number(t.dauCa || 0) +
+          Number(t.benhVao || 0) +
+          Number(t.chuyenDen || 0) -
+          Number(t.raVien || 0) -
+          Number(t.chuyenDi || 0) -
+          Number(t.tuVong || 0)
+      );
+      t.hienCo = calc;
+      document.getElementById('pm-hienCo').value = calc;
+      updateInsuranceSubtitle();
+      showToast(`⚡ Đã tính Hiện có = ${calc} bệnh nhân`);
+    }
+
+    function updateRoomMetric(roomName, key, val) {
+      if (!patientStatsState.byRoom[roomName]) patientStatsState.byRoom[roomName] = {};
+      patientStatsState.byRoom[roomName][key] = Math.max(0, Number(val || 0));
+    }
+
+    function sumRoomsToDepartmentTotal() {
+      METRIC_KEYS.forEach(k => {
+        let sum = 0;
+        DEPT_ROOMS.forEach(r => {
+          sum += Number((patientStatsState.byRoom[r] && patientStatsState.byRoom[r][k]) || 0);
+        });
+        patientStatsState.total[k] = sum;
+      });
+      syncPatientInputsFromState();
+      showToast('∑ Đã cộng tổng 5 phòng lên số liệu Toàn Khoa!');
+    }
+
+    function getDateKey(dt) {
+      return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+    }
+
+    let selectedAdminDateKey = getDateKey(new Date());
+    let patientStatsByDateCache = {};
+    let defaultPatientStatsFallback = null;
+
+    function parseDateKeyToLocalObj(dateKey) {
+      const parts = String(dateKey || '').split('-').map(Number);
+      if (parts.length !== 3 || !parts[0]) return new Date();
+      return new Date(parts[0], parts[1] - 1, parts[2], 12, 0, 0);
+    }
+
+    function formatSelectedDateVN(dateKey) {
+      const dt = parseDateKeyToLocalObj(dateKey);
+      const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+      const d = String(dt.getDate()).padStart(2, '0');
+      const m = String(dt.getMonth() + 1).padStart(2, '0');
+      return `${days[dt.getDay()]}, ${d}/${m}/${dt.getFullYear()}`;
+    }
+
+    function getRelativeDayBadgeText(dateKey) {
+      const todayKey = getDateKey(new Date());
+      if (dateKey === todayKey) return 'HÔM NAY';
+      const dtSel = parseDateKeyToLocalObj(dateKey);
+      const dtToday = parseDateKeyToLocalObj(todayKey);
+      const diffDays = Math.round((dtSel.getTime() - dtToday.getTime()) / 86400000);
+      if (diffDays === -1) return 'HÔM QUA';
+      if (diffDays === 1) return 'NGÀY MAI';
+      const d = String(dtSel.getDate()).padStart(2, '0');
+      const m = String(dtSel.getMonth() + 1).padStart(2, '0');
+      return `${d}/${m}/${dtSel.getFullYear()}`;
+    }
+
+    function createBlankPatientStats() {
+      const st = {
+        total: { dauCa: 0, benhVao: 0, raVien: 0, chuyenDen: 0, chuyenDi: 0, tuVong: 0, benhMo: 0, hienCo: 0, baoHiem: 0 },
+        byRoom: {}
+      };
+      DEPT_ROOMS.forEach(r => {
+        st.byRoom[r] = { dauCa: 0, benhVao: 0, raVien: 0, chuyenDen: 0, chuyenDi: 0, tuVong: 0, benhMo: 0, hienCo: 0, baoHiem: 0 };
+      });
+      return st;
+    }
+
+    function loadPatientStatsForSelectedDate() {
+      const todayKey = getDateKey(new Date());
+      const storedForDate = patientStatsByDateCache[selectedAdminDateKey];
+      const source = storedForDate || (selectedAdminDateKey === todayKey ? defaultPatientStatsFallback : null);
+      if (source) {
+        const nextByRoom = {};
+        DEPT_ROOMS.forEach(r => {
+          nextByRoom[r] = {
+            dauCa: 0, benhVao: 0, raVien: 0, chuyenDen: 0, chuyenDi: 0, tuVong: 0, benhMo: 0, hienCo: 0, baoHiem: 0,
+            ...((source.byRoom && source.byRoom[r]) || {})
+          };
+        });
+        patientStatsState = {
+          total: {
+            dauCa: 0, benhVao: 0, raVien: 0, chuyenDen: 0, chuyenDi: 0, tuVong: 0, benhMo: 0, hienCo: 0, baoHiem: 0,
+            ...(source.total || {})
+          },
+          byRoom: nextByRoom
+        };
+      } else {
+        patientStatsState = createBlankPatientStats();
+      }
+      syncPatientInputsFromState();
+    }
+
+    function syncDatePickerBarUI() {
+      const inputEl = document.getElementById('admin-selected-date');
+      if (inputEl && inputEl.value !== selectedAdminDateKey) {
+        inputEl.value = selectedAdminDateKey;
+      }
+      const badgeEl = document.getElementById('admin-date-human-label');
+      if (badgeEl) {
+        badgeEl.textContent = getRelativeDayBadgeText(selectedAdminDateKey);
+        const isToday = selectedAdminDateKey === getDateKey(new Date());
+        badgeEl.classList.toggle('is-other-day', !isToday);
+      }
+      const headingEl = document.getElementById('chamcong-heading-with-date');
+      if (headingEl) {
+        headingEl.textContent = `Bảng Phân Công & Chấm Công Bác Sĩ (${formatSelectedDateVN(selectedAdminDateKey)})`;
+      }
+      loadPatientStatsForSelectedDate();
+      renderAdminRoster(currentDoctors);
+    }
+
+    function shiftSelectedDate(deltaDays) {
+      const dt = parseDateKeyToLocalObj(selectedAdminDateKey);
+      dt.setDate(dt.getDate() + deltaDays);
+      selectedAdminDateKey = getDateKey(dt);
+      syncDatePickerBarUI();
+    }
+
+    function onSelectedDateChange(val) {
+      if (!val || !/^\d{4}-\d{2}-\d{2}$/.test(val)) return;
+      selectedAdminDateKey = val;
+      syncDatePickerBarUI();
+    }
+
+    function resetSelectedDateToToday() {
+      selectedAdminDateKey = getDateKey(new Date());
+      syncDatePickerBarUI();
+      showToast('📅 Đã chuyển về ngày hôm nay');
+    }
+
+    async function autoFillScheduleFromPrevDay() {
+      try {
+        const res = await fetch('/api/auto-fill-schedule-date', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ dateKey: selectedAdminDateKey })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          showToast(`⚡ Đã lấy lịch Ra trực từ ngày ${data.prevDateKey} sang ngày ${data.dateKey} (${data.autoPostDutyCount} BS Ra trực)`);
+        }
+      } catch (err) {
+        showToast('❌ Không thể tự động lấy lịch từ ngày trước');
+      }
+    }
+
+    async function savePatientStatsToServer() {
+      onMetricInputChange();
+      try {
+        const res = await fetch('/api/update-patient-stats', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            dateKey: selectedAdminDateKey,
+            patientStats: patientStatsState
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          patientStatsByDateCache[selectedAdminDateKey] = JSON.parse(JSON.stringify(patientStatsState));
+          showToast(`💾 Đã lưu Số liệu bệnh nhân cho ngày ${formatSelectedDateVN(selectedAdminDateKey)}!`);
+        }
+      } catch (e) {
+        showToast('❌ Lỗi lưu số liệu bệnh nhân');
+      }
+    }
+
+    // XỬ LÝ UPLOAD FILE EXCEL TỪ HIS LÊN SERVER & BÓC TÁCH SƠ BỘ
+    function renderUploadedHisFiles(files) {
+      const box = document.getElementById('his-uploaded-files-list');
+      if (!box) return;
+      if (!files || files.length === 0) {
+        box.innerHTML = '';
+        return;
+      }
+      box.innerHTML = files.map(f => `
+        <div class="his-file-pill">
+          <span>📄 <strong>${f.fileName}</strong> (${Math.round((f.sizeBytes || 0) / 1024)} KB)</span>
+          <span style="color:#047857; font-weight:700;">✓ Đã lưu vào uploads_his/ lúc ${f.uploadedAt}</span>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('his-excel-file-input').addEventListener('change', async (evt) => {
+      const files = Array.from(evt.target.files || []);
+      if (files.length === 0) return;
+
+      for (const file of files) {
+        try {
+          const arrayBuf = await file.arrayBuffer();
+          const uint8 = new Uint8Array(arrayBuf);
+          let binary = '';
+          for (let i = 0; i < uint8.byteLength; i++) {
+            binary += String.fromCharCode(uint8[i]);
+          }
+          const base64Data = btoa(binary);
+
+          let extractedPreview = null;
+          if (window.XLSX) {
+            const wb = XLSX.read(arrayBuf, { type: 'array' });
+            const firstSheet = wb.SheetNames[0];
+            const ws = wb.Sheets[firstSheet];
+            const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+            extractedPreview = {
+              sheetNames: wb.SheetNames,
+              rowCount: rows.length,
+              sampleRows: rows.slice(0, 8)
+            };
+          }
+
+          const res = await fetch('/api/upload-his-excel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              fileName: file.name,
+              base64Data,
+              extractedPreview
+            })
+          });
+          const data = await res.json();
+          if (data.ok) {
+            showToast(`📂 Đã tải file "${file.name}" lên thư mục uploads_his/ thành công!`);
+            if (data.db && data.db.uploadedHisFiles) {
+              renderUploadedHisFiles(data.db.uploadedHisFiles);
+            }
+          }
+        } catch (err) {
+          showToast(`❌ Không thể tải file ${file.name}`);
+        }
+      }
+      evt.target.value = '';
+    });
+
+    // =========================================================================
+    // CHẤM CÔNG & QUẢN LÝ BÁC SĨ THEO NGÀY ĐANG CHỌN
+    // =========================================================================
+    async function changeDoctorSchedule(doctorId, scheduleCode) {
+      try {
+        await fetch('/api/update-schedule', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            doctorId,
+            scheduleCode,
+            dateKey: selectedAdminDateKey
+          })
+        });
+      } catch (err) {
+        showToast('❌ Lỗi cập nhật lịch làm việc');
+      }
+    }
+
+    document.getElementById('btn-open-add-doctor').addEventListener('click', () => {
+      document.getElementById('edit-doc-mode').value = 'add';
+      document.getElementById('edit-doc-id').value = '';
+      document.getElementById('doctor-modal-title').textContent = '➕ Thêm Bác Sĩ Mới Vào Khoa';
+      document.getElementById('btn-submit-doctor-form').textContent = '➕ Tạo Bác Sĩ';
+      document.getElementById('edit-doc-name').value = '';
+      document.getElementById('edit-doc-short').value = '';
+      document.getElementById('edit-doc-handle').value = '';
+      document.getElementById('edit-doc-room').value = 'Thần kinh 1';
+      document.getElementById('edit-doc-seniority').value = currentDoctors.length + 1;
+      document.getElementById('edit-doctor-dialog').showModal();
+    });
+
+    function openEditDoctorModal(docId) {
+      const doc = currentDoctors.find(d => d.id === docId);
+      if (!doc) return;
+      document.getElementById('edit-doc-mode').value = 'edit';
+      document.getElementById('edit-doc-id').value = doc.id;
+      document.getElementById('doctor-modal-title').textContent = '✏️ Chỉnh Sửa Thông Tin Bác Sĩ';
+      document.getElementById('btn-submit-doctor-form').textContent = '💾 Lưu thay đổi';
+      document.getElementById('edit-doc-name').value = doc.name || '';
+      document.getElementById('edit-doc-short').value = doc.shortName || '';
+      document.getElementById('edit-doc-handle').value = doc.handle || '';
+      document.getElementById('edit-doc-room').value = doc.assignedRoom || 'Thần kinh 1';
+      document.getElementById('edit-doc-seniority').value = doc.seniority || 1;
+      document.getElementById('edit-doctor-dialog').showModal();
+    }
+
+    document.getElementById('btn-close-edit-doctor').addEventListener('click', () => {
+      document.getElementById('edit-doctor-dialog').close();
+    });
+    document.getElementById('btn-cancel-edit-doctor').addEventListener('click', () => {
+      document.getElementById('edit-doctor-dialog').close();
+    });
+
+    document.getElementById('edit-doctor-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const mode = document.getElementById('edit-doc-mode').value;
+      const doctorId = document.getElementById('edit-doc-id').value;
+      const name = document.getElementById('edit-doc-name').value.trim();
+      const shortName = document.getElementById('edit-doc-short').value.trim();
+      const handle = document.getElementById('edit-doc-handle').value.trim();
+      const assignedRoom = document.getElementById('edit-doc-room').value;
+      const seniority = Number(document.getElementById('edit-doc-seniority').value);
+
+      const endpoint = mode === 'add' ? '/api/add-doctor' : '/api/update-doctor';
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ doctorId, name, shortName, handle, assignedRoom, seniority })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          document.getElementById('edit-doctor-dialog').close();
+          showToast(mode === 'add' ? `➕ Đã thêm BS. ${name}` : `✅ Đã lưu thông tin BS. ${name}`);
+        } else {
+          showToast('❌ ' + (data.error || 'Không thể lưu thông tin'));
+        }
+      } catch (err) {
+        showToast('❌ Lỗi kết nối máy chủ');
+      }
+    });
+
+    function renderDepartmentMetrics(doctors) {
+      const now = new Date();
+      const nowMin = Math.floor(now.getTime() / 60000);
+      const targetDateKey = selectedAdminDateKey || getDateKey(now);
+      const sorted = [...doctors].sort((a, b) => a.seniority - b.seniority);
+      const getShift = (d) => (d.scheduleByDate && d.scheduleByDate[targetDateKey]) || 'LAM_NGAY';
+
+      const presentDocs = sorted.filter(d => getShift(d) !== 'NGHI');
+      let activeSurgeryNow = 0;
+      let totalSurgeryTargetDay = 0;
+      let activeInUseNow = 0;
+      let totalSessionsTargetDay = 0;
+
+      for (const d of sorted) {
+        for (const u of (d.usages || [])) {
+          const uDateKey = getDateKey(new Date(u.startMin * 60000));
+          if (uDateKey === targetDateKey) {
+            totalSessionsTargetDay++;
+            if (u.roomName === 'Đang mổ') totalSurgeryTargetDay++;
+          }
+          const isActive = !u.releasedEarly && (u.endMin === null ? nowMin >= u.startMin : (nowMin >= u.startMin && nowMin < u.endMin));
+          if (isActive) {
+            if (u.roomName === 'Đang mổ') activeSurgeryNow++;
+            else activeInUseNow++;
+          }
+        }
+      }
+
+      document.getElementById('metricTotalDoctors').textContent = sorted.length;
+      document.getElementById('metricActiveDoctors').textContent = `${presentDocs.length} / ${sorted.length}`;
+      document.getElementById('metricSurgeryStats').textContent = `${activeSurgeryNow} đang mổ (${totalSurgeryTargetDay} lượt)`;
+      document.getElementById('metricTotalSessions').textContent = totalSessionsTargetDay;
+      document.getElementById('metricInUseSub').textContent = `Đang nhận dùng trực tiếp: ${activeInUseNow} User`;
+
+      const roomTbody = document.getElementById('deptRoomMetricsBody');
+      roomTbody.innerHTML = DEPT_ROOMS.map(roomName => {
+        const roomDocs = sorted.filter(d => d.assignedRoom === roomName);
+        const presentInRoom = roomDocs.filter(d => getShift(d) !== 'NGHI');
+
+        const activeUsersInRoom = [];
+        let roomSessionsCount = 0;
+        for (const d of sorted) {
+          for (const u of (d.usages || [])) {
+            if (u.roomName === roomName) {
+              if (getDateKey(new Date(u.startMin * 60000)) === targetDateKey) {
+                roomSessionsCount++;
+              }
+              const isActive = !u.releasedEarly && (u.endMin === null ? nowMin >= u.startMin : (nowMin >= u.startMin && nowMin < u.endMin));
+              if (isActive) {
+                activeUsersInRoom.push(d.name);
+              }
+            }
+          }
+        }
+
+        return `
+          <tr>
+            <td><span class="admin-room-chip">🏥 ${roomName}</span></td>
+            <td>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                ${roomDocs.map(d => `<span class="admin-room-chip">BS. ${d.name}</span>`).join('')}
+              </div>
+            </td>
+            <td><strong>${presentInRoom.length} / ${roomDocs.length}</strong> bác sĩ</td>
+            <td>
+              ${
+                activeUsersInRoom.length > 0
+                  ? activeUsersInRoom.map(n => `<span class="admin-live-pill pill-inuse">🔒 BS. ${n}</span>`).join(' ')
+                  : `<span style="color: #94a3b8; font-size: 0.84rem;">Chưa nhận User</span>`
+              }
+            </td>
+            <td><strong style="font-family: 'JetBrains Mono', monospace;">${roomSessionsCount}</strong> lượt</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderAdminRoster(doctors) {
+      const targetDateKey = selectedAdminDateKey || getDateKey(new Date());
+      const sorted = [...doctors].sort((a, b) => a.seniority - b.seniority);
+
+      const getShift = (d) => (d.scheduleByDate && d.scheduleByDate[targetDateKey]) || 'LAM_NGAY';
+
+      document.getElementById('statWorkCount').textContent = sorted.filter(d => getShift(d) === 'LAM_NGAY').length;
+      document.getElementById('statDutyCount').textContent = sorted.filter(d => getShift(d) === 'TRUC').length;
+      document.getElementById('statPostDutyCount').textContent = sorted.filter(d => getShift(d) === 'RA_TRUC').length;
+      document.getElementById('statClinicCount').textContent = sorted.filter(d => getShift(d) === 'PHONG_KHAM').length;
+      document.getElementById('statOffCount').textContent = sorted.filter(d => getShift(d) === 'NGHI').length;
+
+      const tbody = document.getElementById('adminRosterBody');
+      tbody.innerHTML = sorted.map(doc => {
+        const currentCode = getShift(doc);
+
+        const buttonsHtml = SCHEDULE_OPTIONS.map(opt => {
+          const isActive = currentCode === opt.code;
+          return `
+            <button
+              type="button"
+              class="admin-sched-btn ${opt.cls} ${isActive ? 'active' : ''}"
+              onclick="changeDoctorSchedule('${doc.id}', '${opt.code}')"
+            >
+              ${isActive ? '✓ ' : ''}${opt.label}
+            </button>
+          `;
+        }).join('');
+
+        return `
+          <tr class="roster-row">
+            <td class="col-rank" style="text-align: center;">#${doc.seniority}</td>
+            <td>
+              <div class="admin-doc-name">BS. ${doc.name}</div>
+              <div class="admin-doc-acc">${doc.handle}</div>
+            </td>
+            <td>
+              <span class="admin-room-chip">🏥 ${doc.assignedRoom}</span>
+            </td>
+            <td>
+              <div class="admin-sched-btn-group">
+                ${buttonsHtml}
+              </div>
+            </td>
+            <td style="text-align: center;">
+              <button type="button" class="btn-edit-doc" onclick="openEditDoctorModal('${doc.id}')">
+                ✏️ Sửa
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      renderDepartmentMetrics(doctors);
+    }
+
+    // =========================================================================
+    // TỰ ĐỘNG VẼ & TẢI XUỐNG HÌNH ẢNH BẢNG CHẤM CÔNG TỔNG HỢP (.PNG) THEO NGÀY ĐANG CHỌN
+    // =========================================================================
+    function drawRoundedRect(ctx, x, y, w, h, r, fill, stroke, lineWidth = 1) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+      if (fill) {
+        ctx.fillStyle = fill;
+        ctx.fill();
+      }
+      if (stroke) {
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = stroke;
+        ctx.stroke();
+      }
+    }
+
+    async function generateAndDownloadAttendanceImage() {
+      const targetDateKey = selectedAdminDateKey || getDateKey(new Date());
+      const targetDateObj = parseDateKeyToLocalObj(targetDateKey);
+      const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+      const dStr = String(targetDateObj.getDate()).padStart(2, '0');
+      const mStr = String(targetDateObj.getMonth() + 1).padStart(2, '0');
+      const yStr = targetDateObj.getFullYear();
+      const fullDateLabel = `${days[targetDateObj.getDay()]}, ngày ${dStr}/${mStr}/${yStr}`;
+
+      const getShift = (d) => (d.scheduleByDate && d.scheduleByDate[targetDateKey]) || 'LAM_NGAY';
+
+      const GROUP_PRIORITY = {
+        TRUC: 1,
+        LAM_NGAY: 2,
+        PHONG_KHAM: 3,
+        RA_TRUC: 4,
+        NGHI: 5
+      };
+
+      const sorted = [...currentDoctors].sort((a, b) => {
+        const pa = GROUP_PRIORITY[getShift(a)] || 99;
+        const pb = GROUP_PRIORITY[getShift(b)] || 99;
+        if (pa !== pb) return pa - pb;
+        return (a.seniority || 999) - (b.seniority || 999);
+      });
+
+      const rowHeight = 62;
+      const headerHeight = 140;
+      const summaryHeight = 125;
+      const tableHeaderHeight = 54;
+      const footerHeight = 56;
+      const canvasW = 1200;
+      const canvasH = headerHeight + summaryHeight + tableHeaderHeight + (sorted.length * rowHeight) + footerHeight + 54;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = canvasW;
+      canvas.height = canvasH;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(0, 0, canvasW, canvasH);
+
+      drawRoundedRect(ctx, 24, 20, canvasW - 48, canvasH - 40, 18, '#ffffff', '#cbd5e1', 2);
+
+      drawRoundedRect(ctx, 24, 20, canvasW - 48, 115, 18, '#003b8e', null);
+      ctx.fillStyle = '#003b8e';
+      ctx.fillRect(24, 95, canvasW - 48, 40);
+
+      try {
+        const logoImg = new Image();
+        logoImg.src = 'logo.png';
+        await new Promise((res) => {
+          logoImg.onload = res;
+          logoImg.onerror = res;
+        });
+        if (logoImg.complete && logoImg.naturalWidth > 0) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(84, 78, 35, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+          ctx.clip();
+          ctx.drawImage(logoImg, 49, 43, 70, 70);
+          ctx.restore();
+        }
+      } catch (e) {}
+
+      ctx.fillStyle = '#6ee7b7';
+      ctx.font = '700 16px "Be Vietnam Pro", sans-serif';
+      ctx.fillText('BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI', 136, 62);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 26px "Montserrat", "Be Vietnam Pro", sans-serif';
+      ctx.fillText('KHOA NGOẠI THẦN KINH - CỘT SỐNG', 136, 98);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 22px "Montserrat", "Be Vietnam Pro", sans-serif';
+      ctx.fillText('BẢNG CHẤM CÔNG BÁC SĨ', canvasW - 52, 66);
+
+      ctx.fillStyle = '#e0f2fe';
+      ctx.font = '600 17px "Be Vietnam Pro", sans-serif';
+      ctx.fillText(fullDateLabel, canvasW - 52, 98);
+      ctx.textAlign = 'left';
+
+      const summaryGroups = [
+        { code: 'TRUC', title: 'TRỰC (24H)', countColor: '#dc2626' },
+        { code: 'LAM_NGAY', title: 'LÀM NGÀY', countColor: '#059669' },
+        { code: 'PHONG_KHAM', title: 'PHÒNG KHÁM', countColor: '#0284c7' },
+        { code: 'RA_TRUC', title: 'RA TRỰC', countColor: '#d97706' },
+        { code: 'NGHI', title: 'NGHỈ', countColor: '#475569' }
+      ];
+
+      const boxGap = 14;
+      const totalBoxW = canvasW - 96;
+      const boxW = (totalBoxW - boxGap * 4) / 5;
+      const boxY = 154;
+
+      summaryGroups.forEach((grp, idx) => {
+        const bx = 48 + idx * (boxW + boxGap);
+        const listDocs = sorted.filter(d => getShift(d) === grp.code);
+        drawRoundedRect(ctx, bx, boxY, boxW, 90, 12, '#f8fafc', '#e2e8f0', 1.5);
+
+        ctx.fillStyle = '#475569';
+        ctx.font = '800 14px "Be Vietnam Pro", sans-serif';
+        ctx.fillText(grp.title, bx + 14, boxY + 28);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = grp.countColor;
+        ctx.font = '800 26px "Montserrat", sans-serif';
+        ctx.fillText(`${listDocs.length}`, bx + boxW - 14, boxY + 32);
+        ctx.textAlign = 'left';
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '600 14px "Be Vietnam Pro", sans-serif';
+        const namesLine = listDocs.length > 0 ? listDocs.map(d => d.shortName).join(', ') : 'Không có';
+        const truncated = namesLine.length > 26 ? namesLine.slice(0, 24) + '…' : namesLine;
+        ctx.fillText(truncated, bx + 14, boxY + 66);
+      });
+
+      const tableX = 48;
+      const tableW = canvasW - 96;
+      const tableTopY = 264;
+
+      drawRoundedRect(ctx, tableX, tableTopY, tableW, tableHeaderHeight, 10, '#1e293b', null);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 16px "Be Vietnam Pro", sans-serif';
+      ctx.fillText('STT', tableX + 36, tableTopY + 33);
+      ctx.fillText('HỌ VÀ TÊN BÁC SĨ', tableX + 160, tableTopY + 33);
+      ctx.fillText(`TRẠNG THÁI CHẤM CÔNG (${dStr}/${mStr}/${yStr})`, tableX + 740, tableTopY + 33);
+
+      sorted.forEach((doc, idx) => {
+        const ry = tableTopY + tableHeaderHeight + idx * rowHeight;
+        const code = getShift(doc);
+        const opt = SCHEDULE_OPTIONS.find(o => o.code === code) || SCHEDULE_OPTIONS[0];
+
+        ctx.fillStyle = idx % 2 === 0 ? '#ffffff' : '#f8fafc';
+        ctx.fillRect(tableX, ry, tableW, rowHeight);
+
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(tableX, ry + rowHeight);
+        ctx.lineTo(tableX + tableW, ry + rowHeight);
+        ctx.stroke();
+
+        ctx.fillStyle = '#64748b';
+        ctx.font = '800 18px "Montserrat", sans-serif';
+        ctx.fillText(`#${idx + 1}`, tableX + 36, ry + 38);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '800 21px "Be Vietnam Pro", sans-serif';
+        ctx.fillText(`BS. ${doc.name}`, tableX + 160, ry + 38);
+
+        drawRoundedRect(ctx, tableX + 760, ry + 11, 260, 40, 10, opt.badgeBg, null);
+        ctx.fillStyle = opt.badgeText;
+        ctx.font = '800 17px "Be Vietnam Pro", sans-serif';
+        ctx.fillText(`✓ ${opt.label.toUpperCase()}`, tableX + 784, ry + 37);
+      });
+
+      const now = new Date();
+      const fy = tableTopY + tableHeaderHeight + sorted.length * rowHeight + 34;
+      ctx.fillStyle = '#64748b';
+      ctx.font = '600 14px "Be Vietnam Pro", sans-serif';
+      ctx.fillText(`Xuất từ Hệ thống Quản lý Khoa Ngoại Thần Kinh - Cột Sống lúc ${now.toLocaleTimeString('vi-VN', { hour12: false })} (${fullDateLabel})`, tableX, fy);
+
+      const dataUrl = canvas.toDataURL('image/png');
+      const fileName = `Bang_Cham_Cong_Khoa_Ngoai_TKCS_${targetDateKey}.png`;
+
+      const previewImg = document.getElementById('attendance-preview-img');
+      const downloadLink = document.getElementById('btn-download-img-link');
+      previewImg.src = dataUrl;
+      downloadLink.href = dataUrl;
+      downloadLink.download = fileName;
+
+      document.getElementById('attendance-image-dialog').showModal();
+
+      const tempA = document.createElement('a');
+      tempA.href = dataUrl;
+      tempA.download = fileName;
+      document.body.appendChild(tempA);
+      tempA.click();
+      tempA.remove();
+      showToast(`📸 Đã tạo và tải xuống Bảng chấm công ngày ${dStr}/${mStr}/${yStr}!`);
+    }
+
+    document.getElementById('btn-export-attendance').addEventListener('click', generateAndDownloadAttendanceImage);
+    document.getElementById('btn-close-img-dialog').addEventListener('click', () => {
+      document.getElementById('attendance-image-dialog').close();
+    });
+    document.getElementById('btn-cancel-img-dialog').addEventListener('click', () => {
+      document.getElementById('attendance-image-dialog').close();
+    });
+
+    syncDatePickerBarUI();
+
+    function connectStream() {
+      const es = new EventSource('/api/stream');
+      es.onmessage = (evt) => {
+        try {
+          const payload = JSON.parse(evt.data);
+          const dbObj = payload.db || payload;
+          if (dbObj.doctors) {
+            currentDoctors = dbObj.doctors;
+            renderAdminRoster(currentDoctors);
+          }
+          if (dbObj.patientStats) {
+            defaultPatientStatsFallback = dbObj.patientStats;
+          }
+          if (dbObj.patientStatsByDate) {
+            patientStatsByDateCache = dbObj.patientStatsByDate;
+          }
+          if (dbObj.patientStats || dbObj.patientStatsByDate) {
+            loadPatientStatsForSelectedDate();
+          }
+          if (dbObj.uploadedHisFiles) {
+            renderUploadedHisFiles(dbObj.uploadedHisFiles);
+          }
+        } catch (e) {}
+      };
+    }
+    connectStream();
+  </script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đi buồng hằng ngày | Khoa Ngoại Thần Kinh - Cột Sống (BVĐK Trung Tâm Tỉnh Gia Lai)</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Official Department Header (Đồng bộ 100% với Trang chủ, Quản lý User & Hành chính khoa) -->
+    <header class="dept-header-bar">
+      <div class="dept-brand">
+        <a href="/" title="Về Trang chủ Khoa" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="logo.png" alt="Logo Khoa Ngoại Thần Kinh - Cột Sống" class="dept-logo-img" width="54" height="54" />
+        </a>
+        <div class="dept-brand-text">
+          <div class="hospital-subtitle">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+          <h1 class="dept-main-title">KHOA NGOẠI THẦN KINH - CỘT SỐNG</h1>
+        </div>
+      </div>
+
+      <!-- Right Header Group: Back to Home + Realtime Clock -->
+      <div class="header-right-group">
+        <a href="/" class="btn-tool-lookup" style="text-decoration: none;">
+          ← Về Trang Chủ
+        </a>
+        <div class="header-clock-box">
+          <div class="header-clock-time" id="header-clock-time">00:00:00</div>
+          <div class="header-clock-date" id="header-clock-date">Thứ Ba, 29/09/2026</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- DANH SÁCH 5 PHÒNG TRONG KHOA (Bỏ các dòng tiêu đề thừa theo yêu cầu) -->
+    <section aria-label="Danh sách 5 phòng trong khoa">
+      <div class="ward-5rooms-grid" id="ward-5rooms-grid">
+        <!-- Populated dynamically & synced with /api/stream -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         THẦN KINH 1
+         ======================================================================= -->
+    <section id="room-workspace-tk1" class="room-workspace-panel active" data-room-key="tk1" data-room-name="Thần kinh 1">
+      <div class="room-ws-header">
+        <div class="room-ws-title-group">
+          <h3 class="room-ws-heading">Thần kinh 1</h3>
+          <div class="room-ws-doctors-bar" id="ws-docs-tk1"></div>
+        </div>
+        <div class="admin-hero-stats" id="ws-stats-tk1"></div>
+      </div>
+
+      <!-- Khu vực tính năng đi buồng của Phòng Thần kinh 1 (và dùng chung cho các phòng khi chuyển tab) -->
+      <div id="feature-slot-tk1">
+        <div id="ward-shared-workspace-dom">
+          <!-- Thanh công cụ Đi buồng -->
+          <div class="tk1-toolbar-bar">
+            <div class="tk1-toolbar-left">
+              <label class="btn-tool-lookup" style="margin:0;cursor:pointer;">
+                📂 Cập nhật Excel Đang điều trị
+                <input type="file" id="tk1-upload-excel-input" accept=".xlsx,.xls,.csv" style="display:none;" />
+              </label>
+            </div>
+
+            <div class="tk1-toolbar-right">
+              <button type="button" class="btn-tk1-png-a4" id="btn-tk1-export-png-a4">
+                📸 Tải sơ đồ giường
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. THÔNG BÁN ĐẦU TRANG GỌN: BN chưa phân giường (Chọn sơ đồ giường trực quan) / BN không còn trong Excel / Hoàn tác xoá -->
+          <div id="tk1-top-alerts" class="tk1-alerts-stack"></div>
+
+          <!-- 2. HAI DÃY GIƯỜNG: DÃY A (GIƯỜNG 1–9) & DÃY B (GIƯỜNG 10–24) -->
+          <div class="tk1-wings-layout">
+            <!-- DÃY A -->
+            <div class="tk1-wing-card wing-a" id="tk1-wing-card-a">
+              <button type="button" class="tk1-wing-header" id="btn-toggle-wing-a">
+                <div>
+                  <div class="tk1-wing-title" id="tk1-wing-a-title">DÃY A — GIƯỜNG 01 ĐẾN 09</div>
+                  <div class="tk1-wing-sub" id="tk1-wing-a-sub">Đang tải dữ liệu giường...</div>
+                </div>
+                <span class="tk1-wing-toggle-pill" id="tk1-wing-a-pill">▾ Bấm để thu gọn Dãy A</span>
+              </button>
+              <div class="tk1-wing-body" id="tk1-wing-a-body"></div>
+            </div>
+
+            <!-- DÃY B -->
+            <div class="tk1-wing-card wing-b" id="tk1-wing-card-b">
+              <button type="button" class="tk1-wing-header" id="btn-toggle-wing-b">
+                <div>
+                  <div class="tk1-wing-title" id="tk1-wing-b-title">DÃY B — GIƯỜNG 10 ĐẾN 24</div>
+                  <div class="tk1-wing-sub" id="tk1-wing-b-sub">Đang tải dữ liệu giường...</div>
+                </div>
+                <span class="tk1-wing-toggle-pill" id="tk1-wing-b-pill">▾ Bấm để thu gọn Dãy B</span>
+              </button>
+              <div class="tk1-wing-body" id="tk1-wing-b-body"></div>
+            </div>
+          </div>
+
+          <!-- 5. BẢNG TỔNG HỢP ĐI BUỒNG (4 TAB) -->
+          <div class="tk1-summary-section">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+              <div>
+                <h4 style="font-family:'Be Vietnam Pro',sans-serif;font-size:1.12rem;font-weight:800;color:#0f172a;">
+                  📋 Tổng hợp đi buồng
+                </h4>
+              </div>
+            </div>
+
+            <div class="tk1-summary-tabs" role="tablist">
+              <button type="button" class="tk1-sum-tab-btn active" data-tk1-sum-tab="xn-cdha">🧪 Xét nghiệm + CĐHA (<span id="tk1-count-tab-xn">0</span>)</button>
+              <button type="button" class="tk1-sum-tab-btn" data-tk1-sum-tab="hoi-chan">👨‍⚕️ Hội chẩn (<span id="tk1-count-tab-hc">0</span>)</button>
+              <button type="button" class="tk1-sum-tab-btn" data-tk1-sum-tab="ra-vien">🏥 Ra viện (<span id="tk1-count-tab-rv">0</span>)</button>
+              <button type="button" class="tk1-sum-tab-btn" data-tk1-sum-tab="khac">📝 Khác (<span id="tk1-count-tab-khac">0</span>)</button>
+            </div>
+
+            <!-- Tab 1: Xét nghiệm + CĐHA -->
+            <div id="tk1-sum-panel-xn-cdha" class="tk1-sum-tab-panel active">
+              <div class="admin-table-wrapper">
+                <table class="admin-roster-table">
+                  <thead>
+                    <tr>
+                      <th style="width:120px;">Giường</th>
+                      <th style="width:250px;">Bệnh nhân</th>
+                      <th>Công việc cần làm (Xét nghiệm, CT, X-quang, Siêu âm)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tk1-sum-tbody-xn"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab 2: Hội chẩn (Có ô nhập xử trí trực tiếp) -->
+            <div id="tk1-sum-panel-hoi-chan" class="tk1-sum-tab-panel">
+              <div class="admin-table-wrapper">
+                <table class="admin-roster-table">
+                  <thead>
+                    <tr>
+                      <th style="width:115px;">Giường</th>
+                      <th style="width:220px;">Bệnh nhân</th>
+                      <th style="width:190px;">Khoa hội chẩn &amp; PK</th>
+                      <th>Chẩn đoán &amp; Ô nhập xử trí của BS hội chẩn</th>
+                      <th style="width:165px;">Hẹn tái khám</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tk1-sum-tbody-hc"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab 3: Ra viện (Kèm lời hẹn tái khám) -->
+            <div id="tk1-sum-panel-ra-vien" class="tk1-sum-tab-panel">
+              <div class="admin-table-wrapper">
+                <table class="admin-roster-table">
+                  <thead>
+                    <tr>
+                      <th style="width:120px;">Giường</th>
+                      <th style="width:240px;">Bệnh nhân</th>
+                      <th style="width:170px;">Trạng thái</th>
+                      <th>Lời hẹn tái khám (Phòng khám tự động theo khoa hội chẩn)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tk1-sum-tbody-rv"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab 4: Khác (Tổng hợp những ghi chú từ các thẻ bệnh nhân) -->
+            <div id="tk1-sum-panel-khac" class="tk1-sum-tab-panel">
+              <div class="admin-table-wrapper">
+                <table class="admin-roster-table">
+                  <thead>
+                    <tr>
+                      <th style="width:120px;">Giường</th>
+                      <th style="width:240px;">Bệnh nhân</th>
+                      <th>Ghi chú từ thẻ bệnh nhân</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tk1-sum-tbody-khac"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THẦN KINH 2 -->
+    <section id="room-workspace-tk2" class="room-workspace-panel" data-room-key="tk2" data-room-name="Thần kinh 2">
+      <div class="room-ws-header">
+        <div class="room-ws-title-group">
+          <h3 class="room-ws-heading">Thần kinh 2</h3>
+          <div class="room-ws-doctors-bar" id="ws-docs-tk2"></div>
+        </div>
+        <div class="admin-hero-stats" id="ws-stats-tk2"></div>
+      </div>
+      <div id="feature-slot-tk2"></div>
+    </section>
+
+    <!-- THẦN KINH 3 -->
+    <section id="room-workspace-tk3" class="room-workspace-panel" data-room-key="tk3" data-room-name="Thần kinh 3">
+      <div class="room-ws-header">
+        <div class="room-ws-title-group">
+          <h3 class="room-ws-heading">Thần kinh 3</h3>
+          <div class="room-ws-doctors-bar" id="ws-docs-tk3"></div>
+        </div>
+        <div class="admin-hero-stats" id="ws-stats-tk3"></div>
+      </div>
+      <div id="feature-slot-tk3"></div>
+    </section>
+
+    <!-- THẦN KINH 4 -->
+    <section id="room-workspace-tk4" class="room-workspace-panel" data-room-key="tk4" data-room-name="Thần kinh 4">
+      <div class="room-ws-header">
+        <div class="room-ws-title-group">
+          <h3 class="room-ws-heading">Thần kinh 4</h3>
+          <div class="room-ws-doctors-bar" id="ws-docs-tk4"></div>
+        </div>
+        <div class="admin-hero-stats" id="ws-stats-tk4"></div>
+      </div>
+      <div id="feature-slot-tk4"></div>
+    </section>
+
+    <!-- HỒI SỨC THẦN KINH -->
+    <section id="room-workspace-hstk" class="room-workspace-panel" data-room-key="hstk" data-room-name="Hồi sức thần kinh">
+      <div class="room-ws-header">
+        <div class="room-ws-title-group">
+          <h3 class="room-ws-heading" style="color: #9f1239;">Hồi sức thần kinh</h3>
+          <div class="room-ws-doctors-bar" id="ws-docs-hstk"></div>
+        </div>
+        <div class="admin-hero-stats" id="ws-stats-hstk"></div>
+      </div>
+      <div id="feature-slot-hstk"></div>
+    </section>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 1: CHI TIẾT BỆNH NHÂN, ĐI BUỒNG, HỘI CHẨN & RA VIỆN (THẦN KINH 1)
+       ========================================================================= -->
+  <dialog id="tk1-patient-modal" class="tk1-patient-dialog">
+    <div class="modal-header" style="background:#003b8e;color:#ffffff;padding:0.8rem 1.2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.65rem;">
+      <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+        <button
+          type="button"
+          id="btn-tk1-modal-prev-bed"
+          title="Chuyển về giường trước (Lui)"
+          style="background:rgba(255,255,255,0.16);color:#ffffff;border:1px solid rgba(255,255,255,0.35);border-radius:8px;padding:0.36rem 0.75rem;font-size:0.8rem;font-weight:800;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;"
+        >
+          ◀ Lui
+        </button>
+        <h4 id="tk1-modal-patient-title" style="color:#ffffff;font-size:1.03rem;font-family:'Be Vietnam Pro',sans-serif;margin:0 0.2rem;">Chi tiết bệnh nhân</h4>
+        <button
+          type="button"
+          id="btn-tk1-modal-next-bed"
+          title="Chuyển sang giường kế tiếp (Tới)"
+          style="background:rgba(255,255,255,0.16);color:#ffffff;border:1px solid rgba(255,255,255,0.35);border-radius:8px;padding:0.36rem 0.75rem;font-size:0.8rem;font-weight:800;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;"
+        >
+          Tới ▶
+        </button>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button type="button" class="btn-delete-transfer" id="btn-tk1-modal-delete-transfer" title="Xoá bệnh nhân khỏi phòng (Chuyển mổ / Chuyển phòng)">
+          Xoá
+        </button>
+        <button type="button" class="btn-secondary" onclick="document.getElementById('tk1-patient-modal').close()">✕</button>
+      </div>
+    </div>
+
+    <div class="tk1-modal-scroll">
+      <!-- Trạng thái Ra viện / Xuất viện sáng nay (nếu đang chọn) -->
+      <div
+        id="tk1-modal-discharge-status-bar"
+        style="display:none;justify-content:space-between;align-items:center;gap:0.75rem;background:#fff1f2;border:1.5px solid #e11d48;border-radius:11px;padding:0.75rem 1rem;color:#9f1239;font-family:'Be Vietnam Pro',sans-serif;"
+      ></div>
+
+      <!-- 1. Thông tin Hành chính gọn gàng: Mã KCB, Tên, Tuổi, Địa chỉ, Đối tượng BHYT -->
+      <div class="tk1-info-grid" id="tk1-modal-admin-info"></div>
+
+      <!-- Chẩn đoán điều trị (bỏ nút phân/chuyển/đổi giường vì đã có ở ngoài thẻ) -->
+      <div>
+        <label style="font-size:0.78rem;font-weight:800;color:#334155;display:block;margin-bottom:4px;">Chẩn đoán điều trị:</label>
+        <input type="text" id="tk1-modal-diagnosis-input" class="date-input" style="width:100%;height:38px;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;" />
+      </div>
+
+      <!-- 2. Lịch sử đi buồng: các nhãn công việc gần nhất + nhãn thời gian -->
+      <div id="tk1-modal-history-box" style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:11px;padding:0.7rem 1rem;font-family:'Be Vietnam Pro',sans-serif;"></div>
+
+      <!-- 3. Khối chọn nhanh công việc hôm nay -->
+      <div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:12px;padding:0.9rem 1rem;">
+        <div style="font-size:0.83rem;font-weight:800;color:#004aad;margin-bottom:0.55rem;font-family:'Be Vietnam Pro',sans-serif;">
+          ⚡ CHỌN NHANH CÔNG VIỆC HÔM NAY:
+        </div>
+        <div class="tk1-dropdowns-5grid">
+          <select id="tk1-dd-xetnghiem" class="tk1-work-select" data-dd-label="Xét nghiệm"></select>
+          <select id="tk1-dd-ct" class="tk1-work-select" data-dd-label="CTScan"></select>
+          <select id="tk1-dd-xquang" class="tk1-work-select" data-dd-label="X-quang / Siêu âm"></select>
+          <select id="tk1-dd-hoichan" class="tk1-work-select" data-dd-label="Khoa hội chẩn"></select>
+        </div>
+
+        <!-- Các nút chọn nhanh Thủ thuật / Chăm sóc riêng cho Thần kinh 2 (Rút dẫn lưu, Rút sonde tiểu, Cắt chỉ) -->
+        <div
+          id="tk2-extra-tasks-bar"
+          style="display:none;flex-wrap:wrap;align-items:center;gap:0.45rem;margin-top:0.6rem;padding-top:0.55rem;border-top:1px dashed #bfdbfe;"
+        ></div>
+
+        <!-- Ô nhập liệu khi chọn Xét nghiệm -> Khác -->
+        <div id="tk1-custom-xn-wrap" style="display:none;align-items:center;gap:0.5rem;margin-top:0.6rem;background:#ffffff;border:1px solid #93c5fd;border-radius:9px;padding:0.45rem 0.65rem;">
+          <span style="font-size:0.78rem;font-weight:800;color:#1d4ed8;white-space:nowrap;">🧪 Xét nghiệm khác:</span>
+          <input type="text" id="tk1-custom-xn-input" class="date-input" style="flex:1;height:34px;" placeholder="Nhập tên xét nghiệm khác..." />
+          <button type="button" class="btn-primary-sm" id="btn-tk1-add-custom-xn" style="padding:0.35rem 0.85rem;font-size:0.78rem;font-family:'Be Vietnam Pro',sans-serif;">Thêm</button>
+          <button type="button" class="btn-bed-mini" id="btn-tk1-cancel-custom-xn">Đóng</button>
+        </div>
+
+        <!-- Ô nhập liệu khi chọn X-quang xương chi -->
+        <div id="tk1-custom-xq-wrap" style="display:none;align-items:center;gap:0.5rem;margin-top:0.6rem;background:#ffffff;border:1px solid #5eead4;border-radius:9px;padding:0.45rem 0.65rem;">
+          <span style="font-size:0.78rem;font-weight:800;color:#0f766e;white-space:nowrap;">🦴 X-quang xương chi:</span>
+          <input type="text" id="tk1-custom-xq-input" class="date-input" style="flex:1;height:34px;" placeholder="Nhập X-quang xương gì (VD: xương đùi P, cẳng tay T...)" />
+          <button type="button" class="btn-primary-sm" id="btn-tk1-add-custom-xq" style="padding:0.35rem 0.85rem;font-size:0.78rem;font-family:'Be Vietnam Pro',sans-serif;">Thêm</button>
+          <button type="button" class="btn-bed-mini" id="btn-tk1-cancel-custom-xq">Đóng</button>
+        </div>
+
+        <!-- Danh sách công việc đã chọn hôm nay -->
+        <div id="tk1-modal-selected-tasks" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:0.75rem;"></div>
+
+        <div style="margin-top:0.65rem;">
+          <input
+            type="text"
+            id="tk1-modal-round-note"
+            class="date-input"
+            style="width:100%;height:36px;font-family:'Be Vietnam Pro',sans-serif;"
+            placeholder="Ghi chú đi buồng thêm hôm nay (nếu có)..."
+          />
+        </div>
+      </div>
+
+      <!-- 4. Hội chẩn trước đó ở phòng khác cùng đợt điều trị (Tự động ẩn nếu không có) -->
+      <div
+        id="tk1-modal-prior-room-consult"
+        style="display:none;background:#f0fdfa;border:1.5px solid #5eead4;border-radius:12px;padding:0.8rem 1rem;"
+      ></div>
+    </div>
+
+    <!-- Footer Modal với nút Ra viện (tự lấy hẹn tái khám từ Hội chẩn) + Lưu -->
+    <div class="modal-footer" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.6rem;padding:0.85rem 1.35rem;background:#f8fafc;border-top:1px solid #e2e8f0;">
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+        <button type="button" class="btn-ra-vien-red" id="btn-tk1-modal-discharge-red">
+          Ra viện
+        </button>
+      </div>
+      <div style="display:flex;gap:0.5rem;">
+        <button type="button" class="btn-secondary" style="font-family:'Be Vietnam Pro',sans-serif;" onclick="document.getElementById('tk1-patient-modal').close()">Đóng</button>
+        <button type="button" class="btn-primary-sm" id="btn-tk1-modal-save" style="padding:0.58rem 1.25rem;font-size:0.86rem;font-family:'Be Vietnam Pro',sans-serif;">
+          💾 Lưu thông tin đi buồng
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL 2: SƠ ĐỒ CHỌN GIƯỜNG TRỰC QUAN (FIT ĐỘ RỘNG MÀN HÌNH) -->
+  <dialog id="tk1-bed-move-dialog" class="modal-dialog tk1-bed-picker-dialog">
+    <div class="modal-header">
+      <h4 id="tk1-bed-move-title">Chọn giường</h4>
+      <button type="button" class="btn-secondary" onclick="document.getElementById('tk1-bed-move-dialog').close()">✕</button>
+    </div>
+    <div class="modal-body" id="tk1-bed-move-body"></div>
+  </dialog>
+
+  <!-- MODAL 3: KIỂM TRA TRỰC QUAN & TẢI SƠ ĐỒ GIƯỜNG -->
+  <dialog id="tk1-png-preview-dialog" class="tk1-patient-dialog" style="width:min(1080px,96vw);">
+    <div class="modal-header" style="background:#1e293b;color:#ffffff;padding:0.85rem 1.3rem;">
+      <h4 style="color:#ffffff;">📸 Sơ Đồ Giường — Thần kinh 1</h4>
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <a id="tk1-png-download-link" class="btn-tk1-png-a4" style="text-decoration:none;padding:0.45rem 1rem;" download="So_Do_Giuong_Than_Kinh_1.png">
+          ⬇️ Tải sơ đồ giường
+        </a>
+        <button type="button" class="btn-secondary" onclick="document.getElementById('tk1-png-preview-dialog').close()">✕</button>
+      </div>
+    </div>
+    <div style="max-height:80vh;overflow:auto;background:#334155;padding:1.25rem;text-align:center;">
+      <img id="tk1-png-preview-img" alt="Bản xem trước PNG A4 Phòng Thần kinh 1" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 12px 36px rgba(0,0,0,0.4);" />
+    </div>
+  </dialog>
+
+  <script src="ward-tk1.js"></script>
+  <script>
+    const WARD_ROOMS_CONFIG = [
+      { key: 'tk1',  name: 'Thần kinh 1',       isHstk: false },
+      { key: 'tk2',  name: 'Thần kinh 2',       isHstk: false },
+      { key: 'tk3',  name: 'Thần kinh 3',       isHstk: false },
+      { key: 'tk4',  name: 'Thần kinh 4',       isHstk: false },
+      { key: 'hstk', name: 'Hồi sức thần kinh', isHstk: true  }
+    ];
+
+    const SHIFT_LABELS = {
+      TRUC:       { label: 'Trực',       cls: 'badge-truc' },
+      RA_TRUC:    { label: 'Ra trực',    cls: 'badge-ratruc' },
+      LAM_NGAY:   { label: 'Làm ngày',   cls: 'badge-lamngay' },
+      PHONG_KHAM: { label: 'Phòng khám', cls: 'badge-off' },
+      NGHI:       { label: 'Nghỉ',       cls: 'badge-off' },
+      NGHI_SANG:  { label: 'Nghỉ sáng',  cls: 'badge-off' },
+      NGHI_CHIEU: { label: 'Nghỉ chiều', cls: 'badge-off' }
+    };
+
+    const ROOM_FEATURE_MODULES = {
+      tk1:  window.TK1Module || { roomName: 'Thần kinh 1', init() {} },
+      tk2:  { roomName: 'Thần kinh 2',       init() {} },
+      tk3:  { roomName: 'Thần kinh 3',       init() {} },
+      tk4:  { roomName: 'Thần kinh 4',       init() {} },
+      hstk: { roomName: 'Hồi sức thần kinh', init() {} }
+    };
+
+    let currentSelectedRoomKey = 'tk1';
+    let wardDbState = {
+      doctors: [],
+      patientStats: null
+    };
+
+    function getDateKey(dt) {
+      return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const timeEl = document.getElementById('header-clock-time');
+      const dateEl = document.getElementById('header-clock-date');
+      if (timeEl) timeEl.textContent = now.toLocaleTimeString('vi-VN', { hour12: false });
+      if (dateEl) {
+        const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+        const d = String(now.getDate()).padStart(2, '0');
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        dateEl.textContent = `${days[now.getDay()]}, ${d}/${m}/${now.getFullYear()}`;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function selectWardRoom(roomKey, updateUrl = true) {
+      const found = WARD_ROOMS_CONFIG.find(r => r.key === roomKey);
+      if (!found) return;
+      currentSelectedRoomKey = found.key;
+
+      if (updateUrl && window.history && window.history.replaceState) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('room', found.key);
+        window.history.replaceState({}, '', url.toString());
+      }
+
+      renderWard5RoomsGrid();
+      document.querySelectorAll('.room-workspace-panel').forEach(panel => {
+        const isMatch = panel.getAttribute('data-room-key') === found.key;
+        panel.classList.toggle('active', isMatch);
+      });
+
+      const sharedDom = document.getElementById('ward-shared-workspace-dom');
+      const targetSlot = document.getElementById(`feature-slot-${found.key}`);
+      if (sharedDom && targetSlot && sharedDom.parentElement !== targetSlot) {
+        targetSlot.appendChild(sharedDom);
+      }
+      if (window.TK1Module && window.TK1Module.switchRoom) {
+        window.TK1Module.switchRoom(found.key);
+      }
+    }
+
+    // Bỏ nút "Đang mở / Mở ...", phòng đang chọn mở rộng, 4 phòng còn lại tự động thu nhỏ gọn gàng
+    function renderWard5RoomsGrid() {
+      const gridEl = document.getElementById('ward-5rooms-grid');
+      if (!gridEl) return;
+
+      const byRoomStats = (wardDbState.patientStats && wardDbState.patientStats.byRoom) || {};
+
+      gridEl.innerHTML = WARD_ROOMS_CONFIG.map((room) => {
+        const isSelected = room.key === currentSelectedRoomKey;
+        const roomDocs = (wardDbState.doctors || [])
+          .filter(d => d.assignedRoom === room.name)
+          .sort((a, b) => (a.seniority || 999) - (b.seniority || 999));
+
+        const docNames = roomDocs.length > 0
+          ? roomDocs.map(d => d.shortName || d.name.split(' ').pop()).join(', ')
+          : 'Chưa phân công';
+
+        const st = byRoomStats[room.name] || { hienCo: 0, benhVao: 0, raVien: 0, dauCa: 0, chuyenDen: 0 };
+
+        if (isSelected) {
+          return `
+            <div
+              class="ward-room-card ${room.isHstk ? 'room-hstk-card' : ''} active"
+              data-select-room="${room.key}"
+              role="button"
+              tabindex="0"
+            >
+              <div>
+                <div class="ward-room-top">
+                  <div class="ward-room-name">${room.name}</div>
+                </div>
+                <div class="ward-room-docs" style="margin-top:0.2rem;">
+                  BS phụ trách: <strong>${docNames}</strong>
+                </div>
+              </div>
+
+              <div class="ward-room-stats-row">
+                <div class="ward-mini-stat">
+                  <span class="wms-lbl">Hiện có:</span>
+                  <span class="wms-val">${st.hienCo ?? 0}</span>
+                </div>
+                <div class="ward-mini-stat">
+                  <span class="wms-lbl">Vào:</span>
+                  <span class="wms-val">${st.benhVao ?? 0}</span>
+                </div>
+                <div class="ward-mini-stat">
+                  <span class="wms-lbl">Ra:</span>
+                  <span class="wms-val">${st.raVien ?? 0}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        // 4 Phòng còn lại: Thu nhỏ gọn gàng
+        return `
+          <div
+            class="ward-room-card ${room.isHstk ? 'room-hstk-card' : ''} is-compact"
+            data-select-room="${room.key}"
+            role="button"
+            tabindex="0"
+            title="Bấm để chuyển sang ${room.name}"
+          >
+            <div class="ward-room-top">
+              <div class="ward-room-name">${room.name}</div>
+              <span class="ward-compact-count-pill">${st.hienCo ?? 0} BN</span>
+            </div>
+            <div class="ward-room-docs">
+              BS: <strong>${docNames}</strong>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      gridEl.querySelectorAll('.ward-room-card[data-select-room]').forEach((card) => {
+        card.addEventListener('click', () => {
+          selectWardRoom(card.getAttribute('data-select-room'));
+        });
+      });
+    }
+
+    function renderAllRoomWorkspaces() {
+      const todayKey = getDateKey(new Date());
+      const byRoomStats = (wardDbState.patientStats && wardDbState.patientStats.byRoom) || {};
+
+      for (const room of WARD_ROOMS_CONFIG) {
+        const docsEl = document.getElementById(`ws-docs-${room.key}`);
+        const statsEl = document.getElementById(`ws-stats-${room.key}`);
+
+        const roomDocs = (wardDbState.doctors || [])
+          .filter(d => d.assignedRoom === room.name)
+          .sort((a, b) => (a.seniority || 999) - (b.seniority || 999));
+
+        if (docsEl) {
+          docsEl.innerHTML = roomDocs.map((d) => {
+            const shiftCode = (d.scheduleByDate && d.scheduleByDate[todayKey]) || 'LAM_NGAY';
+            const shiftMeta = SHIFT_LABELS[shiftCode] || { label: shiftCode, cls: 'badge-lamngay' };
+            return `
+              <span class="room-ws-doc-pill">
+                <span>👨‍⚕️ ${d.name}</span>
+                <span class="${shiftMeta.cls}" style="font-size: 0.68rem; padding: 2px 7px;">${shiftMeta.label}</span>
+              </span>
+            `;
+          }).join('');
+        }
+
+        if (statsEl) {
+          const st = byRoomStats[room.name] || { dauCa: 0, benhVao: 0, chuyenDen: 0, raVien: 0, hienCo: 0 };
+          statsEl.innerHTML = `
+            <div class="admin-stat-box">
+              <span class="stat-num">${st.dauCa ?? 0}</span>
+              <span class="stat-lbl">Đầu ca</span>
+            </div>
+            <div class="admin-stat-box">
+              <span class="stat-num" style="color: #15803d;">${st.benhVao ?? 0}</span>
+              <span class="stat-lbl">Bệnh vào</span>
+            </div>
+            <div class="admin-stat-box">
+              <span class="stat-num" style="color: #0284c7;">${st.chuyenDen ?? 0}</span>
+              <span class="stat-lbl">Chuyển đến</span>
+            </div>
+            <div class="admin-stat-box">
+              <span class="stat-num" style="color: #d97706;">${st.raVien ?? 0}</span>
+              <span class="stat-lbl">Ra viện</span>
+            </div>
+            <div class="admin-stat-box" style="background: #eef2ff; border-color: #a5b4fc;">
+              <span class="stat-num" style="color: #4338ca;">${st.hienCo ?? 0}</span>
+              <span class="stat-lbl">Hiện có</span>
+            </div>
+          `;
+        }
+      }
+    }
+
+    (function initFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      const qRoom = params.get('room');
+      if (qRoom && WARD_ROOMS_CONFIG.some(r => r.key === qRoom)) {
+        currentSelectedRoomKey = qRoom;
+      }
+      selectWardRoom(currentSelectedRoomKey, false);
+      Object.values(ROOM_FEATURE_MODULES).forEach(m => m.init && m.init());
+    })();
+
+    fetch('/api/state')
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.db) {
+          wardDbState = data.db;
+          renderWard5RoomsGrid();
+          renderAllRoomWorkspaces();
+          if (window.TK1Module && window.TK1Module.onServerStateUpdate) {
+            window.TK1Module.onServerStateUpdate(data.db);
+          }
+        }
+      })
+      .catch(() => {});
+
+    const es = new EventSource('/api/stream');
+    es.onmessage = (evt) => {
+      try {
+        const payload = JSON.parse(evt.data);
+        const dbObj = payload.db || payload;
+        if (dbObj) {
+          wardDbState = dbObj;
+          renderWard5RoomsGrid();
+          renderAllRoomWorkspaces();
+          if (window.TK1Module && window.TK1Module.onServerStateUpdate) {
+            window.TK1Module.onServerStateUpdate(dbObj);
+          }
+        }
+      } catch (e) {}
+    };
+  </script>
+</body>
+</html>

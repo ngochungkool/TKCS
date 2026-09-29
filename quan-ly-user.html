@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý User Bác sĩ | Khoa Ngoại Thần Kinh - Cột Sống (BVĐK Trung Tâm Tỉnh Gia Lai)</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Official Department Header with Subpage Navigation + Large Báo Mổ + Realtime Clock -->
+    <header class="dept-header-bar">
+      <div class="dept-brand">
+        <a href="/" title="Về Trang chủ Khoa" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="logo.png" alt="Logo Khoa Ngoại Thần Kinh - Cột Sống" class="dept-logo-img" width="54" height="54" />
+        </a>
+        <div class="dept-brand-text">
+          <div class="hospital-subtitle">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+          <h1 class="dept-main-title">KHOA NGOẠI THẦN KINH - CỘT SỐNG</h1>
+        </div>
+      </div>
+
+      <!-- Right Header Group: Large "BÁO MỔ" Button + Realtime Clock -->
+      <div class="header-right-group">
+        <button type="button" class="btn-header-bao-mo" id="btn-header-bao-mo">
+          + BÁO MỔ
+        </button>
+
+        <div class="header-clock-box">
+          <div class="header-clock-time" id="header-clock-time">00:00:00</div>
+          <div class="header-clock-date" id="header-clock-date">Thứ Hai, 28/09/2026</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- GLOBAL 60-MINUTE + 5-MINUTE CONFIRMATION BANNER -->
+    <div id="global-60m-warning-container"></div>
+
+    <!-- 5 Department Rooms + "Đang mổ" Card -->
+    <section aria-label="Danh sách phòng">
+      <div class="rooms-grid" id="rooms-grid-container">
+        <!-- Populated by app.js -->
+      </div>
+    </section>
+
+    <!-- Main Card: Trạng thái & dòng thời gian -->
+    <section class="timeline-card" aria-label="Trạng thái và dòng thời gian">
+      <div class="timeline-header">
+        <div class="timeline-title-group">
+          <h3>Trạng thái &amp; dòng thời gian</h3>
+          <span class="live-sync-pill" id="realtime-status-badge">
+            <span class="sync-bolt">⚡</span> Đồng bộ tức thì (&lt;50ms · 1s)
+          </span>
+        </div>
+
+        <div class="timeline-controls">
+          <label for="view-date-picker">Ngày xem</label>
+          <input type="date" id="view-date-picker" class="date-input" />
+
+          <button type="button" class="nav-icon-btn" id="btn-shift-left" title="Lùi 30 phút">&lt;</button>
+          <span class="window-range-label" id="window-range-text">
+            <strong>21:40–00:40</strong> · 28/09/2026 · 3 giờ
+          </span>
+          <button type="button" class="nav-icon-btn" id="btn-shift-right" title="Tiến 30 phút">&gt;</button>
+
+          <button type="button" class="btn-live is-live" id="btn-jump-now" title="Bám sát thời gian thực">
+            <span class="live-dot-indicator"></span> LIVE
+          </button>
+        </div>
+      </div>
+
+      <!-- Legend Row -->
+      <div class="legend-bar">
+        <div class="legend-items">
+          <span class="legend-item">
+            <span class="dot dot-green"></span> Có thể sử dụng
+          </span>
+          <span class="legend-item">
+            <span class="dot dot-red"></span> Không sử dụng được
+          </span>
+          <span class="legend-item">
+            <span class="dot dot-gray"></span> Chưa có dữ liệu / chưa đến
+          </span>
+        </div>
+        <div class="drag-hint-text">🤚 Nhấn giữ chuột &amp; kéo ngang dải thời gian · Vạch mỗi 15 phút</div>
+      </div>
+
+      <!-- Timeline Grid -->
+      <div class="timeline-table-container" id="timeline-drag-area">
+        <!-- Header Row -->
+        <div class="timeline-grid-header">
+          <div>BÁC SĨ / USER</div>
+          <div>TRẠNG THÁI HIỆN TẠI</div>
+          <div>NHẬN / TRẢ USER</div>
+          <div class="time-axis" id="time-axis-header">
+            <!-- 12 ticks (every 15 mins across 3 hours) populated by app.js -->
+          </div>
+        </div>
+
+        <!-- Doctor Rows -->
+        <div id="timeline-rows-container">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Section: 2 Tính năng Tra cứu khả năng sử dụng & Tra cứu lịch sử -->
+    <footer class="bottom-tools-bar" aria-label="Công cụ tra cứu">
+      <button type="button" class="btn-tool-lookup" id="btn-open-availability-lookup">
+        🔍 Tra cứu khả năng sử dụng User theo phòng &amp; thời gian
+      </button>
+      <button type="button" class="btn-tool-lookup" id="btn-open-history-lookup">
+        📜 Tra cứu lịch sử sử dụng User
+      </button>
+    </footer>
+  </div>
+
+  <!-- BOX 1: HỘP CHỌN THỜI GIAN KHI BẤM "NHẬN SỬ DỤNG ->" -->
+  <dialog id="receive-time-dialog" class="modal-dialog" style="max-width: 480px;">
+    <form method="dialog" id="receive-time-form">
+      <div class="modal-header">
+        <h4 id="receive-dialog-title">Nhận sử dụng User Bác sĩ</h4>
+        <button type="button" class="btn-secondary" id="btn-close-receive-dialog">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="receive-target-doc-id" />
+        <div class="receive-summary-line" id="receive-dialog-summary"></div>
+
+        <div class="time-form-row">
+          <div class="time-field">
+            <label for="receive-start-time">Thời gian bắt đầu</label>
+            <input type="time" id="receive-start-time" class="date-input time-big-input" required />
+          </div>
+          <div class="time-field">
+            <label for="receive-end-time">Thời gian kết thúc</label>
+            <input type="time" id="receive-end-time" class="date-input time-big-input" />
+          </div>
+        </div>
+
+        <!-- Quick Duration Buttons: 5 - 10 - 20 - 30 - 60 phút -->
+        <div class="quick-duration-section">
+          <span class="quick-duration-label">Chọn nhanh khoảng thời gian:</span>
+          <div class="quick-duration-chips" id="receive-quick-duration-group">
+            <button type="button" class="duration-chip" data-duration-mins="5">5 phút</button>
+            <button type="button" class="duration-chip" data-duration-mins="10">10 phút</button>
+            <button type="button" class="duration-chip" data-duration-mins="20">20 phút</button>
+            <button type="button" class="duration-chip" data-duration-mins="30">30 phút</button>
+            <button type="button" class="duration-chip" data-duration-mins="60">60 phút</button>
+            <button type="button" class="duration-chip clear-chip" data-duration-mins="0">Để trống</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="btn-cancel-receive-dialog">Hủy</button>
+        <button type="submit" class="btn-primary-sm">Xác nhận Nhận User</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- BOX 2: HỘP "+ BÁO MỔ" TO RÕ, DỄ THAO TÁC TRÊN ĐIỆN THOẠI -->
+  <dialog id="surgery-quick-dialog" class="modal-dialog surgery-large-dialog">
+    <form method="dialog" id="surgery-quick-form">
+      <div class="modal-header">
+        <h4>Báo Mổ Nhanh</h4>
+        <button type="button" class="btn-secondary" id="btn-close-surgery-dialog">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-dark);">
+          Chọn bác sĩ đi mổ:
+        </div>
+        <div class="short-name-grid-large" id="surgery-short-name-grid"></div>
+
+        <div class="time-form-row" style="margin-top: 0.4rem;">
+          <div class="time-field">
+            <label for="surgery-start-time">Thời gian bắt đầu</label>
+            <input type="time" id="surgery-start-time" class="date-input time-big-input" required />
+          </div>
+          <div class="time-field">
+            <label for="surgery-end-time">Thời gian kết thúc</label>
+            <input type="time" id="surgery-end-time" class="date-input time-big-input" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary btn-touch-lg" id="btn-cancel-surgery-dialog">Hủy</button>
+        <button type="submit" class="btn-primary-sm btn-touch-lg">Xác nhận báo mổ</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- BOX 3: TRA CỨU KHẢ NĂNG SỬ DỤNG USER THEO PHÒNG VÀO THỜI GIAN NHẤT ĐỊNH -->
+  <dialog id="availability-lookup-dialog" class="modal-dialog" style="max-width: 720px;">
+    <div class="modal-header">
+      <h4>🔍 Tra cứu khả năng sử dụng User theo Phòng &amp; Thời gian</h4>
+      <button type="button" class="btn-secondary" id="btn-close-availability-dialog">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="lookup-filter-bar">
+        <div class="time-field">
+          <label for="lookup-room-select">Phòng cần sử dụng</label>
+          <select id="lookup-room-select" class="date-input"></select>
+        </div>
+        <div class="time-field">
+          <label for="lookup-date-input">Ngày kiểm tra</label>
+          <input type="date" id="lookup-date-input" class="date-input" />
+        </div>
+        <div class="time-field">
+          <label for="lookup-time-input">Thời điểm (Giờ:Phút)</label>
+          <input type="time" id="lookup-time-input" class="date-input" />
+        </div>
+      </div>
+
+      <div id="availability-lookup-results" class="lookup-results-box"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-primary-sm" id="btn-done-availability-dialog">Đóng</button>
+    </div>
+  </dialog>
+
+  <!-- BOX 4: TRA CỨU LỊCH SỬ SỬ DỤNG USER -->
+  <dialog id="history-lookup-dialog" class="modal-dialog" style="max-width: 820px;">
+    <div class="modal-header">
+      <h4>📜 Tra cứu lịch sử sử dụng User Bác sĩ</h4>
+      <button type="button" class="btn-secondary" id="btn-close-history-dialog">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="lookup-filter-bar">
+        <div class="time-field">
+          <label for="history-room-filter">Lọc theo Phòng / Trạng thái</label>
+          <select id="history-room-filter" class="date-input">
+            <option value="ALL">Tất cả các phòng &amp; Đang mổ</option>
+          </select>
+        </div>
+        <div class="time-field">
+          <label for="history-doc-filter">Lọc theo Bác sĩ</label>
+          <select id="history-doc-filter" class="date-input">
+            <option value="ALL">Tất cả 14 bác sĩ</option>
+          </select>
+        </div>
+        <div class="time-field">
+          <label for="history-date-filter">Ngày sử dụng</label>
+          <input type="date" id="history-date-filter" class="date-input" />
+        </div>
+      </div>
+
+      <div class="lookup-results-box" style="max-height: 380px; overflow-y: auto;">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Bác sĩ</th>
+              <th>Phòng / Trạng thái</th>
+              <th>Giờ bắt đầu</th>
+              <th>Giờ kết thúc</th>
+              <th>Thời lượng</th>
+              <th>Tình trạng</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-primary-sm" id="btn-done-history-dialog">Đóng</button>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" class="toast-box"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

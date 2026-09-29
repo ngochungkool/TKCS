@@ -1,0 +1,3340 @@
+:root {
+  --bg-page: #f3f6fb;
+  --bg-card: #ffffff;
+  --border-light: #e5eaf2;
+  --border-hover: #cbd5e1;
+  --text-dark: #1e293b;
+  --text-sub: #64748b;
+  --text-muted: #94a3b8;
+
+  /* Exact colors from screenshot & logo */
+  --brand-blue: #004aad;
+  --brand-green: #00a651;
+  --green-bar: #6ec496;
+  --green-pill-bg: #e6f7ed;
+  --green-pill-text: #15803d;
+
+  --red-block: #d6515c;
+  --red-pill-bg: #fde8e8;
+  --red-pill-text: #b91c1c;
+
+  --future-gray: #eef2f6;
+  --now-line-blue: #3b82f6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  padding: 0.85rem 1.35rem 3rem;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Official Department Header Bar */
+.dept-header-bar {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-left: 5px solid var(--brand-blue);
+  border-radius: 12px;
+  padding: 0.65rem 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 74, 173, 0.05);
+}
+
+.dept-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.dept-logo-img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.hospital-subtitle {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--brand-green);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dept-main-title {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  letter-spacing: -0.01em;
+}
+
+.header-right-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* Large, prominent "+ BÁO MỔ" button in Top Header next to Realtime Clock */
+.btn-header-bao-mo {
+  appearance: none;
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border: 2px solid #b91c1c;
+  border-radius: 10px;
+  padding: 0.75rem 1.65rem;
+  min-height: 50px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  transition: all 0.15s ease;
+  text-rendering: geometricPrecision;
+}
+
+.btn-header-bao-mo:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(220, 38, 38, 0.38);
+}
+
+.btn-header-bao-mo:active {
+  transform: translateY(0);
+}
+
+/* Bottom bar for Lookup & History features */
+.bottom-tools-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1.2rem;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  margin-top: 0.25rem;
+}
+
+.btn-tool-lookup {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 0.6rem 1.15rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.14s ease;
+}
+
+.btn-tool-lookup:hover {
+  background: #eff6ff;
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+}
+
+/* Realtime Clock on Top-Right horizontally aligned with Logo & Department Name */
+.header-clock-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  padding: 0.32rem 0.85rem;
+  border-radius: 10px;
+}
+
+.header-clock-time {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.header-clock-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-sub);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.22); opacity: 0.75; }
+}
+
+/* 5 Rooms + Đang mổ Grid */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(175px, 1fr));
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.15rem;
+}
+
+.room-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: 10px;
+  padding: 0.8rem 0.95rem;
+  cursor: pointer;
+  transition: all 0.14s ease;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.room-card:hover {
+  border-color: #93c5fd;
+  transform: translateY(-1px);
+}
+
+.room-card.selected {
+  border: 2px solid var(--brand-blue);
+  background: #eff6ff;
+  box-shadow: 0 3px 10px rgba(0, 74, 173, 0.12);
+}
+
+.room-card.has-active {
+  border-left: 4px solid var(--red-block);
+}
+
+.room-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.room-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.room-selected-pill {
+  background: var(--brand-blue);
+  color: #ffffff;
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 0.08rem 0.42rem;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* Enlarged, mobile-friendly "+ Báo mổ" button inside the "Đang mổ" card */
+.btn-bao-mo {
+  appearance: none;
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.42rem 0.85rem;
+  min-height: 36px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.25);
+  transition: all 0.14s ease;
+}
+
+.btn-bao-mo:hover {
+  background: #b91c1c;
+  transform: scale(1.03);
+}
+
+.room-count {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+}
+
+.room-count.active-text {
+  color: var(--red-pill-text);
+  font-weight: 600;
+}
+
+/* Main Card: Trạng thái & dòng thời gian */
+.timeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 1.15rem 1.35rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+}
+
+.timeline-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.85rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.timeline-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.timeline-title-group h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.live-sync-pill {
+  background: var(--green-pill-bg);
+  color: var(--green-pill-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.24rem 0.62rem;
+  border-radius: 99px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.timeline-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.83rem;
+  color: var(--text-sub);
+}
+
+.date-input {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.38rem 0.65rem;
+  font-size: 0.84rem;
+  color: var(--text-dark);
+  background: #ffffff;
+}
+
+.time-big-input {
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+  min-height: 44px;
+}
+
+.nav-icon-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-light);
+  background: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.nav-icon-btn:hover {
+  background: #f8fafc;
+  border-color: var(--border-hover);
+}
+
+.window-range-label {
+  font-size: 0.83rem;
+  color: var(--text-sub);
+  padding: 0 0.25rem;
+}
+
+.window-range-label strong {
+  color: var(--text-dark);
+}
+
+/* LIVE Button */
+.btn-live {
+  background: #fff1f2;
+  border: 1.5px solid #fecdd3;
+  color: #be123c;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  padding: 0.36rem 0.82rem;
+  border-radius: 99px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  transition: all 0.15s ease;
+}
+
+.btn-live.is-live {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  border-color: #be123c;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.32);
+}
+
+.live-dot-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e11d48;
+}
+
+.btn-live.is-live .live-dot-indicator {
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+  animation: pulseGlow 1.3s infinite;
+}
+
+/* Legend bar */
+.legend-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  font-size: 0.81rem;
+  color: var(--text-sub);
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.15rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-green { background: #16a34a; }
+.dot-red { background: #dc2626; }
+.dot-gray { background: #cbd5e1; }
+
+.drag-hint-text {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+}
+
+/* Timeline Grid Layout */
+.timeline-table-container {
+  width: 100%;
+  overflow-x: auto;
+  cursor: grab;
+  user-select: none;
+}
+
+.timeline-table-container.is-dragging {
+  cursor: grabbing;
+}
+
+.timeline-grid-header,
+.timeline-row {
+  display: grid;
+  grid-template-columns: 275px 230px 185px minmax(410px, 1fr);
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.timeline-grid-header {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.time-axis {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  text-transform: none;
+}
+
+.time-tick-label {
+  text-align: left;
+  padding-left: 2px;
+}
+
+/* Rows */
+.timeline-row {
+  padding: 0.82rem 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.timeline-row:last-child {
+  border-bottom: none;
+}
+
+/* Col 1: Doctor Info */
+.doc-info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+}
+
+.doc-name-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.doc-fullname {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.doc-handle-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-sub);
+}
+
+.doc-handle {
+  color: #475569;
+  font-weight: 500;
+}
+
+.doc-room-sep {
+  color: #cbd5e1;
+}
+
+.doc-assigned-room {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.doc-assigned-room.match-selected {
+  color: var(--brand-blue);
+  font-weight: 700;
+  background: #eff6ff;
+  padding: 0.05rem 0.38rem;
+  border-radius: 4px;
+}
+
+/* Shift State Badges */
+.badge-truc {
+  background: #dbeafe;
+  color: #1e40af;
+  font-weight: 700;
+  font-size: 0.71rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 5px;
+}
+
+.badge-ratruc {
+  background: #fef3c7;
+  color: #b45309;
+  font-weight: 700;
+  font-size: 0.71rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 5px;
+}
+
+.badge-lamngay {
+  background: #dcfce7;
+  color: #15803d;
+  font-weight: 700;
+  font-size: 0.71rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 5px;
+}
+
+.badge-off {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 700;
+  font-size: 0.71rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 5px;
+}
+
+/* Col 2: Current Status */
+.status-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.22rem 0.62rem;
+  border-radius: 99px;
+}
+
+.status-badge.available {
+  background: var(--green-pill-bg);
+  color: var(--green-pill-text);
+}
+
+.status-badge.unavailable {
+  background: var(--red-pill-bg);
+  color: var(--red-pill-text);
+}
+
+.status-subtext {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+}
+
+/* Col 3: Action Button */
+.action-cell {
+  display: flex;
+  align-items: center;
+}
+
+.btn-action-receive {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  font-size: 0.81rem;
+  font-weight: 600;
+  padding: 0.46rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.14s ease;
+}
+
+.btn-action-receive:hover {
+  background: #eff6ff;
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+}
+
+.btn-action-release {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #be123c;
+  font-size: 0.81rem;
+  font-weight: 700;
+  padding: 0.46rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.14s ease;
+}
+
+.btn-action-release:hover {
+  background: #ffe4e6;
+}
+
+.btn-action-disabled {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #94a3b8;
+  font-size: 0.79rem;
+  font-weight: 600;
+  padding: 0.46rem 0.78rem;
+  border-radius: 8px;
+  cursor: not-allowed;
+}
+
+/* Col 4: Timeline Bar Track */
+.timeline-track-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.timeline-track {
+  position: relative;
+  height: 42px;
+  border-radius: 6px;
+  background: var(--future-gray);
+  overflow: visible;
+  border: 1px solid #e2e8f0;
+}
+
+.track-grid-lines {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.track-grid-cell {
+  border-right: 1px solid rgba(255, 255, 255, 0.38);
+}
+
+.track-grid-cell:last-child {
+  border-right: none;
+}
+
+.track-available-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--green-bar);
+  border-radius: 5px 0 0 5px;
+  z-index: 1;
+}
+
+.track-offduty-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    #f8b4b4,
+    #f8b4b4 10px,
+    #fbd5d5 10px,
+    #fbd5d5 20px
+  );
+  border-radius: 5px 0 0 5px;
+  z-index: 1;
+}
+
+.usage-block {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: var(--red-block);
+  color: #ffffff;
+  z-index: 3;
+  padding: 0.2rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  border-left: 1px solid rgba(255, 255, 255, 0.55);
+  border-right: 1px solid rgba(255, 255, 255, 0.55);
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+.usage-block strong {
+  font-weight: 700;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.usage-block span {
+  font-size: 0.68rem;
+  opacity: 0.95;
+}
+
+/* Vertical Blue Current Time Line */
+.current-time-marker {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 2px;
+  background-color: var(--now-line-blue);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.current-time-marker::before,
+.current-time-marker::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--now-line-blue);
+  border-radius: 50%;
+}
+
+.current-time-marker::before {
+  top: -2px;
+}
+
+.current-time-marker::after {
+  bottom: -2px;
+}
+
+.usage-caption-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: #881337;
+  min-height: 1rem;
+}
+
+.usage-caption-item b {
+  font-weight: 700;
+}
+
+/* Modal Dialogs */
+dialog.modal-dialog {
+  margin: auto;
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  max-width: 480px;
+  width: calc(100% - 1.5rem);
+  box-shadow: 0 20px 30px rgba(15, 23, 42, 0.25);
+}
+
+dialog.surgery-large-dialog {
+  max-width: 720px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid #fecaca;
+  box-shadow: 0 25px 50px rgba(15, 23, 42, 0.32);
+}
+
+dialog.surgery-large-dialog .modal-header {
+  padding: 1.15rem 1.5rem;
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+  border-bottom: 2px solid #fecdd3;
+}
+
+dialog.surgery-large-dialog .modal-header h4 {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #b91c1c;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+dialog.surgery-large-dialog .modal-body {
+  padding: 1.4rem 1.5rem;
+  gap: 1.15rem;
+}
+
+dialog.surgery-large-dialog .modal-footer {
+  padding: 1.1rem 1.5rem;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  gap: 0.85rem;
+}
+
+dialog.modal-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.modal-header {
+  padding: 0.95rem 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h4 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.modal-body {
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.receive-summary-line {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.86rem;
+  color: #1e3a8a;
+}
+
+.time-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.time-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+}
+
+.time-field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.time-field input,
+.time-field select {
+  width: 100%;
+  font-weight: 600;
+}
+
+/* Quick Duration Buttons: 5 - 10 - 20 - 30 - 60 phút */
+.quick-duration-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.quick-duration-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-sub);
+}
+
+.quick-duration-chips {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.4rem;
+}
+
+@media (max-width: 520px) {
+  .quick-duration-chips {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.duration-chip {
+  appearance: none;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.48rem 0.3rem;
+  font-size: 0.81rem;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.duration-chip:hover,
+.duration-chip.active {
+  background: var(--brand-blue);
+  border-color: var(--brand-blue);
+  color: #ffffff;
+}
+
+.duration-chip.clear-chip {
+  color: #64748b;
+}
+
+/* Large Touch-Friendly Short-Name Grid inside "+ Báo mổ" */
+.short-name-grid-large {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+}
+
+@media (max-width: 560px) {
+  .short-name-grid-large {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+  }
+}
+
+.short-name-chip {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #ffffff;
+  border: 2.5px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 1rem 0.6rem;
+  min-height: 68px;
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #0f172a;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.05);
+  transition: all 0.14s ease;
+  user-select: none;
+}
+
+.short-name-chip:hover {
+  border-color: #dc2626;
+  background: #fff1f2;
+  color: #b91c1c;
+  transform: translateY(-2px);
+}
+
+.short-name-chip.active {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border-color: #991b1b;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.36);
+  transform: translateY(-2px);
+}
+
+.short-name-chip.active::before {
+  content: "✓ ";
+  font-weight: 900;
+}
+
+.time-big-input {
+  min-height: 54px !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  padding: 0.65rem 0.9rem !important;
+  border-radius: 12px !important;
+  border: 2px solid #cbd5e1 !important;
+}
+
+.time-big-input:focus {
+  border-color: #dc2626 !important;
+  outline: none;
+}
+
+.btn-touch-lg {
+  padding: 0.85rem 1.6rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  min-height: 52px;
+  border-radius: 12px !important;
+}
+
+/* Lookup Dialogs (Availability & History) */
+.lookup-filter-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .lookup-filter-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lookup-results-box {
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 0.85rem;
+  background: #ffffff;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.lookup-group-title {
+  font-size: 0.84rem;
+  font-weight: 800;
+  margin-bottom: 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.lookup-doc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  margin-bottom: 0.38rem;
+  font-size: 0.84rem;
+}
+
+.lookup-doc-item.avail-item {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.lookup-doc-item.unavail-item {
+  background: #fef2f2;
+  border: 1px solid #fecdd3;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+}
+
+.history-table th,
+.history-table td {
+  padding: 0.55rem 0.65rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.history-table th {
+  background: #f8fafc;
+  font-weight: 700;
+  color: var(--text-sub);
+  position: sticky;
+  top: 0;
+}
+
+.modal-footer {
+  padding: 0.8rem 1.25rem;
+  border-top: 1px solid var(--border-light);
+  background: #f8fafc;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.btn-secondary {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--border-light);
+  border-radius: 7px;
+  background: #ffffff;
+  font-size: 0.83rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary-sm {
+  padding: 0.45rem 0.9rem;
+  border: none;
+  border-radius: 7px;
+  background: var(--brand-blue);
+  color: #ffffff;
+  font-size: 0.83rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Toast */
+.toast-box {
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1.2rem;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.toast-msg {
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 0.83rem;
+  padding: 0.65rem 0.95rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  border-left: 4px solid var(--now-line-blue);
+}
+
+/* ============================================================================
+   TRANG CHỦ (HOME PORTAL), THANH ĐIỀU HƯỚNG TRANG CON & HÀNH CHÍNH KHOA
+   ============================================================================ */
+.subpage-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.nav-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.16s ease;
+}
+
+.nav-pill-link:hover {
+  background: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.nav-pill-link.active {
+  background: #ffffff;
+  color: #003b8e;
+  border-color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+.nav-sep {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.header-quick-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.header-quick-switch-btn:hover {
+  background: #ffffff;
+  color: #003b8e;
+}
+
+/* HOME PORTAL LAYOUT */
+.home-main-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.home-welcome-banner {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+  border: 1px solid #cfe0f5;
+  border-radius: 20px;
+  padding: 26px 30px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 28px rgba(0, 59, 142, 0.06);
+}
+
+.home-portal-kicker {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #004aad;
+  background: #e0edff;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.home-portal-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+.home-portal-subtitle {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 880px;
+}
+
+.home-portal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.portal-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 28px;
+  text-decoration: none;
+  color: inherit;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 74, 173, 0.14);
+}
+
+.portal-card-user:hover {
+  border-color: #004aad;
+}
+
+.portal-card-admin:hover {
+  border-color: #00a651;
+}
+
+.portal-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 54px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.portal-live-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+  font-size: 0.74rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.live-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.portal-sub-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: #ecfdf5;
+  border: 1.5px solid #6ee7b7;
+  color: #047857;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.portal-card-title {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 1.72rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.title-user-impress {
+  background: linear-gradient(135deg, #003580 0%, #004aad 50%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 6px rgba(0, 74, 173, 0.12));
+}
+
+.title-admin-impress {
+  background: linear-gradient(135deg, #065f46 0%, #00a651 55%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 6px rgba(0, 166, 81, 0.12));
+}
+
+.portal-card-desc {
+  font-size: 0.92rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0 0 22px;
+}
+
+.portal-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.portal-metric-item {
+  padding: 14px 12px;
+  border-radius: 14px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.portal-metric-item .metric-val {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.portal-metric-item .metric-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.metric-green { background: #f0fdf4; border-color: #bbf7d0; color: #15803d; }
+.metric-blue { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+.metric-red { background: #fef2f2; border-color: #fecaca; color: #dc2626; }
+.metric-slate { background: #f8fafc; border-color: #cbd5e1; color: #0f172a; }
+.metric-amber { background: #fffbeb; border-color: #fde68a; color: #b45309; }
+.metric-teal { background: #f0fdfa; border-color: #99f6e4; color: #0f766e; }
+
+.portal-enter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: #004aad;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.96rem;
+  transition: background 0.18s ease;
+}
+
+.portal-enter-btn.portal-enter-green {
+  background: #00a651;
+}
+
+/* TRANG CON HÀNH CHÍNH KHOA */
+.admin-hero-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: #ffffff;
+  border: 1px solid #dbe4f0;
+  border-radius: 18px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+}
+
+.admin-badge-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #047857;
+  background: #d1fae5;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.admin-hero-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px;
+}
+
+.admin-hero-desc {
+  font-size: 0.9rem;
+  color: #475569;
+  margin: 0;
+  max-width: 680px;
+  line-height: 1.5;
+}
+
+.admin-hero-stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-stat-box {
+  min-width: 88px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.admin-stat-box .stat-num {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.admin-stat-box .stat-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.admin-table-section {
+  background: #ffffff;
+  border: 1px solid #dbe4f0;
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+}
+
+.admin-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admin-section-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+.section-sub-note {
+  font-size: 0.83rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.admin-legend-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-roster-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-roster-table th,
+.admin-roster-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.admin-roster-table th {
+  background: #f8fafc;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.col-rank {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  color: #64748b;
+}
+
+.admin-doc-name {
+  font-weight: 800;
+  color: #0f172a;
+  font-size: 0.93rem;
+}
+
+.admin-short-tag {
+  color: #004aad;
+  font-weight: 700;
+}
+
+.admin-doc-acc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.admin-room-chip {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.admin-sched-btn-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.admin-sched-btn {
+  padding: 7px 12px;
+  border-radius: 9px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.admin-sched-btn:hover {
+  border-color: #004aad;
+  color: #004aad;
+}
+
+.admin-sched-btn.active {
+  background: #004aad;
+  color: #ffffff;
+  border-color: #004aad;
+  box-shadow: 0 3px 8px rgba(0, 74, 173, 0.22);
+}
+
+.admin-live-pill {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.pill-usable { background: #dcfce7; color: #15803d; }
+.pill-inuse { background: #dbeafe; color: #1d4ed8; }
+.pill-surgery { background: #fee2e2; color: #b91c1c; }
+.pill-locked { background: #f1f5f9; color: #64748b; }
+
+@media (max-width: 900px) {
+  .home-portal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================================
+   TABS TRONG TRANG HÀNH CHÍNH KHOA (CHẤM CÔNG | SỐ LIỆU KHOA)
+   ============================================================================ */
+.admin-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 0.5rem;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+}
+
+.admin-tab-btn {
+  appearance: none;
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 1.02rem;
+  font-weight: 800;
+  padding: 0.8rem 1.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  letter-spacing: 0.01em;
+}
+
+.admin-tab-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.admin-tab-btn.active {
+  background: linear-gradient(135deg, #004aad 0%, #0284c7 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 74, 173, 0.25);
+}
+
+.admin-tab-panel {
+  display: none;
+}
+
+.admin-tab-panel.active {
+  display: block;
+}
+
+/* SỐ LIỆU KHOA KPI GRID */
+.dept-metrics-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .dept-metrics-overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .dept-metrics-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dept-kpi-card {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.dept-kpi-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.dept-kpi-value {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.dept-kpi-sub {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.dept-kpi-card.kpi-blue {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+.dept-kpi-card.kpi-blue .dept-kpi-value { color: #004aad; }
+
+.dept-kpi-card.kpi-green {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+.dept-kpi-card.kpi-green .dept-kpi-value { color: #15803d; }
+
+.dept-kpi-card.kpi-red {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+.dept-kpi-card.kpi-red .dept-kpi-value { color: #dc2626; }
+
+.dept-kpi-card.kpi-amber {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+.dept-kpi-card.kpi-amber .dept-kpi-value { color: #b45309; }
+
+/* ============================================================================
+   DÀN TRANG & PHÂN MÀU BẢNG CHẤM CÔNG (TAB CHẤM CÔNG)
+   ============================================================================ */
+.admin-chamcong-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.15rem;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 2px solid #eef2f7;
+}
+
+.admin-toolbar-title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-main-heading {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 1.32rem;
+  font-weight: 800;
+  color: #003b8e;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.btn-export-attendance-img {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: linear-gradient(135deg, #004aad 0%, #0284c7 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 11px;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.28);
+  transition: all 0.16s ease;
+}
+
+.btn-export-attendance-img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.36);
+}
+
+.btn-add-doctor {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #ffffff;
+  color: #004aad;
+  border: 2px solid #004aad;
+  border-radius: 11px;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.16s ease;
+}
+
+.btn-add-doctor:hover {
+  background: #004aad;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* DÒNG TRONG BẢNG CHẤM CÔNG TRUNG TÍNH, SẠCH SẼ */
+.roster-row {
+  background: #ffffff;
+  transition: background 0.12s ease;
+}
+
+.roster-row:hover {
+  background: #f8fafc;
+}
+
+/* CHỈ GIỮ MÀU NỔI BẬT Ở CÁC NÚT BẤM CHẤM CÔNG KHI ĐƯỢC CHỌN */
+.admin-sched-btn.sched-btn-work.active {
+  background: #059669 !important;
+  border-color: #047857 !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(5, 150, 105, 0.28);
+}
+
+.admin-sched-btn.sched-btn-duty.active {
+  background: #dc2626 !important;
+  border-color: #b91c1c !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(220, 38, 38, 0.28);
+}
+
+.admin-sched-btn.sched-btn-postduty.active {
+  background: #d97706 !important;
+  border-color: #b45309 !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(217, 119, 6, 0.28);
+}
+
+.admin-sched-btn.sched-btn-clinic.active {
+  background: #0284c7 !important;
+  border-color: #0369a1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.28);
+}
+
+.admin-sched-btn.sched-btn-off.active {
+  background: #475569 !important;
+  border-color: #334155 !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(71, 85, 105, 0.25);
+}
+
+/* NÚT SỬA THÔNG TIN BÁC SĨ */
+.btn-edit-doc {
+  appearance: none;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  color: #0f172a;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.48rem 0.9rem;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.btn-edit-doc:hover {
+  background: #eff6ff;
+  border-color: #004aad;
+  color: #004aad;
+}
+
+.attendance-preview-scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+/* ============================================================================
+   TAB SỐ LIỆU BỆNH NHÂN (9 CHỈ SỐ + CÔNG CỤ TẢI FILE EXCEL TỪ HIS)
+   ============================================================================ */
+.his-excel-upload-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 2px dashed #0284c7;
+  border-radius: 16px;
+  padding: 1.35rem 1.6rem;
+}
+
+.his-upload-left {
+  max-width: 780px;
+}
+
+.his-upload-badge {
+  display: inline-block;
+  background: #0284c7;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
+.his-upload-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px;
+}
+
+.his-upload-desc {
+  font-size: 0.88rem;
+  color: #334155;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.his-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.his-file-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #bae6fd;
+  border-radius: 9px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+}
+
+.his-upload-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-upload-his-excel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.6rem;
+  background: #004aad;
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 800;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 74, 173, 0.25);
+  transition: all 0.15s ease;
+}
+
+.btn-upload-his-excel:hover {
+  background: #003580;
+  transform: translateY(-2px);
+}
+
+.his-upload-hint {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* 9 Ô CHỈ SỐ BỆNH NHÂN */
+.patient-9metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 920px) {
+  .patient-9metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .patient-9metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.patient-metric-card {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.patient-metric-card.pm-card-highlight {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+.patient-metric-card.pm-card-insurance {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.pm-label {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+}
+
+.pm-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pm-step-btn {
+  width: 40px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.pm-step-btn:hover {
+  border-color: #004aad;
+  color: #004aad;
+  background: #eff6ff;
+}
+
+.pm-num-input {
+  flex: 1;
+  height: 44px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #003b8e;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.pm-sub {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.room-pm-input {
+  width: 74px;
+  height: 36px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.92rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* ============================================================================
+   BOX ĐI BUỒNG HẰNG NGÀY (TRANG CHỦ) & TRANG ĐI BUỒNG 5 PHÒNG TRONG KHOA
+   ============================================================================ */
+.home-portal-grid.home-portal-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 1180px) {
+  .home-portal-grid.home-portal-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .home-portal-grid.home-portal-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portal-card-rounds:hover {
+  border-color: #4f46e5;
+}
+
+.title-rounds-impress {
+  background: linear-gradient(135deg, #312e81 0%, #4f46e5 55%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 6px rgba(79, 70, 229, 0.12));
+}
+
+.portal-sub-tag-rounds {
+  background: #eef2ff;
+  border-color: #a5b4fc;
+  color: #4338ca;
+}
+
+.metric-indigo {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4338ca;
+}
+
+.portal-enter-btn.portal-enter-indigo {
+  background: linear-gradient(135deg, #4338ca 0%, #4f46e5 100%);
+}
+
+.portal-enter-btn.portal-enter-indigo:hover {
+  background: linear-gradient(135deg, #3730a3 0%, #4338ca 100%);
+}
+
+.portal-rooms-mini-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.portal-room-mini-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.77rem;
+  font-weight: 700;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.portal-room-mini-chip:hover {
+  background: #eef2ff;
+  border-color: #4f46e5;
+  color: #4338ca;
+  transform: translateY(-1px);
+}
+
+.portal-room-mini-chip.chip-hstk {
+  background: #fff1f2;
+  border-color: #fecdd3;
+  color: #be123c;
+}
+
+.portal-room-mini-chip.chip-hstk:hover {
+  background: #ffe4e6;
+  border-color: #e11d48;
+  color: #9f1239;
+}
+
+/* TRANG ĐI BUỒNG HẰNG NGÀY - THANH 5 PHÒNG (PHÒNG ĐANG CHỌN NỔI BẬT, 4 PHÒNG CÒN LẠI THU NHỎ GỌN GÀNG) */
+.ward-5rooms-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.65rem;
+}
+
+.ward-room-card {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #dbe4f0;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  text-align: left;
+}
+
+.ward-room-card:hover {
+  transform: translateY(-2px);
+  border-color: #818cf8;
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.11);
+}
+
+/* Phòng đang được chọn: Rộng rãi, nổi bật */
+.ward-room-card.active {
+  flex: 2.1 1 320px;
+  padding: 0.85rem 1.1rem;
+  border: 2px solid #4f46e5;
+  background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.15);
+  gap: 0.5rem;
+}
+
+.ward-room-card.room-hstk-card.active {
+  border-color: #e11d48;
+  background: linear-gradient(135deg, #fff1f2 0%, #ffffff 100%);
+  box-shadow: 0 8px 22px rgba(225, 29, 72, 0.14);
+}
+
+/* 4 Phòng còn lại: Thu nhỏ gọn gàng */
+.ward-room-card.is-compact {
+  flex: 1 1 155px;
+  padding: 0.55rem 0.8rem;
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  opacity: 0.92;
+  gap: 0.2rem;
+}
+
+.ward-room-card.is-compact:hover {
+  background: #ffffff;
+  opacity: 1;
+}
+
+.ward-room-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.ward-room-name {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.ward-room-card.is-compact .ward-room-name {
+  font-size: 0.88rem;
+  color: #334155;
+}
+
+.ward-room-card.room-hstk-card.is-compact .ward-room-name {
+  color: #9f1239;
+}
+
+.ward-compact-count-pill {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #e2e8f0;
+  color: #1e293b;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.ward-room-card.room-hstk-card.is-compact .ward-compact-count-pill {
+  background: #ffe4e6;
+  color: #be123c;
+}
+
+.ward-room-docs {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.35;
+}
+
+.ward-room-card.is-compact .ward-room-docs {
+  font-size: 0.71rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ward-room-docs strong {
+  color: #1e293b;
+}
+
+.ward-room-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding-top: 0.4rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.ward-mini-stat {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 4px 6px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.ward-mini-stat .wms-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.ward-mini-stat .wms-lbl {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* KHÔNG GIAN RIÊNG CỦA TỪNG PHÒNG (5 MODULE ĐỘC LẬP) */
+.room-workspace-panel {
+  display: none;
+  background: #ffffff;
+  border: 2px solid #dbe4f0;
+  border-radius: 18px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.room-workspace-panel.active {
+  display: block;
+  animation: fadeRoomPanel 0.18s ease-out;
+}
+
+@keyframes fadeRoomPanel {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.room-ws-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.room-ws-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.room-ws-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4338ca;
+}
+
+.room-ws-heading {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.room-ws-doctors-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.room-ws-doc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 4px 11px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.room-ws-custom-zone {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 2px dashed #94a3b8;
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 240px;
+}
+
+.room-ws-custom-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.65rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.room-ws-custom-title {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.room-ws-custom-desc {
+  font-size: 0.9rem;
+  color: #475569;
+  max-width: 620px;
+  line-height: 1.55;
+}
+
+/* ============================================================================
+   TÍNH NĂNG ĐI BUỒNG PHÒNG THẦN KINH 1 (GIƯỜNG A 1-9, B 10-24, HỘI CHẨN, RA VIỆN, PNG A4)
+   ============================================================================ */
+.tk1-toolbar-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.tk1-toolbar-left,
+.tk1-toolbar-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-tk1-png-a4 {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: linear-gradient(135deg, #4338ca 0%, #2563eb 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 4px 12px rgba(67, 56, 202, 0.25);
+  transition: all 0.15s ease;
+}
+
+.btn-tk1-png-a4:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(67, 56, 202, 0.35);
+}
+
+/* CẢNH BÁO ĐẦU TRANG & THANH HOÀN TÁC */
+.tk1-alerts-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.tk1-undo-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: #1e293b;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 0.75rem 1.1rem;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
+}
+
+.btn-tk1-undo {
+  background: #fbbf24;
+  color: #0f172a;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-tk1-undo:hover {
+  background: #f59e0b;
+}
+
+.tk1-alert-box {
+  border-radius: 13px;
+  padding: 0.85rem 1.1rem;
+  border: 1.5px solid #fde68a;
+  background: #fffbeb;
+}
+
+.tk1-alert-box.alert-missing-excel {
+  border-color: #fecdd3;
+  background: #fff1f2;
+}
+
+.tk1-alert-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #92400e;
+}
+
+.tk1-alert-box.alert-missing-excel .tk1-alert-header {
+  color: #9f1239;
+}
+
+.tk1-unassigned-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.tk1-unassigned-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #ffffff;
+  border: 1.5px solid #fcd34d;
+  border-radius: 999px;
+  padding: 0.28rem 0.4rem 0.28rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.14s ease;
+}
+
+.tk1-unassigned-chip.selected-for-assign {
+  background: #eff6ff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+.btn-chip-pick-bed {
+  appearance: none;
+  background: #004aad;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.btn-chip-pick-bed:hover {
+  background: #1d4ed8;
+}
+
+.btn-chip-del-mini {
+  appearance: none;
+  background: #fff1f2;
+  color: #be123c;
+  border: 1px solid #fecdd3;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SƠ ĐỒ CHỌN GIƯỜNG TRỰC QUAN (FIT ĐỘ RỘNG MÀN HÌNH) */
+.tk1-bed-picker-dialog {
+  width: min(96vw, 1380px) !important;
+  max-width: 96vw !important;
+  margin: auto;
+  border-radius: 16px;
+}
+
+.tk1-vbed-wings-wrap {
+  display: grid;
+  grid-template-columns: 3fr 5fr;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .tk1-vbed-wings-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tk1-vbed-wing-box {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.75rem;
+}
+
+.tk1-vbed-wing-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #004aad;
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tk1-vbed-grid.grid-wing-a {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.tk1-vbed-grid.grid-wing-b {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .tk1-vbed-grid.grid-wing-a,
+  .tk1-vbed-grid.grid-wing-b {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tk1-vbed-tile {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.45rem 0.55rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 62px;
+}
+
+.tk1-vbed-tile.vbed-empty {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.tk1-vbed-tile.vbed-empty:hover {
+  background: #dcfce7;
+  border-color: #16a34a;
+  transform: translateY(-1px);
+}
+
+.tk1-vbed-tile.vbed-occupied {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+.tk1-vbed-tile.vbed-occupied:hover {
+  background: #dbeafe;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.tk1-vbed-tile.vbed-discharging {
+  background: #fffbeb;
+  border-color: #fcd34d;
+}
+
+.tk1-vbed-tile.vbed-self {
+  background: #e0e7ff;
+  border: 2px solid #4338ca;
+}
+
+.vbed-num-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.vbed-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.vbed-fold-btn {
+  appearance: none;
+  background: #f3e8ff;
+  color: #6d28d9;
+  border: 1px solid #d8b4fe;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.vbed-fold-btn:hover {
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+.vbed-occ-name {
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+}
+
+/* 2 DÃY GIƯỜNG (DÃY A: 1-9, DÃY B: 10-24) */
+.tk1-wings-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  align-items: start;
+  margin-bottom: 1.4rem;
+}
+
+@media (max-width: 1080px) {
+  .tk1-wings-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tk1-wing-card {
+  background: #f8fafc;
+  border: 1.5px solid #dbe4f0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.tk1-wing-header {
+  width: 100%;
+  background: linear-gradient(135deg, #004aad 0%, #1d4ed8 100%);
+  color: #ffffff;
+  border: none;
+  padding: 0.85rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.tk1-wing-card.wing-b .tk1-wing-header {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+}
+
+.tk1-wing-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.tk1-wing-sub {
+  font-size: 0.76rem;
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.tk1-wing-toggle-pill {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.tk1-wing-body {
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.tk1-wing-card.collapsed .tk1-wing-body {
+  display: none;
+}
+
+/* THẺ GIƯỜNG CHÍNH & GIƯỜNG XẾP */
+.tk1-bed-pair-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.tk1-bed-card {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-left: 5px solid #004aad;
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  transition: all 0.14s ease;
+  position: relative;
+}
+
+.tk1-bed-card.is-occupied {
+  cursor: pointer;
+}
+
+.tk1-bed-card.is-occupied:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 6px 16px rgba(0, 74, 173, 0.1);
+  transform: translateY(-1px);
+}
+
+.tk1-bed-card.is-empty {
+  border-left-color: #94a3b8;
+  background: #f8fafc;
+  border-style: dashed;
+  padding: 0.55rem 0.85rem;
+}
+
+/* MÀU RIÊNG CHO BỆNH NHÂN CHỜ RA VIỆN & XUẤT VIỆN SÁNG NAY */
+.tk1-bed-card.status-scheduled-discharge {
+  border-color: #fca5a5;
+  border-left: 5px solid #dc2626;
+  background: #fff5f5;
+}
+
+.tk1-bed-card.status-morning-discharge {
+  border-color: #f59e0b;
+  border-left: 6px solid #d97706;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+/* GIƯỜNG XẾP */
+.tk1-bed-card.is-folding-bed {
+  margin-left: 1.35rem;
+  border-left: 5px solid #7c3aed;
+  background: #faf5ff;
+}
+
+.tk1-bed-top-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.tk1-bed-badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tk1-bed-num-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 7px;
+  background: #004aad;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.tk1-bed-card.is-folding-bed .tk1-bed-num-badge {
+  background: #7c3aed;
+}
+
+.tk1-bed-card.status-morning-discharge .tk1-bed-num-badge {
+  background: #d97706;
+}
+
+.tk1-patient-name {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.tk1-patient-meta {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.tk1-patient-diag {
+  font-size: 0.82rem;
+  color: #1e293b;
+  line-height: 1.4;
+  margin-top: 0.15rem;
+}
+
+.tk1-card-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+
+.tk1-task-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.tk1-task-pill.pill-xn { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.tk1-task-pill.pill-ct { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+.tk1-task-pill.pill-xq { background: #f0fdfa; color: #0f766e; border: 1px solid #99f6e4; }
+.tk1-task-pill.pill-sa { background: #faf5ff; color: #6d28d9; border: 1px solid #ddd6fe; }
+.tk1-task-pill.pill-hc { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+
+.tk1-discharge-banner-inline {
+  margin-top: 0.45rem;
+  padding: 0.38rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.77rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #f59e0b;
+  color: #92400e;
+}
+
+.tk1-bed-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-bed-mini {
+  appearance: none;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-size: 0.71rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-bed-mini:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* 3 TAB TỔNG HỢP RIÊNG CHO PHÒNG THẦN KINH 1 */
+.tk1-summary-section {
+  background: #ffffff;
+  border: 1.5px solid #dbe4f0;
+  border-radius: 16px;
+  padding: 1.15rem 1.35rem;
+  margin-top: 0.5rem;
+}
+
+.tk1-summary-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.tk1-sum-tab-btn {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
+  border-radius: 10px;
+  padding: 0.55rem 1.05rem;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.14s ease;
+}
+
+.tk1-sum-tab-btn.active {
+  background: #004aad;
+  border-color: #004aad;
+  color: #ffffff;
+}
+
+.tk1-sum-tab-panel {
+  display: none;
+}
+
+.tk1-sum-tab-panel.active {
+  display: block;
+}
+
+/* MODAL CHI TIẾT BỆNH NHÂN & ĐI BUỒNG — FIT MÀN HÌNH & CĂN GIỮA */
+.tk1-patient-dialog {
+  margin: auto;
+  width: min(760px, calc(100vw - 1.5rem));
+  max-width: calc(100vw - 1.5rem);
+  max-height: calc(100dvh - 1.5rem);
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+  overflow: hidden;
+}
+
+.tk1-patient-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.tk1-patient-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(2px);
+}
+
+.tk1-modal-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.95rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tk1-info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  padding: 0.65rem 0.95rem;
+  font-size: 0.83rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.tk1-dropdowns-5grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+@media (max-width: 720px) {
+  .tk1-dropdowns-5grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.tk1-work-select {
+  width: 100%;
+  height: 38px;
+  border-radius: 9px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.81rem;
+  font-weight: 700;
+  padding: 0 0.55rem;
+  color: #0f172a;
+}
+
+.btn-ra-vien-red {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border: 1.5px solid #b91c1c;
+  border-radius: 10px;
+  padding: 0.58rem 1.25rem;
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+}
+
+.btn-ra-vien-red:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+}
+
+.btn-delete-transfer {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #fff1f2;
+  color: #be123c;
+  border: 1.5px solid #fda4af;
+  border-radius: 9px;
+  padding: 0.42rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-delete-transfer:hover {
+  background: #ffe4e6;
+}
+
+/* ============================================================================
+   THANH ĐIỀU KHIỂN CHỌN NGÀY CHẤM CÔNG & QUẢN LÝ SỐ LIỆU KHOA (HÀNH CHÍNH KHOA)
+   ============================================================================ */
+.admin-top-controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin-top-controls-row .admin-tab-bar {
+  margin-bottom: 0;
+}
+
+.admin-date-picker-bar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 0.42rem 0.6rem;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+}
+
+.btn-date-nav {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.btn-date-nav:hover {
+  background: #eff6ff;
+  border-color: #004aad;
+  color: #004aad;
+}
+
+.admin-date-input-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #eff6ff;
+  border: 1.5px solid #93c5fd;
+  border-radius: 10px;
+  padding: 0.25rem 0.65rem;
+}
+
+.admin-date-input {
+  font-family: 'Montserrat', 'Be Vietnam Pro', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #003b8e;
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.admin-date-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  background: #059669;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.admin-date-badge.is-other-day {
+  background: #d97706;
+  color: #ffffff;
+}
+
+.btn-date-today {
+  appearance: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #003b8e;
+  color: #ffffff;
+  border: 1.5px solid #002d6e;
+  border-radius: 9px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.btn-date-today:hover {
+  background: #004aad;
+}
+

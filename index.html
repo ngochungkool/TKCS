@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang chủ | Khoa Ngoại Thần Kinh - Cột Sống (BVĐK Trung Tâm Tỉnh Gia Lai)</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Official Department Header (100% đồng bộ với trang Quản lý User) -->
+    <header class="dept-header-bar">
+      <div class="dept-brand">
+        <a href="/" title="Trang chủ Khoa" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="logo.png" alt="Logo Khoa Ngoại Thần Kinh - Cột Sống" class="dept-logo-img" width="54" height="54" />
+        </a>
+        <div class="dept-brand-text">
+          <div class="hospital-subtitle">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+          <h1 class="dept-main-title">KHOA NGOẠI THẦN KINH - CỘT SỐNG</h1>
+        </div>
+      </div>
+
+      <!-- Right Header Group: Realtime Clock -->
+      <div class="header-right-group">
+        <div class="header-clock-box">
+          <div class="header-clock-time" id="header-clock-time">00:00:00</div>
+          <div class="header-clock-date" id="header-clock-date">Thứ Hai, 28/09/2026</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 3 THẺ TRANG CON CHÍNH -->
+    <main class="home-portal-grid home-portal-grid-3">
+      <!-- TRANG CON 1: QUẢN LÝ USER BÁC SĨ -->
+      <a href="/quan-ly-user" class="portal-card portal-card-user" id="card-quan-ly-user">
+        <div>
+          <div class="portal-card-top">
+            <h2 class="portal-card-title title-user-impress">Quản Lý User Bác Sĩ</h2>
+            <button type="button" class="btn-header-bao-mo" id="btn-home-bao-mo">
+              + BÁO MỔ
+            </button>
+          </div>
+
+          <div class="portal-metrics-grid">
+            <div class="portal-metric-item metric-green">
+              <span class="metric-val" id="homeUsableCount">--</span>
+              <span class="metric-label">Có thể sử dụng</span>
+            </div>
+            <div class="portal-metric-item metric-blue">
+              <span class="metric-val" id="homeInUseCount">--</span>
+              <span class="metric-label">Đang nhận dùng</span>
+            </div>
+            <div class="portal-metric-item metric-red">
+              <span class="metric-val" id="homeSurgeryCount">--</span>
+              <span class="metric-label">Đang mổ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portal-card-footer">
+          <span class="portal-enter-btn">Vào trang Quản lý User Bác sĩ →</span>
+        </div>
+      </a>
+
+      <!-- TRANG CON 2: HÀNH CHÍNH KHOA -->
+      <a href="/hanh-chinh-khoa" class="portal-card portal-card-admin">
+        <div>
+          <div class="portal-card-top">
+            <h2 class="portal-card-title title-admin-impress">Hành Chính Khoa</h2>
+            <span class="portal-sub-tag">HÀNH CHÍNH</span>
+          </div>
+
+          <div class="portal-metrics-grid">
+            <div class="portal-metric-item metric-slate">
+              <span class="metric-val" id="homeTotalDoctors">14</span>
+              <span class="metric-label">Tổng số Bác sĩ</span>
+            </div>
+            <div class="portal-metric-item metric-amber">
+              <span class="metric-val" id="homeOnDutyCount">--</span>
+              <span class="metric-label">Trực &amp; Ra trực</span>
+            </div>
+            <div class="portal-metric-item metric-teal">
+              <span class="metric-val" id="homeDayWorkCount">--</span>
+              <span class="metric-label">Làm ngày &amp; PK</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portal-card-footer">
+          <span class="portal-enter-btn portal-enter-green">Vào trang Hành chính khoa →</span>
+        </div>
+      </a>
+
+      <!-- TRANG CON 3: ĐI BUỒNG HẰNG NGÀY (5 PHÒNG TRONG KHOA) -->
+      <a href="/di-buong-hang-ngay" class="portal-card portal-card-rounds" id="card-di-buong">
+        <div>
+          <div class="portal-card-top">
+            <h2 class="portal-card-title title-rounds-impress">Đi Buồng Hằng Ngày</h2>
+            <span class="portal-sub-tag portal-sub-tag-rounds">5 PHÒNG BỆNH</span>
+          </div>
+
+          <div class="portal-metrics-grid" style="margin-bottom: 14px;">
+            <div class="portal-metric-item metric-indigo">
+              <span class="metric-val" id="homeRoundsRoomCount">5</span>
+              <span class="metric-label">Phòng trong khoa</span>
+            </div>
+            <div class="portal-metric-item metric-blue">
+              <span class="metric-val" id="homeRoundsPatientCount">--</span>
+              <span class="metric-label">BN đang điều trị</span>
+            </div>
+            <div class="portal-metric-item metric-teal">
+              <span class="metric-val" id="homeRoundsDocCount">14</span>
+              <span class="metric-label">BS phụ trách</span>
+            </div>
+          </div>
+
+          <!-- 5 Phòng lối tắt nhanh -->
+          <div class="portal-rooms-mini-grid" aria-label="Danh sách 5 phòng trong khoa">
+            <span class="portal-room-mini-chip" data-room-jump="tk1">Thần kinh 1</span>
+            <span class="portal-room-mini-chip" data-room-jump="tk2">Thần kinh 2</span>
+            <span class="portal-room-mini-chip" data-room-jump="tk3">Thần kinh 3</span>
+            <span class="portal-room-mini-chip" data-room-jump="tk4">Thần kinh 4</span>
+            <span class="portal-room-mini-chip chip-hstk" data-room-jump="hstk">Hồi sức thần kinh</span>
+          </div>
+        </div>
+
+        <div class="portal-card-footer">
+          <span class="portal-enter-btn portal-enter-indigo">Vào trang Đi buồng hằng ngày (5 phòng) →</span>
+        </div>
+      </a>
+    </main>
+  </div>
+
+  <!-- HỘP "+ BÁO MỔ" TO RÕ TRỰC TIẾP TRÊN TRANG CHỦ (GIỐNG Y HỆT TRONG TRANG QUẢN LÝ USER) -->
+  <dialog id="surgery-quick-dialog" class="modal-dialog surgery-large-dialog">
+    <form method="dialog" id="surgery-quick-form">
+      <div class="modal-header">
+        <h4>Báo Mổ Nhanh</h4>
+        <button type="button" class="btn-secondary" id="btn-close-surgery-dialog">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-dark);">
+          Chọn bác sĩ đi mổ:
+        </div>
+        <div class="short-name-grid-large" id="surgery-short-name-grid"></div>
+
+        <div class="time-form-row" style="margin-top: 0.4rem;">
+          <div class="time-field">
+            <label for="surgery-start-time">Thời gian bắt đầu</label>
+            <input type="time" id="surgery-start-time" class="date-input time-big-input" required />
+          </div>
+          <div class="time-field">
+            <label for="surgery-end-time">Thời gian kết thúc</label>
+            <input type="time" id="surgery-end-time" class="date-input time-big-input" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary btn-touch-lg" id="btn-cancel-surgery-dialog">Hủy</button>
+        <button type="submit" class="btn-primary-sm btn-touch-lg">Xác nhận báo mổ</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast-box" id="toast-box"></div>
+
+  <script>
+    let homeDoctors = [];
+    let selectedSurgeryIds = new Set();
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      if (!box) return;
+      const item = document.createElement('div');
+      item.className = 'toast-msg';
+      item.textContent = msg;
+      box.appendChild(item);
+      setTimeout(() => item.remove(), 3500);
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const timeEl = document.getElementById('header-clock-time');
+      const dateEl = document.getElementById('header-clock-date');
+      if (timeEl) timeEl.textContent = now.toLocaleTimeString('vi-VN', { hour12: false });
+      if (dateEl) {
+        const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+        const d = String(now.getDate()).padStart(2, '0');
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        dateEl.textContent = `${days[now.getDay()]}, ${d}/${m}/${now.getFullYear()}`;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function getDateKey(dt) {
+      return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+    }
+
+    function isDoctorAllowedNow(doc, now) {
+      const todayKey = getDateKey(now);
+      const prevDt = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+      const prevKey = getDateKey(prevDt);
+      const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevKey]) || 'LAM_NGAY';
+      const todayShift = (doc.scheduleByDate && doc.scheduleByDate[todayKey]) || 'TRUC';
+      const minOfDay = now.getHours() * 60 + now.getMinutes();
+      const isWeekend = now.getDay() === 0 || now.getDay() === 6;
+
+      if (minOfDay < 420 && prevShift === 'TRUC') return true;
+      if (todayShift === 'TRUC' && minOfDay >= 420) return true;
+      if (todayShift === 'RA_TRUC' && !isWeekend && minOfDay >= 420 && minOfDay < 690) return true;
+      if (todayShift === 'LAM_NGAY' && ((minOfDay >= 420 && minOfDay < 690) || (minOfDay >= 810 && minOfDay < 1020))) return true;
+      return false;
+    }
+
+    async function openHomeSurgeryModal() {
+      const dlg = document.getElementById('surgery-quick-dialog');
+      const grid = document.getElementById('surgery-short-name-grid');
+      const startInp = document.getElementById('surgery-start-time');
+      const endInp = document.getElementById('surgery-end-time');
+      selectedSurgeryIds.clear();
+
+      if (!homeDoctors || homeDoctors.length === 0) {
+        try {
+          const r = await fetch('/api/state');
+          const j = await r.json();
+          if (j && j.db && j.db.doctors) homeDoctors = j.db.doctors;
+        } catch (e) {}
+      }
+
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      startInp.value = `${hh}:${mm}`;
+      endInp.value = '';
+
+      const sorted = [...homeDoctors].sort((a, b) => (a.seniority || 999) - (b.seniority || 999));
+      grid.innerHTML = sorted.map(doc => {
+        const sName = doc.shortName || doc.name.split(' ').pop();
+        return `
+          <button
+            type="button"
+            class="short-name-chip"
+            data-surg-doc-id="${doc.id}"
+          >
+            ${sName}
+          </button>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.short-name-chip').forEach(btn => {
+        btn.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          const id = btn.getAttribute('data-surg-doc-id');
+          if (selectedSurgeryIds.has(id)) {
+            selectedSurgeryIds.delete(id);
+            btn.classList.remove('active');
+          } else {
+            selectedSurgeryIds.add(id);
+            btn.classList.add('active');
+          }
+        });
+      });
+
+      dlg.showModal();
+    }
+
+    document.getElementById('btn-home-bao-mo').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openHomeSurgeryModal();
+    });
+
+    document.getElementById('btn-close-surgery-dialog').addEventListener('click', () => {
+      document.getElementById('surgery-quick-dialog').close();
+    });
+    document.getElementById('btn-cancel-surgery-dialog').addEventListener('click', () => {
+      document.getElementById('surgery-quick-dialog').close();
+    });
+
+    function parseHHMMToEpochMin(hhmm) {
+      if (!hhmm) return null;
+      const [h, m] = hhmm.split(':').map(Number);
+      const now = new Date();
+      const dt = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0, 0);
+      return Math.floor(dt.getTime() / 60000);
+    }
+
+    document.getElementById('surgery-quick-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (selectedSurgeryIds.size === 0) {
+        showToast('⚠️ Vui lòng chọn ít nhất 1 bác sĩ đi mổ!');
+        return;
+      }
+      const startMin = parseHHMMToEpochMin(document.getElementById('surgery-start-time').value);
+      const endVal = document.getElementById('surgery-end-time').value;
+      const endMin = endVal ? parseHHMMToEpochMin(endVal) : null;
+
+      try {
+        const res = await fetch('/api/receive', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            docIds: Array.from(selectedSurgeryIds),
+            roomName: 'Đang mổ',
+            startMin,
+            endMin
+          })
+        });
+        const data = await res.json();
+        if (!data.ok) {
+          showToast('❌ ' + (data.error || 'Không thể báo mổ'));
+          return;
+        }
+        document.getElementById('surgery-quick-dialog').close();
+        showToast('✅ Đã báo mổ thành công!');
+      } catch (err) {
+        showToast('❌ Lỗi kết nối máy chủ');
+      }
+    });
+
+    document.querySelectorAll('.portal-room-mini-chip[data-room-jump]').forEach((chip) => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const roomKey = chip.getAttribute('data-room-jump');
+        window.location.href = `/di-buong-hang-ngay?room=${encodeURIComponent(roomKey)}`;
+      });
+    });
+
+    const es = new EventSource('/api/stream');
+    es.onmessage = (evt) => {
+      try {
+        const payload = JSON.parse(evt.data);
+        const dbObj = payload.db || payload;
+        const docs = dbObj.doctors;
+        if (docs) {
+          homeDoctors = docs;
+          const now = new Date();
+          const nowMin = Math.floor(now.getTime() / 60000);
+          const todayKey = getDateKey(now);
+
+          let usable = 0, inUse = 0, surgery = 0, onDuty = 0, dayWork = 0;
+          for (const d of docs) {
+            const active = (d.usages || []).find(u => !u.releasedEarly && (u.endMin === null ? nowMin >= u.startMin : (nowMin >= u.startMin && nowMin < u.endMin)));
+            if (active && active.roomName === 'Đang mổ') surgery++;
+            else if (active) inUse++;
+            else if (isDoctorAllowedNow(d, now)) usable++;
+
+            const shift = (d.scheduleByDate && d.scheduleByDate[todayKey]) || 'LAM_NGAY';
+            if (shift === 'TRUC' || shift === 'RA_TRUC') onDuty++;
+            if (shift === 'LAM_NGAY' || shift === 'PHONG_KHAM') dayWork++;
+          }
+
+          document.getElementById('homeUsableCount').textContent = usable;
+          document.getElementById('homeInUseCount').textContent = inUse;
+          document.getElementById('homeSurgeryCount').textContent = surgery;
+          document.getElementById('homeTotalDoctors').textContent = docs.length;
+          document.getElementById('homeOnDutyCount').textContent = onDuty;
+          document.getElementById('homeDayWorkCount').textContent = dayWork;
+
+          const roundsDocEl = document.getElementById('homeRoundsDocCount');
+          if (roundsDocEl) roundsDocEl.textContent = docs.length;
+        }
+        if (dbObj.patientStats && dbObj.patientStats.total) {
+          const roundsPatEl = document.getElementById('homeRoundsPatientCount');
+          if (roundsPatEl) {
+            roundsPatEl.textContent = dbObj.patientStats.total.hienCo ?? 0;
+          }
+        }
+      } catch (e) {}
+    };
+  </script>
+</body>
+</html>
