@@ -1,5 +1,5 @@
 {
-  "version": 1790721546775,
+  "version": 1790721550074,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1863,13 +1863,23 @@
           "ngayVaoStr": "24/09/2026",
           "hisBed": "H028",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-09-30": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
             "status": "NONE",
@@ -2968,7 +2978,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T22:39:06.774Z",
+      "updatedAt": "2026-09-29T22:39:10.073Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4068,7 +4078,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T22:39:06.774Z"
+      "updatedAt": "2026-09-29T22:39:10.073Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -4733,7 +4743,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T22:39:06.774Z"
+      "updatedAt": "2026-09-29T22:39:10.074Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6493,7 +6503,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T22:39:06.774Z"
+      "updatedAt": "2026-09-29T22:39:10.074Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -7112,7 +7122,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T22:39:06.775Z"
+      "updatedAt": "2026-09-29T22:39:10.074Z"
     }
   },
   "episodeConsultations": {
