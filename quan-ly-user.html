@@ -132,12 +132,12 @@
 
         <div class="time-form-row">
           <div class="time-field">
-            <label for="receive-start-time">Thời gian bắt đầu</label>
-            <input type="time" id="receive-start-time" class="date-input time-big-input" required />
+            <label for="receive-start-time">Thời gian bắt đầu (24h)</label>
+            <input type="text" inputmode="numeric" maxlength="5" placeholder="HH:mm" id="receive-start-time" class="date-input time-big-input time-input-24h" autocomplete="off" required />
           </div>
           <div class="time-field">
-            <label for="receive-end-time">Thời gian kết thúc</label>
-            <input type="time" id="receive-end-time" class="date-input time-big-input" />
+            <label for="receive-end-time">Thời gian kết thúc (24h)</label>
+            <input type="text" inputmode="numeric" maxlength="5" placeholder="Để trống = Mở" id="receive-end-time" class="date-input time-big-input time-input-24h" autocomplete="off" />
           </div>
         </div>
 
@@ -176,12 +176,12 @@
 
         <div class="time-form-row" style="margin-top: 0.4rem;">
           <div class="time-field">
-            <label for="surgery-start-time">Thời gian bắt đầu</label>
-            <input type="time" id="surgery-start-time" class="date-input time-big-input" required />
+            <label for="surgery-start-time">Thời gian bắt đầu (24h)</label>
+            <input type="text" inputmode="numeric" maxlength="5" placeholder="HH:mm" id="surgery-start-time" class="date-input time-big-input time-input-24h" autocomplete="off" required />
           </div>
           <div class="time-field">
-            <label for="surgery-end-time">Thời gian kết thúc</label>
-            <input type="time" id="surgery-end-time" class="date-input time-big-input" />
+            <label for="surgery-end-time">Thời gian kết thúc (24h)</label>
+            <input type="text" inputmode="numeric" maxlength="5" placeholder="Để trống = Mở" id="surgery-end-time" class="date-input time-big-input time-input-24h" autocomplete="off" />
           </div>
         </div>
       </div>
@@ -209,8 +209,8 @@
           <input type="date" id="lookup-date-input" class="date-input" />
         </div>
         <div class="time-field">
-          <label for="lookup-time-input">Thời điểm (Giờ:Phút)</label>
-          <input type="time" id="lookup-time-input" class="date-input" />
+          <label for="lookup-time-input">Thời điểm (Giờ:Phút 24h)</label>
+          <input type="text" inputmode="numeric" maxlength="5" placeholder="HH:mm" id="lookup-time-input" class="date-input time-input-24h" autocomplete="off" />
         </div>
       </div>
 

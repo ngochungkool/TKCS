@@ -3338,3 +3338,422 @@ dialog.modal-dialog::backdrop {
   background: #004aad;
 }
 
+/* ============================================================================
+   ĐỊNH DẠNG Ô NHẬP GIỜ 24H CHUẨN (00:00 - 23:59) & TỐI ƯU HIỂN THỊ ĐIỆN THOẠI (MOBILE FIT)
+   ============================================================================ */
+.time-input-24h {
+  font-family: 'Montserrat', 'JetBrains Mono', monospace !important;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #003b8e !important;
+  background-color: #f8fafc !important;
+}
+
+.time-input-24h::placeholder {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #94a3b8;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* RESPONSIVE CHO TABLET & ĐIỆN THOẠI (<= 860px) */
+@media (max-width: 860px) {
+  body {
+    padding: 0.55rem 0.6rem 2.4rem;
+  }
+
+  .page-wrapper {
+    gap: 0.65rem;
+  }
+
+  /* Header gọn gàng, vừa khít màn hình điện thoại */
+  .dept-header-bar {
+    padding: 0.6rem 0.8rem;
+    gap: 0.65rem;
+    border-radius: 12px;
+  }
+
+  .dept-brand {
+    width: 100%;
+    gap: 0.65rem;
+  }
+
+  .dept-logo-img {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .hospital-subtitle {
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .dept-main-title {
+    font-size: 1.02rem;
+    line-height: 1.25;
+  }
+
+  .header-right-group {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.45rem;
+    border-top: 1px dashed #e2e8f0;
+  }
+
+  .btn-header-bao-mo {
+    padding: 0.52rem 1rem;
+    min-height: 42px;
+    font-size: 0.9rem;
+    border-radius: 9px;
+    flex: 1;
+    max-width: 165px;
+  }
+
+  .header-clock-box {
+    padding: 0.28rem 0.65rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .header-clock-time {
+    font-size: 1.05rem;
+  }
+
+  .header-clock-date {
+    font-size: 0.7rem;
+  }
+
+  /* Trang chủ: 3 thẻ vừa khít màn hình điện thoại */
+  .portal-card {
+    padding: 1.15rem 1rem;
+    border-radius: 16px;
+  }
+
+  .portal-card-top {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    min-height: auto;
+    gap: 8px;
+  }
+
+  .portal-card-title {
+    font-size: 1.25rem;
+  }
+
+  .portal-metrics-grid {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .portal-metric-item {
+    padding: 10px 6px;
+    border-radius: 10px;
+  }
+
+  .portal-metric-item .metric-val {
+    font-size: 1.2rem;
+  }
+
+  .portal-metric-item .metric-label {
+    font-size: 0.68rem;
+  }
+
+  .portal-enter-btn {
+    padding: 11px 14px;
+    font-size: 0.88rem;
+    border-radius: 11px;
+  }
+
+  /* Trang Quản lý User: 5 Phòng + Đang mổ xếp thành lưới 2 cột trực quan không cần cuộn ngang */
+  .rooms-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    overflow-x: visible;
+  }
+
+  .room-card {
+    padding: 0.65rem 0.75rem;
+    gap: 0.25rem;
+  }
+
+  .room-title {
+    font-size: 0.83rem;
+  }
+
+  .room-count {
+    font-size: 0.72rem;
+  }
+
+  /* Thẻ Timeline & điều khiển trên điện thoại */
+  .timeline-card {
+    padding: 0.85rem 0.75rem;
+    border-radius: 12px;
+  }
+
+  .timeline-header {
+    gap: 0.6rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .timeline-title-group {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .timeline-title-group h3 {
+    font-size: 0.98rem;
+  }
+
+  .timeline-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+
+  .drag-hint-text {
+    display: none;
+  }
+
+  /* Chuyển từng dòng Bác sĩ trong Quản lý User thành Thẻ Mobile (Card) vừa 100% màn hình */
+  .timeline-table-container {
+    overflow-x: visible;
+    cursor: default;
+  }
+
+  .timeline-grid-header {
+    display: none;
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "info action"
+      "status status"
+      "track track";
+    gap: 0.5rem 0.6rem;
+    padding: 0.8rem 0.85rem;
+    margin-bottom: 0.6rem;
+    border: 1.5px solid #dbe4f0;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+  }
+
+  .doc-info-cell {
+    grid-area: info;
+  }
+
+  .action-cell {
+    grid-area: action;
+    justify-content: flex-end;
+    align-self: flex-start;
+  }
+
+  .status-cell {
+    grid-area: status;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .timeline-track-wrapper {
+    grid-area: track;
+    width: 100%;
+    margin-top: 0.15rem;
+  }
+
+  .timeline-track {
+    height: 34px;
+  }
+
+  .bottom-tools-bar {
+    padding: 0.7rem;
+    gap: 0.5rem;
+  }
+
+  .btn-tool-lookup {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.82rem;
+    padding: 0.65rem 0.8rem;
+  }
+
+  /* Hành chính khoa trên điện thoại */
+  .admin-top-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .admin-tab-bar {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem !important;
+    width: 100%;
+  }
+
+  .admin-tab-btn {
+    padding: 0.55rem 0.35rem !important;
+    font-size: 0.76rem !important;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .admin-date-picker-bar {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .admin-table-section {
+    padding: 0.9rem 0.75rem;
+    border-radius: 14px;
+  }
+
+  .admin-toolbar-title-wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .admin-main-heading {
+    width: 100%;
+    font-size: 1rem !important;
+  }
+
+  .admin-hero-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .admin-stat-box {
+    min-width: 0;
+    padding: 0.45rem 0.25rem;
+  }
+
+  .admin-stat-box .stat-num {
+    font-size: 1.05rem;
+  }
+
+  .admin-stat-box .stat-lbl {
+    font-size: 0.64rem;
+  }
+
+  /* Biến bảng Chấm công thành Thẻ Bác sĩ trên điện thoại để bấm 5 nút không cần kéo ngang */
+  .admin-roster-table thead {
+    display: none;
+  }
+
+  .admin-roster-table,
+  .admin-roster-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-roster-table tr.roster-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "rank doc edit"
+      "sched sched sched";
+    gap: 0.5rem 0.65rem;
+    align-items: center;
+    padding: 0.75rem;
+    margin-bottom: 0.6rem;
+    border: 1.5px solid #dbe4f0;
+    border-radius: 12px;
+    background: #ffffff;
+  }
+
+  .admin-roster-table tr.roster-row td {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .admin-roster-table tr.roster-row td:nth-child(1) {
+    grid-area: rank;
+    font-size: 0.85rem;
+  }
+
+  .admin-roster-table tr.roster-row td:nth-child(2) {
+    grid-area: doc;
+  }
+
+  .admin-roster-table tr.roster-row td:nth-child(3) {
+    display: none;
+  }
+
+  .admin-roster-table tr.roster-row td:nth-child(4) {
+    grid-area: sched;
+    width: 100%;
+  }
+
+  .admin-roster-table tr.roster-row td:nth-child(5) {
+    grid-area: edit;
+  }
+
+  .admin-sched-btn-group {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem !important;
+    width: 100%;
+  }
+
+  .admin-sched-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.45rem 0.3rem !important;
+    font-size: 0.76rem !important;
+  }
+
+  /* Hộp thoại Modal vừa khít điện thoại */
+  dialog.modal-dialog,
+  dialog.surgery-large-dialog {
+    width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem);
+    max-height: 92vh;
+    border-radius: 14px;
+  }
+
+  dialog.surgery-large-dialog .modal-header,
+  dialog.surgery-large-dialog .modal-body,
+  dialog.surgery-large-dialog .modal-footer {
+    padding: 0.85rem 0.95rem;
+  }
+
+  .short-name-chip {
+    min-height: 52px;
+    padding: 0.65rem 0.4rem;
+    font-size: 0.98rem;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .time-form-row {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .header-clock-date {
+    display: none;
+  }
+}

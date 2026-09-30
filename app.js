@@ -73,18 +73,37 @@ function addDaysToKey(dateKey, offsetDays) {
   return getDateKey(dt);
 }
 
+function normalize24hTimeStr(raw, fallbackEmpty = true) {
+  const digits = String(raw || '').replace(/\D/g, '');
+  if (!digits) return fallbackEmpty ? '' : '08:00';
+  let hh = 0, mm = 0;
+  if (digits.length <= 2) {
+    hh = Math.min(23, Number(digits));
+    mm = 0;
+  } else if (digits.length === 3) {
+    hh = Math.min(23, Number(digits.slice(0, 1)));
+    mm = Math.min(59, Number(digits.slice(1, 3)));
+  } else {
+    hh = Math.min(23, Number(digits.slice(0, 2)));
+    mm = Math.min(59, Number(digits.slice(2, 4)));
+  }
+  return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+}
+
 function timeStringToEpochMin(hhmmStr, refEpochMin) {
-  if (!hhmmStr || !hhmmStr.includes(':')) return null;
-  const [hh, mm] = hhmmStr.split(':').map(Number);
+  const normalized = normalize24hTimeStr(hhmmStr, true);
+  if (!normalized || !normalized.includes(':')) return null;
+  const [hh, mm] = normalized.split(':').map(Number);
   const refDate = new Date(refEpochMin * 60000);
   const target = new Date(refDate.getFullYear(), refDate.getMonth(), refDate.getDate(), hh, mm, 0, 0);
   return Math.floor(target.getTime() / 60000);
 }
 
 function dateAndTimeToEpochMin(dateKeyStr, hhmmStr) {
-  if (!dateKeyStr || !hhmmStr) return getNowEpochMinutes();
+  const normalized = normalize24hTimeStr(hhmmStr, false);
+  if (!dateKeyStr || !normalized) return getNowEpochMinutes();
   const [y, m, d] = dateKeyStr.split('-').map(Number);
-  const [hh, mm] = hhmmStr.split(':').map(Number);
+  const [hh, mm] = normalized.split(':').map(Number);
   return Math.floor(new Date(y, m - 1, d, hh, mm, 0, 0).getTime() / 60000);
 }
 
@@ -1114,5 +1133,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (relBtn) {
       postApi('/api/release', { docId: relBtn.getAttribute('data-release-now-doc') });
     }
+  });
+
+  // Bind 24-hour HH:mm auto-formatting to all .time-input-24h inputs
+  document.querySelectorAll('.time-input-24h').forEach((inp) => {
+    inp.addEventListener('input', () => {
+      const digits = inp.value.replace(/\D/g, '').slice(0, 4);
+      if (digits.length >= 3) {
+        const hh = Math.min(23, Number(digits.slice(0, 2)));
+        const mm = Math.min(59, Number(digits.slice(2, 4)));
+        inp.value = `${String(hh).padStart(2, '0')}:${String(mm).padStart(digits.length - 2, '0')}`;
+      } else {
+        inp.value = digits;
+      }
+    });
+    inp.addEventListener('blur', () => {
+      if (inp.value.trim()) {
+        inp.value = normalize24hTimeStr(inp.value, true);
+      }
+    });
   });
 });
