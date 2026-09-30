@@ -112,6 +112,17 @@ function getActiveUsage(doc) {
   return getActiveUsageAt(doc, getNowEpochMinutes());
 }
 
+function getEffectiveShiftForDate(doc, dateKey) {
+  if (doc.scheduleByDate && doc.scheduleByDate[dateKey]) {
+    return doc.scheduleByDate[dateKey];
+  }
+  const prevKey = addDaysToKey(dateKey, -1);
+  if (doc.scheduleByDate && doc.scheduleByDate[prevKey] === 'TRUC') {
+    return 'RA_TRUC';
+  }
+  return 'LAM_NGAY';
+}
+
 function getAllowedIntervalsForDate(doc, dateKey) {
   const [y, m, d] = dateKey.split('-').map(Number);
   const dayStartMs = new Date(y, m - 1, d, 0, 0, 0, 0).getTime();
@@ -120,8 +131,8 @@ function getAllowedIntervalsForDate(doc, dateKey) {
   const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
   const prevDateKey = addDaysToKey(dateKey, -1);
-  const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevDateKey]) || 'LAM_NGAY';
-  const todayShift = (doc.scheduleByDate && doc.scheduleByDate[dateKey]) || 'TRUC';
+  const prevShift = getEffectiveShiftForDate(doc, prevDateKey);
+  const todayShift = getEffectiveShiftForDate(doc, dateKey);
 
   const intervals = [];
 
@@ -130,7 +141,7 @@ function getAllowedIntervalsForDate(doc, dateKey) {
   }
 
   if (todayShift === 'TRUC') {
-    intervals.push([dayStartMin + 420, dayStartMin + 1440]);
+    intervals.push([dayStartMin + 0, dayStartMin + 1440]);
   } else if (todayShift === 'RA_TRUC') {
     if (!isWeekend) {
       intervals.push([dayStartMin + 420, dayStartMin + 690]);
@@ -185,11 +196,11 @@ function getDoctorShiftInfoAtMinute(doc, epochMin) {
   const prevKey = addDaysToKey(dateKey, -1);
   const hh = dt.getHours();
 
-  const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevKey]) || 'LAM_NGAY';
-  const todayShift = (doc.scheduleByDate && doc.scheduleByDate[dateKey]) || 'TRUC';
+  const prevShift = getEffectiveShiftForDate(doc, prevKey);
+  const todayShift = getEffectiveShiftForDate(doc, dateKey);
 
   if (hh < 7) {
-    if (prevShift === 'TRUC') {
+    if (prevShift === 'TRUC' || todayShift === 'TRUC') {
       return {
         badgeText: 'Trực',
         badgeCls: 'badge-truc',

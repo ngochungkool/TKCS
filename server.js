@@ -1,3 +1,5 @@
+process.env.TZ = 'Asia/Ho_Chi_Minh';
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -5,6 +7,8 @@ const path = require('path');
 const PORT = 8080;
 const ROOT = __dirname;
 const DATA_FILE = path.join(ROOT, 'state_db.json');
+const VN_OFFSET_MS = 7 * 60 * 60 * 1000; // GMT+7 (Asia/Ho_Chi_Minh)
+const VN_OFFSET_MIN = 7 * 60;            // +420 minutes from UTC
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -29,18 +33,34 @@ function getNowEpochMinutes() {
   return Math.floor(Date.now() / 60000);
 }
 
-function getDateKey(dateObj) {
-  const yyyy = dateObj.getFullYear();
-  const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
-  const dd = String(dateObj.getDate()).padStart(2, '0');
+// Always compute YYYY-MM-DD in Vietnam Time (GMT+7) regardless of server OS timezone (e.g. Render UTC)
+function getDateKey(dateObj = new Date()) {
+  const ms = dateObj instanceof Date ? dateObj.getTime() : Number(dateObj);
+  const vnDate = new Date(ms + VN_OFFSET_MS);
+  const yyyy = vnDate.getUTCFullYear();
+  const mm = String(vnDate.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(vnDate.getUTCDate()).padStart(2, '0');
   return `${yyyy}-${mm}-${dd}`;
 }
 
 function addDaysToKey(dateKey, offsetDays) {
-  const [y, m, d] = dateKey.split('-').map(Number);
-  const dt = new Date(y, m - 1, d);
-  dt.setDate(dt.getDate() + offsetDays);
-  return getDateKey(dt);
+  const [y, m, d] = String(dateKey).split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d, 12, 0, 0) + offsetDays * 86400000);
+  const yyyy = dt.getUTCFullYear();
+  const mm = String(dt.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(dt.getUTCDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function getEffectiveShiftForDate(doc, dateKey) {
+  if (doc.scheduleByDate && doc.scheduleByDate[dateKey]) {
+    return doc.scheduleByDate[dateKey];
+  }
+  const prevKey = addDaysToKey(dateKey, -1);
+  if (doc.scheduleByDate && doc.scheduleByDate[prevKey] === 'TRUC') {
+    return 'RA_TRUC';
+  }
+  return 'LAM_NGAY';
 }
 
 // Check if a usage entry is currently active at epochMin
@@ -54,17 +74,18 @@ function getActiveUsageAt(doc, epochMin) {
   return (doc.usages || []).find((u) => isUsageActiveAt(u, epochMin));
 }
 
-// Compute allowed [startEpochMin, endEpochMin] intervals for a doctor on dateKey
+// Compute allowed [startEpochMin, endEpochMin] intervals for a doctor on dateKey (in Vietnam GMT+7)
 function getAllowedIntervalsForDate(doc, dateKey) {
-  const [y, m, d] = dateKey.split('-').map(Number);
-  const dayStartMs = new Date(y, m - 1, d, 0, 0, 0, 0).getTime();
+  const [y, m, d] = String(dateKey).split('-').map(Number);
+  // 00:00:00 Vietnam time (GMT+7) in UTC milliseconds:
+  const dayStartMs = Date.UTC(y, m - 1, d, 0, 0, 0, 0) - VN_OFFSET_MS;
   const dayStartMin = Math.floor(dayStartMs / 60000);
-  const dayOfWeek = new Date(y, m - 1, d).getDay(); // 0 = Sun, 6 = Sat
+  const dayOfWeek = new Date(Date.UTC(y, m - 1, d, 12, 0, 0)).getUTCDay(); // 0 = Sun, 6 = Sat
   const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
   const prevDateKey = addDaysToKey(dateKey, -1);
-  const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevDateKey]) || 'LAM_NGAY';
-  const todayShift = (doc.scheduleByDate && doc.scheduleByDate[dateKey]) || 'TRUC';
+  const prevShift = getEffectiveShiftForDate(doc, prevDateKey);
+  const todayShift = getEffectiveShiftForDate(doc, dateKey);
 
   const intervals = [];
 
@@ -73,7 +94,7 @@ function getAllowedIntervalsForDate(doc, dateKey) {
   }
 
   if (todayShift === 'TRUC') {
-    intervals.push([dayStartMin + 420, dayStartMin + 1440]); // 07:00 -> 24:00
+    intervals.push([dayStartMin + 0, dayStartMin + 1440]); // 00:00 -> 24:00 (Trực 24h mở xuyên suốt cả ngày)
   } else if (todayShift === 'RA_TRUC') {
     if (!isWeekend) {
       intervals.push([dayStartMin + 420, dayStartMin + 690]); // 07:00 -> 11:30
@@ -470,10 +491,11 @@ function readBody(req) {
   });
 }
 
-// Check if [newStart, newEnd] overlaps with any existing usage of doc
+// Check if [newStart, newEnd] overlaps with any existing active usage of doc
 function hasOverlapWithExisting(doc, newStart, newEnd, nowMin) {
   const effectiveNewEnd = newEnd !== null ? newEnd : Math.max(newStart + 1, nowMin + 1440);
   for (const u of doc.usages || []) {
+    if (u.releasedEarly) continue;
     const uEnd = u.endMin !== null ? u.endMin : Math.max(u.startMin + 1, nowMin + 1440);
     if (newStart < uEnd && effectiveNewEnd > u.startMin) {
       return u;

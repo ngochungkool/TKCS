@@ -201,17 +201,23 @@
       return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
     }
 
+    function getEffectiveShift(doc, dateKey, prevKey) {
+      if (doc.scheduleByDate && doc.scheduleByDate[dateKey]) return doc.scheduleByDate[dateKey];
+      if (doc.scheduleByDate && doc.scheduleByDate[prevKey] === 'TRUC') return 'RA_TRUC';
+      return 'LAM_NGAY';
+    }
+
     function isDoctorAllowedNow(doc, now) {
       const todayKey = getDateKey(now);
       const prevDt = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
       const prevKey = getDateKey(prevDt);
       const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevKey]) || 'LAM_NGAY';
-      const todayShift = (doc.scheduleByDate && doc.scheduleByDate[todayKey]) || 'TRUC';
+      const todayShift = getEffectiveShift(doc, todayKey, prevKey);
       const minOfDay = now.getHours() * 60 + now.getMinutes();
       const isWeekend = now.getDay() === 0 || now.getDay() === 6;
 
       if (minOfDay < 420 && prevShift === 'TRUC') return true;
-      if (todayShift === 'TRUC' && minOfDay >= 420) return true;
+      if (todayShift === 'TRUC') return true;
       if (todayShift === 'RA_TRUC' && !isWeekend && minOfDay >= 420 && minOfDay < 690) return true;
       if (todayShift === 'LAM_NGAY' && ((minOfDay >= 420 && minOfDay < 690) || (minOfDay >= 810 && minOfDay < 1020))) return true;
       return false;
