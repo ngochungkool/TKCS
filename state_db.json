@@ -1,5 +1,5 @@
 {
-  "version": 1790729337273,
+  "version": 1790729367168,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -840,35 +840,21 @@
       "bedAssignments": {
         "1": "0001418457",
         "2": "0001420337",
-        "3": "0001422366",
-        "4": "0001420743",
         "5": "0001420755",
         "6": "0001421064",
-        "7": "0001421068",
-        "8": "0001421398",
         "9": "0001352007",
         "10": "0001421561",
         "11": "0001421945",
         "12": "0001421963",
         "13": "0001421962",
-        "14": "0000996031",
-        "15": "0001421988",
-        "16": "0001017823",
-        "17": "0001422020",
         "18": "0001422158",
         "19": "0001032592",
-        "20": "0001050501",
         "21": "0001422178",
         "22": "0001422326",
-        "23": "0001422336",
-        "24": "0001422332",
-        "1X": "0001421512",
         "2X": "0001422360",
         "3X": "0001422359",
-        "4X": "0001422413",
         "5X": "0001422706",
-        "6X": "0001422719",
-        "7X": "0001422908"
+        "6X": "0001422719"
       },
       "hiddenFoldingBeds": {},
       "patientRecords": {
@@ -1105,10 +1091,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729348569
           }
         },
         "0001420755": {
@@ -1237,10 +1222,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729349868
           }
         },
         "0001421398": {
@@ -1281,10 +1265,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729352070
           }
         },
         "0001352007": {
@@ -1379,10 +1362,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729364175
           }
         },
         "0001421561": {
@@ -1630,10 +1612,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729353879
           }
         },
         "0001421988": {
@@ -1683,10 +1664,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729355776
           }
         },
         "0001017823": {
@@ -1738,10 +1718,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729357071
           }
         },
         "0001422020": {
@@ -1791,10 +1770,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729358176
           }
         },
         "0001422158": {
@@ -1941,10 +1919,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729359676
           }
         },
         "0001422178": {
@@ -2073,10 +2050,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729361078
           }
         },
         "0001422332": {
@@ -2117,10 +2093,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729362867
           }
         },
         "0001422360": {
@@ -2205,10 +2180,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729347174
           }
         },
         "0001422359": {
@@ -2293,10 +2267,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729365377
           }
         },
         "0001422706": {
@@ -2425,10 +2398,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729367168
           }
         },
         "0001423331": {
@@ -2768,7 +2740,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T00:48:58.078Z",
+      "updatedAt": "2026-09-30T00:49:27.168Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3845,7 +3817,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T00:48:58.078Z"
+      "updatedAt": "2026-09-30T00:49:27.168Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -4496,7 +4468,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T00:48:58.078Z"
+      "updatedAt": "2026-09-30T00:49:27.168Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6218,7 +6190,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T00:48:58.078Z"
+      "updatedAt": "2026-09-30T00:49:27.168Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -6824,7 +6796,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T00:48:58.078Z"
+      "updatedAt": "2026-09-30T00:49:27.168Z"
     }
   },
   "episodeConsultations": {
