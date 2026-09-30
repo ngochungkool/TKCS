@@ -1,5 +1,5 @@
 {
-  "version": 1790733515938,
+  "version": 1790733880932,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -96,7 +96,16 @@
         "2026-09-30": "RA_TRUC",
         "2026-10-01": "LAM_NGAY"
       },
-      "usages": []
+      "usages": [
+        {
+          "id": "u-1790733880932-1gs4",
+          "roomName": "Thần kinh 1",
+          "startMin": 29845565,
+          "endMin": 29845585,
+          "lastConfirmedMin": 29845565,
+          "warnedAtMin": null
+        }
+      ]
     },
     {
       "id": "doc-5",
@@ -2817,7 +2826,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T01:58:27.474Z",
+      "updatedAt": "2026-09-30T02:04:29.768Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3894,7 +3903,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T01:58:27.474Z"
+      "updatedAt": "2026-09-30T02:04:29.768Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -4545,7 +4554,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T01:58:27.474Z"
+      "updatedAt": "2026-09-30T02:04:29.768Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6267,7 +6276,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T01:58:27.474Z"
+      "updatedAt": "2026-09-30T02:04:29.768Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -6873,7 +6882,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T01:58:27.474Z"
+      "updatedAt": "2026-09-30T02:04:29.768Z"
     }
   },
   "episodeConsultations": {
