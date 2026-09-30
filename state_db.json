@@ -1,5 +1,5 @@
 {
-  "version": 1790734341771,
+  "version": 1790734491959,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -161,6 +161,14 @@
           "lastConfirmedMin": 29845497,
           "warnedAtMin": null,
           "releasedEarly": true
+        },
+        {
+          "id": "u-1790734491959-nxp1",
+          "roomName": "Thần kinh 2",
+          "startMin": 29845575,
+          "endMin": 29845585,
+          "lastConfirmedMin": 29845575,
+          "warnedAtMin": null
         }
       ]
     },
@@ -3146,7 +3154,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T02:12:21.770Z",
+      "updatedAt": "2026-09-30T02:13:20.071Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4510,7 +4518,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T02:12:21.770Z"
+      "updatedAt": "2026-09-30T02:13:20.071Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5527,7 +5535,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T02:12:21.771Z"
+      "updatedAt": "2026-09-30T02:13:20.071Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7815,7 +7823,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T02:12:21.771Z"
+      "updatedAt": "2026-09-30T02:13:20.072Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8611,7 +8619,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-30T02:12:21.771Z"
+      "updatedAt": "2026-09-30T02:13:20.072Z"
     }
   },
   "episodeConsultations": {
