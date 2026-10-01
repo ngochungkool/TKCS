@@ -1,5 +1,5 @@
 {
-  "version": 1790828229144,
+  "version": 1790828232142,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1037,8 +1037,8 @@
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "7",
-            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+            "followUpDays": "",
+            "followUpClinic": ""
           },
           "discharge": {
             "status": "NONE",
@@ -3159,7 +3159,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:09.144Z",
+      "updatedAt": "2026-10-01T04:17:12.142Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4632,7 +4632,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:09.144Z"
+      "updatedAt": "2026-10-01T04:17:12.142Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5723,7 +5723,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:09.144Z"
+      "updatedAt": "2026-10-01T04:17:12.142Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8237,7 +8237,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:09.144Z"
+      "updatedAt": "2026-10-01T04:17:12.142Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -9107,7 +9107,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:09.144Z"
+      "updatedAt": "2026-10-01T04:17:12.142Z"
     }
   },
   "episodeConsultations": {
