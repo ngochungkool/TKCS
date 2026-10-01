@@ -3907,3 +3907,66 @@ body {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ==========================================================================
+   THẦN KINH 4: HỘI CHẨN MỔ STYLES
+   ========================================================================== */
+.tk4-card-surg-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 0.35rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  line-height: 1.35;
+}
+
+.tk4-sc-row-card {
+  display: grid;
+  grid-template-columns: 190px 1.2fr 1.2fr 155px 120px 75px;
+  gap: 8px;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  transition: all 0.15s ease;
+}
+
+.tk4-sc-row-card:hover {
+  background: #ffffff;
+  border-color: #86efac;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+.tk4-sc-row-card.is-consulted {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+@media (max-width: 1024px) {
+  .tk4-sc-row-card {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+.tk4-sc-choice-pill {
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.tk4-sc-choice-pill:hover {
+  filter: brightness(0.97);
+  transform: translateY(-1px);
+}
+
+.tk4-sc-choice-pill input[type="radio"]:checked + span {
+  font-weight: 900;
+  text-decoration: underline;
+}
+

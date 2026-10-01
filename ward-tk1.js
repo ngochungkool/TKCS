@@ -459,6 +459,51 @@
       `;
     }
 
+    let tk4SurgConsultBannerHtml = '';
+    if (currentRoomKey === 'tk4') {
+      const sc = rec.surgicalConsultation;
+      const dec = sc ? (sc.decision || '') : '';
+      const hasData = sc && (dec || sc.postConsultDiagnosis || sc.surgeryMethod || sc.advancePayment);
+      if (hasData) {
+        let badgeBg = '#f0fdf4';
+        let badgeBorder = '#86efac';
+        let badgeColor = '#166534';
+        let badgeText = 'Đã hội chẩn';
+
+        if (dec === 'Đồng ý') {
+          badgeBg = '#dcfce7';
+          badgeBorder = '#4ade80';
+          badgeColor = '#15803d';
+          badgeText = '✓ Đồng ý mổ';
+        } else if (dec === 'Hội ý') {
+          badgeBg = '#fef3c7';
+          badgeBorder = '#fcd34d';
+          badgeColor = '#b45309';
+          badgeText = '💬 Hội ý thêm';
+        } else if (dec === 'Không đồng ý') {
+          badgeBg = '#fee2e2';
+          badgeBorder = '#fca5a5';
+          badgeColor = '#dc2626';
+          badgeText = '✕ Không đồng ý';
+        }
+
+        const methodStr = sc.surgeryMethod ? ` · <strong>PP:</strong> ${sc.surgeryMethod}` : '';
+        const diagStr = sc.postConsultDiagnosis ? ` · <strong>CĐ:</strong> ${sc.postConsultDiagnosis}` : '';
+        const payStr = sc.advancePayment ? ` · <strong>Ứng:</strong> ${sc.advancePayment}` : '';
+
+        tk4SurgConsultBannerHtml = `
+          <div class="tk4-card-surg-banner" style="background:${badgeBg};border:1px solid ${badgeBorder};cursor:pointer;" data-open-tk4-consult="${rec.mabn}" title="Bấm để xem/sửa thông tin hội chẩn mổ">
+            <div style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.75rem;color:${badgeColor};">
+              🔪 <span style="font-weight:800;padding:1px 6px;border-radius:4px;background:#ffffff;border:1px solid ${badgeBorder};">${badgeText}</span>
+              ${methodStr || diagStr}
+              ${payStr}
+            </div>
+            <button type="button" class="btn-bed-mini" data-open-tk4-consult="${rec.mabn}" style="padding:1px 6px;font-size:0.7rem;color:${badgeColor};border-color:${badgeBorder};">Sửa</button>
+          </div>
+        `;
+      }
+    }
+
     return `
       <div
         class="tk1-bed-card ${cardStatusCls} ${isFolding ? 'is-folding-bed' : ''}"
@@ -474,6 +519,11 @@
           </div>
 
           <div class="tk1-bed-quick-actions" onclick="event.stopPropagation();">
+            ${
+              currentRoomKey === 'tk4'
+                ? `<button type="button" class="btn-bed-mini" style="background:#f0fdf4;color:#166534;border-color:#86efac;font-weight:700;" title="Mở bảng nhập Hội chẩn mổ cho bệnh nhân này" data-open-tk4-consult="${rec.mabn}">🔪 Hội chẩn mổ</button>`
+                : ''
+            }
             ${
               !isFolding && !attachedFoldRec
                 ? `<button type="button" class="btn-bed-mini" title="Thêm bệnh nhân vào giường xếp ${bedNumber}" data-open-assign-to-bed="${bedNumber}X">+ xếp</button>`
@@ -498,6 +548,7 @@
         </div>
 
         ${tk2SurgeryBarHtml}
+        ${tk4SurgConsultBannerHtml}
 
         ${
           recentHist
@@ -708,6 +759,468 @@
           `;
         }).join('');
 
+    // 4. Tab Hội chẩn mổ (Khu vực tổng hợp riêng cho Thần kinh 4)
+    const hcmTabBtn = document.getElementById('tk1-sum-tab-btn-hcm');
+    const hcmCountEl = document.getElementById('tk1-count-tab-hcm');
+    const hcmBody = document.getElementById('tk4-sum-tbody-hcm');
+    const hcmStatsBanner = document.getElementById('tk4-sum-hcm-stats-banner');
+
+    if (currentRoomKey === 'tk4') {
+      if (hcmTabBtn) hcmTabBtn.style.display = 'inline-block';
+      const allActivePatients = Object.values(tk1State.patientRecords || {})
+        .filter(r => !r.removed?.isRemoved);
+
+      const hcmPatients = allActivePatients.filter(r => {
+        const sc = r.surgicalConsultation;
+        return sc && (sc.isConsulted || sc.decision || sc.postConsultDiagnosis || sc.surgeryMethod || sc.advancePayment);
+      }).sort((a, b) => {
+        const bA = getBedOfPatient(a.mabn) || '999';
+        const bB = getBedOfPatient(b.mabn) || '999';
+        return bA.localeCompare(bB, undefined, { numeric: true });
+      });
+
+      if (hcmCountEl) hcmCountEl.textContent = hcmPatients.length;
+
+      if (hcmStatsBanner) {
+        const total = hcmPatients.length;
+        const agree = hcmPatients.filter(r => r.surgicalConsultation?.decision === 'Đồng ý').length;
+        const discuss = hcmPatients.filter(r => r.surgicalConsultation?.decision === 'Hội ý').length;
+        const disagree = hcmPatients.filter(r => r.surgicalConsultation?.decision === 'Không đồng ý').length;
+
+        hcmStatsBanner.innerHTML = `
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;">
+            <span style="font-weight:800;color:#166534;font-size:0.92rem;">
+              🔪 TỔNG HỢP HỘI CHẨN MỔ (${total} ca)
+            </span>
+            <span style="background:#dcfce7;color:#15803d;border:1px solid #86efac;font-weight:800;padding:3px 10px;border-radius:999px;font-size:0.78rem;">
+              ✓ Đồng ý: ${agree} ca
+            </span>
+            <span style="background:#fef3c7;color:#b45309;border:1px solid #fde68a;font-weight:800;padding:3px 10px;border-radius:999px;font-size:0.78rem;">
+              💬 Cần hội ý: ${discuss} ca
+            </span>
+            <span style="background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;font-weight:800;padding:3px 10px;border-radius:999px;font-size:0.78rem;">
+              ✕ Không đồng ý: ${disagree} ca
+            </span>
+          </div>
+          <div>
+            <button type="button" class="btn-bed-mini" onclick="window.print()" style="background:#ffffff;border-color:#86efac;color:#166534;font-weight:700;">
+              🖨️ In biên bản HC mổ
+            </button>
+          </div>
+        `;
+      }
+
+      if (hcmBody) {
+        hcmBody.innerHTML = hcmPatients.length === 0
+          ? `<tr><td colspan="7" style="text-align:center;padding:1.4rem;color:#64748b;">Chưa có bệnh nhân nào được lưu thông tin Hội chẩn mổ tại Thần kinh 4.</td></tr>`
+          : hcmPatients.map(rec => {
+              const bedCode = getBedOfPatient(rec.mabn);
+              const sc = rec.surgicalConsultation || {};
+              const dec = sc.decision || 'Chưa duyệt';
+              let decBadgeHtml = `<span style="background:#f1f5f9;color:#475569;padding:3px 9px;border-radius:6px;font-weight:800;font-size:0.78rem;">-- Chưa duyệt --</span>`;
+              if (dec === 'Đồng ý') {
+                decBadgeHtml = `<span style="background:#dcfce7;color:#15803d;border:1px solid #86efac;padding:3px 9px;border-radius:6px;font-weight:800;font-size:0.78rem;">✓ Đồng ý mổ</span>`;
+              } else if (dec === 'Hội ý') {
+                decBadgeHtml = `<span style="background:#fef3c7;color:#b45309;border:1px solid #fde68a;padding:3px 9px;border-radius:6px;font-weight:800;font-size:0.78rem;">💬 Cần hội ý</span>`;
+              } else if (dec === 'Không đồng ý') {
+                decBadgeHtml = `<span style="background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;padding:3px 9px;border-radius:6px;font-weight:800;font-size:0.78rem;">✕ Không đồng ý</span>`;
+              }
+
+              return `
+                <tr>
+                  <td><strong>${formatBedLabel(bedCode)}</strong></td>
+                  <td>
+                    <a href="javascript:void(0)" onclick="window.TK1Module.openPatientModal('${rec.mabn}')" style="font-weight:800;color:#004aad;text-decoration:none;">
+                      ${rec.hoten}
+                    </a>
+                    <div style="font-size:0.75rem;color:#64748b;">${rec.tuoi || '--'} · Vào: ${rec.ngayVaoStr || '--'}</div>
+                  </td>
+                  <td>
+                    <strong style="color:#0f172a;">${sc.postConsultDiagnosis || '<span style="color:#94a3b8;font-weight:normal;font-style:italic;">Chưa nhập CĐ sau HC</span>'}</strong>
+                    <div style="font-size:0.72rem;color:#64748b;margin-top:2px;">HIS: ${rec.chanDoanHis || '--'}</div>
+                  </td>
+                  <td>
+                    <span style="font-weight:700;color:#1e40af;">${sc.surgeryMethod || '<span style="color:#94a3b8;font-weight:normal;font-style:italic;">Chưa nhập phương pháp mổ</span>'}</span>
+                  </td>
+                  <td>${decBadgeHtml}</td>
+                  <td>
+                    <strong style="color:#b45309;">${sc.advancePayment || '<span style="color:#94a3b8;font-weight:normal;font-style:italic;">--</span>'}</strong>
+                  </td>
+                  <td style="text-align:center;">
+                    <button type="button" class="btn-bed-mini" style="background:#f0fdf4;border-color:#86efac;color:#166534;font-weight:800;" data-open-tk4-consult="${rec.mabn}">
+                      ✏️ Sửa
+                    </button>
+                  </td>
+                </tr>
+              `;
+            }).join('');
+      }
+    } else {
+      if (hcmTabBtn) hcmTabBtn.style.display = 'none';
+      if (activeSummaryTab === 'hoi-chan-mo') {
+        activeSummaryTab = 'xn-cdha';
+        document.querySelectorAll('[data-tk1-sum-tab]').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-tk1-sum-tab') === 'xn-cdha');
+        });
+        document.querySelectorAll('.tk1-sum-tab-panel').forEach(p => {
+          p.classList.toggle('active', p.id === 'tk1-sum-panel-xn-cdha');
+        });
+      }
+    }
+  }
+
+  // =========================================================================
+  // THẦN KINH 4: HỘI CHẨN MỔ (BOX DANH SÁCH BỆNH NHÂN + MODAL + INLINE SAVE)
+  // =========================================================================
+  let tk4ScBoxCollapsed = false;
+  let tk4ScSearchQuery = '';
+  let activeScDialogMabn = null;
+
+  function renderTk4SurgicalConsultBox() {
+    const boxEl = document.getElementById('tk4-surgical-consult-box');
+    if (!boxEl) return;
+
+    if (currentRoomKey !== 'tk4') {
+      boxEl.style.display = 'none';
+      return;
+    }
+
+    boxEl.style.display = 'block';
+
+    const bodyEl = document.getElementById('tk4-sc-box-body');
+    const statsBadge = document.getElementById('tk4-sc-box-stats-badge');
+    const collapseBtn = document.getElementById('btn-toggle-tk4-sc-collapse');
+
+    if (bodyEl) {
+      bodyEl.style.display = tk4ScBoxCollapsed ? 'none' : 'flex';
+    }
+    if (collapseBtn) {
+      collapseBtn.textContent = tk4ScBoxCollapsed ? '▸ Mở rộng' : '▾ Thu gọn';
+    }
+
+    const allActivePatients = Object.values(tk1State.patientRecords || {})
+      .filter(r => !r.removed?.isRemoved);
+
+    const totalPatients = allActivePatients.length;
+    const consultedList = allActivePatients.filter(r => {
+      const sc = r.surgicalConsultation;
+      return sc && (sc.isConsulted || sc.decision || sc.postConsultDiagnosis || sc.surgeryMethod || sc.advancePayment);
+    });
+    const agreeCount = allActivePatients.filter(r => r.surgicalConsultation?.decision === 'Đồng ý').length;
+    const discussCount = allActivePatients.filter(r => r.surgicalConsultation?.decision === 'Hội ý').length;
+    const disagreeCount = allActivePatients.filter(r => r.surgicalConsultation?.decision === 'Không đồng ý').length;
+
+    if (statsBadge) {
+      statsBadge.textContent = `${consultedList.length}/${totalPatients} ca đã HC (✓ ${agreeCount} · 💬 ${discussCount} · ✕ ${disagreeCount})`;
+    }
+
+    // Filter patients by search query
+    const q = tk4ScSearchQuery.toLowerCase().trim();
+    const filteredPatients = allActivePatients.filter(r => {
+      if (!q) return true;
+      const bed = getBedOfPatient(r.mabn) || '';
+      const sc = r.surgicalConsultation || {};
+      const searchStr = `${r.hoten} ${r.mabn} ${r.tuoi} ${bed} ${r.chanDoanHis || ''} ${sc.postConsultDiagnosis || ''} ${sc.surgeryMethod || ''} ${sc.decision || ''} ${sc.advancePayment || ''}`.toLowerCase();
+      return searchStr.includes(q);
+    });
+
+    // Sort: assigned to bed first (by bed order), then unassigned
+    filteredPatients.sort((a, b) => {
+      const bedA = getBedOfPatient(a.mabn);
+      const bedB = getBedOfPatient(b.mabn);
+      if (bedA && !bedB) return -1;
+      if (!bedA && bedB) return 1;
+      if (bedA && bedB) {
+        return bedA.localeCompare(bedB, undefined, { numeric: true });
+      }
+      return a.hoten.localeCompare(b.hoten, 'vi');
+    });
+
+    if (!bodyEl) return;
+
+    if (filteredPatients.length === 0) {
+      bodyEl.innerHTML = `
+        <div style="text-align:center;padding:1.5rem;color:#64748b;font-size:0.88rem;">
+          ${q ? `Không tìm thấy bệnh nhân nào khớp từ khóa "<strong>${q}</strong>".` : 'Chưa có bệnh nhân nào trong danh sách.'}
+        </div>
+      `;
+      return;
+    }
+
+    bodyEl.innerHTML = filteredPatients.map(rec => {
+      const bedCode = getBedOfPatient(rec.mabn);
+      const bedLabel = bedCode ? formatBedLabel(bedCode) : 'Chưa xếp';
+      const sc = rec.surgicalConsultation || {};
+      const dec = sc.decision || '';
+      const isConsulted = Boolean(dec || sc.postConsultDiagnosis || sc.surgeryMethod || sc.advancePayment);
+
+      let decColor = '#475569';
+      if (dec === 'Đồng ý') decColor = '#15803d';
+      else if (dec === 'Hội ý') decColor = '#b45309';
+      else if (dec === 'Không đồng ý') decColor = '#dc2626';
+
+      return `
+        <div class="tk4-sc-row-card ${isConsulted ? 'is-consulted' : ''}" id="tk4-sc-row-${rec.mabn}">
+          <!-- Cột 1: Thông tin bệnh nhân -->
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+              <span class="tk1-bed-num-badge" style="min-width:26px;height:22px;font-size:0.75rem;padding:0 5px;background:#e0e7ff;color:#3730a3;border:1px solid #c7d2fe;">${bedLabel}</span>
+              <a href="javascript:void(0)" onclick="window.TK1Module.openPatientModal('${rec.mabn}')" style="font-weight:800;color:#004aad;text-decoration:none;font-size:0.85rem;" title="Xem chi tiết bệnh nhân">
+                ${rec.hoten}
+              </a>
+              <span style="font-size:0.75rem;color:#64748b;">· ${rec.tuoi || '--'}</span>
+            </div>
+            <div style="font-size:0.72rem;color:#64748b;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="HIS: ${rec.chanDoanHis || '--'}">
+              HIS: ${rec.chanDoanHis || 'Chưa có CĐ'}
+            </div>
+          </div>
+
+          <!-- Cột 2: Chẩn đoán sau hội chẩn -->
+          <div>
+            <input
+              type="text"
+              class="date-input"
+              id="sc-diag-${rec.mabn}"
+              value="${(sc.postConsultDiagnosis || '').replace(/"/g, '&quot;')}"
+              placeholder="Chẩn đoán sau hội chẩn..."
+              style="width:100%;height:34px;font-size:0.8rem;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;"
+            />
+          </div>
+
+          <!-- Cột 3: Phương pháp phẫu thuật -->
+          <div>
+            <input
+              type="text"
+              class="date-input"
+              id="sc-method-${rec.mabn}"
+              value="${(sc.surgeryMethod || '').replace(/"/g, '&quot;')}"
+              placeholder="Phương pháp phẫu thuật..."
+              style="width:100%;height:34px;font-size:0.8rem;font-weight:700;color:#1e40af;font-family:'Be Vietnam Pro',sans-serif;"
+            />
+          </div>
+
+          <!-- Cột 4: Kết luận phẫu thuật -->
+          <div>
+            <select
+              class="date-input"
+              id="sc-decision-${rec.mabn}"
+              style="width:100%;height:34px;font-size:0.8rem;font-weight:800;color:${decColor};font-family:'Be Vietnam Pro',sans-serif;"
+              onchange="this.style.color = this.value === 'Đồng ý' ? '#15803d' : this.value === 'Hội ý' ? '#b45309' : this.value === 'Không đồng ý' ? '#dc2626' : '#475569';"
+            >
+              <option value="" ${!dec ? 'selected' : ''}>-- Kết luận mổ --</option>
+              <option value="Đồng ý" ${dec === 'Đồng ý' ? 'selected' : ''} style="color:#15803d;font-weight:800;">✓ Đồng ý phẫu thuật</option>
+              <option value="Hội ý" ${dec === 'Hội ý' ? 'selected' : ''} style="color:#b45309;font-weight:800;">💬 Cần hội ý thêm</option>
+              <option value="Không đồng ý" ${dec === 'Không đồng ý' ? 'selected' : ''} style="color:#dc2626;font-weight:800;">✕ Không đồng ý</option>
+            </select>
+          </div>
+
+          <!-- Cột 5: Tiền ứng -->
+          <div>
+            <input
+              type="text"
+              class="date-input"
+              id="sc-payment-${rec.mabn}"
+              value="${(sc.advancePayment || '').replace(/"/g, '&quot;')}"
+              placeholder="Tiền ứng: ..."
+              style="width:100%;height:34px;font-size:0.8rem;font-weight:800;color:#b45309;font-family:'Be Vietnam Pro',sans-serif;"
+            />
+          </div>
+
+          <!-- Cột 6: Thao tác -->
+          <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;">
+            <button
+              type="button"
+              class="btn-primary-sm"
+              style="height:34px;padding:0 9px;font-size:0.78rem;background:#15803d;border-color:#14532d;font-weight:800;white-space:nowrap;"
+              onclick="window.TK1Module.saveInlineScRow('${rec.mabn}', this)"
+              title="Lưu thông tin hội chẩn mổ của bệnh nhân này"
+            >
+              💾 Lưu
+            </button>
+            <button
+              type="button"
+              class="btn-bed-mini"
+              style="height:34px;padding:0 8px;font-size:0.78rem;background:#ffffff;border-color:#86efac;color:#166534;font-weight:700;"
+              data-open-tk4-consult="${rec.mabn}"
+              title="Mở bảng chi tiết"
+            >
+              🔍
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    bodyEl.querySelectorAll('[data-open-tk4-consult]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const mabn = btn.getAttribute('data-open-tk4-consult');
+        if (mabn) openTk4SurgConsultDialog(mabn);
+      });
+    });
+  }
+
+  async function saveInlineScRow(mabn, btnEl) {
+    const diag = (document.getElementById(`sc-diag-${mabn}`)?.value || '').trim();
+    const method = (document.getElementById(`sc-method-${mabn}`)?.value || '').trim();
+    const decision = document.getElementById(`sc-decision-${mabn}`)?.value || '';
+    const payment = (document.getElementById(`sc-payment-${mabn}`)?.value || '').trim();
+
+    const origHtml = btnEl ? btnEl.innerHTML : '💾 Lưu';
+    if (btnEl) btnEl.innerHTML = '⏳';
+
+    const isConsulted = Boolean(diag || method || decision || payment);
+
+    await callTk1Api({
+      action: 'SAVE_SURGICAL_CONSULTATION',
+      mabn,
+      postConsultDiagnosis: diag,
+      surgeryMethod: method,
+      decision,
+      advancePayment: payment,
+      isConsulted
+    });
+
+    const rec = tk1State.patientRecords[mabn];
+    if (rec) {
+      rec.surgicalConsultation = {
+        isConsulted,
+        postConsultDiagnosis: diag,
+        surgeryMethod: method,
+        decision,
+        advancePayment: payment,
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    if (btnEl) {
+      btnEl.innerHTML = '✓ Đã lưu';
+      btnEl.style.background = '#16a34a';
+      setTimeout(() => {
+        btnEl.innerHTML = origHtml;
+        btnEl.style.background = '#15803d';
+      }, 1200);
+    }
+
+    const rowCard = document.getElementById(`tk4-sc-row-${mabn}`);
+    if (rowCard) {
+      rowCard.classList.toggle('is-consulted', isConsulted);
+    }
+
+    renderTk1SummaryTabs();
+  }
+
+  function openTk4SurgConsultDialog(mabn) {
+    const rec = tk1State.patientRecords[mabn];
+    if (!rec) return;
+    activeScDialogMabn = mabn;
+
+    const dlg = document.getElementById('tk4-surg-consult-dialog');
+    if (!dlg) return;
+
+    const titleEl = document.getElementById('tk4-sc-modal-title');
+    const infoEl = document.getElementById('tk4-sc-modal-patient-info');
+    const inpDiag = document.getElementById('tk4-sc-modal-inp-diag');
+    const inpMethod = document.getElementById('tk4-sc-modal-inp-method');
+    const inpPayment = document.getElementById('tk4-sc-modal-inp-payment');
+
+    const bedCode = getBedOfPatient(mabn);
+    const bedLabel = bedCode ? formatBedLabel(bedCode) : 'Chưa xếp giường';
+
+    if (titleEl) {
+      titleEl.innerHTML = `🔪 Hội chẩn mổ — <strong>${rec.hoten}</strong> (${bedLabel})`;
+    }
+
+    if (infoEl) {
+      infoEl.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+          <span><strong>${bedLabel}</strong> · ${rec.tuoi || '--'} · Vào viện: <strong>${rec.ngayVaoStr || '--'}</strong></span>
+          <span style="color:#004aad;font-weight:700;">Mã KCB: ${rec.maKcb || rec.mabn}</span>
+        </div>
+        <div style="margin-top:4px;color:#475569;">
+          <strong>Chẩn đoán HIS:</strong> ${rec.chanDoanHis || 'Chưa có chẩn đoán ban đầu'}
+        </div>
+      `;
+    }
+
+    const sc = rec.surgicalConsultation || {};
+    if (inpDiag) inpDiag.value = sc.postConsultDiagnosis || '';
+    if (inpMethod) inpMethod.value = sc.surgeryMethod || '';
+    if (inpPayment) inpPayment.value = sc.advancePayment || '';
+
+    const curDec = sc.decision || '';
+    document.querySelectorAll('input[name="tk4-sc-decision"]').forEach(r => {
+      r.checked = r.value === curDec;
+    });
+
+    dlg.showModal();
+  }
+
+  async function saveTk4SurgConsultFromDialog() {
+    if (!activeScDialogMabn) return;
+    const mabn = activeScDialogMabn;
+    const inpDiag = document.getElementById('tk4-sc-modal-inp-diag');
+    const inpMethod = document.getElementById('tk4-sc-modal-inp-method');
+    const inpPayment = document.getElementById('tk4-sc-modal-inp-payment');
+    const selectedRadio = document.querySelector('input[name="tk4-sc-decision"]:checked');
+
+    const diag = (inpDiag?.value || '').trim();
+    const method = (inpMethod?.value || '').trim();
+    const decision = selectedRadio ? selectedRadio.value : '';
+    const payment = (inpPayment?.value || '').trim();
+    const isConsulted = Boolean(diag || method || decision || payment);
+
+    await callTk1Api({
+      action: 'SAVE_SURGICAL_CONSULTATION',
+      mabn,
+      postConsultDiagnosis: diag,
+      surgeryMethod: method,
+      decision,
+      advancePayment: payment,
+      isConsulted
+    });
+
+    const rec = tk1State.patientRecords[mabn];
+    if (rec) {
+      rec.surgicalConsultation = {
+        isConsulted,
+        postConsultDiagnosis: diag,
+        surgeryMethod: method,
+        decision,
+        advancePayment: payment,
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    const dlg = document.getElementById('tk4-surg-consult-dialog');
+    if (dlg) dlg.close();
+
+    renderTk1Workspace();
+  }
+
+  async function deleteTk4SurgConsultFromDialog() {
+    if (!activeScDialogMabn) return;
+    const mabn = activeScDialogMabn;
+    const rec = tk1State.patientRecords[mabn];
+    const name = rec ? rec.hoten : mabn;
+
+    if (!confirm(`Bạn có chắc muốn huỷ/xoá thông tin hội chẩn mổ của bệnh nhân ${name}?`)) {
+      return;
+    }
+
+    await callTk1Api({
+      action: 'DELETE_SURGICAL_CONSULTATION',
+      mabn
+    });
+
+    if (rec) {
+      delete rec.surgicalConsultation;
+    }
+
+    const dlg = document.getElementById('tk4-surg-consult-dialog');
+    if (dlg) dlg.close();
+
+    renderTk1Workspace();
   }
 
   // 4. Làm gọn lại box chưa được phân giường (dải chip ngang gọn nhẹ + Sơ đồ chọn giường trực quan)
@@ -1095,9 +1608,18 @@
           await toggleTk2NonSurgical(mabn, isNonSurgical);
         });
       });
+
+      slotEl.querySelectorAll('[data-open-tk4-consult]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const mabn = btn.getAttribute('data-open-tk4-consult');
+          if (mabn) openTk4SurgConsultDialog(mabn);
+        });
+      });
     }
 
     renderTk1SummaryTabs();
+    renderTk4SurgicalConsultBox();
   }
 
   async function toggleTk2NonSurgical(mabn, isNonSurgical) {
@@ -1681,6 +2203,49 @@
       if (diagInp) diagInp.value = rec.customDiagnosis || rec.chanDoanHis || '';
     }
 
+    // Khối thông tin Hội chẩn mổ riêng cho Thần kinh 4
+    const isTk4 = currentRoomKey === 'tk4';
+    const tk4ScSec = document.getElementById('tk4-modal-sc-section');
+    if (tk4ScSec) {
+      if (isTk4) {
+        tk4ScSec.style.display = 'block';
+        const sc = rec.surgicalConsultation || {};
+        const dec = sc.decision || '';
+        const badgeEl = document.getElementById('tk4-modal-sc-status-badge');
+        if (badgeEl) {
+          if (dec === 'Đồng ý') {
+            badgeEl.style.background = '#dcfce7';
+            badgeEl.style.color = '#15803d';
+            badgeEl.textContent = '✓ Đồng ý phẫu thuật';
+          } else if (dec === 'Hội ý') {
+            badgeEl.style.background = '#fef3c7';
+            badgeEl.style.color = '#b45309';
+            badgeEl.textContent = '💬 Cần hội ý thêm';
+          } else if (dec === 'Không đồng ý') {
+            badgeEl.style.background = '#fee2e2';
+            badgeEl.style.color = '#dc2626';
+            badgeEl.textContent = '✕ Không đồng ý phẫu thuật';
+          } else {
+            badgeEl.style.background = '#e2e8f0';
+            badgeEl.style.color = '#475569';
+            badgeEl.textContent = 'Chưa duyệt mổ';
+          }
+        }
+
+        const inpDiag = document.getElementById('tk4-modal-sc-inp-diag');
+        const inpMethod = document.getElementById('tk4-modal-sc-inp-method');
+        const selDec = document.getElementById('tk4-modal-sc-sel-decision');
+        const inpPay = document.getElementById('tk4-modal-sc-inp-payment');
+
+        if (inpDiag) inpDiag.value = sc.postConsultDiagnosis || '';
+        if (inpMethod) inpMethod.value = sc.surgeryMethod || '';
+        if (selDec) selDec.value = dec;
+        if (inpPay) inpPay.value = sc.advancePayment || '';
+      } else {
+        tk4ScSec.style.display = 'none';
+      }
+    }
+
     // Khởi tạo ô nhập liệu phụ nếu BN đã có XQ xương chi hoặc XN khác
     const customXnWrap = document.getElementById('tk1-custom-xn-wrap');
     const customXqWrap = document.getElementById('tk1-custom-xq-wrap');
@@ -1896,6 +2461,24 @@
       };
       rec.surgeryInfo = surgeryInfo;
     }
+
+    let surgicalConsultation = undefined;
+    if (currentRoomKey === 'tk4') {
+      const diag = (document.getElementById('tk4-modal-sc-inp-diag')?.value || '').trim();
+      const method = (document.getElementById('tk4-modal-sc-inp-method')?.value || '').trim();
+      const decision = document.getElementById('tk4-modal-sc-sel-decision')?.value || '';
+      const payment = (document.getElementById('tk4-modal-sc-inp-payment')?.value || '').trim();
+      surgicalConsultation = {
+        isConsulted: Boolean(diag || method || decision || payment),
+        postConsultDiagnosis: diag,
+        surgeryMethod: method,
+        decision,
+        advancePayment: payment,
+        updatedAt: new Date().toISOString()
+      };
+      rec.surgicalConsultation = surgicalConsultation;
+    }
+
     rec.customDiagnosis = customDiagnosis;
 
     await callTk1Api({
@@ -1904,6 +2487,7 @@
       dateKey: curDateKey,
       customDiagnosis,
       surgeryInfo,
+      surgicalConsultation,
       tasks: modalDraftTasks,
       consultDetails: {
         specialty,
@@ -2031,13 +2615,27 @@
         diagLines = wrapCanvasText(mCtx, diagStr, colWidth - 28);
       }
 
+      let surgConsultLines = [];
+      if (currentRoomKey === 'tk4') {
+        const sc = rec.surgicalConsultation;
+        if (sc && (sc.decision || sc.postConsultDiagnosis || sc.surgeryMethod || sc.advancePayment)) {
+          const decStr = sc.decision ? `[HC MỔ: ${sc.decision}]` : '[HC MỔ]';
+          const methodStr = sc.surgeryMethod ? ` · PP: ${sc.surgeryMethod}` : '';
+          const diagStr = sc.postConsultDiagnosis ? ` · CĐ: ${sc.postConsultDiagnosis}` : '';
+          const payStr = sc.advancePayment ? ` · Ứng: ${sc.advancePayment}` : '';
+          surgConsultLines = wrapCanvasText(mCtx, `${decStr}${methodStr || diagStr}${payStr}`, colWidth - 28);
+        }
+      }
+
       let h = 34;
       if (diagLines.length > 0) h += 4 + diagLines.length * 18;
+      if (surgConsultLines.length > 0) h += 4 + surgConsultLines.length * 18;
       if (taskLines.length > 0) h += 4 + taskLines.length * 18;
       if (followUpLines.length > 0) h += 4 + followUpLines.length * 18;
       return {
         height: Math.max(50, h + 8),
         diagLines,
+        surgConsultLines,
         taskLines,
         followUpLines
       };
@@ -2156,6 +2754,15 @@
           ctx.fillStyle = '#0f766e';
           ctx.font = '700 13px "Be Vietnam Pro", sans-serif';
           for (const line of layout.diagLines) {
+            ctx.fillText(line, startX + 14, textY);
+            textY += 18;
+          }
+        }
+
+        if (layout.surgConsultLines && layout.surgConsultLines.length > 0) {
+          ctx.fillStyle = '#15803d';
+          ctx.font = '700 13px "Be Vietnam Pro", sans-serif';
+          for (const line of layout.surgConsultLines) {
             ctx.fillText(line, startX + 14, textY);
             textY += 18;
           }
@@ -2454,6 +3061,32 @@
         document.getElementById('tk1-patient-modal').close();
       });
     }
+
+    const scSearchInp = document.getElementById('tk4-sc-box-search');
+    if (scSearchInp) {
+      scSearchInp.addEventListener('input', (e) => {
+        tk4ScSearchQuery = e.target.value;
+        renderTk4SurgicalConsultBox();
+      });
+    }
+
+    const btnToggleScCollapse = document.getElementById('btn-toggle-tk4-sc-collapse');
+    if (btnToggleScCollapse) {
+      btnToggleScCollapse.addEventListener('click', () => {
+        tk4ScBoxCollapsed = !tk4ScBoxCollapsed;
+        renderTk4SurgicalConsultBox();
+      });
+    }
+
+    const btnScModalSave = document.getElementById('btn-tk4-sc-modal-save');
+    if (btnScModalSave) {
+      btnScModalSave.addEventListener('click', saveTk4SurgConsultFromDialog);
+    }
+
+    const btnScModalDelete = document.getElementById('btn-tk4-sc-modal-delete');
+    if (btnScModalDelete) {
+      btnScModalDelete.addEventListener('click', deleteTk4SurgConsultFromDialog);
+    }
   }
 
   async function fetchTk1InitialState() {
@@ -2557,6 +3190,9 @@
         },
         consultDetails: rec.consultDetails
       });
-    }
+    },
+    openTk4SurgConsultDialog,
+    saveInlineScRow,
+    renderTk4SurgicalConsultBox
   };
 })();

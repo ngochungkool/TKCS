@@ -1196,7 +1196,8 @@ const server = http.createServer(async (req, res) => {
               isNonSurgical: false,
               surgeryName: '',
               surgeryDate: ''
-            }
+            },
+            surgicalConsultation: existing.surgicalConsultation || null
           };
         }
 
@@ -1295,6 +1296,48 @@ const server = http.createServer(async (req, res) => {
               followUpClinic: 'Phòng khám Nội tiết',
               note: 'Hẹn tái khám sau 14 ngày tại Phòng khám Nội tiết & Phòng khám Ngoại Thần kinh'
             };
+          }
+
+          if (rKey === 'tk4') {
+            if (latestMabns[0]) {
+              const p0 = roomState.patientRecords[latestMabns[0]];
+              if (p0 && !p0.surgicalConsultation) {
+                p0.surgicalConsultation = {
+                  isConsulted: true,
+                  postConsultDiagnosis: 'Máu tụ dưới màng cứng bán cấp bán cầu T',
+                  surgeryMethod: 'Phẫu thuật mở sọ bóc bao màng cứng',
+                  decision: 'Đồng ý',
+                  advancePayment: '10.000.000đ',
+                  updatedAt: new Date().toISOString()
+                };
+              }
+            }
+            if (latestMabns[1]) {
+              const p1 = roomState.patientRecords[latestMabns[1]];
+              if (p1 && !p1.surgicalConsultation) {
+                p1.surgicalConsultation = {
+                  isConsulted: true,
+                  postConsultDiagnosis: 'U màng não vùng đính P kích thước 4x4cm',
+                  surgeryMethod: 'Phẫu thuật vi phẫu bóc u màng não',
+                  decision: 'Hội ý',
+                  advancePayment: '15.000.000đ',
+                  updatedAt: new Date().toISOString()
+                };
+              }
+            }
+            if (latestMabns[2]) {
+              const p2 = roomState.patientRecords[latestMabns[2]];
+              if (p2 && !p2.surgicalConsultation) {
+                p2.surgicalConsultation = {
+                  isConsulted: true,
+                  postConsultDiagnosis: 'Thoát vị đĩa đệm cột sống thắt lưng L4-L5',
+                  surgeryMethod: 'Phẫu thuật nội soi lấy nhân đệm',
+                  decision: 'Không đồng ý',
+                  advancePayment: '5.000.000đ',
+                  updatedAt: new Date().toISOString()
+                };
+              }
+            }
           }
         }
 
@@ -1442,7 +1485,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (action === 'SAVE_PATIENT_ROUND') {
-      const { mabn, dateKey, customDiagnosis, tasks, consultDetails, surgeryInfo } = body;
+      const { mabn, dateKey, customDiagnosis, tasks, consultDetails, surgeryInfo, surgicalConsultation } = body;
       const rec = tk1.patientRecords[mabn];
       if (!rec) {
         res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -1458,6 +1501,16 @@ const server = http.createServer(async (req, res) => {
           isNonSurgical: Boolean(surgeryInfo.isNonSurgical),
           surgeryName: String(surgeryInfo.surgeryName || '').trim(),
           surgeryDate: String(surgeryInfo.surgeryDate || '').trim()
+        };
+      }
+      if (surgicalConsultation && typeof surgicalConsultation === 'object') {
+        rec.surgicalConsultation = {
+          isConsulted: Boolean(surgicalConsultation.isConsulted),
+          postConsultDiagnosis: String(surgicalConsultation.postConsultDiagnosis || '').trim(),
+          surgeryMethod: String(surgicalConsultation.surgeryMethod || '').trim(),
+          decision: String(surgicalConsultation.decision || '').trim(),
+          advancePayment: String(surgicalConsultation.advancePayment || '').trim(),
+          updatedAt: new Date().toISOString()
         };
       }
       if (tasks && typeof tasks === 'object') {
@@ -1516,6 +1569,33 @@ const server = http.createServer(async (req, res) => {
         if (surgeryDate !== undefined) rec.surgeryInfo.surgeryDate = String(surgeryDate).trim();
         if (customDiagnosis !== undefined) rec.customDiagnosis = String(customDiagnosis).trim();
         broadcastState(`🔪 Đã cập nhật thông tin phẫu thuật BN ${rec.hoten} (${tk1.roomName})`);
+      }
+      return sendWardResponse();
+    }
+
+    if (action === 'SAVE_SURGICAL_CONSULTATION') {
+      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, isConsulted } = body;
+      const rec = tk1.patientRecords[mabn];
+      if (rec) {
+        rec.surgicalConsultation = {
+          isConsulted: isConsulted !== undefined ? Boolean(isConsulted) : true,
+          postConsultDiagnosis: String(postConsultDiagnosis || '').trim(),
+          surgeryMethod: String(surgeryMethod || '').trim(),
+          decision: String(decision || '').trim(),
+          advancePayment: String(advancePayment || '').trim(),
+          updatedAt: new Date().toISOString()
+        };
+        broadcastState(`🔪 Đã lưu hội chẩn mổ BN ${rec.hoten} (${tk1.roomName})`);
+      }
+      return sendWardResponse();
+    }
+
+    if (action === 'DELETE_SURGICAL_CONSULTATION') {
+      const { mabn } = body;
+      const rec = tk1.patientRecords[mabn];
+      if (rec) {
+        delete rec.surgicalConsultation;
+        broadcastState(`🗑️ Đã huỷ hội chẩn mổ BN ${rec.hoten} (${tk1.roomName})`);
       }
       return sendWardResponse();
     }

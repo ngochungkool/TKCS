@@ -111,7 +111,33 @@
             </div>
           </div>
 
-          <!-- 5. BẢNG TỔNG HỢP ĐI BUỒNG (4 TAB) -->
+          <!-- =========================================================================
+               BOX HỘI CHẨN MỔ RIÊNG CHO THẦN KINH 4 (DANH SÁCH TẤT CẢ BỆNH NHÂN)
+               ========================================================================= -->
+          <div id="tk4-surgical-consult-box" style="display:none;margin-bottom:1.5rem;background:#ffffff;border:2px solid #86efac;border-radius:14px;box-shadow:0 4px 18px rgba(22,101,52,0.08);overflow:hidden;font-family:'Be Vietnam Pro',sans-serif;">
+            <div style="background:linear-gradient(135deg, #15803d 0%, #166534 100%);color:#ffffff;padding:0.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:1.25rem;">🔪</span>
+                <div>
+                  <div style="font-size:1.05rem;font-weight:800;letter-spacing:-0.2px;">HỘI CHẨN MỔ — THẦN KINH 4</div>
+                  <div style="font-size:0.75rem;opacity:0.9;">Danh sách tất cả bệnh nhân trong phòng · Nhập thông tin &amp; kết luận duyệt mổ</div>
+                </div>
+                <span id="tk4-sc-box-stats-badge" style="background:#dcfce7;color:#166534;font-weight:800;font-size:0.75rem;padding:3px 9px;border-radius:999px;">0 ca</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <input type="text" id="tk4-sc-box-search" placeholder="🔍 Tìm theo tên/giường..." style="height:32px;font-size:0.8rem;padding:0 10px;border-radius:7px;border:none;outline:none;" />
+                <button type="button" class="btn-bed-mini" id="btn-toggle-tk4-sc-collapse" style="background:rgba(255,255,255,0.22);color:#ffffff;border-color:rgba(255,255,255,0.4);font-weight:700;">
+                  ▾ Thu gọn
+                </button>
+              </div>
+            </div>
+
+            <div id="tk4-sc-box-body" style="padding:1rem;display:flex;flex-direction:column;gap:0.75rem;max-height:650px;overflow-y:auto;">
+              <!-- Populated dynamically with patient cards / rows -->
+            </div>
+          </div>
+
+          <!-- 5. BẢNG TỔNG HỢP ĐI BUỒNG -->
           <div class="tk1-summary-section">
             <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
               <div>
@@ -125,6 +151,7 @@
               <button type="button" class="tk1-sum-tab-btn active" data-tk1-sum-tab="xn-cdha">🧪 Xét nghiệm + CĐHA (<span id="tk1-count-tab-xn">0</span>)</button>
               <button type="button" class="tk1-sum-tab-btn" data-tk1-sum-tab="hoi-chan">👨‍⚕️ Hội chẩn (<span id="tk1-count-tab-hc">0</span>)</button>
               <button type="button" class="tk1-sum-tab-btn" data-tk1-sum-tab="ra-vien">🏥 Ra viện (<span id="tk1-count-tab-rv">0</span>)</button>
+              <button type="button" class="tk1-sum-tab-btn" id="tk1-sum-tab-btn-hcm" data-tk1-sum-tab="hoi-chan-mo" style="display:none;">🔪 Hội chẩn mổ (<span id="tk1-count-tab-hcm">0</span>)</button>
             </div>
 
             <!-- Tab 1: Xét nghiệm + CĐHA (Gộp cả Chỉ định & Ghi chú) -->
@@ -174,6 +201,29 @@
                     </tr>
                   </thead>
                   <tbody id="tk1-sum-tbody-rv"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab 4: Hội chẩn mổ (Khu vực tổng hợp thông tin riêng cho Thần kinh 4) -->
+            <div id="tk1-sum-panel-hoi-chan-mo" class="tk1-sum-tab-panel">
+              <div id="tk4-sum-hcm-stats-banner" style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:0.75rem 1rem;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'Be Vietnam Pro',sans-serif;">
+                <!-- Stats generated dynamically: Tổng số ca, Đồng ý, Hội ý, Không đồng ý, Tổng tiền ứng -->
+              </div>
+              <div class="admin-table-wrapper">
+                <table class="admin-roster-table">
+                  <thead>
+                    <tr>
+                      <th style="width:110px;">Giường</th>
+                      <th style="width:210px;">Bệnh nhân</th>
+                      <th style="width:230px;">Chẩn đoán sau hội chẩn</th>
+                      <th>Phương pháp phẫu thuật</th>
+                      <th style="width:165px;">Kết luận duyệt mổ</th>
+                      <th style="width:135px;">Tiền ứng</th>
+                      <th style="width:95px;text-align:center;">Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tk4-sum-tbody-hcm"></tbody>
                 </table>
               </div>
             </div>
@@ -326,6 +376,45 @@
         </div>
       </div>
 
+      <!-- Khối thông tin Hội chẩn mổ riêng cho Thần kinh 4 -->
+      <div id="tk4-modal-sc-section" style="display:none;background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:0.75rem 0.95rem;font-family:'Be Vietnam Pro',sans-serif;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">
+          <span style="font-size:0.84rem;font-weight:800;color:#166534;display:flex;align-items:center;gap:5px;">
+            🔪 HỘI CHẨN MỔ (THẦN KINH 4)
+          </span>
+          <span id="tk4-modal-sc-status-badge" style="font-size:0.75rem;font-weight:800;padding:2px 8px;border-radius:6px;background:#e2e8f0;color:#475569;">
+            Chưa duyệt
+          </span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+          <div>
+            <label style="font-size:0.75rem;font-weight:700;color:#166534;display:block;margin-bottom:3px;">Chẩn đoán sau hội chẩn:</label>
+            <input type="text" id="tk4-modal-sc-inp-diag" class="date-input" style="width:100%;height:34px;font-size:0.82rem;font-weight:700;" placeholder="Nhập chẩn đoán sau HC..." />
+          </div>
+          <div>
+            <label style="font-size:0.75rem;font-weight:700;color:#166534;display:block;margin-bottom:3px;">Phương pháp phẫu thuật:</label>
+            <input type="text" id="tk4-modal-sc-inp-method" class="date-input" style="width:100%;height:34px;font-size:0.82rem;font-weight:700;" placeholder="Nhập phương pháp mổ..." />
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 140px;gap:8px;align-items:end;">
+          <div>
+            <label style="font-size:0.75rem;font-weight:700;color:#166534;display:block;margin-bottom:3px;">Kết luận phẫu thuật:</label>
+            <select id="tk4-modal-sc-sel-decision" class="date-input" style="width:100%;height:34px;font-size:0.82rem;font-weight:800;">
+              <option value="">-- Chọn kết luận duyệt mổ --</option>
+              <option value="Đồng ý">✓ Đồng ý phẫu thuật</option>
+              <option value="Hội ý">💬 Cần hội ý thêm</option>
+              <option value="Không đồng ý">✕ Không đồng ý phẫu thuật</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.75rem;font-weight:700;color:#166534;display:block;margin-bottom:3px;">Tiền ứng:</label>
+            <input type="text" id="tk4-modal-sc-inp-payment" class="date-input" style="width:100%;height:34px;font-size:0.82rem;font-weight:700;" placeholder="VD: 5 triệu..." />
+          </div>
+        </div>
+      </div>
+
       <!-- Chẩn đoán điều trị (bỏ nút phân/chuyển/đổi giường vì đã có ở ngoài thẻ) -->
       <div>
         <label style="font-size:0.78rem;font-weight:800;color:#334155;display:block;margin-bottom:4px;">Chẩn đoán điều trị:</label>
@@ -455,6 +544,63 @@
     </div>
     <div style="max-height:80vh;overflow:auto;background:#334155;padding:1.25rem;text-align:center;">
       <img id="tk1-png-preview-img" alt="Bản xem trước PNG A4 Phòng Thần kinh 1" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 12px 36px rgba(0,0,0,0.4);" />
+    </div>
+  </dialog>
+
+  <!-- MODAL 4: HỘI CHẨN MỔ TỪNG BỆNH NHÂN (THẦN KINH 4) -->
+  <dialog id="tk4-surg-consult-dialog" class="modal-dialog" style="width:min(660px,95vw);border:none;border-radius:16px;box-shadow:0 25px 60px rgba(15,23,42,0.3);overflow:hidden;padding:0;">
+    <div class="modal-header" style="background:linear-gradient(135deg, #15803d 0%, #166534 100%);color:#ffffff;padding:0.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;">
+      <h4 id="tk4-sc-modal-title" style="margin:0;font-size:1.05rem;font-weight:800;color:#ffffff;font-family:'Be Vietnam Pro',sans-serif;">
+        🔪 Hội chẩn mổ
+      </h4>
+      <button type="button" class="btn-secondary" onclick="document.getElementById('tk4-surg-consult-dialog').close()" style="color:#ffffff;background:rgba(255,255,255,0.2);border:none;">✕</button>
+    </div>
+    <div class="modal-body" style="padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.85rem;font-family:'Be Vietnam Pro',sans-serif;">
+      <div id="tk4-sc-modal-patient-info" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:0.6rem 0.9rem;font-size:0.83rem;"></div>
+      
+      <div>
+        <label style="font-size:0.8rem;font-weight:800;color:#166534;display:block;margin-bottom:4px;">Chẩn đoán sau hội chẩn:</label>
+        <input type="text" id="tk4-sc-modal-inp-diag" class="date-input" style="width:100%;height:38px;font-size:0.85rem;font-weight:700;" placeholder="Nhập chẩn đoán sau khi hội chẩn duyệt mổ..." />
+      </div>
+
+      <div>
+        <label style="font-size:0.8rem;font-weight:800;color:#166534;display:block;margin-bottom:4px;">Phương pháp phẫu thuật:</label>
+        <input type="text" id="tk4-sc-modal-inp-method" class="date-input" style="width:100%;height:38px;font-size:0.85rem;font-weight:700;" placeholder="Nhập phương pháp phẫu thuật (VD: Mở sọ bóc u, Cố định cột sống...)" />
+      </div>
+
+      <div>
+        <label style="font-size:0.8rem;font-weight:800;color:#166534;display:block;margin-bottom:6px;">Kết luận phẫu thuật:</label>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;" id="tk4-sc-modal-decision-group">
+          <label class="tk4-sc-choice-pill" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1.5px solid #86efac;background:#f0fdf4;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:800;color:#166534;">
+            <input type="radio" name="tk4-sc-decision" value="Đồng ý" style="cursor:pointer;" />
+            <span>✓ Đồng ý phẫu thuật</span>
+          </label>
+          <label class="tk4-sc-choice-pill" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1.5px solid #fde68a;background:#fffbeb;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:800;color:#b45309;">
+            <input type="radio" name="tk4-sc-decision" value="Hội ý" style="cursor:pointer;" />
+            <span>💬 Cần hội ý thêm</span>
+          </label>
+          <label class="tk4-sc-choice-pill" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1.5px solid #fca5a5;background:#fef2f2;border-radius:8px;cursor:pointer;font-size:0.82rem;font-weight:800;color:#dc2626;">
+            <input type="radio" name="tk4-sc-decision" value="Không đồng ý" style="cursor:pointer;" />
+            <span>✕ Không đồng ý phẫu thuật</span>
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.8rem;font-weight:800;color:#166534;display:block;margin-bottom:4px;">Tiền ứng:</label>
+        <input type="text" id="tk4-sc-modal-inp-payment" class="date-input" style="width:100%;height:38px;font-size:0.85rem;font-weight:700;" placeholder="Nhập số tiền ứng (VD: 5 triệu, 10.000.000đ...)" />
+      </div>
+    </div>
+    <div class="modal-footer" style="padding:0.85rem 1.25rem;background:#f8fafc;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+      <button type="button" class="btn-bed-mini" id="btn-tk4-sc-modal-delete" style="background:#fee2e2;color:#dc2626;border-color:#fca5a5;font-weight:700;">
+        🗑️ Huỷ/Xoá hội chẩn này
+      </button>
+      <div style="display:flex;gap:8px;">
+        <button type="button" class="btn-secondary" onclick="document.getElementById('tk4-surg-consult-dialog').close()">Đóng</button>
+        <button type="button" class="btn-primary-sm" id="btn-tk4-sc-modal-save" style="background:#15803d;border-color:#14532d;padding:0.55rem 1.2rem;font-weight:800;">
+          💾 Lưu hội chẩn mổ
+        </button>
+      </div>
     </div>
   </dialog>
 
