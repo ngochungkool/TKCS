@@ -1,5 +1,5 @@
 {
-  "version": 1790823123698,
+  "version": 1790823574836,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -295,7 +295,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 20585,
-      "uploadedAt": "09:42:51 1/10/2026",
+      "uploadedAt": "09:59:34 1/10/2026",
       "extractedPreview": null
     },
     {
@@ -705,7 +705,7 @@
         "baoHiem": 0
       }
     },
-    "updatedAt": "2026-10-01T02:42:52.108Z"
+    "updatedAt": "2026-10-01T02:59:34.836Z"
   },
   "wardRounds": {
     "tk1": {
@@ -755,8 +755,8 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "01/02/2026",
           "hanTheDen": "31/01/2027",
-          "diaChi": "PHÚ AN-Xã Tây Sơn--Tỉnh Gia Lai",
-          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "diaChi": "Phú An -Xã Tây Sơn--Tỉnh Gia Lai",
+          "chanDoanHis": "T00.8-Tổn thương nông tác động kết hợp khác ở nhiều vùng cơ thể",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Dương Minh Trí",
           "ngayVaoStr": "16/09/2026",
@@ -854,7 +854,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "22/09/2026",
-          "hisBed": "H021",
+          "hisBed": "H030",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-09-27": {
@@ -1020,7 +1020,7 @@
           "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
           "bsDieuTri": "Đào Văn Nhân",
           "ngayVaoStr": "22/09/2026",
-          "hisBed": "H016",
+          "hisBed": "H015",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-10-01": {
@@ -1357,7 +1357,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "25/09/2026",
-          "hisBed": "H024",
+          "hisBed": "H033",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-09-30": {
@@ -1424,7 +1424,7 @@
           "customDiagnosis": "S06.50-Xuất huyết dưới màng cứng do chấn thương, không có vết thương nội sọ hở",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
           "ngayVaoStr": "25/09/2026",
-          "hisBed": "H017",
+          "hisBed": "H020",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-09-29": {
@@ -2100,12 +2100,12 @@
           "tuoi": "19 tuổi",
           "namSinh": "2007",
           "gioiTinh": "Nữ",
-          "doiTuong": "Viện phí",
-          "soTheBhyt": "",
-          "tuyenDangKy": "",
-          "hanTheTu": "",
-          "hanTheDen": "",
-          "diaChi": "háo lễ-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "SV4565221835564",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/10/2025",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Định Thiện Tây -Xã Tuy Phước Bắc--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
@@ -2295,7 +2295,7 @@
           "customDiagnosis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
           "bsDieuTri": "Lê Đức Nhật",
           "ngayVaoStr": "28/09/2026",
-          "hisBed": "H025",
+          "hisBed": "H104",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -3111,36 +3111,30 @@
       "latestExcelMabns": [
         "0001418457",
         "0001420337",
-        "0001420728",
-        "0001420743",
         "0001420755",
         "0001421064",
-        "0001421068",
-        "0001421398",
         "0001352007",
-        "0001421512",
         "0001421561",
         "0001421945",
         "0001421963",
         "0001421962",
-        "0000996031",
-        "0001421988",
-        "0001017823",
-        "0001422020",
         "0001422158",
         "0001032592",
-        "0001050501",
-        "0001422178",
         "0001422326",
-        "0001422336",
-        "0001422332",
         "0001422360",
-        "0001422366",
-        "0001422359",
-        "0001422413",
         "0001422706",
-        "0001422719",
-        "0001422908"
+        "0001423331",
+        "0001423400",
+        "0001423397",
+        "0001423405",
+        "0001423448",
+        "0000037245",
+        "0001423911",
+        "0001423919",
+        "0001423930",
+        "0001423940",
+        "0001423953",
+        "0000942496"
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": {
@@ -3156,7 +3150,7 @@
         "reason": "Chuyển mổ / Chuyển phòng",
         "deletedAtMs": 1790816392749
       },
-      "updatedAt": "2026-10-01T02:52:03.685Z",
+      "updatedAt": "2026-10-01T02:59:35.831Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4626,33 +4620,10 @@
           }
         }
       },
-      "latestExcelMabns": [
-        "0001412378",
-        "0001418507",
-        "0001412616",
-        "0001419869",
-        "0000948030",
-        "0001397969",
-        "0001373574",
-        "0001420471",
-        "0001400167",
-        "0001265243",
-        "0001419943",
-        "0001418920",
-        "0000462435",
-        "0000789370",
-        "0001422060",
-        "0001422302",
-        "0001220543",
-        "0001420757",
-        "0001418939",
-        "0001087442",
-        "0001359700",
-        "0001422775"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T02:52:03.695Z"
+      "updatedAt": "2026-10-01T02:59:35.831Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5740,24 +5711,10 @@
           }
         }
       },
-      "latestExcelMabns": [
-        "0001307829",
-        "0001283135",
-        "0001160694",
-        "0001416882",
-        "0001410444",
-        "0001070375",
-        "0001383920",
-        "0000167064",
-        "0000835346",
-        "0001327863",
-        "0001413514",
-        "0000893787",
-        "0001422911"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T02:52:03.695Z"
+      "updatedAt": "2026-10-01T02:59:35.831Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8268,48 +8225,10 @@
           }
         }
       },
-      "latestExcelMabns": [
-        "0001413526",
-        "0001418724",
-        "0001415940",
-        "0001419157",
-        "0001418784",
-        "0001287139",
-        "0001420526",
-        "0001411127",
-        "0001421285",
-        "0001227262",
-        "0001418775",
-        "0001420910",
-        "0001040749",
-        "0001419435",
-        "0001418951",
-        "0001037354",
-        "0001377524",
-        "0001421838",
-        "0001421575",
-        "0001325103",
-        "0001417273",
-        "0001422079",
-        "0001422096",
-        "0001291952",
-        "0001422207",
-        "0001422252",
-        "0001153038",
-        "0001422322",
-        "0001422398",
-        "0001422488",
-        "0001309625",
-        "0001422435",
-        "0001416348",
-        "0001422625",
-        "0001422644",
-        "0001422884",
-        "0001422894"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T02:52:03.696Z"
+      "updatedAt": "2026-10-01T02:59:35.831Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -9176,23 +9095,10 @@
           }
         }
       },
-      "latestExcelMabns": [
-        "0001412464",
-        "0000844175",
-        "0001416769",
-        "0001416828",
-        "0001420321",
-        "0001419674",
-        "0001417494",
-        "0001422300",
-        "0001420565",
-        "0001422339",
-        "0001421947",
-        "0001420070"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T02:52:03.696Z"
+      "updatedAt": "2026-10-01T02:59:35.831Z"
     }
   },
   "episodeConsultations": {
@@ -9233,5 +9139,5 @@
       }
     ]
   },
-  "lastExcelUploadTime": "09:42 ngày 01/10/2026"
+  "lastExcelUploadTime": "09:59 ngày 01/10/2026"
 }
