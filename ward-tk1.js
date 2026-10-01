@@ -1086,47 +1086,129 @@
     if (!dlg || !titleEl || !bodyEl) return;
 
     titleEl.textContent = `Chọn bệnh nhân xếp vào ${formatBedLabel(targetBedCode)}`;
-    const allPatients = Object.values(tk1State.patientRecords || {})
-      .filter(r => !r.removed?.isRemoved)
-      .sort((a, b) => {
-        const bedA = getBedOfPatient(a.mabn);
-        const bedB = getBedOfPatient(b.mabn);
-        if (!bedA && bedB) return -1;
-        if (bedA && !bedB) return 1;
-        return a.hoten.localeCompare(b.hoten, 'vi');
+    const allActivePatients = Object.values(tk1State.patientRecords || {})
+      .filter(r => !r.removed?.isRemoved);
+
+    let isAssignedCollapsed = true;
+
+    function renderAssignDialog(searchTerm = '') {
+      const term = searchTerm.toLowerCase().trim();
+      const filtered = allActivePatients.filter(p => !term || (p.hoten && p.hoten.toLowerCase().includes(term)));
+
+      const unassignedList = filtered
+        .filter(p => !getBedOfPatient(p.mabn))
+        .sort((a, b) => a.hoten.localeCompare(b.hoten, 'vi'));
+
+      const assignedList = filtered
+        .filter(p => Boolean(getBedOfPatient(p.mabn)))
+        .sort((a, b) => {
+          const bedA = getBedOfPatient(a.mabn);
+          const bedB = getBedOfPatient(b.mabn);
+          return bedA.localeCompare(bedB, undefined, { numeric: true });
+        });
+
+      const showAssigned = term.length > 0 ? true : !isAssignedCollapsed;
+
+      bodyEl.innerHTML = `
+        <div style="margin-bottom:0.75rem;">
+          <input
+            type="text"
+            id="tk1-assign-search-input"
+            value="${searchTerm.replace(/"/g, '&quot;')}"
+            placeholder="🔍 Tìm kiếm bệnh nhân theo tên..."
+            style="width:100%;height:38px;padding:6px 12px;border:1.5px solid #94a3b8;border-radius:8px;font-size:0.86rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;outline:none;"
+          />
+        </div>
+
+        <div style="font-size:0.83rem;color:#475569;margin-bottom:0.6rem;">
+          Bấm chọn 1 bệnh nhân để xếp ngay vào <strong>${formatBedLabel(targetBedCode)}</strong>:
+        </div>
+
+        <!-- PHẦN 1: BỆNH NHÂN CHƯA CÓ GIƯỜNG (LUÔN MỞ, NỔI BẬT) -->
+        <div style="margin-bottom:1rem;">
+          <div style="font-size:0.85rem;font-weight:800;color:#1e40af;margin-bottom:0.45rem;display:flex;align-items:center;gap:6px;">
+            <span>⚠️ Bệnh nhân chưa có giường (${unassignedList.length} BN)</span>
+          </div>
+          ${
+            unassignedList.length > 0
+              ? `<div style="display:flex;flex-wrap:wrap;gap:0.45rem;max-height:35vh;overflow-y:auto;">
+                  ${unassignedList.map(p => `
+                    <button
+                      type="button"
+                      class="tk1-unassigned-chip"
+                      style="cursor:pointer;border-color:#2563eb;background:#eff6ff;"
+                      data-pick-patient-for-bed="${p.mabn}"
+                    >
+                      <span><strong>${p.hoten}</strong> (${p.tuoi})</span>
+                      <span class="btn-chip-pick-bed" style="background:#004aad;">Chưa có giường</span>
+                    </button>
+                  `).join('')}
+                </div>`
+              : `<div style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">Không có bệnh nhân nào chưa có giường${term ? ' khớp từ khoá' : ''}.</div>`
+          }
+        </div>
+
+        <!-- PHẦN 2: BỆNH NHÂN ĐÃ CÓ GIƯỜNG (THƯỜNG XUYÊN THU GỌN, BẤM ĐỂ MỞ) -->
+        <div style="border-top:1px solid #e2e8f0;padding-top:0.75rem;">
+          <button
+            type="button"
+            id="btn-toggle-assigned-section"
+            style="width:100%;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:0.83rem;font-weight:700;color:#334155;"
+          >
+            <span>🛏️ Đã có giường (${assignedList.length} BN — Đổi sang ${formatBedLabel(targetBedCode)})</span>
+            <span style="font-size:0.8rem;color:#64748b;">${showAssigned ? '▾ Thu gọn' : '▸ Bấm để mở rộng'}</span>
+          </button>
+          
+          <div id="tk1-assign-assigned-wrap" style="display:${showAssigned ? 'flex' : 'none'};flex-wrap:wrap;gap:0.45rem;margin-top:0.6rem;max-height:35vh;overflow-y:auto;padding:2px;">
+            ${
+              assignedList.length > 0
+                ? assignedList.map(p => {
+                    const curBed = getBedOfPatient(p.mabn);
+                    return `
+                      <button
+                        type="button"
+                        class="tk1-unassigned-chip"
+                        style="cursor:pointer;border-color:#cbd5e1;background:#f8fafc;"
+                        data-pick-patient-for-bed="${p.mabn}"
+                      >
+                        <span><strong>${p.hoten}</strong> (${p.tuoi})</span>
+                        <span class="btn-chip-pick-bed" style="background:#64748b;">${formatBedLabel(curBed)}</span>
+                      </button>
+                    `;
+                  }).join('')
+                : `<div style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">Không có bệnh nhân nào${term ? ' khớp từ khoá' : ''}.</div>`
+            }
+          </div>
+        </div>
+      `;
+
+      const searchInp = document.getElementById('tk1-assign-search-input');
+      if (searchInp) {
+        searchInp.focus();
+        searchInp.selectionStart = searchInp.selectionEnd = searchInp.value.length;
+        searchInp.addEventListener('input', (e) => {
+          renderAssignDialog(e.target.value);
+        });
+      }
+
+      const toggleBtn = document.getElementById('btn-toggle-assigned-section');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          isAssignedCollapsed = !isAssignedCollapsed;
+          renderAssignDialog(document.getElementById('tk1-assign-search-input')?.value || '');
+        });
+      }
+
+      bodyEl.querySelectorAll('[data-pick-patient-for-bed]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const selMabn = btn.getAttribute('data-pick-patient-for-bed');
+          await callTk1Api({ action: 'ASSIGN_OR_MOVE_BED', mabn: selMabn, targetBedCode });
+          dlg.close();
+        });
       });
+    }
 
-    bodyEl.innerHTML = `
-      <div style="font-size:0.84rem;color:#334155;margin-bottom:0.6rem;">
-        Bấm chọn 1 bệnh nhân bên dưới để xếp ngay vào <strong>${formatBedLabel(targetBedCode)}</strong>:
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:0.45rem;max-height:55vh;overflow-y:auto;">
-        ${allPatients.map(p => {
-          const curBed = getBedOfPatient(p.mabn);
-          const tag = curBed ? formatBedLabel(curBed) : 'Chưa có giường';
-          return `
-            <button
-              type="button"
-              class="tk1-unassigned-chip"
-              style="cursor:pointer;border-color:${curBed ? '#cbd5e1' : '#2563eb'};background:${curBed ? '#f8fafc' : '#eff6ff'};"
-              data-pick-patient-for-bed="${p.mabn}"
-            >
-              <span><strong>${p.hoten}</strong> (${p.tuoi})</span>
-              <span class="btn-chip-pick-bed" style="background:${curBed ? '#64748b' : '#004aad'};">${tag}</span>
-            </button>
-          `;
-        }).join('')}
-      </div>
-    `;
-
-    bodyEl.querySelectorAll('[data-pick-patient-for-bed]').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const selMabn = btn.getAttribute('data-pick-patient-for-bed');
-        await callTk1Api({ action: 'ASSIGN_OR_MOVE_BED', mabn: selMabn, targetBedCode });
-        dlg.close();
-      });
-    });
-
+    renderAssignDialog('');
     dlg.showModal();
   }
 
@@ -1339,6 +1421,105 @@
     });
   }
 
+  const MULTI_DD_CATS = [
+    { cat: 'xetNghiem', defaultTitle: '🧪 Xét nghiệm', wrapId: 'wrap-dd-xetNghiem', titleId: 'title-dd-xetNghiem', popoverId: 'popover-dd-xetNghiem' },
+    { cat: 'ct',        defaultTitle: '🧠 CTScan',     wrapId: 'wrap-dd-ct',        titleId: 'title-dd-ct',        popoverId: 'popover-dd-ct' },
+    { cat: 'xquang',    defaultTitle: '🦴 XQ / SA',    wrapId: 'wrap-dd-xquang',    titleId: 'title-dd-xquang',    popoverId: 'popover-dd-xquang' },
+    { cat: 'hoiChan',   defaultTitle: '👨‍⚕️ Hội chẩn',   wrapId: 'wrap-dd-hoiChan',   titleId: 'title-dd-hoiChan',   popoverId: 'popover-dd-hoiChan' }
+  ];
+
+  function updateMultiDdPopoversAndTitles() {
+    for (const item of MULTI_DD_CATS) {
+      const { cat, defaultTitle, titleId, popoverId } = item;
+      const titleEl = document.getElementById(titleId);
+      const popoverEl = document.getElementById(popoverId);
+      if (!titleEl || !popoverEl) continue;
+
+      const opts = TK1_QUICK_OPTIONS[cat] || [];
+      const currentSelected = modalDraftTasks[cat] || [];
+      const count = currentSelected.length;
+
+      titleEl.textContent = count > 0 ? `${defaultTitle} (${count})` : defaultTitle;
+
+      popoverEl.innerHTML = opts.map(opt => {
+        let isChecked = false;
+        if (cat === 'xquang' && opt === 'X-quang xương chi') {
+          isChecked = currentSelected.some(x => x.startsWith('X-quang xương chi'));
+        } else if (cat === 'xetNghiem' && opt === 'Khác') {
+          const std = opts.filter(x => x !== 'Khác');
+          isChecked = currentSelected.some(x => !std.includes(x));
+        } else {
+          isChecked = currentSelected.includes(opt);
+        }
+
+        return `
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;font-size:0.81rem;font-weight:600;color:#1e293b;cursor:pointer;user-select:none;transition:background 0.15s ease;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">
+            <input
+              type="checkbox"
+              data-multi-opt-cat="${cat}"
+              value="${opt.replace(/"/g, '&quot;')}"
+              ${isChecked ? 'checked' : ''}
+              style="width:15px;height:15px;accent-color:#2563eb;cursor:pointer;"
+            />
+            <span>${opt}</span>
+          </label>
+        `;
+      }).join('');
+
+      popoverEl.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+        chk.addEventListener('change', () => {
+          const optVal = chk.value;
+          const checked = chk.checked;
+          handleMultiDdOptionToggle(cat, optVal, checked);
+        });
+      });
+    }
+  }
+
+  function handleMultiDdOptionToggle(cat, optVal, checked) {
+    if (!modalDraftTasks[cat]) modalDraftTasks[cat] = [];
+
+    if (cat === 'xquang' && optVal === 'X-quang xương chi') {
+      const wrap = document.getElementById('tk1-custom-xq-wrap');
+      const inp = document.getElementById('tk1-custom-xq-input');
+      if (checked) {
+        if (wrap) wrap.style.display = 'flex';
+        const cur = (modalDraftTasks.xquang || []).find(x => x.startsWith('X-quang xương chi'));
+        if (!cur) {
+          modalDraftTasks.xquang.push('X-quang xương chi');
+        }
+        if (inp) inp.focus();
+      } else {
+        modalDraftTasks.xquang = (modalDraftTasks.xquang || []).filter(x => !x.startsWith('X-quang xương chi'));
+        if (wrap) wrap.style.display = 'none';
+        if (inp) inp.value = '';
+      }
+    } else if (cat === 'xetNghiem' && optVal === 'Khác') {
+      const wrap = document.getElementById('tk1-custom-xn-wrap');
+      const inp = document.getElementById('tk1-custom-xn-input');
+      const stdOpts = (TK1_QUICK_OPTIONS.xetNghiem || []).filter(x => x !== 'Khác');
+      if (checked) {
+        if (wrap) wrap.style.display = 'flex';
+        if (inp) inp.focus();
+      } else {
+        modalDraftTasks.xetNghiem = (modalDraftTasks.xetNghiem || []).filter(x => stdOpts.includes(x));
+        if (wrap) wrap.style.display = 'none';
+        if (inp) inp.value = '';
+      }
+    } else {
+      if (checked) {
+        if (!modalDraftTasks[cat].includes(optVal)) {
+          modalDraftTasks[cat].push(optVal);
+        }
+      } else {
+        modalDraftTasks[cat] = modalDraftTasks[cat].filter(x => x !== optVal);
+      }
+    }
+
+    renderModalSelectedTasksPills();
+    updateMultiDdPopoversAndTitles();
+  }
+
   function openPatientModal(mabn) {
     const rec = tk1State.patientRecords[mabn];
     if (!rec) return;
@@ -1402,11 +1583,33 @@
 
     document.getElementById('tk1-modal-diagnosis-input').value = rec.customDiagnosis || rec.chanDoanHis || '';
 
-    // Ẩn ô nhập liệu phụ khi mở modal
+    // Khởi tạo ô nhập liệu phụ nếu BN đã có XQ xương chi hoặc XN khác
     const customXnWrap = document.getElementById('tk1-custom-xn-wrap');
     const customXqWrap = document.getElementById('tk1-custom-xq-wrap');
-    if (customXnWrap) customXnWrap.style.display = 'none';
-    if (customXqWrap) customXqWrap.style.display = 'none';
+    const inpCustomXn = document.getElementById('tk1-custom-xn-input');
+    const inpCustomXq = document.getElementById('tk1-custom-xq-input');
+
+    const xqItem = (modalDraftTasks.xquang || []).find(x => x.startsWith('X-quang xương chi'));
+    if (xqItem) {
+      if (customXqWrap) customXqWrap.style.display = 'flex';
+      const m = xqItem.match(/\((.*?)\)/);
+      if (inpCustomXq) inpCustomXq.value = m ? m[1] : '';
+    } else {
+      if (customXqWrap) customXqWrap.style.display = 'none';
+      if (inpCustomXq) inpCustomXq.value = '';
+    }
+
+    const stdXn = (TK1_QUICK_OPTIONS.xetNghiem || []).filter(x => x !== 'Khác');
+    const customXnVal = (modalDraftTasks.xetNghiem || []).find(x => !stdXn.includes(x));
+    if (customXnVal) {
+      if (customXnWrap) customXnWrap.style.display = 'flex';
+      if (inpCustomXn) inpCustomXn.value = customXnVal;
+    } else {
+      if (customXnWrap) customXnWrap.style.display = 'none';
+      if (inpCustomXn) inpCustomXn.value = '';
+    }
+
+    updateMultiDdPopoversAndTitles();
 
     // 3. Khối lịch sử: Đổi tên "Lần đi buồng gần nhất:" thành "Lịch sử đi buồng: các nhãn công việc gần nhất + nhãn thời gian"
     const recentHist = getMostRecentHistorySummary(rec);
@@ -1500,8 +1703,26 @@
         const cat = btn.getAttribute('data-remove-draft-cat');
         const val = btn.getAttribute('data-remove-draft-val');
         modalDraftTasks[cat] = (modalDraftTasks[cat] || []).filter(x => x !== val);
+
+        if (cat === 'xquang' && val.startsWith('X-quang xương chi')) {
+          const wrapXq = document.getElementById('tk1-custom-xq-wrap');
+          const inpXq = document.getElementById('tk1-custom-xq-input');
+          if (wrapXq) wrapXq.style.display = 'none';
+          if (inpXq) inpXq.value = '';
+        }
+        if (cat === 'xetNghiem') {
+          const stdOpts = (TK1_QUICK_OPTIONS.xetNghiem || []).filter(x => x !== 'Khác');
+          if (!stdOpts.includes(val)) {
+            const wrapXn = document.getElementById('tk1-custom-xn-wrap');
+            const inpXn = document.getElementById('tk1-custom-xn-input');
+            if (wrapXn) wrapXn.style.display = 'none';
+            if (inpXn) inpXn.value = '';
+          }
+        }
+
         renderModalExtraRoomTasksBar();
         renderModalSelectedTasksPills();
+        updateMultiDdPopoversAndTitles();
       });
     });
 
@@ -1939,120 +2160,85 @@
       });
     });
 
-    const dropdownMap = [
-      { id: 'tk1-dd-xetnghiem', cat: 'xetNghiem' },
-      { id: 'tk1-dd-ct',        cat: 'ct' },
-      { id: 'tk1-dd-xquang',    cat: 'xquang' },
-      { id: 'tk1-dd-hoichan',   cat: 'hoiChan' }
-    ];
-
-    for (const { id, cat } of dropdownMap) {
-      const sel = document.getElementById(id);
-      if (!sel) continue;
-      sel.innerHTML = `<option value="">+ Chọn ${sel.getAttribute('data-dd-label')}...</option>` +
-        (TK1_QUICK_OPTIONS[cat] || []).map(opt => `<option value="${opt}">${opt}</option>`).join('');
-
-      sel.addEventListener('change', () => {
-        const val = sel.value;
-        if (!val) return;
-        sel.value = '';
-
-        // Khi chọn Xét nghiệm -> Khác: hiện ô nhập liệu
-        if (cat === 'xetNghiem' && val === 'Khác') {
-          const wrap = document.getElementById('tk1-custom-xn-wrap');
-          const inp = document.getElementById('tk1-custom-xn-input');
-          if (wrap && inp) {
-            wrap.style.display = 'flex';
-            inp.value = '';
-            inp.focus();
-          }
-          return;
+    // Xử lý bật / tắt popover danh sách chọn nhanh công việc
+    document.querySelectorAll('.tk1-multi-dd-trigger').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cat = btn.getAttribute('data-dd-cat');
+        const popover = document.getElementById(`popover-dd-${cat}`);
+        if (!popover) return;
+        const isOpen = popover.style.display === 'block';
+        document.querySelectorAll('.tk1-multi-dd-popover').forEach(p => { p.style.display = 'none'; });
+        if (!isOpen) {
+          popover.style.display = 'block';
         }
+      });
+    });
 
-        // Khi chọn X-quang xương chi: hiện ô nhập liệu X-quang xương gì
-        if (cat === 'xquang' && val === 'X-quang xương chi') {
-          const wrap = document.getElementById('tk1-custom-xq-wrap');
-          const inp = document.getElementById('tk1-custom-xq-input');
-          if (wrap && inp) {
-            wrap.style.display = 'flex';
-            inp.value = '';
-            inp.focus();
-          }
-          return;
-        }
+    // Ngăn chặn sự kiện click bên trong popover làm đóng popover (để tích chọn nhiều mục)
+    document.querySelectorAll('.tk1-multi-dd-popover').forEach(p => {
+      p.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
 
-        if (!modalDraftTasks[cat].includes(val)) {
-          modalDraftTasks[cat].push(val);
+    // Bấm bên ngoài popover thì đóng tất cả popover
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.tk1-multi-dd-popover').forEach(p => { p.style.display = 'none'; });
+    });
+
+    // Nhập Xét nghiệm khác: Tự động lưu tức thì vào danh sách công việc khi gõ
+    const inpCustomXn = document.getElementById('tk1-custom-xn-input');
+    const wrapCustomXn = document.getElementById('tk1-custom-xn-wrap');
+    const btnCancelXn = document.getElementById('btn-tk1-cancel-custom-xn');
+
+    if (inpCustomXn) {
+      inpCustomXn.addEventListener('input', () => {
+        const val = inpCustomXn.value.trim();
+        const stdOpts = (TK1_QUICK_OPTIONS.xetNghiem || []).filter(x => x !== 'Khác');
+        modalDraftTasks.xetNghiem = (modalDraftTasks.xetNghiem || []).filter(x => stdOpts.includes(x));
+        if (val) {
+          modalDraftTasks.xetNghiem.push(val);
         }
         renderModalSelectedTasksPills();
+        updateMultiDdPopoversAndTitles();
       });
     }
 
-    const addCustomXn = () => {
-      const wrap = document.getElementById('tk1-custom-xn-wrap');
-      const inp = document.getElementById('tk1-custom-xn-input');
-      if (!inp) return;
-      const customVal = inp.value.trim();
-      if (customVal) {
-        const label = customVal;
-        if (!modalDraftTasks.xetNghiem.includes(label)) {
-          modalDraftTasks.xetNghiem.push(label);
-        }
-        renderModalSelectedTasksPills();
-      }
-      if (wrap) wrap.style.display = 'none';
-      inp.value = '';
-    };
-
-    const btnAddXn = document.getElementById('btn-tk1-add-custom-xn');
-    const btnCancelXn = document.getElementById('btn-tk1-cancel-custom-xn');
-    const inpCustomXn = document.getElementById('tk1-custom-xn-input');
-    if (btnAddXn) btnAddXn.addEventListener('click', addCustomXn);
     if (btnCancelXn) {
       btnCancelXn.addEventListener('click', () => {
-        const wrap = document.getElementById('tk1-custom-xn-wrap');
-        if (wrap) wrap.style.display = 'none';
-      });
-    }
-    if (inpCustomXn) {
-      inpCustomXn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          addCustomXn();
-        }
+        const stdOpts = (TK1_QUICK_OPTIONS.xetNghiem || []).filter(x => x !== 'Khác');
+        modalDraftTasks.xetNghiem = (modalDraftTasks.xetNghiem || []).filter(x => stdOpts.includes(x));
+        if (wrapCustomXn) wrapCustomXn.style.display = 'none';
+        if (inpCustomXn) inpCustomXn.value = '';
+        renderModalSelectedTasksPills();
+        updateMultiDdPopoversAndTitles();
       });
     }
 
-    const addCustomXq = () => {
-      const wrap = document.getElementById('tk1-custom-xq-wrap');
-      const inp = document.getElementById('tk1-custom-xq-input');
-      if (!inp) return;
-      const boneName = inp.value.trim();
-      const label = boneName ? `X-quang xương chi (${boneName})` : 'X-quang xương chi';
-      if (!modalDraftTasks.xquang.includes(label)) {
-        modalDraftTasks.xquang.push(label);
-      }
-      renderModalSelectedTasksPills();
-      if (wrap) wrap.style.display = 'none';
-      inp.value = '';
-    };
-
-    const btnAddXq = document.getElementById('btn-tk1-add-custom-xq');
-    const btnCancelXq = document.getElementById('btn-tk1-cancel-custom-xq');
+    // Nhập X-quang xương chi: Tự động lưu tức thì vào danh sách công việc khi gõ
     const inpCustomXq = document.getElementById('tk1-custom-xq-input');
-    if (btnAddXq) btnAddXq.addEventListener('click', addCustomXq);
+    const wrapCustomXq = document.getElementById('tk1-custom-xq-wrap');
+    const btnCancelXq = document.getElementById('btn-tk1-cancel-custom-xq');
+
+    if (inpCustomXq) {
+      inpCustomXq.addEventListener('input', () => {
+        const boneName = inpCustomXq.value.trim();
+        modalDraftTasks.xquang = (modalDraftTasks.xquang || []).filter(x => !x.startsWith('X-quang xương chi'));
+        const label = boneName ? `X-quang xương chi (${boneName})` : 'X-quang xương chi';
+        modalDraftTasks.xquang.push(label);
+        renderModalSelectedTasksPills();
+        updateMultiDdPopoversAndTitles();
+      });
+    }
+
     if (btnCancelXq) {
       btnCancelXq.addEventListener('click', () => {
-        const wrap = document.getElementById('tk1-custom-xq-wrap');
-        if (wrap) wrap.style.display = 'none';
-      });
-    }
-    if (inpCustomXq) {
-      inpCustomXq.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          addCustomXq();
-        }
+        modalDraftTasks.xquang = (modalDraftTasks.xquang || []).filter(x => !x.startsWith('X-quang xương chi'));
+        if (wrapCustomXq) wrapCustomXq.style.display = 'none';
+        if (inpCustomXq) inpCustomXq.value = '';
+        renderModalSelectedTasksPills();
+        updateMultiDdPopoversAndTitles();
       });
     }
 

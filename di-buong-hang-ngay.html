@@ -326,10 +326,37 @@
           ⚡ CHỌN NHANH CÔNG VIỆC HÔM NAY:
         </div>
         <div class="tk1-dropdowns-5grid">
-          <select id="tk1-dd-xetnghiem" class="tk1-work-select" data-dd-label="Xét nghiệm"></select>
-          <select id="tk1-dd-ct" class="tk1-work-select" data-dd-label="CTScan"></select>
-          <select id="tk1-dd-xquang" class="tk1-work-select" data-dd-label="X-quang / Siêu âm"></select>
-          <select id="tk1-dd-hoichan" class="tk1-work-select" data-dd-label="Khoa hội chẩn"></select>
+          <div class="tk1-multi-dd-wrap" id="wrap-dd-xetNghiem" style="position:relative;">
+            <button type="button" class="tk1-work-select tk1-multi-dd-trigger" data-dd-cat="xetNghiem" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;">
+              <span id="title-dd-xetNghiem">🧪 Xét nghiệm</span>
+              <span style="font-size:0.72rem;color:#64748b;">▾</span>
+            </button>
+            <div class="tk1-multi-dd-popover" id="popover-dd-xetNghiem" style="display:none;position:absolute;top:calc(100% + 4px);left:0;min-width:210px;background:#ffffff;border:1.5px solid #94a3b8;border-radius:9px;box-shadow:0 10px 25px rgba(0,0,0,0.18);padding:6px;z-index:1050;max-height:260px;overflow-y:auto;"></div>
+          </div>
+
+          <div class="tk1-multi-dd-wrap" id="wrap-dd-ct" style="position:relative;">
+            <button type="button" class="tk1-work-select tk1-multi-dd-trigger" data-dd-cat="ct" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;">
+              <span id="title-dd-ct">🧠 CTScan</span>
+              <span style="font-size:0.72rem;color:#64748b;">▾</span>
+            </button>
+            <div class="tk1-multi-dd-popover" id="popover-dd-ct" style="display:none;position:absolute;top:calc(100% + 4px);left:0;min-width:210px;background:#ffffff;border:1.5px solid #94a3b8;border-radius:9px;box-shadow:0 10px 25px rgba(0,0,0,0.18);padding:6px;z-index:1050;max-height:260px;overflow-y:auto;"></div>
+          </div>
+
+          <div class="tk1-multi-dd-wrap" id="wrap-dd-xquang" style="position:relative;">
+            <button type="button" class="tk1-work-select tk1-multi-dd-trigger" data-dd-cat="xquang" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;">
+              <span id="title-dd-xquang">🦴 X-quang / Siêu âm</span>
+              <span style="font-size:0.72rem;color:#64748b;">▾</span>
+            </button>
+            <div class="tk1-multi-dd-popover" id="popover-dd-xquang" style="display:none;position:absolute;top:calc(100% + 4px);left:0;min-width:210px;background:#ffffff;border:1.5px solid #94a3b8;border-radius:9px;box-shadow:0 10px 25px rgba(0,0,0,0.18);padding:6px;z-index:1050;max-height:260px;overflow-y:auto;"></div>
+          </div>
+
+          <div class="tk1-multi-dd-wrap" id="wrap-dd-hoiChan" style="position:relative;">
+            <button type="button" class="tk1-work-select tk1-multi-dd-trigger" data-dd-cat="hoiChan" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;">
+              <span id="title-dd-hoiChan">👨‍⚕️ Khoa hội chẩn</span>
+              <span style="font-size:0.72rem;color:#64748b;">▾</span>
+            </button>
+            <div class="tk1-multi-dd-popover" id="popover-dd-hoiChan" style="display:none;position:absolute;top:calc(100% + 4px);left:0;min-width:210px;background:#ffffff;border:1.5px solid #94a3b8;border-radius:9px;box-shadow:0 10px 25px rgba(0,0,0,0.18);padding:6px;z-index:1050;max-height:260px;overflow-y:auto;"></div>
+          </div>
         </div>
 
         <!-- Các nút chọn nhanh Thủ thuật / Chăm sóc riêng cho Thần kinh 2 (Rút dẫn lưu, Rút sonde tiểu, Cắt chỉ) -->
@@ -338,20 +365,20 @@
           style="display:none;flex-wrap:wrap;align-items:center;gap:0.45rem;margin-top:0.6rem;padding-top:0.55rem;border-top:1px dashed #bfdbfe;"
         ></div>
 
-        <!-- Ô nhập liệu khi chọn Xét nghiệm -> Khác -->
+        <!-- Ô nhập liệu khi chọn Xét nghiệm -> Khác (Tự lưu) -->
         <div id="tk1-custom-xn-wrap" style="display:none;align-items:center;gap:0.5rem;margin-top:0.6rem;background:#ffffff;border:1px solid #93c5fd;border-radius:9px;padding:0.45rem 0.65rem;">
           <span style="font-size:0.78rem;font-weight:800;color:#1d4ed8;white-space:nowrap;">🧪 Xét nghiệm khác:</span>
-          <input type="text" id="tk1-custom-xn-input" class="date-input" style="flex:1;height:34px;" placeholder="Nhập tên xét nghiệm khác..." />
-          <button type="button" class="btn-primary-sm" id="btn-tk1-add-custom-xn" style="padding:0.35rem 0.85rem;font-size:0.78rem;font-family:'Be Vietnam Pro',sans-serif;">Thêm</button>
-          <button type="button" class="btn-bed-mini" id="btn-tk1-cancel-custom-xn">Đóng</button>
+          <input type="text" id="tk1-custom-xn-input" class="date-input" style="flex:1;height:34px;" placeholder="Nhập tên xét nghiệm khác (Tự động lưu)..." />
+          <span style="font-size:0.74rem;color:#15803d;font-weight:700;white-space:nowrap;background:#dcfce7;border:1px solid #86efac;padding:2px 7px;border-radius:5px;">✓ Tự lưu</span>
+          <button type="button" class="btn-bed-mini" id="btn-tk1-cancel-custom-xn" title="Xoá xét nghiệm khác này">✕</button>
         </div>
 
-        <!-- Ô nhập liệu khi chọn X-quang xương chi -->
+        <!-- Ô nhập liệu khi chọn X-quang xương chi (Tự lưu) -->
         <div id="tk1-custom-xq-wrap" style="display:none;align-items:center;gap:0.5rem;margin-top:0.6rem;background:#ffffff;border:1px solid #5eead4;border-radius:9px;padding:0.45rem 0.65rem;">
           <span style="font-size:0.78rem;font-weight:800;color:#0f766e;white-space:nowrap;">🦴 X-quang xương chi:</span>
-          <input type="text" id="tk1-custom-xq-input" class="date-input" style="flex:1;height:34px;" placeholder="Nhập X-quang xương gì (VD: xương đùi P, cẳng tay T...)" />
-          <button type="button" class="btn-primary-sm" id="btn-tk1-add-custom-xq" style="padding:0.35rem 0.85rem;font-size:0.78rem;font-family:'Be Vietnam Pro',sans-serif;">Thêm</button>
-          <button type="button" class="btn-bed-mini" id="btn-tk1-cancel-custom-xq">Đóng</button>
+          <input type="text" id="tk1-custom-xq-input" class="date-input" style="flex:1;height:34px;" placeholder="Nhập tên xương (VD: xương đùi P, cẳng tay T...) — Tự động lưu" />
+          <span style="font-size:0.74rem;color:#0f766e;font-weight:700;white-space:nowrap;background:#ccfbf1;border:1px solid #5eead4;padding:2px 7px;border-radius:5px;">✓ Tự lưu</span>
+          <button type="button" class="btn-bed-mini" id="btn-tk1-cancel-custom-xq" title="Xoá X-quang xương chi này">✕</button>
         </div>
 
         <!-- Danh sách công việc đã chọn hôm nay -->
@@ -533,17 +560,9 @@
               </div>
 
               <div class="ward-room-stats-row">
-                <div class="ward-mini-stat">
-                  <span class="wms-lbl">Hiện có:</span>
-                  <span class="wms-val">${st.hienCo ?? 0}</span>
-                </div>
-                <div class="ward-mini-stat">
-                  <span class="wms-lbl">Vào:</span>
-                  <span class="wms-val">${st.benhVao ?? 0}</span>
-                </div>
-                <div class="ward-mini-stat">
-                  <span class="wms-lbl">Ra:</span>
-                  <span class="wms-val">${st.raVien ?? 0}</span>
+                <div class="ward-mini-stat" style="background:#e0e7ff;border:1px solid #c7d2fe;padding:2px 9px;border-radius:6px;">
+                  <span class="wms-lbl" style="font-weight:700;color:#3730a3;">Hiện có:</span>
+                  <span class="wms-val" style="font-weight:900;color:#1e1b4b;font-size:0.92rem;">${st.hienCo ?? 0} BN</span>
                 </div>
               </div>
             </div>
@@ -603,27 +622,12 @@
         }
 
         if (statsEl) {
-          const st = byRoomStats[room.name] || { dauCa: 0, benhVao: 0, chuyenDen: 0, raVien: 0, hienCo: 0 };
+          const st = byRoomStats[room.name] || { hienCo: 0 };
           statsEl.innerHTML = `
-            <div class="admin-stat-box">
-              <span class="stat-num">${st.dauCa ?? 0}</span>
-              <span class="stat-lbl">Đầu ca</span>
-            </div>
-            <div class="admin-stat-box">
-              <span class="stat-num" style="color: #15803d;">${st.benhVao ?? 0}</span>
-              <span class="stat-lbl">Bệnh vào</span>
-            </div>
-            <div class="admin-stat-box">
-              <span class="stat-num" style="color: #0284c7;">${st.chuyenDen ?? 0}</span>
-              <span class="stat-lbl">Chuyển đến</span>
-            </div>
-            <div class="admin-stat-box">
-              <span class="stat-num" style="color: #d97706;">${st.raVien ?? 0}</span>
-              <span class="stat-lbl">Ra viện</span>
-            </div>
-            <div class="admin-stat-box" style="background: #eef2ff; border-color: #a5b4fc;">
-              <span class="stat-num" style="color: #4338ca;">${st.hienCo ?? 0}</span>
-              <span class="stat-lbl">Hiện có</span>
+            <div class="admin-stat-box" style="background:#eef2ff;border:1.5px solid #a5b4fc;border-radius:9px;padding:4px 14px;display:inline-flex;align-items:center;gap:8px;">
+              <span class="stat-lbl" style="font-weight:800;color:#3730a3;font-size:0.82rem;text-transform:uppercase;">Hiện có:</span>
+              <span class="stat-num" style="color:#4338ca;font-size:1.35rem;font-weight:900;line-height:1;">${st.hienCo ?? 0}</span>
+              <span style="font-size:0.78rem;font-weight:700;color:#6366f1;">BN</span>
             </div>
           `;
         }
