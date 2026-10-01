@@ -1,5 +1,5 @@
 {
-  "version": 1790816154448,
+  "version": 1790816165550,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -736,7 +736,8 @@
         "5X": "0001422706",
         "4X": "0001422178",
         "23X": "0001423396",
-        "16X": "0001423448"
+        "16X": "0001423448",
+        "12X": "0001423930"
       },
       "hiddenFoldingBeds": {},
       "patientRecords": {
@@ -2878,7 +2879,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:55:54.448Z",
+      "updatedAt": "2026-10-01T00:56:05.549Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4219,7 +4220,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:55:54.448Z"
+      "updatedAt": "2026-10-01T00:56:05.549Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5222,7 +5223,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:55:54.448Z"
+      "updatedAt": "2026-10-01T00:56:05.550Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7472,7 +7473,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:55:54.448Z"
+      "updatedAt": "2026-10-01T00:56:05.550Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8254,7 +8255,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:55:54.448Z"
+      "updatedAt": "2026-10-01T00:56:05.550Z"
     }
   },
   "episodeConsultations": {
