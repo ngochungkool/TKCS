@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Báo cáo giao ban | Khoa Ngoại Thần Kinh - Cột Sống (BVĐK Trung Tâm Tỉnh Gia Lai)</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* ==========================================================================
+       GIAO DIỆN BÁO CÁO GIAO BAN KHOA NGOẠI THẦN KINH
+       ========================================================================== */
+    :root {
+      --gb-primary: #0284c7;
+      --gb-primary-dark: #0369a1;
+      --gb-accent: #2563eb;
+      --gb-danger: #dc2626;
+      --gb-warning: #d97706;
+      --gb-success: #16a34a;
+      --gb-purple: #7c3aed;
+      --gb-bg: #f8fafc;
+      --gb-card-bg: #ffffff;
+      --gb-border: #cbd5e1;
+      --gb-text: #0f172a;
+      --gb-muted: #64748b;
+    }
+
+    body {
+      background-color: var(--gb-bg);
+      color: var(--gb-text);
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    /* Top control toolbar */
+    .gb-top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .gb-date-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 4px 10px;
+    }
+
+    .gb-date-input {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid #94a3b8;
+      border-radius: 8px;
+      padding: 4px 10px;
+      color: #0f172a;
+      background: #ffffff;
+      outline: none;
+    }
+
+    .gb-btn-nav {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .gb-btn-nav:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .gb-btn-today {
+      background: #0284c7;
+      color: #ffffff;
+      border: 1px solid #0369a1;
+      font-weight: 700;
+    }
+    .gb-btn-today:hover {
+      background: #0369a1;
+      color: #ffffff;
+    }
+
+    .gb-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-gb-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .btn-gb-present {
+      background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+      color: #ffffff;
+      border-color: #312e81;
+    }
+    .btn-gb-present:hover {
+      background: linear-gradient(135deg, #4338ca 0%, #2e2677 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+    }
+
+    .btn-gb-print {
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+    .btn-gb-print:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .btn-gb-sync {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+    .btn-gb-sync:hover {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .btn-gb-save {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #ffffff;
+      border-color: #065f46;
+    }
+    .btn-gb-save:hover {
+      background: linear-gradient(135deg, #047857 0%, #064e3b 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
+    }
+
+    /* Role & Room Tabs */
+    .gb-tabs-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .gb-tab-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px 12px 0 0;
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: 1px solid #e2e8f0;
+      border-bottom: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .gb-tab-item:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .gb-tab-item.active {
+      background: #ffffff;
+      color: #0284c7;
+      border-color: #cbd5e1;
+      border-top: 3px solid #0284c7;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.03);
+    }
+
+    .gb-tab-item.tab-master.active {
+      color: #2563eb;
+      border-top: 3px solid #2563eb;
+    }
+
+    .badge-tab-status {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+    .badge-tab-status.status-submitted {
+      background: #22c55e;
+      box-shadow: 0 0 6px #22c55e;
+    }
+
+    /* Content Cards */
+    .gb-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .gb-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .gb-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Table Styles */
+    .gb-table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .gb-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: center;
+      background: #ffffff;
+    }
+
+    .gb-table th {
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 700;
+      padding: 10px 8px;
+      border: 1px solid #e2e8f0;
+      white-space: nowrap;
+    }
+
+    .gb-table td {
+      padding: 8px 6px;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+    }
+
+    .gb-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    .gb-table tr.total-row td {
+      background: #eff6ff;
+      font-weight: 800;
+      color: #1e3a8a;
+      border-top: 2px solid #3b82f6;
+    }
+
+    .input-cell-num {
+      width: 58px;
+      text-align: center;
+      font-weight: 700;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 4px;
+      background: #ffffff;
+      outline: none;
+      transition: border 0.15s ease;
+    }
+    .input-cell-num:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15);
+    }
+
+    /* Personnel Form Grid */
+    .gb-personnel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .gb-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .gb-input-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #475569;
+    }
+
+    .gb-input-control {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 7px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0f172a;
+      outline: none;
+    }
+    .gb-input-control:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15);
+    }
+
+    /* Highlight Case Badges & Tagging */
+    .badge-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-mo-cc {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+
+    .badge-theo-doi {
+      background: #fefce8;
+      color: #ca8a04;
+      border: 1px solid #fef08a;
+    }
+
+    .badge-tu-vong {
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+    }
+
+    .badge-xin-ve {
+      background: #faf5ff;
+      color: #7e22ce;
+      border: 1px solid #e9d5ff;
+    }
+
+    .btn-tag-chip {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin: 2px;
+    }
+    .btn-tag-chip:hover {
+      background: #f1f5f9;
+    }
+    .btn-tag-chip.active-tag-mo-cc {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #dc2626;
+    }
+    .btn-tag-chip.active-tag-theo-doi {
+      background: #f59e0b;
+      color: #ffffff;
+      border-color: #d97706;
+    }
+    .btn-tag-chip.active-tag-tu-vong {
+      background: #1e293b;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+    .btn-tag-chip.active-tag-xin-ve {
+      background: #9333ea;
+      color: #ffffff;
+      border-color: #7e22ce;
+    }
+
+    /* Master Highlight Case Cards */
+    .master-case-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background: #ffffff;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .master-case-card:hover {
+      border-color: #93c5fd;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+    }
+    .master-case-card.card-mo-cc {
+      border-left: 6px solid #ef4444;
+    }
+    .master-case-card.card-theo-doi {
+      border-left: 6px solid #f59e0b;
+    }
+    .master-case-card.card-tu-vong {
+      border-left: 6px solid #1e293b;
+    }
+    .master-case-card.card-xin-ve {
+      border-left: 6px solid #9333ea;
+    }
+
+    .master-case-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .master-case-pt-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .master-case-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .master-case-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    /* CT/MRI Attachment Box */
+    .clinical-images-section {
+      background: #f8fafc;
+      border: 1px dashed #94a3b8;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .clinical-images-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #1e293b;
+    }
+
+    .clinical-dropzone {
+      background: #ffffff;
+      border: 2px dashed #3b82f6;
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      color: #2563eb;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .clinical-dropzone:hover {
+      background: #eff6ff;
+      border-color: #1d4ed8;
+    }
+
+    .clinical-gallery {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .clinical-thumb-box {
+      width: 140px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .clinical-thumb-img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      cursor: zoom-in;
+      display: block;
+      background: #0f172a;
+    }
+
+    .clinical-thumb-meta {
+      padding: 6px;
+      font-size: 0.74rem;
+      color: #334155;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-thumb-del {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(220, 38, 38, 0.85);
+      color: #ffffff;
+      border: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      transition: background 0.15s ease;
+    }
+    .btn-thumb-del:hover {
+      background: #dc2626;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox-modal.active {
+      display: flex;
+    }
+    .lightbox-content-box {
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .lightbox-main-img {
+      max-width: 88vw;
+      max-height: 80vh;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+    .lightbox-caption {
+      color: #f8fafc;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 12px;
+      text-align: center;
+    }
+    .lightbox-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: #1e293b;
+      color: #ffffff;
+      border: 1px solid #475569;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .lightbox-close-btn:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+    }
+
+    /* ==========================================================================
+       PRESENTATION THEATER MODE (DARK THEME FULLSCREEN)
+       ========================================================================== */
+    .theater-mode {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      background: #090d16;
+      color: #f1f5f9;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .theater-mode.active {
+      display: flex;
+    }
+
+    .theater-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 28px;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      flex-shrink: 0;
+    }
+
+    .theater-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .theater-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+    .theater-subtitle {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    .theater-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-theater {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .btn-theater:hover {
+      background: #334155;
+    }
+    .btn-theater-close {
+      background: #991b1b;
+      border-color: #b91c1c;
+    }
+    .btn-theater-close:hover {
+      background: #dc2626;
+    }
+
+    .theater-slide-viewport {
+      flex: 1;
+      padding: 24px 36px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Slide 1: Grand Overview */
+    .slide-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .slide-stat-card {
+      background: #131d31;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+    }
+    .slide-stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 4px;
+    }
+    .slide-stat-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Slide Case View (Split 2 Columns) */
+    .slide-case-layout {
+      display: grid;
+      grid-template-columns: 46% 54%;
+      gap: 28px;
+      height: 100%;
+      align-items: center;
+    }
+
+    .slide-case-left {
+      background: #131d31;
+      border: 1px solid #1e293b;
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .slide-case-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 12px;
+    }
+
+    .slide-case-patient-name {
+      font-size: 1.55rem;
+      font-weight: 900;
+      font-family: 'Montserrat', sans-serif;
+      color: #38bdf8;
+    }
+
+    .slide-case-info-block {
+      background: #0b1120;
+      border-radius: 10px;
+      padding: 12px 16px;
+      border-left: 4px solid #38bdf8;
+    }
+    .slide-case-info-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .slide-case-info-val {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      line-height: 1.45;
+    }
+
+    .slide-case-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      height: 100%;
+    }
+
+    .slide-big-img-wrap {
+      position: relative;
+      max-width: 100%;
+      max-height: 68vh;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid #334155;
+      background: #000000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-big-img {
+      max-width: 100%;
+      max-height: 68vh;
+      object-fit: contain;
+      cursor: zoom-in;
+    }
+
+    .slide-img-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 10pt;
+      }
+      .dept-header-bar,
+      .gb-top-bar,
+      .gb-tabs-nav,
+      .btn-gb-action,
+      .no-print {
+        display: none !important;
+      }
+      .page-wrapper {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .gb-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-bottom: 12px !important;
+      }
+      .print-header {
+        display: block !important;
+        margin-bottom: 16px;
+      }
+      .gb-table {
+        font-size: 8.5pt !important;
+      }
+      .gb-table th, .gb-table td {
+        padding: 4px !important;
+      }
+      @page {
+        size: A4 landscape;
+        margin: 10mm;
+      }
+    }
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Official Department Header -->
+    <header class="dept-header-bar">
+      <div class="dept-brand">
+        <a href="/" title="Về Trang chủ Khoa" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="logo.png" alt="Logo Khoa Ngoại Thần Kinh - Cột Sống" class="dept-logo-img" width="54" height="54" />
+        </a>
+        <div class="dept-brand-text">
+          <div class="hospital-subtitle">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+          <h1 class="dept-main-title">KHOA NGOẠI THẦN KINH - CỘT SỐNG</h1>
+        </div>
+      </div>
+
+      <!-- Right Header Group -->
+      <div class="header-right-group">
+        <a href="/" class="btn-tool-lookup" style="text-decoration: none;">
+          ← Về Trang Chủ
+        </a>
+        <a href="/di-buong-hang-ngay" class="btn-tool-lookup" style="text-decoration: none;">
+          🛏️ Đi Buồng
+        </a>
+        <a href="/hanh-chinh-khoa" class="btn-tool-lookup" style="text-decoration: none;">
+          📋 Hành Chính
+        </a>
+        <div class="header-clock-box">
+          <div class="header-clock-time" id="header-clock-time">00:00:00</div>
+          <div class="header-clock-date" id="header-clock-date">--</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PRINT HEADER (Only visible when printing A4) -->
+    <div class="print-header">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 2px solid #000; padding-bottom: 8px;">
+        <div style="text-align: center;">
+          <div style="font-size: 9pt; font-weight: 700; text-transform: uppercase;">SỞ Y TẾ TỈNH GIA LAI</div>
+          <div style="font-size: 10pt; font-weight: 800; text-transform: uppercase;">BV ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+          <div style="font-size: 9pt; font-weight: 700; color: #1e3a8a;">KHOA NGOẠI THẦN KINH - CỘT SỐNG</div>
+        </div>
+        <div style="text-align: center;">
+          <h2 style="font-size: 13pt; font-weight: 900; margin: 0; text-transform: uppercase;">BÁO CÁO GIAO BAN BUỔI SÁNG</h2>
+          <div style="font-size: 10pt; font-weight: 700; margin-top: 4px;" id="print-date-display">Ngày: --/--/----</div>
+        </div>
+        <div style="font-size: 8.5pt; text-align: right;">
+          <div>MS: 01/BV-GB</div>
+          <div id="print-time-stamp">In lúc: --:--</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN TOP TOOLBAR -->
+    <div class="gb-top-bar no-print">
+      <!-- Date Picker navigation -->
+      <div class="gb-date-nav">
+        <button type="button" class="gb-btn-nav" onclick="shiftDate(-1)" title="Lùi 1 ngày">◀ Hôm trước</button>
+        <input type="date" id="gb-date-picker" class="gb-date-input" onchange="onDateChanged(this.value)" />
+        <button type="button" class="gb-btn-nav" onclick="shiftDate(1)" title="Tiến 1 ngày">Ngày sau ▶</button>
+        <button type="button" class="gb-btn-nav gb-btn-today" onclick="setToday()">Hôm nay</button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="gb-actions-group">
+        <button type="button" class="btn-gb-action btn-gb-sync" onclick="autoFetchFromHis()" title="Trích xuất số liệu mới nhất từ các file Excel HIS">
+          <i class="fa-solid fa-arrows-rotate"></i> Lấy dữ liệu HIS
+        </button>
+        <button type="button" class="btn-gb-action btn-gb-save" onclick="saveActiveReport()" title="Lưu và nộp dữ liệu ca trực">
+          <i class="fa-solid fa-floppy-disk"></i> Lưu báo cáo
+        </button>
+        <button type="button" class="btn-gb-action btn-gb-present" onclick="openPresentationMode()" title="Bật màn hình trình chiếu giao ban toàn khoa">
+          <i class="fa-solid fa-tv"></i> Trình chiếu giao ban
+        </button>
+        <button type="button" class="btn-gb-action btn-gb-print" onclick="window.print()" title="In báo cáo A4 ngang chuẩn y tế">
+          <i class="fa-solid fa-print"></i> In A4
+        </button>
+      </div>
+    </div>
+
+    <!-- ROLE & ROOM TABS -->
+    <div class="gb-tabs-nav no-print" id="gb-tabs-container">
+      <button type="button" class="gb-tab-item tab-master active" data-tab="overall" onclick="switchTab('overall')">
+        <i class="fa-solid fa-user-doctor"></i> Toàn Khoa (Bác sĩ trực)
+      </button>
+      <button type="button" class="gb-tab-item" data-tab="tk1" onclick="switchTab('tk1')">
+        <span class="badge-tab-status" id="tab-dot-tk1"></span> Thần kinh 1
+      </button>
+      <button type="button" class="gb-tab-item" data-tab="tk2" onclick="switchTab('tk2')">
+        <span class="badge-tab-status" id="tab-dot-tk2"></span> Thần kinh 2
+      </button>
+      <button type="button" class="gb-tab-item" data-tab="tk3" onclick="switchTab('tk3')">
+        <span class="badge-tab-status" id="tab-dot-tk3"></span> Thần kinh 3
+      </button>
+      <button type="button" class="gb-tab-item" data-tab="tk4" onclick="switchTab('tk4')">
+        <span class="badge-tab-status" id="tab-dot-tk4"></span> Thần kinh 4
+      </button>
+      <button type="button" class="gb-tab-item" data-tab="hstk" onclick="switchTab('hstk')">
+        <span class="badge-tab-status" id="tab-dot-hstk"></span> 🚨 Hồi sức TK (HSTK)
+      </button>
+    </div>
+
+    <!-- MAIN DYNAMIC CONTENT AREA -->
+    <div id="gb-view-container">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR ZOOMING CLINICAL IMAGES -->
+  <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)">
+    <button type="button" class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
+    <div class="lightbox-content-box" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="Phim CT / MRI" class="lightbox-main-img" />
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- PRESENTATION THEATER OVERLAY (DARK FULLSCREEN) -->
+  <div id="theater-modal" class="theater-mode">
+    <div class="theater-top-bar">
+      <div class="theater-brand">
+        <img src="logo.png" width="36" height="36" alt="Logo" />
+        <div>
+          <div class="theater-title">BÁO CÁO GIAO BAN BUỔI SÁNG</div>
+          <div class="theater-subtitle" id="theater-date-label">Khoa Ngoại Thần Kinh - Cột Sống</div>
+        </div>
+      </div>
+
+      <div class="theater-controls">
+        <span id="theater-slide-counter" style="font-weight: 800; color: #38bdf8; font-size: 0.95rem; margin-right: 8px;">
+          Slide 1 / 1
+        </span>
+        <button type="button" class="btn-theater" onclick="prevSlide()" title="Phím tắt: Mũi tên trái">
+          <i class="fa-solid fa-chevron-left"></i> Trước
+        </button>
+        <button type="button" class="btn-theater" onclick="nextSlide()" title="Phím tắt: Mũi tên phải">
+          Sau <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <button type="button" class="btn-theater" onclick="toggleTheaterFullscreen()">
+          <i class="fa-solid fa-expand"></i> Toàn màn hình
+        </button>
+        <button type="button" class="btn-theater btn-theater-close" onclick="closePresentationMode()">
+          <i class="fa-solid fa-xmark"></i> Thoát (Esc)
+        </button>
+      </div>
+    </div>
+
+    <div class="theater-slide-viewport" id="theater-viewport">
+      <!-- Dynamic slide content -->
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Global State
+    let currentDateKey = new Date().toISOString().slice(0, 10);
+    let activeTab = 'overall'; // 'overall' | 'tk1' | 'tk2' | 'tk3' | 'tk4' | 'hstk'
+    let currentReport = null;
+    let doctorsList = [];
+    let presentationSlides = [];
+    let currentSlideIndex = 0;
+    let currentSlideImageIdx = 0;
+    let activePasteCaseId = null;
+
+    // Room Metadata
+    const ROOM_NAMES = {
+      tk1: 'Thần kinh 1',
+      tk2: 'Thần kinh 2',
+      tk3: 'Thần kinh 3',
+      tk4: 'Thần kinh 4',
+      hstk: 'Hồi sức thần kinh (HSTK)'
+    };
+
+    // Category labels and badges
+    const CATEGORIES = {
+      MO_CC: { text: 'Mổ cấp cứu', class: 'badge-mo-cc', icon: 'fa-scalpel' },
+      THEO_DOI: { text: 'Theo dõi sát', class: 'badge-theo-doi', icon: 'fa-triangle-exclamation' },
+      TU_VONG: { text: 'Tử vong', class: 'badge-tu-vong', icon: 'fa-cross' },
+      XIN_VE: { text: 'Nặng xin về', class: 'badge-xin-ve', icon: 'fa-house' }
+    };
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      initRealtimeClock();
+      document.getElementById('gb-date-picker').value = currentDateKey;
+      fetchBriefingReport(currentDateKey);
+      setupGlobalPasteListener();
+      setupKeyboardNavigation();
+    });
+
+    // Realtime Clock
+    function initRealtimeClock() {
+      const clockTime = document.getElementById('header-clock-time');
+      const clockDate = document.getElementById('header-clock-date');
+      const printDisplay = document.getElementById('print-date-display');
+      const printStamp = document.getElementById('print-time-stamp');
+
+      function tick() {
+        const now = new Date();
+        const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+        const dayStr = days[now.getDay()];
+        const d = String(now.getDate()).padStart(2, '0');
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const y = now.getFullYear();
+        const hr = String(now.getHours()).padStart(2, '0');
+        const mn = String(now.getMinutes()).padStart(2, '0');
+        const sc = String(now.getSeconds()).padStart(2, '0');
+
+        if (clockTime) clockTime.textContent = `${hr}:${mn}:${sc}`;
+        if (clockDate) clockDate.textContent = `${dayStr}, ${d}/${m}/${y}`;
+        if (printDisplay) printDisplay.textContent = `Ngày: ${d}/${m}/${y}`;
+        if (printStamp) printStamp.textContent = `In lúc: ${hr}:${mn} ${d}/${m}/${y}`;
+      }
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    // Date Navigation
+    function shiftDate(delta) {
+      const d = new Date(currentDateKey);
+      d.setDate(d.getDate() + delta);
+      currentDateKey = d.toISOString().slice(0, 10);
+      document.getElementById('gb-date-picker').value = currentDateKey;
+      fetchBriefingReport(currentDateKey);
+    }
+
+    function setToday() {
+      currentDateKey = new Date().toISOString().slice(0, 10);
+      document.getElementById('gb-date-picker').value = currentDateKey;
+      fetchBriefingReport(currentDateKey);
+    }
+
+    function onDateChanged(val) {
+      if (!val) return;
+      currentDateKey = val;
+      fetchBriefingReport(currentDateKey);
+    }
+
+    // Tab Switcher
+    function switchTab(tabKey) {
+      activeTab = tabKey;
+      document.querySelectorAll('.gb-tab-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.tab === tabKey);
+      });
+      renderCurrentView();
+    }
+
+    // Fetch report from Server
+    async function fetchBriefingReport(dateKey) {
+      try {
+        const res = await fetch(`/api/briefing-report?date=${dateKey}`);
+        const data = await res.json();
+        if (data.ok && data.report) {
+          currentReport = data.report;
+          doctorsList = data.doctors || [];
+          updateTabStatusDots();
+          renderCurrentView();
+        } else {
+          alert('Không thể tải báo cáo giao ban: ' + (data.error || 'Lỗi server'));
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Lỗi kết nối khi tải dữ liệu giao ban!');
+      }
+    }
+
+    // Update Dots on tabs
+    function updateTabStatusDots() {
+      if (!currentReport || !currentReport.roomReports) return;
+      ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].forEach(rKey => {
+        const dot = document.getElementById(`tab-dot-${rKey}`);
+        const rep = currentReport.roomReports[rKey];
+        if (dot && rep) {
+          dot.classList.toggle('status-submitted', rep.status === 'SUBMITTED');
+        }
+      });
+    }
+
+    // Auto Fetch Fresh Draft From HIS
+    async function autoFetchFromHis() {
+      if (!confirm(`Bạn có chắc muốn đọc lại các file Excel HIS để làm mới số liệu cho ngày ${currentDateKey}? (Các ca đã gắn nhãn vẫn sẽ được bảo lưu)`)) {
+        return;
+      }
+      try {
+        const res = await fetch('/api/briefing-auto-fetch-his', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ dateKey: currentDateKey, roomKey: activeTab })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          alert('✅ Đã cập nhật thành công số liệu mới từ HIS!');
+          await fetchBriefingReport(currentDateKey);
+        } else {
+          alert('Lỗi cập nhật HIS: ' + (data.error || 'Thao tác không thành công'));
+        }
+      } catch (e) {
+        console.error(e);
+        alert('Lỗi kết nối server khi lấy dữ liệu HIS!');
+      }
+    }
+
+    // Save Active Report
+    async function saveActiveReport() {
+      if (!currentReport) return;
+      try {
+        let payload = { dateKey: currentDateKey, roomKey: activeTab };
+        if (activeTab === 'overall') {
+          payload.overall = currentReport.overall;
+          payload.highlightCases = currentReport.highlightCases;
+        } else {
+          payload.roomReport = currentReport.roomReports[activeTab];
+        }
+
+        const res = await fetch('/api/briefing-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.ok) {
+          alert('💾 Đã lưu thành công dữ liệu báo cáo giao ban!');
+          currentReport = data.report;
+          updateTabStatusDots();
+          renderCurrentView();
+        } else {
+          alert('Lỗi lưu báo cáo: ' + (data.error || 'Server error'));
+        }
+      } catch (e) {
+        console.error(e);
+        alert('Lỗi kết nối khi lưu báo cáo!');
+      }
+    }
+
+    // Render dispatcher
+    function renderCurrentView() {
+      const container = document.getElementById('gb-view-container');
+      if (!currentReport) {
+        container.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b;font-weight:700;">Đang tải dữ liệu báo cáo...</div>';
+        return;
+      }
+      if (activeTab === 'overall') {
+        renderOverallView(container);
+      } else {
+        renderRoomView(container, activeTab);
+      }
+    }
+
+    /* =========================================================================
+       1. OVERALL VIEW (BÁC SĨ TRỰC TOÀN KHOA)
+       ========================================================================= */
+    function renderOverallView(container) {
+      const overall = currentReport.overall || {};
+      const grand = overall.grandCensus || {};
+      const roomReports = currentReport.roomReports || {};
+      const highlightCases = currentReport.highlightCases || [];
+
+      // Calculate totals dynamically
+      let sumBenhCu = 0, sumVaoKK = 0, sumVaoKhac = 0, sumMoCT = 0, sumMoCC = 0, sumRaRH = 0, sumRaKhac = 0, sumTuVong = 0, sumHienCo = 0, sumBhyt = 0;
+      ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].forEach(k => {
+        const c = (roomReports[k] && roomReports[k].census) || {};
+        sumBenhCu += Number(c.benhCu || 0);
+        sumVaoKK += Number(c.vaoKK || 0);
+        sumVaoKhac += Number(c.vaoKhac || 0);
+        sumMoCT += Number(c.moCT || 0);
+        sumMoCC += Number(c.moCC || 0);
+        sumRaRH += Number(c.raRH || 0);
+        sumRaKhac += Number(c.raKhac || 0);
+        sumTuVong += Number(c.tuVong || 0);
+        sumHienCo += Number(c.hienCo || 0);
+        sumBhyt += Number(c.bhyt || 0);
+      });
+
+      // Doctors on duty string
+      const docsDutyStr = (overall.doctorsOnDuty && overall.doctorsOnDuty.length > 0)
+        ? overall.doctorsOnDuty.join(', ')
+        : 'Chưa cập nhật kíp trực';
+
+      let html = `
+        <!-- BÁC SĨ TRỰC & THÔNG TIN CHUNG -->
+        <div class="gb-card">
+          <div class="gb-card-header">
+            <div class="gb-card-title">
+              <i class="fa-solid fa-stethoscope" style="color:#2563eb;"></i> KÍP TRỰC TOÀN KHOA & THÔNG TIN GIAO BAN
+            </div>
+            <div style="font-size:0.85rem;font-weight:700;color:#0284c7;">
+              📅 Ngày báo cáo: ${currentDateKey}
+            </div>
+          </div>
+          <div class="gb-personnel-grid">
+            <div class="gb-input-group" style="grid-column: span 2;">
+              <label class="gb-input-label">👨‍⚕️ Bác sĩ trực đêm qua (Cách nhau dấu phẩy):</label>
+              <input type="text" class="gb-input-control" id="overall-docs-duty" value="${escapeHtml(docsDutyStr)}" onchange="updateOverallField('doctorsOnDuty', this.value.split(',').map(s=>s.trim()).filter(Boolean))" />
+            </div>
+            <div class="gb-input-group">
+              <label class="gb-input-label">🎖️ Bác sĩ duyệt / Chủ tọa giao ban:</label>
+              <input type="text" class="gb-input-control" id="overall-approved-by" value="${escapeHtml(overall.approvedBy || '')}" placeholder="BS. Trưởng khoa / Phó khoa..." onchange="updateOverallField('approvedBy', this.value)" />
+            </div>
+          </div>
+        </div>
+
+        <!-- BẢNG TỔNG HỢP SỐ LIỆU 5 PHÒNG -->
+        <div class="gb-card">
+          <div class="gb-card-header">
+            <div class="gb-card-title">
+              <i class="fa-solid fa-table-list" style="color:#0284c7;"></i> BẢNG TỔNG HỢP 9 CHỈ SỐ GIAO BAN TOÀN KHOA
+            </div>
+            <span style="font-size:0.8rem;color:#64748b;font-weight:600;">(Tự động cộng dồn từ 5 phòng)</span>
+          </div>
+
+          <div class="gb-table-wrap">
+            <table class="gb-table">
+              <thead>
+                <tr>
+                  <th style="text-align:left;padding-left:14px;">Phòng bệnh</th>
+                  <th>Bệnh cũ</th>
+                  <th>Vào KK</th>
+                  <th>Vào khác</th>
+                  <th>Mổ CT</th>
+                  <th>Mổ CC</th>
+                  <th>Ra RH</th>
+                  <th>Ra khác</th>
+                  <th>Tử vong</th>
+                  <th style="background:#fef3c7;color:#92400e;">Hiện có</th>
+                  <th>BHYT</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+
+      ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].forEach(k => {
+        const rRep = roomReports[k] || { roomName: ROOM_NAMES[k], census: {}, status: 'DRAFT' };
+        const c = rRep.census || {};
+        const isSub = rRep.status === 'SUBMITTED';
+        html += `
+          <tr>
+            <td style="text-align:left;font-weight:700;padding-left:14px;color:#1e293b;">
+              <a href="javascript:void(0)" onclick="switchTab('${k}')" style="text-decoration:none;color:#0284c7;">
+                ${ROOM_NAMES[k]}
+              </a>
+            </td>
+            <td>${c.benhCu || 0}</td>
+            <td style="color:#dc2626;font-weight:700;">${c.vaoKK || 0}</td>
+            <td>${c.vaoKhac || 0}</td>
+            <td>${c.moCT || 0}</td>
+            <td style="color:#dc2626;font-weight:700;">${c.moCC || 0}</td>
+            <td>${c.raRH || 0}</td>
+            <td>${c.raKhac || 0}</td>
+            <td style="font-weight:800;color:${Number(c.tuVong || 0) > 0 ? '#dc2626' : '#64748b'};">${c.tuVong || 0}</td>
+            <td style="font-weight:800;background:#fffbeb;color:#b45309;font-size:0.95rem;">${c.hienCo || 0}</td>
+            <td>${c.bhyt || 0}</td>
+            <td>
+              <span style="font-size:0.75rem;padding:3px 8px;border-radius:6px;font-weight:700;background:${isSub ? '#dcfce7' : '#f1f5f9'};color:${isSub ? '#166534' : '#64748b'};">
+                ${isSub ? '✓ Đã nộp' : 'Chờ nộp'}
+              </span>
+            </td>
+          </tr>
+        `;
+      });
+
+      // Total row
+      html += `
+                <tr class="total-row">
+                  <td style="text-align:left;padding-left:14px;">TỔNG TOÀN KHOA</td>
+                  <td>${sumBenhCu}</td>
+                  <td style="color:#dc2626;">${sumVaoKK}</td>
+                  <td>${sumVaoKhac}</td>
+                  <td>${sumMoCT}</td>
+                  <td style="color:#dc2626;">${sumMoCC}</td>
+                  <td>${sumRaRH}</td>
+                  <td>${sumRaKhac}</td>
+                  <td style="color:${sumTuVong > 0 ? '#dc2626' : '#1e3a8a'};">${sumTuVong}</td>
+                  <td style="font-size:1.1rem;background:#fde68a;color:#78350f;">${sumHienCo}</td>
+                  <td>${sumBhyt}</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- DANH SÁCH CA TRỌNG ĐIỂM (TỰ ĐỘNG GOM TỪ CÁC PHÒNG & CHO PHÉP THÊM ẢNH CT/MRI) -->
+        <div class="gb-card">
+          <div class="gb-card-header">
+            <div class="gb-card-title">
+              <i class="fa-solid fa-hospital-user" style="color:#dc2626;"></i> 
+              DANH SÁCH CA TRỌNG ĐIỂM BÁO CÁO GIAO BAN (${highlightCases.length} ca)
+            </div>
+            <div class="gb-actions-group">
+              <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="addNewMasterCase()">
+                <i class="fa-solid fa-plus"></i> + Bác sĩ thêm ca trực tiếp
+              </button>
+            </div>
+          </div>
+
+          <div id="master-cases-list">
+      `;
+
+      if (highlightCases.length === 0) {
+        html += `
+          <div style="text-align:center;padding:32px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
+            <i class="fa-solid fa-circle-check" style="font-size:2rem;color:#10b981;margin-bottom:8px;"></i>
+            <div style="font-weight:700;">Chưa có ca trọng điểm nào được báo cáo cho ngày này.</div>
+            <div style="font-size:0.85rem;margin-top:4px;">Khi các phòng gắn nhãn ca mổ cấp cứu, theo dõi sát, tử vong, xin về, dữ liệu sẽ tự động xuất hiện tại đây. Bác sĩ cũng có thể bấm nút <strong>"+ Bác sĩ thêm ca trực tiếp"</strong> ở trên.</div>
+          </div>
+        `;
+      } else {
+        highlightCases.forEach((c, idx) => {
+          const catInfo = CATEGORIES[c.category] || { text: c.category || 'Trọng điểm', class: 'badge-mo-cc', icon: 'fa-circle-exclamation' };
+          const cardBorderClass = (c.category === 'MO_CC') ? 'card-mo-cc' : (c.category === 'THEO_DOI') ? 'card-theo-doi' : (c.category === 'TU_VONG') ? 'card-tu-vong' : 'card-xin-ve';
+          const isSelectedForSlide = c.selectedForSlide !== false;
+
+          html += `
+            <div class="master-case-card ${cardBorderClass}" id="case-card-${c.id}">
+              <div class="master-case-header">
+                <div class="master-case-pt-info">
+                  <span class="badge-category ${catInfo.class}">
+                    <i class="fa-solid ${catInfo.icon}"></i> ${catInfo.text}
+                  </span>
+                  <span style="font-size:0.8rem;background:#f1f5f9;color:#475569;font-weight:700;padding:3px 8px;border-radius:6px;">
+                    ${ROOM_NAMES[c.roomKey] || c.roomName || 'Toàn khoa'}
+                  </span>
+                  <span class="master-case-name">${idx + 1}. ${escapeHtml(c.hoten || 'Chưa rõ tên')}</span>
+                  <span style="font-size:0.9rem;font-weight:600;color:#64748b;">
+                    (${c.tuoi ? c.tuoi + 'T' : ''} - Mã BN: <strong>${c.mabn || '--'}</strong>)
+                  </span>
+                </div>
+
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:700;color:#1e40af;cursor:pointer;background:#eff6ff;padding:4px 10px;border-radius:8px;border:1px solid #bfdbfe;">
+                    <input type="checkbox" ${isSelectedForSlide ? 'checked' : ''} onchange="toggleCaseSlide('${c.id}', this.checked)" />
+                    📺 Chiếu slide giao ban
+                  </label>
+                  <button type="button" style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;border-radius:8px;padding:4px 10px;cursor:pointer;font-weight:700;font-size:0.8rem;" onclick="removeMasterCase('${c.id}')" title="Xóa ca này khỏi danh sách">
+                    <i class="fa-solid fa-trash"></i> Xóa ca
+                  </button>
+                </div>
+              </div>
+
+              <!-- EDITABLE FIELDS -->
+              <div class="master-case-details-grid">
+                <div class="gb-input-group">
+                  <label class="gb-input-label">🩺 Chẩn đoán bệnh:</label>
+                  <input type="text" class="gb-input-control" value="${escapeHtml(c.chanDoan || '')}" onchange="updateCaseField('${c.id}', 'chanDoan', this.value)" placeholder="Chẩn đoán xác định..." />
+                </div>
+                <div class="gb-input-group">
+                  <label class="gb-input-label">🔪 Kíp mổ / Phẫu thuật viên / Xử trí:</label>
+                  <input type="text" class="gb-input-control" value="${escapeHtml(c.kipMo || '')}" onchange="updateCaseField('${c.id}', 'kipMo', this.value)" placeholder="BS mổ chính, phương pháp phẫu thuật..." />
+                </div>
+                <div class="gb-input-group" style="grid-column: 1 / -1;">
+                  <label class="gb-input-label">⚠️ Diễn biến trong ca trực & Tình trạng hiện tại:</label>
+                  <textarea class="gb-input-control" style="resize:vertical;min-height:55px;" onchange="updateCaseField('${c.id}', 'dienBien', this.value)" placeholder="Tri giác (GCS), sinh hiệu, dẫn lưu, diễn biến đáng chú ý...">${escapeHtml(c.dienBien || '')}</textarea>
+                </div>
+                <div class="gb-input-group" style="grid-column: 1 / -1;">
+                  <label class="gb-input-label">💬 Ý kiến Bác sĩ trực & Hướng điều trị tiếp theo:</label>
+                  <textarea class="gb-input-control" style="resize:vertical;min-height:45px;" onchange="updateCaseField('${c.id}', 'notesBs', this.value)" placeholder="Dự kiến xử trí, chỉ đạo hội chẩn, dặn dò điều dưỡng...">${escapeHtml(c.notesBs || '')}</textarea>
+                </div>
+              </div>
+
+              <!-- KHU VỰC HÌNH ẢNH CT / MRI / CẬN LÂM SÀNG -->
+              <div class="clinical-images-section" onmouseenter="activePasteCaseId='${c.id}'">
+                <div class="clinical-images-header">
+                  <span>
+                    <i class="fa-solid fa-x-ray" style="color:#0284c7;"></i> HÌNH ẢNH CT / MRI / CẬN LÂM SÀNG (${(c.images || []).length} ảnh)
+                  </span>
+                  <span style="font-size:0.78rem;color:#0369a1;background:#e0f2fe;padding:2px 8px;border-radius:6px;">
+                    💡 Hỗ trợ bấm chụp màn hình PACS rồi nhấn <strong>Ctrl + V</strong> để dán ngay
+                  </span>
+                </div>
+
+                <div class="clinical-dropzone" onclick="triggerFileUpload('${c.id}')" ondragover="event.preventDefault()" ondrop="handleDropFile(event, '${c.id}')">
+                  <i class="fa-solid fa-cloud-arrow-up" style="font-size:1.1rem;"></i>
+                  <span>Bấm vào đây để tải ảnh lên HOẶC dán trực tiếp (Ctrl + V) từ Clipboard</span>
+                  <input type="file" id="file-input-${c.id}" accept="image/*" style="display:none;" onchange="onFileSelected(event, '${c.id}')" />
+                </div>
+
+                <!-- GALLERY THUMBNAILS -->
+                <div class="clinical-gallery" id="gallery-${c.id}">
+                  ${(c.images || []).map(img => `
+                    <div class="clinical-thumb-box" id="thumb-${img.id}">
+                      <img src="${img.url}" class="clinical-thumb-img" alt="${escapeHtml(img.title || 'Ảnh')}" onclick="openLightbox('${img.url}', '${escapeHtml(img.title || '')}', '${escapeHtml(img.caption || '')}')" />
+                      <button type="button" class="btn-thumb-del" onclick="deleteClinicalImage('${c.id}', '${img.id}')" title="Xóa ảnh này">&times;</button>
+                      <div class="clinical-thumb-meta" title="${escapeHtml(img.title || 'Ảnh')}">
+                        ${escapeHtml(img.title || 'Cận lâm sàng')}
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      html += `
+          </div>
+        </div>
+
+        <!-- GHI CHÚ CHUNG GIAO BAN TOÀN KHOA -->
+        <div class="gb-card">
+          <div class="gb-card-header">
+            <div class="gb-card-title">
+              <i class="fa-solid fa-clipboard-check" style="color:#059669;"></i> Ý KIẾN KẾT LUẬN & CHỈ ĐẠO CỦA CHỦ TỌA GIAO BAN
+            </div>
+          </div>
+          <textarea class="gb-input-control" style="width:100%;min-height:90px;font-size:0.92rem;line-height:1.5;" onchange="updateOverallField('doctorNotes', this.value)" placeholder="Nhập tóm tắt kết luận buổi giao ban, phân công nhân sự, ca mổ phiên, các vấn đề chuyên môn cần lưu ý...">${escapeHtml(overall.doctorNotes || '')}</textarea>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    /* =========================================================================
+       2. ROOM VIEW (ĐIỀU DƯỠNG CÁC PHÒNG NHẬP LIỆU)
+       ========================================================================= */
+    function renderRoomView(container, roomKey) {
+      const roomName = ROOM_NAMES[roomKey] || roomKey;
+      const roomRep = (currentReport.roomReports && currentReport.roomReports[roomKey]) || {
+        roomKey,
+        roomName,
+        status: 'DRAFT',
+        personnel: {},
+        census: {},
+        admissions: [],
+        discharges: [],
+        criticalNotes: ''
+      };
+
+      const p = roomRep.personnel || {};
+      const c = roomRep.census || {};
+      const admissions = roomRep.admissions || [];
+      const discharges = roomRep.discharges || [];
+      const isSubmitted = roomRep.status === 'SUBMITTED';
+
+      let html = `
+        <!-- HEADER PHÒNG & TRẠNG THÁI -->
+        <div class="gb-card" style="border-top: 4px solid #0284c7;">
+          <div class="gb-card-header">
+            <div>
+              <div class="gb-card-title" style="color:#0284c7;">
+                <i class="fa-solid fa-hospital"></i> BÁO CÁO GIAO BAN CA TRỰC — ${roomName.toUpperCase()}
+              </div>
+              <div style="font-size:0.83rem;color:#64748b;margin-top:4px;">
+                Trạng thái nộp: 
+                <strong style="color:${isSubmitted ? '#16a34a' : '#d97706'};">
+                  ${isSubmitted ? '✓ ĐÃ NỘP BÁO CÁO' : '⏳ ĐANG NHẬP (DRAFT)'}
+                </strong>
+                ${roomRep.updatedAt ? ` • Cập nhật lần cuối: ${new Date(roomRep.updatedAt).toLocaleTimeString('vi-VN')}` : ''}
+              </div>
+            </div>
+
+            <div class="gb-actions-group">
+              <button type="button" class="btn-gb-action btn-gb-save" onclick="submitRoomReport('${roomKey}')">
+                <i class="fa-solid fa-paper-plane"></i> GỬI BÁO CÁO VỀ TOÀN KHOA
+              </button>
+            </div>
+          </div>
+
+          <!-- KHỐI 1: NHÂN LỰC CA TRỰC PHÒNG -->
+          <div style="font-weight:700;font-size:0.95rem;color:#1e293b;margin-bottom:12px;">
+            <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp trực & Nhân lực buồng bệnh
+          </div>
+
+          <div class="gb-personnel-grid">
+      `;
+
+      if (roomKey === 'hstk') {
+        html += `
+          <div class="gb-input-group">
+            <label class="gb-input-label">Điều dưỡng Ca Ngày (7h - 19h):</label>
+            <input type="text" class="gb-input-control" value="${escapeHtml(p.nursesDay || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nursesDay', this.value)" placeholder="Tên các điều dưỡng ca ngày..." />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">Điều dưỡng Ca Đêm (19h - 7h):</label>
+            <input type="text" class="gb-input-control" value="${escapeHtml(p.nursesNight || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nursesNight', this.value)" placeholder="Tên các điều dưỡng ca đêm..." />
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="gb-input-group" style="grid-column: span 2;">
+            <label class="gb-input-label">Kíp Điều dưỡng trực:</label>
+            <input type="text" class="gb-input-control" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên các điều dưỡng trực..." />
+          </div>
+        `;
+      }
+
+      html += `
+            <div class="gb-input-group">
+              <label class="gb-input-label">Hộ lý trực:</label>
+              <input type="text" class="gb-input-control" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" placeholder="Tên hộ lý..." />
+            </div>
+            <div class="gb-input-group">
+              <label class="gb-input-label">Xuất viện (Hành chính):</label>
+              <input type="number" class="gb-input-control" value="${p.xuatVien || 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
+            </div>
+            <div class="gb-input-group">
+              <label class="gb-input-label">Chăm sóc cấp 2:</label>
+              <input type="number" class="gb-input-control" value="${p.chamSocCap2 || 0}" onchange="updateRoomPersonnel('${roomKey}', 'chamSocCap2', this.value)" />
+            </div>
+            <div class="gb-input-group">
+              <label class="gb-input-label">Hội chẩn (lượt):</label>
+              <input type="number" class="gb-input-control" value="${p.hoiChan || 0}" onchange="updateRoomPersonnel('${roomKey}', 'hoiChan', this.value)" />
+            </div>
+      `;
+
+      if (roomKey === 'tk3') {
+        html += `
+          <div class="gb-input-group">
+            <label class="gb-input-label">BN Tầng trên:</label>
+            <input type="number" class="gb-input-control" value="${p.tangTren || 0}" onchange="updateRoomPersonnel('${roomKey}', 'tangTren', this.value)" />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">BN Tầng dưới:</label>
+            <input type="number" class="gb-input-control" value="${p.tangDuoi || 0}" onchange="updateRoomPersonnel('${roomKey}', 'tangDuoi', this.value)" />
+          </div>
+        `;
+      }
+
+      html += `
+          </div>
+        </div>
+
+        <!-- KHỐI 2: 9 CHỈ SỐ GIAO BAN PHÒNG -->
+        <div class="gb-card">
+          <div class="gb-card-header">
+            <div class="gb-card-title">
+              <i class="fa-solid fa-list-ol" style="color:#0284c7;"></i> 9 CHỈ SỐ GIAO BAN CỦA PHÒNG
+            </div>
+            <span style="font-size:0.8rem;color:#64748b;font-weight:600;">(Điều dưỡng có thể chỉnh sửa số liệu nếu cần)</span>
+          </div>
+
+          <div class="gb-table-wrap">
+            <table class="gb-table">
+              <thead>
+                <tr>
+                  <th>1. Bệnh cũ</th>
+                  <th>2. Vào KK</th>
+                  <th>3. Vào khác</th>
+                  <th>4. Mổ CT</th>
+                  <th>5. Mổ CC</th>
+                  <th>6. Ra RH</th>
+                  <th>7. Ra khác</th>
+                  <th>8. Tử vong</th>
+                  <th style="background:#fef3c7;color:#92400e;">9. Hiện có</th>
+                  <th>BHYT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="number" class="input-cell-num" value="${c.benhCu || 0}" onchange="updateRoomCensus('${roomKey}', 'benhCu', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="color:#dc2626;" value="${c.vaoKK || 0}" onchange="updateRoomCensus('${roomKey}', 'vaoKK', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" value="${c.vaoKhac || 0}" onchange="updateRoomCensus('${roomKey}', 'vaoKhac', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" value="${c.moCT || 0}" onchange="updateRoomCensus('${roomKey}', 'moCT', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="color:#dc2626;" value="${c.moCC || 0}" onchange="updateRoomCensus('${roomKey}', 'moCC', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" value="${c.raRH || 0}" onchange="updateRoomCensus('${roomKey}', 'raRH', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" value="${c.raKhac || 0}" onchange="updateRoomCensus('${roomKey}', 'raKhac', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="color:${Number(c.tuVong || 0) > 0 ? '#dc2626' : '#64748b'};font-weight:800;" value="${c.tuVong || 0}" onchange="updateRoomCensus('${roomKey}', 'tuVong', this.value)" /></td>
+                  <td style="background:#fffbeb;"><input type="number" class="input-cell-num" style="background:#fef3c7;font-size:1.05rem;color:#b45309;" value="${c.hienCo || 0}" onchange="updateRoomCensus('${roomKey}', 'hienCo', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" value="${c.bhyt || 0}" onchange="updateRoomCensus('${roomKey}', 'bhyt', this.value)" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- KHỐI 3: DANH SÁCH BỆNH NHÂN VÀO KHOA / CHUYỂN ĐẾN & NÚT GẮN NHÃN -->
+        <div class="gb-card">
+          <div class="gb-card-header">
+            <div>
+              <div class="gb-card-title">
+                <i class="fa-solid fa-user-plus" style="color:#16a34a;"></i> DANH SÁCH BỆNH NHÂN VÀO BUỒNG TRONG CA TRỰC (${admissions.length} BN)
+              </div>
+              <div style="font-size:0.8rem;color:#64748b;margin-top:2px;">
+                Bấm vào các nút nhãn: <strong>[🔪 Mổ CC]</strong>, <strong>[⚠️ Theo dõi]</strong>, <strong>[⚰️ Tử vong]</strong>, <strong>[🏠 Xin về]</strong> để tự động chuyển ca sang Bác sĩ giao ban.
+              </div>
+            </div>
+            <button type="button" class="btn-gb-action" style="background:#f0fdf4;color:#166534;border-color:#bbf7d0;" onclick="addManualRoomCase('${roomKey}')">
+              <i class="fa-solid fa-plus"></i> + Thêm ca đột xuất / nặng
+            </button>
+          </div>
+
+          <div class="gb-table-wrap">
+            <table class="gb-table" style="text-align:left;">
+              <thead>
+                <tr>
+                  <th style="width:40px;text-align:center;">STT</th>
+                  <th style="width:95px;">Mã BN</th>
+                  <th>Họ và tên</th>
+                  <th style="width:55px;text-align:center;">Tuổi</th>
+                  <th style="width:85px;">Nguyên nhân</th>
+                  <th>Chẩn đoán vào viện</th>
+                  <th style="width:110px;">Nơi chuyển</th>
+                  <th style="width:310px;text-align:center;">Gắn nhãn giao ban</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+
+      if (admissions.length === 0) {
+        html += `<tr><td colspan="8" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày.</td></tr>`;
+      } else {
+        admissions.forEach((adm, idx) => {
+          const isMoCC = adm.category === 'MO_CC';
+          const isTheoDoi = adm.category === 'THEO_DOI';
+          const isTuVong = adm.category === 'TU_VONG';
+          const isXinVe = adm.category === 'XIN_VE';
+
+          html += `
+            <tr style="background:${adm.isHighlight ? '#fffbeb' : '#ffffff'};">
+              <td style="text-align:center;font-weight:700;">${idx + 1}</td>
+              <td style="font-weight:700;color:#0284c7;">${adm.mabn || '--'}</td>
+              <td style="font-weight:700;color:#0f172a;">${adm.hoten || '--'}</td>
+              <td style="text-align:center;">${adm.tuoi || '--'}</td>
+              <td><span style="font-size:0.75rem;padding:2px 6px;border-radius:4px;background:#f1f5f9;">${adm.cause || 'Bệnh'}</span></td>
+              <td style="font-size:0.83rem;">${adm.chanDoan || '--'}</td>
+              <td style="font-size:0.8rem;color:#475569;">${adm.source || '--'}</td>
+              <td style="text-align:center;white-space:nowrap;">
+                <button type="button" class="btn-tag-chip ${isMoCC ? 'active-tag-mo-cc' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'MO_CC')">
+                  🔪 Mổ CC
+                </button>
+                <button type="button" class="btn-tag-chip ${isTheoDoi ? 'active-tag-theo-doi' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'THEO_DOI')">
+                  ⚠️ Theo dõi
+                </button>
+                <button type="button" class="btn-tag-chip ${isTuVong ? 'active-tag-tu-vong' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'TU_VONG')">
+                  ⚰️ Tử vong
+                </button>
+                <button type="button" class="btn-tag-chip ${isXinVe ? 'active-tag-xin-ve' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'XIN_VE')">
+                  🏠 Xin về
+                </button>
+              </td>
+            </tr>
+          `;
+        });
+      }
+
+      html += `
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- KHỐI 4: GHI CHÚ BÀN GIAO CA TRỰC PHÒNG -->
+        <div class="gb-card">
+          <div class="gb-card-header">
+            <div class="gb-card-title">
+              <i class="fa-solid fa-notes-medical" style="color:#0284c7;"></i> GHI CHÚ BÀN GIAO CA TRỰC PHÒNG ${roomName.toUpperCase()}
+            </div>
+          </div>
+          <textarea class="gb-input-control" style="width:100%;min-height:75px;" onchange="updateRoomNotes('${roomKey}', this.value)" placeholder="Nhập các dặn dò, bệnh nhân nặng cần lưu ý thêm, vật tư, cơ số thuốc bàn giao ca trực...">${escapeHtml(roomRep.criticalNotes || '')}</textarea>
+          <div style="margin-top:14px;display:flex;justify-content:flex-end;">
+            <button type="button" class="btn-gb-action btn-gb-save" onclick="submitRoomReport('${roomKey}')">
+              <i class="fa-solid fa-check"></i> Lưu & Gửi báo cáo ${roomName} về Toàn Khoa
+            </button>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    /* =========================================================================
+       3. EVENT HANDLERS & DATA MUTATIONS
+       ========================================================================= */
+    function updateOverallField(field, val) {
+      if (!currentReport.overall) currentReport.overall = {};
+      currentReport.overall[field] = val;
+    }
+
+    function updateCaseField(caseId, field, val) {
+      const c = (currentReport.highlightCases || []).find(item => item.id === caseId);
+      if (c) {
+        c[field] = val;
+      }
+    }
+
+    function toggleCaseSlide(caseId, checked) {
+      const c = (currentReport.highlightCases || []).find(item => item.id === caseId);
+      if (c) {
+        c.selectedForSlide = checked;
+      }
+    }
+
+    function updateRoomPersonnel(roomKey, field, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (rep) {
+        if (!rep.personnel) rep.personnel = {};
+        rep.personnel[field] = (typeof rep.personnel[field] === 'number') ? Number(val) : val;
+      }
+    }
+
+    function updateRoomCensus(roomKey, field, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (rep) {
+        if (!rep.census) rep.census = {};
+        rep.census[field] = Number(val) || 0;
+      }
+    }
+
+    function updateRoomNotes(roomKey, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (rep) rep.criticalNotes = val;
+    }
+
+    // Toggle Tag from Room View
+    function togglePatientTag(roomKey, patientId, category) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.admissions)) return;
+
+      const adm = rep.admissions.find(a => a.id === patientId);
+      if (!adm) return;
+
+      if (adm.category === category) {
+        // Untag
+        adm.category = '';
+        adm.isHighlight = false;
+        // Remove from master highlightCases
+        currentReport.highlightCases = (currentReport.highlightCases || []).filter(c => c.mabn !== adm.mabn || c.roomKey !== roomKey);
+      } else {
+        adm.category = category;
+        adm.isHighlight = true;
+        // Add or update in master highlightCases
+        if (!Array.isArray(currentReport.highlightCases)) currentReport.highlightCases = [];
+        let existing = currentReport.highlightCases.find(c => c.mabn === adm.mabn && c.roomKey === roomKey);
+        if (!existing) {
+          existing = {
+            id: `case-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+            mabn: adm.mabn,
+            hoten: adm.hoten,
+            tuoi: adm.tuoi,
+            roomKey: roomKey,
+            roomName: ROOM_NAMES[roomKey],
+            category: category,
+            chanDoan: adm.chanDoan,
+            dienBien: `Vào viện: ${adm.cause || 'TNGT'}, chẩn đoán: ${adm.chanDoan}. Tình trạng: ${adm.tinhTrang || 'Tỉnh'}.`,
+            kipMo: '',
+            selectedForSlide: true,
+            images: [],
+            notesBs: ''
+          };
+          currentReport.highlightCases.push(existing);
+        } else {
+          existing.category = category;
+        }
+      }
+
+      renderCurrentView();
+    }
+
+    // Add manual case from room
+    function addManualRoomCase(roomKey) {
+      const name = prompt('Nhập Họ và tên bệnh nhân:');
+      if (!name) return;
+      const mabn = prompt('Nhập Mã bệnh nhân (nếu có):') || `BN-${Date.now().toString().slice(-4)}`;
+      const chandoan = prompt('Nhập Chẩn đoán tóm tắt:') || 'Chấn thương sọ não';
+      const cat = prompt('Loại ca (1: Mổ cấp cứu, 2: Theo dõi sát, 3: Tử vong, 4: Xin về):', '2');
+      const catKey = (cat === '1') ? 'MO_CC' : (cat === '3') ? 'TU_VONG' : (cat === '4') ? 'XIN_VE' : 'THEO_DOI';
+
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep.admissions) rep.admissions = [];
+      const newAdm = {
+        id: `adm-${roomKey}-${Date.now()}`,
+        stt: rep.admissions.length + 1,
+        mabn: mabn.trim(),
+        hoten: name.trim().toUpperCase(),
+        tuoi: '50',
+        cause: 'Bệnh lý',
+        source: ROOM_NAMES[roomKey],
+        chanDoan: chandoan.trim(),
+        diaChi: 'Gia Lai',
+        tinhTrang: 'Nặng',
+        isHighlight: true,
+        category: catKey
+      };
+      rep.admissions.push(newAdm);
+
+      // Add to highlightCases
+      if (!Array.isArray(currentReport.highlightCases)) currentReport.highlightCases = [];
+      currentReport.highlightCases.push({
+        id: `case-${Date.now()}`,
+        mabn: newAdm.mabn,
+        hoten: newAdm.hoten,
+        tuoi: newAdm.tuoi,
+        roomKey: roomKey,
+        roomName: ROOM_NAMES[roomKey],
+        category: catKey,
+        chanDoan: newAdm.chanDoan,
+        dienBien: 'Bệnh nhân diễn biến nặng trong ca trực.',
+        kipMo: '',
+        selectedForSlide: true,
+        images: [],
+        notesBs: ''
+      });
+
+      renderCurrentView();
+    }
+
+    // Add new case directly by doctor
+    function addNewMasterCase() {
+      const name = prompt('Nhập Họ và tên bệnh nhân:');
+      if (!name) return;
+      const mabn = prompt('Nhập Mã bệnh nhân:') || `BN-${Date.now().toString().slice(-4)}`;
+      const room = prompt('Thuộc phòng nào (tk1, tk2, tk3, tk4, hstk):', 'tk1') || 'tk1';
+      const chandoan = prompt('Nhập Chẩn đoán:') || 'Chấn thương sọ não';
+
+      if (!Array.isArray(currentReport.highlightCases)) currentReport.highlightCases = [];
+      currentReport.highlightCases.push({
+        id: `case-${Date.now()}`,
+        mabn: mabn.trim(),
+        hoten: name.trim().toUpperCase(),
+        tuoi: '',
+        roomKey: room,
+        roomName: ROOM_NAMES[room] || room,
+        category: 'THEO_DOI',
+        chanDoan: chandoan.trim(),
+        dienBien: '',
+        kipMo: '',
+        selectedForSlide: true,
+        images: [],
+        notesBs: ''
+      });
+
+      renderCurrentView();
+    }
+
+    // Remove Master Case
+    function removeMasterCase(caseId) {
+      if (!confirm('Bạn có chắc muốn xoá ca này khỏi danh sách giao ban?')) return;
+      currentReport.highlightCases = (currentReport.highlightCases || []).filter(c => c.id !== caseId);
+      renderCurrentView();
+    }
+
+    // Submit room report
+    async function submitRoomReport(roomKey) {
+      const rep = currentReport.roomReports[roomKey];
+      if (rep) {
+        rep.status = 'SUBMITTED';
+        rep.updatedAt = new Date().toISOString();
+      }
+      await saveActiveReport();
+      alert(`🎉 Đã nộp thành công Báo cáo giao ban ${ROOM_NAMES[roomKey]} về cho Bác sĩ Toàn Khoa!`);
+    }
+
+    /* =========================================================================
+       4. CLINICAL IMAGES UPLOAD & CLIPBOARD (Ctrl+V) HANDLING
+       ========================================================================= */
+    function triggerFileUpload(caseId) {
+      const input = document.getElementById(`file-input-${caseId}`);
+      if (input) input.click();
+    }
+
+    function onFileSelected(e, caseId) {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        uploadClinicalImageFile(caseId, file);
+      }
+    }
+
+    function handleDropFile(e, caseId) {
+      e.preventDefault();
+      const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        uploadClinicalImageFile(caseId, file);
+      }
+    }
+
+    // Setup Global Paste Listener for Ctrl+V
+    function setupGlobalPasteListener() {
+      document.addEventListener('paste', async (e) => {
+        const items = e.clipboardData && e.clipboardData.items;
+        if (!items) return;
+
+        let imageFile = null;
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].type.indexOf('image') !== -1) {
+            imageFile = items[i].getAsFile();
+            break;
+          }
+        }
+
+        if (imageFile) {
+          // If a case is active or hovered
+          let targetCaseId = activePasteCaseId;
+          if (!targetCaseId && currentReport && currentReport.highlightCases && currentReport.highlightCases.length > 0) {
+            targetCaseId = currentReport.highlightCases[0].id;
+          }
+
+          if (targetCaseId) {
+            e.preventDefault();
+            const targetCase = currentReport.highlightCases.find(c => c.id === targetCaseId);
+            const promptTitle = prompt(`Dán hình ảnh CT/MRI vào ca [${targetCase ? targetCase.hoten : ''}]. Nhập tiêu đề phim (ví dụ: CT Sọ não trước mổ):`, 'CT Sọ não');
+            if (promptTitle !== null) {
+              await uploadClinicalImageFile(targetCaseId, imageFile, promptTitle);
+            }
+          }
+        }
+      });
+    }
+
+    async function uploadClinicalImageFile(caseId, file, customTitle) {
+      try {
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+          const base64Data = event.target.result;
+          const res = await fetch('/api/upload-clinical-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              caseId,
+              dateKey: currentDateKey,
+              fileName: file.name || 'clipboard.png',
+              base64Data,
+              title: customTitle || file.name || 'Phim cận lâm sàng',
+              caption: ''
+            })
+          });
+          const data = await res.json();
+          if (data.ok && data.image) {
+            const targetCase = (currentReport.highlightCases || []).find(c => c.id === caseId);
+            if (targetCase) {
+              if (!Array.isArray(targetCase.images)) targetCase.images = [];
+              targetCase.images.push(data.image);
+              renderCurrentView();
+            }
+          } else {
+            alert('Lỗi tải ảnh: ' + (data.error || 'Server error'));
+          }
+        };
+        reader.readAsDataURL(file);
+      } catch (err) {
+        console.error(err);
+        alert('Lỗi khi xử lý tải hình ảnh!');
+      }
+    }
+
+    async function deleteClinicalImage(caseId, imageId) {
+      if (!confirm('Bạn có chắc muốn xoá hình ảnh này?')) return;
+      try {
+        const res = await fetch('/api/delete-clinical-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ caseId, imageId, dateKey: currentDateKey })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          const targetCase = (currentReport.highlightCases || []).find(c => c.id === caseId);
+          if (targetCase && Array.isArray(targetCase.images)) {
+            targetCase.images = targetCase.images.filter(img => img.id !== imageId);
+            renderCurrentView();
+          }
+        }
+      } catch (e) {
+        console.error(e);
+        alert('Lỗi kết nối khi xoá ảnh!');
+      }
+    }
+
+    // Lightbox handlers
+    function openLightbox(url, title, caption) {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const cap = document.getElementById('lightbox-caption');
+      img.src = url;
+      cap.textContent = title ? `${title} ${caption ? '— ' + caption : ''}` : '';
+      modal.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.remove('active');
+    }
+
+    /* =========================================================================
+       5. PRESENTATION THEATER MODE (FULLSCREEN SLIDES)
+       ========================================================================= */
+    function openPresentationMode() {
+      if (!currentReport) return;
+      buildPresentationSlides();
+      currentSlideIndex = 0;
+      currentSlideImageIdx = 0;
+      renderCurrentSlide();
+      document.getElementById('theater-modal').classList.add('active');
+      document.getElementById('theater-date-label').textContent = `Báo cáo ngày ${currentDateKey} • Khoa Ngoại Thần Kinh - Cột Sống`;
+    }
+
+    function closePresentationMode() {
+      document.getElementById('theater-modal').classList.remove('active');
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    function toggleTheaterFullscreen() {
+      if (!document.fullscreenElement) {
+        document.getElementById('theater-modal').requestFullscreen().catch(err => {
+          alert(`Lỗi bật toàn màn hình: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    function buildPresentationSlides() {
+      presentationSlides = [];
+      // Slide 1: Grand Overview
+      presentationSlides.push({ type: 'OVERVIEW' });
+
+      // Slide 2..N: Selected Highlight cases
+      const cases = (currentReport.highlightCases || []).filter(c => c.selectedForSlide !== false);
+      cases.forEach(c => {
+        presentationSlides.push({ type: 'CASE', data: c });
+      });
+    }
+
+    function renderCurrentSlide() {
+      const viewport = document.getElementById('theater-viewport');
+      const counter = document.getElementById('theater-slide-counter');
+      const totalSlides = presentationSlides.length;
+
+      counter.textContent = `Slide ${currentSlideIndex + 1} / ${totalSlides}`;
+      const slide = presentationSlides[currentSlideIndex];
+
+      if (!slide) return;
+
+      if (slide.type === 'OVERVIEW') {
+        const grand = currentReport.overall && currentReport.overall.grandCensus || {};
+        const roomReports = currentReport.roomReports || {};
+        const docsDutyStr = (currentReport.overall && currentReport.overall.doctorsOnDuty && currentReport.overall.doctorsOnDuty.length > 0)
+          ? currentReport.overall.doctorsOnDuty.join(', ')
+          : 'Chưa cập nhật';
+
+        viewport.innerHTML = `
+          <div style="max-width:1200px;margin:0 auto;width:100%;">
+            <div style="text-align:center;margin-bottom:28px;">
+              <h2 style="font-size:1.85rem;font-weight:900;color:#38bdf8;font-family:'Montserrat',sans-serif;margin-bottom:6px;">
+                TỔNG HỢP SỐ LIỆU GIAO BAN TOÀN KHOA
+              </h2>
+              <div style="font-size:1.05rem;color:#94a3b8;font-weight:600;">
+                👨‍⚕️ Bác sĩ trực đêm qua: <span style="color:#f8fafc;font-weight:800;">${escapeHtml(docsDutyStr)}</span>
+              </div>
+            </div>
+
+            <div class="slide-overview-grid">
+              <div class="slide-stat-card">
+                <div class="slide-stat-num" style="color:#f8fafc;">${grand.benhCu || 0}</div>
+                <div class="slide-stat-label">Bệnh cũ</div>
+              </div>
+              <div class="slide-stat-card">
+                <div class="slide-stat-num" style="color:#ef4444;">${grand.vaoKK || 0}</div>
+                <div class="slide-stat-label">Vào cấp cứu (KK)</div>
+              </div>
+              <div class="slide-stat-card">
+                <div class="slide-stat-num" style="color:#38bdf8;">${grand.vaoKhac || 0}</div>
+                <div class="slide-stat-label">Vào khác</div>
+              </div>
+              <div class="slide-stat-card">
+                <div class="slide-stat-num" style="color:#f59e0b;">${grand.moCC || 0}</div>
+                <div class="slide-stat-label">Mổ cấp cứu</div>
+              </div>
+              <div class="slide-stat-card">
+                <div class="slide-stat-num" style="color:#10b981;">${grand.raRH || 0}</div>
+                <div class="slide-stat-label">Ra viện hẹn</div>
+              </div>
+              <div class="slide-stat-card">
+                <div class="slide-stat-num" style="color:${Number(grand.tuVong || 0) > 0 ? '#ef4444' : '#94a3b8'};">${grand.tuVong || 0}</div>
+                <div class="slide-stat-label">Tử vong</div>
+              </div>
+              <div class="slide-stat-card" style="background:#1e3a8a;border-color:#3b82f6;">
+                <div class="slide-stat-num" style="color:#fde047;">${grand.hienCo || 0}</div>
+                <div class="slide-stat-label" style="color:#bfdbfe;">Hiện có toàn khoa</div>
+              </div>
+            </div>
+
+            <!-- Mini Summary Table for 5 Rooms -->
+            <div style="background:#131d31;border:1px solid #1e293b;border-radius:14px;overflow:hidden;padding:16px;">
+              <table style="width:100%;border-collapse:collapse;color:#f8fafc;font-size:0.95rem;text-align:center;">
+                <thead>
+                  <tr style="border-bottom:1px solid #334155;color:#94a3b8;font-size:0.85rem;">
+                    <th style="text-align:left;padding:8px 12px;">Phòng</th>
+                    <th>Bệnh cũ</th>
+                    <th>Vào KK</th>
+                    <th>Mổ CC</th>
+                    <th>Tử vong</th>
+                    <th style="color:#fde047;font-weight:800;">Hiện có</th>
+                    <th>Kíp trực / Nhân lực</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].map(k => {
+                    const r = roomReports[k] || { census: {}, personnel: {} };
+                    const c = r.census || {};
+                    const p = r.personnel || {};
+                    const nurseStr = (k === 'hstk') ? `Ngày: ${p.nursesDay || '--'} | Đêm: ${p.nursesNight || '--'}` : (p.nurses || '--');
+                    return `
+                      <tr style="border-bottom:1px solid #1e293b;">
+                        <td style="text-align:left;padding:10px 12px;font-weight:800;color:#38bdf8;">${ROOM_NAMES[k]}</td>
+                        <td>${c.benhCu || 0}</td>
+                        <td style="color:#ef4444;font-weight:700;">${c.vaoKK || 0}</td>
+                        <td style="color:#f59e0b;font-weight:700;">${c.moCC || 0}</td>
+                        <td style="color:${Number(c.tuVong || 0) > 0 ? '#ef4444' : '#94a3b8'};font-weight:800;">${c.tuVong || 0}</td>
+                        <td style="color:#fde047;font-weight:900;font-size:1.1rem;">${c.hienCo || 0}</td>
+                        <td style="font-size:0.85rem;color:#cbd5e1;text-align:left;padding-left:12px;">${escapeHtml(nurseStr)}</td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      } else if (slide.type === 'CASE') {
+        const c = slide.data;
+        const catInfo = CATEGORIES[c.category] || { text: c.category || 'Trọng điểm', class: 'badge-mo-cc', icon: 'fa-circle-exclamation' };
+        const images = c.images || [];
+        const hasImages = images.length > 0;
+        const activeImg = hasImages ? images[currentSlideImageIdx % images.length] : null;
+
+        viewport.innerHTML = `
+          <div class="slide-case-layout">
+            <!-- CỘT TRÁI: THÔNG TIN LÂM SÀNG & DIỄN BIẾN -->
+            <div class="slide-case-left">
+              <div class="slide-case-title-row">
+                <span class="badge-category ${catInfo.class}" style="font-size:0.9rem;padding:6px 14px;">
+                  <i class="fa-solid ${catInfo.icon}"></i> ${catInfo.text}
+                </span>
+                <span style="font-size:0.9rem;background:#1e293b;color:#38bdf8;padding:4px 10px;border-radius:6px;font-weight:700;">
+                  ${ROOM_NAMES[c.roomKey] || c.roomName || 'Toàn khoa'}
+                </span>
+              </div>
+
+              <div>
+                <div class="slide-case-patient-name">${escapeHtml(c.hoten || 'Chưa rõ tên')}</div>
+                <div style="font-size:0.95rem;color:#94a3b8;font-weight:600;margin-top:2px;">
+                  Tuổi: <strong style="color:#f8fafc;">${c.tuoi || '--'}</strong> • Mã BN: <strong style="color:#38bdf8;">${c.mabn || '--'}</strong>
+                </div>
+              </div>
+
+              <div class="slide-case-info-block">
+                <div class="slide-case-info-label">Chẩn đoán lâm sàng</div>
+                <div class="slide-case-info-val" style="color:#fde047;font-weight:700;">
+                  ${escapeHtml(c.chanDoan || 'Chưa có chẩn đoán')}
+                </div>
+              </div>
+
+              ${c.kipMo ? `
+                <div class="slide-case-info-block" style="border-left-color:#ef4444;">
+                  <div class="slide-case-info-label">Kíp phẫu thuật & Can thiệp</div>
+                  <div class="slide-case-info-val">${escapeHtml(c.kipMo)}</div>
+                </div>
+              ` : ''}
+
+              <div class="slide-case-info-block" style="border-left-color:#f59e0b;">
+                <div class="slide-case-info-label">Diễn biến ca trực & Tình trạng hiện tại</div>
+                <div class="slide-case-info-val" style="white-space:pre-line;">
+                  ${escapeHtml(c.dienBien || 'Không có diễn biến bất thường')}
+                </div>
+              </div>
+
+              ${c.notesBs ? `
+                <div class="slide-case-info-block" style="border-left-color:#10b981;">
+                  <div class="slide-case-info-label">Ý kiến BS trực & Hướng điều trị tiếp theo</div>
+                  <div class="slide-case-info-val" style="color:#86efac;">
+                    ${escapeHtml(c.notesBs)}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+
+            <!-- CỘT PHẢI: HÌNH ẢNH CT / MRI / CẬN LÂM SÀNG -->
+            <div class="slide-case-right">
+              ${hasImages ? `
+                <div class="slide-big-img-wrap">
+                  <img src="${activeImg.url}" class="slide-big-img" alt="Phim CT/MRI" onclick="openLightbox('${activeImg.url}', '${escapeHtml(activeImg.title || '')}', '${escapeHtml(activeImg.caption || '')}')" />
+                </div>
+                <div style="font-size:0.95rem;font-weight:700;color:#38bdf8;text-align:center;">
+                  ${escapeHtml(activeImg.title || 'Hình ảnh cận lâm sàng')}
+                </div>
+                ${images.length > 1 ? `
+                  <div class="slide-img-controls">
+                    <button type="button" class="btn-theater" onclick="prevSlideImage()">
+                      <i class="fa-solid fa-arrow-left"></i> Ảnh trước
+                    </button>
+                    <span style="font-size:0.85rem;color:#94a3b8;font-weight:700;">
+                      Ảnh ${(currentSlideImageIdx % images.length) + 1} / ${images.length}
+                    </span>
+                    <button type="button" class="btn-theater" onclick="nextSlideImage()">
+                      Ảnh sau <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                  </div>
+                ` : ''}
+              ` : `
+                <div style="text-align:center;padding:40px;background:#131d31;border-radius:18px;border:1px dashed #334155;color:#64748b;width:80%;">
+                  <i class="fa-solid fa-x-ray" style="font-size:3rem;margin-bottom:12px;color:#334155;"></i>
+                  <div style="font-size:1.1rem;font-weight:700;color:#94a3b8;">Chưa có hình ảnh CT / MRI cho ca này</div>
+                  <div style="font-size:0.85rem;margin-top:6px;color:#64748b;">(Bác sĩ có thể chụp ảnh hoặc dán Ctrl+V từ PACS ở màn hình danh sách)</div>
+                </div>
+              `}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < presentationSlides.length - 1) {
+        currentSlideIndex++;
+        currentSlideImageIdx = 0;
+        renderCurrentSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlideIndex > 0) {
+        currentSlideIndex--;
+        currentSlideImageIdx = 0;
+        renderCurrentSlide();
+      }
+    }
+
+    function nextSlideImage() {
+      currentSlideImageIdx++;
+      renderCurrentSlide();
+    }
+
+    function prevSlideImage() {
+      if (currentSlideImageIdx > 0) {
+        currentSlideImageIdx--;
+      } else {
+        const slide = presentationSlides[currentSlideIndex];
+        if (slide && slide.data && slide.data.images) {
+          currentSlideImageIdx = slide.data.images.length - 1;
+        }
+      }
+      renderCurrentSlide();
+    }
+
+    // Keyboard navigation
+    function setupKeyboardNavigation() {
+      document.addEventListener('keydown', (e) => {
+        const isTheater = document.getElementById('theater-modal').classList.contains('active');
+        if (isTheater) {
+          if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+            nextSlide();
+          } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            prevSlide();
+          } else if (e.key === 'Escape') {
+            closePresentationMode();
+          } else if (e.key === 'f' || e.key === 'F') {
+            toggleTheaterFullscreen();
+          }
+        } else {
+          if (e.key === 'Escape') {
+            closeLightbox();
+          }
+        }
+      });
+    }
+
+    // Utility: HTML escape
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+  </script>
+</body>
+</html>

@@ -2243,6 +2243,56 @@ dialog.modal-dialog::backdrop {
   color: #9f1239;
 }
 
+/* TRANG CON 4: BÁO CÁO GIAO BAN CARD STYLES */
+.home-portal-grid.home-portal-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (min-width: 1350px) {
+  .home-portal-grid.home-portal-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .home-portal-grid.home-portal-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portal-card-briefing:hover {
+  border-color: #0284c7;
+}
+
+.title-briefing-impress {
+  background: linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 6px rgba(2, 132, 199, 0.12));
+}
+
+.portal-sub-tag-briefing {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+  color: #0369a1;
+}
+
+.metric-sky {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+  color: #0284c7;
+}
+
+.portal-enter-btn.portal-enter-sky {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+}
+
+.portal-enter-btn.portal-enter-sky:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+}
+
 /* TRANG ĐI BUỒNG HẰNG NGÀY - THANH 5 PHÒNG (PHÒNG ĐANG CHỌN NỔI BẬT, 4 PHÒNG CÒN LẠI THU NHỎ GỌN GÀNG) */
 .ward-5rooms-grid {
   display: flex;

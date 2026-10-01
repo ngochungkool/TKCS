@@ -16,6 +16,9 @@ const MIME_TYPES = {
   '.js': 'application/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon'
 };
@@ -1813,6 +1816,570 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // ==========================================================================
+  // BÁO CÁO GIAO BAN: APIS & ĐỒNG BỘ DỮ LIỆU HIS & HÌNH ẢNH CẬN LÂM SÀNG
+  // ==========================================================================
+  const CLINICAL_UPLOAD_DIR = path.join(ROOT, 'uploads_clinical');
+  if (!fs.existsSync(CLINICAL_UPLOAD_DIR)) {
+    fs.mkdirSync(CLINICAL_UPLOAD_DIR, { recursive: true });
+  }
+
+  function getRoomKeyFromName(name) {
+    if (!name) return 'tk1';
+    const n = String(name).toLowerCase();
+    if (n.includes('hồi sức') || n.includes('hstk')) return 'hstk';
+    if (n.includes('1')) return 'tk1';
+    if (n.includes('2')) return 'tk2';
+    if (n.includes('3')) return 'tk3';
+    if (n.includes('4')) return 'tk4';
+    return 'tk1';
+  }
+
+  function recalculateGrandCensus(report) {
+    if (!report || !report.roomReports) return;
+    const grand = {
+      benhCu: 0,
+      vaoKK: 0,
+      vaoKhac: 0,
+      moCT: 0,
+      moCC: 0,
+      raRH: 0,
+      raKhac: 0,
+      tuVong: 0,
+      hienCo: 0,
+      bhyt: 0
+    };
+
+    const roomKeys = ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'];
+    for (const rk of roomKeys) {
+      const rr = report.roomReports[rk];
+      if (rr && rr.census) {
+        for (const [k, v] of Object.entries(rr.census)) {
+          if (grand[k] !== undefined) grand[k] += (Number(v) || 0);
+        }
+      }
+    }
+
+    if (!report.overall) report.overall = {};
+    report.overall.grandCensus = grand;
+  }
+
+  function buildBriefingDraftFromHis(targetDateKey) {
+    const roomKeys = ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'];
+    const roomNames = {
+      tk1: 'Thần kinh 1',
+      tk2: 'Thần kinh 2',
+      tk3: 'Thần kinh 3',
+      tk4: 'Thần kinh 4',
+      hstk: 'Hồi sức thần kinh'
+    };
+
+    const roomReports = {};
+    roomKeys.forEach(rk => {
+      roomReports[rk] = {
+        roomKey: rk,
+        roomName: roomNames[rk],
+        status: 'DRAFT',
+        updatedAt: new Date().toISOString(),
+        personnel: {
+          nurses: rk === 'hstk' ? '' : 'Linh - Hiếu',
+          nursesDay: rk === 'hstk' ? 'Việt - Quyên - Tân' : '',
+          nursesNight: rk === 'hstk' ? 'Quyện - Nguyên - Vĩ' : '',
+          orderly: 'Phượng',
+          xuatVien: 0,
+          chamSocCap2: 4,
+          hoiChan: 2,
+          tangTren: rk === 'tk3' ? 2 : 0,
+          tangDuoi: rk === 'tk3' ? 1 : 0
+        },
+        census: {
+          benhCu: 0,
+          vaoKK: 0,
+          vaoKhac: 0,
+          moCT: 0,
+          moCC: 0,
+          raRH: 0,
+          raKhac: 0,
+          tuVong: 0,
+          hienCo: 0,
+          bhyt: 0
+        },
+        admissions: [],
+        discharges: [],
+        emergencySurgeries: [],
+        criticalNotes: ''
+      };
+    });
+
+    try {
+      const XLSX = require('xlsx');
+      const uploadDir = path.join(ROOT, 'uploads_his');
+      if (fs.existsSync(uploadDir)) {
+        const files = fs.readdirSync(uploadDir)
+          .filter(f => /\.(xlsx|xls|csv)$/i.test(f))
+          .map(f => ({
+            name: f,
+            fullPath: path.join(uploadDir, f),
+            mtime: fs.statSync(path.join(uploadDir, f)).mtimeMs
+          }))
+          .sort((a, b) => a.mtime - b.mtime);
+
+        let dangDieuTriRows = [];
+        let vaoKhoaRows = [];
+        let raVienRows = [];
+        let chuyenKhoaRows = [];
+
+        for (const fObj of files) {
+          const wb = XLSX.readFile(fObj.fullPath);
+          const ws = wb.Sheets[wb.SheetNames[0]];
+          const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
+          const cat = detectHisExcelCategory(rows, fObj.name);
+
+          if (cat.code === 'DANG_DIEU_TRI') dangDieuTriRows = rows;
+          else if (cat.code === 'VAO_KHOA') vaoKhoaRows = rows;
+          else if (cat.code === 'RA_VIEN') raVienRows = rows;
+          else if (cat.code === 'CHUYEN_KHOA') chuyenKhoaRows = rows;
+        }
+
+        const mabnToRoomKey = {};
+        for (const r of dangDieuTriRows) {
+          const rmName = mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
+          const rk = getRoomKeyFromName(rmName);
+          const m = String(r['mabn'] || '').trim();
+          if (m) mabnToRoomKey[m] = rk;
+
+          roomReports[rk].census.hienCo += 1;
+          const isBhyt = String(r['Đối tượng'] || '').toUpperCase().includes('BHYT') || Number(r['madoituong']) === 1;
+          if (isBhyt) roomReports[rk].census.bhyt += 1;
+        }
+
+        let sttAdm = { tk1: 1, tk2: 1, tk3: 1, tk4: 1, hstk: 1 };
+        for (const r of vaoKhoaRows) {
+          const m = String(r['mabn'] || '').trim();
+          const rk = mabnToRoomKey[m] || 'tk1';
+          const hasFromDept = String(r['Khoa chuyển đến'] || '').trim() !== '' || (r['makkc'] !== '' && r['makkc'] !== undefined && Number(r['makkc']) !== 0);
+          const isChuyenDen = Number(r['dangky']) === 0 || hasFromDept;
+
+          if (isChuyenDen) {
+            roomReports[rk].census.vaoKhac += 1;
+          } else {
+            roomReports[rk].census.vaoKK += 1;
+          }
+
+          const name = String(r['Họ tên'] || '').trim();
+          const age = String(r['Tuổi'] || '').replace(/\D/g, '') || String(r['Tuổi'] || '');
+          const addr = String(r['diachi'] || '').trim();
+          const diag = String(r['Chẩn đoán'] || r['chandoan'] || '').trim() || 'Chấn thương sọ não';
+          
+          let cause = 'TNGT';
+          const diagLower = diag.toLowerCase();
+          if (diagLower.includes('sinh hoạt') || diagLower.includes('té') || diagLower.includes('ngã')) cause = 'TNSH';
+          else if (diagLower.includes('đánh') || diagLower.includes('đả thương')) cause = 'Đánh';
+          else if (diagLower.includes('lao động')) cause = 'TNLĐ';
+          else if (diagLower.includes('thoát vị') || diagLower.includes('u não') || diagLower.includes('xẹp')) cause = 'Bệnh';
+
+          roomReports[rk].admissions.push({
+            id: `adm-${rk}-${sttAdm[rk]}`,
+            stt: sttAdm[rk]++,
+            mabn: m,
+            hoten: name,
+            tuoi: age,
+            cause,
+            source: isChuyenDen ? (r['Khoa chuyển đến'] || 'Khác') : 'KK',
+            chanDoan: diag,
+            diaChi: addr,
+            tinhTrang: 'Tỉnh',
+            isHighlight: false,
+            category: ''
+          });
+        }
+
+        let sttDis = { tk1: 1, tk2: 1, tk3: 1, tk4: 1, hstk: 1 };
+        for (const r of raVienRows) {
+          const m = String(r['mabn'] || '').trim();
+          const rk = mabnToRoomKey[m] || 'tk1';
+          const lyDoStr = String(r['malydo'] || '').toLowerCase();
+          const isTuVong = lyDoStr.includes('tử vong') || Number(r['malydo']) === 4 || Number(r['malydo']) === 5;
+          const isXinVe = lyDoStr.includes('xin về');
+
+          if (isTuVong) {
+            roomReports[rk].census.tuVong += 1;
+          } else if (isXinVe) {
+            roomReports[rk].census.raKhac += 1;
+          } else {
+            roomReports[rk].census.raRH += 1;
+          }
+
+          const name = String(r['Họ tên'] || '').trim();
+          const age = String(r['Tuổi'] || '').replace(/\D/g, '') || String(r['Tuổi'] || '');
+          const svv = String(r['Mã KCB'] || r['mayte'] || '').trim();
+          const isBhyt = String(r['Đối tượng'] || '').toUpperCase().includes('BHYT') || Number(r['madoituong']) === 1;
+
+          let note = 'Xuất viện';
+          if (isTuVong) note = 'Tử vong';
+          else if (isXinVe) note = 'Nặng xin về';
+
+          roomReports[rk].discharges.push({
+            id: `dis-${rk}-${sttDis[rk]}`,
+            stt: sttDis[rk]++,
+            mabn: m,
+            hoten: name,
+            tuoi: age,
+            raHan: !isTuVong && !isXinVe,
+            baoHiem: isBhyt,
+            svv,
+            note,
+            isHighlight: isTuVong || isXinVe,
+            category: isTuVong ? 'TU_VONG' : (isXinVe ? 'XIN_VE' : '')
+          });
+        }
+
+        for (const r of chuyenKhoaRows) {
+          const m = String(r['mabn'] || '').trim();
+          const rk = mabnToRoomKey[m] || 'tk1';
+          roomReports[rk].census.raKhac += 1;
+
+          const name = String(r['Họ tên'] || '').trim();
+          const age = String(r['Tuổi'] || '').replace(/\D/g, '') || String(r['Tuổi'] || '');
+          const targetDept = String(r['Khoa chuyển đến'] || '').trim();
+          const isBhyt = String(r['Đối tượng'] || '').toUpperCase().includes('BHYT') || Number(r['madoituong']) === 1;
+
+          roomReports[rk].discharges.push({
+            id: `dis-${rk}-${sttDis[rk]}`,
+            stt: sttDis[rk]++,
+            mabn: m,
+            hoten: name,
+            tuoi: age,
+            raHan: false,
+            baoHiem: isBhyt,
+            svv: String(r['Mã KCB'] || ''),
+            note: `Chuyển ${targetDept || 'Khoa khác'}`,
+            isHighlight: false,
+            category: ''
+          });
+        }
+
+        roomKeys.forEach(rk => {
+          const c = roomReports[rk].census;
+          c.benhCu = Math.max(0, c.hienCo - (c.vaoKK + c.vaoKhac) + (c.raRH + c.raKhac + c.tuVong));
+          roomReports[rk].personnel.xuatVien = c.raRH;
+        });
+      }
+    } catch (err) {
+      console.warn('Error reading HIS for briefing draft:', err.message);
+    }
+
+    const highlightCases = [];
+    let caseIdCounter = 1;
+
+    roomKeys.forEach(rk => {
+      const rr = roomReports[rk];
+      for (const adm of rr.admissions) {
+        if (adm.isHighlight || (adm.chanDoan && (adm.chanDoan.includes('tụ máu') || adm.chanDoan.includes('vỡ lún')))) {
+          highlightCases.push({
+            id: `case-${Date.now()}-${caseIdCounter++}`,
+            mabn: adm.mabn,
+            hoten: adm.hoten,
+            tuoi: adm.tuoi,
+            roomKey: rk,
+            roomName: rr.roomName,
+            category: 'THEO_DOI',
+            chanDoan: adm.chanDoan,
+            dienBien: `${adm.cause || 'TNGT'}, vào viện ${adm.tinhTrang || 'Tỉnh, đau đầu'}, theo dõi sát tri giác.`,
+            kipMo: '',
+            selectedForSlide: true,
+            images: [],
+            notesBs: ''
+          });
+        }
+      }
+      for (const dis of rr.discharges) {
+        if (dis.category === 'TU_VONG' || dis.category === 'XIN_VE') {
+          highlightCases.push({
+            id: `case-${Date.now()}-${caseIdCounter++}`,
+            mabn: dis.mabn,
+            hoten: dis.hoten,
+            tuoi: dis.tuoi,
+            roomKey: rk,
+            roomName: rr.roomName,
+            category: dis.category,
+            chanDoan: dis.note || 'Bệnh nặng xin về',
+            dienBien: `Tri giác tụt, thở nấc/thở máy, gia đình xin về tại ${rr.roomName}.`,
+            kipMo: '',
+            selectedForSlide: true,
+            images: [],
+            notesBs: 'Tiên lượng nặng tử vong'
+          });
+        }
+      }
+    });
+
+    const draft = {
+      dateKey: targetDateKey,
+      updatedAt: new Date().toISOString(),
+      roomReports,
+      highlightCases,
+      overall: {
+        doctorsOnDuty: [],
+        grandCensus: {},
+        doctorNotes: '',
+        approvedBy: ''
+      }
+    };
+
+    recalculateGrandCensus(draft);
+    return draft;
+  }
+
+  function getOrBuildBriefingReport(targetDateKey) {
+    if (!db.briefingReports) db.briefingReports = {};
+    if (!db.briefingReports[targetDateKey]) {
+      db.briefingReports[targetDateKey] = buildBriefingDraftFromHis(targetDateKey);
+    }
+    const report = db.briefingReports[targetDateKey];
+
+    const onDutyDocs = (db.doctors || [])
+      .filter(d => d.scheduleByDate && (d.scheduleByDate[targetDateKey] === 'TRUC' || d.scheduleByDate[targetDateKey] === 'RA_TRUC'))
+      .sort((a, b) => (a.seniority || 999) - (b.seniority || 999))
+      .map(d => d.name);
+
+    if (!report.overall) report.overall = {};
+    if (!report.overall.doctorsOnDuty || report.overall.doctorsOnDuty.length === 0) {
+      report.overall.doctorsOnDuty = onDutyDocs.length > 0 ? onDutyDocs : ['BS. Trí A', 'BS. Tịnh', 'BS. Trí B', 'BS. Vũ B'];
+    }
+
+    if (!Array.isArray(report.highlightCases)) {
+      report.highlightCases = [];
+    }
+
+    recalculateGrandCensus(report);
+    return report;
+  }
+
+  function syncRoomKeyCasesToMaster(report, roomKey, roomReport) {
+    if (!report || !roomReport) return;
+    if (!Array.isArray(report.highlightCases)) report.highlightCases = [];
+
+    const flagged = [];
+    for (const adm of roomReport.admissions || []) {
+      if (adm.isHighlight || adm.category) {
+        flagged.push({
+          mabn: adm.mabn,
+          hoten: adm.hoten,
+          tuoi: adm.tuoi,
+          category: adm.category || 'THEO_DOI',
+          chanDoan: adm.chanDoan,
+          dienBien: `${adm.cause || ''}: ${adm.tinhTrang || ''}`,
+          kipMo: ''
+        });
+      }
+    }
+
+    for (const dis of roomReport.discharges || []) {
+      if (dis.isHighlight || dis.category) {
+        flagged.push({
+          mabn: dis.mabn,
+          hoten: dis.hoten,
+          tuoi: dis.tuoi,
+          category: dis.category || (dis.note?.includes('Xin về') ? 'XIN_VE' : 'THEO_DOI'),
+          chanDoan: dis.note || 'Xuất viện / Xin về',
+          dienBien: dis.note || '',
+          kipMo: ''
+        });
+      }
+    }
+
+    for (const surg of roomReport.emergencySurgeries || []) {
+      flagged.push({
+        mabn: surg.mabn || '',
+        hoten: surg.patientName || surg.hoten,
+        tuoi: surg.age || surg.tuoi,
+        category: 'MO_CC',
+        chanDoan: surg.diagnosis || surg.chanDoan,
+        dienBien: `Chuyển mổ lúc ${surg.transferTime || ''}: ${surg.description || ''}`,
+        kipMo: surg.surgeons || surg.kipMo || ''
+      });
+    }
+
+    for (const item of flagged) {
+      if (!item.hoten) continue;
+      const existing = report.highlightCases.find(c => (item.mabn && c.mabn === item.mabn) || (c.hoten && c.hoten.toLowerCase() === item.hoten.toLowerCase()));
+      if (existing) {
+        existing.category = item.category || existing.category;
+        if (item.chanDoan) existing.chanDoan = item.chanDoan;
+        if (item.dienBien) existing.dienBien = item.dienBien;
+        if (item.kipMo) existing.kipMo = item.kipMo;
+        existing.roomKey = roomKey;
+        existing.roomName = roomReport.roomName;
+      } else {
+        report.highlightCases.push({
+          id: `case-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          mabn: item.mabn || '',
+          hoten: item.hoten,
+          tuoi: item.tuoi,
+          roomKey,
+          roomName: roomReport.roomName,
+          category: item.category,
+          chanDoan: item.chanDoan || '',
+          dienBien: item.dienBien || '',
+          kipMo: item.kipMo || '',
+          selectedForSlide: true,
+          images: [],
+          notesBs: ''
+        });
+      }
+    }
+  }
+
+  // GET /api/briefing-report
+  if (req.method === 'GET' && pathname === '/api/briefing-report') {
+    const reqUrl = new URL(req.url, 'http://localhost');
+    const qDate = reqUrl.searchParams.get('date') || getDateKey(new Date());
+    const report = getOrBuildBriefingReport(qDate);
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({
+      ok: true,
+      dateKey: qDate,
+      report,
+      doctors: db.doctors || [],
+      availableDates: Object.keys(db.briefingReports || {})
+    }));
+    return;
+  }
+
+  // POST /api/briefing-report
+  if (req.method === 'POST' && pathname === '/api/briefing-report') {
+    const body = await readBody(req);
+    const { dateKey, roomKey, roomReport, overall, highlightCases } = body;
+    const targetDate = dateKey || getDateKey(new Date());
+    const report = getOrBuildBriefingReport(targetDate);
+
+    if (roomKey && roomKey !== 'all') {
+      if (roomReport && typeof roomReport === 'object') {
+        report.roomReports[roomKey] = {
+          ...report.roomReports[roomKey],
+          ...roomReport,
+          status: 'SUBMITTED',
+          updatedAt: new Date().toISOString()
+        };
+        syncRoomKeyCasesToMaster(report, roomKey, report.roomReports[roomKey]);
+        recalculateGrandCensus(report);
+        broadcastState(`📋 [${report.roomReports[roomKey].roomName}] đã nộp báo cáo giao ban ngày ${targetDate}`);
+      }
+    } else {
+      if (overall && typeof overall === 'object') {
+        report.overall = { ...report.overall, ...overall };
+      }
+      if (Array.isArray(highlightCases)) {
+        report.highlightCases = highlightCases;
+      }
+      recalculateGrandCensus(report);
+      broadcastState(`👨‍⚕️ Đã cập nhật & duyệt Báo cáo giao ban toàn khoa ngày ${targetDate}`);
+    }
+
+    saveDb();
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, report }));
+    return;
+  }
+
+  // POST /api/upload-clinical-image
+  if (req.method === 'POST' && pathname === '/api/upload-clinical-image') {
+    const { caseId, dateKey, fileName, base64Data, title, caption } = await readBody(req);
+    if (!base64Data) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Thiếu dữ liệu hình ảnh!' }));
+      return;
+    }
+
+    const targetDate = dateKey || getDateKey(new Date());
+    const dateDir = path.join(CLINICAL_UPLOAD_DIR, targetDate);
+    if (!fs.existsSync(dateDir)) {
+      fs.mkdirSync(dateDir, { recursive: true });
+    }
+
+    const matches = base64Data.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    const rawBase64 = matches ? matches[2] : base64Data;
+    const buffer = Buffer.from(rawBase64, 'base64');
+
+    const cleanExt = (fileName && path.extname(fileName)) ? path.extname(fileName).toLowerCase() : '.png';
+    const ext = ['.jpg', '.jpeg', '.png', '.webp'].includes(cleanExt) ? cleanExt : '.png';
+    const safeName = `img_${Date.now()}_${Math.random().toString(36).slice(2, 7)}${ext}`;
+    const filePath = path.join(dateDir, safeName);
+    fs.writeFileSync(filePath, buffer);
+
+    const imageUrl = `/uploads_clinical/${targetDate}/${safeName}`;
+    const imgObj = {
+      id: `img-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`,
+      title: String(title || 'Hình ảnh cận lâm sàng').trim(),
+      caption: String(caption || '').trim(),
+      url: imageUrl,
+      uploadedAt: new Date().toISOString()
+    };
+
+    if (caseId && db.briefingReports && db.briefingReports[targetDate]) {
+      const report = db.briefingReports[targetDate];
+      const targetCase = (report.highlightCases || []).find(c => c.id === caseId);
+      if (targetCase) {
+        if (!Array.isArray(targetCase.images)) targetCase.images = [];
+        targetCase.images.push(imgObj);
+        saveDb();
+        broadcastState(`🖼️ Đã đính kèm ảnh cận lâm sàng cho BN ${targetCase.hoten}`);
+      }
+    }
+
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, image: imgObj, caseId }));
+    return;
+  }
+
+  // POST /api/delete-clinical-image
+  if (req.method === 'POST' && pathname === '/api/delete-clinical-image') {
+    const { caseId, imageId, dateKey } = await readBody(req);
+    const targetDate = dateKey || getDateKey(new Date());
+    if (caseId && imageId && db.briefingReports && db.briefingReports[targetDate]) {
+      const report = db.briefingReports[targetDate];
+      const targetCase = (report.highlightCases || []).find(c => c.id === caseId);
+      if (targetCase && Array.isArray(targetCase.images)) {
+        const removed = targetCase.images.filter(img => img.id === imageId);
+        targetCase.images = targetCase.images.filter(img => img.id !== imageId);
+        saveDb();
+        // Try unlink from disk if local
+        for (const rem of removed) {
+          if (rem.url && rem.url.startsWith('/uploads_clinical/')) {
+            const relPath = rem.url.replace('/uploads_clinical/', '');
+            const localFile = path.join(CLINICAL_UPLOAD_DIR, relPath);
+            if (fs.existsSync(localFile)) {
+              try { fs.unlinkSync(localFile); } catch (e) { /* ignore */ }
+            }
+          }
+        }
+        broadcastState(`🗑️ Đã xóa ảnh cận lâm sàng của BN ${targetCase.hoten}`);
+      }
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true }));
+    return;
+  }
+
+  // POST /api/briefing-auto-fetch-his
+  if (req.method === 'POST' && pathname === '/api/briefing-auto-fetch-his') {
+    const { dateKey, roomKey } = await readBody(req);
+    const targetDate = dateKey || getDateKey(new Date());
+    const freshDraft = buildBriefingDraftFromHis(targetDate);
+
+    if (roomKey && roomKey !== 'all') {
+      const roomDraft = freshDraft.roomReports[roomKey];
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, roomKey, roomReport: roomDraft }));
+      return;
+    }
+
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, report: freshDraft }));
+    return;
+  }
+
   // Lightweight ping endpoint for 24/7 Keep-Alive
   if (pathname === '/api/ping') {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -1832,6 +2399,7 @@ const server = http.createServer(async (req, res) => {
   else if (cleanRoute === '/quan-ly-user') cleanRoute = '/quan-ly-user.html';
   else if (cleanRoute === '/hanh-chinh-khoa') cleanRoute = '/hanh-chinh-khoa.html';
   else if (cleanRoute === '/di-buong-hang-ngay' || cleanRoute === '/di-buong') cleanRoute = '/di-buong-hang-ngay.html';
+  else if (cleanRoute === '/bao-cao-giao-ban' || cleanRoute === '/giao-ban') cleanRoute = '/bao-cao-giao-ban.html';
 
   const filePath = path.join(ROOT, cleanRoute);
   fs.readFile(filePath, (err, data) => {
