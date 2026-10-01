@@ -251,30 +251,34 @@
        MODAL 1: CHI TIẾT BỆNH NHÂN, ĐI BUỒNG, HỘI CHẨN & RA VIỆN (THẦN KINH 1)
        ========================================================================= -->
   <dialog id="tk1-patient-modal" class="tk1-patient-dialog">
-    <div class="modal-header" style="background:#003b8e;color:#ffffff;padding:0.75rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:0.75rem;">
-      <div style="min-width:75px;"></div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:0.85rem;flex:1;">
+    <div class="modal-header tk1-patient-modal-header">
+      <!-- Cụm chuyển giường Trước / Sau -->
+      <div class="tk1-modal-nav-wrap">
         <button
           type="button"
           id="btn-tk1-modal-prev-bed"
+          class="tk1-btn-bed-nav"
           title="Chuyển về giường trước (Lui)"
-          style="background:rgba(255,255,255,0.18);color:#ffffff;border:1px solid rgba(255,255,255,0.4);border-radius:8px;padding:0.38rem 0.85rem;font-size:0.83rem;font-weight:800;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;white-space:nowrap;"
         >
           ◀ Lui
         </button>
-        <h4 id="tk1-modal-patient-title" style="color:#ffffff;font-size:1.15rem;font-weight:800;font-family:'Be Vietnam Pro',sans-serif;margin:0;white-space:nowrap;text-align:center;">
-          Chi tiết bệnh nhân
-        </h4>
         <button
           type="button"
           id="btn-tk1-modal-next-bed"
+          class="tk1-btn-bed-nav"
           title="Chuyển sang giường kế tiếp (Tới)"
-          style="background:rgba(255,255,255,0.18);color:#ffffff;border:1px solid rgba(255,255,255,0.4);border-radius:8px;padding:0.38rem 0.85rem;font-size:0.83rem;font-weight:800;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;white-space:nowrap;"
         >
           Tới ▶
         </button>
       </div>
-      <div style="display:flex;align-items:center;gap:0.5rem;min-width:75px;justify-content:flex-end;">
+
+      <!-- Tiêu đề: Giường & Tên bệnh nhân -->
+      <h4 id="tk1-modal-patient-title" class="tk1-modal-patient-title">
+        Chi tiết bệnh nhân
+      </h4>
+
+      <!-- Các nút thao tác góc phải -->
+      <div class="tk1-modal-header-actions">
         <button type="button" class="btn-delete-transfer" id="btn-tk1-modal-delete-transfer" title="Xoá bệnh nhân khỏi phòng (Chuyển mổ / Chuyển phòng)">
           Xoá
         </button>
