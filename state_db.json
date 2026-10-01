@@ -1,5 +1,5 @@
 {
-  "version": 1790865309531,
+  "version": 1790866408923,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -838,6 +838,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420337": {
@@ -922,6 +923,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420728": {
@@ -973,6 +975,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420743": {
@@ -1022,6 +1025,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420755": {
@@ -1082,6 +1086,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421064": {
@@ -1144,6 +1149,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421068": {
@@ -1193,6 +1199,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421398": {
@@ -1242,6 +1249,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001352007": {
@@ -1304,6 +1312,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421512": {
@@ -1363,6 +1372,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421561": {
@@ -1413,6 +1423,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421945": {
@@ -1486,6 +1497,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421963": {
@@ -1554,6 +1566,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421962": {
@@ -1615,6 +1628,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0000996031": {
@@ -1675,6 +1689,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421988": {
@@ -1733,6 +1748,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001017823": {
@@ -1793,6 +1809,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422020": {
@@ -1851,6 +1868,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422158": {
@@ -1921,6 +1939,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001032592": {
@@ -1993,6 +2012,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001050501": {
@@ -2042,6 +2062,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422178": {
@@ -2092,6 +2113,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422326": {
@@ -2161,6 +2183,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422336": {
@@ -2210,6 +2233,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422332": {
@@ -2259,6 +2283,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422360": {
@@ -2321,6 +2346,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422366": {
@@ -2370,6 +2396,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422359": {
@@ -2419,6 +2446,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422413": {
@@ -2468,6 +2496,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422706": {
@@ -2518,6 +2547,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422719": {
@@ -2568,6 +2598,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422908": {
@@ -2617,6 +2648,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001423331": {
@@ -3357,7 +3389,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:35:09.528Z",
+      "updatedAt": "2026-10-01T14:53:28.922Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3463,6 +3495,7 @@
             "surgeryName": "Mở sọ giải áp lấy máu tụ dưới màng cứng",
             "surgeryDate": "2026-09-28"
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001418507": {
@@ -3538,6 +3571,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001412616": {
@@ -3589,6 +3623,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001419869": {
@@ -3652,6 +3687,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0000948030": {
@@ -3701,6 +3737,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001397969": {
@@ -3751,6 +3788,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001373574": {
@@ -3801,6 +3839,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420471": {
@@ -3851,6 +3890,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001400167": {
@@ -3900,6 +3940,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001265243": {
@@ -3950,6 +3991,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001419943": {
@@ -4000,6 +4042,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001418920": {
@@ -4049,6 +4092,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0000462435": {
@@ -4099,6 +4143,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0000789370": {
@@ -4149,6 +4194,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422060": {
@@ -4199,6 +4245,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422302": {
@@ -4259,6 +4306,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001220543": {
@@ -4308,6 +4356,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420757": {
@@ -4368,6 +4417,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001418939": {
@@ -4418,6 +4468,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001087442": {
@@ -4468,6 +4519,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001359700": {
@@ -4518,6 +4570,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422775": {
@@ -4568,6 +4621,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422908": {
@@ -4993,7 +5047,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:35:09.529Z"
+      "updatedAt": "2026-10-01T14:53:28.922Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5089,6 +5143,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001283135": {
@@ -5165,6 +5220,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001160694": {
@@ -5216,6 +5272,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001416882": {
@@ -5266,6 +5323,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001410444": {
@@ -5316,6 +5374,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001070375": {
@@ -5366,6 +5425,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001383920": {
@@ -5416,6 +5476,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0000167064": {
@@ -5466,6 +5527,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0000835346": {
@@ -5516,6 +5578,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001327863": {
@@ -5566,6 +5629,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001413514": {
@@ -5616,6 +5680,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0000893787": {
@@ -5666,6 +5731,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422911": {
@@ -5716,6 +5782,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420565": {
@@ -6176,7 +6243,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:35:09.529Z"
+      "updatedAt": "2026-10-01T14:53:28.922Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6286,7 +6353,8 @@
             "isNonSurgical": false,
             "surgeryName": "",
             "surgeryDate": ""
-          }
+          },
+          "surgicalConsultationsByDate": {}
         },
         "0001418724": {
           "mabn": "0001418724",
@@ -6362,6 +6430,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001415940": {
@@ -6413,6 +6482,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001419157": {
@@ -6463,6 +6533,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001418784": {
@@ -6513,6 +6584,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001287139": {
@@ -6563,6 +6635,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420526": {
@@ -6613,6 +6686,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001411127": {
@@ -6663,6 +6737,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421285": {
@@ -6713,6 +6788,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001227262": {
@@ -6763,6 +6839,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001418775": {
@@ -6813,6 +6890,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420910": {
@@ -6863,6 +6941,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001040749": {
@@ -6913,6 +6992,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001419435": {
@@ -6963,6 +7043,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001418951": {
@@ -7013,6 +7094,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001037354": {
@@ -7063,6 +7145,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001377524": {
@@ -7113,6 +7196,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421838": {
@@ -7163,6 +7247,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421575": {
@@ -7213,6 +7298,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001325103": {
@@ -7263,6 +7349,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001417273": {
@@ -7313,6 +7400,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422079": {
@@ -7363,6 +7451,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422096": {
@@ -7413,6 +7502,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001291952": {
@@ -7463,6 +7553,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422207": {
@@ -7513,6 +7604,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422252": {
@@ -7563,6 +7655,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001153038": {
@@ -7613,6 +7706,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422322": {
@@ -7663,6 +7757,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422398": {
@@ -7713,6 +7808,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422488": {
@@ -7763,6 +7859,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001309625": {
@@ -7813,6 +7910,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422435": {
@@ -7863,6 +7961,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001416348": {
@@ -7913,6 +8012,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422625": {
@@ -7963,6 +8063,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422644": {
@@ -8013,6 +8114,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422884": {
@@ -8063,6 +8165,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422894": {
@@ -8113,6 +8216,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001200590": {
@@ -9081,7 +9185,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:35:09.530Z"
+      "updatedAt": "2026-10-01T14:53:28.923Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -9176,6 +9280,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0000844175": {
@@ -9252,6 +9357,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001416769": {
@@ -9303,6 +9409,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001416828": {
@@ -9353,6 +9460,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420321": {
@@ -9403,6 +9511,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001419674": {
@@ -9453,6 +9562,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001417494": {
@@ -9503,6 +9613,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422300": {
@@ -9553,6 +9664,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420565": {
@@ -9603,6 +9715,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001422339": {
@@ -9653,6 +9766,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001421947": {
@@ -9703,6 +9817,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001420070": {
@@ -9753,6 +9868,7 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
+          "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
         },
         "0001423406": {
@@ -10036,7 +10152,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:35:09.530Z"
+      "updatedAt": "2026-10-01T14:53:28.923Z"
     }
   },
   "episodeConsultations": {

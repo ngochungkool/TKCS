@@ -1197,6 +1197,7 @@ const server = http.createServer(async (req, res) => {
               surgeryName: '',
               surgeryDate: ''
             },
+            surgicalConsultationsByDate: existing.surgicalConsultationsByDate || {},
             surgicalConsultation: existing.surgicalConsultation || null
           };
         }
@@ -1297,48 +1298,6 @@ const server = http.createServer(async (req, res) => {
               note: 'Hẹn tái khám sau 14 ngày tại Phòng khám Nội tiết & Phòng khám Ngoại Thần kinh'
             };
           }
-
-          if (rKey === 'tk4') {
-            if (latestMabns[0]) {
-              const p0 = roomState.patientRecords[latestMabns[0]];
-              if (p0 && !p0.surgicalConsultation) {
-                p0.surgicalConsultation = {
-                  isConsulted: true,
-                  postConsultDiagnosis: 'Máu tụ dưới màng cứng bán cấp bán cầu T',
-                  surgeryMethod: 'Phẫu thuật mở sọ bóc bao màng cứng',
-                  decision: 'Đồng ý',
-                  advancePayment: '10.000.000đ',
-                  updatedAt: new Date().toISOString()
-                };
-              }
-            }
-            if (latestMabns[1]) {
-              const p1 = roomState.patientRecords[latestMabns[1]];
-              if (p1 && !p1.surgicalConsultation) {
-                p1.surgicalConsultation = {
-                  isConsulted: true,
-                  postConsultDiagnosis: 'U màng não vùng đính P kích thước 4x4cm',
-                  surgeryMethod: 'Phẫu thuật vi phẫu bóc u màng não',
-                  decision: 'Hội ý',
-                  advancePayment: '15.000.000đ',
-                  updatedAt: new Date().toISOString()
-                };
-              }
-            }
-            if (latestMabns[2]) {
-              const p2 = roomState.patientRecords[latestMabns[2]];
-              if (p2 && !p2.surgicalConsultation) {
-                p2.surgicalConsultation = {
-                  isConsulted: true,
-                  postConsultDiagnosis: 'Thoát vị đĩa đệm cột sống thắt lưng L4-L5',
-                  surgeryMethod: 'Phẫu thuật nội soi lấy nhân đệm',
-                  decision: 'Không đồng ý',
-                  advancePayment: '5.000.000đ',
-                  updatedAt: new Date().toISOString()
-                };
-              }
-            }
-          }
         }
 
         applyTk1MorningDischargeRules(roomState);
@@ -1377,7 +1336,10 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && pathname === '/api/ward-rounds/tk1') {
     const body = await readBody(req);
     const { action, roomKey } = body;
-    const targetRoomKey = (roomKey && ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].includes(roomKey)) ? roomKey : 'tk1';
+    const reqUrl = new URL(req.url, 'http://localhost');
+    const qRoom = reqUrl.searchParams.get('room');
+    const chosenRoom = roomKey || qRoom;
+    const targetRoomKey = (chosenRoom && ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].includes(chosenRoom)) ? chosenRoom : 'tk1';
     if (!db.wardRounds || !db.wardRounds[targetRoomKey]) {
       syncTk1WardRoundsFromHis();
     }
@@ -1504,14 +1466,26 @@ const server = http.createServer(async (req, res) => {
         };
       }
       if (surgicalConsultation && typeof surgicalConsultation === 'object') {
-        rec.surgicalConsultation = {
-          isConsulted: Boolean(surgicalConsultation.isConsulted),
-          postConsultDiagnosis: String(surgicalConsultation.postConsultDiagnosis || '').trim(),
-          surgeryMethod: String(surgicalConsultation.surgeryMethod || '').trim(),
-          decision: String(surgicalConsultation.decision || '').trim(),
-          advancePayment: String(surgicalConsultation.advancePayment || '').trim(),
-          updatedAt: new Date().toISOString()
-        };
+        const isConsulted = Boolean(surgicalConsultation.isConsulted);
+        if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
+        if (isConsulted) {
+          const scObj = {
+            isConsulted: true,
+            dateKey: targetDate,
+            postConsultDiagnosis: String(surgicalConsultation.postConsultDiagnosis || '').trim(),
+            surgeryMethod: String(surgicalConsultation.surgeryMethod || '').trim(),
+            decision: String(surgicalConsultation.decision || '').trim(),
+            advancePayment: String(surgicalConsultation.advancePayment || '').trim(),
+            updatedAt: new Date().toISOString()
+          };
+          rec.surgicalConsultationsByDate[targetDate] = scObj;
+          rec.surgicalConsultation = scObj;
+        } else {
+          delete rec.surgicalConsultationsByDate[targetDate];
+          if (rec.surgicalConsultation && (!rec.surgicalConsultation.dateKey || rec.surgicalConsultation.dateKey === targetDate)) {
+            delete rec.surgicalConsultation;
+          }
+        }
       }
       if (tasks && typeof tasks === 'object') {
         rec.tasksByDate[targetDate] = {
@@ -1574,28 +1548,37 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (action === 'SAVE_SURGICAL_CONSULTATION') {
-      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, isConsulted } = body;
+      const { mabn, dateKey, postConsultDiagnosis, surgeryMethod, decision, advancePayment, isConsulted } = body;
       const rec = tk1.patientRecords[mabn];
       if (rec) {
-        rec.surgicalConsultation = {
+        const targetDate = dateKey || todayKey;
+        if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
+        const consultObj = {
           isConsulted: isConsulted !== undefined ? Boolean(isConsulted) : true,
-          postConsultDiagnosis: String(postConsultDiagnosis || '').trim(),
+          dateKey: targetDate,
+          postConsultDiagnosis: String(postConsultDiagnosis !== undefined ? postConsultDiagnosis : (rec.chanDoanHis || '')).trim(),
           surgeryMethod: String(surgeryMethod || '').trim(),
           decision: String(decision || '').trim(),
           advancePayment: String(advancePayment || '').trim(),
           updatedAt: new Date().toISOString()
         };
+        rec.surgicalConsultationsByDate[targetDate] = consultObj;
+        rec.surgicalConsultation = consultObj;
         broadcastState(`🔪 Đã lưu hội chẩn mổ BN ${rec.hoten} (${tk1.roomName})`);
       }
       return sendWardResponse();
     }
 
     if (action === 'DELETE_SURGICAL_CONSULTATION') {
-      const { mabn } = body;
+      const { mabn, dateKey } = body;
       const rec = tk1.patientRecords[mabn];
       if (rec) {
+        const targetDate = dateKey || todayKey;
+        if (rec.surgicalConsultationsByDate) {
+          delete rec.surgicalConsultationsByDate[targetDate];
+        }
         delete rec.surgicalConsultation;
-        broadcastState(`🗑️ Đã huỷ hội chẩn mổ BN ${rec.hoten} (${tk1.roomName})`);
+        broadcastState(`🗑️ Đã xoá BN ${rec.hoten} khỏi danh sách hội chẩn mổ (${tk1.roomName})`);
       }
       return sendWardResponse();
     }
