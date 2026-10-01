@@ -1,5 +1,5 @@
 {
-  "version": 1790816304751,
+  "version": 1790816316650,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -727,6 +727,7 @@
         "14": "0001423405",
         "15": "0001422158",
         "16": "0001032592",
+        "17": "0001423448",
         "19": "0001423331",
         "20": "0001418457",
         "21": "0001421561",
@@ -734,7 +735,6 @@
         "23": "0001421963",
         "24": "0001421064",
         "23X": "0001423396",
-        "16X": "0001423448",
         "12X": "0001423930",
         "3X": "0001423953"
       },
@@ -2890,7 +2890,7 @@
         "reason": "Chuyển mổ / Chuyển phòng",
         "deletedAtMs": 1790816272146
       },
-      "updatedAt": "2026-10-01T00:58:24.751Z",
+      "updatedAt": "2026-10-01T00:58:36.649Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4231,7 +4231,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:58:24.751Z"
+      "updatedAt": "2026-10-01T00:58:36.649Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5234,7 +5234,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:58:24.751Z"
+      "updatedAt": "2026-10-01T00:58:36.649Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7484,7 +7484,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:58:24.751Z"
+      "updatedAt": "2026-10-01T00:58:36.650Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8266,7 +8266,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:58:24.751Z"
+      "updatedAt": "2026-10-01T00:58:36.650Z"
     }
   },
   "episodeConsultations": {
