@@ -1,5 +1,5 @@
 {
-  "version": 1790865296037,
+  "version": 1790865309531,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3357,7 +3357,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:34:56.032Z",
+      "updatedAt": "2026-10-01T14:35:09.528Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4993,7 +4993,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:34:56.033Z"
+      "updatedAt": "2026-10-01T14:35:09.529Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6176,7 +6176,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:34:56.033Z"
+      "updatedAt": "2026-10-01T14:35:09.529Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6286,14 +6286,6 @@
             "isNonSurgical": false,
             "surgeryName": "",
             "surgeryDate": ""
-          },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "postConsultDiagnosis": "Máu tụ dưới màng cứng bán cấp",
-            "surgeryMethod": "Mở sọ bóc bao máu tụ",
-            "decision": "Đồng ý",
-            "advancePayment": "10 triệu",
-            "updatedAt": "2026-10-01T14:34:56.036Z"
           }
         },
         "0001418724": {
@@ -9089,7 +9081,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:34:56.035Z"
+      "updatedAt": "2026-10-01T14:35:09.530Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10044,7 +10036,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:34:56.035Z"
+      "updatedAt": "2026-10-01T14:35:09.530Z"
     }
   },
   "episodeConsultations": {
