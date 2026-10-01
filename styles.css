@@ -2415,10 +2415,11 @@ dialog.modal-dialog::backdrop {
 
 .room-ws-header {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: center;
+  text-align: center;
+  gap: 0.65rem;
   padding-bottom: 1.1rem;
   margin-bottom: 1.25rem;
   border-bottom: 2px solid #f1f5f9;
@@ -2427,7 +2428,11 @@ dialog.modal-dialog::backdrop {
 .room-ws-title-group {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .room-ws-kicker {
@@ -2447,12 +2452,14 @@ dialog.modal-dialog::backdrop {
   font-weight: 800;
   color: #0f172a;
   margin: 0;
+  text-align: center;
 }
 
 .room-ws-doctors-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   margin-top: 0.25rem;
 }

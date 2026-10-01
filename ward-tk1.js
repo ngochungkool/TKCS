@@ -509,7 +509,7 @@
 
     document.getElementById('tk1-count-tab-xn').textContent = xnRows.length;
     xnBody.innerHTML = xnRows.length === 0
-      ? `<tr><td colspan="4" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có bệnh nhân nào có chỉ định Xét nghiệm / CĐHA / Ghi chú ngày ${formatDateDisplayVN(curDateKey)}.</td></tr>`
+      ? `<tr><td colspan="3" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có bệnh nhân nào có chỉ định Xét nghiệm / CĐHA / Ghi chú ngày ${formatDateDisplayVN(curDateKey)}.</td></tr>`
       : xnRows.map(({ bedCode, rec }) => {
           const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
           const badges = [
@@ -533,22 +533,23 @@
                 </a>
                 <span style="font-size:0.76rem;color:#64748b;"> · ${rec.tuoi}</span>
               </td>
-              <td>${badgesHtml}</td>
               <td>
-                <div style="display:flex;align-items:center;gap:6px;">
+                ${badgesHtml}
+                <div style="margin-top:6px;display:flex;align-items:center;gap:6px;">
+                  <span style="font-size:0.75rem;font-weight:700;color:#64748b;white-space:nowrap;">📝 Ghi chú:</span>
                   <input
                     type="text"
                     class="date-input"
-                    style="flex:1;font-size:0.82rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;"
+                    style="flex:1;height:30px;font-size:0.8rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;"
                     value="${noteVal.replace(/"/g, '&quot;')}"
-                    placeholder="Ghi chú đi buồng..."
+                    placeholder="Nhập ghi chú đi buồng (nếu có)..."
                     id="inline-note-${rec.mabn}"
                     onkeydown="if(event.key==='Enter') window.TK1Module.saveInlineNote('${rec.mabn}')"
                   />
                   <button
                     type="button"
                     class="btn-primary-sm"
-                    style="padding:0.38rem 0.75rem;font-size:0.76rem;font-family:'Be Vietnam Pro',sans-serif;"
+                    style="padding:0.25rem 0.65rem;font-size:0.74rem;font-family:'Be Vietnam Pro',sans-serif;"
                     onclick="window.TK1Module.saveInlineNote('${rec.mabn}')"
                   >
                     Lưu
@@ -1513,7 +1514,8 @@
       note: existingToday.note || ''
     };
 
-    document.getElementById('tk1-modal-patient-title').textContent = `${formatBedLabel(curBed)} — ${rec.hoten} (${rec.tuoi}) · 📅 ${formatDateDisplayVN(curDateKey)}`;
+    const bedLabel = curBed ? formatBedLabel(curBed) : 'Chưa xếp';
+    document.getElementById('tk1-modal-patient-title').textContent = `${bedLabel} — ${rec.hoten}`;
 
     // Cập nhật nhãn nút Lui / Tới hiển thị số giường trước & sau
     const entries = getOrderedOccupiedBedEntries();
@@ -1531,8 +1533,8 @@
         btnPrev.style.display = 'inline-flex';
         btnNext.style.display = 'inline-flex';
       } else {
-        btnPrev.textContent = `◀ Lui`;
-        btnNext.textContent = `Tới ▶`;
+        btnPrev.style.display = 'none';
+        btnNext.style.display = 'none';
       }
     }
 
