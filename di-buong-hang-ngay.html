@@ -583,7 +583,6 @@
 
       for (const room of WARD_ROOMS_CONFIG) {
         const docsEl = document.getElementById(`ws-docs-${room.key}`);
-        const statsEl = document.getElementById(`ws-stats-${room.key}`);
 
         const roomDocs = (wardDbState.doctors || [])
           .filter(d => d.assignedRoom === room.name)
@@ -600,10 +599,6 @@
               </span>
             `;
           }).join('');
-        }
-
-        if (statsEl) {
-          statsEl.innerHTML = '';
         }
       }
     }

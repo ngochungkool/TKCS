@@ -535,26 +535,13 @@
               </td>
               <td>
                 ${badgesHtml}
-                <div style="margin-top:6px;display:flex;align-items:center;gap:6px;">
-                  <span style="font-size:0.75rem;font-weight:700;color:#64748b;white-space:nowrap;">📝 Ghi chú:</span>
-                  <input
-                    type="text"
-                    class="date-input"
-                    style="flex:1;height:30px;font-size:0.8rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;"
-                    value="${noteVal.replace(/"/g, '&quot;')}"
-                    placeholder="Nhập ghi chú đi buồng (nếu có)..."
-                    id="inline-note-${rec.mabn}"
-                    onkeydown="if(event.key==='Enter') window.TK1Module.saveInlineNote('${rec.mabn}')"
-                  />
-                  <button
-                    type="button"
-                    class="btn-primary-sm"
-                    style="padding:0.25rem 0.65rem;font-size:0.74rem;font-family:'Be Vietnam Pro',sans-serif;"
-                    onclick="window.TK1Module.saveInlineNote('${rec.mabn}')"
-                  >
-                    Lưu
-                  </button>
-                </div>
+                ${
+                  noteVal
+                    ? `<div style="margin-top:6px;font-size:0.8rem;color:#1e293b;background:#f8fafc;border:1px solid #cbd5e1;border-left:3.5px solid #004aad;padding:4px 9px;border-radius:6px;display:inline-block;max-width:100%;">
+                        <strong style="color:#004aad;">📝 Ghi chú:</strong> ${noteVal}
+                      </div>`
+                    : ''
+                }
               </td>
             </tr>
           `;
