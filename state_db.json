@@ -1,5 +1,5 @@
 {
-  "version": 1790818226853,
+  "version": 1790822572108,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -291,11 +291,11 @@
   ],
   "uploadedHisFiles": [
     {
-      "fileName": "1.xlsx → [Đang điều trị: 106 dòng]",
+      "fileName": "1.xlsx → [Đang điều trị: 26 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
-      "sizeBytes": 52604,
-      "uploadedAt": "08:01:13 1/10/2026",
+      "sizeBytes": 20585,
+      "uploadedAt": "09:42:51 1/10/2026",
       "extractedPreview": null
     },
     {
@@ -638,74 +638,74 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 92,
+      "dauCa": 12,
       "benhVao": 16,
       "raVien": 1,
       "chuyenDen": 2,
       "chuyenDi": 3,
       "tuVong": 0,
       "benhMo": 0,
-      "hienCo": 106,
-      "baoHiem": 102
+      "hienCo": 26,
+      "baoHiem": 25
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 22,
-        "benhVao": 6,
+        "dauCa": 11,
+        "benhVao": 16,
         "raVien": 0,
-        "chuyenDen": 0,
+        "chuyenDen": 2,
         "chuyenDi": 3,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 25,
-        "baoHiem": 24
+        "hienCo": 26,
+        "baoHiem": 25
       },
       "Thần kinh 2": {
-        "dauCa": 20,
-        "benhVao": 2,
-        "raVien": 0,
-        "chuyenDen": 1,
-        "chuyenDi": 0,
-        "tuVong": 0,
-        "benhMo": 0,
-        "hienCo": 23,
-        "baoHiem": 22
-      },
-      "Thần kinh 3": {
-        "dauCa": 13,
-        "benhVao": 1,
+        "dauCa": 0,
+        "benhVao": 0,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 14,
-        "baoHiem": 13
+        "hienCo": 0,
+        "baoHiem": 0
+      },
+      "Thần kinh 3": {
+        "dauCa": 0,
+        "benhVao": 0,
+        "raVien": 0,
+        "chuyenDen": 0,
+        "chuyenDi": 0,
+        "tuVong": 0,
+        "benhMo": 0,
+        "hienCo": 0,
+        "baoHiem": 0
       },
       "Thần kinh 4": {
-        "dauCa": 27,
-        "benhVao": 7,
+        "dauCa": 1,
+        "benhVao": 0,
         "raVien": 1,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 33,
-        "baoHiem": 32
+        "hienCo": 0,
+        "baoHiem": 0
       },
       "Hồi sức thần kinh": {
-        "dauCa": 10,
+        "dauCa": 0,
         "benhVao": 0,
         "raVien": 0,
-        "chuyenDen": 1,
+        "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 11,
-        "baoHiem": 11
+        "hienCo": 0,
+        "baoHiem": 0
       }
     },
-    "updatedAt": "2026-10-01T01:01:14.251Z"
+    "updatedAt": "2026-10-01T02:42:52.108Z"
   },
   "wardRounds": {
     "tk1": {
@@ -754,8 +754,8 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "01/02/2026",
           "hanTheDen": "31/01/2027",
-          "diaChi": "PHÚ AN-Xã Tây Sơn--Tỉnh Gia Lai",
-          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "diaChi": "Phú An -Xã Tây Sơn--Tỉnh Gia Lai",
+          "chanDoanHis": "T00.8-Tổn thương nông tác động kết hợp khác ở nhiều vùng cơ thể",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Dương Minh Trí",
           "ngayVaoStr": "16/09/2026",
@@ -1906,13 +1906,13 @@
           "tuoi": "18 tuổi",
           "namSinh": "2008",
           "gioiTinh": "Nam",
-          "doiTuong": "BHYT",
-          "soTheBhyt": "HS4665420172718",
-          "tuyenDangKy": "Đúng tuyến",
-          "hanTheTu": "01/01/2026",
-          "hanTheDen": "31/12/2026",
-          "diaChi": "Thôn Từ  Nham-Phường Sông Cầu--Tỉnh Đắk Lắk",
-          "chanDoanHis": "T00.8-Tổn thương nông tác động kết hợp khác ở nhiều vùng cơ thể",
+          "doiTuong": "Viện phí",
+          "soTheBhyt": "",
+          "tuyenDangKy": "",
+          "hanTheTu": "",
+          "hanTheDen": "",
+          "diaChi": "từ nham-Phường Sông Cầu--Tỉnh Đắk Lắk",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Ngô Văn Cư",
           "ngayVaoStr": "27/09/2026",
@@ -2333,7 +2333,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "10/05/2026",
           "hanTheDen": "09/05/2027",
-          "diaChi": "Phú Thạnh -Xã Tuy An Nam--Tỉnh Đắk Lắk",
+          "diaChi": "phú thạnh-Xã Tuy An Nam--Tỉnh Đắk Lắk",
           "chanDoanHis": "S06.50-Xuất huyết dưới màng cứng do chấn thương, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.50-Xuất huyết dưới màng cứng do chấn thương, không có vết thương nội sọ hở",
           "bsDieuTri": "Lê Đức Nhật",
@@ -2535,8 +2535,8 @@
           "tuyenDangKy": "Đúng tuyến",
           "hanTheTu": "01/04/2026",
           "hanTheDen": "31/12/2026",
-          "diaChi": "thôn 5-Xã Kon Gang--Tỉnh Gia Lai",
-          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "diaChi": "Thôn 5-Xã Kon Gang--Tỉnh Gia Lai",
+          "chanDoanHis": "T00.8-Tổn thương nông tác động kết hợp khác ở nhiều vùng cơ thể",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Dương Minh Trí",
           "ngayVaoStr": "29/09/2026",
@@ -2589,7 +2589,7 @@
           "tuyenDangKy": "Đúng tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "hoà nghị-Phường An Nhơn Nam--Tỉnh Gia Lai",
+          "diaChi": "Hòa Nghị -Phường An Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "S06.01-Chấn động não, có vết thương nội sọ hở",
           "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
           "bsDieuTri": "Dương Minh Trí",
@@ -3061,6 +3061,50 @@
             "previousBed": "",
             "removedAtMs": 0
           }
+        },
+        "0000942496": {
+          "mabn": "0000942496",
+          "episodeKey": "2600373712",
+          "maKcb": "2600373712",
+          "madieutri": "949822",
+          "soBA": "26077019",
+          "hoten": "TỪ THỊ CẤN",
+          "tuoi": "95 tuổi",
+          "namSinh": "1931",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "TS2525221754611",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "Hiệp Long-Xã Hội Sơn--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H026",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
         }
       },
       "latestExcelMabns": [
@@ -3088,7 +3132,8 @@
         "0001423919",
         "0001423930",
         "0001423940",
-        "0001423953"
+        "0001423953",
+        "0000942496"
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": {
@@ -3104,7 +3149,7 @@
         "reason": "Chuyển mổ / Chuyển phòng",
         "deletedAtMs": 1790816392749
       },
-      "updatedAt": "2026-10-01T01:30:26.852Z",
+      "updatedAt": "2026-10-01T02:42:53.216Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3620,7 +3665,7 @@
           "tuyenDangKy": "Trái tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "Trung Ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
+          "diaChi": "trung ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "customDiagnosis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3664,7 +3709,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "01/02/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "Vạn Hội 1-Xã Vạn Đức--Tỉnh Gia Lai",
+          "diaChi": "Xã Vạn Đức--Tỉnh Gia Lai",
           "chanDoanHis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "customDiagnosis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3972,7 +4017,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "08/05/2026",
           "hanTheDen": "07/05/2027",
-          "diaChi": "Cửu Lợi Đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
+          "diaChi": "cửu lợi đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -4574,34 +4619,10 @@
           }
         }
       },
-      "latestExcelMabns": [
-        "0001412378",
-        "0001419869",
-        "0001397969",
-        "0001373574",
-        "0001420471",
-        "0001265243",
-        "0001419943",
-        "0000462435",
-        "0000789370",
-        "0001422060",
-        "0001422302",
-        "0001420757",
-        "0001418939",
-        "0001422775",
-        "0001422908",
-        "0001422322",
-        "0001325103",
-        "0001254460",
-        "0001423438",
-        "0001423447",
-        "0001421947",
-        "0000024430",
-        "0001423960"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:30:26.852Z"
+      "updatedAt": "2026-10-01T02:42:53.217Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5689,25 +5710,10 @@
           }
         }
       },
-      "latestExcelMabns": [
-        "0001383920",
-        "0000835346",
-        "0001327863",
-        "0001413514",
-        "0001422911",
-        "0001417494",
-        "0001420565",
-        "0001220543",
-        "0001423182",
-        "0001181071",
-        "0001415849",
-        "0001262499",
-        "0001423451",
-        "0001423393"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:30:26.852Z"
+      "updatedAt": "2026-10-01T02:42:53.217Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6829,7 +6835,7 @@
           "customDiagnosis": "U51.431-Não nham [U ác của não]",
           "bsDieuTri": "Dương Minh Trí",
           "ngayVaoStr": "26/09/2026",
-          "hisBed": "H094",
+          "hisBed": "H078",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -8218,44 +8224,10 @@
           }
         }
       },
-      "latestExcelMabns": [
-        "0001413526",
-        "0001415940",
-        "0001418784",
-        "0001411127",
-        "0001421285",
-        "0001418775",
-        "0001040749",
-        "0001418951",
-        "0001421575",
-        "0001422079",
-        "0001291952",
-        "0001422207",
-        "0001422252",
-        "0001422398",
-        "0001422488",
-        "0001309625",
-        "0001422435",
-        "0001422625",
-        "0001422884",
-        "0001422894",
-        "0001200590",
-        "0001423036",
-        "0001423062",
-        "0001423163",
-        "0001423344",
-        "0001423307",
-        "0001422572",
-        "0001423683",
-        "0000162797",
-        "0001422255",
-        "0001423830",
-        "0001423904",
-        "0001423932"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:30:26.853Z"
+      "updatedAt": "2026-10-01T02:42:53.217Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8831,9 +8803,9 @@
           "diaChi": "Xã Bình Phú--Tỉnh Gia Lai",
           "chanDoanHis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
           "customDiagnosis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
-          "bsDieuTri": "Phạm Thái Hoàng Luân",
-          "ngayVaoStr": "29/09/2026",
-          "hisBed": "H001",
+          "bsDieuTri": "Đào Văn Nhân",
+          "ngayVaoStr": "28/09/2026",
+          "hisBed": "H006",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -9122,22 +9094,10 @@
           }
         }
       },
-      "latestExcelMabns": [
-        "0001412464",
-        "0000844175",
-        "0001416828",
-        "0001420321",
-        "0001419674",
-        "0001422339",
-        "0001420070",
-        "0001423406",
-        "0001232783",
-        "0001423465",
-        "0001423888"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:30:26.853Z"
+      "updatedAt": "2026-10-01T02:42:53.217Z"
     }
   },
   "episodeConsultations": {
@@ -9177,5 +9137,6 @@
         "consultTreatment": ""
       }
     ]
-  }
+  },
+  "lastExcelUploadTime": "09:42 ngày 01/10/2026"
 }
