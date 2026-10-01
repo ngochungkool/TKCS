@@ -1,5 +1,5 @@
 {
-  "version": 1790867870530,
+  "version": 1790895128236,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3389,7 +3389,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T15:17:50.523Z",
+      "updatedAt": "2026-10-01T22:52:08.023Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -5047,7 +5047,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T15:17:50.523Z"
+      "updatedAt": "2026-10-01T22:52:08.024Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6243,7 +6243,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T15:17:50.524Z"
+      "updatedAt": "2026-10-01T22:52:08.025Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -9222,7 +9222,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T15:17:50.524Z"
+      "updatedAt": "2026-10-01T22:52:08.027Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10189,7 +10189,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T15:17:50.525Z"
+      "updatedAt": "2026-10-01T22:52:08.028Z"
     }
   },
   "episodeConsultations": {
@@ -10727,6 +10727,757 @@
         },
         "doctorNotes": "",
         "approvedBy": ""
+      }
+    },
+    "2026-09-30": {
+      "dateKey": "2026-09-30",
+      "updatedAt": "2026-10-01T22:52:08.217Z",
+      "roomReports": {
+        "tk1": {
+          "roomKey": "tk1",
+          "roomName": "Thần kinh 1",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-01T22:52:08.032Z",
+          "personnel": {
+            "nurses": "Linh - Hiếu",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "Phượng",
+            "xuatVien": 1,
+            "chamSocCap2": 4,
+            "hoiChan": 2,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 32,
+            "vaoKK": 4,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 1,
+            "raKhac": 3,
+            "tuVong": 0,
+            "hienCo": 32,
+            "bhyt": 25
+          },
+          "admissions": [
+            {
+              "id": "adm-tk1-1",
+              "stt": 1,
+              "mabn": "0001422413",
+              "hoten": "TRƯƠNG HOÀNG THIỆN",
+              "tuoi": "21",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "An Hòa-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-2",
+              "stt": 2,
+              "mabn": "0001422706",
+              "hoten": "PHAN THỊ TUYẾT NHUNG",
+              "tuoi": "71",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Cẩm Văn-Phường An Nhơn Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-3",
+              "stt": 3,
+              "mabn": "0001422719",
+              "hoten": "LÊ THỊ HƯỜNG",
+              "tuoi": "69",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "phú thạnh-Xã Tuy An Nam--Tỉnh Đắk Lắk",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-4",
+              "stt": 4,
+              "mabn": "0001422908",
+              "hoten": "NGUYỄN HỨA",
+              "tuoi": "79",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "bình đê-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
+          "discharges": [
+            {
+              "id": "dis-tk1-1",
+              "stt": 1,
+              "mabn": "0001420028",
+              "hoten": "PHẠM VĂN CƯ",
+              "tuoi": "67",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600358965",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-2",
+              "stt": 2,
+              "mabn": "0001420772",
+              "hoten": "VÕ KIỆT",
+              "tuoi": "22",
+              "raHan": false,
+              "baoHiem": true,
+              "svv": "2600361636",
+              "note": "Chuyển Khoa Ngoại Chấn thương - Bỏng",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-3",
+              "stt": 3,
+              "mabn": "0001422335",
+              "hoten": "HỨA TRUNG BẢO",
+              "tuoi": "50",
+              "raHan": false,
+              "baoHiem": true,
+              "svv": "2600367447",
+              "note": "Chuyển Khoa Răng Hàm Mặt",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-4",
+              "stt": 4,
+              "mabn": "0001422048",
+              "hoten": "NGÔ TÙNG THỊNH",
+              "tuoi": "53",
+              "raHan": false,
+              "baoHiem": false,
+              "svv": "2600366902",
+              "note": "Chuyển Khoa Tai Mũi Họng",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        },
+        "tk2": {
+          "roomKey": "tk2",
+          "roomName": "Thần kinh 2",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-01T22:52:08.032Z",
+          "personnel": {
+            "nurses": "Linh - Hiếu",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "Phượng",
+            "xuatVien": 0,
+            "chamSocCap2": 4,
+            "hoiChan": 2,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 21,
+            "vaoKK": 1,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 22,
+            "bhyt": 21
+          },
+          "admissions": [
+            {
+              "id": "adm-tk2-1",
+              "stt": 1,
+              "mabn": "0001422775",
+              "hoten": "LA O THỊ LIÊN",
+              "tuoi": "71",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "suối cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        },
+        "tk3": {
+          "roomKey": "tk3",
+          "roomName": "Thần kinh 3",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-01T22:52:08.032Z",
+          "personnel": {
+            "nurses": "Linh - Hiếu",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "Phượng",
+            "xuatVien": 0,
+            "chamSocCap2": 4,
+            "hoiChan": 2,
+            "tangTren": 2,
+            "tangDuoi": 1
+          },
+          "census": {
+            "benhCu": 11,
+            "vaoKK": 2,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 13,
+            "bhyt": 13
+          },
+          "admissions": [
+            {
+              "id": "adm-tk3-1",
+              "stt": 1,
+              "mabn": "0000893787",
+              "hoten": "NGUYỄN XUÂN HÀ",
+              "tuoi": "65",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Phụng Sơn-Xã Tuy Phước Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk3-2",
+              "stt": 2,
+              "mabn": "0001422911",
+              "hoten": "NGUYỄN TRỌNG NHÂN KHOA",
+              "tuoi": "17",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "vân hội 1-Xã Tuy Phước--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        },
+        "tk4": {
+          "roomKey": "tk4",
+          "roomName": "Thần kinh 4",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-01T22:52:08.032Z",
+          "personnel": {
+            "nurses": "Linh - Hiếu",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "Phượng",
+            "xuatVien": 0,
+            "chamSocCap2": 4,
+            "hoiChan": 2,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 28,
+            "vaoKK": 9,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 37,
+            "bhyt": 36
+          },
+          "admissions": [
+            {
+              "id": "adm-tk4-1",
+              "stt": 1,
+              "mabn": "0001422398",
+              "hoten": "NGUYỄN THỊ THANH",
+              "tuoi": "78",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Tấn Thạnh 2-Phường Hoài Nhơn Tây--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-2",
+              "stt": 2,
+              "mabn": "0001309625",
+              "hoten": "LƯƠNG THỊ NHƠN",
+              "tuoi": "78",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Thượng Giang 1-Xã Bình Khê--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-3",
+              "stt": 3,
+              "mabn": "0001422488",
+              "hoten": "NGUYỄN THÀNH LONG",
+              "tuoi": "72",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Phường An Nhơn Nam--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-4",
+              "stt": 4,
+              "mabn": "0001422435",
+              "hoten": "ĐÀM NGUYỄN QUỲNH HƯƠNG",
+              "tuoi": "14",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Xã Ân Tường--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-5",
+              "stt": 5,
+              "mabn": "0001416348",
+              "hoten": "ĐỒNG THỊ KÉN",
+              "tuoi": "78",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Chánh định-Xã Ngô Mây--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-6",
+              "stt": 6,
+              "mabn": "0001422625",
+              "hoten": "PHẠM THỊ LƯỚI",
+              "tuoi": "79",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "hiệp vinh-Xã Canh Vinh--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-7",
+              "stt": 7,
+              "mabn": "0001422644",
+              "hoten": "HUỲNH THỊ NHẠN",
+              "tuoi": "53",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Xã Hội Sơn--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-8",
+              "stt": 8,
+              "mabn": "0001422884",
+              "hoten": "ĐINH VĂN HIÊU",
+              "tuoi": "27",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Làng Cát-Xã Canh Liên--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-9",
+              "stt": 9,
+              "mabn": "0001422894",
+              "hoten": "NGUYỄN VĂN TUẤN",
+              "tuoi": "39",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Xã Cát Tiến--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        },
+        "hstk": {
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-01T22:52:08.032Z",
+          "personnel": {
+            "nurses": "",
+            "nursesDay": "Việt - Quyên - Tân",
+            "nursesNight": "Quyện - Nguyên - Vĩ",
+            "orderly": "Phượng",
+            "xuatVien": 0,
+            "chamSocCap2": 4,
+            "hoiChan": 2,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 10,
+            "vaoKK": 0,
+            "vaoKhac": 2,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 12,
+            "bhyt": 10
+          },
+          "admissions": [
+            {
+              "id": "adm-hstk-1",
+              "stt": 1,
+              "mabn": "0001422339",
+              "hoten": "RA LAN TRUNG",
+              "tuoi": "68",
+              "cause": "TNGT",
+              "source": "Khoa Thần kinh - Đột quỵ",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "canh phước-Xã Vân Canh--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-hstk-2",
+              "stt": 2,
+              "mabn": "0001421947",
+              "hoten": "TRẦN VĂN QUYẾT",
+              "tuoi": "49",
+              "cause": "TNGT",
+              "source": "Khoa Thần kinh - Đột quỵ",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "thượng an 1-Phường An Khê--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        }
+      },
+      "highlightCases": [
+        {
+          "id": "case-3009-1",
+          "stt": 1,
+          "hoten": "NGUYỄN CHÍ SINH",
+          "tuoi": "60",
+          "gioiTinh": "NAM",
+          "diaChi": "An Thượng 3-Xã Cửu An--Tỉnh Gia Lai",
+          "ngayVaoVien": "12/09/2026",
+          "ngayXinVe": "30/09/2026",
+          "ngayPhauThuat": "",
+          "category": "HSTK – BỆNH NẶNG XIN VỀ",
+          "categoryKey": "XIN_VE",
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "chanDoan": "Xuất huyết não tái phát/ HP EVD đã rút/ Xuất huyết não-não thất/ Viêm phổi thở máy",
+          "dienBien": "Bệnh nhân hôn mê sâu, tiên lượng tử vong, gia đình xin về.",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [
+            {
+              "id": "img-3009-1",
+              "title": "CT Sọ não (12/09/2026)",
+              "caption": "Lúc vào viện",
+              "url": "/uploads_clinical/2026-09-30/image1.png"
+            },
+            {
+              "id": "img-3009-2",
+              "title": "CT Sọ não (28/09/2026)",
+              "caption": "Sau rút EVD",
+              "url": "/uploads_clinical/2026-09-30/image2.png"
+            },
+            {
+              "id": "img-3009-3",
+              "title": "CT Sọ não (30/09/2026)",
+              "caption": "Xuất huyết não tái phát diện rộng",
+              "url": "/uploads_clinical/2026-09-30/image3.png"
+            }
+          ]
+        },
+        {
+          "id": "case-3009-2",
+          "stt": 1,
+          "hoten": "TRÌNH THỊ CÚC HOA",
+          "tuoi": "76",
+          "gioiTinh": "NỮ",
+          "diaChi": "phú giáo-Xã Ngô Mây--Tỉnh Gia Lai",
+          "ngayVaoVien": "30/09/2026",
+          "ngayPhauThuat": "30/09/2026",
+          "ngayXinVe": "",
+          "category": "HSTK – BỆNH MỔ CẤP CỨU",
+          "categoryKey": "MO_CC",
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "chanDoan": "Hậu phẫu EVD/ Xuất huyết dưới nhện, Xuất huyết não thất, TD não úng thủy/ Tăng huyết áp",
+          "dienBien": "Phẫu thuật đặt dẫn lưu não thất ra ngoài (EVD) cấp cứu.",
+          "kipMo": "BS. Trực Ngoại thần kinh",
+          "selectedForSlide": true,
+          "images": [
+            {
+              "id": "img-3009-4",
+              "title": "CT Sọ não cấp cứu (30/09/2026)",
+              "caption": "Xuất huyết dưới nhện, não thất, não úng thủy",
+              "url": "/uploads_clinical/2026-09-30/image4.png"
+            }
+          ]
+        },
+        {
+          "id": "case-3009-3",
+          "stt": 2,
+          "hoten": "ĐỖ THỊ HIỆP",
+          "tuoi": "62",
+          "gioiTinh": "NỮ",
+          "diaChi": "an phong-Xã Ya Hội--Tỉnh Gia Lai",
+          "ngayVaoVien": "30/09/2026",
+          "ngayPhauThuat": "30/09/2026",
+          "ngayXinVe": "",
+          "category": "HSTK – BỆNH MỔ CẤP CỨU",
+          "categoryKey": "MO_CC",
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "chanDoan": "Đa chấn thương/ Chấn thương sọ não / Vết thương lóc da đầu 2 thái dương đỉnh 2 bên/ Gãy cổ phẫu thuật xương cánh tay, gãy xương vai trái",
+          "dienBien": "Phẫu thuật khâu vết thương lóc da đầu, cố định xương gãy.",
+          "kipMo": "Kíp trực NTK - Chấn thương chỉnh hình",
+          "selectedForSlide": true,
+          "images": [
+            {
+              "id": "img-3009-5",
+              "title": "CT Sọ não cấp cứu",
+              "caption": "Tổn thương sọ não, lóc da đầu",
+              "url": "/uploads_clinical/2026-09-30/image5.png"
+            },
+            {
+              "id": "img-3009-6",
+              "title": "X-quang vai trái",
+              "caption": "Gãy cổ phẫu thuật xương cánh tay, gãy xương vai trái",
+              "url": "/uploads_clinical/2026-09-30/image7.png"
+            },
+            {
+              "id": "img-3009-7",
+              "title": "X-quang ngực thẳng",
+              "caption": "Kiểm tra khung sườn và ngực",
+              "url": "/uploads_clinical/2026-09-30/image6.png"
+            }
+          ]
+        },
+        {
+          "id": "case-3009-4",
+          "stt": 1,
+          "hoten": "NGUYỄN DUY",
+          "tuoi": "49",
+          "gioiTinh": "NAM",
+          "diaChi": "an xuân 3-Xã Cửu An--Tỉnh Gia Lai",
+          "ngayVaoVien": "01/10/2026",
+          "ngayPhauThuat": "01/10/2026",
+          "ngayXinVe": "",
+          "category": "TK1 – BỆNH MỔ CẤP CỨU",
+          "categoryKey": "MO_CC",
+          "roomKey": "tk1",
+          "roomName": "Thần kinh 1",
+          "chanDoan": "Chấn thương sọ não- Tụ máu ngoài màng cứng bán cầu trái",
+          "dienBien": "Mở nắp sọ lấy máu tụ ngoài màng cứng cấp cứu bán cầu trái.",
+          "kipMo": "BS. Trực",
+          "selectedForSlide": true,
+          "images": [
+            {
+              "id": "img-3009-8",
+              "title": "CT Sọ não cấp cứu",
+              "caption": "Tụ máu ngoài màng cứng thấu kính bán cầu trái",
+              "url": "/uploads_clinical/2026-09-30/image8.png"
+            }
+          ]
+        },
+        {
+          "id": "case-3009-5",
+          "stt": 1,
+          "hoten": "NGUYỄN THỊ HOÀNG OANH",
+          "tuoi": "57",
+          "gioiTinh": "Nữ",
+          "diaChi": "Kv1-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
+          "ngayVaoVien": "30/09/2026",
+          "ngayPhauThuat": "30/09/2026",
+          "ngayXinVe": "",
+          "category": "TK1 – BỆNH THEO DÕI",
+          "categoryKey": "THEO_DOI",
+          "roomKey": "tk1",
+          "roomName": "Thần kinh 1",
+          "chanDoan": "Chấn thương sọ não",
+          "dienBien": "Theo dõi tri giác sát, chụp CT kiểm tra sau 8h.",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [
+            {
+              "id": "img-3009-9",
+              "title": "CT Sọ não vào viện (01:12)",
+              "caption": "Dập não xuất huyết nhỏ",
+              "url": "/uploads_clinical/2026-09-30/image9.png"
+            },
+            {
+              "id": "img-3009-10",
+              "title": "CT Sọ não kiểm tra (09:07)",
+              "caption": "Kiểm tra sau 8h",
+              "url": "/uploads_clinical/2026-09-30/image10.png"
+            }
+          ]
+        },
+        {
+          "id": "case-3009-6",
+          "stt": 1,
+          "hoten": "LÊ VĂN ÂN",
+          "tuoi": "82",
+          "gioiTinh": "NAM",
+          "diaChi": "An Hội-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+          "ngayVaoVien": "01/10/2026",
+          "ngayPhauThuat": "",
+          "ngayXinVe": "",
+          "category": "TK2 – BỆNH MỔ VỀ TỪ CHỢ RẪY",
+          "categoryKey": "MO_VE_TUYEN_TREN",
+          "roomKey": "tk2",
+          "roomName": "Thần kinh 2",
+          "chanDoan": "HP ACDF C3C4/Thoát vị đĩa đệm C3C4",
+          "dienBien": "Sau phẫu thuật ACDF C3C4 Chợ Rẫy chuyển về, vết mổ khô, tứ chi vận động tốt.",
+          "kipMo": "BV Chợ Rẫy",
+          "selectedForSlide": true,
+          "images": [
+            {
+              "id": "img-3009-11",
+              "title": "MRI Cột sống cổ",
+              "caption": "Thoát vị đĩa đệm C3C4",
+              "url": "/uploads_clinical/2026-09-30/image11.png"
+            }
+          ]
+        },
+        {
+          "id": "case-3009-7",
+          "stt": 1,
+          "hoten": "ĐỒNG THỊ KÉN",
+          "tuoi": "78",
+          "gioiTinh": "Nữ",
+          "diaChi": "Chánh Định-Xã Ngô Mây--Tỉnh Gia Lai",
+          "ngayVaoVien": "28/09/2026",
+          "ngayPhauThuat": "30/09/2026",
+          "ngayXinVe": "",
+          "category": "TK2 – BỆNH MỔ VỀ",
+          "categoryKey": "MO_VE",
+          "roomKey": "tk2",
+          "roomName": "Thần kinh 2",
+          "chanDoan": "HP tạo hình thân đốt sống D11,L1/ Xẹp D11,L1",
+          "dienBien": "Bơm xi măng thân đốt sống D11, L1 ổn định.",
+          "kipMo": "Khoa Ngoại Thần Kinh - Cột Sống",
+          "selectedForSlide": true,
+          "images": [
+            {
+              "id": "img-3009-12",
+              "title": "X-quang Cột sống thắt lưng",
+              "caption": "Kiểm tra xi măng D11, L1",
+              "url": "/uploads_clinical/2026-09-30/image12.png"
+            }
+          ]
+        },
+        {
+          "id": "case-3009-8",
+          "stt": 2,
+          "hoten": "LÂM THỊ ĐÁNG",
+          "tuoi": "72",
+          "gioiTinh": "Nữ",
+          "diaChi": "Thiện Chánh 2-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+          "ngayVaoVien": "29/09/2026",
+          "ngayPhauThuat": "30/09/2026",
+          "ngayXinVe": "",
+          "category": "TK2 – BỆNH MỔ VỀ",
+          "categoryKey": "MO_VE",
+          "roomKey": "tk2",
+          "roomName": "Thần kinh 2",
+          "chanDoan": "HP tạo hình thân đốt sống D9,D11/ Xẹp D9,D11",
+          "dienBien": "Hậu phẫu tạo hình thân đốt sống D9, D11 ổn định.",
+          "kipMo": "Khoa Ngoại Thần Kinh - Cột Sống",
+          "selectedForSlide": true,
+          "images": [
+            {
+              "id": "img-3009-13",
+              "title": "X-quang Cột sống ngực",
+              "caption": "Kiểm tra xi măng D9, D11",
+              "url": "/uploads_clinical/2026-09-30/image13.png"
+            }
+          ]
+        }
+      ],
+      "overall": {
+        "doctorsOnDuty": [
+          "HẢI",
+          "CƯ",
+          "LUÂN",
+          "LƯƠNG"
+        ],
+        "grandCensus": {
+          "benhCu": 102,
+          "vaoKK": 16,
+          "vaoKhac": 2,
+          "moCT": 0,
+          "moCC": 0,
+          "raRH": 1,
+          "raKhac": 3,
+          "tuVong": 0,
+          "hienCo": 116,
+          "bhyt": 105
+        },
+        "doctorNotes": "Buổi giao ban ngày 30/09/2026 diễn ra nghiêm túc, rà soát kíp trực đêm và thảo luận kỹ các ca mổ cấp cứu, nặng xin về.",
+        "approvedBy": "BS. Phạm Ngọc Hải"
       }
     }
   }
