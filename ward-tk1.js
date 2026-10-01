@@ -127,6 +127,27 @@
     return Math.floor(Date.UTC(y, m - 1, d) / 86400000);
   }
 
+  function convertVnDateToIso(vnDateStr) {
+    if (!vnDateStr || typeof vnDateStr !== 'string') return '';
+    const parts = vnDateStr.trim().split('/');
+    if (parts.length === 3) {
+      const [d, m, y] = parts;
+      if (d && m && y && !isNaN(d) && !isNaN(m) && !isNaN(y)) {
+        return `${String(y).padStart(4, '20')}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      }
+    }
+    return '';
+  }
+
+  function calculatePostOpDay(surgeryDateStr, targetDateStr) {
+    if (!surgeryDateStr) return 1;
+    const sNum = parseDateKeyToDayNumber(surgeryDateStr);
+    const tNum = parseDateKeyToDayNumber(targetDateStr || getSelectedDateKey());
+    const diff = tNum - sNum;
+    if (diff <= 0) return 1;
+    return diff;
+  }
+
   function formatRelativePastDayLabel(pastDateKey) {
     const todayNum = parseDateKeyToDayNumber(getTodayKey());
     const pastNum = parseDateKeyToDayNumber(pastDateKey);
@@ -411,6 +432,33 @@
 
     const recentHist = getMostRecentHistorySummary(rec);
 
+    let tk2SurgeryBarHtml = '';
+    if (currentRoomKey === 'tk2') {
+      const isNonSurgical = Boolean(rec.surgeryInfo?.isNonSurgical);
+      const sName = (rec.surgeryInfo?.surgeryName || '').trim();
+      const sDate = rec.surgeryInfo?.surgeryDate || convertVnDateToIso(rec.ngayVaoStr) || curDateKey;
+      const postOpDay = calculatePostOpDay(sDate, curDateKey);
+
+      let diagText = '';
+      if (isNonSurgical) {
+        diagText = rec.customDiagnosis || rec.chanDoanHis || 'Chưa có chẩn đoán';
+      } else {
+        diagText = `Hậu phẫu ngày thứ ${postOpDay}${sName ? ` (${sName})` : ' (Chưa nhập tên PT)'}`;
+      }
+
+      tk2SurgeryBarHtml = `
+        <div class="tk2-card-surgery-bar ${isNonSurgical ? 'is-nonsurgical' : 'is-surgical'}">
+          <div style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700;" title="${diagText.replace(/"/g, '&quot;')}">
+            <span style="font-size:0.8rem;margin-right:3px;">${isNonSurgical ? '💊' : '🔪'}</span>${diagText}
+          </div>
+          <label style="display:inline-flex;align-items:center;gap:4px;margin:0;font-size:0.72rem;font-weight:700;color:${isNonSurgical ? '#dc2626' : '#64748b'};cursor:pointer;white-space:nowrap;flex-shrink:0;" onclick="event.stopPropagation();" title="Đánh dấu bệnh nhân không phẫu thuật">
+            <input type="checkbox" class="tk2-card-chk-nonsurgical" data-mabn="${rec.mabn}" ${isNonSurgical ? 'checked' : ''} style="cursor:pointer;" />
+            <span>Không phẫu thuật</span>
+          </label>
+        </div>
+      `;
+    }
+
     return `
       <div
         class="tk1-bed-card ${cardStatusCls} ${isFolding ? 'is-folding-bed' : ''}"
@@ -448,6 +496,8 @@
             </button>
           </div>
         </div>
+
+        ${tk2SurgeryBarHtml}
 
         ${
           recentHist
@@ -1036,9 +1086,53 @@
           openMoveOrSwapBedDialog(mabn);
         });
       });
+
+      slotEl.querySelectorAll('.tk2-card-chk-nonsurgical').forEach(chk => {
+        chk.addEventListener('change', async (e) => {
+          e.stopPropagation();
+          const mabn = chk.getAttribute('data-mabn');
+          const isNonSurgical = chk.checked;
+          await toggleTk2NonSurgical(mabn, isNonSurgical);
+        });
+      });
     }
 
     renderTk1SummaryTabs();
+  }
+
+  async function toggleTk2NonSurgical(mabn, isNonSurgical) {
+    const rec = tk1State.patientRecords[mabn];
+    if (!rec) return;
+    if (!rec.surgeryInfo) {
+      rec.surgeryInfo = {
+        isNonSurgical: false,
+        surgeryName: '',
+        surgeryDate: convertVnDateToIso(rec.ngayVaoStr) || getSelectedDateKey()
+      };
+    }
+    rec.surgeryInfo.isNonSurgical = isNonSurgical;
+
+    const curDateKey = getSelectedDateKey();
+    if (isNonSurgical) {
+      rec.customDiagnosis = rec.chanDoanHis || '';
+    } else {
+      const sDate = rec.surgeryInfo.surgeryDate || convertVnDateToIso(rec.ngayVaoStr) || curDateKey;
+      const postOpDay = calculatePostOpDay(sDate, curDateKey);
+      const sName = (rec.surgeryInfo.surgeryName || '').trim();
+      rec.customDiagnosis = `Hậu phẫu ngày ${postOpDay} phẫu thuật ${sName}`.trim();
+    }
+
+    renderTk1Workspace();
+
+    await callTk1Api({
+      action: 'SAVE_PATIENT_ROUND',
+      mabn,
+      dateKey: curDateKey,
+      customDiagnosis: rec.customDiagnosis,
+      surgeryInfo: rec.surgeryInfo,
+      tasks: (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {},
+      consultDetails: rec.consultDetails || {}
+    });
   }
 
   function openAssignPatientToBedPrompt(targetBedCode) {
@@ -1544,7 +1638,48 @@
       </div>
     `;
 
-    document.getElementById('tk1-modal-diagnosis-input').value = rec.customDiagnosis || rec.chanDoanHis || '';
+    const isTk2 = currentRoomKey === 'tk2';
+    const tk2SurgSec = document.getElementById('tk2-surgery-section');
+    const diagInp = document.getElementById('tk1-modal-diagnosis-input');
+
+    if (tk2SurgSec) {
+      if (isTk2) {
+        tk2SurgSec.style.display = 'block';
+        const isNonSurgical = Boolean(rec.surgeryInfo?.isNonSurgical);
+        const sName = (rec.surgeryInfo?.surgeryName || '').trim();
+        const sDate = rec.surgeryInfo?.surgeryDate || convertVnDateToIso(rec.ngayVaoStr) || curDateKey;
+        const postOpDay = calculatePostOpDay(sDate, curDateKey);
+
+        const chkNonSurgical = document.getElementById('tk2-modal-chk-nonsurgical');
+        const inpSurgName = document.getElementById('tk2-modal-inp-surgery-name');
+        const inpSurgDate = document.getElementById('tk2-modal-inp-surgery-date');
+        const badgePostOp = document.getElementById('tk2-modal-post-op-badge');
+        const wrapFields = document.getElementById('tk2-surgery-fields-wrap');
+
+        if (chkNonSurgical) chkNonSurgical.checked = isNonSurgical;
+        if (inpSurgName) inpSurgName.value = sName;
+        if (inpSurgDate) inpSurgDate.value = sDate;
+        if (badgePostOp) badgePostOp.textContent = `Ngày thứ ${postOpDay}`;
+        if (wrapFields) wrapFields.style.display = isNonSurgical ? 'none' : 'grid';
+
+        if (isNonSurgical) {
+          if (diagInp) diagInp.value = rec.customDiagnosis || rec.chanDoanHis || '';
+        } else {
+          // If surgical:
+          // Default diagnosis format: Hậu phẫu ngày.....Phẫu thuật.......
+          if (rec.customDiagnosis && !rec.customDiagnosis.startsWith('Hậu phẫu ngày') && rec.customDiagnosis !== rec.chanDoanHis) {
+            if (diagInp) diagInp.value = rec.customDiagnosis;
+          } else {
+            if (diagInp) diagInp.value = `Hậu phẫu ngày ${postOpDay} phẫu thuật ${sName}`.trim();
+          }
+        }
+      } else {
+        tk2SurgSec.style.display = 'none';
+        if (diagInp) diagInp.value = rec.customDiagnosis || rec.chanDoanHis || '';
+      }
+    } else {
+      if (diagInp) diagInp.value = rec.customDiagnosis || rec.chanDoanHis || '';
+    }
 
     // Khởi tạo ô nhập liệu phụ nếu BN đã có XQ xương chi hoặc XN khác
     const customXnWrap = document.getElementById('tk1-custom-xn-wrap');
@@ -1749,11 +1884,26 @@
     const followUpDays = specialty ? (cd.followUpDays || rec.discharge?.followUpDays || '7') : '';
     const followUpClinic = specialty ? (cd.followUpClinic || getClinicNameForSpecialty(specialty)) : '';
 
+    let surgeryInfo = undefined;
+    if (currentRoomKey === 'tk2') {
+      const chk = document.getElementById('tk2-modal-chk-nonsurgical');
+      const inpName = document.getElementById('tk2-modal-inp-surgery-name');
+      const inpDate = document.getElementById('tk2-modal-inp-surgery-date');
+      surgeryInfo = {
+        isNonSurgical: Boolean(chk && chk.checked),
+        surgeryName: inpName ? inpName.value.trim() : '',
+        surgeryDate: inpDate ? inpDate.value : ''
+      };
+      rec.surgeryInfo = surgeryInfo;
+    }
+    rec.customDiagnosis = customDiagnosis;
+
     await callTk1Api({
       action: 'SAVE_PATIENT_ROUND',
       mabn: activeModalMabn,
       dateKey: curDateKey,
       customDiagnosis,
+      surgeryInfo,
       tasks: modalDraftTasks,
       consultDetails: {
         specialty,
@@ -1763,6 +1913,8 @@
         followUpClinic
       }
     });
+
+    renderTk1Workspace();
   }
 
   async function triggerModalDischarge(statusMode) {
@@ -1867,11 +2019,25 @@
         : '';
       const followUpLines = followUpStr ? wrapCanvasText(mCtx, followUpStr, colWidth - 28) : [];
 
+      let diagLines = [];
+      if (currentRoomKey === 'tk2') {
+        const isNonSurgical = Boolean(rec.surgeryInfo?.isNonSurgical);
+        const sName = (rec.surgeryInfo?.surgeryName || '').trim();
+        const sDate = rec.surgeryInfo?.surgeryDate || convertVnDateToIso(rec.ngayVaoStr) || curDateKey;
+        const postOpDay = calculatePostOpDay(sDate, curDateKey);
+        const diagStr = isNonSurgical
+          ? `CĐ: ${rec.customDiagnosis || rec.chanDoanHis || 'Chưa có CĐ'}`
+          : `Hậu phẫu ngày thứ ${postOpDay}${sName ? ` (${sName})` : ''}`;
+        diagLines = wrapCanvasText(mCtx, diagStr, colWidth - 28);
+      }
+
       let h = 34;
+      if (diagLines.length > 0) h += 4 + diagLines.length * 18;
       if (taskLines.length > 0) h += 4 + taskLines.length * 18;
       if (followUpLines.length > 0) h += 4 + followUpLines.length * 18;
       return {
         height: Math.max(50, h + 8),
+        diagLines,
         taskLines,
         followUpLines
       };
@@ -1985,6 +2151,15 @@
         }
 
         let textY = curY + 44;
+
+        if (layout.diagLines && layout.diagLines.length > 0) {
+          ctx.fillStyle = '#0f766e';
+          ctx.font = '700 13px "Be Vietnam Pro", sans-serif';
+          for (const line of layout.diagLines) {
+            ctx.fillText(line, startX + 14, textY);
+            textY += 18;
+          }
+        }
 
         if (layout.taskLines && layout.taskLines.length > 0) {
           ctx.fillStyle = '#1d4ed8';
@@ -2203,6 +2378,47 @@
         renderModalSelectedTasksPills();
         updateMultiDdPopoversAndTitles();
       });
+    }
+
+    // Cụm thông tin phẫu thuật Thần kinh 2: Tự động tính ngày hậu phẫu & điền chẩn đoán mặc định
+    function updateTk2ModalDiagnosisAndBadge() {
+      if (currentRoomKey !== 'tk2') return;
+      const chkNonSurgical = document.getElementById('tk2-modal-chk-nonsurgical');
+      const inpSurgName = document.getElementById('tk2-modal-inp-surgery-name');
+      const inpSurgDate = document.getElementById('tk2-modal-inp-surgery-date');
+      const badgePostOp = document.getElementById('tk2-modal-post-op-badge');
+      const wrapFields = document.getElementById('tk2-surgery-fields-wrap');
+      const diagInp = document.getElementById('tk1-modal-diagnosis-input');
+      if (!chkNonSurgical || !inpSurgName || !inpSurgDate || !diagInp) return;
+
+      const isNonSurgical = chkNonSurgical.checked;
+      if (wrapFields) wrapFields.style.display = isNonSurgical ? 'none' : 'grid';
+
+      const rec = activeModalMabn ? tk1State.patientRecords[activeModalMabn] : null;
+
+      if (isNonSurgical) {
+        diagInp.value = rec ? (rec.customDiagnosis || rec.chanDoanHis || '') : '';
+      } else {
+        const curDateKey = getSelectedDateKey();
+        const sDate = inpSurgDate.value || (rec ? convertVnDateToIso(rec.ngayVaoStr) : '') || curDateKey;
+        const postOpDay = calculatePostOpDay(sDate, curDateKey);
+        if (badgePostOp) badgePostOp.textContent = `Ngày thứ ${postOpDay}`;
+        const sName = inpSurgName.value.trim();
+        diagInp.value = `Hậu phẫu ngày ${postOpDay} phẫu thuật ${sName}`.trim();
+      }
+    }
+
+    const chkModalNonSurg = document.getElementById('tk2-modal-chk-nonsurgical');
+    if (chkModalNonSurg) {
+      chkModalNonSurg.addEventListener('change', updateTk2ModalDiagnosisAndBadge);
+    }
+    const inpModalSurgName = document.getElementById('tk2-modal-inp-surgery-name');
+    if (inpModalSurgName) {
+      inpModalSurgName.addEventListener('input', updateTk2ModalDiagnosisAndBadge);
+    }
+    const inpModalSurgDate = document.getElementById('tk2-modal-inp-surgery-date');
+    if (inpModalSurgDate) {
+      inpModalSurgDate.addEventListener('change', updateTk2ModalDiagnosisAndBadge);
     }
 
     const btnPrevBed = document.getElementById('btn-tk1-modal-prev-bed');

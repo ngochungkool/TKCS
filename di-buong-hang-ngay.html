@@ -296,6 +296,36 @@
       <!-- 1. Thông tin Hành chính gọn gàng: Mã KCB, Tên, Tuổi, Địa chỉ, Đối tượng BHYT -->
       <div class="tk1-info-grid" id="tk1-modal-admin-info"></div>
 
+      <!-- Khối thông tin Phẫu thuật riêng cho Thần kinh 2 -->
+      <div id="tk2-surgery-section" style="display:none;background:#f0f9ff;border:1.5px solid #93c5fd;border-radius:10px;padding:0.65rem 0.85rem;font-family:'Be Vietnam Pro',sans-serif;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:0.82rem;font-weight:800;color:#1e40af;display:flex;align-items:center;gap:4px;">
+            🔪 THÔNG TIN PHẪU THUẬT (THẦN KINH 2)
+          </span>
+          <label style="display:inline-flex;align-items:center;gap:5px;font-size:0.8rem;font-weight:800;color:#dc2626;cursor:pointer;background:#ffffff;padding:2px 8px;border-radius:6px;border:1.5px solid #fca5a5;">
+            <input type="checkbox" id="tk2-modal-chk-nonsurgical" style="cursor:pointer;" />
+            <span>Không phẫu thuật</span>
+          </label>
+        </div>
+
+        <div id="tk2-surgery-fields-wrap" style="display:grid;grid-template-columns:1fr 150px auto;gap:8px;align-items:end;">
+          <div>
+            <label style="font-size:0.75rem;font-weight:700;color:#1e3a8a;display:block;margin-bottom:3px;">Phẫu thuật gì:</label>
+            <input type="text" id="tk2-modal-inp-surgery-name" class="date-input" style="width:100%;height:34px;font-size:0.82rem;font-weight:700;" placeholder="Nhập tên phẫu thuật (VD: Mở sọ giải áp, Máu tụ DMC...)" />
+          </div>
+          <div>
+            <label style="font-size:0.75rem;font-weight:700;color:#1e3a8a;display:block;margin-bottom:3px;">Ngày phẫu thuật:</label>
+            <input type="date" id="tk2-modal-inp-surgery-date" class="date-input" style="width:100%;height:34px;font-size:0.82rem;font-weight:700;" />
+          </div>
+          <div style="text-align:center;">
+            <label style="font-size:0.75rem;font-weight:700;color:#1e3a8a;display:block;margin-bottom:3px;">Hậu phẫu:</label>
+            <div id="tk2-modal-post-op-badge" style="height:34px;padding:0 10px;background:#dbeafe;border:1.5px solid #3b82f6;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.82rem;color:#1e40af;white-space:nowrap;">
+              Ngày thứ 1
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Chẩn đoán điều trị (bỏ nút phân/chuyển/đổi giường vì đã có ở ngoài thẻ) -->
       <div>
         <label style="font-size:0.78rem;font-weight:800;color:#334155;display:block;margin-bottom:4px;">Chẩn đoán điều trị:</label>

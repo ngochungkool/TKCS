@@ -3873,3 +3873,37 @@ body {
     display: none;
   }
 }
+
+/* ==========================================================================
+   THẦN KINH 2: PHẪU THUẬT & HẬU PHẪU STYLES
+   ========================================================================== */
+.tk2-card-surgery-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 0.35rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.77rem;
+  line-height: 1.35;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.tk2-card-surgery-bar.is-surgical {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.tk2-card-surgery-bar.is-nonsurgical {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+@media (max-width: 640px) {
+  #tk2-surgery-fields-wrap {
+    grid-template-columns: 1fr !important;
+  }
+}

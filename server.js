@@ -1191,6 +1191,11 @@ const server = http.createServer(async (req, res) => {
               reason: '',
               previousBed: '',
               removedAtMs: 0
+            },
+            surgeryInfo: existing.surgeryInfo || {
+              isNonSurgical: false,
+              surgeryName: '',
+              surgeryDate: ''
             }
           };
         }
@@ -1437,7 +1442,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (action === 'SAVE_PATIENT_ROUND') {
-      const { mabn, dateKey, customDiagnosis, tasks, consultDetails } = body;
+      const { mabn, dateKey, customDiagnosis, tasks, consultDetails, surgeryInfo } = body;
       const rec = tk1.patientRecords[mabn];
       if (!rec) {
         res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -1447,6 +1452,13 @@ const server = http.createServer(async (req, res) => {
       const targetDate = dateKey || todayKey;
       if (typeof customDiagnosis === 'string') {
         rec.customDiagnosis = customDiagnosis.trim() || rec.chanDoanHis;
+      }
+      if (surgeryInfo && typeof surgeryInfo === 'object') {
+        rec.surgeryInfo = {
+          isNonSurgical: Boolean(surgeryInfo.isNonSurgical),
+          surgeryName: String(surgeryInfo.surgeryName || '').trim(),
+          surgeryDate: String(surgeryInfo.surgeryDate || '').trim()
+        };
       }
       if (tasks && typeof tasks === 'object') {
         rec.tasksByDate[targetDate] = {
@@ -1491,6 +1503,20 @@ const server = http.createServer(async (req, res) => {
       }
 
       broadcastState(`📝 Đã lưu thông tin đi buồng BN ${rec.hoten} (${tk1.roomName})`);
+      return sendWardResponse();
+    }
+
+    if (action === 'SET_SURGERY_INFO') {
+      const { mabn, isNonSurgical, surgeryName, surgeryDate, customDiagnosis } = body;
+      const rec = tk1.patientRecords[mabn];
+      if (rec) {
+        if (!rec.surgeryInfo) rec.surgeryInfo = {};
+        if (isNonSurgical !== undefined) rec.surgeryInfo.isNonSurgical = Boolean(isNonSurgical);
+        if (surgeryName !== undefined) rec.surgeryInfo.surgeryName = String(surgeryName).trim();
+        if (surgeryDate !== undefined) rec.surgeryInfo.surgeryDate = String(surgeryDate).trim();
+        if (customDiagnosis !== undefined) rec.customDiagnosis = String(customDiagnosis).trim();
+        broadcastState(`🔪 Đã cập nhật thông tin phẫu thuật BN ${rec.hoten} (${tk1.roomName})`);
+      }
       return sendWardResponse();
     }
 

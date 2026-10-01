@@ -1,5 +1,5 @@
 {
-  "version": 1790823750431,
+  "version": 1790863934993,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -291,11 +291,11 @@
   ],
   "uploadedHisFiles": [
     {
-      "fileName": "1.xlsx → [Đang điều trị: 26 dòng]",
+      "fileName": "1.xlsx → [Đang điều trị: 108 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
-      "sizeBytes": 20585,
-      "uploadedAt": "09:59:34 1/10/2026",
+      "sizeBytes": 53985,
+      "uploadedAt": "11:21:03 1/10/2026",
       "extractedPreview": null
     },
     {
@@ -638,22 +638,22 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 12,
+      "dauCa": 94,
       "benhVao": 16,
       "raVien": 1,
       "chuyenDen": 2,
       "chuyenDi": 3,
       "tuVong": 0,
       "benhMo": 0,
-      "hienCo": 26,
-      "baoHiem": 25
+      "hienCo": 108,
+      "baoHiem": 104
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 11,
-        "benhVao": 16,
+        "dauCa": 23,
+        "benhVao": 6,
         "raVien": 0,
-        "chuyenDen": 2,
+        "chuyenDen": 0,
         "chuyenDi": 3,
         "tuVong": 0,
         "benhMo": 0,
@@ -661,51 +661,51 @@
         "baoHiem": 25
       },
       "Thần kinh 2": {
-        "dauCa": 0,
-        "benhVao": 0,
+        "dauCa": 19,
+        "benhVao": 2,
         "raVien": 0,
-        "chuyenDen": 0,
+        "chuyenDen": 1,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 0,
-        "baoHiem": 0
+        "hienCo": 22,
+        "baoHiem": 21
       },
       "Thần kinh 3": {
-        "dauCa": 0,
-        "benhVao": 0,
+        "dauCa": 13,
+        "benhVao": 1,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 0,
-        "baoHiem": 0
+        "hienCo": 14,
+        "baoHiem": 13
       },
       "Thần kinh 4": {
-        "dauCa": 1,
-        "benhVao": 0,
+        "dauCa": 30,
+        "benhVao": 7,
         "raVien": 1,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 0,
-        "baoHiem": 0
+        "hienCo": 36,
+        "baoHiem": 35
       },
       "Hồi sức thần kinh": {
-        "dauCa": 0,
+        "dauCa": 9,
         "benhVao": 0,
         "raVien": 0,
-        "chuyenDen": 0,
+        "chuyenDen": 1,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 0,
-        "baoHiem": 0
+        "hienCo": 10,
+        "baoHiem": 10
       }
     },
-    "updatedAt": "2026-10-01T02:59:34.836Z"
+    "updatedAt": "2026-10-01T04:21:04.041Z"
   },
   "wardRounds": {
     "tk1": {
@@ -755,8 +755,8 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "01/02/2026",
           "hanTheDen": "31/01/2027",
-          "diaChi": "Phú An -Xã Tây Sơn--Tỉnh Gia Lai",
-          "chanDoanHis": "T00.8-Tổn thương nông tác động kết hợp khác ở nhiều vùng cơ thể",
+          "diaChi": "PHÚ AN-Xã Tây Sơn--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Dương Minh Trí",
           "ngayVaoStr": "16/09/2026",
@@ -832,6 +832,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420337": {
@@ -854,7 +859,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "22/09/2026",
-          "hisBed": "H030",
+          "hisBed": "H021",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-09-27": {
@@ -910,6 +915,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420728": {
@@ -955,6 +965,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420743": {
@@ -998,6 +1013,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729348569
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420755": {
@@ -1020,7 +1040,7 @@
           "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
           "bsDieuTri": "Đào Văn Nhân",
           "ngayVaoStr": "22/09/2026",
-          "hisBed": "H015",
+          "hisBed": "H016",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-10-01": {
@@ -1037,8 +1057,8 @@
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "7",
-            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+            "followUpDays": "",
+            "followUpClinic": ""
           },
           "discharge": {
             "status": "NONE",
@@ -1052,6 +1072,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421064": {
@@ -1108,6 +1133,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421068": {
@@ -1151,6 +1181,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729349868
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421398": {
@@ -1194,6 +1229,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729352070
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001352007": {
@@ -1218,7 +1258,19 @@
           "ngayVaoStr": "24/09/2026",
           "hisBed": "H027",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [
+                "X-quang xương chi (Vai phải)"
+              ],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1238,6 +1290,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421512": {
@@ -1291,6 +1348,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729364175
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421561": {
@@ -1335,6 +1397,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421945": {
@@ -1357,7 +1424,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "25/09/2026",
-          "hisBed": "H033",
+          "hisBed": "H024",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-09-30": {
@@ -1402,6 +1469,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421963": {
@@ -1424,7 +1496,7 @@
           "customDiagnosis": "S06.50-Xuất huyết dưới màng cứng do chấn thương, không có vết thương nội sọ hở",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
           "ngayVaoStr": "25/09/2026",
-          "hisBed": "H020",
+          "hisBed": "H017",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-09-29": {
@@ -1434,14 +1506,23 @@
               "sieuAm": [],
               "hoiChan": [],
               "note": ""
+            },
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
             }
           },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "7",
-            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+            "followUpDays": "",
+            "followUpClinic": ""
           },
           "discharge": {
             "status": "NONE",
@@ -1455,6 +1536,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421962": {
@@ -1510,6 +1596,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0000996031": {
@@ -1564,6 +1655,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729353879
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421988": {
@@ -1616,6 +1712,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729355776
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001017823": {
@@ -1670,6 +1771,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729357071
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422020": {
@@ -1722,6 +1828,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729358176
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422158": {
@@ -1786,6 +1897,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001032592": {
@@ -1852,6 +1968,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001050501": {
@@ -1895,6 +2016,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729359676
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422178": {
@@ -1939,6 +2065,11 @@
             "reason": "Chuyển mổ / Chuyển phòng",
             "previousBed": "4X",
             "removedAtMs": 1790816234251
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422326": {
@@ -2002,6 +2133,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422336": {
@@ -2045,6 +2181,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729361078
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422332": {
@@ -2088,6 +2229,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729362867
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422360": {
@@ -2100,12 +2246,12 @@
           "tuoi": "19 tuổi",
           "namSinh": "2007",
           "gioiTinh": "Nữ",
-          "doiTuong": "BHYT",
-          "soTheBhyt": "SV4565221835564",
-          "tuyenDangKy": "Đúng tuyến",
-          "hanTheTu": "01/10/2025",
-          "hanTheDen": "31/12/2026",
-          "diaChi": "Định Thiện Tây -Xã Tuy Phước Bắc--Tỉnh Gia Lai",
+          "doiTuong": "Viện phí",
+          "soTheBhyt": "",
+          "tuyenDangKy": "",
+          "hanTheTu": "",
+          "hanTheDen": "",
+          "diaChi": "háo lễ-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
@@ -2144,6 +2290,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422366": {
@@ -2187,6 +2338,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729347174
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422359": {
@@ -2230,6 +2386,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790816114252
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422413": {
@@ -2273,6 +2434,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729365377
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422706": {
@@ -2295,7 +2461,7 @@
           "customDiagnosis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
           "bsDieuTri": "Lê Đức Nhật",
           "ngayVaoStr": "28/09/2026",
-          "hisBed": "H104",
+          "hisBed": "H025",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -2317,6 +2483,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422719": {
@@ -2361,6 +2532,11 @@
             "reason": "Chuyển mổ / Chuyển phòng",
             "previousBed": "4",
             "removedAtMs": 1790816230053
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422908": {
@@ -2404,6 +2580,11 @@
             "isRemoved": true,
             "reason": "Không còn trong Excel mới nhất",
             "removedAtMs": 1790729367168
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001423331": {
@@ -2504,8 +2685,8 @@
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "7",
-            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+            "followUpDays": "",
+            "followUpClinic": ""
           },
           "discharge": {
             "status": "NONE",
@@ -3046,8 +3227,8 @@
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "7",
-            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+            "followUpDays": "",
+            "followUpClinic": ""
           },
           "discharge": {
             "status": "NONE",
@@ -3111,46 +3292,40 @@
       "latestExcelMabns": [
         "0001418457",
         "0001420337",
+        "0001420728",
+        "0001420743",
         "0001420755",
         "0001421064",
+        "0001421068",
+        "0001421398",
         "0001352007",
+        "0001421512",
         "0001421561",
         "0001421945",
         "0001421963",
         "0001421962",
+        "0000996031",
+        "0001421988",
+        "0001017823",
+        "0001422020",
         "0001422158",
         "0001032592",
+        "0001050501",
+        "0001422178",
         "0001422326",
+        "0001422336",
+        "0001422332",
         "0001422360",
+        "0001422366",
+        "0001422359",
+        "0001422413",
         "0001422706",
-        "0001423331",
-        "0001423400",
-        "0001423397",
-        "0001423405",
-        "0001423448",
-        "0000037245",
-        "0001423911",
-        "0001423919",
-        "0001423930",
-        "0001423940",
-        "0001423953",
-        "0000942496"
+        "0001422719",
+        "0001422908"
       ],
       "acknowledgedMissingMabns": {},
-      "lastDeletedAction": {
-        "mabn": "0001423396",
-        "hoten": "THỦY NGỌC GIANG",
-        "previousBed": "23X",
-        "previousRemoved": {
-          "isRemoved": false,
-          "reason": "",
-          "previousBed": "",
-          "removedAtMs": 0
-        },
-        "reason": "Chuyển mổ / Chuyển phòng",
-        "deletedAtMs": 1790816392749
-      },
-      "updatedAt": "2026-10-01T03:02:30.430Z",
+      "lastDeletedAction": null,
+      "updatedAt": "2026-10-01T14:12:14.992Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3159,23 +3334,17 @@
       "initializedSeed": true,
       "bedAssignments": {
         "1": "0001412378",
-        "2": "0001418507",
-        "4": "0001419869",
-        "5": "0000948030",
         "6": "0001397969",
         "7": "0001373574",
         "8": "0001420471",
-        "9": "0001400167",
         "10": "0001265243",
         "11": "0001419943",
         "12": "0000462435",
         "13": "0000789370",
         "14": "0001422060",
         "15": "0001422302",
-        "16": "0001220543",
         "17": "0001420757",
-        "18": "0001418939",
-        "1X": "0001418920"
+        "18": "0001418939"
       },
       "hiddenFoldingBeds": {},
       "patientRecords": {
@@ -3256,6 +3425,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "Mở sọ giải áp lấy máu tụ dưới màng cứng",
+            "surgeryDate": "2026-09-28"
           }
         },
         "0001418507": {
@@ -3322,10 +3496,14 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001412616": {
@@ -3371,6 +3549,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001419869": {
@@ -3425,10 +3608,14 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0000948030": {
@@ -3469,10 +3656,14 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001397969": {
@@ -3517,6 +3708,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001373574": {
@@ -3561,6 +3757,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420471": {
@@ -3605,6 +3806,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001400167": {
@@ -3645,10 +3851,14 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001265243": {
@@ -3693,6 +3903,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001419943": {
@@ -3737,6 +3952,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001418920": {
@@ -3777,10 +3997,14 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0000462435": {
@@ -3825,6 +4049,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0000789370": {
@@ -3869,6 +4098,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422060": {
@@ -3913,6 +4147,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422302": {
@@ -3937,7 +4176,17 @@
           "ngayVaoStr": "27/09/2026",
           "hisBed": "H039",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3957,6 +4206,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001220543": {
@@ -3997,10 +4251,14 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420757": {
@@ -4025,7 +4283,17 @@
           "ngayVaoStr": "28/09/2026",
           "hisBed": "H052",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -4045,6 +4313,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001418939": {
@@ -4089,6 +4362,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001087442": {
@@ -4133,6 +4411,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001359700": {
@@ -4177,6 +4460,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422775": {
@@ -4221,6 +4509,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422908": {
@@ -4620,10 +4913,33 @@
           }
         }
       },
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001412378",
+        "0001418507",
+        "0001412616",
+        "0001419869",
+        "0000948030",
+        "0001397969",
+        "0001373574",
+        "0001420471",
+        "0001400167",
+        "0001265243",
+        "0001419943",
+        "0001418920",
+        "0000462435",
+        "0000789370",
+        "0001422060",
+        "0001422302",
+        "0001220543",
+        "0001420757",
+        "0001418939",
+        "0001087442",
+        "0001359700",
+        "0001422775"
+      ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T03:02:30.430Z"
+      "updatedAt": "2026-10-01T14:12:14.992Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -4713,6 +5029,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001283135": {
@@ -4783,6 +5104,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001160694": {
@@ -4828,6 +5154,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001416882": {
@@ -4872,6 +5203,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001410444": {
@@ -4916,6 +5252,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001070375": {
@@ -4960,6 +5301,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001383920": {
@@ -5004,6 +5350,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0000167064": {
@@ -5048,6 +5399,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0000835346": {
@@ -5092,6 +5448,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001327863": {
@@ -5136,6 +5497,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001413514": {
@@ -5180,6 +5546,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0000893787": {
@@ -5224,6 +5595,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422911": {
@@ -5268,6 +5644,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420565": {
@@ -5711,10 +6092,24 @@
           }
         }
       },
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001307829",
+        "0001283135",
+        "0001160694",
+        "0001416882",
+        "0001410444",
+        "0001070375",
+        "0001383920",
+        "0000167064",
+        "0000835346",
+        "0001327863",
+        "0001413514",
+        "0000893787",
+        "0001422911"
+      ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T03:02:30.430Z"
+      "updatedAt": "2026-10-01T14:12:14.993Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -5819,6 +6214,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001418724": {
@@ -5889,6 +6289,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001415940": {
@@ -5934,6 +6339,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001419157": {
@@ -5978,6 +6388,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001418784": {
@@ -6022,6 +6437,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001287139": {
@@ -6066,6 +6486,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420526": {
@@ -6110,6 +6535,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001411127": {
@@ -6154,6 +6584,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421285": {
@@ -6198,6 +6633,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001227262": {
@@ -6242,6 +6682,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001418775": {
@@ -6286,6 +6731,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420910": {
@@ -6330,6 +6780,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001040749": {
@@ -6374,6 +6829,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001419435": {
@@ -6418,6 +6878,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001418951": {
@@ -6462,6 +6927,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001037354": {
@@ -6506,6 +6976,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001377524": {
@@ -6550,6 +7025,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421838": {
@@ -6594,6 +7074,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421575": {
@@ -6638,6 +7123,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001325103": {
@@ -6682,6 +7172,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001417273": {
@@ -6726,6 +7221,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422079": {
@@ -6770,6 +7270,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422096": {
@@ -6814,6 +7319,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001291952": {
@@ -6858,6 +7368,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422207": {
@@ -6902,6 +7417,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422252": {
@@ -6946,6 +7466,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001153038": {
@@ -6990,6 +7515,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422322": {
@@ -7034,6 +7564,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422398": {
@@ -7078,6 +7613,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422488": {
@@ -7122,6 +7662,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001309625": {
@@ -7166,6 +7711,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422435": {
@@ -7210,6 +7760,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001416348": {
@@ -7254,6 +7809,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422625": {
@@ -7298,6 +7858,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422644": {
@@ -7342,6 +7907,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422884": {
@@ -7386,6 +7956,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422894": {
@@ -7430,6 +8005,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001200590": {
@@ -8223,12 +8803,182 @@
             "previousBed": "",
             "removedAtMs": 0
           }
+        },
+        "0001424078": {
+          "mabn": "0001424078",
+          "episodeKey": "2600373878",
+          "maKcb": "2600373878",
+          "madieutri": "949801",
+          "soBA": "26077010",
+          "hoten": "NGUYỄN VĂN HÒA",
+          "tuoi": "64 tuổi",
+          "namSinh": "1962",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "DK2525220234268",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/02/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Xã An Lương--Tỉnh Gia Lai",
+          "chanDoanHis": "D23.5-U lành da ở thân mình",
+          "customDiagnosis": "D23.5-U lành da ở thân mình",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H092",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0000793707": {
+          "mabn": "0000793707",
+          "episodeKey": "2600374101",
+          "maKcb": "2600374101",
+          "madieutri": "949821",
+          "soBA": "26077024",
+          "hoten": "NGUYỄN XUÂN MỸ",
+          "tuoi": "67 tuổi",
+          "namSinh": "1959",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "HT3523706001806",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "Hải Bắc-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
+          "chanDoanHis": "G40.8-Bệnh động kinh khác",
+          "customDiagnosis": "G40.8-Bệnh động kinh khác",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H095",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001419899": {
+          "mabn": "0001419899",
+          "episodeKey": "2600374182",
+          "maKcb": "2600374182",
+          "madieutri": "949832",
+          "soBA": "26077029",
+          "hoten": "HUỲNH NGỌC TÁNH",
+          "tuoi": "71 tuổi",
+          "namSinh": "1955",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "TQ4975221127180",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/03/2026",
+          "hanTheDen": "31/01/2028",
+          "diaChi": "Trung Lý, Nhơn Phong, An Nhơn, Bình Định-Phường An Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
+          "customDiagnosis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H098",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
         }
       },
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001413526",
+        "0001418724",
+        "0001415940",
+        "0001419157",
+        "0001418784",
+        "0001287139",
+        "0001420526",
+        "0001411127",
+        "0001421285",
+        "0001227262",
+        "0001418775",
+        "0001420910",
+        "0001040749",
+        "0001419435",
+        "0001418951",
+        "0001037354",
+        "0001377524",
+        "0001421838",
+        "0001421575",
+        "0001325103",
+        "0001417273",
+        "0001422079",
+        "0001422096",
+        "0001291952",
+        "0001422207",
+        "0001422252",
+        "0001153038",
+        "0001422322",
+        "0001422398",
+        "0001422488",
+        "0001309625",
+        "0001422435",
+        "0001416348",
+        "0001422625",
+        "0001422644",
+        "0001422884",
+        "0001422894"
+      ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T03:02:30.431Z"
+      "updatedAt": "2026-10-01T14:12:14.993Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8317,6 +9067,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0000844175": {
@@ -8387,6 +9142,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001416769": {
@@ -8432,6 +9192,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001416828": {
@@ -8476,6 +9241,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420321": {
@@ -8520,6 +9290,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001419674": {
@@ -8564,6 +9339,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001417494": {
@@ -8608,6 +9388,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422300": {
@@ -8652,6 +9437,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420565": {
@@ -8696,6 +9486,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001422339": {
@@ -8740,6 +9535,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001421947": {
@@ -8784,6 +9584,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001420070": {
@@ -8828,6 +9633,11 @@
             "reason": "",
             "previousBed": "",
             "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
           }
         },
         "0001423406": {
@@ -9095,10 +9905,23 @@
           }
         }
       },
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001412464",
+        "0000844175",
+        "0001416769",
+        "0001416828",
+        "0001420321",
+        "0001419674",
+        "0001417494",
+        "0001422300",
+        "0001420565",
+        "0001422339",
+        "0001421947",
+        "0001420070"
+      ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T03:02:30.431Z"
+      "updatedAt": "2026-10-01T14:12:14.993Z"
     }
   },
   "episodeConsultations": {
@@ -9139,5 +9962,5 @@
       }
     ]
   },
-  "lastExcelUploadTime": "09:59 ngày 01/10/2026"
+  "lastExcelUploadTime": "11:21 ngày 01/10/2026"
 }
