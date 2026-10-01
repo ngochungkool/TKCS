@@ -1,5 +1,5 @@
 {
-  "version": 1790828464041,
+  "version": 1790828469534,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3159,7 +3159,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:05.635Z",
+      "updatedAt": "2026-10-01T04:21:09.446Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3168,23 +3168,17 @@
       "initializedSeed": true,
       "bedAssignments": {
         "1": "0001412378",
-        "2": "0001418507",
-        "4": "0001419869",
-        "5": "0000948030",
         "6": "0001397969",
         "7": "0001373574",
         "8": "0001420471",
-        "9": "0001400167",
         "10": "0001265243",
         "11": "0001419943",
         "12": "0000462435",
         "13": "0000789370",
         "14": "0001422060",
         "15": "0001422302",
-        "16": "0001220543",
         "17": "0001420757",
-        "18": "0001418939",
-        "1X": "0001418920"
+        "18": "0001418939"
       },
       "hiddenFoldingBeds": {},
       "patientRecords": {
@@ -3331,10 +3325,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
           }
         },
         "0001412616": {
@@ -3434,10 +3427,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
           }
         },
         "0000948030": {
@@ -3478,10 +3470,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
           }
         },
         "0001397969": {
@@ -3654,10 +3645,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
           }
         },
         "0001265243": {
@@ -3786,10 +3776,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
           }
         },
         "0000462435": {
@@ -4006,10 +3995,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790828469534
           }
         },
         "0001420757": {
@@ -4655,7 +4643,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:05.635Z"
+      "updatedAt": "2026-10-01T04:21:09.447Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5761,7 +5749,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:05.635Z"
+      "updatedAt": "2026-10-01T04:21:09.447Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8444,7 +8432,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:05.636Z"
+      "updatedAt": "2026-10-01T04:21:09.533Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -9325,7 +9313,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:05.636Z"
+      "updatedAt": "2026-10-01T04:21:09.533Z"
     }
   },
   "episodeConsultations": {
