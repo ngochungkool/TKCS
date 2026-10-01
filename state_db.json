@@ -1,5 +1,5 @@
 {
-  "version": 1790866548182,
+  "version": 1790866558486,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3389,7 +3389,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:55:48.181Z",
+      "updatedAt": "2026-10-01T14:55:58.486Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -5047,7 +5047,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:55:48.181Z"
+      "updatedAt": "2026-10-01T14:55:58.486Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6243,7 +6243,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:55:48.181Z"
+      "updatedAt": "2026-10-01T14:55:58.486Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7197,8 +7197,26 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-01": {
+              "isConsulted": true,
+              "dateKey": "2026-10-01",
+              "postConsultDiagnosis": "E11.4†-Bệnh đái tháo đường típ 2, kèm biến chứng thần kinh",
+              "surgeryMethod": "",
+              "decision": "",
+              "advancePayment": "",
+              "updatedAt": "2026-10-01T14:55:58.486Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-01",
+            "postConsultDiagnosis": "E11.4†-Bệnh đái tháo đường típ 2, kèm biến chứng thần kinh",
+            "surgeryMethod": "",
+            "decision": "",
+            "advancePayment": "",
+            "updatedAt": "2026-10-01T14:55:58.486Z"
+          }
         },
         "0001421838": {
           "mabn": "0001421838",
@@ -9204,7 +9222,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:55:48.181Z"
+      "updatedAt": "2026-10-01T14:55:58.486Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10171,7 +10189,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T14:55:48.181Z"
+      "updatedAt": "2026-10-01T14:55:58.486Z"
     }
   },
   "episodeConsultations": {
