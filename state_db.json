@@ -1,5 +1,5 @@
 {
-  "version": 1790816392749,
+  "version": 1790816417651,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -294,8 +294,8 @@
       "fileName": "1.xlsx → [Đang điều trị: 28 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
-      "sizeBytes": 20591,
-      "uploadedAt": "07:55:08 1/10/2026",
+      "sizeBytes": 20590,
+      "uploadedAt": "08:00:16 1/10/2026",
       "extractedPreview": null
     },
     {
@@ -705,7 +705,7 @@
         "baoHiem": 0
       }
     },
-    "updatedAt": "2026-10-01T00:55:09.250Z"
+    "updatedAt": "2026-10-01T01:00:17.650Z"
   },
   "wardRounds": {
     "tk1": {
@@ -2889,7 +2889,7 @@
         "reason": "Chuyển mổ / Chuyển phòng",
         "deletedAtMs": 1790816392749
       },
-      "updatedAt": "2026-10-01T00:59:52.748Z",
+      "updatedAt": "2026-10-01T01:00:18.853Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4230,7 +4230,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:59:52.748Z"
+      "updatedAt": "2026-10-01T01:00:18.853Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5233,7 +5233,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:59:52.748Z"
+      "updatedAt": "2026-10-01T01:00:18.853Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7483,7 +7483,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:59:52.748Z"
+      "updatedAt": "2026-10-01T01:00:18.853Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8265,7 +8265,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:59:52.748Z"
+      "updatedAt": "2026-10-01T01:00:18.853Z"
     }
   },
   "episodeConsultations": {
