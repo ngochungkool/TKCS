@@ -1,5 +1,5 @@
 {
-  "version": 1790816230053,
+  "version": 1790816234251,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -734,7 +734,6 @@
         "23": "0001421963",
         "24": "0001421064",
         "5X": "0001422706",
-        "4X": "0001422178",
         "23X": "0001423396",
         "16X": "0001423448",
         "12X": "0001423930",
@@ -1869,10 +1868,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Chuyển mổ / Chuyển phòng",
+            "previousBed": "4X",
+            "removedAtMs": 1790816234251
           }
         },
         "0001422326": {
@@ -2880,9 +2879,9 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": {
-        "mabn": "0001422719",
-        "hoten": "LÊ THỊ HƯỜNG",
-        "previousBed": "4",
+        "mabn": "0001422178",
+        "hoten": "PHAN THANH BÌNH",
+        "previousBed": "4X",
         "previousRemoved": {
           "isRemoved": false,
           "reason": "",
@@ -2890,9 +2889,9 @@
           "removedAtMs": 0
         },
         "reason": "Chuyển mổ / Chuyển phòng",
-        "deletedAtMs": 1790816230053
+        "deletedAtMs": 1790816234251
       },
-      "updatedAt": "2026-10-01T00:57:10.053Z",
+      "updatedAt": "2026-10-01T00:57:14.250Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4233,7 +4232,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:57:10.053Z"
+      "updatedAt": "2026-10-01T00:57:14.250Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5236,7 +5235,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:57:10.053Z"
+      "updatedAt": "2026-10-01T00:57:14.250Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7486,7 +7485,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:57:10.053Z"
+      "updatedAt": "2026-10-01T00:57:14.250Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8268,7 +8267,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T00:57:10.053Z"
+      "updatedAt": "2026-10-01T00:57:14.250Z"
     }
   },
   "episodeConsultations": {
