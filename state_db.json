@@ -1,5 +1,5 @@
 {
-  "version": 1790816890352,
+  "version": 1790816901344,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -2489,20 +2489,30 @@
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H024",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
-            "status": "NONE",
-            "markedDate": "",
-            "followUpDays": "",
-            "followUpClinic": "",
-            "note": ""
+            "status": "SCHEDULED",
+            "markedDate": "2026-10-01",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống",
+            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "removed": {
             "isRemoved": false,
@@ -2929,7 +2939,7 @@
         "reason": "Chuyển mổ / Chuyển phòng",
         "deletedAtMs": 1790816392749
       },
-      "updatedAt": "2026-10-01T01:08:10.351Z",
+      "updatedAt": "2026-10-01T01:08:21.256Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4426,7 +4436,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:08:10.351Z"
+      "updatedAt": "2026-10-01T01:08:21.256Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5532,7 +5542,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:08:10.352Z"
+      "updatedAt": "2026-10-01T01:08:21.343Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8080,7 +8090,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:08:10.352Z"
+      "updatedAt": "2026-10-01T01:08:21.343Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8962,7 +8972,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:08:10.352Z"
+      "updatedAt": "2026-10-01T01:08:21.343Z"
     }
   },
   "episodeConsultations": {
