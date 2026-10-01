@@ -80,6 +80,7 @@
     lastDeletedAction: null,
     lastExcelUploadTime: null
   };
+  let lastExcelUploadTimeGlobal = '';
   let globalEpisodeConsultations = {};
   let wingCollapsed = { A: false, B: false };
   let activeSummaryTab = 'xn-cdha';
@@ -247,6 +248,13 @@
         } else if (data.tk1) {
           tk1State = data.tk1;
           allRoomsState[currentRoomKey] = data.tk1;
+        }
+        if (data.lastExcelUploadTime) {
+          lastExcelUploadTimeGlobal = data.lastExcelUploadTime;
+          tk1State.lastExcelUploadTime = data.lastExcelUploadTime;
+          if (allRoomsState) {
+            Object.values(allRoomsState).forEach(r => { r.lastExcelUploadTime = data.lastExcelUploadTime; });
+          }
         }
         if (data.episodeConsultations) globalEpisodeConsultations = data.episodeConsultations;
         renderTk1Workspace();
@@ -716,17 +724,46 @@
 
     const blocks = [];
 
-    // Thanh Hoàn tác sau khi bấm Xoá
+    // Thanh Hoàn tác sau khi bấm Xoá (có nút tắt ✕)
     if (tk1State.lastDeletedAction) {
       const del = tk1State.lastDeletedAction;
       blocks.push(`
-        <div class="tk1-undo-banner">
-          <div>
-            🗑️ Đã xoá bệnh nhân <strong>${del.hoten}</strong> (${del.previousBed ? formatBedLabel(del.previousBed) : 'Chưa gán giường'}) — Lý do: <em>${del.reason}</em>
+        <div class="tk1-undo-banner" style="display:flex;align-items:center;justify-content:space-between;gap:0.75rem;padding:0.6rem 1rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex:1;">
+            <span>🗑️ Đã xoá bệnh nhân <strong>${del.hoten}</strong> (${del.previousBed ? formatBedLabel(del.previousBed) : 'Chưa gán giường'}) — Lý do: <em>${del.reason}</em></span>
           </div>
-          <button type="button" class="btn-tk1-undo" id="btn-tk1-undo-delete">
-            ↩️ Hoàn tác ngay
-          </button>
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-shrink:0;">
+            <button type="button" class="btn-tk1-undo" id="btn-tk1-undo-delete" title="Hoàn tác đưa bệnh nhân trở lại">
+              ↩️ Hoàn tác ngay
+            </button>
+            <button type="button" class="btn-tk1-dismiss-undo" id="btn-tk1-dismiss-undo" title="Tắt / Đóng thông báo này" style="background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:700;cursor:pointer;line-height:1;">
+              ✕
+            </button>
+          </div>
+        </div>
+      `);
+    }
+
+    // Cảnh báo BN đã từng bấm xoá nhưng vẫn còn trong file Excel HIS
+    const removedActivePatients = (tk1State.latestExcelMabns || [])
+      .map(m => tk1State.patientRecords[m])
+      .filter(r => r && r.removed?.isRemoved);
+    if (removedActivePatients.length > 0) {
+      blocks.push(`
+        <div class="tk1-alert-box" style="padding:0.65rem 0.95rem;background:#fefce8;border:1.5px solid #facc15;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+            <span style="font-size:0.83rem;font-weight:700;color:#854d0e;">
+              ⚠️ Có ${removedActivePatients.length} BN đã bấm xoá/chuyển nhưng vẫn còn tên trong file Excel HIS:
+              ${removedActivePatients.map(p => `<strong>${p.hoten}</strong> (${p.removed.previousBed ? formatBedLabel(p.removed.previousBed) : 'Chưa giường'})`).join(', ')}
+            </span>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+              ${removedActivePatients.map(p => `
+                <button type="button" class="btn-bed-mini" style="background:#fef08a;color:#713f12;border-color:#eab308;font-weight:700;" data-restore-removed-mabn="${p.mabn}">
+                  🔄 Khôi phục [${p.hoten.split(' ').pop()}]
+                </button>
+              `).join('')}
+            </div>
+          </div>
         </div>
       `);
     }
@@ -834,6 +871,24 @@
     if (undoBtn) {
       undoBtn.addEventListener('click', () => callTk1Api({ action: 'UNDO_DELETE' }));
     }
+
+    const dismissUndoBtn = document.getElementById('btn-tk1-dismiss-undo');
+    if (dismissUndoBtn) {
+      dismissUndoBtn.addEventListener('click', async () => {
+        delete tk1State.lastDeletedAction;
+        renderTk1Workspace();
+        await callTk1Api({ action: 'DISMISS_UNDO_DELETE' });
+      });
+    }
+
+    alertContainer.querySelectorAll('[data-restore-removed-mabn]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const mabn = btn.getAttribute('data-restore-removed-mabn');
+        if (mabn) {
+          await callTk1Api({ action: 'RESTORE_REMOVED_PATIENT', mabn });
+        }
+      });
+    });
 
     const btnReleaseAllMissing = document.getElementById('btn-release-all-missing-beds');
     if (btnReleaseAllMissing) {
@@ -2051,6 +2106,7 @@
           allRoomsState[currentRoomKey] = data.tk1;
         }
         if (data.lastExcelUploadTime) {
+          lastExcelUploadTimeGlobal = data.lastExcelUploadTime;
           tk1State.lastExcelUploadTime = data.lastExcelUploadTime;
           if (allRoomsState) {
             Object.values(allRoomsState).forEach(r => { r.lastExcelUploadTime = data.lastExcelUploadTime; });
@@ -2075,6 +2131,9 @@
       quickAssignSelectedMabn = null;
       if (allRoomsState && allRoomsState[roomKey]) {
         tk1State = allRoomsState[roomKey];
+        if (!tk1State.lastExcelUploadTime && lastExcelUploadTimeGlobal) {
+          tk1State.lastExcelUploadTime = lastExcelUploadTimeGlobal;
+        }
         renderTk1Workspace();
       } else {
         fetchTk1InitialState();
@@ -2087,6 +2146,7 @@
           tk1State = dbObj.wardRounds[currentRoomKey];
         }
         if (dbObj.lastExcelUploadTime) {
+          lastExcelUploadTimeGlobal = dbObj.lastExcelUploadTime;
           tk1State.lastExcelUploadTime = dbObj.lastExcelUploadTime;
           if (allRoomsState) {
             Object.values(allRoomsState).forEach(r => { r.lastExcelUploadTime = dbObj.lastExcelUploadTime; });

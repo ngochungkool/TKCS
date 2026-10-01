@@ -1337,6 +1337,17 @@ const server = http.createServer(async (req, res) => {
     const now = new Date();
     const todayKey = getDateKey(now);
 
+    function sendWardResponse() {
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        ok: true,
+        tk1,
+        wardRounds: db.wardRounds,
+        episodeConsultations: db.episodeConsultations,
+        lastExcelUploadTime: getLatestExcelUploadInfo()
+      }));
+    }
+
     if (action === 'ASSIGN_OR_MOVE_BED') {
       const { mabn, targetBedCode, confirmOverwriteDischarge } = body;
       const rec = tk1.patientRecords[mabn];
@@ -1402,9 +1413,7 @@ const server = http.createServer(async (req, res) => {
       }
 
       broadcastState(`🛏️ Đã cập nhật giường [${targetBedCode}] cho BN ${rec.hoten} (${tk1.roomName})`);
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'UNASSIGN_BED') {
@@ -1413,9 +1422,7 @@ const server = http.createServer(async (req, res) => {
         if (m === mabn) delete tk1.bedAssignments[bCode];
       }
       broadcastState(`🛏️ Đã đưa bệnh nhân về danh sách chờ phân giường (${tk1.roomName})`);
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'TOGGLE_FOLDING_BED_VISIBILITY') {
@@ -1426,9 +1433,7 @@ const server = http.createServer(async (req, res) => {
         delete tk1.hiddenFoldingBeds[String(mainBedNum)];
       }
       broadcastState(`🛏️ Đã cập nhật hiển thị giường xếp ${mainBedNum}X (${tk1.roomName})`);
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'SAVE_PATIENT_ROUND') {
@@ -1486,9 +1491,7 @@ const server = http.createServer(async (req, res) => {
       }
 
       broadcastState(`📝 Đã lưu thông tin đi buồng BN ${rec.hoten} (${tk1.roomName})`);
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'UPDATE_CONSULT_TREATMENT') {
@@ -1503,9 +1506,7 @@ const server = http.createServer(async (req, res) => {
         rec.consultDetails.followUpClinic = getClinicBySpecialty(rec.consultDetails.specialty);
         broadcastState(`💬 Đã cập nhật xử trí hội chẩn BN ${rec.hoten} (${tk1.roomName})`);
       }
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'SET_DISCHARGE') {
@@ -1541,9 +1542,7 @@ const server = http.createServer(async (req, res) => {
         }
         broadcastState(`🏥 Đã cập nhật trạng thái ra viện BN ${rec.hoten} (${tk1.roomName})`);
       }
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'RELEASE_DISCHARGED_BED_NOW') {
@@ -1556,9 +1555,7 @@ const server = http.createServer(async (req, res) => {
         rec.discharge.status = 'RELEASED_AFTER_9AM';
       }
       broadcastState(`🔓 Đã giải phóng giường bệnh nhân xuất viện (${tk1.roomName})`);
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'DELETE_PATIENT') {
@@ -1588,9 +1585,7 @@ const server = http.createServer(async (req, res) => {
         };
         broadcastState(`🗑️ Đã xoá BN ${rec.hoten} (${tk1.roomName})`);
       }
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'UNDO_DELETE') {
@@ -1604,9 +1599,29 @@ const server = http.createServer(async (req, res) => {
         tk1.lastDeletedAction = null;
         broadcastState(`↩️ Đã hoàn tác xoá BN ${rec.hoten} (${tk1.roomName})`);
       }
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
+    }
+
+    if (action === 'DISMISS_UNDO_DELETE') {
+      tk1.lastDeletedAction = null;
+      return sendWardResponse();
+    }
+
+    if (action === 'RESTORE_REMOVED_PATIENT') {
+      const { mabn } = body;
+      if (mabn && tk1.patientRecords[mabn]) {
+        const rec = tk1.patientRecords[mabn];
+        const prevBed = rec.removed?.previousBed || '';
+        rec.removed = { isRemoved: false, reason: '', previousBed: '', removedAtMs: 0 };
+        if (prevBed && !tk1.bedAssignments[prevBed]) {
+          tk1.bedAssignments[prevBed] = mabn;
+        }
+        if (tk1.lastDeletedAction && tk1.lastDeletedAction.mabn === mabn) {
+          tk1.lastDeletedAction = null;
+        }
+        broadcastState(`🔄 Đã khôi phục BN ${rec.hoten} (${tk1.roomName})`);
+      }
+      return sendWardResponse();
     }
 
     if (action === 'HANDLE_MISSING_EXCEL_PATIENT') {
@@ -1626,9 +1641,7 @@ const server = http.createServer(async (req, res) => {
         tk1.acknowledgedMissingMabns[mabn] = true;
       }
       broadcastState(`✅ Đã xử lý kiểm tra danh sách Excel (${tk1.roomName})`);
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     if (action === 'RELEASE_ALL_MISSING_EXCEL_PATIENTS') {
@@ -1649,9 +1662,7 @@ const server = http.createServer(async (req, res) => {
         }
       }
       broadcastState(`🗑️ Đã giải phóng ${count} giường không còn trong Excel (${tk1.roomName})`);
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
-      return;
+      return sendWardResponse();
     }
 
     res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
