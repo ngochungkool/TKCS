@@ -1,5 +1,5 @@
 {
-  "version": 1790828487144,
+  "version": 1790828491843,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3159,7 +3159,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:27.143Z",
+      "updatedAt": "2026-10-01T04:21:31.841Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4663,7 +4663,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:27.143Z"
+      "updatedAt": "2026-10-01T04:21:31.842Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5769,7 +5769,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:27.143Z"
+      "updatedAt": "2026-10-01T04:21:31.842Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8452,7 +8452,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:27.143Z"
+      "updatedAt": "2026-10-01T04:21:31.842Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -9333,7 +9333,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:27.144Z"
+      "updatedAt": "2026-10-01T04:21:31.843Z"
     }
   },
   "episodeConsultations": {
