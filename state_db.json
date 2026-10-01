@@ -1,5 +1,5 @@
 {
-  "version": 1790828235245,
+  "version": 1790828464041,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -291,11 +291,11 @@
   ],
   "uploadedHisFiles": [
     {
-      "fileName": "1.xlsx → [Đang điều trị: 26 dòng]",
+      "fileName": "1.xlsx → [Đang điều trị: 108 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
-      "sizeBytes": 20585,
-      "uploadedAt": "11:15:40 1/10/2026",
+      "sizeBytes": 53985,
+      "uploadedAt": "11:21:03 1/10/2026",
       "extractedPreview": null
     },
     {
@@ -638,22 +638,22 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 12,
+      "dauCa": 94,
       "benhVao": 16,
       "raVien": 1,
       "chuyenDen": 2,
       "chuyenDi": 3,
       "tuVong": 0,
       "benhMo": 0,
-      "hienCo": 26,
-      "baoHiem": 25
+      "hienCo": 108,
+      "baoHiem": 104
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 11,
-        "benhVao": 16,
+        "dauCa": 23,
+        "benhVao": 6,
         "raVien": 0,
-        "chuyenDen": 2,
+        "chuyenDen": 0,
         "chuyenDi": 3,
         "tuVong": 0,
         "benhMo": 0,
@@ -661,51 +661,51 @@
         "baoHiem": 25
       },
       "Thần kinh 2": {
-        "dauCa": 0,
-        "benhVao": 0,
+        "dauCa": 19,
+        "benhVao": 2,
         "raVien": 0,
-        "chuyenDen": 0,
+        "chuyenDen": 1,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 0,
-        "baoHiem": 0
+        "hienCo": 22,
+        "baoHiem": 21
       },
       "Thần kinh 3": {
-        "dauCa": 0,
-        "benhVao": 0,
+        "dauCa": 13,
+        "benhVao": 1,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 0,
-        "baoHiem": 0
+        "hienCo": 14,
+        "baoHiem": 13
       },
       "Thần kinh 4": {
-        "dauCa": 1,
-        "benhVao": 0,
+        "dauCa": 30,
+        "benhVao": 7,
         "raVien": 1,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 0,
-        "baoHiem": 0
+        "hienCo": 36,
+        "baoHiem": 35
       },
       "Hồi sức thần kinh": {
-        "dauCa": 0,
+        "dauCa": 9,
         "benhVao": 0,
         "raVien": 0,
-        "chuyenDen": 0,
+        "chuyenDen": 1,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 0,
-        "baoHiem": 0
+        "hienCo": 10,
+        "baoHiem": 10
       }
     },
-    "updatedAt": "2026-10-01T04:15:40.743Z"
+    "updatedAt": "2026-10-01T04:21:04.041Z"
   },
   "wardRounds": {
     "tk1": {
@@ -3159,7 +3159,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:15.244Z",
+      "updatedAt": "2026-10-01T04:21:05.635Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3675,7 +3675,7 @@
           "tuyenDangKy": "Trái tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "trung ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
+          "diaChi": "Trung Ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "customDiagnosis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3719,7 +3719,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "01/02/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "Xã Vạn Đức--Tỉnh Gia Lai",
+          "diaChi": "Vạn Hội 1-Xã Vạn Đức--Tỉnh Gia Lai",
           "chanDoanHis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "customDiagnosis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -4027,7 +4027,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "08/05/2026",
           "hanTheDen": "07/05/2027",
-          "diaChi": "cửu lợi đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
+          "diaChi": "Cửu Lợi Đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -4071,7 +4071,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "14/07/2026",
           "hanTheDen": "13/07/2027",
-          "diaChi": "xuân vinh-Phường Hoài Nhơn Đông--Tỉnh Gia Lai",
+          "diaChi": "Xuân Vinh-Phường Hoài Nhơn Đông--Tỉnh Gia Lai",
           "chanDoanHis": "S12.20-Gãy đốt sống cổ xác định khác, gãy kín",
           "customDiagnosis": "S12.20-Gãy đốt sống cổ xác định khác, gãy kín",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -4203,7 +4203,7 @@
           "tuyenDangKy": "Đúng tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2026",
-          "diaChi": "suối cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
+          "diaChi": "Suối Cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
           "chanDoanHis": "D43.0-U tân sinh không tiên lượng được tiến triển và tính chất ở não, trên lều não",
           "customDiagnosis": "D43.0-U tân sinh không tiên lượng được tiến triển và tính chất ở não, trên lều não",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -4629,10 +4629,33 @@
           }
         }
       },
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001412378",
+        "0001397969",
+        "0001373574",
+        "0001420471",
+        "0001265243",
+        "0001419943",
+        "0000462435",
+        "0000789370",
+        "0001422060",
+        "0001422302",
+        "0001420757",
+        "0001418939",
+        "0001422775",
+        "0001422908",
+        "0001422322",
+        "0001325103",
+        "0001254460",
+        "0001423438",
+        "0001423447",
+        "0001421947",
+        "0000024430",
+        "0001423960"
+      ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:15.244Z"
+      "updatedAt": "2026-10-01T04:21:05.635Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5720,10 +5743,25 @@
           }
         }
       },
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001383920",
+        "0000835346",
+        "0001327863",
+        "0001413514",
+        "0001422911",
+        "0001417494",
+        "0001420565",
+        "0001220543",
+        "0001423182",
+        "0001181071",
+        "0001415849",
+        "0001262499",
+        "0001423451",
+        "0001423393"
+      ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:15.244Z"
+      "updatedAt": "2026-10-01T04:21:05.635Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6845,7 +6883,7 @@
           "customDiagnosis": "U51.431-Não nham [U ác của não]",
           "bsDieuTri": "Dương Minh Trí",
           "ngayVaoStr": "26/09/2026",
-          "hisBed": "H078",
+          "hisBed": "H094",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -8232,12 +8270,181 @@
             "previousBed": "",
             "removedAtMs": 0
           }
+        },
+        "0001424078": {
+          "mabn": "0001424078",
+          "episodeKey": "2600373878",
+          "maKcb": "2600373878",
+          "madieutri": "949801",
+          "soBA": "26077010",
+          "hoten": "NGUYỄN VĂN HÒA",
+          "tuoi": "64 tuổi",
+          "namSinh": "1962",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "DK2525220234268",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/02/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Xã An Lương--Tỉnh Gia Lai",
+          "chanDoanHis": "D23.5-U lành da ở thân mình",
+          "customDiagnosis": "D23.5-U lành da ở thân mình",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H092",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0000793707": {
+          "mabn": "0000793707",
+          "episodeKey": "2600374101",
+          "maKcb": "2600374101",
+          "madieutri": "949821",
+          "soBA": "26077024",
+          "hoten": "NGUYỄN XUÂN MỸ",
+          "tuoi": "67 tuổi",
+          "namSinh": "1959",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "HT3523706001806",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "Hải Bắc-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
+          "chanDoanHis": "G40.8-Bệnh động kinh khác",
+          "customDiagnosis": "G40.8-Bệnh động kinh khác",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H095",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001419899": {
+          "mabn": "0001419899",
+          "episodeKey": "2600374182",
+          "maKcb": "2600374182",
+          "madieutri": "949832",
+          "soBA": "26077029",
+          "hoten": "HUỲNH NGỌC TÁNH",
+          "tuoi": "71 tuổi",
+          "namSinh": "1955",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "TQ4975221127180",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/03/2026",
+          "hanTheDen": "31/01/2028",
+          "diaChi": "Trung Lý, Nhơn Phong, An Nhơn, Bình Định-Phường An Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
+          "customDiagnosis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H098",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
         }
       },
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001413526",
+        "0001415940",
+        "0001418784",
+        "0001411127",
+        "0001421285",
+        "0001418775",
+        "0001040749",
+        "0001418951",
+        "0001421575",
+        "0001422079",
+        "0001291952",
+        "0001422207",
+        "0001422252",
+        "0001422398",
+        "0001422488",
+        "0001309625",
+        "0001422435",
+        "0001422625",
+        "0001422884",
+        "0001422894",
+        "0001200590",
+        "0001423036",
+        "0001423062",
+        "0001423163",
+        "0001423344",
+        "0001423307",
+        "0001422572",
+        "0001423683",
+        "0000162797",
+        "0001422255",
+        "0001423830",
+        "0001423904",
+        "0001423932",
+        "0001424078",
+        "0000793707",
+        "0001419899"
+      ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:15.244Z"
+      "updatedAt": "2026-10-01T04:21:05.636Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8813,9 +9020,9 @@
           "diaChi": "Xã Bình Phú--Tỉnh Gia Lai",
           "chanDoanHis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
           "customDiagnosis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
-          "bsDieuTri": "Đào Văn Nhân",
-          "ngayVaoStr": "28/09/2026",
-          "hisBed": "H006",
+          "bsDieuTri": "Phạm Thái Hoàng Luân",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H001",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -9104,10 +9311,21 @@
           }
         }
       },
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001412464",
+        "0000844175",
+        "0001416828",
+        "0001420321",
+        "0001422339",
+        "0001420070",
+        "0001423406",
+        "0001232783",
+        "0001423465",
+        "0001423888"
+      ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:17:15.244Z"
+      "updatedAt": "2026-10-01T04:21:05.636Z"
     }
   },
   "episodeConsultations": {
@@ -9148,5 +9366,5 @@
       }
     ]
   },
-  "lastExcelUploadTime": "11:15 ngày 01/10/2026"
+  "lastExcelUploadTime": "11:21 ngày 01/10/2026"
 }
