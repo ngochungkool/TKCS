@@ -1,5 +1,5 @@
 {
-  "version": 1790816972344,
+  "version": 1790817013055,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1709,6 +1709,17 @@
               "sieuAm": [],
               "hoiChan": [],
               "note": ""
+            },
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
             }
           },
           "consultDetails": {
@@ -2952,7 +2963,7 @@
         "reason": "Chuyển mổ / Chuyển phòng",
         "deletedAtMs": 1790816392749
       },
-      "updatedAt": "2026-10-01T01:09:32.269Z",
+      "updatedAt": "2026-10-01T01:10:13.054Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4449,7 +4460,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:09:32.269Z"
+      "updatedAt": "2026-10-01T01:10:13.055Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5555,7 +5566,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:09:32.343Z"
+      "updatedAt": "2026-10-01T01:10:13.055Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8103,7 +8114,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:09:32.344Z"
+      "updatedAt": "2026-10-01T01:10:13.055Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -8985,7 +8996,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:09:32.344Z"
+      "updatedAt": "2026-10-01T01:10:13.055Z"
     }
   },
   "episodeConsultations": {
