@@ -495,28 +495,35 @@
       }
     }
 
-    // 1. Tab Xét nghiệm + CĐHA
+    // 1. Tab Xét nghiệm + CĐHA (Gộp cả Chỉ định XN, CT, XQ, SA, Thủ thuật & Ghi chú đi buồng)
     const xnRows = assignedEntries.filter(({ rec }) => {
       const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
-      return (
-        (t.xetNghiem && t.xetNghiem.length > 0) ||
-        (t.ct && t.ct.length > 0) ||
-        (t.xquang && t.xquang.length > 0) ||
-        (t.sieuAm && t.sieuAm.length > 0)
-      );
+      const hasXn = Array.isArray(t.xetNghiem) && t.xetNghiem.length > 0;
+      const hasCt = Array.isArray(t.ct) && t.ct.length > 0;
+      const hasXq = Array.isArray(t.xquang) && t.xquang.length > 0;
+      const hasSa = Array.isArray(t.sieuAm) && t.sieuAm.length > 0;
+      const hasThuThuat = Array.isArray(t.thuThuat) && t.thuThuat.length > 0;
+      const hasNote = Boolean(t.note && String(t.note).trim());
+      return hasXn || hasCt || hasXq || hasSa || hasThuThuat || hasNote;
     });
 
     document.getElementById('tk1-count-tab-xn').textContent = xnRows.length;
     xnBody.innerHTML = xnRows.length === 0
-      ? `<tr><td colspan="3" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có bệnh nhân nào có chỉ định Xét nghiệm / CĐHA ngày ${formatDateDisplayVN(curDateKey)}.</td></tr>`
+      ? `<tr><td colspan="4" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có bệnh nhân nào có chỉ định Xét nghiệm / CĐHA / Ghi chú ngày ${formatDateDisplayVN(curDateKey)}.</td></tr>`
       : xnRows.map(({ bedCode, rec }) => {
           const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
           const badges = [
             ...(t.xetNghiem || []).map(x => `<span class="tk1-task-pill pill-xn">🧪 XN: ${x}</span>`),
             ...(t.ct || []).map(x => `<span class="tk1-task-pill pill-ct">🧠 ${formatCtLabel(x)}</span>`),
             ...(t.xquang || []).map(x => `<span class="tk1-task-pill pill-xq">🦴 XQ: ${x}</span>`),
-            ...(t.sieuAm || []).map(x => `<span class="tk1-task-pill pill-sa">📡 SA: ${x}</span>`)
-          ].join(' ');
+            ...(t.sieuAm || []).map(x => `<span class="tk1-task-pill pill-sa">📡 SA: ${x}</span>`),
+            ...(t.thuThuat || []).map(x => `<span class="tk1-task-pill pill-sa" style="background:#fef3c7;border-color:#fcd34d;color:#92400e;">🩹 ${x}</span>`)
+          ];
+          const badgesHtml = badges.length > 0
+            ? `<div style="display:flex;flex-wrap:wrap;gap:4px;">${badges.join(' ')}</div>`
+            : `<span style="font-size:0.78rem;color:#94a3b8;font-style:italic;">Không có chỉ định</span>`;
+          const noteVal = String(t.note || '').trim();
+
           return `
             <tr>
               <td><strong>${formatBedLabel(bedCode)}</strong></td>
@@ -526,7 +533,28 @@
                 </a>
                 <span style="font-size:0.76rem;color:#64748b;"> · ${rec.tuoi}</span>
               </td>
-              <td><div style="display:flex;flex-wrap:wrap;gap:4px;">${badges}</div></td>
+              <td>${badgesHtml}</td>
+              <td>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <input
+                    type="text"
+                    class="date-input"
+                    style="flex:1;font-size:0.82rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;"
+                    value="${noteVal.replace(/"/g, '&quot;')}"
+                    placeholder="Ghi chú đi buồng..."
+                    id="inline-note-${rec.mabn}"
+                    onkeydown="if(event.key==='Enter') window.TK1Module.saveInlineNote('${rec.mabn}')"
+                  />
+                  <button
+                    type="button"
+                    class="btn-primary-sm"
+                    style="padding:0.38rem 0.75rem;font-size:0.76rem;font-family:'Be Vietnam Pro',sans-serif;"
+                    onclick="window.TK1Module.saveInlineNote('${rec.mabn}')"
+                  >
+                    Lưu
+                  </button>
+                </div>
+              </td>
             </tr>
           `;
         }).join('');
@@ -642,60 +670,6 @@
           `;
         }).join('');
 
-    // 4. Tab Khác (Tổng hợp những ghi chú + thủ thuật từ các thẻ bệnh nhân)
-    const khacBody = document.getElementById('tk1-sum-tbody-khac');
-    const khacCountEl = document.getElementById('tk1-count-tab-khac');
-    if (khacBody && khacCountEl) {
-      const khacRows = assignedEntries.filter(({ rec }) => {
-        const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
-        const hasNote = Boolean(t.note && String(t.note).trim());
-        const hasThuThuat = Array.isArray(t.thuThuat) && t.thuThuat.length > 0;
-        return hasNote || hasThuThuat;
-      });
-
-      khacCountEl.textContent = khacRows.length;
-      khacBody.innerHTML = khacRows.length === 0
-        ? `<tr><td colspan="3" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có ghi chú hoặc thủ thuật nào từ các thẻ bệnh nhân ngày ${formatDateDisplayVN(curDateKey)}.</td></tr>`
-        : khacRows.map(({ bedCode, rec }) => {
-            const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
-            const noteVal = String(t.note || '').trim();
-            const thuThuatBadges = (t.thuThuat || []).map(item =>
-              `<span class="tk1-task-pill pill-sa" style="margin-right:4px;margin-bottom:4px;display:inline-flex;">🩹 ${item}</span>`
-            ).join('');
-            return `
-              <tr>
-                <td><strong>${formatBedLabel(bedCode)}</strong></td>
-                <td>
-                  <a href="javascript:void(0)" onclick="window.TK1Module.openPatientModal('${rec.mabn}')" style="font-weight:800;color:#004aad;text-decoration:none;">
-                    ${rec.hoten}
-                  </a>
-                  <span style="font-size:0.76rem;color:#64748b;"> · ${rec.tuoi}</span>
-                </td>
-                <td>
-                  ${thuThuatBadges ? `<div style="margin-bottom:4px;">${thuThuatBadges}</div>` : ''}
-                  <div style="display:flex;align-items:center;gap:6px;">
-                    <input
-                      type="text"
-                      class="date-input"
-                      style="flex:1;font-size:0.82rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;"
-                      value="${noteVal.replace(/"/g, '&quot;')}"
-                      placeholder="Nhập ghi chú..."
-                      id="inline-note-${rec.mabn}"
-                    />
-                    <button
-                      type="button"
-                      class="btn-primary-sm"
-                      style="padding:0.38rem 0.75rem;font-size:0.76rem;font-family:'Be Vietnam Pro',sans-serif;"
-                      onclick="window.TK1Module.saveInlineNote('${rec.mabn}')"
-                    >
-                      Lưu
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            `;
-          }).join('');
-    }
   }
 
   // 4. Làm gọn lại box chưa được phân giường (dải chip ngang gọn nhẹ + Sơ đồ chọn giường trực quan)
@@ -2373,6 +2347,7 @@
           xquang: existingToday.xquang || [],
           sieuAm: existingToday.sieuAm || [],
           hoiChan: existingToday.hoiChan || [],
+          thuThuat: existingToday.thuThuat || [],
           note: newNote
         },
         consultDetails: rec.consultDetails

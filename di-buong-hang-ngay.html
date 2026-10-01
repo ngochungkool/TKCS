@@ -126,18 +126,18 @@
               <button type="button" class="tk1-sum-tab-btn active" data-tk1-sum-tab="xn-cdha">🧪 Xét nghiệm + CĐHA (<span id="tk1-count-tab-xn">0</span>)</button>
               <button type="button" class="tk1-sum-tab-btn" data-tk1-sum-tab="hoi-chan">👨‍⚕️ Hội chẩn (<span id="tk1-count-tab-hc">0</span>)</button>
               <button type="button" class="tk1-sum-tab-btn" data-tk1-sum-tab="ra-vien">🏥 Ra viện (<span id="tk1-count-tab-rv">0</span>)</button>
-              <button type="button" class="tk1-sum-tab-btn" data-tk1-sum-tab="khac">📝 Khác (<span id="tk1-count-tab-khac">0</span>)</button>
             </div>
 
-            <!-- Tab 1: Xét nghiệm + CĐHA -->
+            <!-- Tab 1: Xét nghiệm + CĐHA (Gộp cả Chỉ định & Ghi chú) -->
             <div id="tk1-sum-panel-xn-cdha" class="tk1-sum-tab-panel active">
               <div class="admin-table-wrapper">
                 <table class="admin-roster-table">
                   <thead>
                     <tr>
-                      <th style="width:120px;">Giường</th>
-                      <th style="width:250px;">Bệnh nhân</th>
-                      <th>Công việc cần làm (Xét nghiệm, CT, X-quang, Siêu âm)</th>
+                      <th style="width:115px;">Giường</th>
+                      <th style="width:220px;">Bệnh nhân</th>
+                      <th>Chỉ định (Xét nghiệm, CT, X-quang, Siêu âm, Thủ thuật)</th>
+                      <th style="width:340px;">Ghi chú đi buồng</th>
                     </tr>
                   </thead>
                   <tbody id="tk1-sum-tbody-xn"></tbody>
@@ -176,22 +176,6 @@
                     </tr>
                   </thead>
                   <tbody id="tk1-sum-tbody-rv"></tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Tab 4: Khác (Tổng hợp những ghi chú từ các thẻ bệnh nhân) -->
-            <div id="tk1-sum-panel-khac" class="tk1-sum-tab-panel">
-              <div class="admin-table-wrapper">
-                <table class="admin-roster-table">
-                  <thead>
-                    <tr>
-                      <th style="width:120px;">Giường</th>
-                      <th style="width:240px;">Bệnh nhân</th>
-                      <th>Ghi chú từ thẻ bệnh nhân</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tk1-sum-tbody-khac"></tbody>
                 </table>
               </div>
             </div>
