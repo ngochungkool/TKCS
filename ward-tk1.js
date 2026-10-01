@@ -77,7 +77,8 @@
     patientRecords: {},
     latestExcelMabns: [],
     acknowledgedMissingMabns: {},
-    lastDeletedAction: null
+    lastDeletedAction: null,
+    lastExcelUploadTime: null
   };
   let globalEpisodeConsultations = {};
   let wingCollapsed = { A: false, B: false };
@@ -85,6 +86,24 @@
   let activeModalMabn = null;
   // Chế độ bấm chọn nhanh 1 BN chưa phân giường rồi bấm trực tiếp vào ô giường bên dưới
   let quickAssignSelectedMabn = null;
+
+  let selectedDateKey = getTodayKey();
+  function getSelectedDateKey() {
+    return selectedDateKey || getTodayKey();
+  }
+
+  function formatDateDisplayVN(dateKey) {
+    if (!dateKey || !dateKey.includes('-')) return dateKey || '';
+    const [y, m, d] = dateKey.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  function formatCtLabel(item) {
+    if (!item) return '';
+    const trimmed = String(item).trim();
+    if (trimmed.toLowerCase().startsWith('ct')) return trimmed;
+    return `CT ${trimmed.charAt(0).toLowerCase() + trimmed.slice(1)}`;
+  }
 
   let modalDraftTasks = {
     xetNghiem: [],
@@ -117,18 +136,23 @@
   }
 
   function getClinicNameForSpecialty(spec) {
-    if (!spec) return 'Phòng khám Ngoại Thần kinh - Cột sống';
+    if (!spec) return '';
     return CLINIC_BY_SPECIALTY[spec] || `Phòng khám ${spec}`;
   }
 
   function formatFollowUpAppointmentText(rec) {
     const cd = rec.consultDetails || {};
     const dis = rec.discharge || {};
-    const days = dis.followUpDays || cd.followUpDays || '';
-    const spec = cd.specialty || (rec.tasksByDate?.[getTodayKey()]?.hoiChan?.[0] || '');
-    const clinic = dis.followUpClinic || cd.followUpClinic || getClinicNameForSpecialty(spec);
+    const curDateKey = getSelectedDateKey();
+    const spec = cd.specialty || (rec.tasksByDate?.[curDateKey]?.hoiChan?.[0] || '');
 
-    if (!days && !spec && (!dis.status || dis.status === 'NONE')) return '';
+    // Yêu cầu: Không tự động nhận là tái khám PK ngoại thần kinh sau 7 ngày, chỉ nhận tự động của các ca có hội chẩn
+    if (!spec) {
+      return 'Không hẹn tái khám';
+    }
+
+    const days = dis.followUpDays || cd.followUpDays || '7';
+    const clinic = dis.followUpClinic || cd.followUpClinic || getClinicNameForSpecialty(spec);
     const numDays = Number(days) || 7;
     const targetDt = new Date();
     targetDt.setDate(targetDt.getDate() + numDays);
@@ -136,12 +160,7 @@
     const mm = String(targetDt.getMonth() + 1).padStart(2, '0');
     const yyyy = targetDt.getFullYear();
 
-    const secondaryClinic =
-      clinic !== 'Phòng khám Ngoại Thần kinh - Cột sống'
-        ? `${clinic} & Phòng khám Ngoại Thần kinh`
-        : clinic;
-
-    return `Hẹn tái khám sau ${numDays} ngày (${dd}/${mm}/${yyyy}) tại ${secondaryClinic}`;
+    return `Hẹn tái khám sau ${numDays} ngày (${dd}/${mm}/${yyyy}) tại ${clinic}`;
   }
 
   function getBedOfPatient(mabn) {
@@ -267,9 +286,9 @@
   }
 
   function getMostRecentHistorySummary(rec) {
-    const todayKey = getTodayKey();
+    const curDateKey = getSelectedDateKey();
     const dates = Object.keys(rec.tasksByDate || {})
-      .filter(d => d < todayKey)
+      .filter(d => d < curDateKey)
       .sort((a, b) => (a < b ? 1 : -1));
 
     for (const dKey of dates) {
@@ -321,7 +340,6 @@
 
   // 5. Không hiển thị chẩn đoán đi cùng ở bảng hiển thị ngoài; chỉ giữ số giường và nút + xếp gọn gàng
   function renderSingleBedCardHtml(bedCode, bedNumber, isFolding, rec, attachedFoldRec, isFoldHiddenManually) {
-    const todayKey = getTodayKey();
     const badgeTitle = isFolding ? `Xếp ${bedNumber}` : `${bedNumber}`;
     const quickSelectHint = quickAssignSelectedMabn && tk1State.patientRecords[quickAssignSelectedMabn]
       ? ` · Bấm để xếp [${tk1State.patientRecords[quickAssignSelectedMabn].hoten}] vào đây`
@@ -369,10 +387,11 @@
       statusBadgeHtml = `<span style="background:#dc2626;color:#fff;font-size:0.71rem;font-weight:800;padding:2px 8px;border-radius:999px;">🏥 Chờ ra viện</span>`;
     }
 
-    const todayTasks = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
+    const curDateKey = getSelectedDateKey();
+    const todayTasks = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
     const pills = [];
     (todayTasks.xetNghiem || []).forEach(item => pills.push(`<span class="tk1-task-pill pill-xn">🧪 ${item}</span>`));
-    (todayTasks.ct || []).forEach(item => pills.push(`<span class="tk1-task-pill pill-ct">🧠 ${item}</span>`));
+    (todayTasks.ct || []).forEach(item => pills.push(`<span class="tk1-task-pill pill-ct">🧠 ${formatCtLabel(item)}</span>`));
     (todayTasks.xquang || []).forEach(item => pills.push(`<span class="tk1-task-pill pill-xq">🦴 ${item}</span>`));
     (todayTasks.sieuAm || []).forEach(item => pills.push(`<span class="tk1-task-pill pill-sa">📡 ${item}</span>`));
     (todayTasks.hoiChan || []).forEach(item => pills.push(`<span class="tk1-task-pill pill-hc">👨‍⚕️ HC: ${item}</span>`));
@@ -450,7 +469,12 @@
     const rvBody = document.getElementById('tk1-sum-tbody-rv');
     if (!xnBody || !hcBody || !rvBody) return;
 
-    const todayKey = getTodayKey();
+    const curDateKey = getSelectedDateKey();
+    const sumTitleEl = document.getElementById('tk1-summary-title');
+    if (sumTitleEl) {
+      sumTitleEl.textContent = `📋 Tổng hợp đi buồng — Ngày ${formatDateDisplayVN(curDateKey)}`;
+    }
+
     const { wingB } = getCurrentRoomConfig();
     const maxBedNum = wingB[1];
     const assignedEntries = [];
@@ -465,7 +489,7 @@
 
     // 1. Tab Xét nghiệm + CĐHA
     const xnRows = assignedEntries.filter(({ rec }) => {
-      const t = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
+      const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
       return (
         (t.xetNghiem && t.xetNghiem.length > 0) ||
         (t.ct && t.ct.length > 0) ||
@@ -476,12 +500,12 @@
 
     document.getElementById('tk1-count-tab-xn').textContent = xnRows.length;
     xnBody.innerHTML = xnRows.length === 0
-      ? `<tr><td colspan="3" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có bệnh nhân nào có chỉ định Xét nghiệm / CĐHA hôm nay.</td></tr>`
+      ? `<tr><td colspan="3" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có bệnh nhân nào có chỉ định Xét nghiệm / CĐHA ngày ${formatDateDisplayVN(curDateKey)}.</td></tr>`
       : xnRows.map(({ bedCode, rec }) => {
-          const t = rec.tasksByDate[todayKey] || {};
+          const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
           const badges = [
             ...(t.xetNghiem || []).map(x => `<span class="tk1-task-pill pill-xn">🧪 XN: ${x}</span>`),
-            ...(t.ct || []).map(x => `<span class="tk1-task-pill pill-ct">🧠 CT: ${x}</span>`),
+            ...(t.ct || []).map(x => `<span class="tk1-task-pill pill-ct">🧠 ${formatCtLabel(x)}</span>`),
             ...(t.xquang || []).map(x => `<span class="tk1-task-pill pill-xq">🦴 XQ: ${x}</span>`),
             ...(t.sieuAm || []).map(x => `<span class="tk1-task-pill pill-sa">📡 SA: ${x}</span>`)
           ].join(' ');
@@ -499,18 +523,18 @@
           `;
         }).join('');
 
-    // 2. Tab Hội chẩn
+    // 2. Tab Hội chẩn (Chỉ hiện các ca có đăng ký hội chẩn trong ngày được chọn)
     const hcRows = assignedEntries.filter(({ rec }) => {
-      const t = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
-      return (t.hoiChan && t.hoiChan.length > 0) || (rec.consultDetails && rec.consultDetails.specialty);
+      const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
+      return Array.isArray(t.hoiChan) && t.hoiChan.length > 0;
     });
 
     document.getElementById('tk1-count-tab-hc').textContent = hcRows.length;
     hcBody.innerHTML = hcRows.length === 0
-      ? `<tr><td colspan="5" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có bệnh nhân nào đăng ký Hội chẩn hôm nay.</td></tr>`
+      ? `<tr><td colspan="5" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có bệnh nhân nào đăng ký Hội chẩn ngày ${formatDateDisplayVN(curDateKey)}.</td></tr>`
       : hcRows.map(({ bedCode, rec }) => {
-          const t = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
-          const spec = rec.consultDetails?.specialty || (t.hoiChan && t.hoiChan[0]) || 'Chuyên khoa';
+          const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
+          const spec = (t.hoiChan && t.hoiChan[0]) || rec.consultDetails?.specialty || 'Chuyên khoa';
           const cDiag = rec.consultDetails?.consultDiagnosis || '';
           const cTreat = rec.consultDetails?.consultTreatment || '';
           const fDays = rec.consultDetails?.followUpDays || '7';
@@ -584,6 +608,9 @@
       : rvRows.map(({ bedCode, rec }) => {
           const isMorning = rec.discharge?.status === 'MORNING_DISCHARGE';
           const followUpText = formatFollowUpAppointmentText(rec);
+          const followUpCellHtml = followUpText && followUpText !== 'Không hẹn tái khám'
+            ? `📅 ${followUpText}`
+            : `<span style="font-size:0.8rem;color:#64748b;">Không hẹn tái khám</span>`;
           return `
             <tr>
               <td><strong>${formatBedLabel(bedCode)}</strong></td>
@@ -601,7 +628,7 @@
                 }
               </td>
               <td style="font-size:0.82rem;font-weight:700;color:#0f766e;">
-                📅 ${followUpText}
+                ${followUpCellHtml}
               </td>
             </tr>
           `;
@@ -612,7 +639,7 @@
     const khacCountEl = document.getElementById('tk1-count-tab-khac');
     if (khacBody && khacCountEl) {
       const khacRows = assignedEntries.filter(({ rec }) => {
-        const t = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
+        const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
         const hasNote = Boolean(t.note && String(t.note).trim());
         const hasThuThuat = Array.isArray(t.thuThuat) && t.thuThuat.length > 0;
         return hasNote || hasThuThuat;
@@ -620,9 +647,9 @@
 
       khacCountEl.textContent = khacRows.length;
       khacBody.innerHTML = khacRows.length === 0
-        ? `<tr><td colspan="3" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có ghi chú hoặc thủ thuật nào từ các thẻ bệnh nhân hôm nay.</td></tr>`
+        ? `<tr><td colspan="3" style="text-align:center;color:#64748b;padding:1.1rem;">Chưa có ghi chú hoặc thủ thuật nào từ các thẻ bệnh nhân ngày ${formatDateDisplayVN(curDateKey)}.</td></tr>`
         : khacRows.map(({ bedCode, rec }) => {
-            const t = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
+            const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
             const noteVal = String(t.note || '').trim();
             const thuThuatBadges = (t.thuThuat || []).map(item =>
               `<span class="tk1-task-pill pill-sa" style="margin-right:4px;margin-bottom:4px;display:inline-flex;">🩹 ${item}</span>`
@@ -761,8 +788,17 @@
     if (missingFromExcelPatients.length > 0) {
       blocks.push(`
         <div class="tk1-alert-box alert-missing-excel" style="padding:0.65rem 0.95rem;">
-          <div class="tk1-alert-header" style="margin-bottom:0.45rem;">
+          <div class="tk1-alert-header" style="margin-bottom:0.45rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
             <span>🚨 Không còn trong Excel mới nhất (${missingFromExcelPatients.length} BN):</span>
+            <button
+              type="button"
+              class="btn-bed-mini"
+              id="btn-release-all-missing-beds"
+              style="background:#be123c;color:#ffffff;border-color:#9f1239;font-weight:700;padding:3px 10px;"
+              title="Giải phóng tất cả các giường của bệnh nhân không còn trong Excel"
+            >
+              🗑️ Xoá tất cả khỏi giường (${missingFromExcelPatients.length} BN)
+            </button>
           </div>
           <div class="tk1-unassigned-list">
             ${missingFromExcelPatients.map(({ bedCode, rec }) => `
@@ -797,6 +833,14 @@
     const undoBtn = document.getElementById('btn-tk1-undo-delete');
     if (undoBtn) {
       undoBtn.addEventListener('click', () => callTk1Api({ action: 'UNDO_DELETE' }));
+    }
+
+    const btnReleaseAllMissing = document.getElementById('btn-release-all-missing-beds');
+    if (btnReleaseAllMissing) {
+      btnReleaseAllMissing.addEventListener('click', async () => {
+        const missingMabns = missingFromExcelPatients.map(x => x.rec.mabn);
+        await callTk1Api({ action: 'RELEASE_ALL_MISSING_EXCEL_PATIENTS', mabns: missingMabns });
+      });
     }
 
     const autoBtn = document.getElementById('btn-tk1-auto-assign-empty');
@@ -861,6 +905,18 @@
   function renderTk1Workspace() {
     checkClientSideMorningRelease();
     renderTk1TopAlerts();
+
+    const curDate = getSelectedDateKey();
+    document.querySelectorAll('.ward-date-selector').forEach(inp => {
+      if (inp.value !== curDate) {
+        inp.value = curDate;
+      }
+    });
+
+    const excelTimeEl = document.getElementById('tk1-excel-time-text');
+    if (excelTimeEl) {
+      excelTimeEl.textContent = tk1State.lastExcelUploadTime || 'Chưa có thông tin';
+    }
 
     const { wingA, wingB } = getCurrentRoomConfig();
     const [startA, endA] = wingA;
@@ -1233,9 +1289,9 @@
     if (!rec) return;
     activeModalMabn = mabn;
 
-    const todayKey = getTodayKey();
+    const curDateKey = getSelectedDateKey();
     const curBed = getBedOfPatient(mabn);
-    const existingToday = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
+    const existingToday = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
 
     modalDraftTasks = {
       xetNghiem: [...(existingToday.xetNghiem || [])],
@@ -1247,7 +1303,7 @@
       note: existingToday.note || ''
     };
 
-    document.getElementById('tk1-modal-patient-title').textContent = `${formatBedLabel(curBed)} — ${rec.hoten} (${rec.tuoi})`;
+    document.getElementById('tk1-modal-patient-title').textContent = `${formatBedLabel(curBed)} — ${rec.hoten} (${rec.tuoi}) · 📅 ${formatDateDisplayVN(curDateKey)}`;
 
     // Cập nhật nhãn nút Lui / Tới hiển thị số giường trước & sau
     const entries = getOrderedOccupiedBedEntries();
@@ -1365,9 +1421,10 @@
     const htmlParts = [];
     for (const g of groups) {
       for (const item of modalDraftTasks[g.key] || []) {
+        const itemLabel = g.key === 'ct' ? formatCtLabel(item) : item;
         htmlParts.push(`
           <span class="tk1-task-pill ${g.cls}" style="padding:4px 10px;font-size:0.78rem;">
-            ${g.label}: <b>${item}</b>
+            ${g.label}: <b>${itemLabel}</b>
             <button
               type="button"
               style="border:none;background:transparent;cursor:pointer;font-weight:800;margin-left:4px;color:inherit;"
@@ -1381,7 +1438,7 @@
 
     container.innerHTML = htmlParts.length > 0
       ? htmlParts.join('')
-      : `<span style="font-size:0.8rem;color:#64748b;">Chưa chọn công việc hôm nay.</span>`;
+      : `<span style="font-size:0.8rem;color:#64748b;">Chưa chọn công việc cho ngày được chọn.</span>`;
 
     container.querySelectorAll('[data-remove-draft-cat]').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1404,12 +1461,16 @@
     const followUpText = formatFollowUpAppointmentText(rec);
 
     if (st === 'SCHEDULED' || st === 'MORNING_DISCHARGE') {
+      const followUpHtml = followUpText && followUpText !== 'Không hẹn tái khám'
+        ? `📅 Lời hẹn tái khám: <b>${followUpText}</b>`
+        : `<span style="color:#64748b;font-weight:600;">📅 Tái khám: Không hẹn tái khám (chỉ tự động hẹn ca có hội chẩn)</span>`;
+
       previewEl.style.display = 'flex';
       previewEl.innerHTML = `
         <div>
           <strong>${st === 'MORNING_DISCHARGE' ? '🌅 Trạng thái: XUẤT VIỆN SÁNG NAY (Giữ giường đến 09:00 sáng)' : '🏥 Trạng thái: ĐÃ CHỌN RA VIỆN'}</strong>
           <div style="font-size:0.8rem;margin-top:2px;">
-            📅 Lời hẹn tái khám: <b>${followUpText}</b>
+            ${followUpHtml}
           </div>
         </div>
         <div style="display:flex;gap:6px;">
@@ -1442,16 +1503,17 @@
 
     modalDraftTasks.note = document.getElementById('tk1-modal-round-note').value;
 
-    // Tự lấy thông tin hội chẩn hiện có (được nhập ở mục Tổng hợp -> Hội chẩn) + khoa hội chẩn chọn hôm nay
+    const curDateKey = getSelectedDateKey();
+    // Tự lấy thông tin hội chẩn: chỉ tự động đặt lịch hẹn nếu ca có hội chẩn
     const cd = rec.consultDetails || {};
     const specialty = modalDraftTasks.hoiChan[0] || cd.specialty || '';
-    const followUpDays = cd.followUpDays || rec.discharge?.followUpDays || '7';
-    const followUpClinic = cd.followUpClinic || getClinicNameForSpecialty(specialty);
+    const followUpDays = specialty ? (cd.followUpDays || rec.discharge?.followUpDays || '7') : '';
+    const followUpClinic = specialty ? (cd.followUpClinic || getClinicNameForSpecialty(specialty)) : '';
 
     await callTk1Api({
       action: 'SAVE_PATIENT_ROUND',
       mabn: activeModalMabn,
-      dateKey: getTodayKey(),
+      dateKey: curDateKey,
       customDiagnosis,
       tasks: modalDraftTasks,
       consultDetails: {
@@ -1470,8 +1532,8 @@
     const rec = tk1State.patientRecords[activeModalMabn] || {};
     const cd = rec.consultDetails || {};
     const specialty = modalDraftTasks.hoiChan[0] || cd.specialty || '';
-    const followUpDays = cd.followUpDays || rec.discharge?.followUpDays || '7';
-    const followUpClinic = cd.followUpClinic || getClinicNameForSpecialty(specialty);
+    const followUpDays = specialty ? (cd.followUpDays || rec.discharge?.followUpDays || '7') : '';
+    const followUpClinic = specialty ? (cd.followUpClinic || getClinicNameForSpecialty(specialty)) : '';
 
     await callTk1Api({
       action: 'SET_DISCHARGE',
@@ -1503,9 +1565,9 @@
   }
 
   function generateTk1A4PngAndPreview() {
-    const todayKey = getTodayKey();
+    const curDateKey = getSelectedDateKey();
     const now = new Date();
-    const dateStrVN = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    const dateStrVN = formatDateDisplayVN(curDateKey);
 
     const canvasWidth = 1480;
     const minA4Height = 2093;
@@ -1547,10 +1609,10 @@
       }
       mCtx.font = '600 13px "Be Vietnam Pro", sans-serif';
 
-      const t = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
+      const t = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
       const taskParts = [
         ...(t.xetNghiem || []).map(x => `[XN] ${x}`),
-        ...(t.ct || []).map(x => `[CT] ${x}`),
+        ...(t.ct || []).map(x => `[CT] ${formatCtLabel(x)}`),
         ...(t.xquang || []).map(x => `[XQ] ${x}`),
         ...(t.sieuAm || []).map(x => `[SA] ${x}`),
         ...(t.hoiChan || []).map(x => `[HC] ${x}`),
@@ -1602,12 +1664,12 @@
     ctx.font = '800 14px "Be Vietnam Pro", sans-serif';
     ctx.fillText('BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI  |  KHOA NGOẠI THẦN KINH - CỘT SỐNG', 36, 34);
 
-    ctx.font = '800 26px "Be Vietnam Pro", sans-serif';
-    ctx.fillText(`BẢNG ĐI BUỒNG HẰNG NGÀY — ${(tk1State.roomName || 'THẦN KINH 1').toUpperCase()} (DÃY A & DÃY B)`, 36, 72);
+    ctx.font = '800 24px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(`BẢNG ĐI BUỒNG HẰNG NGÀY — ${(tk1State.roomName || 'THẦN KINH 1').toUpperCase()} (DÃY A & DÃY B) — NGÀY ${dateStrVN}`, 36, 72);
 
     ctx.textAlign = 'right';
-    ctx.font = '700 15px "Be Vietnam Pro", sans-serif';
-    ctx.fillText(`Cập nhật: ${dateStrVN}`, canvasWidth - 36, 68);
+    ctx.font = '700 14px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(`Xuất lúc: ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`, canvasWidth - 36, 68);
     ctx.textAlign = 'left';
 
     ctx.fillStyle = '#1d4ed8';
@@ -1716,7 +1778,7 @@
     const downloadLink = document.getElementById('tk1-png-download-link');
     const previewDlg = document.getElementById('tk1-png-preview-dialog');
 
-    const fileName = `Di_Buong_Than_Kinh_1_A4_${getTodayKey()}.png`;
+    const fileName = `Di_Buong_${currentRoomKey.toUpperCase()}_A4_${curDateKey}.png`;
     if (previewImg) previewImg.src = dataUrl;
     if (downloadLink) {
       downloadLink.href = dataUrl;
@@ -1784,6 +1846,31 @@
         reader.readAsDataURL(file);
       });
     }
+
+    document.querySelectorAll('.ward-date-selector').forEach(input => {
+      input.value = getSelectedDateKey();
+      input.addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val) {
+          selectedDateKey = val;
+          document.querySelectorAll('.ward-date-selector').forEach(other => {
+            other.value = val;
+          });
+          renderTk1Workspace();
+        }
+      });
+    });
+
+    document.querySelectorAll('.btn-ward-date-today').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const today = getTodayKey();
+        selectedDateKey = today;
+        document.querySelectorAll('.ward-date-selector').forEach(other => {
+          other.value = today;
+        });
+        renderTk1Workspace();
+      });
+    });
 
     document.querySelectorAll('[data-tk1-sum-tab]').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1943,13 +2030,7 @@
     if (btnDeleteTransfer) {
       btnDeleteTransfer.addEventListener('click', async () => {
         if (!activeModalMabn) return;
-        const rec = tk1State.patientRecords[activeModalMabn];
-        const reason = window.prompt(
-          `Nhập lý do xoá BN ${rec ? rec.hoten : ''} khỏi phòng (VD: Chuyển mổ / Chuyển phòng khác):`,
-          'Chuyển mổ / Chuyển phòng'
-        );
-        if (reason === null) return;
-        await callTk1Api({ action: 'DELETE_PATIENT', mabn: activeModalMabn, reason: reason || 'Chuyển mổ / Chuyển phòng' });
+        await callTk1Api({ action: 'DELETE_PATIENT', mabn: activeModalMabn, reason: 'Chuyển mổ / Chuyển phòng' });
         document.getElementById('tk1-patient-modal').close();
       });
     }
@@ -1968,6 +2049,12 @@
         } else if (data.tk1) {
           tk1State = data.tk1;
           allRoomsState[currentRoomKey] = data.tk1;
+        }
+        if (data.lastExcelUploadTime) {
+          tk1State.lastExcelUploadTime = data.lastExcelUploadTime;
+          if (allRoomsState) {
+            Object.values(allRoomsState).forEach(r => { r.lastExcelUploadTime = data.lastExcelUploadTime; });
+          }
         }
         if (data.episodeConsultations) globalEpisodeConsultations = data.episodeConsultations;
         renderTk1Workspace();
@@ -1999,6 +2086,12 @@
         if (dbObj.wardRounds[currentRoomKey]) {
           tk1State = dbObj.wardRounds[currentRoomKey];
         }
+        if (dbObj.lastExcelUploadTime) {
+          tk1State.lastExcelUploadTime = dbObj.lastExcelUploadTime;
+          if (allRoomsState) {
+            Object.values(allRoomsState).forEach(r => { r.lastExcelUploadTime = dbObj.lastExcelUploadTime; });
+          }
+        }
         if (dbObj.episodeConsultations) globalEpisodeConsultations = dbObj.episodeConsultations;
         renderTk1Workspace();
       }
@@ -2020,13 +2113,13 @@
     async saveInlineNote(mabn) {
       const rec = tk1State.patientRecords[mabn];
       if (!rec) return;
-      const todayKey = getTodayKey();
-      const existingToday = (rec.tasksByDate && rec.tasksByDate[todayKey]) || {};
+      const curDateKey = getSelectedDateKey();
+      const existingToday = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
       const newNote = document.getElementById(`inline-note-${mabn}`)?.value || '';
       await callTk1Api({
         action: 'SAVE_PATIENT_ROUND',
         mabn,
-        dateKey: todayKey,
+        dateKey: curDateKey,
         customDiagnosis: rec.customDiagnosis || rec.chanDoanHis || '',
         tasks: {
           xetNghiem: existingToday.xetNghiem || [],

@@ -48,8 +48,13 @@
          ======================================================================= -->
     <section id="room-workspace-tk1" class="room-workspace-panel active" data-room-key="tk1" data-room-name="Thần kinh 1">
       <div class="room-ws-header">
-        <div class="room-ws-title-group">
+        <div class="room-ws-title-group" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
           <h3 class="room-ws-heading">Thần kinh 1</h3>
+          <div class="room-ws-date-picker-wrap" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:3px 9px;">
+            <label style="font-size:0.8rem;font-weight:700;color:#166534;margin:0;">📅 Ngày:</label>
+            <input type="date" class="ward-date-selector date-input" style="height:30px;font-size:0.82rem;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;padding:2px 7px;border-color:#22c55e;" />
+            <button type="button" class="btn-bed-mini btn-ward-date-today" style="font-size:0.74rem;padding:3px 8px;background:#15803d;color:#ffffff;border-color:#14532d;font-weight:700;">Hôm nay</button>
+          </div>
           <div class="room-ws-doctors-bar" id="ws-docs-tk1"></div>
         </div>
         <div class="admin-hero-stats" id="ws-stats-tk1"></div>
@@ -60,11 +65,14 @@
         <div id="ward-shared-workspace-dom">
           <!-- Thanh công cụ Đi buồng -->
           <div class="tk1-toolbar-bar">
-            <div class="tk1-toolbar-left">
+            <div class="tk1-toolbar-left" style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;">
               <label class="btn-tool-lookup" style="margin:0;cursor:pointer;">
                 📂 Cập nhật Excel Đang điều trị
                 <input type="file" id="tk1-upload-excel-input" accept=".xlsx,.xls,.csv" style="display:none;" />
               </label>
+              <div id="tk1-excel-update-info" style="font-size:0.8rem;color:#475569;font-weight:600;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:5px 11px;">
+                📄 File Excel mới nhất cập nhật lúc: <strong id="tk1-excel-time-text" style="color:#0f766e;">Đang tải...</strong>
+              </div>
             </div>
 
             <div class="tk1-toolbar-right">
@@ -108,7 +116,7 @@
           <div class="tk1-summary-section">
             <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
               <div>
-                <h4 style="font-family:'Be Vietnam Pro',sans-serif;font-size:1.12rem;font-weight:800;color:#0f172a;">
+                <h4 id="tk1-summary-title" style="font-family:'Be Vietnam Pro',sans-serif;font-size:1.12rem;font-weight:800;color:#0f172a;">
                   📋 Tổng hợp đi buồng
                 </h4>
               </div>
@@ -195,8 +203,13 @@
     <!-- THẦN KINH 2 -->
     <section id="room-workspace-tk2" class="room-workspace-panel" data-room-key="tk2" data-room-name="Thần kinh 2">
       <div class="room-ws-header">
-        <div class="room-ws-title-group">
+        <div class="room-ws-title-group" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
           <h3 class="room-ws-heading">Thần kinh 2</h3>
+          <div class="room-ws-date-picker-wrap" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:3px 9px;">
+            <label style="font-size:0.8rem;font-weight:700;color:#166534;margin:0;">📅 Ngày:</label>
+            <input type="date" class="ward-date-selector date-input" style="height:30px;font-size:0.82rem;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;padding:2px 7px;border-color:#22c55e;" />
+            <button type="button" class="btn-bed-mini btn-ward-date-today" style="font-size:0.74rem;padding:3px 8px;background:#15803d;color:#ffffff;border-color:#14532d;font-weight:700;">Hôm nay</button>
+          </div>
           <div class="room-ws-doctors-bar" id="ws-docs-tk2"></div>
         </div>
         <div class="admin-hero-stats" id="ws-stats-tk2"></div>
@@ -207,8 +220,13 @@
     <!-- THẦN KINH 3 -->
     <section id="room-workspace-tk3" class="room-workspace-panel" data-room-key="tk3" data-room-name="Thần kinh 3">
       <div class="room-ws-header">
-        <div class="room-ws-title-group">
+        <div class="room-ws-title-group" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
           <h3 class="room-ws-heading">Thần kinh 3</h3>
+          <div class="room-ws-date-picker-wrap" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:3px 9px;">
+            <label style="font-size:0.8rem;font-weight:700;color:#166534;margin:0;">📅 Ngày:</label>
+            <input type="date" class="ward-date-selector date-input" style="height:30px;font-size:0.82rem;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;padding:2px 7px;border-color:#22c55e;" />
+            <button type="button" class="btn-bed-mini btn-ward-date-today" style="font-size:0.74rem;padding:3px 8px;background:#15803d;color:#ffffff;border-color:#14532d;font-weight:700;">Hôm nay</button>
+          </div>
           <div class="room-ws-doctors-bar" id="ws-docs-tk3"></div>
         </div>
         <div class="admin-hero-stats" id="ws-stats-tk3"></div>
@@ -219,8 +237,13 @@
     <!-- THẦN KINH 4 -->
     <section id="room-workspace-tk4" class="room-workspace-panel" data-room-key="tk4" data-room-name="Thần kinh 4">
       <div class="room-ws-header">
-        <div class="room-ws-title-group">
+        <div class="room-ws-title-group" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
           <h3 class="room-ws-heading">Thần kinh 4</h3>
+          <div class="room-ws-date-picker-wrap" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:3px 9px;">
+            <label style="font-size:0.8rem;font-weight:700;color:#166534;margin:0;">📅 Ngày:</label>
+            <input type="date" class="ward-date-selector date-input" style="height:30px;font-size:0.82rem;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;padding:2px 7px;border-color:#22c55e;" />
+            <button type="button" class="btn-bed-mini btn-ward-date-today" style="font-size:0.74rem;padding:3px 8px;background:#15803d;color:#ffffff;border-color:#14532d;font-weight:700;">Hôm nay</button>
+          </div>
           <div class="room-ws-doctors-bar" id="ws-docs-tk4"></div>
         </div>
         <div class="admin-hero-stats" id="ws-stats-tk4"></div>
@@ -231,8 +254,13 @@
     <!-- HỒI SỨC THẦN KINH -->
     <section id="room-workspace-hstk" class="room-workspace-panel" data-room-key="hstk" data-room-name="Hồi sức thần kinh">
       <div class="room-ws-header">
-        <div class="room-ws-title-group">
+        <div class="room-ws-title-group" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
           <h3 class="room-ws-heading" style="color: #9f1239;">Hồi sức thần kinh</h3>
+          <div class="room-ws-date-picker-wrap" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:3px 9px;">
+            <label style="font-size:0.8rem;font-weight:700;color:#166534;margin:0;">📅 Ngày:</label>
+            <input type="date" class="ward-date-selector date-input" style="height:30px;font-size:0.82rem;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;padding:2px 7px;border-color:#22c55e;" />
+            <button type="button" class="btn-bed-mini btn-ward-date-today" style="font-size:0.74rem;padding:3px 8px;background:#15803d;color:#ffffff;border-color:#14532d;font-weight:700;">Hôm nay</button>
+          </div>
           <div class="room-ws-doctors-bar" id="ws-docs-hstk"></div>
         </div>
         <div class="admin-hero-stats" id="ws-stats-hstk"></div>

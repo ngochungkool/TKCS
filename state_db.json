@@ -1,5 +1,5 @@
 {
-  "version": 1790698655353,
+  "version": 1790818226853,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -29,6 +29,15 @@
           "endMin": 29842372,
           "lastConfirmedMin": 29842312,
           "warnedAtMin": null
+        },
+        {
+          "id": "u-1790729874365-l5da",
+          "roomName": "Đang mổ",
+          "startMin": 29845497,
+          "endMin": 29845558,
+          "lastConfirmedMin": 29845497,
+          "warnedAtMin": null,
+          "releasedEarly": true
         }
       ]
     },
@@ -42,9 +51,20 @@
       "scheduleByDate": {
         "2026-09-27": "LAM_NGAY",
         "2026-09-28": "TRUC",
-        "2026-09-29": "RA_TRUC"
+        "2026-09-29": "TRUC",
+        "2026-09-30": "NGHI",
+        "2026-10-01": "LAM_NGAY"
       },
-      "usages": []
+      "usages": [
+        {
+          "id": "u-1790729794985-7mup",
+          "roomName": "Thần kinh 1",
+          "startMin": 29845496,
+          "endMin": 29845516,
+          "lastConfirmedMin": 29845496,
+          "warnedAtMin": null
+        }
+      ]
     },
     {
       "id": "doc-3",
@@ -56,7 +76,9 @@
       "scheduleByDate": {
         "2026-09-27": "TRUC",
         "2026-09-28": "RA_TRUC",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "TRUC",
+        "2026-09-30": "TRUC",
+        "2026-10-01": "RA_TRUC"
       },
       "usages": []
     },
@@ -70,9 +92,20 @@
       "scheduleByDate": {
         "2026-09-27": "LAM_NGAY",
         "2026-09-28": "LAM_NGAY",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "TRUC",
+        "2026-09-30": "RA_TRUC",
+        "2026-10-01": "LAM_NGAY"
       },
-      "usages": []
+      "usages": [
+        {
+          "id": "u-1790733880932-1gs4",
+          "roomName": "Thần kinh 1",
+          "startMin": 29845565,
+          "endMin": 29845585,
+          "lastConfirmedMin": 29845565,
+          "warnedAtMin": null
+        }
+      ]
     },
     {
       "id": "doc-5",
@@ -84,7 +117,9 @@
       "scheduleByDate": {
         "2026-09-27": "LAM_NGAY",
         "2026-09-28": "TRUC",
-        "2026-09-29": "RA_TRUC"
+        "2026-09-29": "RA_TRUC",
+        "2026-09-30": "TRUC",
+        "2026-10-01": "RA_TRUC"
       },
       "usages": []
     },
@@ -98,7 +133,8 @@
       "scheduleByDate": {
         "2026-09-27": "LAM_NGAY",
         "2026-09-28": "NGHI",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "LAM_NGAY",
+        "2026-09-30": "NGHI"
       },
       "usages": []
     },
@@ -112,9 +148,29 @@
       "scheduleByDate": {
         "2026-09-27": "LAM_NGAY",
         "2026-09-28": "PHONG_KHAM",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "TRUC",
+        "2026-09-30": "RA_TRUC",
+        "2026-10-01": "LAM_NGAY"
       },
-      "usages": []
+      "usages": [
+        {
+          "id": "u-1790729874365-op2h",
+          "roomName": "Đang mổ",
+          "startMin": 29845497,
+          "endMin": 29845558,
+          "lastConfirmedMin": 29845497,
+          "warnedAtMin": null,
+          "releasedEarly": true
+        },
+        {
+          "id": "u-1790734491959-nxp1",
+          "roomName": "Thần kinh 2",
+          "startMin": 29845575,
+          "endMin": 29845585,
+          "lastConfirmedMin": 29845575,
+          "warnedAtMin": null
+        }
+      ]
     },
     {
       "id": "doc-8",
@@ -126,7 +182,9 @@
       "scheduleByDate": {
         "2026-09-27": "TRUC",
         "2026-09-28": "RA_TRUC",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "LAM_NGAY",
+        "2026-09-30": "PHONG_KHAM",
+        "2026-10-01": "LAM_NGAY"
       },
       "usages": []
     },
@@ -140,7 +198,8 @@
       "scheduleByDate": {
         "2026-09-27": "LAM_NGAY",
         "2026-09-28": "NGHI",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "LAM_NGAY",
+        "2026-09-30": "NGHI"
       },
       "usages": []
     },
@@ -168,9 +227,21 @@
       "scheduleByDate": {
         "2026-09-27": "TRUC",
         "2026-09-28": "RA_TRUC",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "LAM_NGAY",
+        "2026-09-30": "TRUC",
+        "2026-10-01": "RA_TRUC"
       },
-      "usages": []
+      "usages": [
+        {
+          "id": "u-1790729874365-0m0v",
+          "roomName": "Đang mổ",
+          "startMin": 29845497,
+          "endMin": 29845558,
+          "lastConfirmedMin": 29845497,
+          "warnedAtMin": null,
+          "releasedEarly": true
+        }
+      ]
     },
     {
       "id": "doc-12",
@@ -182,7 +253,8 @@
       "scheduleByDate": {
         "2026-09-27": "LAM_NGAY",
         "2026-09-28": "TRUC",
-        "2026-09-29": "RA_TRUC"
+        "2026-09-29": "RA_TRUC",
+        "2026-09-30": "NGHI"
       },
       "usages": []
     },
@@ -196,7 +268,9 @@
       "scheduleByDate": {
         "2026-09-27": "LAM_NGAY",
         "2026-09-28": "LAM_NGAY",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "TRUC",
+        "2026-09-30": "RA_TRUC",
+        "2026-10-01": "LAM_NGAY"
       },
       "usages": []
     },
@@ -217,15 +291,24 @@
   ],
   "uploadedHisFiles": [
     {
-      "fileName": "vào khoa.xlsx",
-      "savedPath": "D:\\Antigravity\\Phần mềm quản lý khoa\\uploads_his\\vào khoa.xlsx",
-      "sizeBytes": 12934,
-      "uploadedAt": "21:34:08 28/9/2026",
+      "fileName": "1.xlsx → [Đang điều trị: 106 dòng]",
+      "categoryCode": "DANG_DIEU_TRI",
+      "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
+      "sizeBytes": 52604,
+      "uploadedAt": "08:01:13 1/10/2026",
+      "extractedPreview": null
+    },
+    {
+      "fileName": "vào khoa.xlsx → [Vào khoa: 1 dòng]",
+      "categoryCode": "VAO_KHOA",
+      "savedPath": "/opt/render/project/src/uploads_his/vao_khoa.xlsx",
+      "sizeBytes": 10096,
+      "uploadedAt": "02:12:21 30/9/2026",
       "extractedPreview": {
         "sheetNames": [
           "Sheet1"
         ],
-        "rowCount": 19,
+        "rowCount": 2,
         "sampleRows": [
           [
             "dangky",
@@ -263,225 +346,33 @@
             1,
             "",
             "",
-            46293.31319444445,
-            1,
+            46295.3805555556,
+            0,
             0,
             2609,
-            "525200126367669",
-            947649,
-            "0001422398",
-            "2600367669",
-            "NGUYỄN THỊ THANH",
-            "1948",
-            "78 tuổi",
+            "525200126372569",
+            "",
+            "0000162797",
+            "2600372569",
+            "NGUYỄN THỊ HÀNG",
+            "1977",
+            "49 tuổi",
             2,
             "Nữ",
-            1,
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            "Tấn Thạnh 2-Phường Hoài Nhơn Tây--Tỉnh Gia Lai",
-            "0839929562",
-            "HT2525220398575",
-            "",
-            10,
-            "",
-            "",
-            2,
-            "Có giấy chuyển tuyến"
-          ],
-          [
-            1,
-            "",
-            "",
-            46293.32152777778,
-            1,
+            6,
             0,
-            2609,
-            "525200126368026",
-            947638,
-            "0001309625",
-            "2600368026",
-            "LƯƠNG THỊ NHƠN",
-            "1948",
-            "78 tuổi",
-            2,
-            "Nữ",
-            1,
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            "Thượng Giang 1-Xã Bình Khê--Tỉnh Gia Lai",
-            "0985408700",
-            "BT2525220854147",
-            "",
-            10,
-            "",
-            "",
-            2,
-            "Có giấy chuyển tuyến"
-          ],
-          [
-            1,
-            "",
-            "",
-            46293.32916666667,
-            1,
-            0,
-            2609,
-            "525200126368075",
-            947648,
-            "0001422488",
-            "2600368075",
-            "NGUYỄN THÀNH LONG",
-            "1954",
-            "72 tuổi",
-            1,
-            "Nam",
-            1,
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            "Phường An Nhơn Nam--Tỉnh Gia Lai",
-            "0372319702",
-            "GD4525221075489",
-            "",
-            10,
-            "",
-            "",
-            1,
-            "Tự đến"
-          ],
-          [
-            1,
-            "",
-            "",
-            46293.33541666667,
-            1,
-            0,
-            2609,
-            "525200126367853",
-            947676,
-            "0001422435",
-            "2600367853",
-            "ĐÀM NGUYỄN QUỲNH HƯƠNG",
-            "2012",
-            "14 tuổi",
-            2,
-            "Nữ",
-            1,
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            "Xã Ân Tường--Tỉnh Gia Lai",
-            "0353013644",
-            "DK2525220478012",
-            "",
-            10,
-            "",
-            "",
-            2,
-            "Có giấy chuyển tuyến"
-          ],
-          [
-            1,
-            "",
-            "",
-            46293.34166666667,
-            1,
-            0,
-            2609,
-            "525200126367729",
-            947657,
-            "0001422413",
-            "2600367729",
-            "TRƯƠNG HOÀNG THIỆN",
-            "2005",
-            "21 tuổi",
-            1,
-            "Nam",
-            2,
-            1,
-            "Viện phí",
+            "BHYT Trái tuyến",
             70,
             "Lao động giản đơn khác chưa được phân vào đâu",
-            "An Hòa-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
-            "0868518431",
-            "",
-            "",
-            10,
-            "",
-            "",
-            1,
-            "Tự đến"
-          ],
-          [
-            1,
-            "",
-            "",
-            46293.36388888889,
-            1,
-            0,
-            2609,
-            "525200126368312",
-            947719,
-            "0001416348",
-            "2600368312",
-            "ĐỒNG THỊ KÉN",
-            "1948",
-            "78 tuổi",
-            2,
-            "Nữ",
-            1,
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            "Chánh định-Xã Ngô Mây--Tỉnh Gia Lai",
-            "0902535612",
-            "LH2525220920717",
+            "Trung Lương-Xã Cát Tiến--Tỉnh Gia Lai",
+            "0383306816",
+            "GD4525221035228",
             "",
             10,
             "",
             "",
             1,
             "Tự đến"
-          ],
-          [
-            1,
-            "",
-            "",
-            46293.39444444444,
-            1,
-            0,
-            2609,
-            "525200126368639",
-            947796,
-            "0001422625",
-            "2600368639",
-            "PHẠM THỊ LƯỚI",
-            "1947",
-            "79 tuổi",
-            2,
-            "Nữ",
-            1,
-            1,
-            "BHYT",
-            70,
-            "Lao động giản đơn khác chưa được phân vào đâu",
-            "hiệp vinh-Xã Canh Vinh--Tỉnh Gia Lai",
-            "0362080381",
-            "DK2525221470746",
-            "",
-            10,
-            "",
-            "",
-            2,
-            "Có giấy chuyển tuyến"
           ]
         ]
       }
@@ -598,524 +489,6 @@
             4823576.4,
             525300,
             734795
-          ]
-        ]
-      }
-    },
-    {
-      "fileName": "đang điều trị.xlsx",
-      "savedPath": "D:\\Antigravity\\Phần mềm quản lý khoa\\uploads_his\\đang điều trị.xlsx",
-      "sizeBytes": 57719,
-      "uploadedAt": "21:34:08 28/9/2026",
-      "extractedPreview": {
-        "sheetNames": [
-          "Sheet1"
-        ],
-        "rowCount": 117,
-        "sampleRows": [
-          [
-            "chon",
-            "ct",
-            "makk",
-            "tenkk",
-            "maphong",
-            "Phòng",
-            "madonnguyen",
-            "tendonnguyen",
-            "magiuong",
-            "sogiuong",
-            "mayte",
-            "Số BA",
-            "mabn",
-            "Mã KCB",
-            "madieutri",
-            "madieutridn",
-            "Ngày vào",
-            "Họ tên",
-            "ngaysinh",
-            "ngaysinhtext",
-            "NS",
-            "Tuổi",
-            "maphai",
-            "GT",
-            "madoituong",
-            "Đối tượng",
-            "manghenghiep",
-            "Nghề nghiệp",
-            "dangdieutri",
-            "matuyendangky",
-            "tentuyendangky",
-            "Địa chỉ",
-            "Chẩn đoán",
-            "Số thẻ",
-            "diachithe",
-            "Hạn thẻ từ",
-            "Hạn thẻ đến",
-            "mahinhthucden",
-            "Hình thức đến",
-            "manv",
-            "Bác sỹ điều trị",
-            "machuyenkhoa",
-            "tenchuyenkhoa",
-            "NG",
-            "malydo",
-            "TDĐB",
-            "banngay",
-            "dgvcnamnho",
-            "makknho",
-            "ngaykt",
-            "sovaokhoa",
-            "ailam",
-            "dangkethop",
-            "Tạm ứng và tiền thu",
-            "Tổng chi phí",
-            "Tổng trừ",
-            "Tổng chi",
-            "Còn thừa",
-            "dgvcthieutien",
-            "makhoachuyenden",
-            "tenkhoachuyenden"
-          ],
-          [
-            0,
-            2608,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            207,
-            "Buồng HSTK",
-            10,
-            "Hồi sức Thần kinh",
-            1380,
-            "H007",
-            "525200126331636",
-            "26067962",
-            "0001412464",
-            "2600331636",
-            933603,
-            964617,
-            46266.00347222222,
-            "NGUYỄN THỊ TUYẾN",
-            22282,
-            "//1961",
-            "1961",
-            "65 tuổi",
-            2,
-            "Nữ",
-            1,
-            "BHYT",
-            70,
-            "Lao động giản đơn khác chưa được phân vào đâu",
-            1,
-            1,
-            "Đúng tuyến",
-            "15/8 Nguyễn Thị Học-Phường Quy Nhơn--Tỉnh Gia Lai",
-            "I60.9-Xuất huyết dưới nhện, không xác định",
-            "HT3523796023643",
-            "Tổ 6, KV2, Phường Quy Nhơn, Tỉnh Gia Lai",
-            46023,
-            47848,
-            1,
-            "Tự đến",
-            633,
-            "Phạm Thái Hoàng Luân",
-            "",
-            "",
-            1,
-            0,
-            0,
-            0,
-            0,
-            10,
-            "",
-            "",
-            "633/*/01/09/2026/*/00:07:50/*/pthluan/*/Phạm Thái Hoàng Luân/*/HSTK_MAY3/*/ | 192.168.24.60 | ",
-            1,
-            13616700,
-            121089212.7,
-            6966962.2,
-            "",
-            2386136.08,
-            0,
-            13,
-            "Khoa Thần kinh - Đột quỵ"
-          ],
-          [
-            0,
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            342,
-            "Buồng Ngoại TK - CS 4",
-            14,
-            "Ngoại TK - CS 4",
-            4414,
-            "H100",
-            "665200126334820",
-            "26068867",
-            "0001413526",
-            "2600334820",
-            934907,
-            965966,
-            46268.95138888889,
-            "NGUYỄN TRỌNG TRÍ",
-            34491,
-            "6/6/1994",
-            "1994",
-            "32 tuổi",
-            1,
-            "Nam",
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            1,
-            1,
-            "Đúng tuyến",
-            "thôn 3-Xã Xuân Lộc--Tỉnh Đắk Lắk",
-            "M54.10-Bệnh lý rễ thần kinh, nhiều vị trí của cột sống",
-            "GD4665420179954",
-            "Thôn 3, Xã Xuân Lộc, Tỉnh Đắk Lắk",
-            45983,
-            46347,
-            1,
-            "Tự đến",
-            622,
-            "Đào Văn Nhân",
-            "",
-            "",
-            1,
-            0,
-            0,
-            0,
-            0,
-            10,
-            "",
-            "",
-            "622/*/03/09/2026/*/22:56:10/*/DVNHAN/*/Đào Văn Nhân/*/NGOAITK4_MAY3/*/ | 192.168.24.58 | ",
-            0,
-            4500000,
-            13248948,
-            725002,
-            "",
-            1857898.8,
-            0,
-            "",
-            ""
-          ],
-          [
-            0,
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            207,
-            "Buồng HSTK",
-            10,
-            "Hồi sức Thần kinh",
-            1376,
-            "H003",
-            "525200126337367",
-            "26069361",
-            "0000844175",
-            "2600337367",
-            935743,
-            967158,
-            46271.666666666664,
-            "ĐINH HỒNG VINH",
-            26941,
-            "4/10/1973",
-            "1973",
-            "53 tuổi",
-            1,
-            "Nam",
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            1,
-            1,
-            "Đúng tuyến",
-            "Xuân Mỹ-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
-            "S06.00-Chấn động não, không có vết thương nội sọ hở",
-            "GD4525221278654",
-            "Xuân Mỹ, Xã Tuy Phước Bắc, Tỉnh Gia Lai",
-            46204,
-            46568,
-            1,
-            "Tự đến",
-            622,
-            "Đào Văn Nhân",
-            "",
-            "",
-            1,
-            0,
-            0,
-            0,
-            0,
-            10,
-            "",
-            "",
-            "680/*/05/09/2026/*/23:43:01/*/nxtinh/*/Nguyễn Xuân Tịnh/*/NGOAITK1_MAY3/*/ | 192.168.25.12 | ",
-            1,
-            11000000,
-            51781459.8,
-            4669520.8,
-            "",
-            304025.8,
-            0,
-            "",
-            ""
-          ],
-          [
-            0,
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            207,
-            "Buồng HSTK",
-            10,
-            "Hồi sức Thần kinh",
-            3133,
-            "H011",
-            "525200126347352",
-            "26071385",
-            "0001416769",
-            "2600347352",
-            939602,
-            970999,
-            46277.6875,
-            "NGUYỄN CHÍ SINH",
-            24108,
-            "1/1/1966",
-            "1966",
-            "60 tuổi",
-            1,
-            "Nam",
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            1,
-            4,
-            "Đa tuyến đúng tuyến",
-            "an thượng 3-Xã Cửu An--Tỉnh Gia Lai",
-            "I60.7-Xuất huyết dưới nhện từ động mạch nội sọ, không xác định",
-            "CB2526421628428",
-            "An Thượng 3, Xã Cửu An, Tỉnh Gia Lai",
-            46023,
-            46387,
-            2,
-            "Có giấy chuyển tuyến",
-            631,
-            "Lê Đức Nhật",
-            "",
-            "",
-            1,
-            0,
-            0,
-            0,
-            0,
-            10,
-            "",
-            "",
-            "631/*/12/09/2026/*/16:30:47/*/ldnhat/*/Lê Đức Nhật/*/HSTK_MAY4/*/ | 192.168.24.61 | ",
-            1,
-            16000000,
-            73917537.6,
-            4187822.6,
-            "",
-            2298432,
-            0,
-            13,
-            "Khoa Thần kinh - Đột quỵ"
-          ],
-          [
-            0,
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            339,
-            "Buồng Ngoại TK - CS 1",
-            11,
-            "Ngoại TK - CS 1",
-            1398,
-            "H023",
-            "525200126353579",
-            "26072621",
-            "0001418457",
-            "2600353579",
-            941993,
-            973504,
-            46281.729166666664,
-            "NGUYỄN THÀNH ĐƯỢC",
-            26102,
-            "18/6/1971",
-            "1971",
-            "55 tuổi",
-            1,
-            "Nam",
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            1,
-            4,
-            "Đa tuyến đúng tuyến",
-            "PHÚ AN-Xã Tây Sơn--Tỉnh Gia Lai",
-            "S06.00-Chấn động não, không có vết thương nội sọ hở",
-            "GD4525220868686",
-            "Phú An, Xã Tây Sơn, Tỉnh Gia Lai",
-            46054,
-            46418,
-            2,
-            "Có giấy chuyển tuyến",
-            1690,
-            "Dương Minh Trí",
-            "",
-            "",
-            1,
-            0,
-            0,
-            0,
-            0,
-            10,
-            "",
-            "",
-            "1690/*/16/09/2026/*/17:47:28/*/dmtri/*/Dương Minh Trí/*/NGOAITK1_MAY3/*/ | 192.168.25.12 | ",
-            0,
-            2000000,
-            6337077,
-            159521,
-            "",
-            764488.8,
-            0,
-            "",
-            ""
-          ],
-          [
-            0,
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            342,
-            "Buồng Ngoại TK - CS 4",
-            14,
-            "Ngoại TK - CS 4",
-            1456,
-            "H076",
-            "525200126354671",
-            "26072912",
-            "0001418724",
-            "2600354671",
-            942464,
-            974002,
-            46282.604166666664,
-            "ĐỖ THỊ LANH",
-            23137,
-            "6/5/1963",
-            "1963",
-            "63 tuổi",
-            2,
-            "Nữ",
-            1,
-            "BHYT",
-            70,
-            "Lao động giản đơn khác chưa được phân vào đâu",
-            1,
-            2,
-            "Trái tuyến",
-            "Xã Cát Tiến--Tỉnh Gia Lai",
-            "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
-            "GD4525221049123",
-            "PHƯƠNG PHI, Xã Cát Tiến, Tỉnh Gia Lai",
-            46182,
-            46546,
-            1,
-            "Tự đến",
-            680,
-            "Nguyễn Xuân Tịnh",
-            "",
-            "",
-            0,
-            0,
-            0,
-            0,
-            0,
-            10,
-            "",
-            "",
-            "637/*/17/09/2026/*/14:30:20/*/ntluan/*/Nguyễn Thị Luận/*/NGOAITK4_MAY4/*/ | 192.168.24.68 | ",
-            0,
-            1607990,
-            4106142,
-            44011,
-            "",
-            391734.2,
-            0,
-            "",
-            ""
-          ],
-          [
-            0,
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            341,
-            "Buồng Ngoại TK - CS 3",
-            13,
-            "Ngoại TK - CS 3",
-            1440,
-            "H063",
-            "525200126345429",
-            "26071015",
-            "0001307829",
-            "2600345429",
-            938767,
-            974398,
-            46283.375,
-            "NGUYỄN VĂN TÍ",
-            36063,
-            "25/09/1998",
-            "1998",
-            "28 tuổi",
-            1,
-            "Nam",
-            1,
-            "BHYT",
-            70,
-            "Lao động giản đơn khác chưa được phân vào đâu",
-            1,
-            4,
-            "Đa tuyến đúng tuyến",
-            "Vạn Ninh 2-Xã Phù Mỹ Nam--Tỉnh Gia Lai",
-            "S06.91-Tổn thương nội sọ, không xác định, có vết thương nội sọ hở",
-            "GB4525220641043",
-            "Vạn Ninh 2, Xã Phù Mỹ Nam, Tỉnh Gia Lai",
-            46042,
-            46387,
-            2,
-            "Có giấy chuyển tuyến",
-            620,
-            "Nguyễn Phúc Tài",
-            "",
-            "",
-            1,
-            0,
-            0,
-            0,
-            0,
-            10,
-            "",
-            "",
-            "1692/*/11/09/2026/*/06:34:12/*/ntkdieu/*/Nguyễn Thị Kim Diệu/*/NGOAITK1_MAY3/*/ | 192.168.25.12 | ",
-            0,
-            3500000,
-            13799468.7,
-            341017.2,
-            "",
-            736898.9,
-            0,
-            "",
-            ""
           ]
         ]
       }
@@ -1265,111 +638,104 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 102,
+      "dauCa": 92,
       "benhVao": 16,
       "raVien": 1,
       "chuyenDen": 2,
       "chuyenDi": 3,
       "tuVong": 0,
       "benhMo": 0,
-      "hienCo": 116,
-      "baoHiem": 105
+      "hienCo": 106,
+      "baoHiem": 102
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 31,
-        "benhVao": 4,
+        "dauCa": 22,
+        "benhVao": 6,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 3,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 32,
-        "baoHiem": 25
+        "hienCo": 25,
+        "baoHiem": 24
       },
       "Thần kinh 2": {
-        "dauCa": 21,
+        "dauCa": 20,
+        "benhVao": 2,
+        "raVien": 0,
+        "chuyenDen": 1,
+        "chuyenDi": 0,
+        "tuVong": 0,
+        "benhMo": 0,
+        "hienCo": 23,
+        "baoHiem": 22
+      },
+      "Thần kinh 3": {
+        "dauCa": 13,
         "benhVao": 1,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 22,
-        "baoHiem": 21
-      },
-      "Thần kinh 3": {
-        "dauCa": 11,
-        "benhVao": 2,
-        "raVien": 0,
-        "chuyenDen": 0,
-        "chuyenDi": 0,
-        "tuVong": 0,
-        "benhMo": 0,
-        "hienCo": 13,
+        "hienCo": 14,
         "baoHiem": 13
       },
       "Thần kinh 4": {
-        "dauCa": 29,
-        "benhVao": 9,
+        "dauCa": 27,
+        "benhVao": 7,
         "raVien": 1,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 37,
-        "baoHiem": 36
+        "hienCo": 33,
+        "baoHiem": 32
       },
       "Hồi sức thần kinh": {
         "dauCa": 10,
         "benhVao": 0,
         "raVien": 0,
-        "chuyenDen": 2,
+        "chuyenDen": 1,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 12,
-        "baoHiem": 10
+        "hienCo": 11,
+        "baoHiem": 11
       }
     },
-    "updatedAt": "2026-09-28T14:41:04.872Z"
+    "updatedAt": "2026-10-01T01:01:14.251Z"
   },
   "wardRounds": {
     "tk1": {
       "roomName": "Thần kinh 1",
       "initializedSeed": true,
       "bedAssignments": {
-        "1": "0001418457",
-        "2": "0001420337",
-        "3": "0001422366",
-        "4": "0001420743",
-        "5": "0001420755",
-        "6": "0001421064",
-        "7": "0001421068",
-        "8": "0001421398",
-        "9": "0001352007",
-        "10": "0001421561",
-        "11": "0001421945",
-        "12": "0001421963",
-        "13": "0001421962",
-        "14": "0000996031",
-        "15": "0001421988",
-        "16": "0001017823",
-        "17": "0001422020",
-        "18": "0001422158",
-        "19": "0001032592",
-        "20": "0001050501",
-        "21": "0001422178",
-        "22": "0001422326",
-        "23": "0001422336",
-        "24": "0001422332",
-        "1X": "0001421512",
-        "2X": "0001422360",
-        "3X": "0001422359",
-        "4X": "0001422413",
-        "5X": "0001422706",
-        "6X": "0001422719",
-        "7X": "0001422908"
+        "1": "0001421945",
+        "2": "0001352007",
+        "3": "0001420755",
+        "5": "0001423400",
+        "6": "0001423911",
+        "7": "0001422360",
+        "8": "0000037245",
+        "9": "0001422706",
+        "10": "0001423940",
+        "11": "0001422326",
+        "12": "0001421962",
+        "13": "0001423397",
+        "14": "0001423405",
+        "15": "0001422158",
+        "16": "0001032592",
+        "17": "0001423448",
+        "19": "0001423331",
+        "20": "0001418457",
+        "21": "0001421561",
+        "22": "0001423919",
+        "23": "0001421963",
+        "24": "0001421064",
+        "12X": "0001423930",
+        "3X": "0001423953"
       },
       "hiddenFoldingBeds": {},
       "patientRecords": {
@@ -1422,6 +788,28 @@
                 "Nội Tim mạch"
               ],
               "note": "Theo dõi huyết áp, chờ hội chẩn Tim mạch"
+            },
+            "2026-09-30": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            },
+            "2026-10-01": {
+              "xetNghiem": [
+                "Điện giải đồ"
+              ],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
             }
           },
           "consultDetails": {
@@ -1465,7 +853,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "22/09/2026",
-          "hisBed": "H021",
+          "hisBed": "H030",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-09-27": {
@@ -1491,6 +879,15 @@
               "sieuAm": [],
               "hoiChan": [],
               "note": ""
+            },
+            "2026-09-30": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
             }
           },
           "consultDetails": {
@@ -1501,17 +898,17 @@
             "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
-            "status": "SCHEDULED",
-            "markedDate": "2026-09-29",
-            "followUpDays": "7",
-            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống",
-            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống"
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Chuyển mổ / Chuyển phòng",
+            "previousBed": "5X",
+            "removedAtMs": 1790816272146
           }
         },
         "0001420728": {
@@ -1597,10 +994,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729348569
           }
         },
         "0001420755": {
@@ -1623,15 +1019,25 @@
           "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
           "bsDieuTri": "Đào Văn Nhân",
           "ngayVaoStr": "22/09/2026",
-          "hisBed": "H016",
+          "hisBed": "H015",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": "Cắt dịch"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
             "status": "NONE",
@@ -1669,13 +1075,25 @@
           "ngayVaoStr": "23/09/2026",
           "hisBed": "H032",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [
+                "Điện giải đồ"
+              ],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
             "status": "NONE",
@@ -1729,10 +1147,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729349868
           }
         },
         "0001421398": {
@@ -1773,10 +1190,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729352070
           }
         },
         "0001352007": {
@@ -1845,13 +1261,23 @@
           "ngayVaoStr": "24/09/2026",
           "hisBed": "H028",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-09-30": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
             "status": "NONE",
@@ -1861,10 +1287,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729364175
           }
         },
         "0001421561": {
@@ -1931,15 +1356,38 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "25/09/2026",
-          "hisBed": "H024",
+          "hisBed": "H033",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-09-30": {
+              "xetNghiem": [
+                "Điện giải đồ"
+              ],
+              "ct": [],
+              "xquang": [
+                "X-quang cột sống lưng"
+              ],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            },
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": "mRI cổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
             "status": "NONE",
@@ -1975,7 +1423,7 @@
           "customDiagnosis": "S06.50-Xuất huyết dưới màng cứng do chấn thương, không có vết thương nội sọ hở",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
           "ngayVaoStr": "25/09/2026",
-          "hisBed": "H017",
+          "hisBed": "H020",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-09-29": {
@@ -2112,10 +1560,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729353879
           }
         },
         "0001421988": {
@@ -2165,10 +1612,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729355776
           }
         },
         "0001017823": {
@@ -2220,10 +1666,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729357071
           }
         },
         "0001422020": {
@@ -2273,10 +1718,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729358176
           }
         },
         "0001422158": {
@@ -2308,6 +1752,17 @@
               "xquang": [],
               "sieuAm": [],
               "hoiChan": [],
+              "note": ""
+            },
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
               "note": ""
             }
           },
@@ -2361,6 +1816,19 @@
               "xquang": [],
               "sieuAm": [],
               "hoiChan": [],
+              "note": ""
+            },
+            "2026-10-01": {
+              "xetNghiem": [
+                "Điện giải đồ"
+              ],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
               "note": ""
             }
           },
@@ -2423,10 +1891,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729359676
           }
         },
         "0001422178": {
@@ -2439,13 +1906,13 @@
           "tuoi": "18 tuổi",
           "namSinh": "2008",
           "gioiTinh": "Nam",
-          "doiTuong": "Viện phí",
-          "soTheBhyt": "",
-          "tuyenDangKy": "",
-          "hanTheTu": "",
-          "hanTheDen": "",
-          "diaChi": "từ nham-Phường Sông Cầu--Tỉnh Đắk Lắk",
-          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "HS4665420172718",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Thôn Từ  Nham-Phường Sông Cầu--Tỉnh Đắk Lắk",
+          "chanDoanHis": "T00.8-Tổn thương nông tác động kết hợp khác ở nhiều vùng cơ thể",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Ngô Văn Cư",
           "ngayVaoStr": "27/09/2026",
@@ -2467,10 +1934,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Chuyển mổ / Chuyển phòng",
+            "previousBed": "4X",
+            "removedAtMs": 1790816234251
           }
         },
         "0001422326": {
@@ -2495,13 +1962,32 @@
           "ngayVaoStr": "27/09/2026",
           "hisBed": "H018",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-09-30": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            },
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
             "status": "NONE",
@@ -2555,10 +2041,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729361078
           }
         },
         "0001422332": {
@@ -2599,10 +2084,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729362867
           }
         },
         "0001422360": {
@@ -2615,25 +2099,37 @@
           "tuoi": "19 tuổi",
           "namSinh": "2007",
           "gioiTinh": "Nữ",
-          "doiTuong": "Viện phí",
-          "soTheBhyt": "",
-          "tuyenDangKy": "",
-          "hanTheTu": "",
-          "hanTheDen": "",
-          "diaChi": "háo lễ-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "SV4565221835564",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/10/2025",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Định Thiện Tây -Xã Tuy Phước Bắc--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
           "ngayVaoStr": "28/09/2026",
           "hisBed": "H013",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
             "status": "NONE",
@@ -2687,10 +2183,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729347174
           }
         },
         "0001422359": {
@@ -2731,10 +2226,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790816114252
           }
         },
         "0001422413": {
@@ -2775,10 +2269,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729365377
           }
         },
         "0001422706": {
@@ -2801,7 +2294,7 @@
           "customDiagnosis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
           "bsDieuTri": "Lê Đức Nhật",
           "ngayVaoStr": "28/09/2026",
-          "hisBed": "H025",
+          "hisBed": "H104",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -2840,7 +2333,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "10/05/2026",
           "hanTheDen": "09/05/2027",
-          "diaChi": "phú thạnh-Xã Tuy An Nam--Tỉnh Đắk Lắk",
+          "diaChi": "Phú Thạnh -Xã Tuy An Nam--Tỉnh Đắk Lắk",
           "chanDoanHis": "S06.50-Xuất huyết dưới màng cứng do chấn thương, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.50-Xuất huyết dưới màng cứng do chấn thương, không có vết thương nội sọ hở",
           "bsDieuTri": "Lê Đức Nhật",
@@ -2863,10 +2356,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Chuyển mổ / Chuyển phòng",
+            "previousBed": "4",
+            "removedAtMs": 1790816230053
           }
         },
         "0001422908": {
@@ -2907,6 +2400,662 @@
             "note": ""
           },
           "removed": {
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1790729367168
+          }
+        },
+        "0001423331": {
+          "mabn": "0001423331",
+          "episodeKey": "2600371249",
+          "maKcb": "2600371249",
+          "madieutri": "948815",
+          "soBA": "26076467",
+          "hoten": "PHAN ĐỐC",
+          "tuoi": "89 tuổi",
+          "namSinh": "1937",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "LH2525220347760",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "thuận thượng 1-Phường Hoài Nhơn Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H019",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [
+                "Điện giải đồ",
+                "Sinh hoá"
+              ],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423400": {
+          "mabn": "0001423400",
+          "episodeKey": "2600371532",
+          "maKcb": "2600371532",
+          "madieutri": "948957",
+          "soBA": "26076551",
+          "hoten": "TRẦN XUÂN BIÊN",
+          "tuoi": "77 tuổi",
+          "namSinh": "1949",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "LH2525220149419",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "kp1-Phường Quy Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Phạm Thái Hoàng Luân",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H021",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423397": {
+          "mabn": "0001423397",
+          "episodeKey": "2600371526",
+          "maKcb": "2600371526",
+          "madieutri": "948965",
+          "soBA": "26076556",
+          "hoten": "NGUYỄN NGỌC QUỐC",
+          "tuoi": "24 tuổi",
+          "namSinh": "2002",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "DK2526421739576",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/04/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "thôn 5-Xã Kon Gang--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H022",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "SCHEDULED",
+            "markedDate": "2026-10-01",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống",
+            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423405": {
+          "mabn": "0001423405",
+          "episodeKey": "2600371541",
+          "maKcb": "2600371541",
+          "madieutri": "948966",
+          "soBA": "26076559",
+          "hoten": "HUỲNH ĐÌNH QUANG",
+          "tuoi": "89 tuổi",
+          "namSinh": "1937",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "LH2525221228019",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "hoà nghị-Phường An Nhơn Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H024",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "SCHEDULED",
+            "markedDate": "2026-10-01",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống",
+            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423396": {
+          "mabn": "0001423396",
+          "episodeKey": "2600371527",
+          "maKcb": "2600371527",
+          "madieutri": "948969",
+          "soBA": "26076557",
+          "hoten": "THỦY NGỌC GIANG",
+          "tuoi": "24 tuổi",
+          "namSinh": "2002",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "DK2526423090301",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/04/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Thôn 1-Xã Kon Gang--Tỉnh Gia Lai",
+          "chanDoanHis": "T00.8-Tổn thương nông tác động kết hợp khác ở nhiều vùng cơ thể",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H028",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": true,
+            "reason": "Chuyển mổ / Chuyển phòng",
+            "previousBed": "23X",
+            "removedAtMs": 1790816392749
+          }
+        },
+        "0001423448": {
+          "mabn": "0001423448",
+          "episodeKey": "2600371634",
+          "maKcb": "2600371634",
+          "madieutri": "949088",
+          "soBA": "26076605",
+          "hoten": "HỒNG CƯỜNG",
+          "tuoi": "36 tuổi",
+          "namSinh": "1990",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220597608",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "09/12/2025",
+          "hanTheDen": "08/12/2026",
+          "diaChi": "Thôn Chánh Khoan -Xã Bình Dương--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H029",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": "Cắt dịch"
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0000037245": {
+          "mabn": "0000037245",
+          "episodeKey": "2600371644",
+          "maKcb": "2600371644",
+          "madieutri": "949099",
+          "soBA": "26076626",
+          "hoten": "NGUYỄN THỊ HOÀNG OANH",
+          "tuoi": "57 tuổi",
+          "namSinh": "1969",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525221531801",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "21/05/2026",
+          "hanTheDen": "20/05/2027",
+          "diaChi": "Kv1-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H017",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [
+                "Mạch máu não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423911": {
+          "mabn": "0001423911",
+          "episodeKey": "2600373258",
+          "maKcb": "2600373258",
+          "madieutri": "949638",
+          "soBA": "26076905",
+          "hoten": "TRẦN QUANG ĐẠT",
+          "tuoi": "27 tuổi",
+          "namSinh": "1999",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220959181",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "02/06/2026",
+          "hanTheDen": "01/06/2027",
+          "diaChi": "liên trì-Xã Xuân An--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H016",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "SCHEDULED",
+            "markedDate": "2026-10-01",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống",
+            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423919": {
+          "mabn": "0001423919",
+          "episodeKey": "2600373269",
+          "maKcb": "2600373269",
+          "madieutri": "949649",
+          "soBA": "26076911",
+          "hoten": "HỒ QUỐC LAM",
+          "tuoi": "34 tuổi",
+          "namSinh": "1992",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220294583",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "13/11/2025",
+          "hanTheDen": "12/11/2026",
+          "diaChi": "Ngọc An Đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.80-Tổn thương nội sọ khác, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.80-Tổn thương nội sọ khác, không có vết thương nội sọ hở",
+          "bsDieuTri": "Ngô Văn Cư",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H034",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [
+                "X-quang xương chi (Vai phải)"
+              ],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423930": {
+          "mabn": "0001423930",
+          "episodeKey": "2600373287",
+          "maKcb": "2600373287",
+          "madieutri": "949674",
+          "soBA": "26076922",
+          "hoten": "VÕ THỊ THANH",
+          "tuoi": "84 tuổi",
+          "namSinh": "1942",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "LH2525221093525",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "Đông Lâm-Xã An Nhơn Tây--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.80-Tổn thương nội sọ khác, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.80-Tổn thương nội sọ khác, không có vết thương nội sọ hở",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H013",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [
+                "Công thức máu",
+                "Sinh hoá",
+                "Điện giải đồ"
+              ],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423940": {
+          "mabn": "0001423940",
+          "episodeKey": "2600373307",
+          "maKcb": "2600373307",
+          "madieutri": "949705",
+          "soBA": "26076935",
+          "hoten": "BÙI VĂN PHÚC",
+          "tuoi": "39 tuổi",
+          "namSinh": "1987",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "DN4525220133678",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "kv4-Phường Quy Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Ngô Văn Cư",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H014",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423953": {
+          "mabn": "0001423953",
+          "episodeKey": "2600373320",
+          "maKcb": "2600373320",
+          "madieutri": "949712",
+          "soBA": "26076941",
+          "hoten": "ĐẶNG VĂN XI",
+          "tuoi": "67 tuổi",
+          "namSinh": "1959",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220565369",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "24/03/2026",
+          "hanTheDen": "23/03/2027",
+          "diaChi": "hoà tân-Xã Phù Mỹ Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Ngô Văn Cư",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H015",
+          "khoaChuyenDen": "",
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
             "isRemoved": false,
             "reason": "",
             "previousBed": "",
@@ -2917,40 +3066,45 @@
       "latestExcelMabns": [
         "0001418457",
         "0001420337",
-        "0001420728",
-        "0001420743",
         "0001420755",
         "0001421064",
-        "0001421068",
-        "0001421398",
         "0001352007",
-        "0001421512",
         "0001421561",
         "0001421945",
         "0001421963",
         "0001421962",
-        "0000996031",
-        "0001421988",
-        "0001017823",
-        "0001422020",
         "0001422158",
         "0001032592",
-        "0001050501",
-        "0001422178",
         "0001422326",
-        "0001422336",
-        "0001422332",
         "0001422360",
-        "0001422366",
-        "0001422359",
-        "0001422413",
         "0001422706",
-        "0001422719",
-        "0001422908"
+        "0001423331",
+        "0001423400",
+        "0001423397",
+        "0001423405",
+        "0001423448",
+        "0000037245",
+        "0001423911",
+        "0001423919",
+        "0001423930",
+        "0001423940",
+        "0001423953"
       ],
       "acknowledgedMissingMabns": {},
-      "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T16:17:35.352Z",
+      "lastDeletedAction": {
+        "mabn": "0001423396",
+        "hoten": "THỦY NGỌC GIANG",
+        "previousBed": "23X",
+        "previousRemoved": {
+          "isRemoved": false,
+          "reason": "",
+          "previousBed": "",
+          "removedAtMs": 0
+        },
+        "reason": "Chuyển mổ / Chuyển phòng",
+        "deletedAtMs": 1790816392749
+      },
+      "updatedAt": "2026-10-01T01:30:26.852Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3466,7 +3620,7 @@
           "tuyenDangKy": "Trái tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "trung ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
+          "diaChi": "Trung Ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "customDiagnosis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3510,7 +3664,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "01/02/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "Xã Vạn Đức--Tỉnh Gia Lai",
+          "diaChi": "Vạn Hội 1-Xã Vạn Đức--Tỉnh Gia Lai",
           "chanDoanHis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "customDiagnosis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3818,7 +3972,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "08/05/2026",
           "hanTheDen": "07/05/2027",
-          "diaChi": "cửu lợi đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
+          "diaChi": "Cửu Lợi Đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -4022,35 +4176,432 @@
             "previousBed": "",
             "removedAtMs": 0
           }
+        },
+        "0001422908": {
+          "mabn": "0001422908",
+          "episodeKey": "2600369693",
+          "maKcb": "2600369693",
+          "madieutri": "948302",
+          "soBA": "26076210",
+          "hoten": "NGUYỄN HỨA",
+          "tuoi": "79 tuổi",
+          "namSinh": "1947",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "CK2525220395359",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/07/2025",
+          "hanTheDen": "31/12/2028",
+          "diaChi": "bình đê-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Ngô Văn Ri",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H057",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001422322": {
+          "mabn": "0001422322",
+          "episodeKey": "2600367420",
+          "maKcb": "2600367420",
+          "madieutri": "947458",
+          "soBA": "26075690",
+          "hoten": "ĐẶNG VĂN ĐỨC",
+          "tuoi": "62 tuổi",
+          "namSinh": "1964",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "TS2525221017054",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "Vĩnh Trường-Xã Hòa Hội--Tỉnh Gia Lai",
+          "chanDoanHis": "M47.16-Thoái hóa đốt sống khác kèm bệnh lý tủy sống, vùng thắt lưng",
+          "customDiagnosis": "M47.16-Thoái hóa đốt sống khác kèm bệnh lý tủy sống, vùng thắt lưng",
+          "bsDieuTri": "Đặng Ngọc Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H049",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001325103": {
+          "mabn": "0001325103",
+          "episodeKey": "2600366626",
+          "maKcb": "2600366626",
+          "madieutri": "946662",
+          "soBA": "26075212",
+          "hoten": "NGUYỄN TUẤN DUNG",
+          "tuoi": "52 tuổi",
+          "namSinh": "1974",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220819290",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "01/02/2026",
+          "hanTheDen": "31/01/2027",
+          "diaChi": "Thôn Phú An-Xã Tây Sơn--Tỉnh Gia Lai",
+          "chanDoanHis": "M95.2-Biến dạng mắc phải khác của đầu",
+          "customDiagnosis": "M95.2-Biến dạng mắc phải khác của đầu",
+          "bsDieuTri": "Đặng Ngọc Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H059",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001254460": {
+          "mabn": "0001254460",
+          "episodeKey": "2600371551",
+          "maKcb": "2600371551",
+          "madieutri": "948974",
+          "soBA": "26076561",
+          "hoten": "HUỲNH KIM CƯỜNG",
+          "tuoi": "49 tuổi",
+          "namSinh": "1977",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220877385",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "13/10/2025",
+          "hanTheDen": "12/10/2026",
+          "diaChi": "Khối 1A-Xã Tây Sơn--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.40-Xuất huyết ngoài màng cứng, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.40-Xuất huyết ngoài màng cứng, không có vết thương nội sọ hở",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H044",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423438": {
+          "mabn": "0001423438",
+          "episodeKey": "2600371613",
+          "maKcb": "2600371613",
+          "madieutri": "949051",
+          "soBA": "26076602",
+          "hoten": "NGUYỄN VĂN THIÊN",
+          "tuoi": "54 tuổi",
+          "namSinh": "1972",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525221797562",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "10/06/2026",
+          "hanTheDen": "09/06/2027",
+          "diaChi": "Nhơn thiện-Phường An Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.61-Xuất huyết dưới màng nhện do chấn thương, có vết thương nội sọ hở",
+          "customDiagnosis": "S06.61-Xuất huyết dưới màng nhện do chấn thương, có vết thương nội sọ hở",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H055",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423447": {
+          "mabn": "0001423447",
+          "episodeKey": "2600371631",
+          "maKcb": "2600371631",
+          "madieutri": "949073",
+          "soBA": "26076618",
+          "hoten": "ĐÀO TẤN NAM",
+          "tuoi": "54 tuổi",
+          "namSinh": "1972",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4665420390940",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "15/11/2025",
+          "hanTheDen": "14/11/2026",
+          "diaChi": "Hòa Đa-Xã Tuy An Nam--Tỉnh Đắk Lắk",
+          "chanDoanHis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
+          "customDiagnosis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H038",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001421947": {
+          "mabn": "0001421947",
+          "episodeKey": "2600366664",
+          "maKcb": "2600366664",
+          "madieutri": "948097",
+          "soBA": "26075222",
+          "hoten": "TRẦN VĂN QUYẾT",
+          "tuoi": "49 tuổi",
+          "namSinh": "1977",
+          "gioiTinh": "Nam",
+          "doiTuong": "Viện phí",
+          "soTheBhyt": "",
+          "tuyenDangKy": "",
+          "hanTheTu": "",
+          "hanTheDen": "",
+          "diaChi": "thượng an 1-Phường An Khê--Tỉnh Gia Lai",
+          "chanDoanHis": "I61.0-Xuất huyết não tại bán cầu, vùng dưới vỏ",
+          "customDiagnosis": "I61.0-Xuất huyết não tại bán cầu, vùng dưới vỏ",
+          "bsDieuTri": "Đặng Ngọc Trí",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H040",
+          "khoaChuyenDen": "Khoa Thần kinh - Đột quỵ",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0000024430": {
+          "mabn": "0000024430",
+          "episodeKey": "2600373342",
+          "maKcb": "2600373342",
+          "madieutri": "949746",
+          "soBA": "26076964",
+          "hoten": "LÊ VĂN ÂN",
+          "tuoi": "82 tuổi",
+          "namSinh": "1944",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "CK2525220326978",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/07/2025",
+          "hanTheDen": "31/12/2028",
+          "diaChi": "An Hội-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "M50.2-Thoát vị đĩa đệm cột sống cổ khác",
+          "customDiagnosis": "M50.2-Thoát vị đĩa đệm cột sống cổ khác",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H035",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423960": {
+          "mabn": "0001423960",
+          "episodeKey": "2600373331",
+          "maKcb": "2600373331",
+          "madieutri": "949725",
+          "soBA": "26076945",
+          "hoten": "NGUYỄN DUY",
+          "tuoi": "49 tuổi",
+          "namSinh": "1977",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GB4526421611895",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "08/06/2026",
+          "hanTheDen": "07/01/2027",
+          "diaChi": "an xuân 3-Xã Cửu An--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Đặng Ngọc Trí",
+          "ngayVaoStr": "01/10/2026",
+          "hisBed": "H045",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
         }
       },
       "latestExcelMabns": [
         "0001412378",
-        "0001418507",
-        "0001412616",
         "0001419869",
-        "0000948030",
         "0001397969",
         "0001373574",
         "0001420471",
-        "0001400167",
         "0001265243",
         "0001419943",
-        "0001418920",
         "0000462435",
         "0000789370",
         "0001422060",
         "0001422302",
-        "0001220543",
         "0001420757",
         "0001418939",
-        "0001087442",
-        "0001359700",
-        "0001422775"
+        "0001422775",
+        "0001422908",
+        "0001422322",
+        "0001325103",
+        "0001254460",
+        "0001423438",
+        "0001423447",
+        "0001421947",
+        "0000024430",
+        "0001423960"
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T16:17:35.352Z"
+      "updatedAt": "2026-10-01T01:30:26.852Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -4696,26 +5247,467 @@
             "previousBed": "",
             "removedAtMs": 0
           }
+        },
+        "0001420565": {
+          "mabn": "0001420565",
+          "episodeKey": "2600360902",
+          "maKcb": "2600360902",
+          "madieutri": "944905",
+          "soBA": "26074202",
+          "hoten": "NGUYỄN VĂN NỞ",
+          "tuoi": "58 tuổi",
+          "namSinh": "1968",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "BT2545420359759",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/01/2024",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Mỹ Phú 2-Xã Ô Loan--Tỉnh Đắk Lắk",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Nguyễn Phúc Tài",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H066",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001417494": {
+          "mabn": "0001417494",
+          "episodeKey": "2600349600",
+          "maKcb": "2600349600",
+          "madieutri": "940737",
+          "soBA": "26071970",
+          "hoten": "ĐOÀN THỊ THU HIẾU",
+          "tuoi": "60 tuổi",
+          "namSinh": "1966",
+          "gioiTinh": "Nữ",
+          "doiTuong": "Viện phí",
+          "soTheBhyt": "",
+          "tuyenDangKy": "",
+          "hanTheTu": "",
+          "hanTheDen": "",
+          "diaChi": "Phú Mỹ 2-Xã Tuy Phước--Tỉnh Gia Lai",
+          "chanDoanHis": "I60.7-Xuất huyết dưới nhện từ động mạch nội sọ, không xác định",
+          "customDiagnosis": "I60.7-Xuất huyết dưới nhện từ động mạch nội sọ, không xác định",
+          "bsDieuTri": "Nguyễn Phúc Tài",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H067",
+          "khoaChuyenDen": "Khoa Thần kinh - Đột quỵ",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001422300": {
+          "mabn": "0001422300",
+          "episodeKey": "2600367387",
+          "maKcb": "2600367387",
+          "madieutri": "947422",
+          "soBA": "26075680",
+          "hoten": "HỒ DŨNG QUANG",
+          "tuoi": "64 tuổi",
+          "namSinh": "1962",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "HT3523796014697",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2025",
+          "hanTheDen": "31/12/2028",
+          "diaChi": "Tân Lộc-Xã Phù Mỹ Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "bsDieuTri": "Nguyễn Phúc Tài",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H060",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001220543": {
+          "mabn": "0001220543",
+          "episodeKey": "2600367488",
+          "maKcb": "2600367488",
+          "madieutri": "947568",
+          "soBA": "26075750",
+          "hoten": "ĐẶNG VĂN DŨNG",
+          "tuoi": "71 tuổi",
+          "namSinh": "1955",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220171263",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/06/2026",
+          "hanTheDen": "31/05/2027",
+          "diaChi": "KV1-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "C71.6-U ác tính ở tiểu não",
+          "customDiagnosis": "C71.6-U ác tính ở tiểu não",
+          "bsDieuTri": "Nguyễn Phúc Tài",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H063",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423182": {
+          "mabn": "0001423182",
+          "episodeKey": "2600370701",
+          "maKcb": "2600370701",
+          "madieutri": "948722",
+          "soBA": "26076385",
+          "hoten": "VÕ KẾ EM",
+          "tuoi": "71 tuổi",
+          "namSinh": "1955",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525221018298",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Xã Cát Tiến--Tỉnh Gia Lai",
+          "chanDoanHis": "S30.8-Tổn thương nông khác ở bụng, thắt lưng và/hoặc vùng chậu",
+          "customDiagnosis": "S30.8-Tổn thương nông khác ở bụng, thắt lưng và/hoặc vùng chậu",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H073",
+          "khoaChuyenDen": "Khoa Ngoại Chấn thương - Bỏng",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001181071": {
+          "mabn": "0001181071",
+          "episodeKey": "2600364957",
+          "maKcb": "2600364957",
+          "madieutri": "948805",
+          "soBA": "26075027",
+          "hoten": "NGUYỄN THỊ HỒNG SƯƠNG",
+          "tuoi": "85 tuổi",
+          "namSinh": "1941",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "LH2525221082358",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "An Hòa-Phường Bình Định--Tỉnh Gia Lai",
+          "chanDoanHis": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
+          "customDiagnosis": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H074",
+          "khoaChuyenDen": "Khoa Nội tiết",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001415849": {
+          "mabn": "0001415849",
+          "episodeKey": "2600371388",
+          "maKcb": "2600371388",
+          "madieutri": "948869",
+          "soBA": "26076499",
+          "hoten": "TRẦN THỊ MINH TRÍ",
+          "tuoi": "73 tuổi",
+          "namSinh": "1953",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "CK2525220709976",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "01/01/2025",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Thương binh-Xã Phù Mỹ--Tỉnh Gia Lai",
+          "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "bsDieuTri": "Nguyễn Phúc Tài",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H106",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001262499": {
+          "mabn": "0001262499",
+          "episodeKey": "2600371423",
+          "maKcb": "2600371423",
+          "madieutri": "948955",
+          "soBA": "26076547",
+          "hoten": "TRƯƠNG THỊ AN",
+          "tuoi": "83 tuổi",
+          "namSinh": "1943",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "LH2525220193626",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2028",
+          "diaChi": "KV5-Phường Quy Nhơn--Tỉnh Gia Lai",
+          "chanDoanHis": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
+          "customDiagnosis": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H069",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423451": {
+          "mabn": "0001423451",
+          "episodeKey": "2600371648",
+          "maKcb": "2600371648",
+          "madieutri": "949100",
+          "soBA": "26076627",
+          "hoten": "NGUYỄN VĂN DUYỆT",
+          "tuoi": "36 tuổi",
+          "namSinh": "1990",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220447497",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "17/03/2026",
+          "hanTheDen": "16/03/2027",
+          "diaChi": "an đổ-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H062",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423393": {
+          "mabn": "0001423393",
+          "episodeKey": "2600371522",
+          "maKcb": "2600371522",
+          "madieutri": "948941",
+          "soBA": "26076540",
+          "hoten": "PHAN ĐÌNH HÒA",
+          "tuoi": "52 tuổi",
+          "namSinh": "1974",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "HC4523802001798",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "53/2 -chàng lía-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H068",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
         }
       },
       "latestExcelMabns": [
-        "0001307829",
-        "0001283135",
-        "0001160694",
-        "0001416882",
-        "0001410444",
-        "0001070375",
         "0001383920",
-        "0000167064",
         "0000835346",
         "0001327863",
         "0001413514",
-        "0000893787",
-        "0001422911"
+        "0001422911",
+        "0001417494",
+        "0001420565",
+        "0001220543",
+        "0001423182",
+        "0001181071",
+        "0001415849",
+        "0001262499",
+        "0001423451",
+        "0001423393"
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T16:17:35.352Z"
+      "updatedAt": "2026-10-01T01:30:26.852Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -5837,7 +6829,7 @@
           "customDiagnosis": "U51.431-Não nham [U ác của não]",
           "bsDieuTri": "Dương Minh Trí",
           "ngayVaoStr": "26/09/2026",
-          "hisBed": "H078",
+          "hisBed": "H094",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -6432,50 +7424,838 @@
             "previousBed": "",
             "removedAtMs": 0
           }
+        },
+        "0001200590": {
+          "mabn": "0001200590",
+          "episodeKey": "2600369923",
+          "maKcb": "2600369923",
+          "madieutri": "948463",
+          "soBA": "26076286",
+          "hoten": "NGUYỄN THỊ NÊN",
+          "tuoi": "63 tuổi",
+          "namSinh": "1963",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220445305",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "13/01/2026",
+          "hanTheDen": "12/01/2027",
+          "diaChi": "Đệ Đức 3-Phường Hoài Nhơn Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H096",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423036": {
+          "mabn": "0001423036",
+          "episodeKey": "2600370096",
+          "maKcb": "2600370096",
+          "madieutri": "948495",
+          "soBA": "26076293",
+          "hoten": "VÕ THỊ HƯỢC",
+          "tuoi": "70 tuổi",
+          "namSinh": "1956",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "BT2525220800984",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/06/2026",
+          "hanTheDen": "31/12/2029",
+          "diaChi": "Xã Bình Khê--Tỉnh Gia Lai",
+          "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H082",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423062": {
+          "mabn": "0001423062",
+          "episodeKey": "2600370256",
+          "maKcb": "2600370256",
+          "madieutri": "948540",
+          "soBA": "26076320",
+          "hoten": "VÕ THỊ HƯỜNG",
+          "tuoi": "62 tuổi",
+          "namSinh": "1964",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "BT2525220514640",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "01/05/2026",
+          "hanTheDen": "31/12/2028",
+          "diaChi": "Tổ Ninh Thạnh Bắc, Khu Phố Tấn Thạnh 2-Phường Hoài Nhơn Tây--Tỉnh Gia Lai",
+          "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H084",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423128": {
+          "mabn": "0001423128",
+          "episodeKey": "2600370537",
+          "maKcb": "2600370537",
+          "madieutri": "948558",
+          "soBA": "26076337",
+          "hoten": "LÂM THỊ ĐÁNG",
+          "tuoi": "72 tuổi",
+          "namSinh": "1954",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "KC2525220397544",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/07/2025",
+          "hanTheDen": "31/12/2028",
+          "diaChi": "Thiện Chánh 2-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
+          "customDiagnosis": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H090",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423163": {
+          "mabn": "0001423163",
+          "episodeKey": "2600370647",
+          "maKcb": "2600370647",
+          "madieutri": "948603",
+          "soBA": "26076360",
+          "hoten": "TRẦN THỊ ĐÁNG",
+          "tuoi": "89 tuổi",
+          "namSinh": "1937",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "LH2525221924217",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "01/09/2025",
+          "hanTheDen": "31/12/2028",
+          "diaChi": "kim xuyên-Xã Tuy Phước Đông--Tỉnh Gia Lai",
+          "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H088",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423016": {
+          "mabn": "0001423016",
+          "episodeKey": "2600369997",
+          "maKcb": "2600369997",
+          "madieutri": "948808",
+          "soBA": "26076466",
+          "hoten": "NGUYỄN THỊ DẬY",
+          "tuoi": "76 tuổi",
+          "namSinh": "1950",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "CT2525220374482",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "Phường Hoài Nhơn Đông--Tỉnh Gia Lai",
+          "chanDoanHis": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
+          "customDiagnosis": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H096",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423344": {
+          "mabn": "0001423344",
+          "episodeKey": "2600371313",
+          "maKcb": "2600371313",
+          "madieutri": "948822",
+          "soBA": "26076473",
+          "hoten": "PHAN VĂN MINH",
+          "tuoi": "66 tuổi",
+          "namSinh": "1960",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525221970669",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "09/09/2026",
+          "hanTheDen": "08/03/2027",
+          "diaChi": "Phường Quy Nhơn Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "M50.1-Rối loạn đĩa đệm cột sống cổ có bệnh lý rễ thần kinh",
+          "customDiagnosis": "M50.1-Rối loạn đĩa đệm cột sống cổ có bệnh lý rễ thần kinh",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H080",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001197225": {
+          "mabn": "0001197225",
+          "episodeKey": "2600371283",
+          "maKcb": "2600371283",
+          "madieutri": "948830",
+          "soBA": "26076476",
+          "hoten": "TÔ VĂN THÂU",
+          "tuoi": "65 tuổi",
+          "namSinh": "1961",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "DK2525221473720",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "01/04/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Làng Hiệp Hưng-Xã Canh Vinh--Tỉnh Gia Lai",
+          "chanDoanHis": "M51.0†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý tủy sống (G99.2*)",
+          "customDiagnosis": "M51.0†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý tủy sống (G99.2*)",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H081",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423307": {
+          "mabn": "0001423307",
+          "episodeKey": "2600371157",
+          "maKcb": "2600371157",
+          "madieutri": "948851",
+          "soBA": "26076492",
+          "hoten": "NGUYỄN THỊ BÌNH",
+          "tuoi": "46 tuổi",
+          "namSinh": "1980",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4529795105346",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "10/03/2026",
+          "hanTheDen": "09/03/2027",
+          "diaChi": "Xã Phù Mỹ Đông--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H076",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001422572": {
+          "mabn": "0001422572",
+          "episodeKey": "2600368406",
+          "maKcb": "2600368406",
+          "madieutri": "948901",
+          "soBA": "26075884",
+          "hoten": "BÙI VĂN CA",
+          "tuoi": "73 tuổi",
+          "namSinh": "1953",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525221914421",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/04/2026",
+          "hanTheDen": "31/03/2027",
+          "diaChi": "chánh nhơn-Xã Xuân An--Tỉnh Gia Lai",
+          "chanDoanHis": "R50.9-Sốt, không xác định",
+          "customDiagnosis": "R50.9-Sốt, không xác định",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H097",
+          "khoaChuyenDen": "Khoa Lão khoa",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001421329": {
+          "mabn": "0001421329",
+          "episodeKey": "2600364092",
+          "maKcb": "2600364092",
+          "madieutri": "948898",
+          "soBA": "26074803",
+          "hoten": "TRẦN THỊ HÀNG",
+          "tuoi": "59 tuổi",
+          "namSinh": "1967",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "HT3523896034350",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "Xã Bình An--Tỉnh Gia Lai",
+          "chanDoanHis": "D17.7-U mỡ lành tính ở vị trí khác",
+          "customDiagnosis": "D17.7-U mỡ lành tính ở vị trí khác",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H093",
+          "khoaChuyenDen": "Khoa Thần kinh - Đột quỵ",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423428": {
+          "mabn": "0001423428",
+          "episodeKey": "2600371595",
+          "maKcb": "2600371595",
+          "madieutri": "949027",
+          "soBA": "26076560",
+          "hoten": "NGUYỄN QUÝ",
+          "tuoi": "57 tuổi",
+          "namSinh": "1969",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4665420321052",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "kp long bình-Xã Tuy An Bắc--Tỉnh Đắk Lắk",
+          "chanDoanHis": "S14.0-Chấn động và/hoặc phù tủy sống cổ",
+          "customDiagnosis": "S14.0-Chấn động và/hoặc phù tủy sống cổ",
+          "bsDieuTri": "Nguyễn Xuân Tịnh",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H095",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423683": {
+          "mabn": "0001423683",
+          "episodeKey": "2600372521",
+          "maKcb": "2600372521",
+          "madieutri": "949226",
+          "soBA": "26076721",
+          "hoten": "ĐỖ THỊ THU THẢO",
+          "tuoi": "68 tuổi",
+          "namSinh": "1958",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220281741",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "22/02/2026",
+          "hanTheDen": "21/02/2027",
+          "diaChi": "Phường Hoài Nhơn--Tỉnh Gia Lai",
+          "chanDoanHis": "M50.1-Rối loạn đĩa đệm cột sống cổ có bệnh lý rễ thần kinh",
+          "customDiagnosis": "M50.1-Rối loạn đĩa đệm cột sống cổ có bệnh lý rễ thần kinh",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H087",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0000162797": {
+          "mabn": "0000162797",
+          "episodeKey": "2600372569",
+          "maKcb": "2600372569",
+          "madieutri": "949246",
+          "soBA": "26076713",
+          "hoten": "NGUYỄN THỊ HÀNG",
+          "tuoi": "49 tuổi",
+          "namSinh": "1977",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525221035228",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "07/02/2026",
+          "hanTheDen": "06/02/2027",
+          "diaChi": "Trung Lương-Xã Cát Tiến--Tỉnh Gia Lai",
+          "chanDoanHis": "M43.00-Bệnh lý gãy eo đốt sống, nhiều vị trí của cột sống",
+          "customDiagnosis": "M43.00-Bệnh lý gãy eo đốt sống, nhiều vị trí của cột sống",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H077",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001422255": {
+          "mabn": "0001422255",
+          "episodeKey": "2600372803",
+          "maKcb": "2600372803",
+          "madieutri": "949400",
+          "soBA": "26076797",
+          "hoten": "NGUYỄN THỊ QUÝ",
+          "tuoi": "47 tuổi",
+          "namSinh": "1979",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220690849",
+          "tuyenDangKy": "Trái tuyến",
+          "hanTheTu": "05/06/2026",
+          "hanTheDen": "04/06/2027",
+          "diaChi": "trà bình tây-Xã Phù Mỹ Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "Q01.8-Dị tật thoát vị não ở những vị trí khác",
+          "customDiagnosis": "Q01.8-Dị tật thoát vị não ở những vị trí khác",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H090",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423830": {
+          "mabn": "0001423830",
+          "episodeKey": "2600372983",
+          "maKcb": "2600372983",
+          "madieutri": "949476",
+          "soBA": "26076831",
+          "hoten": "TRẦN THỊ PHƯỢNG",
+          "tuoi": "70 tuổi",
+          "namSinh": "1956",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "KC2525220512586",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "thế thạnh 1-Xã Vạn Đức--Tỉnh Gia Lai",
+          "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+          "customDiagnosis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H087",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423904": {
+          "mabn": "0001423904",
+          "episodeKey": "2600373248",
+          "maKcb": "2600373248",
+          "madieutri": "949645",
+          "soBA": "26076904",
+          "hoten": "LÊ DUY THÀNH",
+          "tuoi": "72 tuổi",
+          "namSinh": "1954",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220273466",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "12/12/2025",
+          "hanTheDen": "11/12/2026",
+          "diaChi": "Phụ Đức-Phường Bồng Sơn--Tỉnh Gia Lai",
+          "chanDoanHis": "M47.99-Thoái hóa đốt sống, không xác định, vị trí không xác định",
+          "customDiagnosis": "M47.99-Thoái hóa đốt sống, không xác định, vị trí không xác định",
+          "bsDieuTri": "Phạm Thái Hoàng Luân",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H085",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423932": {
+          "mabn": "0001423932",
+          "episodeKey": "2600373291",
+          "maKcb": "2600373291",
+          "madieutri": "949694",
+          "soBA": "26076928",
+          "hoten": "MAI XUÂN QUANG",
+          "tuoi": "58 tuổi",
+          "namSinh": "1968",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "DK2525221516105",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/02/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Hiệp Vinh 1-Xã Canh Vinh--Tỉnh Gia Lai",
+          "chanDoanHis": "I64-Đột quỵ, không xác định do xuất huyết hoặc nhồi máu",
+          "customDiagnosis": "I64-Đột quỵ, không xác định do xuất huyết hoặc nhồi máu",
+          "bsDieuTri": "Phạm Thái Hoàng Luân",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H108",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
         }
       },
       "latestExcelMabns": [
         "0001413526",
-        "0001418724",
         "0001415940",
-        "0001419157",
         "0001418784",
-        "0001287139",
-        "0001420526",
         "0001411127",
         "0001421285",
-        "0001227262",
         "0001418775",
-        "0001420910",
         "0001040749",
-        "0001419435",
         "0001418951",
-        "0001037354",
-        "0001377524",
-        "0001421838",
         "0001421575",
-        "0001325103",
-        "0001417273",
         "0001422079",
-        "0001422096",
         "0001291952",
         "0001422207",
         "0001422252",
-        "0001153038",
-        "0001422322",
         "0001422398",
         "0001422488",
         "0001309625",
         "0001422435",
-        "0001416348",
         "0001422625",
-        "0001422644",
         "0001422884",
-        "0001422894"
+        "0001422894",
+        "0001200590",
+        "0001423036",
+        "0001423062",
+        "0001423163",
+        "0001423344",
+        "0001423307",
+        "0001422572",
+        "0001423683",
+        "0000162797",
+        "0001422255",
+        "0001423830",
+        "0001423904",
+        "0001423932"
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T16:17:35.353Z"
+      "updatedAt": "2026-10-01T01:30:26.853Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -7051,9 +8831,273 @@
           "diaChi": "Xã Bình Phú--Tỉnh Gia Lai",
           "chanDoanHis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
           "customDiagnosis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
-          "bsDieuTri": "Đào Văn Nhân",
-          "ngayVaoStr": "28/09/2026",
+          "bsDieuTri": "Phạm Thái Hoàng Luân",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H001",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423406": {
+          "mabn": "0001423406",
+          "episodeKey": "2600371542",
+          "maKcb": "2600371542",
+          "madieutri": "948958",
+          "soBA": "26076553",
+          "hoten": "BÙI THỊ SÁU",
+          "tuoi": "60 tuổi",
+          "namSinh": "1966",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "BT2525221304298",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/07/2025",
+          "hanTheDen": "31/12/2028",
+          "diaChi": "Giang Bắc-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "customDiagnosis": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "bsDieuTri": "Đặng Ngọc Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H010",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001232783": {
+          "mabn": "0001232783",
+          "episodeKey": "2600371067",
+          "maKcb": "2600371067",
+          "madieutri": "948758",
+          "soBA": "26076447",
+          "hoten": "DƯƠNG VĂN TUẤN",
+          "tuoi": "70 tuổi",
+          "namSinh": "1956",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GB4525220471674",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "Phú Văn-Xã Vạn Đức--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Đặng Ngọc Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H012",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423393": {
+          "mabn": "0001423393",
+          "episodeKey": "2600371522",
+          "maKcb": "2600371522",
+          "madieutri": "948941",
+          "soBA": "26076540",
+          "hoten": "PHAN ĐÌNH HÒA",
+          "tuoi": "52 tuổi",
+          "namSinh": "1974",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "HC4523802001798",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "53/2 -chàng lía-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Đặng Ngọc Trí",
+          "ngayVaoStr": "29/09/2026",
+          "hisBed": "H005",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423451": {
+          "mabn": "0001423451",
+          "episodeKey": "2600371648",
+          "maKcb": "2600371648",
+          "madieutri": "949100",
+          "soBA": "26076627",
+          "hoten": "NGUYỄN VĂN DUYỆT",
+          "tuoi": "36 tuổi",
+          "namSinh": "1990",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220447497",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "17/03/2026",
+          "hanTheDen": "16/03/2027",
+          "diaChi": "an đổ-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Đặng Ngọc Trí",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H012",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423465": {
+          "mabn": "0001423465",
+          "episodeKey": "2600371685",
+          "maKcb": "2600371685",
+          "madieutri": "949267",
+          "soBA": "26076623",
+          "hoten": "TRÌNH THỊ CÚC HOA",
+          "tuoi": "76 tuổi",
+          "namSinh": "1950",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "LH2525221015346",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/01/2026",
+          "hanTheDen": "31/12/2030",
+          "diaChi": "phú giáo-Xã Ngô Mây--Tỉnh Gia Lai",
+          "chanDoanHis": "I60.1-Xuất huyết dưới nhện từ động mạch não giữa",
+          "customDiagnosis": "I60.1-Xuất huyết dưới nhện từ động mạch não giữa",
+          "bsDieuTri": "Ngô Văn Cư",
+          "ngayVaoStr": "30/09/2026",
           "hisBed": "H006",
+          "khoaChuyenDen": "Khoa Thần kinh - Đột quỵ",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          }
+        },
+        "0001423888": {
+          "mabn": "0001423888",
+          "episodeKey": "2600373191",
+          "maKcb": "2600373191",
+          "madieutri": "949606",
+          "soBA": "26076890",
+          "hoten": "ĐỖ THỊ HIỆP",
+          "tuoi": "62 tuổi",
+          "namSinh": "1964",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "DK2526422419697",
+          "tuyenDangKy": "Đa tuyến đúng tuyến",
+          "hanTheTu": "01/03/2026",
+          "hanTheDen": "31/12/2026",
+          "diaChi": "an phong-Xã Ya Hội--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Phạm Ngọc Hải",
+          "ngayVaoStr": "30/09/2026",
+          "hisBed": "H005",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -7081,20 +9125,19 @@
       "latestExcelMabns": [
         "0001412464",
         "0000844175",
-        "0001416769",
         "0001416828",
         "0001420321",
         "0001419674",
-        "0001417494",
-        "0001422300",
-        "0001420565",
         "0001422339",
-        "0001421947",
-        "0001420070"
+        "0001420070",
+        "0001423406",
+        "0001232783",
+        "0001423465",
+        "0001423888"
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-09-29T16:17:35.353Z"
+      "updatedAt": "2026-10-01T01:30:26.853Z"
     }
   },
   "episodeConsultations": {
@@ -7106,6 +9149,22 @@
         "specialty": "Nội Thần kinh - Đột quỵ",
         "consultDiagnosis": "Chấn động não / Theo dõi xuất huyết dưới nhện mức độ nhẹ",
         "consultTreatment": "Nimodipin 30mg, nằm đầu cao 30 độ, chuyển trại Thần kinh 1 khi ổn định"
+      },
+      {
+        "id": "ep-tk1-2026-09-30",
+        "roomName": "Thần kinh 1",
+        "dateKey": "2026-09-30",
+        "specialty": "Nội Tim mạch",
+        "consultDiagnosis": "Tăng huyết áp độ 2 trên nền chấn động não",
+        "consultTreatment": "Amlodipin 5mg x 1 viên/ngày uống sáng"
+      },
+      {
+        "id": "ep-tk1-2026-10-01",
+        "roomName": "Thần kinh 1",
+        "dateKey": "2026-10-01",
+        "specialty": "Nội Tim mạch",
+        "consultDiagnosis": "Tăng huyết áp độ 2 trên nền chấn động não",
+        "consultTreatment": "Amlodipin 5mg x 1 viên/ngày uống sáng"
       }
     ],
     "2600366789": [

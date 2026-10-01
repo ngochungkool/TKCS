@@ -1027,6 +1027,29 @@ const server = http.createServer(async (req, res) => {
     return str;
   }
 
+  function getLatestExcelUploadInfo() {
+    if (db.lastExcelUploadTime) return db.lastExcelUploadTime;
+    if (db.uploadedHisFiles && db.uploadedHisFiles.length > 0) {
+      return db.uploadedHisFiles[0].uploadedAt;
+    }
+    const uploadDir = path.join(ROOT, 'uploads_his');
+    if (fs.existsSync(uploadDir)) {
+      const files = fs.readdirSync(uploadDir).filter(f => /\.(xlsx|xls|csv)$/i.test(f));
+      let latestMs = 0;
+      for (const f of files) {
+        try {
+          const mt = fs.statSync(path.join(uploadDir, f)).mtimeMs;
+          if (mt > latestMs) latestMs = mt;
+        } catch {}
+      }
+      if (latestMs > 0) {
+        const d = new Date(latestMs);
+        return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')} ngày ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+      }
+    }
+    return null;
+  }
+
   function getClinicBySpecialty(specialty) {
     const map = {
       'Chấn thương': 'Phòng khám Chấn thương chỉnh hình',
@@ -1041,7 +1064,7 @@ const server = http.createServer(async (req, res) => {
       'Nội tiết - Đái tháo đường': 'Phòng khám Nội tiết',
       'Chấn thương chỉnh hình': 'Phòng khám Chấn thương chỉnh hình'
     };
-    if (!specialty) return 'Phòng khám Ngoại Thần kinh - Cột sống';
+    if (!specialty) return '';
     return map[specialty] || `Phòng khám ${specialty}`;
   }
 
@@ -1296,7 +1319,8 @@ const server = http.createServer(async (req, res) => {
       tk1: targetRoomObj,
       wardRounds: db.wardRounds,
       episodeConsultations: db.episodeConsultations || {},
-      doctors: db.doctors || []
+      doctors: db.doctors || [],
+      lastExcelUploadTime: getLatestExcelUploadInfo()
     }));
     return;
   }
@@ -1432,12 +1456,12 @@ const server = http.createServer(async (req, res) => {
       }
       if (consultDetails && typeof consultDetails === 'object') {
         const spec = String(consultDetails.specialty || (rec.tasksByDate[targetDate]?.hoiChan?.[0] || '')).trim();
-        const autoClinic = consultDetails.followUpClinic || getClinicBySpecialty(spec);
+        const autoClinic = spec ? (consultDetails.followUpClinic || getClinicBySpecialty(spec)) : '';
         rec.consultDetails = {
           specialty: spec,
           consultDiagnosis: String(consultDetails.consultDiagnosis || '').trim(),
           consultTreatment: String(consultDetails.consultTreatment || '').trim(),
-          followUpDays: String(consultDetails.followUpDays ?? '').trim(),
+          followUpDays: spec ? String(consultDetails.followUpDays ?? '').trim() : '',
           followUpClinic: autoClinic
         };
 
@@ -1491,19 +1515,28 @@ const server = http.createServer(async (req, res) => {
         if (status === 'NONE') {
           rec.discharge = { status: 'NONE', markedDate: '', followUpDays: '', followUpClinic: '', note: '' };
         } else {
-          const days = followUpDays !== undefined ? String(followUpDays).trim() : (rec.consultDetails?.followUpDays || '7');
           const spec = rec.consultDetails?.specialty || (rec.tasksByDate?.[todayKey]?.hoiChan?.[0] || '');
-          const clinic = followUpClinic || rec.consultDetails?.followUpClinic || getClinicBySpecialty(spec);
-          if (rec.consultDetails) {
-            rec.consultDetails.followUpDays = days;
-            rec.consultDetails.followUpClinic = clinic;
+          let days = '';
+          let clinic = '';
+          if (spec) {
+            days = followUpDays !== undefined ? String(followUpDays).trim() : (rec.consultDetails?.followUpDays || '7');
+            clinic = followUpClinic || rec.consultDetails?.followUpClinic || getClinicBySpecialty(spec);
+            if (rec.consultDetails) {
+              rec.consultDetails.followUpDays = days;
+              rec.consultDetails.followUpClinic = clinic;
+            }
+          } else {
+            if (rec.consultDetails) {
+              rec.consultDetails.followUpDays = '';
+              rec.consultDetails.followUpClinic = '';
+            }
           }
           rec.discharge = {
             status: status || 'SCHEDULED',
             markedDate: status === 'MORNING_DISCHARGE' ? addDaysToKey(todayKey, -1) : todayKey,
             followUpDays: days,
             followUpClinic: clinic,
-            note: note || `Hẹn tái khám sau ${days || 7} ngày tại ${clinic}`
+            note: note || (spec ? `Hẹn tái khám sau ${days || 7} ngày tại ${clinic}` : 'Không hẹn tái khám')
           };
         }
         broadcastState(`🏥 Đã cập nhật trạng thái ra viện BN ${rec.hoten} (${tk1.roomName})`);
@@ -1598,6 +1631,29 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    if (action === 'RELEASE_ALL_MISSING_EXCEL_PATIENTS') {
+      const { mabns } = body;
+      const list = Array.isArray(mabns) ? mabns : [];
+      let count = 0;
+      for (const [bCode, m] of Object.entries(tk1.bedAssignments)) {
+        if (list.includes(m)) {
+          delete tk1.bedAssignments[bCode];
+          count++;
+          if (tk1.patientRecords[m]) {
+            tk1.patientRecords[m].removed = {
+              isRemoved: true,
+              reason: 'Không còn trong Excel mới nhất',
+              removedAtMs: Date.now()
+            };
+          }
+        }
+      }
+      broadcastState(`🗑️ Đã giải phóng ${count} giường không còn trong Excel (${tk1.roomName})`);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, tk1, wardRounds: db.wardRounds, episodeConsultations: db.episodeConsultations }));
+      return;
+    }
+
     res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: false, error: 'Action không hợp lệ' }));
     return;
@@ -1647,11 +1703,13 @@ const server = http.createServer(async (req, res) => {
     db.uploadedHisFiles = db.uploadedHisFiles.slice(0, 10);
 
     // Automatically parse all uploaded HIS Excel files and update the 9 metrics!
+    const nowDt = new Date();
+    db.lastExcelUploadTime = `${String(nowDt.getHours()).padStart(2, '0')}:${String(nowDt.getMinutes()).padStart(2, '0')} ngày ${String(nowDt.getDate()).padStart(2, '0')}/${String(nowDt.getMonth() + 1).padStart(2, '0')}/${nowDt.getFullYear()}`;
     recomputePatientStatsFromHisUploads();
 
     broadcastState(`📂 Đã tự động nhận diện [${detectedCat.label}] (${rowCount} dòng) từ file "${fileName}" và cập nhật 9 chỉ số!`);
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ ok: true, savedPath, detectedCat, rowCount, db }));
+    res.end(JSON.stringify({ ok: true, savedPath, detectedCat, rowCount, lastExcelUploadTime: db.lastExcelUploadTime, db }));
     return;
   }
 
