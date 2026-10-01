@@ -1,5 +1,5 @@
 {
-  "version": 1790828030347,
+  "version": 1790828140743,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -295,7 +295,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 20585,
-      "uploadedAt": "11:13:49 1/10/2026",
+      "uploadedAt": "11:15:40 1/10/2026",
       "extractedPreview": null
     },
     {
@@ -705,7 +705,7 @@
         "baoHiem": 0
       }
     },
-    "updatedAt": "2026-10-01T04:13:50.347Z"
+    "updatedAt": "2026-10-01T04:15:40.743Z"
   },
   "wardRounds": {
     "tk1": {
@@ -3159,7 +3159,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:13:51.346Z",
+      "updatedAt": "2026-10-01T04:15:41.742Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4632,7 +4632,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:13:51.346Z"
+      "updatedAt": "2026-10-01T04:15:41.742Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5723,7 +5723,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:13:51.346Z"
+      "updatedAt": "2026-10-01T04:15:41.742Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8237,7 +8237,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:13:51.346Z"
+      "updatedAt": "2026-10-01T04:15:41.834Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -9107,7 +9107,7 @@
       "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:13:51.346Z"
+      "updatedAt": "2026-10-01T04:15:41.834Z"
     }
   },
   "episodeConsultations": {
@@ -9148,5 +9148,5 @@
       }
     ]
   },
-  "lastExcelUploadTime": "11:13 ngày 01/10/2026"
+  "lastExcelUploadTime": "11:15 ngày 01/10/2026"
 }
