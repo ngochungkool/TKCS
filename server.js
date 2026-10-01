@@ -3,6 +3,7 @@ process.env.TZ = 'Asia/Ho_Chi_Minh';
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 
 const PORT = 8080;
 const ROOT = __dirname;
@@ -20,7 +21,8 @@ const MIME_TYPES = {
   '.jpeg': 'image/jpeg',
   '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
-  '.ico': 'image/x-icon'
+  '.ico': 'image/x-icon',
+  '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
 };
 
 const ROOMS = [
@@ -2377,6 +2379,35 @@ const server = http.createServer(async (req, res) => {
 
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, report: freshDraft }));
+    return;
+  }
+
+  // GET /api/export-briefing-pptx?date=YYYY-MM-DD
+  if (req.method === 'GET' && pathname === '/api/export-briefing-pptx') {
+    const reqUrl = new URL(req.url, 'http://localhost');
+    const qDate = reqUrl.searchParams.get('date') || getDateKey(new Date());
+    const tempPptx = path.join(ROOT, `briefing_${qDate}_${Date.now()}.pptx`);
+    const scriptPath = path.join(ROOT, 'scripts', 'generate_briefing_pptx.py');
+    const pythonCmd = `python "${scriptPath}" --date ${qDate} --out "${tempPptx}"`;
+
+    exec(pythonCmd, (err, stdout, stderr) => {
+      if (err || !fs.existsSync(tempPptx)) {
+        console.error('PPTX export error:', err, stderr);
+        res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ ok: false, error: 'Không thể tạo file PowerPoint: ' + (stderr || (err && err.message)) }));
+        return;
+      }
+      res.writeHead(200, {
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'Content-Disposition': `attachment; filename="Bao_Cao_Giao_Ban_${qDate}.pptx"`,
+        'Cache-Control': 'no-cache'
+      });
+      const readStream = fs.createReadStream(tempPptx);
+      readStream.pipe(res);
+      readStream.on('close', () => {
+        try { fs.unlinkSync(tempPptx); } catch (e) {}
+      });
+    });
     return;
   }
 
