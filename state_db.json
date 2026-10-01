@@ -1,5 +1,5 @@
 {
-  "version": 1790817934048,
+  "version": 1790818226853,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -2750,13 +2750,25 @@
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H017",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [
+                "Mạch máu não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
             "status": "NONE",
@@ -3092,7 +3104,7 @@
         "reason": "Chuyển mổ / Chuyển phòng",
         "deletedAtMs": 1790816392749
       },
-      "updatedAt": "2026-10-01T01:25:34.048Z",
+      "updatedAt": "2026-10-01T01:30:26.852Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -4589,7 +4601,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:25:34.048Z"
+      "updatedAt": "2026-10-01T01:30:26.852Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5695,7 +5707,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:25:34.048Z"
+      "updatedAt": "2026-10-01T01:30:26.852Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8243,7 +8255,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:25:34.048Z"
+      "updatedAt": "2026-10-01T01:30:26.853Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -9125,7 +9137,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T01:25:34.048Z"
+      "updatedAt": "2026-10-01T01:30:26.853Z"
     }
   },
   "episodeConsultations": {
