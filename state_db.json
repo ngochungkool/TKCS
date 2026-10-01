@@ -1,5 +1,5 @@
 {
-  "version": 1790828469534,
+  "version": 1790828487144,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3159,7 +3159,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:09.446Z",
+      "updatedAt": "2026-10-01T04:21:27.143Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3935,7 +3935,17 @@
           "ngayVaoStr": "27/09/2026",
           "hisBed": "H039",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -4022,7 +4032,17 @@
           "ngayVaoStr": "28/09/2026",
           "hisBed": "H052",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-01": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -4643,7 +4663,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:09.447Z"
+      "updatedAt": "2026-10-01T04:21:27.143Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -5749,7 +5769,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:09.447Z"
+      "updatedAt": "2026-10-01T04:21:27.143Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8432,7 +8452,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:09.533Z"
+      "updatedAt": "2026-10-01T04:21:27.143Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -9313,7 +9333,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T04:21:09.533Z"
+      "updatedAt": "2026-10-01T04:21:27.144Z"
     }
   },
   "episodeConsultations": {
