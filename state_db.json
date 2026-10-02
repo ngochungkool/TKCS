@@ -1,5 +1,5 @@
 {
-  "version": 1790899200115,
+  "version": 1790906400168,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -716,15 +716,12 @@
         "2": "0001352007",
         "3": "0001420755",
         "5": "0001423400",
-        "6": "0001423911",
         "7": "0001422360",
         "8": "0000037245",
         "9": "0001422706",
         "10": "0001423940",
         "11": "0001422326",
         "12": "0001421962",
-        "13": "0001423397",
-        "14": "0001423405",
         "15": "0001422158",
         "16": "0001032592",
         "17": "0001423448",
@@ -2807,11 +2804,12 @@
             "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
-            "status": "MORNING_DISCHARGE",
+            "status": "RELEASED_AFTER_9AM",
             "markedDate": "2026-10-01",
             "followUpDays": "7",
             "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống",
-            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống"
+            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống",
+            "releasedAt": "2026-10-02T02:00:00.167Z"
           },
           "removed": {
             "isRemoved": false,
@@ -2861,11 +2859,12 @@
             "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
-            "status": "MORNING_DISCHARGE",
+            "status": "RELEASED_AFTER_9AM",
             "markedDate": "2026-10-01",
             "followUpDays": "7",
             "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống",
-            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống"
+            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống",
+            "releasedAt": "2026-10-02T02:00:00.167Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3071,11 +3070,12 @@
             "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống"
           },
           "discharge": {
-            "status": "MORNING_DISCHARGE",
+            "status": "RELEASED_AFTER_9AM",
             "markedDate": "2026-10-01",
             "followUpDays": "7",
             "followUpClinic": "Phòng khám Ngoại Thần kinh - Cột sống",
-            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống"
+            "note": "Hẹn tái khám sau 7 ngày tại Phòng khám Ngoại Thần kinh - Cột sống",
+            "releasedAt": "2026-10-02T02:00:00.167Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3389,7 +3389,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T23:59:53.002Z",
+      "updatedAt": "2026-10-02T01:56:58.913Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -5047,7 +5047,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T23:59:53.002Z"
+      "updatedAt": "2026-10-02T01:56:58.914Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6243,7 +6243,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T23:59:53.002Z"
+      "updatedAt": "2026-10-02T01:56:58.914Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -9222,7 +9222,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T23:59:53.002Z"
+      "updatedAt": "2026-10-02T01:56:58.914Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10189,7 +10189,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-01T23:59:53.003Z"
+      "updatedAt": "2026-10-02T01:56:58.914Z"
     }
   },
   "episodeConsultations": {
