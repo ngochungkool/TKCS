@@ -35,77 +35,72 @@
       </div>
     </header>
 
-    <!-- 4 THẺ TRANG CON CHÍNH -->
-    <main class="home-portal-grid home-portal-grid-4">
-      <!-- TRANG CON 1: QUẢN LÝ USER BÁC SĨ -->
+    <!-- BỐ CỤC 3 CỘT CÂN ĐỐI (FIT MÀN HÌNH) -->
+    <main class="home-portal-grid-3col">
+      <!-- CỘT 1: QUẢN LÝ USER BÁC SĨ -->
       <a href="/quan-ly-user" class="portal-card portal-card-user" id="card-quan-ly-user">
-        <div>
-          <div class="portal-card-top-stacked">
-            <h2 class="portal-card-title title-user-impress">Quản Lý User Bác Sĩ</h2>
-            <button type="button" class="btn-header-bao-mo btn-home-bao-mo-full" id="btn-home-bao-mo">
-              BÁO MỔ
-            </button>
-          </div>
+        <div class="portal-card-top-stacked">
+          <h2 class="portal-card-title title-user-impress">Quản Lý User Bác Sĩ</h2>
+          <button type="button" class="btn-header-bao-mo btn-home-bao-mo-full" id="btn-home-bao-mo">
+            BÁO MỔ
+          </button>
+        </div>
 
-          <div class="portal-metrics-grid">
-            <div class="portal-metric-item metric-green">
-              <span class="metric-val" id="homeUsableCount">--</span>
-              <span class="metric-label">Có thể sử dụng</span>
-            </div>
-            <div class="portal-metric-item metric-blue">
-              <span class="metric-val" id="homeInUseCount">--</span>
-              <span class="metric-label">Đang nhận dùng</span>
-            </div>
-            <div class="portal-metric-item metric-red">
-              <span class="metric-val" id="homeSurgeryCount">--</span>
-              <span class="metric-label">Đang mổ</span>
-            </div>
+        <div class="portal-metrics-grid">
+          <div class="portal-metric-item metric-green">
+            <span class="metric-val" id="homeUsableCount">--</span>
+            <span class="metric-label">Có thể sử dụng</span>
+          </div>
+          <div class="portal-metric-item metric-blue">
+            <span class="metric-val" id="homeInUseCount">--</span>
+            <span class="metric-label">Đang nhận dùng</span>
+          </div>
+          <div class="portal-metric-item metric-red">
+            <span class="metric-val" id="homeSurgeryCount">--</span>
+            <span class="metric-label">Đang mổ</span>
           </div>
         </div>
       </a>
 
-      <!-- TRANG CON 2: HÀNH CHÍNH KHOA -->
-      <a href="/hanh-chinh-khoa" class="portal-card portal-card-admin">
-        <div>
+      <!-- CỘT 2: ĐI BUỒNG HẰNG NGÀY -->
+      <a href="/di-buong-hang-ngay" class="portal-card portal-card-rounds" id="card-di-buong">
+        <div class="portal-card-top" style="margin-bottom: 16px; padding-bottom: 12px;">
+          <h2 class="portal-card-title title-rounds-impress">Đi Buồng Hằng Ngày</h2>
+        </div>
+
+        <!-- 5 Phòng lối tắt nhanh (màu Hồi sức thần kinh giống các phòng khác) -->
+        <div class="portal-rooms-mini-grid" aria-label="Danh sách 5 phòng trong khoa" style="margin-bottom: 0;">
+          <span class="portal-room-mini-chip" data-room-jump="tk1">Thần kinh 1</span>
+          <span class="portal-room-mini-chip" data-room-jump="tk2">Thần kinh 2</span>
+          <span class="portal-room-mini-chip" data-room-jump="tk3">Thần kinh 3</span>
+          <span class="portal-room-mini-chip" data-room-jump="tk4">Thần kinh 4</span>
+          <span class="portal-room-mini-chip" data-room-jump="hstk">Hồi sức thần kinh</span>
+        </div>
+      </a>
+
+      <!-- CỘT 3: GỒM 2 HÀNG (HÀNH CHÍNH KHOA & BÁO CÁO GIAO BAN) -->
+      <div class="portal-col-stacked">
+        <!-- HÀNG 1: HÀNH CHÍNH KHOA -->
+        <a href="/hanh-chinh-khoa" class="portal-card portal-card-admin portal-card-stacked-item">
           <div class="portal-card-top" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
             <h2 class="portal-card-title title-admin-impress">Hành Chính Khoa</h2>
           </div>
-        </div>
-      </a>
+        </a>
 
-      <!-- TRANG CON 3: ĐI BUỒNG HẰNG NGÀY (5 PHÒNG TRONG KHOA) -->
-      <a href="/di-buong-hang-ngay" class="portal-card portal-card-rounds" id="card-di-buong">
-        <div>
-          <div class="portal-card-top" style="margin-bottom: 18px; padding-bottom: 14px;">
-            <h2 class="portal-card-title title-rounds-impress">Đi Buồng Hằng Ngày</h2>
-          </div>
-
-          <!-- 5 Phòng lối tắt nhanh (màu Hồi sức thần kinh giống các phòng khác) -->
-          <div class="portal-rooms-mini-grid" aria-label="Danh sách 5 phòng trong khoa" style="margin-bottom: 0;">
-            <span class="portal-room-mini-chip" data-room-jump="tk1">Thần kinh 1</span>
-            <span class="portal-room-mini-chip" data-room-jump="tk2">Thần kinh 2</span>
-            <span class="portal-room-mini-chip" data-room-jump="tk3">Thần kinh 3</span>
-            <span class="portal-room-mini-chip" data-room-jump="tk4">Thần kinh 4</span>
-            <span class="portal-room-mini-chip" data-room-jump="hstk">Hồi sức thần kinh</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- TRANG CON 4: BÁO CÁO GIAO BAN -->
-      <a href="/bao-cao-giao-ban" class="portal-card portal-card-briefing" id="card-bao-cao-giao-ban">
-        <div>
-          <div class="portal-card-top" style="margin-bottom: 18px; padding-bottom: 14px;">
+        <!-- HÀNG 2: BÁO CÁO GIAO BAN -->
+        <a href="/bao-cao-giao-ban" class="portal-card portal-card-briefing portal-card-stacked-item" id="card-bao-cao-giao-ban">
+          <div class="portal-card-top" style="margin-bottom: 12px; padding-bottom: 8px;">
             <h2 class="portal-card-title title-briefing-impress">Báo Cáo Giao Ban</h2>
           </div>
 
           <div class="portal-metrics-grid" style="grid-template-columns: 1fr; margin-bottom: 0;">
-            <div class="portal-metric-item metric-sky">
+            <div class="portal-metric-item metric-sky" style="padding: 8px 12px;">
               <span class="metric-val" id="homeBriefingHienCo">--</span>
               <span class="metric-label">Tổng hiện có</span>
             </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </main>
   </div>
 

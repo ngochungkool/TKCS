@@ -2262,6 +2262,67 @@ dialog.modal-dialog::backdrop {
   color: #9f1239;
 }
 
+/* ============================================================================
+   BỐ CỤC TRANG CHỦ 3 CỘT CÂN ĐỐI (FIT MÀN HÌNH)
+   Cột 1: Quản lý user | Cột 2: Đi buồng | Cột 3 (2 hàng): Hành chính khoa & Giao ban
+   ============================================================================ */
+.home-portal-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.portal-col-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.portal-card-stacked-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 22px 24px;
+}
+
+.portal-card-stacked-item .portal-card-title {
+  font-size: 1.35rem;
+}
+
+/* Tinh chỉnh cột 2 (Đi buồng) 5 phòng dạng lưới 2 cột cân xứng */
+.portal-card-rounds .portal-rooms-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.portal-card-rounds .portal-room-mini-chip {
+  padding: 9px 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 10px;
+  justify-content: center;
+  text-align: center;
+}
+
+.portal-card-rounds .portal-room-mini-chip:last-child {
+  grid-column: span 2;
+}
+
+@media (max-width: 1080px) {
+  .home-portal-grid-3col {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .portal-col-stacked {
+    gap: 16px;
+  }
+}
+
 /* TRANG CON 4: BÁO CÁO GIAO BAN CARD STYLES */
 .home-portal-grid.home-portal-grid-4 {
   display: grid;
