@@ -2932,11 +2932,11 @@ const server = http.createServer(async (req, res) => {
     const qDate = reqUrl.searchParams.get('date') || getDateKey(new Date());
 
     try {
-      const db = getDatabase();
-      if (!db.briefingReports) db.briefingReports = {};
-      if (!db.briefingReports[qDate]) {
-        db.briefingReports[qDate] = getOrBuildBriefingReport(qDate);
-        saveDatabase(db);
+      const database = loadDb();
+      if (!database.briefingReports) database.briefingReports = {};
+      if (!database.briefingReports[qDate]) {
+        database.briefingReports[qDate] = getOrBuildBriefingReport(qDate);
+        saveDb(database);
       }
     } catch (e) {
       console.warn('Could not auto-persist draft before PPTX export:', e);
