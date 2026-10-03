@@ -1,5 +1,5 @@
 {
-  "version": 1791036147697,
+  "version": 1791038157500,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3389,7 +3389,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:02:27.599Z",
+      "updatedAt": "2026-10-03T14:35:57.396Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -5047,7 +5047,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:02:27.599Z"
+      "updatedAt": "2026-10-03T14:35:57.396Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6243,7 +6243,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:02:27.599Z"
+      "updatedAt": "2026-10-03T14:35:57.397Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -9222,7 +9222,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:02:27.600Z"
+      "updatedAt": "2026-10-03T14:35:57.397Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10189,7 +10189,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:02:27.600Z"
+      "updatedAt": "2026-10-03T14:35:57.484Z"
     }
   },
   "episodeConsultations": {
@@ -11149,8 +11149,8 @@
         "hstk": {
           "roomKey": "hstk",
           "roomName": "Hồi sức thần kinh",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-01T22:52:08.032Z",
+          "status": "SUBMITTED",
+          "updatedAt": "2026-10-03T14:35:57.485Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "Việt - Quyên - Tân",
@@ -11186,8 +11186,8 @@
               "chanDoan": "Chấn thương sọ não",
               "diaChi": "canh phước-Xã Vân Canh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": ""
+              "isHighlight": true,
+              "category": "XIN_VE"
             },
             {
               "id": "adm-hstk-2",
@@ -11200,8 +11200,8 @@
               "chanDoan": "Chấn thương sọ não",
               "diaChi": "thượng an 1-Phường An Khê--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": ""
+              "isHighlight": true,
+              "category": "TU_VONG"
             }
           ],
           "discharges": [],
@@ -11455,6 +11455,36 @@
               "url": "/uploads_clinical/2026-09-30/image13.png"
             }
           ]
+        },
+        {
+          "id": "case-1791038157486-lze2",
+          "mabn": "0001422339",
+          "hoten": "RA LAN TRUNG",
+          "tuoi": "68",
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "category": "XIN_VE",
+          "chanDoan": "Chấn thương sọ não",
+          "dienBien": "TNGT: Tỉnh",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [],
+          "notesBs": ""
+        },
+        {
+          "id": "case-1791038157486-wd5o",
+          "mabn": "0001421947",
+          "hoten": "TRẦN VĂN QUYẾT",
+          "tuoi": "49",
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "category": "TU_VONG",
+          "chanDoan": "Chấn thương sọ não",
+          "dienBien": "TNGT: Tỉnh",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [],
+          "notesBs": ""
         }
       ],
       "overall": {
