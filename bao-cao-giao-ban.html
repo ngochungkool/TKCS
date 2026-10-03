@@ -2260,14 +2260,17 @@
         personnel: {},
         census: {},
         admissions: [],
+        discharges: [],
         criticalNotes: ''
       };
 
       const p = roomRep.personnel || {};
       const c = roomRep.census || {};
       const admissions = roomRep.admissions || [];
+      const discharges = roomRep.discharges || [];
       const isSubmitted = roomRep.status === 'SUBMITTED';
       const isHSTK = (roomKey === 'hstk');
+      const isTK2 = (roomKey === 'tk2');
 
       let html = `
         <div class="gb-card" style="border-top: 4px solid #0284c7;">
@@ -2401,7 +2404,7 @@
                   <th style="width:95px;">Mã BN</th>
                   <th>Họ và tên</th>
                   <th style="width:55px;text-align:center;">Tuổi</th>
-                  <th style="width:175px;text-align:center;">Nguyên nhân</th>
+                  <th style="width:${isTK2 ? '210px' : '175px'};text-align:center;">${isTK2 ? 'Nguồn vào buồng' : 'Nguyên nhân'}</th>
                   <th>Chẩn đoán vào viện</th>
                   <th style="width:280px;text-align:center;">Gắn nhãn giao ban</th>
                 </tr>
@@ -2410,6 +2413,8 @@
       `;
 
       let countTngt = 0, countTnsh = 0, countTnld = 0, countBenh = 0;
+      let countHsng = 0, countKk = 0, countChuyen = 0;
+
       if (admissions.length === 0) {
         html += `<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày. Bấm "+ Thêm" để bổ sung ca.</td></tr>`;
       } else {
@@ -2425,6 +2430,11 @@
           else if (c === 'TNLĐ') countTnld++;
           else countBenh++;
 
+          const src = adm.source || '';
+          if (src === 'HSNG' || c === 'HSNG' || (adm.chanDoan && adm.chanDoan.toUpperCase().startsWith('HP'))) countHsng++;
+          else if (src === 'KK' || !src) countKk++;
+          else countChuyen++;
+
           html += `
             <tr style="background:${adm.isHighlight ? '#fffbeb' : '#ffffff'};">
               <td style="text-align:center;font-weight:700;">${idx + 1}</td>
@@ -2432,12 +2442,21 @@
               <td style="font-weight:700;color:#0f172a;">${adm.hoten || '--'}</td>
               <td style="text-align:center;">${adm.tuoi || '--'}</td>
               <td style="text-align:center;padding:4px 2px;">
-                <div class="cause-selector-group">
-                  <button type="button" class="btn-cause-pill ${adm.cause === 'TNGT' ? 'active-cause-tngt' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNGT')" title="Tai nạn giao thông">TNGT</button>
-                  <button type="button" class="btn-cause-pill ${adm.cause === 'TNSH' ? 'active-cause-tnsh' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNSH')" title="Tai nạn sinh hoạt">TNSH</button>
-                  <button type="button" class="btn-cause-pill ${adm.cause === 'TNLĐ' ? 'active-cause-tnld' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNLĐ')" title="Tai nạn lao động">TNLĐ</button>
-                  <button type="button" class="btn-cause-pill ${(!adm.cause || adm.cause === 'Bệnh lý' || adm.cause === 'Bệnh') ? 'active-cause-benh' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'Bệnh lý')" title="Bệnh lý (không phải chấn thương)">Bệnh</button>
-                </div>
+                ${isTK2 ? `
+                  <div class="cause-selector-group">
+                    <button type="button" class="btn-cause-pill ${(adm.source === 'HSNG' || adm.cause === 'HSNG' || (adm.chanDoan && adm.chanDoan.toUpperCase().startsWith('HP'))) ? 'active-cause-tngt' : ''}" onclick="setAdmissionSourceAndCause('${roomKey}', '${adm.id}', 'HSNG', 'HSNG')" title="Hồi sức ngoại sau mổ về">HSNG</button>
+                    <button type="button" class="btn-cause-pill ${(adm.source === 'KK' || (!adm.source && adm.cause !== 'HSNG')) ? 'active-cause-benh' : ''}" onclick="setAdmissionSourceAndCause('${roomKey}', '${adm.id}', 'KK', 'Bệnh lý')" title="Khoa khám bệnh vào buồng">KK</button>
+                    <button type="button" class="btn-cause-pill ${(adm.source === 'TK4') ? 'active-cause-tnsh' : ''}" onclick="setAdmissionSourceAndCause('${roomKey}', '${adm.id}', 'TK4', 'Chuyển TK4')" title="Chuyển buồng từ TK4">TK4</button>
+                    <button type="button" class="btn-cause-pill ${(adm.source && adm.source !== 'HSNG' && adm.source !== 'KK' && adm.source !== 'TK4') ? 'active-cause-tnld' : ''}" onclick="promptAdmissionOtherSource('${roomKey}', '${adm.id}')" title="Nguồn vào khác">Khác</button>
+                  </div>
+                ` : `
+                  <div class="cause-selector-group">
+                    <button type="button" class="btn-cause-pill ${adm.cause === 'TNGT' ? 'active-cause-tngt' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNGT')" title="Tai nạn giao thông">TNGT</button>
+                    <button type="button" class="btn-cause-pill ${adm.cause === 'TNSH' ? 'active-cause-tnsh' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNSH')" title="Tai nạn sinh hoạt">TNSH</button>
+                    <button type="button" class="btn-cause-pill ${adm.cause === 'TNLĐ' ? 'active-cause-tnld' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNLĐ')" title="Tai nạn lao động">TNLĐ</button>
+                    <button type="button" class="btn-cause-pill ${(!adm.cause || adm.cause === 'Bệnh lý' || adm.cause === 'Bệnh') ? 'active-cause-benh' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'Bệnh lý')" title="Bệnh lý (không phải chấn thương)">Bệnh</button>
+                  </div>
+                `}
               </td>
               <td style="padding:4px 6px;">
                 <input type="text" class="gb-input-control" style="width:100%;font-size:0.83rem;padding:4px 6px;border:1px solid #cbd5e1;background:#fff;" value="${escapeHtml(adm.chanDoan || '')}" onchange="updateRoomAdmissionField('${roomKey}', '${adm.id}', 'chanDoan', this.value)" placeholder="Chẩn đoán..." />
@@ -2469,13 +2488,19 @@
                 <tfoot>
                   <tr style="background:#f8fafc;font-weight:700;font-size:0.83rem;border-top:2px solid #e2e8f0;">
                     <td colspan="4" style="text-align:right;color:#475569;padding:6px 10px;">
-                      Tổng hợp nguyên nhân ca vào viện:
+                      ${isTK2 ? 'Tổng hợp nguồn vào buồng:' : 'Tổng hợp nguyên nhân ca vào viện:'}
                     </td>
                     <td style="text-align:center;white-space:nowrap;padding:6px 2px;">
-                      <span class="badge-cause-count badge-tngt" title="Tai nạn giao thông">TNGT: <strong>${countTngt}</strong></span>
-                      <span class="badge-cause-count badge-tnsh" title="Tai nạn sinh hoạt">TNSH: <strong>${countTnsh}</strong></span>
-                      <span class="badge-cause-count badge-tnld" title="Tai nạn lao động">TNLĐ: <strong>${countTnld}</strong></span>
-                      <span class="badge-cause-count badge-benh" title="Bệnh lý">Bệnh: <strong>${countBenh}</strong></span>
+                      ${isTK2 ? `
+                        <span class="badge-cause-count badge-tngt" title="Hồi sức ngoại">HSNG: <strong>${countHsng}</strong></span>
+                        <span class="badge-cause-count badge-benh" title="Khoa khám">KK: <strong>${countKk}</strong></span>
+                        ${countChuyen > 0 ? `<span class="badge-cause-count badge-tnsh" title="Chuyển buồng">Chuyển: <strong>${countChuyen}</strong></span>` : ''}
+                      ` : `
+                        <span class="badge-cause-count badge-tngt" title="Tai nạn giao thông">TNGT: <strong>${countTngt}</strong></span>
+                        <span class="badge-cause-count badge-tnsh" title="Tai nạn sinh hoạt">TNSH: <strong>${countTnsh}</strong></span>
+                        <span class="badge-cause-count badge-tnld" title="Tai nạn lao động">TNLĐ: <strong>${countTnld}</strong></span>
+                        <span class="badge-cause-count badge-benh" title="Bệnh lý">Bệnh: <strong>${countBenh}</strong></span>
+                      `}
                     </td>
                     <td colspan="2" style="text-align:right;color:#64748b;padding:6px 12px;">
                       Tổng vào buồng: <strong style="color:#16a34a;font-size:0.95rem;">${admissions.length}</strong> BN
@@ -2483,6 +2508,74 @@
                   </tr>
                 </tfoot>
               ` : ''}
+            </table>
+          </div>
+        </div>
+
+        <!-- DANH SÁCH BỆNH NHÂN RA VIỆN / CHUYỂN KHOA TRONG CA TRỰC -->
+        <div class="gb-card">
+          <div class="gb-card-header">
+            <div>
+              <div class="gb-card-title">
+                <i class="fa-solid fa-person-walking-arrow-right" style="color:#0284c7;"></i> BỆNH NHÂN RA VIỆN / CHUYỂN KHOA TRONG CA TRỰC (${discharges.length} BN)
+              </div>
+              <div style="font-size:0.8rem;color:#64748b;margin-top:2px;">
+                Đồng bộ vào cột BỆNH RA, RH, BH, SVV trong Báo cáo giao ban &amp; xuất ảnh PNG
+              </div>
+            </div>
+            <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="addManualRoomDischarge('${roomKey}')">
+              <i class="fa-solid fa-plus"></i> + Thêm ca ra viện / chuyển
+            </button>
+          </div>
+
+          <div class="gb-table-wrap">
+            <table class="gb-table" style="text-align:left;">
+              <thead>
+                <tr>
+                  <th style="width:40px;text-align:center;">STT</th>
+                  <th style="width:110px;">Số hồ sơ / SVV</th>
+                  <th>Họ và tên bệnh nhân</th>
+                  <th style="width:60px;text-align:center;">Tuổi</th>
+                  <th style="width:115px;text-align:center;">Ra viện hẳn</th>
+                  <th style="width:95px;text-align:center;">BHYT</th>
+                  <th>Ghi chú / Nơi chuyển đến</th>
+                  <th style="width:70px;text-align:center;">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${discharges.length === 0 ? `
+                  <tr><td colspan="8" style="text-align:center;padding:16px;color:#64748b;">Không có bệnh nhân ra viện hoặc chuyển khoa trong ca trực này. Bấm "+ Thêm ca ra viện / chuyển" để bổ sung.</td></tr>
+                ` : discharges.map((dis, dIdx) => `
+                  <tr>
+                    <td style="text-align:center;font-weight:700;">${dIdx + 1}</td>
+                    <td>
+                      <input type="text" class="gb-input-control" style="font-weight:700;color:#0284c7;width:100%;padding:4px 6px;font-size:0.83rem;" value="${escapeHtml(dis.svv || dis.mabn || '')}" onchange="updateRoomDischargeField('${roomKey}', '${dis.id}', 'svv', this.value)" placeholder="SVV..." />
+                    </td>
+                    <td style="font-weight:800;color:#0f172a;text-transform:uppercase;">
+                      ${escapeHtml(dis.hoten || '--')}
+                    </td>
+                    <td style="text-align:center;">${escapeHtml(String(dis.tuoi || '--'))}</td>
+                    <td style="text-align:center;">
+                      <button type="button" class="btn-tag-chip ${dis.raHan ? 'active-tag-mo-cc' : ''}" style="${dis.raHan ? 'background:#dcfce7;color:#15803d;border-color:#86efac;' : 'background:#f1f5f9;color:#64748b;'}" onclick="toggleRoomDischargeBool('${roomKey}', '${dis.id}', 'raHan')">
+                        ${dis.raHan ? '✓ Ra hẳn' : 'Chuyển'}
+                      </button>
+                    </td>
+                    <td style="text-align:center;">
+                      <button type="button" class="btn-tag-chip ${dis.baoHiem ? 'active-tag-theo-doi' : ''}" style="${dis.baoHiem ? 'background:#e0f2fe;color:#0369a1;border-color:#bae6fd;' : 'background:#f1f5f9;color:#64748b;'}" onclick="toggleRoomDischargeBool('${roomKey}', '${dis.id}', 'baoHiem')">
+                        ${dis.baoHiem ? '✓ BHYT' : 'Viện phí'}
+                      </button>
+                    </td>
+                    <td>
+                      <input type="text" class="gb-input-control" style="width:100%;font-size:0.83rem;padding:4px 6px;" value="${escapeHtml(dis.note || (dis.raHan ? 'Ra viện hẳn' : 'Chuyển viện'))}" onchange="updateRoomDischargeField('${roomKey}', '${dis.id}', 'note', this.value)" placeholder="Nơi chuyển / ghi chú..." />
+                    </td>
+                    <td style="text-align:center;">
+                      <button type="button" class="btn-gb-action" style="padding:3px 8px;font-size:0.75rem;background:#fee2e2;color:#b91c1c;border-color:#fca5a5;" onclick="deleteRoomDischarge('${roomKey}', '${dis.id}')" title="Xóa ca này">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
             </table>
           </div>
         </div>
@@ -2960,6 +3053,109 @@
         renderRoomView(container, roomKey);
       }
     }
+
+    // TK2: Chọn nhanh nguồn vào buồng (HSNG, KK, chuyển buồng...)
+    function setAdmissionSourceAndCause(roomKey, admissionId, sourceVal, causeVal) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.admissions)) return;
+      const adm = rep.admissions.find(a => a.id === admissionId);
+      if (adm) {
+        adm.source = sourceVal;
+        adm.cause = causeVal;
+      }
+      const container = document.getElementById('gb-view-container');
+      if (container) {
+        renderRoomView(container, roomKey);
+      }
+    }
+
+    function promptAdmissionOtherSource(roomKey, admissionId) {
+      const custom = prompt('Nhập nguồn vào buồng (Ví dụ: TK3, TK4, Khoa khác...):');
+      if (custom && custom.trim()) {
+        setAdmissionSourceAndCause(roomKey, admissionId, custom.trim().toUpperCase(), custom.trim().toUpperCase());
+      }
+    }
+
+    // Quản lý bệnh nhân ra viện / chuyển viện của từng phòng
+    function addManualRoomDischarge(roomKey) {
+      if (!currentReport.roomReports[roomKey]) {
+        currentReport.roomReports[roomKey] = {
+          roomKey,
+          roomName: ROOM_NAMES[roomKey] || roomKey,
+          status: 'DRAFT',
+          personnel: {},
+          census: {},
+          admissions: [],
+          discharges: [],
+          criticalNotes: ''
+        };
+      }
+      const rep = currentReport.roomReports[roomKey];
+      if (!Array.isArray(rep.discharges)) rep.discharges = [];
+
+      const hoten = prompt('Nhập họ và tên bệnh nhân ra viện / chuyển khoa:');
+      if (!hoten || !hoten.trim()) return;
+
+      const tuoi = prompt('Nhập tuổi bệnh nhân (hoặc để trống):', '') || '';
+      const svv = prompt('Nhập số hồ sơ / số vào viện (SVV):', '') || '';
+      const isRaHan = confirm('Bệnh nhân này ra viện hẳn? (Bấm OK: Ra hẳn | Bấm Cancel: Chuyển viện/khoa)');
+      const isBHYT = confirm('Bệnh nhân này có BHYT? (Bấm OK: Có BHYT | Bấm Cancel: Viện phí)');
+
+      const newDis = {
+        id: `dis-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+        mabn: svv.trim(),
+        svv: svv.trim(),
+        hoten: hoten.trim().toUpperCase(),
+        tuoi: tuoi.trim(),
+        raHan: isRaHan,
+        baoHiem: isBHYT,
+        note: isRaHan ? 'Ra viện hẳn' : 'Chuyển khoa / buồng'
+      };
+
+      rep.discharges.push(newDis);
+
+      // Cập nhật tăng chỉ số census nếu có
+      if (rep.census) {
+        if (isRaHan) {
+          rep.census.raRH = (Number(rep.census.raRH) || 0) + 1;
+        } else {
+          rep.census.raKhac = (Number(rep.census.raKhac) || 0) + 1;
+        }
+      }
+
+      const container = document.getElementById('gb-view-container');
+      if (container) renderRoomView(container, roomKey);
+    }
+
+    function updateRoomDischargeField(roomKey, dischargeId, field, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.discharges)) return;
+      const item = rep.discharges.find(d => d.id === dischargeId);
+      if (item) {
+        item[field] = val;
+      }
+    }
+
+    function toggleRoomDischargeBool(roomKey, dischargeId, field) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.discharges)) return;
+      const item = rep.discharges.find(d => d.id === dischargeId);
+      if (item) {
+        item[field] = !item[field];
+        const container = document.getElementById('gb-view-container');
+        if (container) renderRoomView(container, roomKey);
+      }
+    }
+
+    function deleteRoomDischarge(roomKey, dischargeId) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.discharges)) return;
+      if (!confirm('Bạn có chắc muốn xóa ca này khỏi danh sách bệnh ra?')) return;
+      rep.discharges = rep.discharges.filter(d => d.id !== dischargeId);
+      const container = document.getElementById('gb-view-container');
+      if (container) renderRoomView(container, roomKey);
+    }
+
 
     // Cập nhật giờ và ngày phẫu thuật
     function updateTaggedSurgeryTime(roomKey, admissionId, type, val) {
@@ -5179,6 +5375,7 @@
       const yyyy = dateParts[0] || '2026';
       const mm = dateParts[1] || '01';
       const dd = dateParts[2] || '01';
+      const isTK2 = (roomKey === 'tk2');
 
       // Bác sĩ trực: Lấy từ danh sách bác sĩ trực ca của ngày
       const overall = currentReport.overall || {};
@@ -5223,6 +5420,7 @@
 
       let totalKkCount = 0;
       let totalTngtCount = 0;
+      let totalHsngCount = 0;
       let totalRhCount = 0;
       let totalBhCount = 0;
 
@@ -5236,6 +5434,7 @@
         let tuoiVao = '';
         let kkVal = '';
         let tngtVal = '';
+        let hsngVal = '';
         let chanDoanVao = '';
         let diaChiVao = '';
         let tinhTrangVao = '';
@@ -5244,38 +5443,54 @@
           sttLeft = i + 1;
           tenVao = (adm.hoten || '').toUpperCase();
           tuoiVao = adm.tuoi || '';
-          
-          // Kiểm tra Khoa khám
-          const isKk = (adm.source === 'KK' || !adm.source || adm.source.toLowerCase().includes('khám'));
-          if (isKk) {
-            kkVal = '<span style="color:#16a34a; font-weight:800; font-size:12px;">1</span>';
-            totalKkCount++;
-          } else {
-            kkVal = `<span style="font-size:10px; font-weight:700; color:#475569;">${escapeHtml(adm.source || '')}</span>`;
-          }
 
-          // Kiểm tra nguyên nhân
-          if (!adm.cause || adm.cause === 'TNGT') {
-            tngtVal = '<span style="color:#16a34a; font-weight:800; font-size:12px;">1</span>';
-            totalTngtCount++;
-          } else if (adm.cause === 'TNLĐ' || adm.cause === 'TNSH' || adm.cause === 'Đánh') {
-            tngtVal = `<span style="background:#ffedd5; color:#c2410c; padding:1px 5px; border-radius:4px; font-weight:800; font-size:10px;">${escapeHtml(adm.cause)}</span>`;
+          if (isTK2) {
+            const isHsng = (adm.source === 'HSNG' || adm.cause === 'HSNG' || (adm.chanDoan && adm.chanDoan.toUpperCase().startsWith('HP')));
+            if (isHsng) {
+              hsngVal = '<span style="color:#16a34a; font-weight:800; font-size:12px;">1</span>';
+              totalHsngCount++;
+            }
+            if (adm.source === 'KK' || (!adm.source && !isHsng)) {
+              kkVal = '<span style="color:#16a34a; font-weight:800; font-size:12px;">1</span>';
+              totalKkCount++;
+            } else if (!isHsng) {
+              kkVal = `<span style="font-size:10.5px; font-weight:700; color:#0369a1;">${escapeHtml(adm.source || '')}</span>`;
+            }
           } else {
-            tngtVal = `<span style="background:#e0f2fe; color:#0369a1; padding:1px 5px; border-radius:4px; font-weight:800; font-size:10px;">${escapeHtml(adm.cause)}</span>`;
+            // Kiểm tra Khoa khám
+            const isKk = (adm.source === 'KK' || !adm.source || adm.source.toLowerCase().includes('khám'));
+            if (isKk) {
+              kkVal = '<span style="color:#16a34a; font-weight:800; font-size:12px;">1</span>';
+              totalKkCount++;
+            } else {
+              kkVal = `<span style="font-size:10px; font-weight:700; color:#475569;">${escapeHtml(adm.source || '')}</span>`;
+            }
+
+            // Kiểm tra nguyên nhân
+            if (!adm.cause || adm.cause === 'TNGT') {
+              tngtVal = '<span style="color:#16a34a; font-weight:800; font-size:12px;">1</span>';
+              totalTngtCount++;
+            } else if (adm.cause === 'TNLĐ' || adm.cause === 'TNSH' || adm.cause === 'Đánh') {
+              tngtVal = `<span style="background:#ffedd5; color:#c2410c; padding:1px 5px; border-radius:4px; font-weight:800; font-size:10px;">${escapeHtml(adm.cause)}</span>`;
+            } else {
+              tngtVal = `<span style="background:#e0f2fe; color:#0369a1; padding:1px 5px; border-radius:4px; font-weight:800; font-size:10px;">${escapeHtml(adm.cause)}</span>`;
+            }
           }
 
           chanDoanVao = adm.chanDoan || 'CTSN';
           diaChiVao = adm.diaChi || '';
-          tinhTrangVao = adm.tinhTrang || '';
+          tinhTrangVao = adm.tinhTrang || adm.dienBien || '';
         }
 
+        let sttRight = '';
         let tenRa = '';
         let rhVal = '';
         let bhVal = '';
         let svvVal = '';
 
         if (dis) {
-          tenRa = `${(dis.hoten || '').toUpperCase()}${dis.tuoi ? ' ' + dis.tuoi + ' Tuổi' : ''}`;
+          sttRight = i + 1;
+          tenRa = `${(dis.hoten || '').toUpperCase()}${dis.tuoi ? ' ' + dis.tuoi + (isTK2 ? 'T' : ' Tuổi') : ''}`;
           if (dis.isMoCC) {
             rhVal = '<span style="background:#fee2e2; color:#991b1b; padding:2px 5px; border-radius:4px; font-weight:800; font-size:10px;">Mổ</span>';
             bhVal = '<span style="background:#fee2e2; color:#991b1b; padding:2px 5px; border-radius:4px; font-weight:800; font-size:10px;">CC</span>';
@@ -5289,33 +5504,53 @@
               bhVal = '<span style="color:#0284c7; font-weight:800; font-size:12px;">1</span>';
               totalBhCount++;
             }
-            const noteText = dis.note || dis.svv || (dis.raHan ? 'Ra viện hẳn' : 'Chuyển viện');
+            const noteText = dis.svv || dis.mabn || dis.note || (dis.raHan ? 'Ra viện hẳn' : 'Chuyển viện');
             if (noteText.includes('Chuyển')) {
               svvVal = `<span style="background:#eff6ff; color:#1d4ed8; padding:2px 6px; border-radius:4px; font-weight:700; font-size:10px;">${escapeHtml(noteText)}</span>`;
             } else {
-              svvVal = `<span style="color:#334155; font-size:10.5px;">${escapeHtml(noteText)}</span>`;
+              svvVal = `<span style="color:#334155; font-size:10.5px; font-weight:600;">${escapeHtml(noteText)}</span>`;
             }
           }
         }
 
         const rowBg = i % 2 === 0 ? '#ffffff' : '#f8fafc';
 
-        detailRowsHtml += `
-          <tr style="height: 27px; background-color: ${rowBg}; font-size: 11px;">
-            <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px;">${sttLeft}</td>
-            <td style="border: 1px solid #cbd5e1; padding: 3px 6px; font-weight: 800; text-align: left; width: 175px; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenVao)}</td>
-            <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; color: #334155; font-weight: 600;">${escapeHtml(String(tuoiVao))}</td>
-            <td style="border: 1px solid #cbd5e1; text-align: center; width: 34px;">${kkVal}</td>
-            <td style="border: 1px solid #cbd5e1; text-align: center; width: 52px;">${tngtVal}</td>
-            <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 145px; color: #0369a1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(chanDoanVao)}</td>
-            <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 165px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(diaChiVao)}</td>
-            <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 120px; color: #1e293b;">${escapeHtml(tinhTrangVao)}</td>
-            <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 180px; font-weight: 800; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenRa)}</td>
-            <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${rhVal}</td>
-            <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${bhVal}</td>
-            <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 135px;">${svvVal}</td>
-          </tr>
-        `;
+        if (isTK2) {
+          detailRowsHtml += `
+            <tr style="height: 27px; background-color: ${rowBg}; font-size: 11px;">
+              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px;">${sttLeft}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; font-weight: 800; text-align: left; width: 175px; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenVao)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; color: #334155; font-weight: 600;">${escapeHtml(String(tuoiVao))}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px;">${hsngVal}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px;">${kkVal}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 155px; color: #0369a1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(chanDoanVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 165px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(diaChiVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 125px; color: #1e293b;">${escapeHtml(tinhTrangVao)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px;">${sttRight}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 175px; font-weight: 800; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenRa)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${rhVal}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${bhVal}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 110px;">${svvVal}</td>
+            </tr>
+          `;
+        } else {
+          detailRowsHtml += `
+            <tr style="height: 27px; background-color: ${rowBg}; font-size: 11px;">
+              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px;">${sttLeft}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; font-weight: 800; text-align: left; width: 175px; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenVao)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; color: #334155; font-weight: 600;">${escapeHtml(String(tuoiVao))}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 34px;">${kkVal}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 52px;">${tngtVal}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 145px; color: #0369a1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(chanDoanVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 165px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(diaChiVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 120px; color: #1e293b;">${escapeHtml(tinhTrangVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 180px; font-weight: 800; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenRa)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${rhVal}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${bhVal}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 135px;">${svvVal}</td>
+            </tr>
+          `;
+        }
       }
 
       // Phần II: Bệnh Mổ CC
@@ -5340,13 +5575,7 @@
       });
 
       let moCcRowsHtml = '';
-      if (moCcList.length === 0) {
-        moCcRowsHtml = `
-          <div style="padding: 10px 14px; font-style: italic; color: #64748b; font-size: 11.5px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px;">
-            (Trong ca trực không có ca mổ cấp cứu phát sinh)
-          </div>
-        `;
-      } else {
+      if (moCcList.length > 0) {
         moCcList.forEach((mCase, idx) => {
           moCcRowsHtml += `
             <div style="border: 1px solid #fecaca; border-radius: 8px; background: linear-gradient(90deg, #fff5f5 0%, #ffffff 100%); padding: 8px 12px; margin-bottom: 6px;">
@@ -5410,10 +5639,15 @@
                 <span style="background: #0284c7; color: #ffffff; font-weight: 800; font-size: 11px; padding: 2px 8px; border-radius: 5px;">BÁC SỸ TRỰC</span>
                 <span style="font-weight: 800; font-size: 13.5px; color: #0f172a; text-transform: uppercase;">${escapeHtml(docNames)}</span>
               </div>
-              <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="background: #fef3c7; color: #92400e; border: 1.5px solid #fde68a; border-radius: 6px; padding: 3px 12px; font-weight: 900; font-size: 14px;">
                   xv : ${xvStr}
                 </span>
+                ${(p.chamSocCap2 !== undefined && p.chamSocCap2 !== '' && p.chamSocCap2 !== 0) ? `
+                  <span style="background: #e0f2fe; color: #0369a1; border: 1.5px solid #bae6fd; border-radius: 6px; padding: 3px 12px; font-weight: 900; font-size: 14px;">
+                    CS CẤP II : ${String(p.chamSocCap2).padStart(2, '0')}
+                  </span>
+                ` : ''}
               </div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
@@ -5472,20 +5706,39 @@
             <table style="width: 100%; border-collapse: collapse; table-layout: fixed; box-sizing: border-box;">
               <thead>
                 <tr style="font-weight: 800; font-size: 11px;">
-                  <!-- BỆNH VÀO: MINT THEME -->
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 36px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">STT</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 180px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH VÀO</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 44px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TUỔI</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 38px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KK</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 56px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TNGT</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 165px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">CHẨN ĐOÁN</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 185px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">ĐỊA CHỈ</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 135px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TÌNH TRẠNG BỆNH</th>
-                  <!-- BỆNH RA: SKY THEME -->
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 185px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH RA</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 40px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">RH</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 40px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BH</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 140px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">SVV / GHI CHÚ</th>
+                  ${isTK2 ? `
+                    <!-- TK2 BỆNH VÀO: HSNG & KK -->
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 32px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">STT</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 175px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH VÀO</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 38px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TUỔI</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 38px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">HSNG</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 38px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KK</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 155px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">CHẨN ĐOÁN</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 165px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">ĐỊA CHỈ</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 125px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TÌNH TRẠNG BỆNH</th>
+
+                    <!-- TK2 BỆNH RA: STT, BỆNH RA, RH, BH, SVV -->
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 32px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">STT</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 175px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH RA</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 36px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">RH</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 36px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BH</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 110px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">SVV</th>
+                  ` : `
+                    <!-- CHUẨN CÁC BUỒNG KHÁC -->
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 36px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">STT</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 180px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH VÀO</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 44px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TUỔI</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 38px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KK</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 56px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TNGT</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 165px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">CHẨN ĐOÁN</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 185px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">ĐỊA CHỈ</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 135px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TÌNH TRẠNG BỆNH</th>
+
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 185px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH RA</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 40px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">RH</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 40px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BH</th>
+                    <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 140px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">SVV / GHI CHÚ</th>
+                  `}
                 </tr>
               </thead>
               <tbody>
@@ -5495,40 +5748,63 @@
                   <td colspan="3" style="border: 1px solid #cbd5e1; text-align: right; padding-right: 10px; font-style: italic; color: #334155; vertical-align: middle;">
                     TỔNG HỢP:
                   </td>
-                  <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
-                    <span style="background:#dcfce7; color:#15803d; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalKkCount || 0}</span>
-                  </td>
-                  <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
-                    <span style="background:#ffedd5; color:#c2410c; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalTngtCount || 0}</span>
-                  </td>
-                  <td style="border: 1px solid #cbd5e1;"></td>
-                  <td style="border: 1px solid #cbd5e1;"></td>
-                  <td style="border: 1px solid #cbd5e1;"></td>
-                  <td style="border: 1px solid #cbd5e1;"></td>
-                  <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
-                    <span style="background:#e0f2fe; color:#0369a1; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalRhCount || 0}</span>
-                  </td>
-                  <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
-                    <span style="background:#e0f2fe; color:#0369a1; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalBhCount || 0}</span>
-                  </td>
-                  <td style="border: 1px solid #cbd5e1;"></td>
+                  ${isTK2 ? `
+                    <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
+                      <span style="background:#dcfce7; color:#15803d; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalHsngCount || 0}</span>
+                    </td>
+                    <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
+                      <span style="background:#dcfce7; color:#15803d; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalKkCount || 0}</span>
+                    </td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
+                      <span style="background:#e0f2fe; color:#0369a1; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalRhCount || 0}</span>
+                    </td>
+                    <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
+                      <span style="background:#e0f2fe; color:#0369a1; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalBhCount || 0}</span>
+                    </td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                  ` : `
+                    <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
+                      <span style="background:#dcfce7; color:#15803d; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalKkCount || 0}</span>
+                    </td>
+                    <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
+                      <span style="background:#ffedd5; color:#c2410c; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalTngtCount || 0}</span>
+                    </td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                    <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
+                      <span style="background:#e0f2fe; color:#0369a1; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalRhCount || 0}</span>
+                    </td>
+                    <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
+                      <span style="background:#e0f2fe; color:#0369a1; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalBhCount || 0}</span>
+                    </td>
+                    <td style="border: 1px solid #cbd5e1;"></td>
+                  `}
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <!-- PHẦN II: BỆNH MỔ CẤP CỨU (CARD Y KHOA HIỆN ĐẠI) -->
-          <div style="margin-top: 10px;">
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-              <span style="background: #dc2626; color: #ffffff; font-weight: 900; font-size: 11.5px; padding: 3px 10px; border-radius: 5px; letter-spacing: 0.5px;">
-                II. BỆNH MỔ CẤP CỨU
-              </span>
-              <span style="font-size: 11px; color: #64748b; font-weight: 600;">(Chi tiết diễn biến và kíp phẫu thuật ca trực)</span>
+          <!-- PHẦN II: BỆNH MỔ CẤP CỨU (CHỈ HIỂN THỊ KHI CÓ CA MỔ CC PHÁT SINH) -->
+          ${moCcList.length > 0 ? `
+            <div style="margin-top: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <span style="background: #dc2626; color: #ffffff; font-weight: 900; font-size: 11.5px; padding: 3px 10px; border-radius: 5px; letter-spacing: 0.5px;">
+                  II. BỆNH MỔ CẤP CỨU
+                </span>
+                <span style="font-size: 11px; color: #64748b; font-weight: 600;">(Chi tiết diễn biến và kíp phẫu thuật ca trực)</span>
+              </div>
+              <div>
+                ${moCcRowsHtml}
+              </div>
             </div>
-            <div>
-              ${moCcRowsHtml}
-            </div>
-          </div>
+          ` : ''}
 
           <!-- FOOTER WATERMARK LƯU NỘI BỘ (ĐÃ BỎ CHỮ KÝ THEO YÊU CẦU) -->
           <div style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #e2e8f0; text-align: right; font-size: 10px; color: #94a3b8; font-style: italic;">
