@@ -2438,6 +2438,40 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  function getTk4SurgicalConsultations(targetDateKey) {
+    try {
+      const tk4 = db.wardRounds && db.wardRounds.tk4;
+      if (!tk4 || !tk4.patientRecords) return [];
+      const dKey = targetDateKey || getDateKey(new Date());
+      const list = [];
+      for (const [mabn, rec] of Object.entries(tk4.patientRecords)) {
+        if (rec.removed && rec.removed.isRemoved) continue;
+        const sc = (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[dKey]) ||
+                   (rec.surgicalConsultation && (!rec.surgicalConsultation.dateKey || rec.surgicalConsultation.dateKey === dKey) ? rec.surgicalConsultation : null);
+        if (sc && sc.isConsulted) {
+          list.push({
+            mabn: rec.mabn || mabn,
+            hoten: rec.hoten || '',
+            tuoi: rec.tuoi || '',
+            gioiTinh: rec.gioiTinh || '',
+            giuong: rec.giuong || '',
+            chanDoanHis: rec.chanDoanHis || '',
+            postConsultDiagnosis: sc.postConsultDiagnosis || rec.chanDoanHis || '',
+            surgeryMethod: sc.surgeryMethod || '',
+            decision: sc.decision || 'Đồng ý',
+            advancePayment: sc.advancePayment || '',
+            dateKey: dKey,
+            updatedAt: sc.updatedAt || ''
+          });
+        }
+      }
+      return list;
+    } catch (e) {
+      console.error('getTk4SurgicalConsultations error:', e);
+      return [];
+    }
+  }
+
   function getOrBuildBriefingReport(targetDateKey) {
     if (!db.briefingReports) db.briefingReports = {};
     if (!db.briefingReports[targetDateKey]) {
@@ -3038,6 +3072,7 @@ const server = http.createServer(async (req, res) => {
       doctors: db.doctors || [],
       dutyDoctorsAbbr: dutyDocsShort.join(' – '),
       inpatientList: getAllInpatientsList(),
+      tk4Consultations: getTk4SurgicalConsultations(qDate),
       availableDates: Object.keys(db.briefingReports || {})
     }));
     return;
@@ -3046,9 +3081,51 @@ const server = http.createServer(async (req, res) => {
   // POST /api/briefing-report
   if (req.method === 'POST' && pathname === '/api/briefing-report') {
     const body = await readBody(req);
-    const { dateKey, roomKey, roomReport, overall, highlightCases } = body;
-    const targetDate = dateKey || getDateKey(new Date());
+    const { dateKey, roomKey, roomReport, overall, highlightCases, action, targetDate: reqTargetDate } = body;
+    const targetDate = reqTargetDate || dateKey || getDateKey(new Date());
     const report = getOrBuildBriefingReport(targetDate);
+
+    if (action === 'SAVE_TK4_CONSULTATION') {
+      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, isConsulted } = body;
+      const tk4 = db.wardRounds && db.wardRounds.tk4;
+      if (tk4 && tk4.patientRecords && tk4.patientRecords[mabn]) {
+        const rec = tk4.patientRecords[mabn];
+        if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
+        const scObj = {
+          isConsulted: isConsulted !== undefined ? Boolean(isConsulted) : true,
+          dateKey: targetDate,
+          postConsultDiagnosis: String(postConsultDiagnosis !== undefined ? postConsultDiagnosis : (rec.chanDoanHis || '')).trim(),
+          surgeryMethod: String(surgeryMethod || '').trim(),
+          decision: String(decision || 'Đồng ý').trim(),
+          advancePayment: String(advancePayment || '').trim(),
+          updatedAt: new Date().toISOString()
+        };
+        rec.surgicalConsultationsByDate[targetDate] = scObj;
+        rec.surgicalConsultation = scObj;
+        saveDb();
+        broadcastState(`🔪 Đã lưu hội chẩn mổ Thần kinh 4 cho BN ${rec.hoten}`);
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(targetDate) }));
+      return;
+    }
+
+    if (action === 'DELETE_TK4_CONSULTATION') {
+      const { mabn } = body;
+      const tk4 = db.wardRounds && db.wardRounds.tk4;
+      if (tk4 && tk4.patientRecords && tk4.patientRecords[mabn]) {
+        const rec = tk4.patientRecords[mabn];
+        if (rec.surgicalConsultationsByDate) {
+          delete rec.surgicalConsultationsByDate[targetDate];
+        }
+        delete rec.surgicalConsultation;
+        saveDb();
+        broadcastState(`🗑️ Đã xóa BN ${rec.hoten} khỏi danh sách hội chẩn mổ Thần kinh 4`);
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(targetDate) }));
+      return;
+    }
 
     if (roomKey && roomKey !== 'all') {
       if (roomReport && typeof roomReport === 'object') {
@@ -3075,7 +3152,7 @@ const server = http.createServer(async (req, res) => {
 
     saveDb();
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ ok: true, report }));
+    res.end(JSON.stringify({ ok: true, report, tk4Consultations: getTk4SurgicalConsultations(targetDate) }));
     return;
   }
 
