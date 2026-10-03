@@ -1308,6 +1308,61 @@
     .badge-cause-count.badge-tnsh { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
     .badge-cause-count.badge-tnld { background: #e0e7ff; color: #4338ca; border: 1px solid #a5b4fc; }
     .badge-cause-count.badge-benh { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .btn-tag-chip {
+      padding: 3px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #475569;
+      cursor: pointer;
+      margin: 1px 2px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-tag-chip:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+    .active-tag-mo-ct {
+      background: #eff6ff !important;
+      color: #1d4ed8 !important;
+      border-color: #93c5fd !important;
+      font-weight: 800 !important;
+      box-shadow: 0 1px 2px rgba(29, 78, 216, 0.15);
+    }
+    .active-tag-mo-cc {
+      background: #fee2e2 !important;
+      color: #b91c1c !important;
+      border-color: #fca5a5 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 1px 2px rgba(185, 28, 28, 0.15);
+    }
+    .active-tag-theo-doi {
+      background: #fef3c7 !important;
+      color: #92400e !important;
+      border-color: #fcd34d !important;
+      font-weight: 800 !important;
+      box-shadow: 0 1px 2px rgba(180, 83, 9, 0.15);
+    }
+    .active-tag-tu-vong {
+      background: #fef2f2 !important;
+      color: #7f1d1d !important;
+      border-color: #f87171 !important;
+      font-weight: 800 !important;
+    }
+    .active-tag-xin-ve {
+      background: #ffedd5 !important;
+      color: #c2410c !important;
+      border-color: #fed7aa !important;
+      font-weight: 800 !important;
+    }
+    .tagged-mo-ct { border-left: 4px solid #2563eb !important; background: #f8fafc; }
+    .tagged-mo-cc { border-left: 4px solid #dc2626 !important; background: #fff5f5; }
+    .tagged-theo-doi { border-left: 4px solid #d97706 !important; background: #fffbeb; }
+    .tagged-tu-vong { border-left: 4px solid #991b1b !important; background: #fef2f2; }
+    .tagged-xin-ve { border-left: 4px solid #ea580c !important; background: #fff7ed; }
   </style>
 </head>
 <body>
@@ -2391,9 +2446,23 @@
                 Gắn nhãn để tự động đẩy ca sang danh sách báo cáo Bác sĩ Toàn Khoa:
               </div>
             </div>
-            <button type="button" class="btn-gb-action" style="background:#f0fdf4;color:#166534;border-color:#bbf7d0;" onclick="addManualRoomCase('${roomKey}')">
-              <i class="fa-solid fa-plus"></i> + Thêm
-            </button>
+            ${isTK2 ? `
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="addManualRoomCase('${roomKey}', 'MO_CT')">
+                  <i class="fa-solid fa-plus"></i> Chọn Mổ CT
+                </button>
+                <button type="button" class="btn-gb-action" style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;" onclick="addManualRoomCase('${roomKey}', 'MO_CC')">
+                  <i class="fa-solid fa-plus"></i> Chọn Mổ CC
+                </button>
+                <button type="button" class="btn-gb-action" style="background:#fefce8;color:#854d0e;border-color:#fef08a;" onclick="addManualRoomCase('${roomKey}', 'THEO_DOI')">
+                  <i class="fa-solid fa-plus"></i> Chọn Theo dõi
+                </button>
+              </div>
+            ` : `
+              <button type="button" class="btn-gb-action" style="background:#f0fdf4;color:#166534;border-color:#bbf7d0;" onclick="addManualRoomCase('${roomKey}')">
+                <i class="fa-solid fa-plus"></i> Thêm ca vào buồng
+              </button>
+            `}
           </div>
 
           <div class="gb-table-wrap">
@@ -2416,9 +2485,10 @@
       let countHsng = 0, countKk = 0, countChuyen = 0;
 
       if (admissions.length === 0) {
-        html += `<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày. Bấm "+ Thêm" để bổ sung ca.</td></tr>`;
+        html += `<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày. Bấm nút "Thêm" để bổ sung ca.</td></tr>`;
       } else {
         admissions.forEach((adm, idx) => {
+          const isMoCT = adm.category === 'MO_CT';
           const isMoCC = adm.category === 'MO_CC';
           const isTheoDoi = adm.category === 'THEO_DOI';
           const isTuVong = adm.category === 'TU_VONG';
@@ -2462,20 +2532,32 @@
                 <input type="text" class="gb-input-control" style="width:100%;font-size:0.83rem;padding:4px 6px;border:1px solid #cbd5e1;background:#fff;" value="${escapeHtml(adm.chanDoan || '')}" onchange="updateRoomAdmissionField('${roomKey}', '${adm.id}', 'chanDoan', this.value)" placeholder="Chẩn đoán..." />
               </td>
               <td style="text-align:center;white-space:nowrap;">
-                <button type="button" class="btn-tag-chip ${isMoCC ? 'active-tag-mo-cc' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'MO_CC')" title="Mổ cấp cứu">
-                  🔪 Mổ CC
-                </button>
-                <button type="button" class="btn-tag-chip ${isTheoDoi ? 'active-tag-theo-doi' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'THEO_DOI')" title="Theo dõi diễn biến nặng">
-                  ⚠️ Theo dõi
-                </button>
-                ${isHSTK ? `
-                  <button type="button" class="btn-tag-chip ${isTuVong ? 'active-tag-tu-vong' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'TU_VONG')" title="Tử vong">
-                    ⚰️ Tử vong
+                ${isTK2 ? `
+                  <button type="button" class="btn-tag-chip ${isMoCT ? 'active-tag-mo-ct' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'MO_CT')" title="Mổ chương trình">
+                    📋 Mổ CT
                   </button>
-                  <button type="button" class="btn-tag-chip ${isXinVe ? 'active-tag-xin-ve' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'XIN_VE')" title="Bệnh nặng xin về">
-                    🏠 Xin về
+                  <button type="button" class="btn-tag-chip ${isMoCC ? 'active-tag-mo-cc' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'MO_CC')" title="Mổ cấp cứu">
+                    🔪 Mổ CC
                   </button>
-                ` : ''}
+                  <button type="button" class="btn-tag-chip ${isTheoDoi ? 'active-tag-theo-doi' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'THEO_DOI')" title="Bệnh theo dõi diễn biến">
+                    ⚠️ Theo dõi
+                  </button>
+                ` : `
+                  <button type="button" class="btn-tag-chip ${isMoCC ? 'active-tag-mo-cc' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'MO_CC')" title="Mổ cấp cứu">
+                    🔪 Mổ CC
+                  </button>
+                  <button type="button" class="btn-tag-chip ${isTheoDoi ? 'active-tag-theo-doi' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'THEO_DOI')" title="Theo dõi diễn biến nặng">
+                    ⚠️ Theo dõi
+                  </button>
+                  ${isHSTK ? `
+                    <button type="button" class="btn-tag-chip ${isTuVong ? 'active-tag-tu-vong' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'TU_VONG')" title="Tử vong">
+                      ⚰️ Tử vong
+                    </button>
+                    <button type="button" class="btn-tag-chip ${isXinVe ? 'active-tag-xin-ve' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'XIN_VE')" title="Bệnh nặng xin về">
+                      🏠 Xin về
+                    </button>
+                  ` : ''}
+                `}
               </td>
             </tr>
           `;
@@ -2524,7 +2606,7 @@
               </div>
             </div>
             <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="addManualRoomDischarge('${roomKey}')">
-              <i class="fa-solid fa-plus"></i> + Thêm ca ra viện / chuyển
+              <i class="fa-solid fa-plus"></i> Thêm ca ra viện / chuyển
             </button>
           </div>
 
@@ -2544,7 +2626,7 @@
               </thead>
               <tbody>
                 ${discharges.length === 0 ? `
-                  <tr><td colspan="8" style="text-align:center;padding:16px;color:#64748b;">Không có bệnh nhân ra viện hoặc chuyển khoa trong ca trực này. Bấm "+ Thêm ca ra viện / chuyển" để bổ sung.</td></tr>
+                  <tr><td colspan="8" style="text-align:center;padding:16px;color:#64748b;">Không có bệnh nhân ra viện hoặc chuyển khoa trong ca trực này. Bấm nút "Thêm" để bổ sung.</td></tr>
                 ` : discharges.map((dis, dIdx) => `
                   <tr>
                     <td style="text-align:center;font-weight:700;">${dIdx + 1}</td>
@@ -2585,95 +2667,175 @@
 
       const taggedAdmissions = (admissions || []).filter(a => !!a.category);
 
-      html += `
-        <div class="gb-card" style="border-left: 5px solid #d97706; background:#fff;">
-          <div class="gb-card-header">
-            <div>
-              <div class="gb-card-title" style="color:#b45309;">
-                <i class="fa-solid fa-tags"></i> DANH SÁCH CA GẮN NHÃN BÀN GIAO TOÀN KHOA (${taggedAdmissions.length} ca)
+      const renderTaggedCardHtml = (adm) => {
+        const isMoCT = adm.category === 'MO_CT';
+        const isMoCC = adm.category === 'MO_CC';
+        const isTheoDoi = adm.category === 'THEO_DOI';
+        const isTuVong = adm.category === 'TU_VONG';
+        const isXinVe = adm.category === 'XIN_VE';
+
+        const cardBorder = isMoCT ? 'tagged-mo-ct' : isMoCC ? 'tagged-mo-cc' : isTheoDoi ? 'tagged-theo-doi' : isTuVong ? 'tagged-tu-vong' : 'tagged-xin-ve';
+        const tagBadge = isMoCT ? '<span style="background:#dbeafe;color:#1e40af;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #93c5fd;">📋 MỔ CHƯƠNG TRÌNH</span>'
+          : isMoCC ? '<span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fca5a5;">🔪 MỔ CẤP CỨU</span>'
+          : isTheoDoi ? '<span style="background:#fef3c7;color:#92400e;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fde68a;">⚠️ THEO DÕI</span>'
+          : isTuVong ? '<span style="background:#fef2f2;color:#7f1d1d;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #f87171;">⚰️ TỬ VONG</span>'
+          : '<span style="background:#ffedd5;color:#c2410c;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fed7aa;">🏠 NẶNG XIN VỀ</span>';
+
+        const mCase = (currentReport.highlightCases || []).find(c => c.mabn === adm.mabn && c.roomKey === roomKey) || {};
+
+        return `
+          <div class="room-tagged-card ${cardBorder}">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                ${tagBadge}
+                <span style="font-weight:900;font-size:1.15rem;color:#0f172a;text-transform:uppercase;">${escapeHtml(adm.hoten || '')}</span>
+                <span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:6px;font-weight:700;font-size:0.8rem;">Mã: ${adm.mabn || '--'}</span>
+                <span style="font-size:0.85rem;font-weight:700;color:#475569;">${adm.tuoi || '--'} tuổi • ${adm.gioiTinh || 'NAM'}</span>
               </div>
-              <div style="font-size:0.83rem;color:#64748b;margin-top:2px;">
-                Các ca này được tự động chuyển lên Bác sĩ toàn khoa để trình chiếu giao ban &amp; xuất slide
+              <button type="button" class="btn-gb-action" style="padding:3px 10px;font-size:0.78rem;background:#fee2e2;color:#b91c1c;border-color:#fca5a5;" onclick="togglePatientTag('${roomKey}', '${adm.id}', '${adm.category}')" title="Gỡ nhãn này khỏi danh sách">
+                <i class="fa-solid fa-xmark"></i> Gỡ nhãn
+              </button>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:8px;margin-bottom:10px;font-size:0.85rem;">
+              <div><strong>Địa chỉ:</strong> ${escapeHtml(adm.diaChi || 'Gia Lai')}</div>
+              <div><strong>Ngày vào viện:</strong> ${adm.ngayVaoVien || currentDateKey}</div>
+              <div style="grid-column: 1 / -1;">
+                <label style="font-size:0.8rem;font-weight:700;color:#0369a1;display:block;margin-bottom:2px;">Chẩn đoán bệnh (* có thể chỉnh sửa):</label>
+                <input type="text" class="gb-input-control" style="font-weight:700;color:#0369a1;background:#eff6ff;width:100%;" value="${escapeHtml(adm.chanDoan || mCase.chanDoan || '')}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'chanDoan', this.value)" placeholder="Chẩn đoán bệnh..." />
               </div>
             </div>
-          </div>
-      `;
 
-      if (taggedAdmissions.length === 0) {
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:10px;margin-bottom:10px;">
+              ${(isMoCC || isMoCT) ? `
+                <div>
+                  <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Giờ &amp; Ngày phẫu thuật:</label>
+                  <div style="display:flex;gap:6px;">
+                    <input type="time" class="gb-input-control" style="width:115px;" value="${adm.gioPhauThuat || '08:00'}" onchange="updateTaggedSurgeryTime('${roomKey}', '${adm.id}', 'gio', this.value)" />
+                    <input type="date" class="gb-input-control" style="flex:1;" value="${adm.ngayPhauThuatDate || currentDateKey}" onchange="updateTaggedSurgeryTime('${roomKey}', '${adm.id}', 'ngay', this.value)" />
+                  </div>
+                </div>
+                <div>
+                  <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Kíp mổ / PTV:</label>
+                  <input type="text" class="gb-input-control" placeholder="Tên PTV, Kíp phẫu thuật..." value="${escapeHtml(adm.kipMo || mCase.kipMo || '')}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'kipMo', this.value)" />
+                </div>
+              ` : (isXinVe || isTuVong) ? `
+                <div>
+                  <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">${isTuVong ? 'Thời gian tử vong:' : 'Thời gian xin về:'}</label>
+                  <input type="text" class="gb-input-control" placeholder="Giờ, ngày..." value="${escapeHtml(adm.ngayXinVe || mCase.ngayXinVe || currentDateKey)}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'ngayXinVe', this.value)" />
+                </div>
+              ` : ''}
+            </div>
+
+            <div>
+              <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Diễn biến ca trực / Tri giác / Sinh hiệu:</label>
+              <textarea class="gb-input-control" style="width:100%;height:52px;font-size:0.85rem;" placeholder="GCS, đồng tử, mạch, HA, SpO2, vết mổ, dẫn lưu..." onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'dienBien', this.value)">${escapeHtml(adm.dienBien || mCase.dienBien || '')}</textarea>
+            </div>
+          </div>
+        `;
+      };
+
+      if (isTK2) {
+        const moCtCases = taggedAdmissions.filter(a => a.category === 'MO_CT');
+        const moCcCases = taggedAdmissions.filter(a => a.category === 'MO_CC');
+        const theoDoiCases = taggedAdmissions.filter(a => a.category === 'THEO_DOI' || (a.category !== 'MO_CT' && a.category !== 'MO_CC'));
+
         html += `
-          <div style="text-align:center;padding:24px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
-            <i class="fa-solid fa-tag" style="font-size:1.8rem;color:#cbd5e1;margin-bottom:6px;"></i>
-            <div style="font-weight:700;">Chưa có bệnh nhân nào được gắn nhãn trong ca trực này.</div>
-            <div style="font-size:0.83rem;margin-top:2px;">Bấm nút gắn nhãn (Mổ CC, Theo dõi...) ở bảng trên hoặc bấm "+ Thêm" để đưa vào danh sách này.</div>
+          <div class="gb-card" style="border-left: 5px solid #0284c7; background:#fff;">
+            <div class="gb-card-header">
+              <div>
+                <div class="gb-card-title" style="color:#0369a1;">
+                  <i class="fa-solid fa-clipboard-list"></i> BÁO CÁO GIAO BAN THẦN KINH 2 (${taggedAdmissions.length} CA)
+                </div>
+                <div style="font-size:0.83rem;color:#64748b;margin-top:2px;">
+                  Được phân chia thành 3 phần: Mổ chương trình, Mổ cấp cứu và Bệnh theo dõi
+                </div>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="addManualRoomCase('tk2', 'MO_CT')">
+                  <i class="fa-solid fa-plus"></i> Chọn Mổ CT
+                </button>
+                <button type="button" class="btn-gb-action" style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;" onclick="addManualRoomCase('tk2', 'MO_CC')">
+                  <i class="fa-solid fa-plus"></i> Chọn Mổ CC
+                </button>
+                <button type="button" class="btn-gb-action" style="background:#fefce8;color:#854d0e;border-color:#fef08a;" onclick="addManualRoomCase('tk2', 'THEO_DOI')">
+                  <i class="fa-solid fa-plus"></i> Chọn Theo dõi
+                </button>
+              </div>
+            </div>
+
+            <!-- PHẦN 1: MỔ CHƯƠNG TRÌNH -->
+            <div style="margin-bottom:20px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid #bfdbfe;">
+                <span style="font-weight:900;color:#1d4ed8;font-size:0.95rem;display:flex;align-items:center;gap:6px;">
+                  <i class="fa-solid fa-calendar-check"></i> PHẦN 1: BỆNH NHÂN MỔ CHƯƠNG TRÌNH (${moCtCases.length} ca)
+                </span>
+                <button type="button" class="btn-gb-action" style="padding:2px 8px;font-size:0.75rem;background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="addManualRoomCase('tk2', 'MO_CT')">
+                  <i class="fa-solid fa-plus"></i> Chọn thêm
+                </button>
+              </div>
+              ${moCtCases.length === 0 ? `
+                <div style="font-size:0.82rem;font-style:italic;color:#64748b;padding:10px 14px;background:#f8fafc;border-radius:8px;border:1px dashed #cbd5e1;">(Chưa có ca mổ chương trình nào được chọn trong ca trực)</div>
+              ` : `<div style="display:flex;flex-direction:column;gap:12px;">${moCtCases.map(renderTaggedCardHtml).join('')}</div>`}
+            </div>
+
+            <!-- PHẦN 2: MỔ CẤP CỨU -->
+            <div style="margin-bottom:20px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid #fecaca;">
+                <span style="font-weight:900;color:#b91c1c;font-size:0.95rem;display:flex;align-items:center;gap:6px;">
+                  <i class="fa-solid fa-kit-medical"></i> PHẦN 2: BỆNH NHÂN MỔ CẤP CỨU (${moCcCases.length} ca)
+                </span>
+                <button type="button" class="btn-gb-action" style="padding:2px 8px;font-size:0.75rem;background:#fef2f2;color:#b91c1c;border-color:#fecaca;" onclick="addManualRoomCase('tk2', 'MO_CC')">
+                  <i class="fa-solid fa-plus"></i> Chọn thêm
+                </button>
+              </div>
+              ${moCcCases.length === 0 ? `
+                <div style="font-size:0.82rem;font-style:italic;color:#64748b;padding:10px 14px;background:#f8fafc;border-radius:8px;border:1px dashed #cbd5e1;">(Trong ca trực không phát sinh ca mổ cấp cứu)</div>
+              ` : `<div style="display:flex;flex-direction:column;gap:12px;">${moCcCases.map(renderTaggedCardHtml).join('')}</div>`}
+            </div>
+
+            <!-- PHẦN 3: BỆNH THEO DÕI -->
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid #fde68a;">
+                <span style="font-weight:900;color:#b45309;font-size:0.95rem;display:flex;align-items:center;gap:6px;">
+                  <i class="fa-solid fa-triangle-exclamation"></i> PHẦN 3: BỆNH NHÂN THEO DÕI (${theoDoiCases.length} ca)
+                </span>
+                <button type="button" class="btn-gb-action" style="padding:2px 8px;font-size:0.75rem;background:#fefce8;color:#854d0e;border-color:#fef08a;" onclick="addManualRoomCase('tk2', 'THEO_DOI')">
+                  <i class="fa-solid fa-plus"></i> Chọn thêm
+                </button>
+              </div>
+              ${theoDoiCases.length === 0 ? `
+                <div style="font-size:0.82rem;font-style:italic;color:#64748b;padding:10px 14px;background:#f8fafc;border-radius:8px;border:1px dashed #cbd5e1;">(Chưa có bệnh nhân theo dõi đặc biệt nào)</div>
+              ` : `<div style="display:flex;flex-direction:column;gap:12px;">${theoDoiCases.map(renderTaggedCardHtml).join('')}</div>`}
+            </div>
           </div>
         `;
       } else {
-        html += `<div style="display:flex;flex-direction:column;gap:14px;">`;
-        taggedAdmissions.forEach(adm => {
-          const isMoCC = adm.category === 'MO_CC';
-          const isTheoDoi = adm.category === 'THEO_DOI';
-          const isTuVong = adm.category === 'TU_VONG';
-          const isXinVe = adm.category === 'XIN_VE';
-
-          const cardBorder = isMoCC ? 'tagged-mo-cc' : isTheoDoi ? 'tagged-theo-doi' : isTuVong ? 'tagged-tu-vong' : 'tagged-xin-ve';
-          const tagBadge = isMoCC ? '<span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fca5a5;">🔪 MỔ CẤP CỨU</span>'
-            : isTheoDoi ? '<span style="background:#fef3c7;color:#92400e;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fde68a;">⚠️ THEO DÕI</span>'
-            : isTuVong ? '<span style="background:#fef2f2;color:#7f1d1d;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #f87171;">⚰️ TỬ VONG</span>'
-            : '<span style="background:#ffedd5;color:#c2410c;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fed7aa;">🏠 NẶNG XIN VỀ</span>';
-
-          const mCase = (currentReport.highlightCases || []).find(c => c.mabn === adm.mabn && c.roomKey === roomKey) || {};
-
-          html += `
-            <div class="room-tagged-card ${cardBorder}">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
-                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-                  ${tagBadge}
-                  <span style="font-weight:900;font-size:1.15rem;color:#0f172a;text-transform:uppercase;">${escapeHtml(adm.hoten || '')}</span>
-                  <span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:6px;font-weight:700;font-size:0.8rem;">Mã: ${adm.mabn || '--'}</span>
-                  <span style="font-size:0.85rem;font-weight:700;color:#475569;">${adm.tuoi || '--'} tuổi • ${adm.gioiTinh || 'NAM'}</span>
-                </div>
-                <button type="button" class="btn-gb-action" style="padding:3px 10px;font-size:0.78rem;background:#fee2e2;color:#b91c1c;border-color:#fca5a5;" onclick="togglePatientTag('${roomKey}', '${adm.id}', '${adm.category}')" title="Gỡ nhãn này khỏi danh sách">
-                  <i class="fa-solid fa-xmark"></i> Gỡ nhãn
-                </button>
-              </div>
-
-              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:8px;margin-bottom:10px;font-size:0.85rem;">
-                <div><strong>Địa chỉ:</strong> ${escapeHtml(adm.diaChi || 'Gia Lai')}</div>
-                <div><strong>Ngày vào viện:</strong> ${adm.ngayVaoVien || currentDateKey}</div>
-                <div style="grid-column: 1 / -1;">
-                  <label style="font-size:0.8rem;font-weight:700;color:#0369a1;display:block;margin-bottom:2px;">Chẩn đoán bệnh (* có thể chỉnh sửa):</label>
-                  <input type="text" class="gb-input-control" style="font-weight:700;color:#0369a1;background:#eff6ff;width:100%;" value="${escapeHtml(adm.chanDoan || mCase.chanDoan || '')}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'chanDoan', this.value)" placeholder="Chẩn đoán bệnh..." />
-                </div>
-              </div>
-
-              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:10px;margin-bottom:10px;">
-                ${isMoCC ? `
-                  <div>
-                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Giờ &amp; Ngày phẫu thuật:</label>
-                    <div style="display:flex;gap:6px;">
-                      <input type="time" class="gb-input-control" style="width:115px;" value="${adm.gioPhauThuat || '08:00'}" onchange="updateTaggedSurgeryTime('${roomKey}', '${adm.id}', 'gio', this.value)" />
-                      <input type="date" class="gb-input-control" style="flex:1;" value="${adm.ngayPhauThuatDate || currentDateKey}" onchange="updateTaggedSurgeryTime('${roomKey}', '${adm.id}', 'ngay', this.value)" />
-                    </div>
-                  </div>
-                  <div>
-                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Kíp mổ / PTV:</label>
-                    <input type="text" class="gb-input-control" placeholder="Tên PTV, Kíp phẫu thuật..." value="${escapeHtml(adm.kipMo || mCase.kipMo || '')}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'kipMo', this.value)" />
-                  </div>
-                ` : (isXinVe || isTuVong) ? `
-                  <div>
-                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">${isTuVong ? 'Thời gian tử vong:' : 'Thời gian xin về:'}</label>
-                    <input type="text" class="gb-input-control" placeholder="Giờ, ngày..." value="${escapeHtml(adm.ngayXinVe || mCase.ngayXinVe || currentDateKey)}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'ngayXinVe', this.value)" />
-                  </div>
-                ` : ''}
-              </div>
-
+        html += `
+          <div class="gb-card" style="border-left: 5px solid #d97706; background:#fff;">
+            <div class="gb-card-header">
               <div>
-                <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Diễn biến ca trực / Tri giác / Sinh hiệu:</label>
-                <textarea class="gb-input-control" style="width:100%;height:52px;font-size:0.85rem;" placeholder="GCS, đồng tử, mạch, HA, SpO2, vết mổ, dẫn lưu..." onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'dienBien', this.value)">${escapeHtml(adm.dienBien || mCase.dienBien || '')}</textarea>
+                <div class="gb-card-title" style="color:#b45309;">
+                  <i class="fa-solid fa-tags"></i> DANH SÁCH CA GẮN NHÃN BÀN GIAO TOÀN KHOA (${taggedAdmissions.length} ca)
+                </div>
+                <div style="font-size:0.83rem;color:#64748b;margin-top:2px;">
+                  Các ca này được tự động chuyển lên Bác sĩ toàn khoa để trình chiếu giao ban &amp; xuất slide
+                </div>
               </div>
             </div>
+        `;
+
+        if (taggedAdmissions.length === 0) {
+          html += `
+            <div style="text-align:center;padding:24px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
+              <i class="fa-solid fa-tag" style="font-size:1.8rem;color:#cbd5e1;margin-bottom:6px;"></i>
+              <div style="font-weight:700;">Chưa có bệnh nhân nào được gắn nhãn trong ca trực này.</div>
+              <div style="font-size:0.83rem;margin-top:2px;">Bấm nút gắn nhãn (Mổ CC, Theo dõi...) ở bảng trên hoặc bấm nút "Thêm" để đưa vào danh sách này.</div>
+            </div>
           `;
-        });
+        } else {
+          html += `<div style="display:flex;flex-direction:column;gap:14px;">${taggedAdmissions.map(renderTaggedCardHtml).join('')}</div>`;
+        }
         html += `</div>`;
       }
 
@@ -2707,7 +2869,7 @@
                   ${khongDongYCount > 0 ? `<span style="background:#fee2e2;color:#991b1b;padding:3px 8px;border-radius:6px;border:1px solid #fca5a5;">Không ĐY: ${khongDongYCount}</span>` : ''}
                 </div>
                 <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="openAddTk4ConsultDialog()">
-                  <i class="fa-solid fa-plus"></i> + Thêm ca hội chẩn mổ
+                  <i class="fa-solid fa-plus"></i> Thêm ca hội chẩn mổ
                 </button>
               </div>
             </div>
@@ -2985,7 +3147,8 @@
       if (!adm) return;
 
       const prefix = roomKey.toUpperCase();
-      const catText = (category === 'MO_CC') ? `${prefix} – BỆNH MỔ CẤP CỨU`
+      const catText = (category === 'MO_CT') ? `${prefix} – BỆNH MỔ CHƯƠNG TRÌNH`
+        : (category === 'MO_CC') ? `${prefix} – BỆNH MỔ CẤP CỨU`
         : (category === 'THEO_DOI') ? `${prefix} – BỆNH THEO DÕI`
         : (category === 'TU_VONG') ? `${prefix} – BỆNH NHÂN TỬ VONG`
         : `${prefix} – BỆNH NẶNG XIN VỀ`;
@@ -3009,7 +3172,7 @@
             gioiTinh: adm.gioiTinh || 'NAM',
             diaChi: adm.diaChi || 'Gia Lai',
             ngayVaoVien: adm.ngayVaoVien || currentDateKey,
-            ngayPhauThuat: (category === 'MO_CC') ? currentDateKey : '',
+            ngayPhauThuat: (category === 'MO_CC' || category === 'MO_CT') ? currentDateKey : '',
             ngayXinVe: (category === 'XIN_VE' || category === 'TU_VONG') ? currentDateKey : '',
             roomKey: roomKey,
             roomName: ROOM_NAMES[roomKey],
@@ -3185,11 +3348,17 @@
     }
 
     // Modal: Chọn bệnh nhân theo dõi / giao ban từ danh sách buồng (Không nhập tay, dò list biết khi nào xong)
-    function addManualRoomCase(roomKey) {
+    let activeRoomAddCaseCategory = null;
+    function addManualRoomCase(roomKey, defaultCategory = null) {
       activeRoomAddCaseRoomKey = roomKey;
+      activeRoomAddCaseCategory = defaultCategory;
       const roomName = ROOM_NAMES[roomKey] || roomKey;
       const headerNameEl = document.getElementById('modal-room-header-name');
-      if (headerNameEl) headerNameEl.textContent = roomName.toUpperCase();
+      let subTitle = '';
+      if (defaultCategory === 'MO_CT') subTitle = ' — MỔ CHƯƠNG TRÌNH';
+      else if (defaultCategory === 'MO_CC') subTitle = ' — MỔ CẤP CỨU';
+      else if (defaultCategory === 'THEO_DOI') subTitle = ' — BỆNH THEO DÕI';
+      if (headerNameEl) headerNameEl.textContent = roomName.toUpperCase() + subTitle;
 
       const searchInput = document.getElementById('modal-room-search-input');
       if (searchInput) searchInput.value = '';
@@ -3206,6 +3375,7 @@
       const roomKey = activeRoomAddCaseRoomKey;
       if (!roomKey) return;
       const isHSTK = (roomKey === 'hstk');
+      const isTK2 = (roomKey === 'tk2');
       const rep = (currentReport.roomReports && currentReport.roomReports[roomKey]) || { admissions: [] };
       const admissions = rep.admissions || [];
 
@@ -3251,7 +3421,8 @@
         let tagBadgeHtml = '';
         if (isTagged) {
           const cat = taggedAdm.category;
-          const label = (cat === 'MO_CC') ? '🔪 MỔ CẤP CỨU'
+          const label = (cat === 'MO_CT') ? '📋 MỔ CHƯƠNG TRÌNH'
+            : (cat === 'MO_CC') ? '🔪 MỔ CẤP CỨU'
             : (cat === 'THEO_DOI') ? '⚠️ THEO DÕI'
             : (cat === 'TU_VONG') ? '⚰️ TỬ VONG'
             : '🏠 NẶNG XIN VỀ';
@@ -3265,20 +3436,32 @@
           `;
         } else {
           tagBadgeHtml = `
-            <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'MO_CC')" title="Đưa vào ca Mổ cấp cứu">
-              🔪 Mổ CC
-            </button>
-            <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'THEO_DOI')" title="Đưa vào ca Theo dõi diễn biến nặng">
-              ⚠️ Theo dõi
-            </button>
-            ${isHSTK ? `
-              <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'TU_VONG')" title="Đưa vào ca Tử vong">
-                ⚰️ Tử vong
+            ${isTK2 ? `
+              <button type="button" class="btn-tag-chip" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="tagPatientInRoomPicker('${p.mabn}', 'MO_CT')" title="Đưa vào ca Mổ chương trình">
+                📋 Mổ CT
               </button>
-              <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'XIN_VE')" title="Đưa vào ca Bệnh nặng xin về">
-                🏠 Xin về
+              <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'MO_CC')" title="Đưa vào ca Mổ cấp cứu">
+                🔪 Mổ CC
               </button>
-            ` : ''}
+              <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'THEO_DOI')" title="Đưa vào ca Theo dõi diễn biến">
+                ⚠️ Theo dõi
+              </button>
+            ` : `
+              <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'MO_CC')" title="Đưa vào ca Mổ cấp cứu">
+                🔪 Mổ CC
+              </button>
+              <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'THEO_DOI')" title="Đưa vào ca Theo dõi diễn biến nặng">
+                ⚠️ Theo dõi
+              </button>
+              ${isHSTK ? `
+                <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'TU_VONG')" title="Đưa vào ca Tử vong">
+                  ⚰️ Tử vong
+                </button>
+                <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'XIN_VE')" title="Đưa vào ca Bệnh nặng xin về">
+                  🏠 Xin về
+                </button>
+              ` : ''}
+            `}
           `;
         }
 
@@ -3332,7 +3515,7 @@
           ngayVaoVien: currentDateKey,
           gioPhauThuat: '08:00',
           ngayPhauThuatDate: currentDateKey,
-          ngayPhauThuat: (category === 'MO_CC') ? `08:00 ngày ${formatDateDMY(currentDateKey)}` : '',
+          ngayPhauThuat: (category === 'MO_CC' || category === 'MO_CT') ? `08:00 ngày ${formatDateDMY(currentDateKey)}` : '',
           ngayXinVe: (category === 'XIN_VE' || category === 'TU_VONG') ? currentDateKey : '',
           dienBien: ''
         };
@@ -3344,7 +3527,8 @@
 
       // Sync to master highlight cases
       const prefix = roomKey.toUpperCase();
-      const catText = (category === 'MO_CC') ? `${prefix} – BỆNH MỔ CẤP CỨU`
+      const catText = (category === 'MO_CT') ? `${prefix} – BỆNH MỔ CHƯƠNG TRÌNH`
+        : (category === 'MO_CC') ? `${prefix} – BỆNH MỔ CẤP CỨU`
         : (category === 'THEO_DOI') ? `${prefix} – BỆNH THEO DÕI`
         : (category === 'TU_VONG') ? `${prefix} – BỆNH NHÂN TỬ VONG`
         : `${prefix} – BỆNH NẶNG XIN VỀ`;
@@ -3363,7 +3547,7 @@
           ngayVaoVien: currentDateKey,
           gioPhauThuat: '08:00',
           ngayPhauThuatDate: currentDateKey,
-          ngayPhauThuat: (category === 'MO_CC') ? `08:00 ngày ${formatDateDMY(currentDateKey)}` : '',
+          ngayPhauThuat: (category === 'MO_CC' || category === 'MO_CT') ? `08:00 ngày ${formatDateDMY(currentDateKey)}` : '',
           ngayXinVe: (category === 'XIN_VE' || category === 'TU_VONG') ? currentDateKey : '',
           roomKey,
           roomName: ROOM_NAMES[roomKey],
@@ -5666,22 +5850,26 @@
           <div style="border: 1.5px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px; box-sizing: border-box;">
             <table style="width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; box-sizing: border-box;">
               <thead>
-                <tr style="background: linear-gradient(180deg, #fef08a 0%, #fde047 100%); color: #713f12; font-weight: 800; font-size: 11.5px;">
-                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 8%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH<br/>CŨ</th>
-                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH VÀO</th>
-                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH MỔ</th>
-                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH RA</th>
-                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 10%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TỬ VONG</th>
-                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 11%; padding: 8px 2px; vertical-align: middle; background: #fed7aa; color: #9a3412; line-height: 1.4; box-sizing: border-box;">HIỆN CÓ</th>
-                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 11%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BẢO HIỂM</th>
+                <tr style="color: #713f12; font-weight: 800; font-size: 12px; height: 26px;">
+                  <th style="border: 1px solid #cbd5e1; border-bottom: none; width: 8%; padding: 5px 2px 0px 2px; vertical-align: bottom; font-weight: 800; font-size: 12px; color: #713f12; background: #fef08a; line-height: 1.2; box-sizing: border-box;">BỆNH</th>
+                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: linear-gradient(180deg, #fef08a 0%, #fde047 100%); color: #713f12; box-sizing: border-box;">BỆNH VÀO</th>
+                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: linear-gradient(180deg, #fef08a 0%, #fde047 100%); color: #713f12; box-sizing: border-box;">BỆNH MỔ</th>
+                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: linear-gradient(180deg, #fef08a 0%, #fde047 100%); color: #713f12; box-sizing: border-box;">BỆNH RA</th>
+                  <th style="border: 1px solid #cbd5e1; border-bottom: none; width: 10%; padding: 5px 2px 0px 2px; vertical-align: bottom; font-weight: 800; font-size: 12px; color: #713f12; background: #fef08a; line-height: 1.2; box-sizing: border-box;">TỬ</th>
+                  <th style="border: 1px solid #cbd5e1; border-bottom: none; width: 11%; padding: 5px 2px 0px 2px; vertical-align: bottom; font-weight: 900; font-size: 12.5px; background: #fed7aa; color: #9a3412; line-height: 1.2; box-sizing: border-box;">HIỆN</th>
+                  <th style="border: 1px solid #cbd5e1; border-bottom: none; width: 11%; padding: 5px 2px 0px 2px; vertical-align: bottom; font-weight: 800; font-size: 12px; color: #713f12; background: #fef08a; line-height: 1.2; box-sizing: border-box;">BẢO</th>
                 </tr>
-                <tr style="background: linear-gradient(180deg, #bbf7d0 0%, #86efac 100%); color: #14532d; font-weight: 800; font-size: 10.5px;">
-                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KHOA KHÁM</th>
-                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KHÁC</th>
-                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">CHƯƠNG TRÌNH</th>
-                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">CẤP CỨU</th>
-                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">RA HẲN</th>
-                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KHÁC</th>
+                <tr style="color: #14532d; font-weight: 800; font-size: 10.5px; height: 26px;">
+                  <th style="border: 1px solid #cbd5e1; border-top: none; width: 8%; padding: 0px 2px 5px 2px; vertical-align: top; font-weight: 800; font-size: 12px; color: #713f12; background: #fef08a; line-height: 1.2; box-sizing: border-box;">CŨ</th>
+                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: #bbf7d0; color: #14532d; box-sizing: border-box;">KHOA KHÁM</th>
+                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: #bbf7d0; color: #14532d; box-sizing: border-box;">KHÁC</th>
+                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: #bbf7d0; color: #14532d; box-sizing: border-box;">CHƯƠNG TRÌNH</th>
+                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: #bbf7d0; color: #14532d; box-sizing: border-box;">CẤP CỨU</th>
+                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: #bbf7d0; color: #14532d; box-sizing: border-box;">RA HẲN</th>
+                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 4px 2px; vertical-align: middle; line-height: 1.2; background: #bbf7d0; color: #14532d; box-sizing: border-box;">KHÁC</th>
+                  <th style="border: 1px solid #cbd5e1; border-top: none; width: 10%; padding: 0px 2px 5px 2px; vertical-align: top; font-weight: 800; font-size: 12px; color: #713f12; background: #fef08a; line-height: 1.2; box-sizing: border-box;">VONG</th>
+                  <th style="border: 1px solid #cbd5e1; border-top: none; width: 11%; padding: 0px 2px 5px 2px; vertical-align: top; font-weight: 900; font-size: 12.5px; background: #fed7aa; color: #9a3412; line-height: 1.2; box-sizing: border-box;">CÓ</th>
+                  <th style="border: 1px solid #cbd5e1; border-top: none; width: 11%; padding: 0px 2px 5px 2px; vertical-align: top; font-weight: 800; font-size: 12px; color: #713f12; background: #fef08a; line-height: 1.2; box-sizing: border-box;">HIỂM</th>
                 </tr>
               </thead>
               <tbody>
