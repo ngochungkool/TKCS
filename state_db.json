@@ -1,5 +1,5 @@
 {
-  "version": 1791042133044,
+  "version": 1791043137509,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3389,7 +3389,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T15:42:13.043Z",
+      "updatedAt": "2026-10-03T15:58:57.500Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -5057,7 +5057,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T15:42:13.043Z"
+      "updatedAt": "2026-10-03T15:58:57.500Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6253,7 +6253,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T15:42:13.043Z"
+      "updatedAt": "2026-10-03T15:58:57.500Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7285,16 +7285,25 @@
               "decision": "",
               "advancePayment": "",
               "updatedAt": "2026-10-01T14:55:48.182Z"
+            },
+            "2026-10-03": {
+              "isConsulted": true,
+              "dateKey": "2026-10-03",
+              "postConsultDiagnosis": "Chấn thương cột sống cổ C5-C6",
+              "surgeryMethod": "Mổ ACDF nẹp vít",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-03T15:58:57.502Z"
             }
           },
           "surgicalConsultation": {
             "isConsulted": true,
-            "dateKey": "2026-10-01",
-            "postConsultDiagnosis": "M48.32-Bệnh lý đốt sống do chấn thương, vùng cổ",
-            "surgeryMethod": "",
-            "decision": "",
-            "advancePayment": "",
-            "updatedAt": "2026-10-01T14:55:48.182Z"
+            "dateKey": "2026-10-03",
+            "postConsultDiagnosis": "Chấn thương cột sống cổ C5-C6",
+            "surgeryMethod": "Mổ ACDF nẹp vít",
+            "decision": "Đồng ý",
+            "advancePayment": "10 triệu",
+            "updatedAt": "2026-10-03T15:58:57.502Z"
           }
         },
         "0001421575": {
@@ -9232,7 +9241,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T15:42:13.043Z"
+      "updatedAt": "2026-10-03T15:58:57.501Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10199,7 +10208,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T15:42:13.043Z"
+      "updatedAt": "2026-10-03T15:58:57.501Z"
     }
   },
   "episodeConsultations": {
