@@ -1,5 +1,5 @@
 {
-  "version": 1791043328180,
+  "version": 1791044859006,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -38,6 +38,21 @@
           "lastConfirmedMin": 29845497,
           "warnedAtMin": null,
           "releasedEarly": true
+        },
+        {
+          "id": "u-1791044858968-0tm9",
+          "roomName": "Đang mổ",
+          "startMin": 29850747,
+          "endMin": 29850748,
+          "lastConfirmedMin": 29850747,
+          "warnedAtMin": null,
+          "receivedBy": "Nguyễn Thị Mai",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-03T16:27:38.968Z",
+          "releasedEarly": true,
+          "releasedBy": "Trần Văn Bình",
+          "releasedRole": "Điều dưỡng",
+          "releasedAt": "2026-10-03T16:27:39.006Z"
         }
       ]
     },
