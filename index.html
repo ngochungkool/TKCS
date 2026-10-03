@@ -40,10 +40,10 @@
       <!-- TRANG CON 1: QUẢN LÝ USER BÁC SĨ -->
       <a href="/quan-ly-user" class="portal-card portal-card-user" id="card-quan-ly-user">
         <div>
-          <div class="portal-card-top">
+          <div class="portal-card-top-stacked">
             <h2 class="portal-card-title title-user-impress">Quản Lý User Bác Sĩ</h2>
-            <button type="button" class="btn-header-bao-mo" id="btn-home-bao-mo">
-              + BÁO MỔ
+            <button type="button" class="btn-header-bao-mo btn-home-bao-mo-full" id="btn-home-bao-mo">
+              BÁO MỔ
             </button>
           </div>
 
@@ -62,118 +62,54 @@
             </div>
           </div>
         </div>
-
-        <div class="portal-card-footer">
-          <span class="portal-enter-btn">Vào trang Quản lý User Bác sĩ →</span>
-        </div>
       </a>
 
       <!-- TRANG CON 2: HÀNH CHÍNH KHOA -->
       <a href="/hanh-chinh-khoa" class="portal-card portal-card-admin">
         <div>
-          <div class="portal-card-top">
+          <div class="portal-card-top" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
             <h2 class="portal-card-title title-admin-impress">Hành Chính Khoa</h2>
-            <span class="portal-sub-tag">HÀNH CHÍNH</span>
           </div>
-
-          <div class="portal-metrics-grid">
-            <div class="portal-metric-item metric-slate">
-              <span class="metric-val" id="homeTotalDoctors">14</span>
-              <span class="metric-label">Tổng số Bác sĩ</span>
-            </div>
-            <div class="portal-metric-item metric-amber">
-              <span class="metric-val" id="homeOnDutyCount">--</span>
-              <span class="metric-label">Trực &amp; Ra trực</span>
-            </div>
-            <div class="portal-metric-item metric-teal">
-              <span class="metric-val" id="homeDayWorkCount">--</span>
-              <span class="metric-label">Làm ngày &amp; PK</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="portal-card-footer">
-          <span class="portal-enter-btn portal-enter-green">Vào trang Hành chính khoa →</span>
         </div>
       </a>
 
       <!-- TRANG CON 3: ĐI BUỒNG HẰNG NGÀY (5 PHÒNG TRONG KHOA) -->
       <a href="/di-buong-hang-ngay" class="portal-card portal-card-rounds" id="card-di-buong">
         <div>
-          <div class="portal-card-top">
+          <div class="portal-card-top" style="margin-bottom: 18px; padding-bottom: 14px;">
             <h2 class="portal-card-title title-rounds-impress">Đi Buồng Hằng Ngày</h2>
-            <span class="portal-sub-tag portal-sub-tag-rounds">5 PHÒNG BỆNH</span>
           </div>
 
-          <div class="portal-metrics-grid" style="margin-bottom: 14px;">
-            <div class="portal-metric-item metric-indigo">
-              <span class="metric-val" id="homeRoundsRoomCount">5</span>
-              <span class="metric-label">Phòng trong khoa</span>
-            </div>
-            <div class="portal-metric-item metric-blue">
-              <span class="metric-val" id="homeRoundsPatientCount">--</span>
-              <span class="metric-label">BN đang điều trị</span>
-            </div>
-            <div class="portal-metric-item metric-teal">
-              <span class="metric-val" id="homeRoundsDocCount">14</span>
-              <span class="metric-label">BS phụ trách</span>
-            </div>
-          </div>
-
-          <!-- 5 Phòng lối tắt nhanh -->
-          <div class="portal-rooms-mini-grid" aria-label="Danh sách 5 phòng trong khoa">
+          <!-- 5 Phòng lối tắt nhanh (màu Hồi sức thần kinh giống các phòng khác) -->
+          <div class="portal-rooms-mini-grid" aria-label="Danh sách 5 phòng trong khoa" style="margin-bottom: 0;">
             <span class="portal-room-mini-chip" data-room-jump="tk1">Thần kinh 1</span>
             <span class="portal-room-mini-chip" data-room-jump="tk2">Thần kinh 2</span>
             <span class="portal-room-mini-chip" data-room-jump="tk3">Thần kinh 3</span>
             <span class="portal-room-mini-chip" data-room-jump="tk4">Thần kinh 4</span>
-            <span class="portal-room-mini-chip chip-hstk" data-room-jump="hstk">Hồi sức thần kinh</span>
+            <span class="portal-room-mini-chip" data-room-jump="hstk">Hồi sức thần kinh</span>
           </div>
-        </div>
-
-        <div class="portal-card-footer">
-          <span class="portal-enter-btn portal-enter-indigo">Vào trang Đi buồng hằng ngày (5 phòng) →</span>
         </div>
       </a>
 
       <!-- TRANG CON 4: BÁO CÁO GIAO BAN -->
       <a href="/bao-cao-giao-ban" class="portal-card portal-card-briefing" id="card-bao-cao-giao-ban">
         <div>
-          <div class="portal-card-top">
+          <div class="portal-card-top" style="margin-bottom: 18px; padding-bottom: 14px;">
             <h2 class="portal-card-title title-briefing-impress">Báo Cáo Giao Ban</h2>
-            <span class="portal-sub-tag portal-sub-tag-briefing">BUỔI SÁNG &amp; TRỰC</span>
           </div>
 
-          <div class="portal-metrics-grid" style="margin-bottom: 14px;">
+          <div class="portal-metrics-grid" style="grid-template-columns: 1fr; margin-bottom: 0;">
             <div class="portal-metric-item metric-sky">
               <span class="metric-val" id="homeBriefingHienCo">--</span>
               <span class="metric-label">Tổng hiện có</span>
             </div>
-            <div class="portal-metric-item metric-red">
-              <span class="metric-val" id="homeBriefingMoCC">--</span>
-              <span class="metric-label">Mổ cấp cứu</span>
-            </div>
-            <div class="portal-metric-item metric-teal">
-              <span class="metric-val" id="homeBriefingHighlight">--</span>
-              <span class="metric-label">Ca trọng điểm</span>
-            </div>
           </div>
-
-          <!-- Các tính năng nổi bật -->
-          <div class="portal-rooms-mini-grid" style="margin-bottom: 18px;">
-            <span class="portal-room-mini-chip" style="background:#f0f9ff;border-color:#bae6fd;color:#0369a1;font-weight:700;">📺 Trình chiếu</span>
-            <span class="portal-room-mini-chip" style="background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;font-weight:700;">🩻 Đính kèm CT/MRI</span>
-            <span class="portal-room-mini-chip" style="background:#f0fdf4;border-color:#bbf7d0;color:#15803d;font-weight:700;">🖨️ In A4 ngang</span>
-          </div>
-        </div>
-
-        <div class="portal-card-footer">
-          <span class="portal-enter-btn portal-enter-sky">Vào trang Báo cáo giao ban →</span>
         </div>
       </a>
     </main>
   </div>
 
-  <!-- HỘP "+ BÁO MỔ" TO RÕ TRỰC TIẾP TRÊN TRANG CHỦ (GIỐNG Y HỆT TRONG TRANG QUẢN LÝ USER) -->
+  <!-- HỘP BÁO MỔ TO RÕ TRỰC TIẾP TRÊN TRANG CHỦ (GIỐNG Y HỆT TRONG TRANG QUẢN LÝ USER) -->
   <dialog id="surgery-quick-dialog" class="modal-dialog surgery-large-dialog">
     <form method="dialog" id="surgery-quick-form">
       <div class="modal-header">
@@ -401,12 +337,18 @@
             if (shift === 'LAM_NGAY' || shift === 'PHONG_KHAM') dayWork++;
           }
 
-          document.getElementById('homeUsableCount').textContent = usable;
-          document.getElementById('homeInUseCount').textContent = inUse;
-          document.getElementById('homeSurgeryCount').textContent = surgery;
-          document.getElementById('homeTotalDoctors').textContent = docs.length;
-          document.getElementById('homeOnDutyCount').textContent = onDuty;
-          document.getElementById('homeDayWorkCount').textContent = dayWork;
+          const uEl = document.getElementById('homeUsableCount');
+          if (uEl) uEl.textContent = usable;
+          const iuEl = document.getElementById('homeInUseCount');
+          if (iuEl) iuEl.textContent = inUse;
+          const sEl = document.getElementById('homeSurgeryCount');
+          if (sEl) sEl.textContent = surgery;
+          const tdEl = document.getElementById('homeTotalDoctors');
+          if (tdEl) tdEl.textContent = docs.length;
+          const odEl = document.getElementById('homeOnDutyCount');
+          if (odEl) odEl.textContent = onDuty;
+          const dwEl = document.getElementById('homeDayWorkCount');
+          if (dwEl) dwEl.textContent = dayWork;
 
           const roundsDocEl = document.getElementById('homeRoundsDocCount');
           if (roundsDocEl) roundsDocEl.textContent = docs.length;
