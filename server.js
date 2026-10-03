@@ -763,26 +763,6 @@ const server = http.createServer(async (req, res) => {
 
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, message: 'Đổi mật khẩu thành công! Hãy ghi nhớ mật khẩu mới của bạn.' }));
-    return;
-  }
-
-  // GET /api/auth/directory
-  if (req.method === 'GET' && pathname === '/api/auth/directory') {
-    const users = loadUsers();
-    const directory = users.map(u => ({
-      id: u.id,
-      stt: u.stt,
-      name: u.name,
-      username: u.username,
-      specialty: u.specialty,
-      role: u.role,
-      workplace: u.workplace,
-      birthYear: u.birthYear,
-      defaultPassFormula: `${(u.name.trim().split(/\s+/).pop() || '').replace(/[^a-zA-Z]/g, '')}@${u.birthYear}`
-    }));
-    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ ok: true, directory }));
-    return;
   }
 
   // Auto-compute from uploads_his if not yet computed
