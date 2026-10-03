@@ -158,167 +158,339 @@ def generate_pptx_for_date(date_key, db_path, out_pptx_path):
                 cp.font.color.rgb = RGBColor(15, 23, 42)
             cp.alignment = PP_ALIGN.CENTER
 
+def get_tk4_surgical_consultations(db, date_key):
+    try:
+        ward_rounds = db.get('wardRounds', {})
+        tk4 = ward_rounds.get('tk4', {})
+        records = tk4.get('patientRecords', {})
+        consults = []
+        for mabn, rec in records.items():
+            if rec.get('removed', {}).get('isRemoved'):
+                continue
+            by_date = rec.get('surgicalConsultationsByDate', {})
+            sc = by_date.get(date_key) or (rec.get('surgicalConsultation') if (rec.get('surgicalConsultation', {}).get('dateKey') == date_key or not rec.get('surgicalConsultation', {}).get('dateKey')) else None)
+            if sc and sc.get('isConsulted'):
+                consults.append({
+                    'mabn': rec.get('mabn', mabn),
+                    'hoten': rec.get('hoten', ''),
+                    'tuoi': str(rec.get('tuoi', '')),
+                    'gioiTinh': rec.get('gioiTinh', 'NAM'),
+                    'bed': rec.get('giuong', '--'),
+                    'chanDoan': sc.get('postConsultDiagnosis') or rec.get('chanDoanHis', ''),
+                    'method': sc.get('surgeryMethod', '--'),
+                    'decision': sc.get('decision', 'Đồng ý'),
+                    'advance': sc.get('advancePayment', '')
+                })
+        return consults
+    except Exception as e:
+        print(f"Error getting TK4 consults: {e}")
+        return []
+
+def add_tk4_consult_slide(prs, blank_layout, consults, date_key):
+    s_c = prs.slides.add_slide(blank_layout)
+
+    # Title box
+    tx_box = s_c.shapes.add_textbox(Inches(0.6), Inches(0.4), Inches(12.1), Inches(1.2))
+    tf = tx_box.text_frame
+    tf.word_wrap = True
+
+    p1 = tf.paragraphs[0]
+    p1.text = "THẦN KINH 4 – DANH SÁCH BỆNH NHÂN ĐỢI HỘI CHẨN MỔ"
+    p1.font.name = "Times New Roman"
+    p1.font.size = Pt(28)
+    p1.font.bold = True
+    p1.font.color.rgb = RGBColor(15, 23, 42)
+
+    dong_y_count = len([c for c in consults if c.get('decision', 'Đồng ý') == 'Đồng ý'])
+    hoi_y_count = len([c for c in consults if c.get('decision') == 'Hội ý'])
+    khong_dy_count = len([c for c in consults if c.get('decision') == 'Không đồng ý'])
+
+    p2 = tf.add_paragraph()
+    p2.text = f"Tổng số ca đợi hội chẩn mổ: {len(consults)} ca  (Đồng ý: {dong_y_count} • Hội ý: {hoi_y_count}" + (f" • Không ĐY: {khong_dy_count})" if khong_dy_count else ")")
+    p2.font.name = "Times New Roman"
+    p2.font.size = Pt(18)
+    p2.font.bold = True
+    p2.font.color.rgb = RGBColor(29, 78, 216)
+    p2.space_before = Pt(4)
+
+    if not consults:
+        tx_empty = s_c.shapes.add_textbox(Inches(1.0), Inches(2.5), Inches(11.3), Inches(3.0))
+        p_emp = tx_empty.text_frame.paragraphs[0]
+        p_emp.text = "(Không có ca đợi hội chẩn mổ trong ngày)"
+        p_emp.font.name = "Times New Roman"
+        p_emp.font.size = Pt(22)
+        p_emp.font.italic = True
+        p_emp.font.color.rgb = RGBColor(100, 116, 139)
+        p_emp.alignment = PP_ALIGN.CENTER
+        return
+
+    num_rows = min(len(consults) + 1, 9)
+    tbl_shape = s_c.shapes.add_table(num_rows, 7, Inches(0.6), Inches(1.8), Inches(12.13), Inches(0.55 * num_rows))
+    tbl = tbl_shape.table
+
+    col_widths = [Inches(0.6), Inches(1.1), Inches(2.6), Inches(0.8), Inches(3.3), Inches(2.4), Inches(1.33)]
+    for idx, w in enumerate(col_widths):
+        tbl.columns[idx].width = w
+
+    headers = ['STT', 'Giường', 'Họ và tên', 'Tuổi', 'Chẩn đoán duyệt mổ', 'Phương pháp phẫu thuật', 'Kết luận']
+    for idx, h in enumerate(headers):
+        cell = tbl.cell(0, idx)
+        cell.text = h
+        for p in cell.text_frame.paragraphs:
+            p.font.name = "Times New Roman"
+            p.font.size = Pt(15)
+            p.font.bold = True
+            p.font.color.rgb = RGBColor(15, 23, 42)
+            if idx in [0, 1, 3, 6]:
+                p.alignment = PP_ALIGN.CENTER
+
+    for r_idx, item in enumerate(consults[:8], 1):
+        vals = [
+            str(r_idx),
+            str(item.get('bed', '--')),
+            item.get('hoten', '').upper(),
+            str(item.get('tuoi', '')),
+            item.get('chanDoan', '--'),
+            item.get('method', '--'),
+            item.get('decision', 'Đồng ý')
+        ]
+        for c_idx, val in enumerate(vals):
+            cell = tbl.cell(r_idx, c_idx)
+            cell.text = val
+            for p in cell.text_frame.paragraphs:
+                p.font.name = "Times New Roman"
+                p.font.size = Pt(14)
+                if c_idx in [0, 1, 3, 6]:
+                    p.alignment = PP_ALIGN.CENTER
+                    p.font.bold = True
+                if c_idx == 2:
+                    p.font.bold = True
+                if c_idx == 6:
+                    if val == 'Đồng ý':
+                        p.font.color.rgb = RGBColor(22, 101, 52)
+                    elif val == 'Hội ý':
+                        p.font.color.rgb = RGBColor(180, 83, 9)
+                    else:
+                        p.font.color.rgb = RGBColor(185, 28, 28)
+
+def add_patient_slides(c, stt_num, prs, blank_layout, project_root, date_key):
+    category = c.get('category', '').strip()
+    if not category:
+        room = c.get('roomName', 'Khoa')
+        category = f"{room} – BỆNH THEO DÕI"
+
+    hoten = c.get('hoten', '').strip().upper()
+    tuoi = str(c.get('tuoi', '')).strip()
+    gioi_tinh = c.get('gioiTinh', '').strip().upper()
+    if not gioi_tinh:
+        gioi_tinh = "NAM" if "VĂN" in hoten or "DUY" in hoten or "SINH" in hoten or "ÂN" in hoten else "NỮ"
+
+    dia_chi = c.get('diaChi', '').strip()
+    ngay_vao = c.get('ngayVaoVien', date_key).strip()
+    ngay_pt = c.get('ngayPhauThuat', '').strip()
+    ngay_ve = c.get('ngayXinVe', '').strip()
+    chan_doan = c.get('chanDoan', '').strip()
+
+    # SLIDE THÔNG TIN BỆNH ÁN
+    s_info = prs.slides.add_slide(blank_layout)
+
+    tx_info = s_info.shapes.add_textbox(Inches(0.8), Inches(0.6), Inches(11.8), Inches(6.3))
+    tf_info = tx_info.text_frame
+    tf_info.word_wrap = True
+
+    # Header dòng 1: Nhóm ca bệnh (VD: HSTK – BỆNH NẶNG XIN VỀ)
+    p_cat = tf_info.paragraphs[0]
+    p_cat.text = category
+    p_cat.font.name = "Times New Roman"
+    p_cat.font.size = Pt(32)
+    p_cat.font.bold = True
+    if "XIN VỀ" in category or "TỬ VONG" in category:
+        p_cat.font.color.rgb = RGBColor(185, 28, 28)
+    elif "MỔ" in category:
+        p_cat.font.color.rgb = RGBColor(29, 78, 216)
+    else:
+        p_cat.font.color.rgb = RGBColor(15, 118, 110)
+
+    # Header dòng 2: Tên BN, tuổi, giới tính
+    p_name = tf_info.add_paragraph()
+    p_name.text = f"{stt_num}. {hoten}\t{tuoi} tuổi\t{gioi_tinh}"
+    p_name.font.name = "Times New Roman"
+    p_name.font.size = Pt(28)
+    p_name.font.bold = True
+    p_name.font.color.rgb = RGBColor(15, 23, 42)
+    p_name.space_before = Pt(14)
+
+    # Dòng 3: Địa chỉ
+    if dia_chi:
+        p_dc = tf_info.add_paragraph()
+        p_dc.text = f"Địa chỉ: {dia_chi}"
+        p_dc.font.name = "Times New Roman"
+        p_dc.font.size = Pt(22)
+        p_dc.space_before = Pt(8)
+
+    # Dòng 4: Ngày vào viện
+    p_nv = tf_info.add_paragraph()
+    p_nv.text = f"Ngày vào viện : {ngay_vao}"
+    p_nv.font.name = "Times New Roman"
+    p_nv.font.size = Pt(22)
+    p_nv.space_before = Pt(8)
+
+    # Dòng 5: Ngày phẫu thuật / Ngày xin về
+    if ngay_pt:
+        p_pt = tf_info.add_paragraph()
+        p_pt.text = f"Ngày phẫu thuật: {ngay_pt}"
+        p_pt.font.name = "Times New Roman"
+        p_pt.font.size = Pt(22)
+        p_pt.space_before = Pt(6)
+    elif ngay_ve:
+        p_ve = tf_info.add_paragraph()
+        p_ve.text = f"Ngày xin về: {ngay_ve}"
+        p_ve.font.name = "Times New Roman"
+        p_ve.font.size = Pt(22)
+        p_ve.space_before = Pt(6)
+
+    # Dòng 6: Chẩn đoán
+    p_cd = tf_info.add_paragraph()
+    p_cd.text = f"Chẩn đoán: {chan_doan}"
+    p_cd.font.name = "Times New Roman"
+    p_cd.font.size = Pt(24)
+    p_cd.font.bold = True
+    p_cd.font.color.rgb = RGBColor(3, 105, 161)
+    p_cd.space_before = Pt(14)
+
+    # SLIDES HÌNH ẢNH CT / MRI / CẬN LÂM SÀNG
+    images = c.get('images', [])
+    valid_img_paths = []
+    for img_obj in images:
+        img_url = img_obj.get('url', '')
+        if img_url.startswith('/'):
+            rel_path = img_url.lstrip('/')
+            full_path = os.path.join(project_root, rel_path)
+        else:
+            full_path = img_url
+        if os.path.exists(full_path):
+            valid_img_paths.append(full_path)
+
+    i = 0
+    while i < len(valid_img_paths):
+        current_path = valid_img_paths[i]
+        is_pair_side_by_side = False
+        if i + 1 < len(valid_img_paths):
+            try:
+                with Image.open(current_path) as im1, Image.open(valid_img_paths[i+1]) as im2:
+                    w1, h1 = im1.size
+                    w2, h2 = im2.size
+                    if (h1 / w1 > 1.1) and (h2 / w2 > 1.1):
+                        is_pair_side_by_side = True
+            except Exception:
+                pass
+
+        s_img = prs.slides.add_slide(blank_layout)
+
+        if is_pair_side_by_side:
+            p1_path = valid_img_paths[i]
+            p2_path = valid_img_paths[i+1]
+            s_img.shapes.add_picture(p1_path, Inches(0.0), Inches(0.24), width=Inches(6.6), height=Inches(6.6))
+            s_img.shapes.add_picture(p2_path, Inches(6.7), Inches(0.24), width=Inches(6.6), height=Inches(6.6))
+            i += 2
+        else:
+            try:
+                with Image.open(current_path) as im:
+                    im_w, im_h = im.size
+                ratio = im_w / im_h
+                slide_ratio = 13.333 / 7.2
+
+                if ratio > slide_ratio:
+                    fit_w = Inches(13.333)
+                    fit_h = Inches(13.333 / ratio)
+                    fit_l = Inches(0.0)
+                    fit_t = Inches((7.5 - (13.333 / ratio)) / 2)
+                else:
+                    fit_h = Inches(7.2)
+                    fit_w = Inches(7.2 * ratio)
+                    fit_l = Inches((13.333 - (7.2 * ratio)) / 2)
+                    fit_t = Inches(0.15)
+
+                s_img.shapes.add_picture(current_path, fit_l, fit_t, width=fit_w, height=fit_h)
+            except Exception as e:
+                print(f"Lỗi chèn ảnh {current_path}: {e}")
+                s_img.shapes.add_picture(current_path, Inches(0.5), Inches(0.5), width=Inches(12.33), height=Inches(6.5))
+            i += 1
+
     # =========================================================================
-    # SLIDES CHO TỪNG CA BỆNH GIAO BAN
+    # SLIDES CHO TỪNG CA BỆNH GIAO BAN THEO THỨ TỰ:
+    # HSTK -> TK1 -> TK4 -> TK2 -> TK3
+    # Đồng bộ & khử trùng lặp bệnh nhân (chỉ xuất hiện 1 lần)
     # =========================================================================
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    room_order = ['hstk', 'tk1', 'tk4', 'tk2', 'tk3']
+    raw_cases = [c for c in highlight_cases if c.get('selectedForSlide') is not False]
+    seen_keys = set()
 
-    for c_idx, c in enumerate(highlight_cases, 1):
-        if c.get('selectedForSlide') is False:
-            continue
+    def get_case_key(c):
+        mabn = (c.get('mabn') or '').strip().lower()
+        hoten = (c.get('hoten') or '').strip().lower()
+        return mabn or hoten
 
-        category = c.get('category', '').strip()
-        if not category:
-            room = c.get('roomName', 'Khoa')
-            category = f"{room} – BỆNH THEO DÕI"
+    tk4_consults = get_tk4_surgical_consultations(db, date_key)
+    stt_counter = 1
 
-        hoten = c.get('hoten', '').strip().upper()
-        tuoi = str(c.get('tuoi', '')).strip()
-        gioi_tinh = c.get('gioiTinh', '').strip().upper()
-        if not gioi_tinh:
-            gioi_tinh = "NAM" if "VĂN" in hoten or "DUY" in hoten or "SINH" in hoten or "ÂN" in hoten else "NỮ"
+    for r_key in room_order:
+        if r_key == 'tk4':
+            # TK4: chỉ báo Mổ CC, Theo dõi (bệnh mổ CT do TK2 báo)
+            tk4_cases = [
+                c for c in raw_cases
+                if ((c.get('roomKey') == 'tk4') or ('TK4' in c.get('category', '').upper()))
+                and not ('MỔ CHƯƠNG TRÌNH' in c.get('category', '').upper() or 'MO_CT' in c.get('category', '').upper())
+            ]
+            for c in tk4_cases:
+                k = get_case_key(c)
+                if k and k not in seen_keys:
+                    seen_keys.add(k)
+                    add_patient_slides(c, stt_counter, prs, blank_layout, project_root, date_key)
+                    stt_counter += 1
 
-        dia_chi = c.get('diaChi', '').strip()
-        ngay_vao = c.get('ngayVaoVien', date_key).strip()
-        ngay_pt = c.get('ngayPhauThuat', '').strip()
-        ngay_ve = c.get('ngayXinVe', '').strip()
-        chan_doan = c.get('chanDoan', '').strip()
+            # Slide tổng hợp số ca đợi hội chẩn mổ Thần kinh 4
+            add_tk4_consult_slide(prs, blank_layout, tk4_consults, date_key)
 
-        stt_num = c.get('stt', c_idx)
+        elif r_key == 'tk2':
+            # TK2: phòng hậu phẫu, báo tất cả Mổ chương trình (kể cả từ TK4/phòng khác), Mổ CC/mổ về, và Theo dõi
+            tk2_own = [
+                c for c in raw_cases
+                if (c.get('roomKey') == 'tk2') or ('TK2' in c.get('category', '').upper())
+            ]
+            mo_ct = [
+                c for c in raw_cases
+                if ('MỔ CHƯƠNG TRÌNH' in c.get('category', '').upper() or 'MO_CT' in c.get('category', '').upper())
+            ]
+            for c in tk2_own + mo_ct:
+                k = get_case_key(c)
+                if k and k not in seen_keys:
+                    seen_keys.add(k)
+                    add_patient_slides(c, stt_counter, prs, blank_layout, project_root, date_key)
+                    stt_counter += 1
 
-        # SLIDE THÔNG TIN BỆNH ÁN
-        s_info = prs.slides.add_slide(blank_layout)
-
-        tx_info = s_info.shapes.add_textbox(Inches(0.8), Inches(0.6), Inches(11.8), Inches(6.3))
-        tf_info = tx_info.text_frame
-        tf_info.word_wrap = True
-
-        # Header dòng 1: Nhóm ca bệnh (VD: HSTK – BỆNH NẶNG XIN VỀ)
-        p_cat = tf_info.paragraphs[0]
-        p_cat.text = category
-        p_cat.font.name = "Times New Roman"
-        p_cat.font.size = Pt(32)
-        p_cat.font.bold = True
-        if "XIN VỀ" in category or "TỬ VONG" in category:
-            p_cat.font.color.rgb = RGBColor(185, 28, 28)
-        elif "MỔ" in category:
-            p_cat.font.color.rgb = RGBColor(29, 78, 216)
         else:
-            p_cat.font.color.rgb = RGBColor(15, 118, 110)
+            # HSTK, TK1, TK3
+            r_cases = [
+                c for c in raw_cases
+                if ((c.get('roomKey') == r_key) or (r_key.upper() in c.get('category', '').upper()))
+                and not ('MỔ CHƯƠNG TRÌNH' in c.get('category', '').upper() or 'MO_CT' in c.get('category', '').upper())
+            ]
+            for c in r_cases:
+                k = get_case_key(c)
+                if k and k not in seen_keys:
+                    seen_keys.add(k)
+                    add_patient_slides(c, stt_counter, prs, blank_layout, project_root, date_key)
+                    stt_counter += 1
 
-        # Header dòng 2: Tên BN, tuổi, giới tính
-        p_name = tf_info.add_paragraph()
-        p_name.text = f"{stt_num}. {hoten}\t{tuoi} tuổi\t{gioi_tinh}"
-        p_name.font.name = "Times New Roman"
-        p_name.font.size = Pt(28)
-        p_name.font.bold = True
-        p_name.font.color.rgb = RGBColor(15, 23, 42)
-        p_name.space_before = Pt(14)
-
-        # Dòng 3: Địa chỉ
-        if dia_chi:
-            p_dc = tf_info.add_paragraph()
-            p_dc.text = f"Địa chỉ: {dia_chi}"
-            p_dc.font.name = "Times New Roman"
-            p_dc.font.size = Pt(22)
-            p_dc.space_before = Pt(8)
-
-        # Dòng 4: Ngày vào viện
-        p_nv = tf_info.add_paragraph()
-        p_nv.text = f"Ngày vào viện : {ngay_vao}"
-        p_nv.font.name = "Times New Roman"
-        p_nv.font.size = Pt(22)
-        p_nv.space_before = Pt(8)
-
-        # Dòng 5: Ngày phẫu thuật / Ngày xin về
-        if ngay_pt:
-            p_pt = tf_info.add_paragraph()
-            p_pt.text = f"Ngày phẫu thuật: {ngay_pt}"
-            p_pt.font.name = "Times New Roman"
-            p_pt.font.size = Pt(22)
-            p_pt.space_before = Pt(6)
-        elif ngay_ve:
-            p_ve = tf_info.add_paragraph()
-            p_ve.text = f"Ngày xin về: {ngay_ve}"
-            p_ve.font.name = "Times New Roman"
-            p_ve.font.size = Pt(22)
-            p_ve.space_before = Pt(6)
-
-        # Dòng 6: Chẩn đoán
-        p_cd = tf_info.add_paragraph()
-        p_cd.text = f"Chẩn đoán: {chan_doan}"
-        p_cd.font.name = "Times New Roman"
-        p_cd.font.size = Pt(24)
-        p_cd.font.bold = True
-        p_cd.font.color.rgb = RGBColor(3, 105, 161)
-        p_cd.space_before = Pt(14)
-
-        # SLIDES HÌNH ẢNH CT / MRI / CẬN LÂM SÀNG
-        images = c.get('images', [])
-        valid_img_paths = []
-        for img_obj in images:
-            img_url = img_obj.get('url', '')
-            if img_url.startswith('/'):
-                rel_path = img_url.lstrip('/')
-                full_path = os.path.join(project_root, rel_path)
-            else:
-                full_path = img_url
-            if os.path.exists(full_path):
-                valid_img_paths.append(full_path)
-
-        # If 2 portrait images (e.g. X-rays like slide 10), we can place them side by side
-        # Check aspect ratio
-        i = 0
-        while i < len(valid_img_paths):
-            current_path = valid_img_paths[i]
-            # Check if this and next are portrait
-            is_pair_side_by_side = False
-            if i + 1 < len(valid_img_paths):
-                try:
-                    with Image.open(current_path) as im1, Image.open(valid_img_paths[i+1]) as im2:
-                        w1, h1 = im1.size
-                        w2, h2 = im2.size
-                        # If both are portrait aspect ratio (h > w)
-                        if (h1 / w1 > 1.1) and (h2 / w2 > 1.1):
-                            is_pair_side_by_side = True
-                except Exception:
-                    pass
-
-            s_img = prs.slides.add_slide(blank_layout)
-
-            if is_pair_side_by_side:
-                # Add 2 images side-by-side
-                p1_path = valid_img_paths[i]
-                p2_path = valid_img_paths[i+1]
-                s_img.shapes.add_picture(p1_path, Inches(0.0), Inches(0.24), width=Inches(6.6), height=Inches(6.6))
-                s_img.shapes.add_picture(p2_path, Inches(6.7), Inches(0.24), width=Inches(6.6), height=Inches(6.6))
-                i += 2
-            else:
-                # Add single image centered, fitting 13.33" x 7.2"
-                try:
-                    with Image.open(current_path) as im:
-                        im_w, im_h = im.size
-                    ratio = im_w / im_h
-                    slide_ratio = 13.333 / 7.2
-
-                    if ratio > slide_ratio:
-                        # Width limited
-                        fit_w = Inches(13.333)
-                        fit_h = Inches(13.333 / ratio)
-                        fit_l = Inches(0.0)
-                        fit_t = Inches((7.5 - (13.333 / ratio)) / 2)
-                    else:
-                        # Height limited
-                        fit_h = Inches(7.2)
-                        fit_w = Inches(7.2 * ratio)
-                        fit_l = Inches((13.333 - (7.2 * ratio)) / 2)
-                        fit_t = Inches(0.15)
-
-                    s_img.shapes.add_picture(current_path, fit_l, fit_t, width=fit_w, height=fit_h)
-                except Exception as e:
-                    print(f"Lỗi chèn ảnh {current_path}: {e}")
-                    s_img.shapes.add_picture(current_path, Inches(0.5), Inches(0.5), width=Inches(12.33), height=Inches(6.5))
-                i += 1
+    # Bất kỳ ca nào còn sót lại
+    for c in raw_cases:
+        k = get_case_key(c)
+        if k and k not in seen_keys:
+            seen_keys.add(k)
+            add_patient_slides(c, stt_counter, prs, blank_layout, project_root, date_key)
+            stt_counter += 1
 
     prs.save(out_pptx_path)
     print(f"Đã xuất thành công file PowerPoint giao ban: {out_pptx_path}")
