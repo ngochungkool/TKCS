@@ -2135,6 +2135,59 @@ const server = http.createServer(async (req, res) => {
     return draft;
   }
 
+  function getDutyDoctorsAbbr(dateKey) {
+    const list = (db.doctors || [])
+      .filter(d => getEffectiveShiftForDate(d, dateKey) === 'TRUC')
+      .sort((a, b) => (a.seniority || 999) - (b.seniority || 999))
+      .map(d => (d.shortName || d.name).trim().toUpperCase());
+    return list.length > 0 ? list : ['HẢI', 'CƯ', 'LUÂN'];
+  }
+
+  function getAllInpatientsList() {
+    try {
+      const hisDir = path.join(ROOT, 'uploads_his');
+      if (!fs.existsSync(hisDir)) return [];
+      const files = fs.readdirSync(hisDir);
+      const dangDieuTriFile = files.find(f => f.toLowerCase().includes('dang') || f.toLowerCase().includes('đang'));
+      if (!dangDieuTriFile) return [];
+      const wb = XLSX.readFile(path.join(hisDir, dangDieuTriFile));
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(sheet);
+
+      return rows.map((r, idx) => {
+        const rawRoom = String(r['Phòng'] || r['tendonnguyen'] || '').toLowerCase();
+        let rk = 'tk1', rName = 'Thần kinh 1';
+        if (rawRoom.includes('hstk') || rawRoom.includes('hồi sức')) {
+          rk = 'hstk'; rName = 'Hồi sức thần kinh (HSTK)';
+        } else if (rawRoom.includes('2')) {
+          rk = 'tk2'; rName = 'Thần kinh 2';
+        } else if (rawRoom.includes('3')) {
+          rk = 'tk3'; rName = 'Thần kinh 3';
+        } else if (rawRoom.includes('4')) {
+          rk = 'tk4'; rName = 'Thần kinh 4';
+        }
+
+        const isFemale = String(r['GT'] || '').toUpperCase().includes('NỮ') || Number(r['maphai']) === 2;
+        return {
+          id: `inpatient-${idx + 1}`,
+          mabn: String(r['mabn'] || '').trim(),
+          hoten: String(r['Họ tên'] || '').trim(),
+          tuoi: String(r['Tuổi'] || '').replace(/\D/g, '') || String(r['Tuổi'] || ''),
+          gioiTinh: isFemale ? 'NỮ' : 'NAM',
+          diaChi: String(r['Địa chỉ'] || r['diachi'] || 'Gia Lai').trim(),
+          chanDoan: String(r['Chẩn đoán'] || r['chandoan'] || '').trim(),
+          roomKey: rk,
+          roomName: rName,
+          bed: String(r['sogiuong'] || '').trim(),
+          doctor: String(r['Bác sỹ điều trị'] || '').trim()
+        };
+      });
+    } catch (e) {
+      console.warn('Error extracting inpatients list:', e.message);
+      return [];
+    }
+  }
+
   function getOrBuildBriefingReport(targetDateKey) {
     if (!db.briefingReports) db.briefingReports = {};
     if (!db.briefingReports[targetDateKey]) {
@@ -2142,14 +2195,11 @@ const server = http.createServer(async (req, res) => {
     }
     const report = db.briefingReports[targetDateKey];
 
-    const onDutyDocs = (db.doctors || [])
-      .filter(d => d.scheduleByDate && (d.scheduleByDate[targetDateKey] === 'TRUC' || d.scheduleByDate[targetDateKey] === 'RA_TRUC'))
-      .sort((a, b) => (a.seniority || 999) - (b.seniority || 999))
-      .map(d => d.name);
+    const dutyDocsShort = getDutyDoctorsAbbr(targetDateKey);
 
     if (!report.overall) report.overall = {};
     if (!report.overall.doctorsOnDuty || report.overall.doctorsOnDuty.length === 0) {
-      report.overall.doctorsOnDuty = onDutyDocs.length > 0 ? onDutyDocs : ['BS. Trí A', 'BS. Tịnh', 'BS. Trí B', 'BS. Vũ B'];
+      report.overall.doctorsOnDuty = dutyDocsShort;
     }
 
     if (!Array.isArray(report.highlightCases)) {
@@ -2306,9 +2356,9 @@ const server = http.createServer(async (req, res) => {
       const c = rRep.census || {};
       const p = rRep.personnel || {};
       const personnelStr = (r.key === 'hstk')
-        ? `Ngày: ${p.nursesDay || '--'} | Đêm: ${p.nursesNight || '--'} | Hộ lý: ${p.orderly || '--'}`
-        : `ĐD: ${p.nurses || '--'} | Hộ lý: ${p.orderly || '--'}`;
-      const statusStr = rRep.status === 'SUBMITTED' ? 'Đã nộp' : 'Chờ nộp';
+        ? `Ngày: ${p.nursesDay || '--'} | Đêm: ${p.nursesNight || '--'}`
+        : `ĐD: ${p.nurses || '--'}`;
+      const statusStr = rRep.status === 'SUBMITTED' ? 'Đã báo cáo' : 'Chờ báo cáo';
 
       rows1.push([
         idx + 1,
@@ -2345,10 +2395,6 @@ const server = http.createServer(async (req, res) => {
       `BS trực: ${docsStr}`,
       '-'
     ]);
-
-    rows1.push([]);
-    rows1.push(['III. Ý KIẾN CHỈ ĐẠO CỦA CHỦ TỌA GIAO BAN']);
-    rows1.push([overall.doctorNotes || '']);
 
     const ws1 = XLSX.utils.aoa_to_sheet(rows1);
     ws1['!cols'] = [
@@ -2733,12 +2779,15 @@ const server = http.createServer(async (req, res) => {
     const reqUrl = new URL(req.url, 'http://localhost');
     const qDate = reqUrl.searchParams.get('date') || getDateKey(new Date());
     const report = getOrBuildBriefingReport(qDate);
+    const dutyDocsShort = getDutyDoctorsAbbr(qDate);
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({
       ok: true,
       dateKey: qDate,
       report,
       doctors: db.doctors || [],
+      dutyDoctorsAbbr: dutyDocsShort.join(' – '),
+      inpatientList: getAllInpatientsList(),
       availableDates: Object.keys(db.briefingReports || {})
     }));
     return;
@@ -2761,7 +2810,7 @@ const server = http.createServer(async (req, res) => {
         };
         syncRoomKeyCasesToMaster(report, roomKey, report.roomReports[roomKey]);
         recalculateGrandCensus(report);
-        broadcastState(`📋 [${report.roomReports[roomKey].roomName}] đã nộp báo cáo giao ban ngày ${targetDate}`);
+        broadcastState(`📋 [${report.roomReports[roomKey].roomName}] đã báo cáo giao ban ngày ${targetDate}`);
       }
     } else {
       if (overall && typeof overall === 'object') {

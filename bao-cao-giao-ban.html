@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Times+New+Roman&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
@@ -821,17 +821,18 @@
     }
 
     /* ==========================================================================
-       PRESENTATION THEATER MODE (DARK FULLSCREEN 16:9 SLIDES)
+       PRESENTATION THEATER MODE (CLEAN WHITE FULLSCREEN 16:9 SLIDES)
        ========================================================================== */
     .theater-mode {
       display: none;
       position: fixed;
       inset: 0;
       z-index: 99998;
-      background: #090d16;
-      color: #f1f5f9;
+      background: #ffffff;
+      color: #0f172a;
       flex-direction: column;
       overflow: hidden;
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     .theater-mode.active {
       display: flex;
@@ -842,8 +843,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 24px;
-      background: #0f172a;
-      border-bottom: 1px solid #1e293b;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
       flex-shrink: 0;
     }
 
@@ -854,9 +855,9 @@
     }
     .theater-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 800;
-      color: #38bdf8;
+      color: #0284c7;
     }
 
     .theater-controls {
@@ -866,9 +867,9 @@
     }
 
     .btn-theater {
-      background: #1e293b;
-      color: #f8fafc;
-      border: 1px solid #334155;
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
       border-radius: 8px;
       padding: 6px 14px;
       font-weight: 700;
@@ -880,151 +881,306 @@
       transition: all 0.15s ease;
     }
     .btn-theater:hover {
-      background: #334155;
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #94a3b8;
     }
     .btn-theater-close {
-      background: #991b1b;
-      border-color: #b91c1c;
+      background: #fee2e2;
+      color: #b91c1c;
+      border-color: #fca5a5;
     }
     .btn-theater-close:hover {
       background: #dc2626;
+      color: #ffffff;
+      border-color: #dc2626;
     }
 
     .theater-slide-viewport {
       flex: 1;
-      padding: 20px 30px;
-      overflow-y: auto;
+      padding: 12px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      background: #ffffff;
     }
 
-    /* Official Slide 1 Layout in Theater Mode */
+    /* Official Slide 1 Layout in White Theme */
     .slide-official-box {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1260px;
       text-align: center;
-      padding: 30px;
-      background: #0f172a;
-      border: 2px solid #1e293b;
+      padding: 36px 40px;
+      background: #ffffff;
+      border: 3px solid #0284c7;
       border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 40px rgba(2, 132, 199, 0.12);
     }
 
     .slide-official-title {
-      font-family: 'Times New Roman', serif;
-      font-size: 2.8rem;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 3.2rem;
       font-weight: 900;
-      color: #38bdf8;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
+      color: #0f172a;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
     }
 
     .slide-official-sub {
-      font-family: 'Times New Roman', serif;
-      font-size: 1.6rem;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1.8rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #1e293b;
       margin-bottom: 34px;
     }
 
     .slide-official-table {
       width: 100%;
       border-collapse: collapse;
-      font-family: 'Times New Roman', serif;
+      font-family: 'Times New Roman', Times, serif;
       font-size: 1.45rem;
-      color: #f8fafc;
-      background: #131d31;
-      border: 2px solid #334155;
+      color: #0f172a;
+      background: #ffffff;
+      border: 2.5px solid #0f172a;
       border-radius: 12px;
       overflow: hidden;
     }
     .slide-official-table th {
-      background: #1e293b;
-      color: #38bdf8;
+      background: #f1f5f9;
+      color: #0f172a;
       padding: 16px 8px;
-      border: 1.5px solid #334155;
+      border: 2px solid #0f172a;
       font-weight: 900;
-      font-size: 1.4rem;
+      font-size: 1.45rem;
     }
     .slide-official-table td {
       padding: 18px 8px;
-      border: 1.5px solid #334155;
+      border: 2px solid #0f172a;
       font-weight: 900;
-      font-size: 1.9rem;
-      color: #f8fafc;
+      font-size: 2.2rem;
+      color: #0f172a;
     }
 
-    /* Official Patient Info Slide */
+    /* Official Patient Info Slide in White Theme */
     .slide-patient-box {
       width: 100%;
-      max-width: 1100px;
-      background: #0f172a;
-      border: 2px solid #1e293b;
+      max-width: 1180px;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
       border-radius: 20px;
-      padding: 40px;
+      padding: 44px;
       text-align: left;
-      font-family: 'Times New Roman', serif;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      font-family: 'Times New Roman', Times, serif;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
     }
 
     .slide-pt-category {
       font-size: 2.2rem;
       font-weight: 900;
-      color: #ef4444;
-      margin-bottom: 24px;
-      border-bottom: 2px solid #1e293b;
-      padding-bottom: 14px;
+      color: #b91c1c;
+      margin-bottom: 22px;
+      border-bottom: 3px solid #fee2e2;
+      padding-bottom: 12px;
+      letter-spacing: 0.02em;
     }
 
     .slide-pt-name-row {
-      font-size: 1.95rem;
+      font-size: 2rem;
       font-weight: 900;
-      color: #38bdf8;
+      color: #0f172a;
       display: flex;
-      gap: 30px;
+      gap: 32px;
       margin-bottom: 18px;
     }
 
     .slide-pt-detail {
-      font-size: 1.4rem;
-      color: #e2e8f0;
+      font-size: 1.45rem;
+      color: #1e293b;
       margin-bottom: 14px;
       line-height: 1.5;
     }
 
     .slide-pt-diag {
-      font-size: 1.55rem;
+      font-size: 1.6rem;
       font-weight: 800;
-      color: #fde047;
-      margin-top: 24px;
+      color: #0369a1;
+      margin-top: 22px;
       line-height: 1.5;
-      background: #131d31;
-      padding: 16px 20px;
+      background: #eff6ff;
+      padding: 16px 22px;
       border-radius: 12px;
-      border-left: 6px solid #fde047;
+      border-left: 6px solid #0284c7;
     }
 
-    /* Official Clinical Image Slide */
+    /* Official Clinical Image Slide (Fit full space, no title/date) */
     .slide-image-fullscreen-box {
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: calc(100vh - 65px);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
+      background: #ffffff;
+      padding: 0;
+      overflow: hidden;
     }
 
     .slide-full-img {
-      max-width: 96vw;
-      max-height: 84vh;
+      max-width: 98vw;
+      max-height: calc(100vh - 75px);
+      width: auto;
+      height: auto;
       object-fit: contain;
-      border-radius: 8px;
-      border: 2px solid #334155;
-      background: #000000;
+      border-radius: 6px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
       cursor: zoom-in;
+    }
+
+    /* Patient Selection Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99990;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .modal-card {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 920px;
+      width: 100%;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      animation: modalFadeIn 0.2s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-header {
+      padding: 16px 24px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-footer {
+      padding: 14px 24px;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .patient-picker-search {
+      width: 100%;
+      padding: 10px 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      outline: none;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+    .patient-picker-search:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+    .patient-filter-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .btn-filter-pill {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-filter-pill.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+    .patient-picker-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 48vh;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .patient-picker-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: #ffffff;
+    }
+    .patient-picker-item:hover {
+      border-color: #0284c7;
+      background: #eff6ff;
+      transform: translateX(4px);
+    }
+
+    /* Tagged cases details in Room View */
+    .room-tagged-card {
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+      background: #ffffff;
+    }
+    .room-tagged-card.tagged-mo-cc { border-left: 6px solid #dc2626; }
+    .room-tagged-card.tagged-theo-doi { border-left: 6px solid #d97706; }
+    .room-tagged-card.tagged-xin-ve { border-left: 6px solid #c2410c; }
+    .room-tagged-card.tagged-tu-vong { border-left: 6px solid #991b1b; }
+
+    .btn-gb-paste {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+    .btn-gb-paste:hover {
+      background: #dcfce7;
+      color: #14532d;
     }
 
     /* Print styles */
@@ -1141,7 +1297,7 @@
         <button type="button" class="btn-gb-action btn-gb-sync" onclick="autoFetchFromHis()" title="Trích xuất số liệu mới nhất từ các file Excel HIS">
           <i class="fa-solid fa-arrows-rotate"></i> Lấy dữ liệu HIS
         </button>
-        <button type="button" class="btn-gb-action btn-gb-save" onclick="saveActiveReport()" title="Lưu và nộp dữ liệu ca trực">
+        <button type="button" class="btn-gb-action btn-gb-save" onclick="saveActiveReport()" title="Lưu và gửi dữ liệu ca trực">
           <i class="fa-solid fa-floppy-disk"></i> Lưu báo cáo
         </button>
         <button type="button" class="btn-gb-action btn-gb-print" onclick="window.print()" title="In báo cáo A4 ngang chuẩn y tế">
@@ -1197,6 +1353,144 @@
     </div>
   </div>
 
+  <!-- MODAL: BÁC SĨ CHỌN BỆNH NHÂN BÁO CÁO GIAO BAN -->
+  <div id="modal-select-patient" class="modal-backdrop" onclick="closeSelectPatientModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-user-plus" style="color:#0284c7;"></i>
+          CHỌN BỆNH NHÂN BÁO CÁO GIAO BAN
+        </div>
+        <button type="button" class="btn-theater btn-theater-close" style="padding:4px 10px;" onclick="closeSelectPatientModal()">
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div style="margin-bottom:12px;display:flex;gap:10px;align-items:center;">
+          <input type="text" id="patient-search-input" class="patient-picker-search" placeholder="🔍 Tìm theo Họ tên, Mã bệnh nhân, Chẩn đoán..." oninput="filterPatientPickerList()" />
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <label style="font-size:0.85rem;font-weight:700;color:#334155;margin-bottom:4px;display:block;">Nhóm phân loại giao ban:</label>
+          <select id="modal-patient-category" class="gb-input-control" style="width:100%;font-weight:700;font-size:0.95rem;padding:8px 12px;">
+            <option value="AUTO">-- Tự động theo buồng bệnh của bệnh nhân --</option>
+            <option value="HSTK – BỆNH MỔ CẤP CỨU">HSTK – BỆNH MỔ CẤP CỨU</option>
+            <option value="HSTK – BỆNH NẶNG XIN VỀ">HSTK – BỆNH NẶNG XIN VỀ</option>
+            <option value="TK1 – BỆNH MỔ CẤP CỨU">TK1 – BỆNH MỔ CẤP CỨU</option>
+            <option value="TK1 – BỆNH THEO DÕI">TK1 – BỆNH THEO DÕI</option>
+            <option value="TK2 – BỆNH MỔ VỀ TỪ CHỢ RẪY">TK2 – BỆNH MỔ VỀ TỪ CHỢ RẪY</option>
+            <option value="TK2 – BỆNH MỔ VỀ">TK2 – BỆNH MỔ VỀ</option>
+            <option value="TK3 – BỆNH MỔ CẤP CỨU">TK3 – BỆNH MỔ CẤP CỨU</option>
+            <option value="TK3 – BỆNH THEO DÕI">TK3 – BỆNH THEO DÕI</option>
+            <option value="TK4 – BỆNH MỔ CẤP CỨU">TK4 – BỆNH MỔ CẤP CỨU</option>
+            <option value="TK4 – BỆNH THEO DÕI">TK4 – BỆNH THEO DÕI</option>
+            <option value="BỆNH NHÂN TỬ VONG">BỆNH NHÂN TỬ VONG</option>
+          </select>
+        </div>
+
+        <div class="patient-filter-pills" id="modal-patient-room-filters">
+          <button type="button" class="btn-filter-pill active" data-room="all" onclick="filterPatientByRoom('all')">Tất cả</button>
+          <button type="button" class="btn-filter-pill" data-room="tk1" onclick="filterPatientByRoom('tk1')">Thần kinh 1</button>
+          <button type="button" class="btn-filter-pill" data-room="tk2" onclick="filterPatientByRoom('tk2')">Thần kinh 2</button>
+          <button type="button" class="btn-filter-pill" data-room="tk3" onclick="filterPatientByRoom('tk3')">Thần kinh 3</button>
+          <button type="button" class="btn-filter-pill" data-room="tk4" onclick="filterPatientByRoom('tk4')">Thần kinh 4</button>
+          <button type="button" class="btn-filter-pill" data-room="hstk" onclick="filterPatientByRoom('hstk')">🚨 HSTK</button>
+        </div>
+
+        <div class="patient-picker-list" id="modal-patient-list">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-gb-action" style="background:#f1f5f9;color:#334155;border-color:#cbd5e1;" onclick="openManualCustomEntry()">
+          ✍️ Tự nhập ca ngoài danh sách
+        </button>
+        <button type="button" class="btn-gb-action btn-gb-print" onclick="closeSelectPatientModal()">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ĐIỀU DƯỠNG THÊM CA NẶNG / ĐỘT XUẤT PHÒNG -->
+  <div id="modal-room-add-case" class="modal-backdrop" onclick="closeRoomAddCaseModal(event)">
+    <div class="modal-card" style="max-width: 650px;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-room-add-title">
+          <i class="fa-solid fa-hospital-user" style="color:#dc2626;"></i>
+          THÊM CA ĐỘT XUẤT / NẶNG
+        </div>
+        <button type="button" class="btn-theater btn-theater-close" style="padding:4px 10px;" onclick="closeRoomAddCaseModal()">
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div style="margin-bottom:12px;">
+          <label style="font-weight:700;font-size:0.85rem;color:#334155;display:block;margin-bottom:4px;">Chọn nhanh bệnh nhân đang điều trị tại phòng:</label>
+          <select id="modal-room-select-existing" class="gb-input-control" style="width:100%;font-weight:700;padding:8px;" onchange="onRoomExistingPatientSelected(this.value)">
+            <option value="">-- Chọn bệnh nhân có sẵn hoặc nhập mới bên dưới --</option>
+          </select>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+          <div>
+            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Mã bệnh nhân:</label>
+            <input type="text" id="modal-room-mabn" class="gb-input-control" placeholder="Mã BN..." />
+          </div>
+          <div>
+            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Họ và tên (*):</label>
+            <input type="text" id="modal-room-hoten" class="gb-input-control" placeholder="Họ và tên bệnh nhân..." />
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:10px;margin-bottom:10px;">
+          <div>
+            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Tuổi:</label>
+            <input type="text" id="modal-room-tuoi" class="gb-input-control" placeholder="Tuổi..." />
+          </div>
+          <div>
+            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Giới tính:</label>
+            <select id="modal-room-gioitinh" class="gb-input-control">
+              <option value="NAM">NAM</option>
+              <option value="NỮ">NỮ</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Địa chỉ:</label>
+            <input type="text" id="modal-room-diachi" class="gb-input-control" placeholder="Địa chỉ..." />
+          </div>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Chẩn đoán:</label>
+          <input type="text" id="modal-room-chandoan" class="gb-input-control" placeholder="Chẩn đoán bệnh..." />
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Gắn nhãn giao ban (*):</label>
+          <div id="modal-room-tag-options" style="display:flex;gap:8px;flex-wrap:wrap;">
+            <!-- Rendered based on whether room is HSTK or TK1-4 -->
+          </div>
+        </div>
+
+        <div>
+          <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Diễn biến ca trực / Ghi chú bàn giao:</label>
+          <textarea id="modal-room-dienbien" class="gb-input-control" style="width:100%;height:60px;" placeholder="Tri giác, sinh hiệu, tình trạng cần theo dõi..."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-gb-action btn-gb-print" onclick="closeRoomAddCaseModal()">Hủy</button>
+        <button type="button" class="btn-gb-action btn-gb-save" onclick="saveRoomAddCase()">
+          <i class="fa-solid fa-check"></i> Lưu &amp; Đưa vào báo cáo
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- LIGHTBOX MODAL FOR ZOOMING CLINICAL IMAGES -->
   <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)">
     <button type="button" class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
@@ -1248,9 +1542,13 @@
     let activeTab = 'overall'; // 'overall' | 'tk1' | 'tk2' | 'tk3' | 'tk4' | 'hstk'
     let currentReport = null;
     let doctorsList = [];
+    let dutyDoctorsAbbr = '';
+    let inpatientList = [];
     let presentationSlides = [];
     let currentSlideIndex = 0;
     let activePasteCaseId = null;
+    let selectedPatientRoomFilter = 'all';
+    let activeRoomAddCaseRoomKey = null;
 
     // View Mode & Period state
     let currentViewMode = 'daily'; // 'daily' | 'week' | 'month'
@@ -1366,6 +1664,15 @@
         if (data.ok && data.report) {
           currentReport = data.report;
           doctorsList = data.doctors || [];
+          dutyDoctorsAbbr = data.dutyDoctorsAbbr || '';
+          inpatientList = data.inpatientList || [];
+
+          // Auto-sync duty doctor abbreviations from chấm công if not set or empty
+          if (dutyDoctorsAbbr && (!currentReport.overall || !currentReport.overall.doctorsOnDuty || currentReport.overall.doctorsOnDuty.length === 0)) {
+            if (!currentReport.overall) currentReport.overall = {};
+            currentReport.overall.doctorsOnDuty = dutyDoctorsAbbr.split('–').map(s => s.trim()).filter(Boolean);
+          }
+
           updateTabStatusDots();
           renderCurrentView();
         } else {
@@ -1375,6 +1682,16 @@
         console.error(err);
         alert('Lỗi kết nối khi tải dữ liệu giao ban!');
       }
+    }
+
+    function syncDoctorDutyFromAttendance() {
+      if (!dutyDoctorsAbbr) {
+        alert('Chưa tìm thấy lịch trực bác sĩ từ chấm công cho ngày này.');
+        return;
+      }
+      if (!currentReport.overall) currentReport.overall = {};
+      currentReport.overall.doctorsOnDuty = dutyDoctorsAbbr.split('–').map(s => s.trim()).filter(Boolean);
+      renderCurrentView();
     }
 
     // Update Dots on tabs
@@ -1514,15 +1831,19 @@
 
       const docsDutyStr = (overall.doctorsOnDuty && overall.doctorsOnDuty.length > 0)
         ? overall.doctorsOnDuty.join(' – ')
-        : 'HẢI – CƯ – LUÂN – LƯƠNG';
+        : (dutyDoctorsAbbr || 'HẢI – CƯ – LUÂN');
 
       let html = `
         <!-- BẢNG 8 CHỈ SỐ GIAO BAN CHUẨN KHOA -->
         <div class="official-census-card">
           <div class="official-main-heading">BÁO CÁO GIAO BAN</div>
-          <div class="official-sub-heading">
-            ${formatDateDisplayVN(currentDateKey)} &nbsp;&nbsp;&nbsp; 
-            BS: <input type="text" style="font-family:'Times New Roman',serif;font-weight:700;font-size:1.25rem;border:none;border-bottom:1px solid #94a3b8;width:340px;text-align:center;color:#0f172a;outline:none;" value="${escapeHtml(docsDutyStr)}" onchange="updateOverallField('doctorsOnDuty', this.value.split('–').map(s=>s.trim()).filter(Boolean))" />
+          <div class="official-sub-heading" style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+            <span>${formatDateDisplayVN(currentDateKey)}</span>
+            <span>&nbsp;&nbsp;BS:</span>
+            <input type="text" style="font-family:'Times New Roman',serif;font-weight:700;font-size:1.25rem;border:none;border-bottom:1.5px solid #0284c7;width:340px;text-align:center;color:#0f172a;outline:none;" value="${escapeHtml(docsDutyStr)}" onchange="updateOverallField('doctorsOnDuty', this.value.split('–').map(s=>s.trim()).filter(Boolean))" />
+            <button type="button" class="btn-gb-action btn-gb-sync" style="padding:4px 10px;font-size:0.8rem;" onclick="syncDoctorDutyFromAttendance()" title="Lấy lại danh sách bác sĩ trực tự động từ chấm công">
+              <i class="fa-solid fa-arrows-rotate"></i> Lấy từ chấm công
+            </button>
           </div>
 
           <div class="official-table-wrap">
@@ -1570,11 +1891,11 @@
                 GIÁM SÁT TIẾN ĐỘ 5 PHÒNG BỆNH &amp; ĐỐI CHIẾU SỐ LIỆU CA TRỰC
               </div>
               <div style="font-size:0.83rem;color:#64748b;margin-top:4px;">
-                Số liệu do điều dưỡng trực các phòng nhập lúc khuya/sáng sớm • Tiến độ: <strong>${countSubmittedRooms(roomReports)}/5 phòng đã nộp</strong>
+                Số liệu do điều dưỡng trực các phòng nhập lúc khuya/sáng sớm • Tiến độ: <strong>${countSubmittedRooms(roomReports)}/5 phòng đã báo cáo</strong>
               </div>
             </div>
             <div class="gb-actions-group">
-              <button type="button" class="btn-gb-action btn-gb-sync" onclick="recalcGrandTotalsFromRooms()" title="Lấy tổng dồn từ 5 phòng nộp lên điền vào Bảng 8 chỉ số Toàn khoa">
+              <button type="button" class="btn-gb-action btn-gb-sync" onclick="recalcGrandTotalsFromRooms()" title="Lấy tổng dồn từ 5 phòng báo cáo lên điền vào Bảng 8 chỉ số Toàn khoa">
                 <i class="fa-solid fa-calculator"></i> 🔄 Đồng bộ dồn tổng lên Toàn khoa
               </button>
             </div>
@@ -1607,7 +1928,7 @@
           </div>
           <div style="margin-top:10px;font-size:0.82rem;color:#64748b;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
             <span>💡 Bác sĩ bấm <strong>"Xem phòng"</strong> để duyệt chi tiết từng phòng hoặc bấm <strong>"Đồng bộ dồn tổng lên Toàn khoa"</strong> để kiểm tra khớp số liệu.</span>
-            <span style="font-weight:700;color:#0f172a;">Tiến độ nộp: ${countSubmittedRooms(roomReports)}/5 phòng đã nộp</span>
+            <span style="font-weight:700;color:#0f172a;">Tiến độ báo cáo: ${countSubmittedRooms(roomReports)}/5 phòng đã báo cáo</span>
           </div>
         </div>
 
@@ -1619,8 +1940,8 @@
               DANH SÁCH CÁC CA TRỌNG ĐIỂM BÁO CÁO GIAO BAN (${highlightCases.length} ca)
             </div>
             <div class="gb-actions-group">
-              <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="addNewMasterCase()">
-                <i class="fa-solid fa-plus"></i> + Bác sĩ thêm ca giao ban
+              <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="openSelectPatientModal()">
+                <i class="fa-solid fa-user-plus"></i> + Bác sĩ thêm ca giao ban
               </button>
             </div>
           </div>
@@ -1712,18 +2033,23 @@
 
               <!-- KHU VỰC HÌNH ẢNH CT / MRI / CẬN LÂM SÀNG -->
               <div class="clinical-images-section" onmouseenter="activePasteCaseId='${c.id}'">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:0.88rem;font-weight:700;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:0.88rem;font-weight:700;flex-wrap:wrap;gap:8px;">
                   <span>
                     <i class="fa-solid fa-x-ray" style="color:#0284c7;"></i> HÌNH ẢNH CT / MRI / X-QUANG (${(c.images || []).length} ảnh)
                   </span>
-                  <span style="font-size:0.8rem;color:#0369a1;background:#e0f2fe;padding:2px 8px;border-radius:6px;">
-                    💡 Chụp màn hình PACS rồi nhấn <strong>Ctrl + V</strong> để dán ngay
-                  </span>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <button type="button" class="btn-gb-action btn-gb-paste" style="padding:4px 12px;font-size:0.82rem;" onclick="pasteImageFromClipboard('${c.id}')" title="Dán ảnh trực tiếp từ Clipboard">
+                      <i class="fa-solid fa-paste"></i> Dán ảnh từ Clipboard
+                    </button>
+                    <span style="font-size:0.8rem;color:#0369a1;background:#e0f2fe;padding:3px 8px;border-radius:6px;">
+                      💡 Hoặc chụp màn hình PACS rồi bấm nút Dán ảnh
+                    </span>
+                  </div>
                 </div>
 
                 <div class="clinical-dropzone" onclick="triggerFileUpload('${c.id}')" ondragover="event.preventDefault()" ondrop="handleDropFile(event, '${c.id}')">
                   <i class="fa-solid fa-cloud-arrow-up" style="font-size:1.1rem;"></i>
-                  <span>Bấm tải ảnh lên HOẶC dán trực tiếp (Ctrl + V) từ Clipboard</span>
+                  <span>Bấm tải ảnh lên HOẶC bấm nút <strong>"Dán ảnh từ Clipboard"</strong></span>
                   <input type="file" id="file-input-${c.id}" accept="image/*" style="display:none;" onchange="onFileSelected(event, '${c.id}')" />
                 </div>
 
@@ -1747,16 +2073,6 @@
 
       html += `
           </div>
-        </div>
-
-        <!-- Ý KIẾN CHỈ ĐẠO GIAO BAN -->
-        <div class="gb-card">
-          <div class="gb-card-header">
-            <div class="gb-card-title">
-              <i class="fa-solid fa-clipboard-check" style="color:#059669;"></i> Ý KIẾN KẾT LUẬN & CHỈ ĐẠO CỦA CHỦ TỌA GIAO BAN
-            </div>
-          </div>
-          <textarea class="gb-input-control" style="width:100%;min-height:90px;font-size:0.95rem;line-height:1.5;" onchange="updateOverallField('doctorNotes', this.value)" placeholder="Nhập kết luận buổi giao ban, phân công nhân sự, ca mổ phiên, các vấn đề chuyên môn cần lưu ý...">${escapeHtml(overall.doctorNotes || '')}</textarea>
         </div>
       `;
 
@@ -1782,6 +2098,7 @@
       const c = roomRep.census || {};
       const admissions = roomRep.admissions || [];
       const isSubmitted = roomRep.status === 'SUBMITTED';
+      const isHSTK = (roomKey === 'hstk');
 
       let html = `
         <div class="gb-card" style="border-top: 4px solid #0284c7;">
@@ -1793,7 +2110,7 @@
               <div style="font-size:0.83rem;color:#64748b;margin-top:4px;">
                 Trạng thái: 
                 <strong style="color:${isSubmitted ? '#16a34a' : '#d97706'};">
-                  ${isSubmitted ? '✓ ĐÃ NỘP BÁO CÁO' : '⏳ ĐANG NHẬP (DRAFT)'}
+                  ${isSubmitted ? '✓ ĐÃ BÁO CÁO' : '⏳ CHỜ BÁO CÁO (DRAFT)'}
                 </strong>
                 ${roomRep.updatedAt ? ` • Cập nhật lúc: ${new Date(roomRep.updatedAt).toLocaleTimeString('vi-VN')}` : ''}
               </div>
@@ -1806,15 +2123,15 @@
             </div>
           </div>
 
-          <!-- NHÂN LỰC BUỒNG BỆNH -->
+          <!-- NHÂN LỰC BUỒNG BỆNH (ĐÃ BỎ HỘ LÝ) -->
           <div style="font-weight:700;font-size:0.95rem;color:#1e293b;margin-bottom:12px;">
-            <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp trực & Nhân lực buồng bệnh
+            <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp trực &amp; Nhân lực buồng bệnh
           </div>
 
           <div class="gb-personnel-grid">
       `;
 
-      if (roomKey === 'hstk') {
+      if (isHSTK) {
         html += `
           <div class="gb-input-group">
             <label class="gb-input-label">Điều dưỡng Ca Ngày (7h - 19h):</label>
@@ -1835,10 +2152,6 @@
       }
 
       html += `
-            <div class="gb-input-group">
-              <label class="gb-input-label">Hộ lý trực:</label>
-              <input type="text" class="gb-input-control" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" />
-            </div>
             <div class="gb-input-group">
               <label class="gb-input-label">Xuất viện (Hành chính):</label>
               <input type="number" class="gb-input-control" value="${p.xuatVien || 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
@@ -1922,14 +2235,14 @@
                   <th style="width:55px;text-align:center;">Tuổi</th>
                   <th style="width:85px;">Nguyên nhân</th>
                   <th>Chẩn đoán vào viện</th>
-                  <th style="width:310px;text-align:center;">Gắn nhãn giao ban</th>
+                  <th style="width:280px;text-align:center;">Gắn nhãn giao ban</th>
                 </tr>
               </thead>
               <tbody>
       `;
 
       if (admissions.length === 0) {
-        html += `<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày.</td></tr>`;
+        html += `<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày. Bấm "+ Thêm ca đột xuất / nặng" để bổ sung ca.</td></tr>`;
       } else {
         admissions.forEach((adm, idx) => {
           const isMoCC = adm.category === 'MO_CC';
@@ -1946,18 +2259,20 @@
               <td><span style="font-size:0.75rem;padding:2px 6px;border-radius:4px;background:#f1f5f9;">${adm.cause || 'Bệnh'}</span></td>
               <td style="font-size:0.83rem;">${adm.chanDoan || '--'}</td>
               <td style="text-align:center;white-space:nowrap;">
-                <button type="button" class="btn-tag-chip ${isMoCC ? 'active-tag-mo-cc' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'MO_CC')">
+                <button type="button" class="btn-tag-chip ${isMoCC ? 'active-tag-mo-cc' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'MO_CC')" title="Mổ cấp cứu">
                   🔪 Mổ CC
                 </button>
-                <button type="button" class="btn-tag-chip ${isTheoDoi ? 'active-tag-theo-doi' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'THEO_DOI')">
+                <button type="button" class="btn-tag-chip ${isTheoDoi ? 'active-tag-theo-doi' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'THEO_DOI')" title="Theo dõi diễn biến nặng">
                   ⚠️ Theo dõi
                 </button>
-                <button type="button" class="btn-tag-chip ${isTuVong ? 'active-tag-tu-vong' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'TU_VONG')">
-                  ⚰️ Tử vong
-                </button>
-                <button type="button" class="btn-tag-chip ${isXinVe ? 'active-tag-xin-ve' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'XIN_VE')">
-                  🏠 Xin về
-                </button>
+                ${isHSTK ? `
+                  <button type="button" class="btn-tag-chip ${isTuVong ? 'active-tag-tu-vong' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'TU_VONG')" title="Tử vong">
+                    ⚰️ Tử vong
+                  </button>
+                  <button type="button" class="btn-tag-chip ${isXinVe ? 'active-tag-xin-ve' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'XIN_VE')" title="Bệnh nặng xin về">
+                    🏠 Xin về
+                  </button>
+                ` : ''}
               </td>
             </tr>
           `;
@@ -1970,6 +2285,105 @@
           </div>
         </div>
 
+        <!-- DANH SÁCH CA GẮN NHÃN BÀN GIAO TOÀN KHOA (DÀNH RIÊNG ĐỂ NHẬP CHI TIẾT) -->
+      `;
+
+      const taggedAdmissions = (admissions || []).filter(a => !!a.category);
+
+      html += `
+        <div class="gb-card" style="border-left: 5px solid #d97706; background:#fff;">
+          <div class="gb-card-header">
+            <div>
+              <div class="gb-card-title" style="color:#b45309;">
+                <i class="fa-solid fa-tags"></i> DANH SÁCH CA GẮN NHÃN BÀN GIAO TOÀN KHOA (${taggedAdmissions.length} ca)
+              </div>
+              <div style="font-size:0.83rem;color:#64748b;margin-top:2px;">
+                Các ca này được tự động chuyển lên Bác sĩ toàn khoa để trình chiếu giao ban &amp; xuất slide
+              </div>
+            </div>
+          </div>
+      `;
+
+      if (taggedAdmissions.length === 0) {
+        html += `
+          <div style="text-align:center;padding:24px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
+            <i class="fa-solid fa-tag" style="font-size:1.8rem;color:#cbd5e1;margin-bottom:6px;"></i>
+            <div style="font-weight:700;">Chưa có bệnh nhân nào được gắn nhãn trong ca trực này.</div>
+            <div style="font-size:0.83rem;margin-top:2px;">Bấm nút gắn nhãn (Mổ CC, Theo dõi...) ở bảng trên hoặc bấm "+ Thêm ca đột xuất / nặng" để đưa vào danh sách này.</div>
+          </div>
+        `;
+      } else {
+        html += `<div style="display:flex;flex-direction:column;gap:14px;">`;
+        taggedAdmissions.forEach(adm => {
+          const isMoCC = adm.category === 'MO_CC';
+          const isTheoDoi = adm.category === 'THEO_DOI';
+          const isTuVong = adm.category === 'TU_VONG';
+          const isXinVe = adm.category === 'XIN_VE';
+
+          const cardBorder = isMoCC ? 'tagged-mo-cc' : isTheoDoi ? 'tagged-theo-doi' : isTuVong ? 'tagged-tu-vong' : 'tagged-xin-ve';
+          const tagBadge = isMoCC ? '<span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fca5a5;">🔪 MỔ CẤP CỨU</span>'
+            : isTheoDoi ? '<span style="background:#fef3c7;color:#92400e;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fde68a;">⚠️ THEO DÕI</span>'
+            : isTuVong ? '<span style="background:#fef2f2;color:#7f1d1d;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #f87171;">⚰️ TỬ VONG</span>'
+            : '<span style="background:#ffedd5;color:#c2410c;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.82rem;border:1px solid #fed7aa;">🏠 NẶNG XIN VỀ</span>';
+
+          const mCase = (currentReport.highlightCases || []).find(c => c.mabn === adm.mabn && c.roomKey === roomKey) || {};
+
+          html += `
+            <div class="room-tagged-card ${cardBorder}">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                  ${tagBadge}
+                  <span style="font-weight:900;font-size:1.15rem;color:#0f172a;text-transform:uppercase;">${escapeHtml(adm.hoten || '')}</span>
+                  <span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:6px;font-weight:700;font-size:0.8rem;">Mã: ${adm.mabn || '--'}</span>
+                  <span style="font-size:0.85rem;font-weight:700;color:#475569;">${adm.tuoi || '--'} tuổi • ${adm.gioiTinh || 'NAM'}</span>
+                </div>
+                <button type="button" class="btn-gb-action" style="padding:3px 10px;font-size:0.78rem;background:#fee2e2;color:#b91c1c;border-color:#fca5a5;" onclick="togglePatientTag('${roomKey}', '${adm.id}', '${adm.category}')" title="Gỡ nhãn này khỏi danh sách">
+                  <i class="fa-solid fa-xmark"></i> Gỡ nhãn
+                </button>
+              </div>
+
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:8px;margin-bottom:10px;font-size:0.85rem;">
+                <div><strong>Địa chỉ:</strong> ${escapeHtml(adm.diaChi || 'Gia Lai')}</div>
+                <div><strong>Ngày vào viện:</strong> ${adm.ngayVaoVien || currentDateKey}</div>
+                <div><strong>Chẩn đoán:</strong> <span style="color:#0369a1;font-weight:700;">${escapeHtml(adm.chanDoan || '--')}</span></div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:10px;margin-bottom:10px;">
+                ${isMoCC ? `
+                  <div>
+                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Ngày phẫu thuật:</label>
+                    <input type="date" class="gb-input-control" value="${adm.ngayPhauThuat || mCase.ngayPhauThuat || currentDateKey}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'ngayPhauThuat', this.value)" />
+                  </div>
+                  <div>
+                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Kíp mổ / PTV:</label>
+                    <input type="text" class="gb-input-control" placeholder="Tên PTV, Kíp phẫu thuật..." value="${escapeHtml(adm.kipMo || mCase.kipMo || '')}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'kipMo', this.value)" />
+                  </div>
+                ` : (isXinVe || isTuVong) ? `
+                  <div>
+                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">${isTuVong ? 'Thời gian tử vong:' : 'Thời gian xin về:'}</label>
+                    <input type="text" class="gb-input-control" placeholder="Giờ, ngày..." value="${escapeHtml(adm.ngayXinVe || mCase.ngayXinVe || currentDateKey)}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'ngayXinVe', this.value)" />
+                  </div>
+                ` : `
+                  <div>
+                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Tình trạng cần theo dõi:</label>
+                    <input type="text" class="gb-input-control" placeholder="Theo dõi tri giác, dẫn lưu..." value="${escapeHtml(adm.dienBien || mCase.dienBien || '')}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'dienBien', this.value)" />
+                  </div>
+                `}
+              </div>
+
+              <div>
+                <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Diễn biến ca trực / Tri giác / Sinh hiệu:</label>
+                <textarea class="gb-input-control" style="width:100%;height:52px;font-size:0.85rem;" placeholder="GCS, đồng tử, mạch, HA, SpO2, vết mổ, dẫn lưu..." onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'dienBien', this.value)">${escapeHtml(adm.dienBien || mCase.dienBien || '')}</textarea>
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      }
+
+      html += `
+        </div>
+
         <!-- GHI CHÚ BÀN GIAO PHÒNG -->
         <div class="gb-card">
           <div class="gb-card-header">
@@ -1980,7 +2394,7 @@
           <textarea class="gb-input-control" style="width:100%;min-height:75px;" onchange="updateRoomNotes('${roomKey}', this.value)" placeholder="Dặn dò điều dưỡng ca sau, bệnh nhân cần chú ý...">${escapeHtml(roomRep.criticalNotes || '')}</textarea>
           <div style="margin-top:14px;display:flex;justify-content:flex-end;">
             <button type="button" class="btn-gb-action btn-gb-save" onclick="submitRoomReport('${roomKey}')">
-              <i class="fa-solid fa-check"></i> Lưu & Gửi báo cáo ${roomName} về Toàn Khoa
+              <i class="fa-solid fa-check"></i> Lưu &amp; Gửi báo cáo ${roomName} về Toàn Khoa
             </button>
           </div>
         </div>
@@ -2056,13 +2470,14 @@
         sum.hienCo += Number(c.hienCo || 0);
         sum.bhyt += Number(c.bhyt || 0);
 
+        // Hộ lý đã được bỏ theo yêu cầu
         const personnelStr = (r.key === 'hstk')
-          ? `Ngày: <strong>${escapeHtml(p.nursesDay || '--')}</strong> | Đêm: <strong>${escapeHtml(p.nursesNight || '--')}</strong> | HL: <strong>${escapeHtml(p.orderly || '--')}</strong>`
-          : `ĐD: <strong>${escapeHtml(p.nurses || '--')}</strong> | HL: <strong>${escapeHtml(p.orderly || '--')}</strong>`;
+          ? `Ngày: <strong>${escapeHtml(p.nursesDay || '--')}</strong> | Đêm: <strong>${escapeHtml(p.nursesNight || '--')}</strong>`
+          : `ĐD: <strong>${escapeHtml(p.nurses || '--')}</strong>`;
 
         const statusBadge = isSub
-          ? `<span class="badge-status-submitted"><i class="fa-solid fa-circle-check"></i> ĐÃ NỘP</span>`
-          : `<span class="badge-status-pending"><i class="fa-solid fa-clock"></i> CHỜ NỘP</span>`;
+          ? `<span class="badge-status-submitted"><i class="fa-solid fa-circle-check"></i> ĐÃ BÁO CÁO</span>`
+          : `<span class="badge-status-pending"><i class="fa-solid fa-clock"></i> CHỜ BÁO CÁO</span>`;
 
         rowsHtml += `
           <tr>
@@ -2094,7 +2509,7 @@
       rowsHtml += `
         <tr style="background:#f8fafc;border-top:2px solid #cbd5e1;font-weight:800;">
           <td colspan="2" style="text-align:left;color:#0284c7;padding:10px 8px;">TỔNG CỘNG 5 PHÒNG</td>
-          <td style="font-size:0.8rem;color:#64748b;text-align:left;">Tổng dồn điều dưỡng nộp</td>
+          <td style="font-size:0.8rem;color:#64748b;text-align:left;">Tổng dồn điều dưỡng báo cáo</td>
           <td>${sum.benhCu}</td>
           <td style="color:#2563eb;">${sum.vaoKK}</td>
           <td style="color:#2563eb;">${sum.vaoKhac}</td>
@@ -2114,6 +2529,464 @@
       `;
 
       return rowsHtml;
+    }
+
+    function updateTaggedCaseDetails(roomKey, admissionId, field, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.admissions)) return;
+
+      const adm = rep.admissions.find(a => a.id === admissionId);
+      if (adm) {
+        adm[field] = val;
+      }
+
+      // Sync to master highlightCases
+      if (currentReport.highlightCases && adm) {
+        const masterCase = currentReport.highlightCases.find(c => c.mabn === adm.mabn && c.roomKey === roomKey);
+        if (masterCase) {
+          if (field === 'ngayPhauThuat') masterCase.ngayPhauThuat = val;
+          if (field === 'ngayXinVe') masterCase.ngayXinVe = val;
+          if (field === 'kipMo') masterCase.kipMo = val;
+          if (field === 'dienBien') masterCase.dienBien = val;
+        }
+      }
+    }
+
+    function updateRoomPersonnel(roomKey, field, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (rep) {
+        if (!rep.personnel) rep.personnel = {};
+        rep.personnel[field] = (typeof rep.personnel[field] === 'number') ? Number(val) : val;
+      }
+    }
+
+    function updateRoomCensus(roomKey, field, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (rep) {
+        if (!rep.census) rep.census = {};
+        rep.census[field] = Number(val) || 0;
+      }
+    }
+
+    function updateRoomNotes(roomKey, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (rep) rep.criticalNotes = val;
+    }
+
+    // Toggle Tag from Room View
+    function togglePatientTag(roomKey, patientId, category) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.admissions)) return;
+
+      const adm = rep.admissions.find(a => a.id === patientId);
+      if (!adm) return;
+
+      const prefix = roomKey.toUpperCase();
+      const catText = (category === 'MO_CC') ? `${prefix} – BỆNH MỔ CẤP CỨU`
+        : (category === 'THEO_DOI') ? `${prefix} – BỆNH THEO DÕI`
+        : (category === 'TU_VONG') ? `${prefix} – BỆNH NHÂN TỬ VONG`
+        : `${prefix} – BỆNH NẶNG XIN VỀ`;
+
+      if (adm.category === category) {
+        adm.category = '';
+        adm.isHighlight = false;
+        currentReport.highlightCases = (currentReport.highlightCases || []).filter(c => !(c.mabn === adm.mabn && c.roomKey === roomKey));
+      } else {
+        adm.category = category;
+        adm.isHighlight = true;
+        if (!Array.isArray(currentReport.highlightCases)) currentReport.highlightCases = [];
+        let existing = currentReport.highlightCases.find(c => c.mabn === adm.mabn && c.roomKey === roomKey);
+        if (!existing) {
+          existing = {
+            id: `case-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+            stt: currentReport.highlightCases.length + 1,
+            mabn: adm.mabn,
+            hoten: adm.hoten,
+            tuoi: adm.tuoi,
+            gioiTinh: adm.gioiTinh || 'NAM',
+            diaChi: adm.diaChi || 'Gia Lai',
+            ngayVaoVien: adm.ngayVaoVien || currentDateKey,
+            ngayPhauThuat: (category === 'MO_CC') ? currentDateKey : '',
+            ngayXinVe: (category === 'XIN_VE' || category === 'TU_VONG') ? currentDateKey : '',
+            roomKey: roomKey,
+            roomName: ROOM_NAMES[roomKey],
+            category: catText,
+            chanDoan: adm.chanDoan,
+            selectedForSlide: true,
+            dienBien: adm.dienBien || '',
+            kipMo: adm.kipMo || '',
+            images: []
+          };
+          currentReport.highlightCases.push(existing);
+        } else {
+          existing.category = catText;
+        }
+      }
+
+      renderCurrentView();
+    }
+
+    // Modal: Thêm ca đột xuất / nặng tại các buồng
+    function addManualRoomCase(roomKey) {
+      activeRoomAddCaseRoomKey = roomKey;
+      const roomName = ROOM_NAMES[roomKey] || roomKey;
+      const titleEl = document.getElementById('modal-room-add-title');
+      if (titleEl) {
+        titleEl.innerHTML = `<i class="fa-solid fa-hospital-user" style="color:#dc2626;"></i> THÊM CA ĐỘT XUẤT / NẶNG — ${roomName.toUpperCase()}`;
+      }
+
+      // Populate existing patients dropdown for this room
+      const selectExisting = document.getElementById('modal-room-select-existing');
+      if (selectExisting) {
+        const roomPatients = (inpatientList || []).filter(p => p.roomKey === roomKey);
+        let optHtml = '<option value="">-- Chọn bệnh nhân có sẵn tại phòng hoặc nhập mới bên dưới --</option>';
+        roomPatients.forEach(p => {
+          optHtml += `<option value="${p.mabn}">${escapeHtml(p.hoten)} — ${p.mabn} (${p.tuoi}T, Giường: ${p.bed || '--'}) — ${escapeHtml(p.chanDoan)}</option>`;
+        });
+        selectExisting.innerHTML = optHtml;
+      }
+
+      // Populate tag choices: HSTK gets all 4, TK1-4 only gets MO_CC & THEO_DOI
+      const tagContainer = document.getElementById('modal-room-tag-options');
+      if (tagContainer) {
+        const isHSTK = (roomKey === 'hstk');
+        let tagsHtml = `
+          <label style="display:inline-flex;align-items:center;gap:6px;background:#fee2e2;color:#991b1b;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.88rem;border:1px solid #fca5a5;">
+            <input type="radio" name="modal-room-tag" value="MO_CC" checked /> 🔪 Mổ Cấp Cứu
+          </label>
+          <label style="display:inline-flex;align-items:center;gap:6px;background:#fef3c7;color:#92400e;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.88rem;border:1px solid #fde68a;">
+            <input type="radio" name="modal-room-tag" value="THEO_DOI" /> ⚠️ Theo Dõi
+          </label>
+        `;
+        if (isHSTK) {
+          tagsHtml += `
+            <label style="display:inline-flex;align-items:center;gap:6px;background:#fef2f2;color:#7f1d1d;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.88rem;border:1px solid #f87171;">
+              <input type="radio" name="modal-room-tag" value="TU_VONG" /> ⚰️ Tử Vong
+            </label>
+            <label style="display:inline-flex;align-items:center;gap:6px;background:#ffedd5;color:#c2410c;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.88rem;border:1px solid #fed7aa;">
+              <input type="radio" name="modal-room-tag" value="XIN_VE" /> 🏠 Nặng Xin Về
+            </label>
+          `;
+        }
+        tagContainer.innerHTML = tagsHtml;
+      }
+
+      // Reset fields
+      document.getElementById('modal-room-mabn').value = '';
+      document.getElementById('modal-room-hoten').value = '';
+      document.getElementById('modal-room-tuoi').value = '';
+      document.getElementById('modal-room-gioitinh').value = 'NAM';
+      document.getElementById('modal-room-diachi').value = 'Gia Lai';
+      document.getElementById('modal-room-chandoan').value = '';
+      document.getElementById('modal-room-dienbien').value = '';
+
+      document.getElementById('modal-room-add-case').classList.add('active');
+    }
+
+    function closeRoomAddCaseModal(e) {
+      if (e && e.target !== e.currentTarget && e.target.id !== 'modal-room-add-case') return;
+      document.getElementById('modal-room-add-case').classList.remove('active');
+    }
+
+    function onRoomExistingPatientSelected(mabn) {
+      if (!mabn) return;
+      const p = (inpatientList || []).find(item => item.mabn === mabn);
+      if (p) {
+        document.getElementById('modal-room-mabn').value = p.mabn || '';
+        document.getElementById('modal-room-hoten').value = p.hoten || '';
+        document.getElementById('modal-room-tuoi').value = p.tuoi || '';
+        document.getElementById('modal-room-gioitinh').value = (p.gioiTinh && p.gioiTinh.toUpperCase().includes('NỮ')) ? 'NỮ' : 'NAM';
+        document.getElementById('modal-room-diachi').value = p.diaChi || 'Gia Lai';
+        document.getElementById('modal-room-chandoan').value = p.chanDoan || '';
+      }
+    }
+
+    function saveRoomAddCase() {
+      if (!activeRoomAddCaseRoomKey) return;
+      const roomKey = activeRoomAddCaseRoomKey;
+      const hoten = (document.getElementById('modal-room-hoten').value || '').trim().toUpperCase();
+      if (!hoten) {
+        alert('Vui lòng nhập Họ và tên bệnh nhân!');
+        return;
+      }
+      const mabn = (document.getElementById('modal-room-mabn').value || '').trim() || `BN-${Date.now().toString().slice(-4)}`;
+      const tuoi = (document.getElementById('modal-room-tuoi').value || '').trim();
+      const gioiTinh = document.getElementById('modal-room-gioitinh').value || 'NAM';
+      const diaChi = (document.getElementById('modal-room-diachi').value || '').trim() || 'Gia Lai';
+      const chanDoan = (document.getElementById('modal-room-chandoan').value || '').trim();
+      const dienBien = (document.getElementById('modal-room-dienbien').value || '').trim();
+
+      const selectedTagEl = document.querySelector('input[name="modal-room-tag"]:checked');
+      const tag = selectedTagEl ? selectedTagEl.value : 'MO_CC';
+
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep) return;
+      if (!Array.isArray(rep.admissions)) rep.admissions = [];
+
+      const newAdmId = `adm-${Date.now()}`;
+      const newAdm = {
+        id: newAdmId,
+        mabn,
+        hoten,
+        tuoi,
+        gioiTinh,
+        diaChi,
+        chanDoan,
+        cause: (tag === 'MO_CC') ? 'Chấn thương' : 'Bệnh lý',
+        category: tag,
+        isHighlight: true,
+        dienBien: dienBien,
+        ngayVaoVien: currentDateKey,
+        ngayPhauThuat: (tag === 'MO_CC') ? currentDateKey : '',
+        ngayXinVe: (tag === 'XIN_VE' || tag === 'TU_VONG') ? currentDateKey : ''
+      };
+
+      rep.admissions.unshift(newAdm);
+
+      // Sync to master highlight cases
+      const prefix = roomKey.toUpperCase();
+      const catText = (tag === 'MO_CC') ? `${prefix} – BỆNH MỔ CẤP CỨU`
+        : (tag === 'THEO_DOI') ? `${prefix} – BỆNH THEO DÕI`
+        : (tag === 'TU_VONG') ? `${prefix} – BỆNH NHÂN TỬ VONG`
+        : `${prefix} – BỆNH NẶNG XIN VỀ`;
+
+      if (!Array.isArray(currentReport.highlightCases)) currentReport.highlightCases = [];
+      currentReport.highlightCases.push({
+        id: `case-${Date.now()}`,
+        stt: currentReport.highlightCases.length + 1,
+        mabn,
+        hoten,
+        tuoi,
+        gioiTinh,
+        diaChi,
+        ngayVaoVien: currentDateKey,
+        ngayPhauThuat: (tag === 'MO_CC') ? currentDateKey : '',
+        ngayXinVe: (tag === 'XIN_VE' || tag === 'TU_VONG') ? currentDateKey : '',
+        roomKey,
+        roomName: ROOM_NAMES[roomKey],
+        category: catText,
+        chanDoan,
+        selectedForSlide: true,
+        dienBien,
+        images: []
+      });
+
+      closeRoomAddCaseModal();
+      renderCurrentView();
+      alert(`✅ Đã thêm ca [${hoten}] vào ${ROOM_NAMES[roomKey]} và tự động chuyển lên Bác sĩ toàn khoa!`);
+    }
+
+    // Modal: Bác sĩ chọn bệnh nhân trong danh sách khoa
+    function openSelectPatientModal() {
+      selectedPatientRoomFilter = 'all';
+      document.getElementById('patient-search-input').value = '';
+      document.querySelectorAll('#modal-patient-room-filters .btn-filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.room === 'all');
+      });
+      filterPatientPickerList();
+      document.getElementById('modal-select-patient').classList.add('active');
+    }
+
+    function closeSelectPatientModal(e) {
+      if (e && e.target !== e.currentTarget && e.target.id !== 'modal-select-patient') return;
+      document.getElementById('modal-select-patient').classList.remove('active');
+    }
+
+    function filterPatientByRoom(roomKey) {
+      selectedPatientRoomFilter = roomKey;
+      document.querySelectorAll('#modal-patient-room-filters .btn-filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.room === roomKey);
+      });
+      filterPatientPickerList();
+    }
+
+    function filterPatientPickerList() {
+      const query = (document.getElementById('patient-search-input').value || '').trim().toLowerCase();
+      const container = document.getElementById('modal-patient-list');
+      if (!container) return;
+
+      let list = inpatientList || [];
+      if (selectedPatientRoomFilter && selectedPatientRoomFilter !== 'all') {
+        list = list.filter(p => p.roomKey === selectedPatientRoomFilter);
+      }
+
+      if (query) {
+        list = list.filter(p => {
+          return (p.hoten && p.hoten.toLowerCase().includes(query)) ||
+                 (p.mabn && p.mabn.toLowerCase().includes(query)) ||
+                 (p.chanDoan && p.chanDoan.toLowerCase().includes(query)) ||
+                 (p.bed && p.bed.toLowerCase().includes(query)) ||
+                 (p.doctor && p.doctor.toLowerCase().includes(query));
+        });
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center;padding:32px;color:#64748b;">
+            <i class="fa-solid fa-user-xmark" style="font-size:2rem;color:#cbd5e1;margin-bottom:8px;"></i>
+            <div style="font-weight:700;">Không tìm thấy bệnh nhân phù hợp</div>
+            <div style="font-size:0.85rem;margin-top:4px;">Thử tìm với từ khóa khác hoặc bấm nút "Tự nhập ca ngoài danh sách"</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(p => `
+        <div class="patient-picker-item" onclick="selectPatientForMasterCase('${p.mabn}')">
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">
+              <span style="font-size:1.05rem;font-weight:900;color:#0f172a;text-transform:uppercase;">${escapeHtml(p.hoten)}</span>
+              <span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:6px;font-weight:700;font-size:0.8rem;">Mã: ${p.mabn}</span>
+              <span style="background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:6px;font-size:0.8rem;font-weight:700;">${p.tuoi} tuổi • ${p.gioiTinh || 'NAM'}</span>
+              <span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:6px;font-size:0.8rem;font-weight:700;">${p.roomName || p.roomKey} (${p.bed || 'Giường --'})</span>
+            </div>
+            <div style="font-size:0.86rem;color:#0369a1;font-weight:700;margin-bottom:2px;">
+              <i class="fa-solid fa-stethoscope"></i> ${escapeHtml(p.chanDoan || 'Chưa có chẩn đoán')}
+            </div>
+            <div style="font-size:0.78rem;color:#64748b;">
+              BS điều trị: <strong>${escapeHtml(p.doctor || '--')}</strong> • Địa chỉ: ${escapeHtml(p.diaChi || 'Gia Lai')}
+            </div>
+          </div>
+          <div>
+            <button type="button" class="btn-gb-action" style="padding:6px 14px;font-size:0.85rem;background:#0284c7;color:#fff;border-color:#0284c7;" onclick="event.stopPropagation(); selectPatientForMasterCase('${p.mabn}')">
+              <i class="fa-solid fa-plus"></i> Chọn ca này
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectPatientForMasterCase(mabn) {
+      const p = (inpatientList || []).find(item => item.mabn === mabn);
+      if (!p) {
+        alert('Không tìm thấy thông tin bệnh nhân!');
+        return;
+      }
+
+      const catSelect = document.getElementById('modal-patient-category');
+      let chosenCategory = catSelect ? catSelect.value : 'AUTO';
+
+      if (chosenCategory === 'AUTO') {
+        const rKey = p.roomKey || 'tk1';
+        const prefix = rKey.toUpperCase();
+        if (rKey === 'hstk') chosenCategory = 'HSTK – BỆNH MỔ CẤP CỨU';
+        else if (rKey === 'tk2') chosenCategory = 'TK2 – BỆNH MỔ VỀ';
+        else chosenCategory = `${prefix} – BỆNH MỔ CẤP CỨU`;
+      }
+
+      if (!Array.isArray(currentReport.highlightCases)) currentReport.highlightCases = [];
+
+      const newCaseId = `case-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+      const newCase = {
+        id: newCaseId,
+        stt: currentReport.highlightCases.length + 1,
+        mabn: p.mabn,
+        hoten: p.hoten,
+        tuoi: p.tuoi,
+        gioiTinh: p.gioiTinh || 'NAM',
+        diaChi: p.diaChi || 'Gia Lai',
+        ngayVaoVien: currentDateKey,
+        ngayPhauThuat: chosenCategory.includes('MỔ') ? currentDateKey : '',
+        ngayXinVe: chosenCategory.includes('XIN VỀ') ? currentDateKey : '',
+        roomKey: p.roomKey,
+        roomName: p.roomName || ROOM_NAMES[p.roomKey] || p.phong,
+        category: chosenCategory,
+        chanDoan: p.chanDoan,
+        selectedForSlide: true,
+        images: []
+      };
+
+      currentReport.highlightCases.push(newCase);
+      closeSelectPatientModal();
+      renderCurrentView();
+
+      setTimeout(() => {
+        const el = document.getElementById(`case-card-${newCaseId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.style.boxShadow = '0 0 0 4px #0284c7';
+          setTimeout(() => el.style.boxShadow = '', 2000);
+        }
+      }, 100);
+    }
+
+    function openManualCustomEntry() {
+      closeSelectPatientModal();
+      addNewMasterCase();
+    }
+
+    function addNewMasterCase() {
+      const name = prompt('Nhập Họ và tên bệnh nhân:');
+      if (!name) return;
+      const cat = prompt('Nhập Tên nhóm phân loại (Ví dụ: HSTK – BỆNH MỔ CẤP CỨU, TK1 – BỆNH THEO DÕI...):', 'TK1 – BỆNH MỔ CẤP CỨU') || 'TK1 – BỆNH MỔ CẤP CỨU';
+      const tuoi = prompt('Nhập Tuổi:') || '50';
+      const gt = prompt('Giới tính (NAM hoặc NỮ):', 'NAM') || 'NAM';
+      const diaChi = prompt('Địa chỉ:') || 'Gia Lai';
+      const chanDoan = prompt('Chẩn đoán:') || 'Chấn thương sọ não';
+
+      if (!Array.isArray(currentReport.highlightCases)) currentReport.highlightCases = [];
+      currentReport.highlightCases.push({
+        id: `case-${Date.now()}`,
+        stt: currentReport.highlightCases.length + 1,
+        mabn: `BN-${Date.now().toString().slice(-4)}`,
+        hoten: name.trim().toUpperCase(),
+        tuoi: tuoi.trim(),
+        gioiTinh: gt.trim().toUpperCase(),
+        diaChi: diaChi.trim(),
+        ngayVaoVien: currentDateKey,
+        ngayPhauThuat: cat.includes('MỔ') ? currentDateKey : '',
+        ngayXinVe: cat.includes('XIN VỀ') ? currentDateKey : '',
+        category: cat.trim(),
+        chanDoan: chanDoan.trim(),
+        selectedForSlide: true,
+        images: []
+      });
+
+      renderCurrentView();
+    }
+
+    function removeMasterCase(caseId) {
+      if (!confirm('Bạn có chắc muốn xoá ca này khỏi danh sách giao ban?')) return;
+      currentReport.highlightCases = (currentReport.highlightCases || []).filter(c => c.id !== caseId);
+      renderCurrentView();
+    }
+
+    async function submitRoomReport(roomKey) {
+      const rep = currentReport.roomReports[roomKey];
+      if (rep) {
+        rep.status = 'SUBMITTED';
+        rep.updatedAt = new Date().toISOString();
+      }
+      await saveActiveReport();
+      alert(`🎉 Đã báo cáo thành công Báo cáo giao ban ${ROOM_NAMES[roomKey]} về Toàn Khoa!`);
+    }
+
+    async function pasteImageFromClipboard(caseId) {
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.read) {
+          alert('Trình duyệt chưa cấp quyền đọc trực tiếp Clipboard qua nút bấm. Bạn có thể bấm vào khung rồi nhấn phím Ctrl + V để dán ảnh.');
+          return;
+        }
+        const clipboardItems = await navigator.clipboard.read();
+        let imageBlob = null;
+        for (const item of clipboardItems) {
+          const imgType = item.types.find(t => t.startsWith('image/'));
+          if (imgType) {
+            imageBlob = await item.getType(imgType);
+            break;
+          }
+        }
+        if (!imageBlob) {
+          alert('Không tìm thấy hình ảnh trong Clipboard! Hãy chụp màn hình (PrintScreen / Snipping Tool / PACS) trước rồi bấm nút Dán ảnh.');
+          return;
+        }
+
+        const targetCase = (currentReport.highlightCases || []).find(c => c.id === caseId);
+        await uploadClinicalImageFile(caseId, imageBlob, 'Ảnh CT/MRI cận lâm sàng');
+      } catch (err) {
+        console.warn('Clipboard read error:', err);
+        alert('Không thể đọc Clipboard (Vui lòng bấm Cho phép / Allow truy cập Clipboard khi trình duyệt hỏi, hoặc nhấn Ctrl + V để dán).');
+      }
     }
 
     /* =========================================================================
@@ -2919,8 +3792,22 @@
       buildPresentationSlides();
       currentSlideIndex = 0;
       renderCurrentSlide();
-      document.getElementById('theater-modal').classList.add('active');
+      const modal = document.getElementById('theater-modal');
+      modal.classList.add('active');
       document.getElementById('theater-date-label').textContent = `${formatDateDisplayVN(currentDateKey)} • Khoa Ngoại Thần Kinh - Cột Sống`;
+
+      // Tự động kích hoạt chế độ toàn màn hình khi bấm trình chiếu
+      try {
+        if (modal.requestFullscreen) {
+          modal.requestFullscreen().catch(() => {});
+        } else if (modal.webkitRequestFullscreen) {
+          modal.webkitRequestFullscreen();
+        } else if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        }
+      } catch (err) {
+        console.warn('Auto fullscreen error:', err);
+      }
     }
 
     function closePresentationMode() {
@@ -2972,7 +3859,7 @@
         const grand = overall.grandCensus || {};
         const docsDutyStr = (overall.doctorsOnDuty && overall.doctorsOnDuty.length > 0)
           ? overall.doctorsOnDuty.join(' – ')
-          : 'HẢI – CƯ – LUÂN – LƯƠNG';
+          : (dutyDoctorsAbbr || 'HẢI – CƯ – LUÂN');
 
         viewport.innerHTML = `
           <div class="slide-official-box">
@@ -2990,19 +3877,19 @@
                   <th>Tử vong</th>
                   <th>Chuyển</th>
                   <th>Mổ</th>
-                  <th style="color:#fde047;">Hiện có</th>
+                  <th style="background:#fef3c7;color:#92400e;">Hiện có</th>
                   <th>Bảo hiểm</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>${grand.benhCu || 0}</td>
-                  <td style="color:#ef4444;">${grand.vao || 0}</td>
+                  <td style="color:#dc2626;">${grand.vao || 0}</td>
                   <td>${grand.ra || 0}</td>
-                  <td style="color:${Number(grand.tuVong || 0) > 0 ? '#ef4444' : '#f8fafc'};">${grand.tuVong || 0}</td>
+                  <td style="color:${Number(grand.tuVong || 0) > 0 ? '#dc2626' : '#0f172a'};">${grand.tuVong || 0}</td>
                   <td>${grand.chuyen || 0}</td>
-                  <td style="color:#ef4444;">${grand.mo || 0}</td>
-                  <td style="color:#fde047;font-size:2.4rem;">${grand.hienCo || 0}</td>
+                  <td style="color:#dc2626;">${grand.mo || 0}</td>
+                  <td style="background:#fffbeb;color:#b45309;font-size:2.4rem;">${grand.hienCo || 0}</td>
                   <td>${grand.bhyt || 0}</td>
                 </tr>
               </tbody>
@@ -3029,14 +3916,10 @@
           </div>
         `;
       } else if (slide.type === 'PATIENT_IMAGE') {
-        const c = slide.patient;
         const img = slide.image;
         viewport.innerHTML = `
           <div class="slide-image-fullscreen-box">
-            <img src="${img.url}" class="slide-full-img" alt="Phim" onclick="openLightbox('${img.url}', '${escapeHtml(c.hoten)}', '${escapeHtml(img.title || '')}')" />
-            <div style="font-family:'Times New Roman',serif;font-size:1.4rem;font-weight:700;color:#38bdf8;margin-top:12px;text-align:center;">
-              ${escapeHtml(c.hoten)} (${c.tuoi || ''}T) — ${escapeHtml(img.title || 'Hình ảnh cận lâm sàng')}
-            </div>
+            <img src="${img.url}" class="slide-full-img" alt="Phim cận lâm sàng" onclick="openLightbox('${img.url}', '', '')" />
           </div>
         `;
       }
