@@ -1,5 +1,5 @@
 {
-  "version": 1791038157500,
+  "version": 1791042133044,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3389,7 +3389,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:35:57.396Z",
+      "updatedAt": "2026-10-03T15:42:13.043Z",
       "roomKey": "tk1"
     },
     "tk2": {
@@ -3859,12 +3859,22 @@
           "hanTheDen": "20/02/2027",
           "diaChi": "339 Trần Phú-Phường Bình Định--Tỉnh Gia Lai",
           "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
-          "customDiagnosis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+          "customDiagnosis": "Hậu phẫu ngày 9 phẫu thuật",
           "bsDieuTri": "Ngô Văn Ri",
           "ngayVaoStr": "24/09/2026",
           "hisBed": "H056",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-03": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -5047,7 +5057,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:35:57.396Z"
+      "updatedAt": "2026-10-03T15:42:13.043Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6243,7 +6253,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:35:57.397Z"
+      "updatedAt": "2026-10-03T15:42:13.043Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -9222,7 +9232,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:35:57.397Z"
+      "updatedAt": "2026-10-03T15:42:13.043Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10189,7 +10199,7 @@
       ],
       "acknowledgedMissingMabns": {},
       "lastDeletedAction": null,
-      "updatedAt": "2026-10-03T14:35:57.484Z"
+      "updatedAt": "2026-10-03T15:42:13.043Z"
     }
   },
   "episodeConsultations": {
