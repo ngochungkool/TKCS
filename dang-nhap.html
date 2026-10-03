@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập | Khoa Ngoại Thần Kinh - Cột Sống (BVĐK Tỉnh Gia Lai)</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #2563eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --warning: #d97706;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #cbd5e1;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 50%, #eff6ff 100%);
+      color: var(--slate-900);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Hospital Header */
+    .top-header {
+      background: #ffffff;
+      border-bottom: 2px solid #e2e8f0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+    }
+
+    .hospital-sub {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #64748b;
+      letter-spacing: 0.05em;
+    }
+
+    .dept-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0369a1;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid #cbd5e1;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-home:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Main Container */
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 16px;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .login-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 12px 35px rgba(2, 132, 199, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #0284c7, #2563eb, #10b981);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .login-icon-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+      color: #0284c7;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.18);
+    }
+
+    .login-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .login-desc {
+      font-size: 0.88rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* Form groups */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      color: #94a3b8;
+      font-size: 1rem;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 44px 0 42px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: #0f172a;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus {
+      background: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .form-input:focus + .input-icon {
+      color: #0284c7;
+    }
+
+    .toggle-pass-btn {
+      position: absolute;
+      right: 12px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .toggle-pass-btn:hover {
+      color: #334155;
+    }
+
+    .form-row-remember {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      font-size: 0.88rem;
+    }
+
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-label input {
+      width: 17px;
+      height: 17px;
+      accent-color: #0284c7;
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.45);
+      background: linear-gradient(135deg, #0369a1, #1d4ed8);
+    }
+
+    .btn-submit:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Alert Message */
+    .auth-alert {
+      display: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.4;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-alert.error {
+      display: flex;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+    }
+
+    .auth-alert.success {
+      display: flex;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+    }
+
+    /* Quick Guide Box */
+    .guide-box {
+      margin-top: 24px;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .guide-title {
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .guide-item {
+      margin-bottom: 4px;
+    }
+
+    .guide-code {
+      font-family: monospace;
+      font-weight: 700;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .btn-lookup-modal {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      width: 100%;
+      justify-content: center;
+      padding: 9px 12px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #94a3b8;
+      color: #0369a1;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-lookup-modal:hover {
+      background: #f0f9ff;
+      border-color: #0284c7;
+    }
+
+    /* Modal Directory Lookup */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 640px;
+      max-height: 85vh;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8fafc;
+    }
+
+    .modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      color: #64748b;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .modal-search-bar {
+      padding: 14px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .search-input-wrap {
+      position: relative;
+    }
+
+    .search-input-wrap input {
+      width: 100%;
+      height: 42px;
+      padding: 0 16px 0 38px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      background: #f8fafc;
+    }
+
+    .search-input-wrap input:focus {
+      background: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+    }
+
+    .search-input-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 13px;
+      color: #94a3b8;
+    }
+
+    .role-chips {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .role-chip {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .role-chip.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+
+    .modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 24px 20px;
+    }
+
+    .directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .directory-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      transition: all 0.15s;
+    }
+
+    .directory-item:hover {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+    }
+
+    .dir-info-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .dir-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #0284c7;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .dir-name-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dir-meta {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 2px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .badge-specialty {
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .badge-specialty.bs {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .badge-specialty.dd {
+      background: #ccfbf1;
+      color: #0f766e;
+    }
+
+    .dir-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .dir-username-pill {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 4px 8px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      color: #0369a1;
+    }
+
+    .btn-pick-user {
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-pick-user:hover {
+      background: #0369a1;
+    }
+
+    /* Already Logged In Card */
+    .already-logged-card {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .already-logged-card.active {
+      display: block;
+    }
+
+    .user-big-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+    }
+
+    .user-greeting-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .user-greeting-role {
+      font-size: 0.92rem;
+      color: #0284c7;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .actions-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-portal-action {
+      height: 46px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary-action {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    .btn-primary-action:hover {
+      background: #0369a1;
+    }
+
+    .btn-secondary-action {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-secondary-action:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Bar -->
+  <header class="top-header">
+    <a href="/" class="brand-group">
+      <img src="logo.png" alt="Logo Khoa" class="brand-logo" />
+      <div>
+        <div class="hospital-sub">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+        <div class="dept-title">KHOA NGOẠI THẦN KINH - CỘT SỐNG</div>
+      </div>
+    </a>
+    <a href="/" class="btn-back-home">
+      <i class="fa-solid fa-arrow-left"></i> Về Trang Chủ
+    </a>
+  </header>
+
+  <!-- Login Area -->
+  <main class="login-container">
+    <div class="login-wrapper">
+      <div class="login-card">
+        <!-- Form view (default) -->
+        <div id="loginFormSection">
+          <div class="login-header">
+            <div class="login-icon-badge">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h1 class="login-title">ĐĂNG NHẬP HỆ THỐNG</h1>
+            <p class="login-desc">Khoa Ngoại Thần Kinh - Cột Sống</p>
+          </div>
+
+          <!-- Alert box -->
+          <div id="authAlert" class="auth-alert"></div>
+
+          <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+            <div class="form-group">
+              <label class="form-label" for="usernameInput">Tên đăng nhập hoặc SĐT</label>
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  id="usernameInput"
+                  class="form-input"
+                  placeholder="Ví dụ: hnhung hoặc 0357753031"
+                  required
+                  autocomplete="username"
+                  autocapitalize="none"
+                  autofocus
+                />
+                <i class="fa-solid fa-user input-icon"></i>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="passwordInput">Mật khẩu</label>
+              <div class="input-wrapper">
+                <input
+                  type="password"
+                  id="passwordInput"
+                  class="form-input"
+                  placeholder="Ví dụ: Hung@1995"
+                  required
+                  autocomplete="current-password"
+                />
+                <i class="fa-solid fa-lock input-icon"></i>
+                <button type="button" class="toggle-pass-btn" onclick="togglePasswordVisibility()" title="Ẩn/Hiện mật khẩu">
+                  <i class="fa-solid fa-eye" id="togglePassIcon"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-row-remember">
+              <label class="checkbox-label">
+                <input type="checkbox" id="rememberMeCheckbox" checked />
+                <span>Ghi nhớ đăng nhập</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnSubmitLogin">
+              <i class="fa-solid fa-right-to-bracket"></i> ĐĂNG NHẬP
+            </button>
+          </form>
+
+          <!-- Guide box -->
+          <div class="guide-box">
+            <div class="guide-title">
+              <i class="fa-solid fa-circle-info" style="color: #0284c7;"></i> Hướng dẫn tài khoản mặc định:
+            </div>
+            <div class="guide-item">
+              • <strong>Tên đăng nhập:</strong> Viết tắt họ đệm + tên không dấu (VD: <em>Huỳnh Ngọc Hưng</em> → <span class="guide-code">hnhung</span>).
+            </div>
+            <div class="guide-item">
+              • <strong>Mật khẩu mặc định:</strong> Tên viết hoa + @ + năm sinh (VD: <span class="guide-code">Hung@1995</span>).
+            </div>
+            <button type="button" class="btn-lookup-modal" onclick="openDirectoryModal()">
+              <i class="fa-solid fa-magnifying-glass"></i> Tra cứu danh bạ tài khoản 77 nhân viên khoa
+            </button>
+          </div>
+        </div>
+
+        <!-- Already logged in view -->
+        <div id="alreadyLoggedSection" class="already-logged-card">
+          <div class="user-big-avatar" id="alreadyUserAvatar">H</div>
+          <div class="user-greeting-name" id="alreadyUserName">BS. Huỳnh Ngọc Hưng</div>
+          <div class="user-greeting-role" id="alreadyUserRole">Bác sĩ • Khoa Ngoại Thần Kinh - Cột Sống</div>
+          <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 20px;">
+            Bạn hiện đang đăng nhập vào hệ thống.
+          </p>
+          <div class="actions-grid">
+            <a href="/" id="alreadyContinueLink" class="btn-portal-action btn-primary-action">
+              <i class="fa-solid fa-arrow-right"></i> Vào Hệ Thống
+            </a>
+            <button type="button" onclick="handleLogout()" class="btn-portal-action btn-secondary-action">
+              <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất (Đổi tài khoản)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL TRA CỨU DANH BẠ NHÂN VIÊN KHOA -->
+  <div class="modal-overlay" id="directoryModal" onclick="closeDirectoryModalOnBackdrop(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-address-book" style="color: #0284c7;"></i> Danh Bạ Tài Khoản Khoa (77 nhân viên)
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeDirectoryModal()" title="Đóng">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-search-bar">
+        <div class="search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="dirSearchInput"
+            placeholder="Tìm theo họ tên (VD: Hưng, Mỹ, Linh, Vũ, Thoa, Tài...)"
+            oninput="handleDirectorySearch()"
+          />
+        </div>
+        <div class="role-chips">
+          <button type="button" class="role-chip active" onclick="filterDirectoryRole('ALL', this)">Tất cả (77)</button>
+          <button type="button" class="role-chip" onclick="filterDirectoryRole('Bác sĩ', this)">Bác sĩ (14)</button>
+          <button type="button" class="role-chip" onclick="filterDirectoryRole('Điều dưỡng', this)">Điều dưỡng (46)</button>
+          <button type="button" class="role-chip" onclick="filterDirectoryRole('OTHER', this)">Nhân viên khác</button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div id="directoryListContainer" class="directory-list">
+          <div style="text-align: center; padding: 30px; color: #94a3b8;">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem;"></i>
+            <p style="margin-top: 8px;">Đang tải danh bạ nhân viên...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let staffDirectory = [];
+    let currentRoleFilter = 'ALL';
+
+    // Parse URL params for redirect target
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectUrl = urlParams.get('redirect') || '/';
+
+    // Check if already authenticated on page load
+    async function checkAuthStatus() {
+      try {
+        const res = await fetch('/api/auth/me', { credentials: 'include' });
+        const data = await res.json();
+        if (data && data.ok && data.user) {
+          showAlreadyLoggedIn(data.user);
+        }
+      } catch (e) {
+        console.error('Check auth error:', e);
+      }
+    }
+
+    function showAlreadyLoggedIn(user) {
+      document.getElementById('loginFormSection').style.display = 'none';
+      const section = document.getElementById('alreadyLoggedSection');
+      section.classList.add('active');
+
+      const avatarLetter = (user.name || 'U').trim().split(/\s+/).pop().charAt(0).toUpperCase();
+      document.getElementById('alreadyUserAvatar').textContent = avatarLetter;
+      document.getElementById('alreadyUserName').textContent = `${user.specialty || ''} ${user.name}`.trim();
+      document.getElementById('alreadyUserRole').textContent = `${user.specialty || 'Cán bộ'} • ${user.workplace || 'Khoa Ngoại Thần Kinh - Cột Sống'}`;
+      document.getElementById('alreadyContinueLink').href = redirectUrl;
+    }
+
+    // Toggle password visibility
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('passwordInput');
+      const passIcon = document.getElementById('togglePassIcon');
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        passIcon.classList.remove('fa-eye');
+        passIcon.classList.add('fa-eye-slash');
+      } else {
+        passInput.type = 'password';
+        passIcon.classList.remove('fa-eye-slash');
+        passIcon.classList.add('fa-eye');
+      }
+    }
+
+    // Alert helper
+    function showAlert(type, message) {
+      const alertBox = document.getElementById('authAlert');
+      alertBox.className = `auth-alert ${type}`;
+      alertBox.innerHTML = `
+        <i class="fa-solid ${type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i>
+        <span>${message}</span>
+      `;
+      alertBox.style.display = 'flex';
+    }
+
+    function hideAlert() {
+      const alertBox = document.getElementById('authAlert');
+      alertBox.style.display = 'none';
+    }
+
+    // Login submit
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      hideAlert();
+
+      const username = document.getElementById('usernameInput').value.trim();
+      const password = document.getElementById('passwordInput').value;
+      const rememberMe = document.getElementById('rememberMeCheckbox').checked;
+      const submitBtn = document.getElementById('btnSubmitLogin');
+
+      if (!username || !password) {
+        showAlert('error', 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang đăng nhập...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ username, password, rememberMe })
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+          showAlert('success', `${data.message || 'Đăng nhập thành công!'} Đang chuyển hướng...`);
+          if (data.token) {
+            localStorage.setItem('auth_token', data.token);
+            localStorage.setItem('auth_user', JSON.stringify(data.user));
+          }
+          setTimeout(() => {
+            window.location.href = redirectUrl;
+          }, 800);
+        } else {
+          showAlert('error', data.error || 'Tên đăng nhập hoặc mật khẩu không đúng!');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> ĐĂNG NHẬP';
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+        showAlert('error', 'Lỗi kết nối máy chủ! Vui lòng thử lại sau.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> ĐĂNG NHẬP';
+      }
+    }
+
+    // Logout
+    async function handleLogout() {
+      try {
+        await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_user');
+        window.location.reload();
+      } catch (e) {
+        console.error('Logout error:', e);
+      }
+    }
+
+    // Directory modal functions
+    async function openDirectoryModal() {
+      document.getElementById('directoryModal').classList.add('active');
+      if (staffDirectory.length === 0) {
+        await loadStaffDirectory();
+      } else {
+        renderDirectoryList();
+      }
+      setTimeout(() => {
+        document.getElementById('dirSearchInput').focus();
+      }, 100);
+    }
+
+    function closeDirectoryModal() {
+      document.getElementById('directoryModal').classList.remove('active');
+    }
+
+    function closeDirectoryModalOnBackdrop(e) {
+      if (e.target.id === 'directoryModal') {
+        closeDirectoryModal();
+      }
+    }
+
+    async function loadStaffDirectory() {
+      try {
+        const res = await fetch('/api/auth/directory');
+        const data = await res.json();
+        if (data.ok && Array.isArray(data.directory)) {
+          staffDirectory = data.directory;
+          renderDirectoryList();
+        }
+      } catch (e) {
+        console.error('Load directory error:', e);
+        document.getElementById('directoryListContainer').innerHTML = `
+          <div style="text-align: center; color: #dc2626; padding: 20px;">
+            Không thể tải danh bạ nhân viên. Vui lòng thử lại sau!
+          </div>
+        `;
+      }
+    }
+
+    function filterDirectoryRole(role, btnEl) {
+      currentRoleFilter = role;
+      document.querySelectorAll('.role-chip').forEach(c => c.classList.remove('active'));
+      btnEl.classList.add('active');
+      renderDirectoryList();
+    }
+
+    function handleDirectorySearch() {
+      renderDirectoryList();
+    }
+
+    function removeDiacritics(str) {
+      return (str || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/Đ/g, 'D')
+        .toLowerCase();
+    }
+
+    function renderDirectoryList() {
+      const q = removeDiacritics(document.getElementById('dirSearchInput').value.trim());
+      const container = document.getElementById('directoryListContainer');
+
+      const filtered = staffDirectory.filter(u => {
+        // Role filter
+        if (currentRoleFilter === 'Bác sĩ' && u.specialty !== 'Bác sĩ') return false;
+        if (currentRoleFilter === 'Điều dưỡng' && u.specialty !== 'Điều dưỡng') return false;
+        if (currentRoleFilter === 'OTHER' && (u.specialty === 'Bác sĩ' || u.specialty === 'Điều dưỡng')) return false;
+
+        // Query filter
+        if (q) {
+          const matchName = removeDiacritics(u.name).includes(q);
+          const matchUsername = (u.username || '').toLowerCase().includes(q);
+          const matchSpecialty = removeDiacritics(u.specialty || '').includes(q);
+          if (!matchName && !matchUsername && !matchSpecialty) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 30px; color: #94a3b8;">
+            <i class="fa-solid fa-user-xmark" style="font-size: 2rem;"></i>
+            <p style="margin-top: 8px;">Không tìm thấy nhân viên phù hợp</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(u => {
+        const isBs = u.specialty === 'Bác sĩ';
+        const isDd = u.specialty === 'Điều dưỡng';
+        const badgeClass = isBs ? 'bs' : (isDd ? 'dd' : '');
+        const avatarLetter = (u.name || 'U').trim().split(/\s+/).pop().charAt(0).toUpperCase();
+
+        return `
+          <div class="directory-item">
+            <div class="dir-info-left">
+              <div class="dir-avatar" style="${isBs ? 'background: #dbeafe; color: #1d4ed8;' : (isDd ? 'background: #ccfbf1; color: #0f766e;' : '')}">
+                ${avatarLetter}
+              </div>
+              <div style="min-width: 0;">
+                <div class="dir-name-title">${u.name}</div>
+                <div class="dir-meta">
+                  <span class="badge-specialty ${badgeClass}">${u.specialty}</span>
+                  <span>Năm sinh: ${u.birthYear}</span>
+                </div>
+              </div>
+            </div>
+            <div class="dir-actions">
+              <span class="dir-username-pill" title="Tên đăng nhập">${u.username}</span>
+              <button type="button" class="btn-pick-user" onclick="pickUser('${u.username}')">
+                Chọn
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function pickUser(username) {
+      document.getElementById('usernameInput').value = username;
+      closeDirectoryModal();
+      document.getElementById('passwordInput').focus();
+    }
+
+    // Initialize
+    checkAuthStatus();
+  </script>
+</body>
+</html>

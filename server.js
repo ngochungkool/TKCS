@@ -4,11 +4,14 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const crypto = require('crypto');
 const XLSX = require('xlsx');
 
 const PORT = 8080;
 const ROOT = __dirname;
 const DATA_FILE = path.join(ROOT, 'state_db.json');
+const USERS_FILE = path.join(ROOT, 'users.json');
+const SESSIONS_FILE = path.join(ROOT, 'auth_sessions.json');
 const VN_OFFSET_MS = 7 * 60 * 60 * 1000; // GMT+7 (Asia/Ho_Chi_Minh)
 const VN_OFFSET_MIN = 7 * 60;            // +420 minutes from UTC
 
@@ -511,9 +514,276 @@ function hasOverlapWithExisting(doc, newStart, newEnd, nowMin) {
   return null;
 }
 
+// ============================================================================
+// AUTHENTICATION & USER MANAGEMENT
+// ============================================================================
+function loadSessions() {
+  try {
+    if (fs.existsSync(SESSIONS_FILE)) {
+      const data = JSON.parse(fs.readFileSync(SESSIONS_FILE, 'utf8'));
+      const map = new Map();
+      const now = Date.now();
+      for (const [token, s] of Object.entries(data)) {
+        if (!s.expires || s.expires > now) {
+          map.set(token, s);
+        }
+      }
+      return map;
+    }
+  } catch (e) {
+    console.error('Error loading sessions:', e);
+  }
+  return new Map();
+}
+
+const authSessions = loadSessions();
+
+function saveSessions() {
+  try {
+    const obj = {};
+    for (const [token, s] of authSessions.entries()) {
+      obj[token] = s;
+    }
+    fs.writeFileSync(SESSIONS_FILE, JSON.stringify(obj, null, 2), 'utf8');
+  } catch (e) {
+    console.error('Error saving sessions:', e);
+  }
+}
+
+function loadUsers() {
+  try {
+    if (fs.existsSync(USERS_FILE)) {
+      return JSON.parse(fs.readFileSync(USERS_FILE, 'utf8'));
+    }
+  } catch (e) {
+    console.error('Error loading users:', e);
+  }
+  return [];
+}
+
+function saveUsers(users) {
+  try {
+    fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2), 'utf8');
+    return true;
+  } catch (e) {
+    console.error('Error saving users:', e);
+    return false;
+  }
+}
+
+function sanitizeUser(user) {
+  if (!user) return null;
+  const { password, cmnd, ...safeUser } = user;
+  return safeUser;
+}
+
+function parseCookies(req) {
+  const list = {};
+  const rc = req.headers.cookie;
+  if (rc) {
+    rc.split(';').forEach(cookie => {
+      const parts = cookie.split('=');
+      const key = parts.shift().trim();
+      const val = parts.join('=').trim();
+      try {
+        list[key] = decodeURIComponent(val);
+      } catch (e) {
+        list[key] = val;
+      }
+    });
+  }
+  return list;
+}
+
+function getAuthUser(req) {
+  let token = null;
+  const authHeader = req.headers['authorization'];
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.slice(7).trim();
+  }
+  if (!token) {
+    const cookies = parseCookies(req);
+    token = cookies['auth_token'];
+  }
+  if (!token) return null;
+  const session = authSessions.get(token);
+  if (!session) return null;
+  if (session.expires && session.expires < Date.now()) {
+    authSessions.delete(token);
+    saveSessions();
+    return null;
+  }
+  const users = loadUsers();
+  const user = users.find(u => u.id === session.userId || (u.username && u.username.toLowerCase() === (session.username || '').toLowerCase()));
+  return user || null;
+}
+
 const server = http.createServer(async (req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   const pathname = decodeURIComponent(parsedUrl.pathname);
+
+  // --- AUTHENTICATION APIS ---
+  // POST /api/auth/login
+  if (req.method === 'POST' && pathname === '/api/auth/login') {
+    const { username, password, rememberMe } = await readBody(req);
+    const cleanUsername = String(username || '').trim().toLowerCase();
+    const cleanPassword = String(password || '').trim();
+
+    if (!cleanUsername || !cleanPassword) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Vui lòng nhập tên đăng nhập và mật khẩu!' }));
+      return;
+    }
+
+    const users = loadUsers();
+    // Allow lookup by username or phone number
+    const user = users.find(u =>
+      (u.username && u.username.toLowerCase() === cleanUsername) ||
+      (u.phone && u.phone.replace(/\D/g, '') === cleanUsername.replace(/\D/g, ''))
+    );
+
+    if (!user || user.password !== cleanPassword) {
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Tên đăng nhập hoặc mật khẩu không chính xác!' }));
+      return;
+    }
+
+    // Create session token
+    const token = crypto.randomBytes(32).toString('hex');
+    const maxAgeSec = rememberMe !== false ? 30 * 24 * 3600 : 24 * 3600; // 30 days default
+    const expires = Date.now() + maxAgeSec * 1000;
+
+    authSessions.set(token, {
+      userId: user.id,
+      username: user.username,
+      role: user.role,
+      name: user.name,
+      specialty: user.specialty,
+      createdAt: Date.now(),
+      expires
+    });
+    saveSessions();
+
+    user.lastLogin = new Date().toISOString();
+    saveUsers(users);
+
+    const cookieHeader = `auth_token=${token}; Path=/; Max-Age=${maxAgeSec}; SameSite=Lax`;
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Set-Cookie': cookieHeader
+    });
+    res.end(JSON.stringify({
+      ok: true,
+      token,
+      user: sanitizeUser(user),
+      message: `Đăng nhập thành công! Chào mừng ${user.name}`
+    }));
+    return;
+  }
+
+  // POST /api/auth/logout
+  if (req.method === 'POST' && pathname === '/api/auth/logout') {
+    let token = null;
+    const authHeader = req.headers['authorization'];
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      token = authHeader.slice(7).trim();
+    }
+    if (!token) {
+      const cookies = parseCookies(req);
+      token = cookies['auth_token'];
+    }
+    const body = await readBody(req);
+    if (!token && body && body.token) {
+      token = body.token;
+    }
+
+    if (token && authSessions.has(token)) {
+      authSessions.delete(token);
+      saveSessions();
+    }
+
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Set-Cookie': 'auth_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
+    });
+    res.end(JSON.stringify({ ok: true, message: 'Đã đăng xuất thành công!' }));
+    return;
+  }
+
+  // GET /api/auth/me
+  if (req.method === 'GET' && pathname === '/api/auth/me') {
+    const user = getAuthUser(req);
+    if (!user) {
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, user: null }));
+      return;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, user: sanitizeUser(user) }));
+    return;
+  }
+
+  // POST /api/auth/change-password
+  if (req.method === 'POST' && pathname === '/api/auth/change-password') {
+    const user = getAuthUser(req);
+    if (!user) {
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại!' }));
+      return;
+    }
+
+    const { currentPassword, newPassword } = await readBody(req);
+    const cleanCurrent = String(currentPassword || '').trim();
+    const cleanNew = String(newPassword || '').trim();
+
+    if (!cleanCurrent || !cleanNew) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Vui lòng nhập mật khẩu hiện tại và mật khẩu mới!' }));
+      return;
+    }
+
+    if (user.password !== cleanCurrent) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Mật khẩu hiện tại không chính xác!' }));
+      return;
+    }
+
+    if (cleanNew.length < 5) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Mật khẩu mới phải có tối thiểu 5 ký tự!' }));
+      return;
+    }
+
+    const users = loadUsers();
+    const targetUser = users.find(u => u.id === user.id);
+    if (targetUser) {
+      targetUser.password = cleanNew;
+      saveUsers(users);
+    }
+
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, message: 'Đổi mật khẩu thành công! Hãy ghi nhớ mật khẩu mới của bạn.' }));
+    return;
+  }
+
+  // GET /api/auth/directory
+  if (req.method === 'GET' && pathname === '/api/auth/directory') {
+    const users = loadUsers();
+    const directory = users.map(u => ({
+      id: u.id,
+      stt: u.stt,
+      name: u.name,
+      username: u.username,
+      specialty: u.specialty,
+      role: u.role,
+      workplace: u.workplace,
+      birthYear: u.birthYear,
+      defaultPassFormula: `${(u.name.trim().split(/\s+/).pop() || '').replace(/[^a-zA-Z]/g, '')}@${u.birthYear}`
+    }));
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, directory }));
+    return;
+  }
 
   // Auto-compute from uploads_his if not yet computed
   if (!db.patientStats || !db.patientStats.total || db.patientStats.total.hienCo === 0) {
@@ -3095,6 +3365,14 @@ const server = http.createServer(async (req, res) => {
   else if (cleanRoute === '/hanh-chinh-khoa') cleanRoute = '/hanh-chinh-khoa.html';
   else if (cleanRoute === '/di-buong-hang-ngay' || cleanRoute === '/di-buong') cleanRoute = '/di-buong-hang-ngay.html';
   else if (cleanRoute === '/bao-cao-giao-ban' || cleanRoute === '/giao-ban') cleanRoute = '/bao-cao-giao-ban.html';
+  else if (cleanRoute === '/dang-nhap' || cleanRoute === '/login') cleanRoute = '/dang-nhap.html';
+
+  // Protect sensitive credential and session files from direct HTTP static download
+  if (cleanRoute === '/users.json' || cleanRoute === '/auth_sessions.json') {
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('403 Forbidden: Truy cập tệp xác thực bị từ chối.');
+    return;
+  }
 
   const filePath = path.join(ROOT, cleanRoute);
   fs.readFile(filePath, (err, data) => {
