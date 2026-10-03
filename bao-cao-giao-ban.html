@@ -2326,6 +2326,7 @@
       const isSubmitted = roomRep.status === 'SUBMITTED';
       const isHSTK = (roomKey === 'hstk');
       const isTK2 = (roomKey === 'tk2');
+      const isTK3 = (roomKey === 'tk3');
 
       let html = `
         <div class="gb-card" style="border-top: 4px solid #0284c7;">
@@ -2353,7 +2354,7 @@
             </div>
           </div>
 
-          <!-- NHÂN LỰC BUỒNG BỆNH (ĐÃ BỎ HỘ LÝ & HỘI CHẨN) -->
+          <!-- NHÂN LỰC BUỒNG BỆNH -->
           <div style="font-weight:700;font-size:0.95rem;color:#1e293b;margin-bottom:12px;">
             <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp trực &amp; Nhân lực buồng bệnh
           </div>
@@ -2371,6 +2372,41 @@
             <label class="gb-input-label">Điều dưỡng Ca Đêm (19h - 7h):</label>
             <input type="text" class="gb-input-control" value="${escapeHtml(p.nursesNight || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nursesNight', this.value)" placeholder="Tên điều dưỡng ca đêm..." />
           </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">Xuất viện:</label>
+            <input type="number" class="gb-input-control" value="${p.xuatVien || 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">Chăm sóc cấp 2:</label>
+            <input type="number" class="gb-input-control" value="${p.chamSocCap2 || 0}" onchange="updateRoomPersonnel('${roomKey}', 'chamSocCap2', this.value)" />
+          </div>
+        `;
+      } else if (isTK3) {
+        html += `
+          <div class="gb-input-group" style="grid-column: span 2;">
+            <label class="gb-input-label">Kíp Điều dưỡng trực:</label>
+            <input type="text" class="gb-input-control" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên điều dưỡng trực (vd: Vân)..." />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">Hộ lý:</label>
+            <input type="text" class="gb-input-control" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" placeholder="Tên hộ lý (vd: Tâm)..." />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">Xuất viện:</label>
+            <input type="number" class="gb-input-control" value="${p.xuatVien !== undefined ? p.xuatVien : 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">CS Cấp II (Khu Trên):</label>
+            <input type="number" class="gb-input-control" value="${p.csTren !== undefined ? p.csTren : 0}" onchange="updateRoomPersonnel('${roomKey}', 'csTren', this.value)" />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">CS Cấp II (Khu Dưới):</label>
+            <input type="number" class="gb-input-control" value="${p.csDuoi !== undefined ? p.csDuoi : (p.chamSocCap2 || 0)}" onchange="updateRoomPersonnel('${roomKey}', 'csDuoi', this.value)" />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">Hội chẩn (HC):</label>
+            <input type="number" class="gb-input-control" value="${p.hc !== undefined ? p.hc : 0}" onchange="updateRoomPersonnel('${roomKey}', 'hc', this.value)" />
+          </div>
         `;
       } else {
         html += `
@@ -2378,18 +2414,18 @@
             <label class="gb-input-label">Kíp Điều dưỡng trực:</label>
             <input type="text" class="gb-input-control" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên các điều dưỡng trực..." />
           </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">Xuất viện:</label>
+            <input type="number" class="gb-input-control" value="${p.xuatVien || 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
+          </div>
+          <div class="gb-input-group">
+            <label class="gb-input-label">Chăm sóc cấp 2:</label>
+            <input type="number" class="gb-input-control" value="${p.chamSocCap2 || 0}" onchange="updateRoomPersonnel('${roomKey}', 'chamSocCap2', this.value)" />
+          </div>
         `;
       }
 
       html += `
-            <div class="gb-input-group">
-              <label class="gb-input-label">Xuất viện:</label>
-              <input type="number" class="gb-input-control" value="${p.xuatVien || 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
-            </div>
-            <div class="gb-input-group">
-              <label class="gb-input-label">Chăm sóc cấp 2:</label>
-              <input type="number" class="gb-input-control" value="${p.chamSocCap2 || 0}" onchange="updateRoomPersonnel('${roomKey}', 'chamSocCap2', this.value)" />
-            </div>
           </div>
         </div>
 
@@ -2458,6 +2494,18 @@
                   <i class="fa-solid fa-plus"></i> Chọn Theo dõi
                 </button>
               </div>
+            ` : isTK3 ? `
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button type="button" class="btn-gb-action" style="background:#f0fdf4;color:#166534;border-color:#bbf7d0;" onclick="addManualRoomCase('${roomKey}')">
+                  <i class="fa-solid fa-plus"></i> Thêm ca vào buồng
+                </button>
+                <button type="button" class="btn-gb-action" style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;" onclick="addManualRoomCase('${roomKey}', 'MO_CC')">
+                  <i class="fa-solid fa-plus"></i> Chọn Mổ CC
+                </button>
+                <button type="button" class="btn-gb-action" style="background:#fefce8;color:#854d0e;border-color:#fef08a;" onclick="addManualRoomCase('${roomKey}', 'THEO_DOI')">
+                  <i class="fa-solid fa-plus"></i> Chọn Theo dõi
+                </button>
+              </div>
             ` : `
               <button type="button" class="btn-gb-action" style="background:#f0fdf4;color:#166534;border-color:#bbf7d0;" onclick="addManualRoomCase('${roomKey}')">
                 <i class="fa-solid fa-plus"></i> Thêm ca vào buồng
@@ -2473,7 +2521,7 @@
                   <th style="width:95px;">Mã BN</th>
                   <th>Họ và tên</th>
                   <th style="width:55px;text-align:center;">Tuổi</th>
-                  <th style="width:${isTK2 ? '210px' : '175px'};text-align:center;">${isTK2 ? 'Nguồn vào buồng' : 'Nguyên nhân'}</th>
+                  <th style="width:${isTK2 ? '210px' : isTK3 ? '225px' : '175px'};text-align:center;">${isTK2 ? 'Nguồn vào buồng' : isTK3 ? 'Nguồn vào &amp; Nguyên nhân' : 'Nguyên nhân'}</th>
                   <th>Chẩn đoán vào viện</th>
                   <th style="width:280px;text-align:center;">Gắn nhãn giao ban</th>
                 </tr>
@@ -2483,6 +2531,7 @@
 
       let countTngt = 0, countTnsh = 0, countTnld = 0, countBenh = 0;
       let countHsng = 0, countKk = 0, countChuyen = 0;
+      let countTk1 = 0, countTk2 = 0, countOther = 0;
 
       if (admissions.length === 0) {
         html += `<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày. Bấm nút "Thêm" để bổ sung ca.</td></tr>`;
@@ -2501,9 +2550,11 @@
           else countBenh++;
 
           const src = adm.source || '';
-          if (src === 'HSNG' || c === 'HSNG' || (adm.chanDoan && adm.chanDoan.toUpperCase().startsWith('HP'))) countHsng++;
+          if (src.toLowerCase() === 'tk1') countTk1++;
+          else if (src.toLowerCase() === 'tk2') countTk2++;
+          else if (src === 'HSNG' || c === 'HSNG' || (adm.chanDoan && adm.chanDoan.toUpperCase().startsWith('HP'))) countHsng++;
           else if (src === 'KK' || !src) countKk++;
-          else countChuyen++;
+          else countOther++;
 
           html += `
             <tr style="background:${adm.isHighlight ? '#fffbeb' : '#ffffff'};">
@@ -2518,6 +2569,21 @@
                     <button type="button" class="btn-cause-pill ${(adm.source === 'KK' || (!adm.source && adm.cause !== 'HSNG')) ? 'active-cause-benh' : ''}" onclick="setAdmissionSourceAndCause('${roomKey}', '${adm.id}', 'KK', 'Bệnh lý')" title="Khoa khám bệnh vào buồng">KK</button>
                     <button type="button" class="btn-cause-pill ${(adm.source === 'TK4') ? 'active-cause-tnsh' : ''}" onclick="setAdmissionSourceAndCause('${roomKey}', '${adm.id}', 'TK4', 'Chuyển TK4')" title="Chuyển buồng từ TK4">TK4</button>
                     <button type="button" class="btn-cause-pill ${(adm.source && adm.source !== 'HSNG' && adm.source !== 'KK' && adm.source !== 'TK4') ? 'active-cause-tnld' : ''}" onclick="promptAdmissionOtherSource('${roomKey}', '${adm.id}')" title="Nguồn vào khác">Khác</button>
+                  </div>
+                ` : isTK3 ? `
+                  <div style="display:flex;flex-direction:column;gap:3px;align-items:center;">
+                    <div class="cause-selector-group" title="Nguồn vào buồng">
+                      <button type="button" class="btn-cause-pill ${(adm.source === 'KK' || !adm.source) ? 'active-cause-benh' : ''}" onclick="setAdmissionSourceOnly('${roomKey}', '${adm.id}', 'KK')" title="Khoa khám vào buồng">KK</button>
+                      <button type="button" class="btn-cause-pill ${(adm.source && adm.source.toLowerCase() === 'tk1') ? 'active-cause-tngt' : ''}" onclick="setAdmissionSourceOnly('${roomKey}', '${adm.id}', 'tk1')" title="Chuyển từ buồng Thần kinh 1">tk1</button>
+                      <button type="button" class="btn-cause-pill ${(adm.source && adm.source.toLowerCase() === 'tk2') ? 'active-cause-tnsh' : ''}" onclick="setAdmissionSourceOnly('${roomKey}', '${adm.id}', 'tk2')" title="Chuyển từ buồng Thần kinh 2">tk2</button>
+                      <button type="button" class="btn-cause-pill ${(adm.source && adm.source !== 'KK' && adm.source.toLowerCase() !== 'tk1' && adm.source.toLowerCase() !== 'tk2') ? 'active-cause-tnld' : ''}" onclick="promptAdmissionOtherSource('${roomKey}', '${adm.id}')" title="Nguồn vào khác">${escapeHtml(adm.source && adm.source !== 'KK' && adm.source.toLowerCase() !== 'tk1' && adm.source.toLowerCase() !== 'tk2' ? adm.source : 'Khác')}</button>
+                    </div>
+                    <div class="cause-selector-group" title="Nguyên nhân vào viện">
+                      <button type="button" class="btn-cause-pill ${adm.cause === 'TNGT' ? 'active-cause-tngt' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNGT')" title="Tai nạn giao thông">TNGT</button>
+                      <button type="button" class="btn-cause-pill ${adm.cause === 'TNSH' ? 'active-cause-tnsh' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNSH')" title="Tai nạn sinh hoạt">TNSH</button>
+                      <button type="button" class="btn-cause-pill ${adm.cause === 'TNLĐ' ? 'active-cause-tnld' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNLĐ')" title="Tai nạn lao động">TNLĐ</button>
+                      <button type="button" class="btn-cause-pill ${(!adm.cause || adm.cause === 'Bệnh lý' || adm.cause === 'Bệnh') ? 'active-cause-benh' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'Bệnh lý')" title="Bệnh lý">Bệnh</button>
+                    </div>
                   </div>
                 ` : `
                   <div class="cause-selector-group">
@@ -2570,13 +2636,22 @@
                 <tfoot>
                   <tr style="background:#f8fafc;font-weight:700;font-size:0.83rem;border-top:2px solid #e2e8f0;">
                     <td colspan="4" style="text-align:right;color:#475569;padding:6px 10px;">
-                      ${isTK2 ? 'Tổng hợp nguồn vào buồng:' : 'Tổng hợp nguyên nhân ca vào viện:'}
+                      ${isTK2 ? 'Tổng hợp nguồn vào buồng:' : isTK3 ? 'Tổng hợp nguồn vào &amp; nguyên nhân:' : 'Tổng hợp nguyên nhân ca vào viện:'}
                     </td>
                     <td style="text-align:center;white-space:nowrap;padding:6px 2px;">
                       ${isTK2 ? `
                         <span class="badge-cause-count badge-tngt" title="Hồi sức ngoại">HSNG: <strong>${countHsng}</strong></span>
                         <span class="badge-cause-count badge-benh" title="Khoa khám">KK: <strong>${countKk}</strong></span>
                         ${countChuyen > 0 ? `<span class="badge-cause-count badge-tnsh" title="Chuyển buồng">Chuyển: <strong>${countChuyen}</strong></span>` : ''}
+                      ` : isTK3 ? `
+                        <span class="badge-cause-count badge-benh" title="Khoa khám">KK: <strong>${countKk}</strong></span>
+                        ${countTk1 > 0 ? `<span class="badge-cause-count badge-tngt" title="Chuyển từ TK1">TK1: <strong>${countTk1}</strong></span>` : ''}
+                        ${countTk2 > 0 ? `<span class="badge-cause-count badge-tnsh" title="Chuyển từ TK2">TK2: <strong>${countTk2}</strong></span>` : ''}
+                        ${countOther > 0 ? `<span class="badge-cause-count badge-tnld" title="Nguồn khác">Khác: <strong>${countOther}</strong></span>` : ''}
+                        <span style="color:#cbd5e1;margin:0 2px;">|</span>
+                        <span class="badge-cause-count badge-tngt" title="Tai nạn giao thông">TNGT: <strong>${countTngt}</strong></span>
+                        <span class="badge-cause-count badge-tnsh" title="Tai nạn sinh hoạt">TNSH: <strong>${countTnsh}</strong></span>
+                        <span class="badge-cause-count badge-benh" title="Bệnh lý">Bệnh: <strong>${countBenh}</strong></span>
                       ` : `
                         <span class="badge-cause-count badge-tngt" title="Tai nạn giao thông">TNGT: <strong>${countTngt}</strong></span>
                         <span class="badge-cause-count badge-tnsh" title="Tai nạn sinh hoạt">TNSH: <strong>${countTnsh}</strong></span>
@@ -3121,7 +3196,11 @@
       const rep = currentReport.roomReports[roomKey];
       if (rep) {
         if (!rep.personnel) rep.personnel = {};
-        rep.personnel[field] = (typeof rep.personnel[field] === 'number') ? Number(val) : val;
+        if (['xuatVien', 'chamSocCap2', 'csTren', 'csDuoi', 'hc', 'hoiChan'].includes(field)) {
+          rep.personnel[field] = Number(val) || 0;
+        } else {
+          rep.personnel[field] = val;
+        }
       }
     }
 
@@ -3232,10 +3311,36 @@
       }
     }
 
+    // TK3 / Các phòng: Chọn nhanh nguồn vào buồng (KK, tk1, tk2...) mà không ghi đè nguyên nhân
+    function setAdmissionSourceOnly(roomKey, admissionId, sourceVal) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.admissions)) return;
+      const adm = rep.admissions.find(a => a.id === admissionId);
+      if (adm) {
+        adm.source = sourceVal;
+      }
+      const container = document.getElementById('gb-view-container');
+      if (container) {
+        renderRoomView(container, roomKey);
+      }
+    }
+
     function promptAdmissionOtherSource(roomKey, admissionId) {
-      const custom = prompt('Nhập nguồn vào buồng (Ví dụ: TK3, TK4, Khoa khác...):');
+      const custom = prompt('Nhập nguồn vào buồng (Ví dụ: TK1, TK2, Khoa khác...):');
       if (custom && custom.trim()) {
-        setAdmissionSourceAndCause(roomKey, admissionId, custom.trim().toUpperCase(), custom.trim().toUpperCase());
+        const val = custom.trim();
+        const rep = currentReport.roomReports[roomKey];
+        if (rep && Array.isArray(rep.admissions)) {
+          const adm = rep.admissions.find(a => a.id === admissionId);
+          if (adm) {
+            adm.source = val;
+            if (roomKey === 'tk2') adm.cause = val;
+          }
+        }
+        const container = document.getElementById('gb-view-container');
+        if (container) {
+          renderRoomView(container, roomKey);
+        }
       }
     }
 
@@ -3376,6 +3481,7 @@
       if (!roomKey) return;
       const isHSTK = (roomKey === 'hstk');
       const isTK2 = (roomKey === 'tk2');
+      const isTK3 = (roomKey === 'tk3');
       const rep = (currentReport.roomReports && currentReport.roomReports[roomKey]) || { admissions: [] };
       const admissions = rep.admissions || [];
 
@@ -3436,7 +3542,7 @@
           `;
         } else {
           tagBadgeHtml = `
-            ${isTK2 ? `
+            ${(isTK2 || isTK3) ? `
               <button type="button" class="btn-tag-chip" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="tagPatientInRoomPicker('${p.mabn}', 'MO_CT')" title="Đưa vào ca Mổ chương trình">
                 📋 Mổ CT
               </button>
@@ -4573,7 +4679,11 @@
       const rep = currentReport.roomReports[roomKey];
       if (rep) {
         if (!rep.personnel) rep.personnel = {};
-        rep.personnel[field] = (typeof rep.personnel[field] === 'number') ? Number(val) : val;
+        if (['xuatVien', 'chamSocCap2', 'csTren', 'csDuoi', 'hc', 'hoiChan'].includes(field)) {
+          rep.personnel[field] = Number(val) || 0;
+        } else {
+          rep.personnel[field] = val;
+        }
       }
     }
 
@@ -5560,23 +5670,24 @@
       const mm = dateParts[1] || '01';
       const dd = dateParts[2] || '01';
       const isTK2 = (roomKey === 'tk2');
+      const isTK3 = (roomKey === 'tk3');
 
       // Bác sĩ trực: Lấy từ danh sách bác sĩ trực ca của ngày
       const overall = currentReport.overall || {};
       let docNames = (overall.doctorsOnDuty && overall.doctorsOnDuty.length > 0)
         ? overall.doctorsOnDuty.join(' – ')
-        : (dutyDoctorsAbbr || 'HẢI – TÀI – LUÂN – LƯƠNG');
+        : (dutyDoctorsAbbr || (isTK3 ? 'TRÍA – NHẬT – TRISB – KHANG' : 'HẢI – TÀI – LUÂN – LƯƠNG'));
 
       // Điều dưỡng trực
       let nurseNames = '';
       if (roomKey === 'hstk') {
         nurseNames = `${p.nursesDay ? 'Ngày: ' + p.nursesDay : ''} ${p.nursesNight ? ' | Đêm: ' + p.nursesNight : ''}`.trim() || p.nurses || '';
       } else {
-        nurseNames = p.nurses || '';
+        nurseNames = p.nurses || (isTK3 ? 'VÂN' : '');
       }
 
       // Hộ lý
-      const orderlyNames = p.orderly || '';
+      const orderlyNames = p.orderly || (isTK3 ? 'TÂM' : '');
 
       // Xuất viện hành chính (xv : 02)
       const xvStr = String(p.xuatVien !== undefined ? p.xuatVien : (c.raRH || 0)).padStart(2, '0');
@@ -5641,23 +5752,24 @@
               kkVal = `<span style="font-size:10.5px; font-weight:700; color:#0369a1;">${escapeHtml(adm.source || '')}</span>`;
             }
           } else {
-            // Kiểm tra Khoa khám
-            const isKk = (adm.source === 'KK' || !adm.source || adm.source.toLowerCase().includes('khám'));
+            // Kiểm tra Khoa khám / Nguồn vào khác
+            const isKk = (adm.source === 'KK' || (!adm.source && !isTK3));
             if (isKk) {
               kkVal = '<span style="color:#16a34a; font-weight:800; font-size:12px;">1</span>';
               totalKkCount++;
-            } else {
-              kkVal = `<span style="font-size:10px; font-weight:700; color:#475569;">${escapeHtml(adm.source || '')}</span>`;
+            } else if (adm.source) {
+              // Như trong mẫu thực tế của TK3: viết 'tk1' hoặc tên buồng vào cột KK
+              kkVal = `<span style="font-size:11px; font-weight:800; color:#0369a1;">${escapeHtml(adm.source.toLowerCase())}</span>`;
             }
 
-            // Kiểm tra nguyên nhân
-            if (!adm.cause || adm.cause === 'TNGT') {
+            // Kiểm tra nguyên nhân: CHỈ tính 1 khi thực sự là TNGT!
+            if (adm.cause === 'TNGT') {
               tngtVal = '<span style="color:#16a34a; font-weight:800; font-size:12px;">1</span>';
               totalTngtCount++;
             } else if (adm.cause === 'TNLĐ' || adm.cause === 'TNSH' || adm.cause === 'Đánh') {
               tngtVal = `<span style="background:#ffedd5; color:#c2410c; padding:1px 5px; border-radius:4px; font-weight:800; font-size:10px;">${escapeHtml(adm.cause)}</span>`;
             } else {
-              tngtVal = `<span style="background:#e0f2fe; color:#0369a1; padding:1px 5px; border-radius:4px; font-weight:800; font-size:10px;">${escapeHtml(adm.cause)}</span>`;
+              tngtVal = '';
             }
           }
 
@@ -5674,7 +5786,7 @@
 
         if (dis) {
           sttRight = i + 1;
-          tenRa = `${(dis.hoten || '').toUpperCase()}${dis.tuoi ? ' ' + dis.tuoi + (isTK2 ? 'T' : ' Tuổi') : ''}`;
+          tenRa = `${(dis.hoten || '').toUpperCase()}${dis.tuoi ? ' ' + dis.tuoi + (isTK2 ? 'T' : ' tuổi') : ''}`;
           if (dis.isMoCC) {
             rhVal = '<span style="background:#fee2e2; color:#991b1b; padding:2px 5px; border-radius:4px; font-weight:800; font-size:10px;">Mổ</span>';
             bhVal = '<span style="background:#fee2e2; color:#991b1b; padding:2px 5px; border-radius:4px; font-weight:800; font-size:10px;">CC</span>';
@@ -5742,6 +5854,11 @@
       (currentReport.highlightCases || []).forEach(hc => {
         if (hc.roomKey === roomKey && (hc.category === 'MO_CC' || (hc.chanDoan && hc.chanDoan.toLowerCase().includes('mổ')))) {
           moCcList.push(hc);
+        }
+      });
+      (admissions || []).forEach(adm => {
+        if (adm.category === 'MO_CC' && !moCcList.some(m => m.mabn === adm.mabn || (m.hoten && m.hoten.toLowerCase() === (adm.hoten || '').toLowerCase()))) {
+          moCcList.push(adm);
         }
       });
       (roomRep.emergencySurgeries || []).forEach(es => {
@@ -5825,9 +5942,16 @@
               </div>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="background: #fef3c7; color: #92400e; border: 1.5px solid #fde68a; border-radius: 6px; padding: 3px 12px; font-weight: 900; font-size: 14px;">
-                  xv : ${xvStr}
+                  ${isTK3 ? 'XUẤT VIỆN' : 'xv'} : ${xvStr}
                 </span>
-                ${(p.chamSocCap2 !== undefined && p.chamSocCap2 !== '' && p.chamSocCap2 !== 0) ? `
+                ${isTK3 ? `
+                  <span style="background: #e0f2fe; color: #0369a1; border: 1.5px solid #bae6fd; border-radius: 6px; padding: 3px 12px; font-weight: 800; font-size: 13px;">
+                    CS CẤP II : TRÊN : <strong>${String(p.csTren !== undefined ? p.csTren : 0).padStart(2, '0')}</strong> | DƯỚI : <strong>${String(p.csDuoi !== undefined ? p.csDuoi : (p.chamSocCap2 || 1)).padStart(2, '0')}</strong>
+                  </span>
+                  <span style="background: #f1f5f9; color: #334155; border: 1.5px solid #cbd5e1; border-radius: 6px; padding: 3px 12px; font-weight: 900; font-size: 14px;">
+                    HC : ${String(p.hc !== undefined ? p.hc : 1).padStart(2, '0')}
+                  </span>
+                ` : (p.chamSocCap2 !== undefined && p.chamSocCap2 !== '' && p.chamSocCap2 !== 0) ? `
                   <span style="background: #e0f2fe; color: #0369a1; border: 1.5px solid #bae6fd; border-radius: 6px; padding: 3px 12px; font-weight: 900; font-size: 14px;">
                     CS CẤP II : ${String(p.chamSocCap2).padStart(2, '0')}
                   </span>
@@ -5837,8 +5961,11 @@
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="background: #334155; color: #ffffff; font-weight: 800; font-size: 11px; padding: 2px 8px; border-radius: 5px;">ĐIỀU DƯỠNG TRỰC</span>
-                <span style="font-weight: 700; font-size: 13px; color: #1e293b; text-transform: uppercase;">${escapeHtml(nurseNames || 'Đang cập nhật...')}</span>
-                ${orderlyNames ? `<span style="color:#64748b; font-size:12px; margin-left:10px;">• Hộ lý: <strong>${escapeHtml(orderlyNames)}</strong></span>` : ''}
+                <span style="font-weight: 700; font-size: 13px; color: #1e293b; text-transform: uppercase;">${escapeHtml(nurseNames || (isTK3 ? 'VÂN' : 'Đang cập nhật...'))}</span>
+                ${(isTK3 || orderlyNames) ? `
+                  <span style="background: #475569; color: #ffffff; font-weight: 800; font-size: 11px; padding: 2px 8px; border-radius: 5px; margin-left: 10px;">HỘ LÝ</span>
+                  <span style="font-weight: 700; font-size: 13px; color: #1e293b; text-transform: uppercase;">${escapeHtml(orderlyNames || 'TÂM')}</span>
+                ` : ''}
               </div>
               <div style="font-style: italic; font-size: 11px; color: #64748b;">
                 * Quy ước: KHÔNG đánh "X", đánh số "1" cho các cột tổng hợp
