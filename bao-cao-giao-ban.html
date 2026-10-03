@@ -5376,12 +5376,13 @@
       stage.style.position = 'fixed';
       stage.style.left = '-9999px';
       stage.style.top = '0';
-      stage.style.width = '1220px';
+      stage.style.width = '1280px';
       stage.style.backgroundColor = '#ffffff';
       stage.style.padding = '24px 28px';
       stage.style.boxSizing = 'border-box';
-      stage.style.fontFamily = "'Be Vietnam Pro', 'Segoe UI', Arial, sans-serif";
+      stage.style.fontFamily = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif";
       stage.style.color = '#0f172a';
+      stage.style.lineHeight = '1.4';
       stage.style.zIndex = '-999';
 
       stage.innerHTML = `
@@ -5403,7 +5404,7 @@
           </div>
 
           <!-- BẢNG THÔNG TIN KÍP TRỰC & XUẤT VIỆN (FORM SANG TRỌNG) -->
-          <div style="border: 1.5px solid #cbd5e1; border-radius: 10px; background: #f8fafc; padding: 10px 14px; margin-bottom: 12px;">
+          <div style="border: 1.5px solid #cbd5e1; border-radius: 10px; background: #f8fafc; padding: 10px 14px; margin-bottom: 12px; box-sizing: border-box;">
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 6px;">
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="background: #0284c7; color: #ffffff; font-weight: 800; font-size: 11px; padding: 2px 8px; border-radius: 5px;">BÁC SỸ TRỰC</span>
@@ -5427,87 +5428,87 @@
             </div>
           </div>
 
-          <!-- BẢNG CHỈ SỐ GIAO BAN: VÀNG & XANH LÁ GRADIENT HIỆN ĐẠI -->
-          <div style="border: 1.5px solid #cbd5e1; border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
-            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+          <!-- BẢNG CHỈ SỐ GIAO BAN: VÀNG & XANH LÁ GRADIENT (TIÊU ĐỀ THOÁNG ĐẦY ĐỦ KHÔNG BỊ CẮT) -->
+          <div style="border: 1.5px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px; box-sizing: border-box;">
+            <table style="width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; box-sizing: border-box;">
               <thead>
                 <tr style="background: linear-gradient(180deg, #fef08a 0%, #fde047 100%); color: #713f12; font-weight: 800; font-size: 11.5px;">
-                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 7%; padding: 5px 2px; vertical-align: middle;">BỆNH<br/>CŨ</th>
-                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 22%; padding: 5px 2px;">BỆNH VÀO</th>
-                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 5px 2px;">BỆNH MỔ</th>
-                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 5px 2px;">BỆNH RA</th>
-                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 10%; padding: 5px 2px; vertical-align: middle;">TỬ VONG</th>
-                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 11%; padding: 5px 2px; vertical-align: middle; background: #fed7aa; color: #9a3412;">HIỆN CÓ</th>
-                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 10%; padding: 5px 2px; vertical-align: middle;">BẢO HIỂM</th>
+                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 8%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH<br/>CŨ</th>
+                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH VÀO</th>
+                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH MỔ</th>
+                  <th colspan="2" style="border: 1px solid #cbd5e1; width: 20%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH RA</th>
+                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 10%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TỬ VONG</th>
+                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 11%; padding: 8px 2px; vertical-align: middle; background: #fed7aa; color: #9a3412; line-height: 1.4; box-sizing: border-box;">HIỆN CÓ</th>
+                  <th rowspan="2" style="border: 1px solid #cbd5e1; width: 11%; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BẢO HIỂM</th>
                 </tr>
                 <tr style="background: linear-gradient(180deg, #bbf7d0 0%, #86efac 100%); color: #14532d; font-weight: 800; font-size: 10.5px;">
-                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 4px 2px;">KHOA KHÁM</th>
-                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 4px 2px;">KHÁC</th>
-                  <th style="border: 1px solid #cbd5e1; width: 10%; padding: 4px 2px;">CHƯƠNG TRÌNH</th>
-                  <th style="border: 1px solid #cbd5e1; width: 10%; padding: 4px 2px;">CẤP CỨU</th>
-                  <th style="border: 1px solid #cbd5e1; width: 10%; padding: 4px 2px;">RA VIỆN HẲN</th>
-                  <th style="border: 1px solid #cbd5e1; width: 10%; padding: 4px 2px;">KHÁC</th>
+                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KHOA KHÁM</th>
+                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KHÁC</th>
+                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">CHƯƠNG TRÌNH</th>
+                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">CẤP CỨU</th>
+                  <th style="border: 1px solid #cbd5e1; width: 11%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">RA HẲN</th>
+                  <th style="border: 1px solid #cbd5e1; width: 9%; padding: 6px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KHÁC</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style="font-weight: 800; font-size: 16px; height: 42px; background: #ffffff;">
-                  <td style="border: 1px solid #cbd5e1; color: #334155;">${c.benhCu || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; color: #dc2626; font-size: 18px;">${c.vaoKK || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; color: #334155;">${c.vaoKhac || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; color: #334155;">${c.moCT || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; color: #dc2626; font-size: 18px;">${c.moCC || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; color: #0284c7;">${c.raRH || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; color: #334155;">${c.raKhac || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; color: ${Number(c.tuVong || 0) > 0 ? '#b91c1c' : '#64748b'}; background: ${Number(c.tuVong || 0) > 0 ? '#fee2e2' : '#ffffff'};">${c.tuVong || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; font-size: 21px; font-weight: 900; background: #fef3c7; color: #b45309; border-left: 2px solid #fcd34d; border-right: 2px solid #fcd34d;">${c.hienCo || 0}</td>
-                  <td style="border: 1px solid #cbd5e1; color: #0284c7;">${c.bhyt || 0}</td>
+                <tr style="font-weight: 800; font-size: 16px; height: 44px; background: #ffffff;">
+                  <td style="border: 1px solid #cbd5e1; color: #334155; vertical-align: middle;">${c.benhCu || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; color: #dc2626; font-size: 18px; vertical-align: middle;">${c.vaoKK || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; color: #334155; vertical-align: middle;">${c.vaoKhac || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; color: #334155; vertical-align: middle;">${c.moCT || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; color: #dc2626; font-size: 18px; vertical-align: middle;">${c.moCC || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; color: #0284c7; vertical-align: middle;">${c.raRH || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; color: #334155; vertical-align: middle;">${c.raKhac || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; color: ${Number(c.tuVong || 0) > 0 ? '#b91c1c' : '#64748b'}; background: ${Number(c.tuVong || 0) > 0 ? '#fee2e2' : '#ffffff'}; vertical-align: middle;">${c.tuVong || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; font-size: 21px; font-weight: 900; background: #fef3c7; color: #b45309; border-left: 2px solid #fcd34d; border-right: 2px solid #fcd34d; vertical-align: middle;">${c.hienCo || 0}</td>
+                  <td style="border: 1px solid #cbd5e1; color: #0284c7; vertical-align: middle;">${c.bhyt || 0}</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <!-- BẢNG CHI TIẾT BỆNH VÀO / BỆNH RA (DUAL-TONE HEADER TINH TẾ) -->
-          <div style="border: 1.5px solid #cbd5e1; border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
-            <table style="width: 100%; border-collapse: collapse;">
+          <!-- BẢNG CHI TIẾT BỆNH VÀO / BỆNH RA (DUAL-TONE HEADER RỘNG RÃI KHÔNG BỊ CẮT CHỮ) -->
+          <div style="border: 1.5px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px; box-sizing: border-box;">
+            <table style="width: 100%; border-collapse: collapse; table-layout: fixed; box-sizing: border-box;">
               <thead>
-                <tr style="height: 28px; font-weight: 800; font-size: 11px;">
+                <tr style="font-weight: 800; font-size: 11px;">
                   <!-- BỆNH VÀO: MINT THEME -->
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 32px;">STT</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 175px;">BỆNH VÀO</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 38px;">TUỔI</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 34px;">KK</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 52px;">TNGT</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 145px;">CHẨN ĐOÁN</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 165px;">ĐỊA CHỈ</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 120px;">TÌNH TRẠNG</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 36px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">STT</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 180px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH VÀO</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 44px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TUỔI</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 38px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">KK</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 56px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TNGT</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 165px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">CHẨN ĐOÁN</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 185px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">ĐỊA CHỈ</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%); color: #065f46; text-align: center; width: 135px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">TÌNH TRẠNG BỆNH</th>
                   <!-- BỆNH RA: SKY THEME -->
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 180px;">BỆNH RA</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 36px;">RH</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 36px;">BH</th>
-                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 135px;">SVV / GHI CHÚ</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 185px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BỆNH RA</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 40px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">RH</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 40px; padding: 8px 2px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">BH</th>
+                  <th style="border: 1px solid #cbd5e1; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); color: #075985; text-align: center; width: 140px; padding: 8px 4px; vertical-align: middle; line-height: 1.4; box-sizing: border-box;">SVV / GHI CHÚ</th>
                 </tr>
               </thead>
               <tbody>
                 ${detailRowsHtml}
                 <!-- DÒNG TỔNG HỢP HIỆN ĐẠI -->
                 <tr style="height: 28px; font-weight: 800; font-size: 11.5px; background: #f1f5f9; border-top: 2px solid #94a3b8;">
-                  <td colspan="3" style="border: 1px solid #cbd5e1; text-align: right; padding-right: 10px; font-style: italic; color: #334155;">
+                  <td colspan="3" style="border: 1px solid #cbd5e1; text-align: right; padding-right: 10px; font-style: italic; color: #334155; vertical-align: middle;">
                     TỔNG HỢP:
                   </td>
-                  <td style="border: 1px solid #cbd5e1; text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
                     <span style="background:#dcfce7; color:#15803d; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalKkCount || 0}</span>
                   </td>
-                  <td style="border: 1px solid #cbd5e1; text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
                     <span style="background:#ffedd5; color:#c2410c; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalTngtCount || 0}</span>
                   </td>
                   <td style="border: 1px solid #cbd5e1;"></td>
                   <td style="border: 1px solid #cbd5e1;"></td>
                   <td style="border: 1px solid #cbd5e1;"></td>
                   <td style="border: 1px solid #cbd5e1;"></td>
-                  <td style="border: 1px solid #cbd5e1; text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
                     <span style="background:#e0f2fe; color:#0369a1; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalRhCount || 0}</span>
                   </td>
-                  <td style="border: 1px solid #cbd5e1; text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; text-align: center; vertical-align: middle;">
                     <span style="background:#e0f2fe; color:#0369a1; padding:2px 7px; border-radius:4px; font-weight:900; font-size:12px;">${totalBhCount || 0}</span>
                   </td>
                   <td style="border: 1px solid #cbd5e1;"></td>
@@ -5529,25 +5530,9 @@
             </div>
           </div>
 
-          <!-- CHỮ KÝ XÁC NHẬN CA TRỰC -->
-          <div style="margin-top: 18px; padding-top: 10px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; text-align: center;">
-            <div style="width: 260px;">
-              <div style="font-size: 11px; font-weight: 800; color: #334155; text-transform: uppercase;">ĐIỀU DƯỠNG TRỰC BUỒNG BỆNH</div>
-              <div style="font-size: 10px; color: #64748b; font-style: italic; margin-top: 2px;">(Ký và ghi rõ họ tên)</div>
-              <div style="height: 48px;"></div>
-              <div style="font-size: 11px; font-weight: 700; color: #0f172a;">${escapeHtml(nurseNames || '')}</div>
-            </div>
-            <div style="width: 260px;">
-              <div style="font-size: 11px; font-weight: 800; color: #334155; text-transform: uppercase;">BÁC SĨ TRỰC KHOA</div>
-              <div style="font-size: 10px; color: #64748b; font-style: italic; margin-top: 2px;">(Ký và ghi rõ họ tên)</div>
-              <div style="height: 48px;"></div>
-              <div style="font-size: 11px; font-weight: 700; color: #0f172a;">${escapeHtml(docNames || '')}</div>
-            </div>
-          </div>
-
-          <!-- FOOTER WATERMARK -->
-          <div style="margin-top: 12px; text-align: right; font-size: 9.5px; color: #94a3b8; font-style: italic;">
-            Hệ thống Quản lý Báo cáo Giao ban • BVĐK Trung tâm Tỉnh Gia Lai • Xuất lúc: ${new Date().toLocaleTimeString('vi-VN')} ngày ${dd}/${mm}/${yyyy}
+          <!-- FOOTER WATERMARK LƯU NỘI BỘ (ĐÃ BỎ CHỮ KÝ THEO YÊU CẦU) -->
+          <div style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #e2e8f0; text-align: right; font-size: 10px; color: #94a3b8; font-style: italic;">
+            Báo cáo lưu hành nội bộ Khoa Ngoại Thần kinh - Cột sống • BVĐK Trung tâm Tỉnh Gia Lai • Ngày xuất: ${new Date().toLocaleDateString('vi-VN')} lúc ${new Date().toLocaleTimeString('vi-VN')}
           </div>
         </div>
       `;
