@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="auth-client.js" defer></script>
+  <script src="html2canvas.min.js"></script>
 
   <style>
     /* ==========================================================================
@@ -2081,7 +2082,7 @@
                   <th>Vào khác</th>
                   <th>Mổ CT</th>
                   <th>Mổ CC</th>
-                  <th>Ra RH</th>
+                  <th>Ra viện hẳn</th>
                   <th>Ra khác</th>
                   <th>Tử vong</th>
                   <th style="background:#e0f2fe;color:#0369a1;font-weight:800;">Hiện có</th>
@@ -2284,14 +2285,17 @@
               </div>
             </div>
 
-            <div class="gb-actions-group">
+            <div class="gb-actions-group" style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button type="button" class="btn-gb-action" style="background:#0284c7;color:#fff;border-color:#0284c7;font-weight:700;" onclick="exportRoomReportPng('${roomKey}')" title="Xuất ảnh báo cáo trực phòng định dạng PNG theo đúng mẫu Excel của khoa">
+                <i class="fa-solid fa-file-image"></i> Xuất ảnh Báo cáo (.PNG)
+              </button>
               <button type="button" class="btn-gb-action btn-gb-save" onclick="submitRoomReport('${roomKey}')">
                 <i class="fa-solid fa-paper-plane"></i> GỬI BÁO CÁO VỀ TOÀN KHOA
               </button>
             </div>
           </div>
 
-          <!-- NHÂN LỰC BUỒNG BỆNH (ĐÃ BỎ HỘ LÝ) -->
+          <!-- NHÂN LỰC BUỒNG BỆNH (ĐÃ BỎ HỘ LÝ & HỘI CHẨN) -->
           <div style="font-weight:700;font-size:0.95rem;color:#1e293b;margin-bottom:12px;">
             <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp trực &amp; Nhân lực buồng bệnh
           </div>
@@ -2328,14 +2332,10 @@
               <label class="gb-input-label">Chăm sóc cấp 2:</label>
               <input type="number" class="gb-input-control" value="${p.chamSocCap2 || 0}" onchange="updateRoomPersonnel('${roomKey}', 'chamSocCap2', this.value)" />
             </div>
-            <div class="gb-input-group">
-              <label class="gb-input-label">Hội chẩn (lượt):</label>
-              <input type="number" class="gb-input-control" value="${p.hoiChan || 0}" onchange="updateRoomPersonnel('${roomKey}', 'hoiChan', this.value)" />
-            </div>
           </div>
         </div>
 
-        <!-- 8 CHỈ SỐ GIAO BAN PHÒNG -->
+        <!-- 8 CHỈ SỐ GIAO BAN PHÒNG (CÂN ĐỐI 100% ĐỘ RỘNG CÁC Ô) -->
         <div class="gb-card">
           <div class="gb-card-header">
             <div class="gb-card-title">
@@ -2344,33 +2344,33 @@
           </div>
 
           <div class="gb-table-wrap">
-            <table class="gb-table">
+            <table class="gb-table" style="table-layout: fixed; width: 100%; min-width: 820px;">
               <thead>
                 <tr>
-                  <th>Bệnh cũ</th>
-                  <th>Vào KK</th>
-                  <th>Vào khác</th>
-                  <th>Mổ CT</th>
-                  <th>Mổ CC</th>
-                  <th>Ra RH</th>
-                  <th>Ra khác</th>
-                  <th>Tử vong</th>
-                  <th style="background:#fef3c7;color:#92400e;">Hiện có</th>
-                  <th>BHYT</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px;">Bệnh cũ</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px;">Vào KK</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px;">Vào khác</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px;">Mổ CT</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px;">Mổ CC</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px; color: #0284c7;">Ra viện hẳn</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px;">Ra khác</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px;">Tử vong</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px; background: #fef3c7; color: #92400e; font-weight: 800;">Hiện có</th>
+                  <th style="width: 10%; text-align: center; white-space: nowrap; font-size: 0.88rem; padding: 8px 4px;">BHYT</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><input type="number" class="input-cell-num" value="${c.benhCu || 0}" onchange="updateRoomCensus('${roomKey}', 'benhCu', this.value)" /></td>
-                  <td><input type="number" class="input-cell-num" style="color:#dc2626;" value="${c.vaoKK || 0}" onchange="updateRoomCensus('${roomKey}', 'vaoKK', this.value)" /></td>
-                  <td><input type="number" class="input-cell-num" value="${c.vaoKhac || 0}" onchange="updateRoomCensus('${roomKey}', 'vaoKhac', this.value)" /></td>
-                  <td><input type="number" class="input-cell-num" value="${c.moCT || 0}" onchange="updateRoomCensus('${roomKey}', 'moCT', this.value)" /></td>
-                  <td><input type="number" class="input-cell-num" style="color:#dc2626;" value="${c.moCC || 0}" onchange="updateRoomCensus('${roomKey}', 'moCC', this.value)" /></td>
-                  <td><input type="number" class="input-cell-num" value="${c.raRH || 0}" onchange="updateRoomCensus('${roomKey}', 'raRH', this.value)" /></td>
-                  <td><input type="number" class="input-cell-num" value="${c.raKhac || 0}" onchange="updateRoomCensus('${roomKey}', 'raKhac', this.value)" /></td>
-                  <td><input type="number" class="input-cell-num" style="color:${Number(c.tuVong || 0) > 0 ? '#dc2626' : '#0f172a'};" value="${c.tuVong || 0}" onchange="updateRoomCensus('${roomKey}', 'tuVong', this.value)" /></td>
-                  <td style="background:#fffbeb;"><input type="number" class="input-cell-num" style="background:#fef3c7;font-size:1.05rem;color:#b45309;" value="${c.hienCo || 0}" onchange="updateRoomCensus('${roomKey}', 'hienCo', this.value)" /></td>
-                  <td><input type="number" class="input-cell-num" value="${c.bhyt || 0}" onchange="updateRoomCensus('${roomKey}', 'bhyt', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;" value="${c.benhCu || 0}" onchange="updateRoomCensus('${roomKey}', 'benhCu', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;color:#dc2626;" value="${c.vaoKK || 0}" onchange="updateRoomCensus('${roomKey}', 'vaoKK', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;" value="${c.vaoKhac || 0}" onchange="updateRoomCensus('${roomKey}', 'vaoKhac', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;" value="${c.moCT || 0}" onchange="updateRoomCensus('${roomKey}', 'moCT', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;color:#dc2626;" value="${c.moCC || 0}" onchange="updateRoomCensus('${roomKey}', 'moCC', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;color:#0369a1;" value="${c.raRH || 0}" onchange="updateRoomCensus('${roomKey}', 'raRH', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;" value="${c.raKhac || 0}" onchange="updateRoomCensus('${roomKey}', 'raKhac', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;color:${Number(c.tuVong || 0) > 0 ? '#dc2626' : '#0f172a'};" value="${c.tuVong || 0}" onchange="updateRoomCensus('${roomKey}', 'tuVong', this.value)" /></td>
+                  <td style="background:#fffbeb;"><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;background:#fef3c7;font-size:1.2rem;font-weight:900;color:#b45309;padding:6px 2px;" value="${c.hienCo || 0}" onchange="updateRoomCensus('${roomKey}', 'hienCo', this.value)" /></td>
+                  <td><input type="number" class="input-cell-num" style="width:100%;box-sizing:border-box;text-align:center;font-size:1.15rem;font-weight:800;padding:6px 2px;" value="${c.bhyt || 0}" onchange="updateRoomCensus('${roomKey}', 'bhyt', this.value)" /></td>
                 </tr>
               </tbody>
             </table>
@@ -2699,7 +2699,10 @@
             </div>
           </div>
           <textarea class="gb-input-control" style="width:100%;min-height:75px;" onchange="updateRoomNotes('${roomKey}', this.value)" placeholder="Dặn dò điều dưỡng ca sau, bệnh nhân cần chú ý...">${escapeHtml(roomRep.criticalNotes || '')}</textarea>
-          <div style="margin-top:14px;display:flex;justify-content:flex-end;">
+          <div style="margin-top:14px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;">
+            <button type="button" class="btn-gb-action" style="background:#0284c7;color:#fff;border-color:#0284c7;padding:8px 16px;font-weight:700;" onclick="exportRoomReportPng('${roomKey}')" title="Xuất ảnh báo cáo trực phòng định dạng PNG theo đúng mẫu Excel của khoa">
+              <i class="fa-solid fa-file-image"></i> Xuất ảnh Báo cáo (.PNG)
+            </button>
             <button type="button" class="btn-gb-action btn-gb-save" onclick="submitRoomReport('${roomKey}')">
               <i class="fa-solid fa-check"></i> Lưu &amp; Gửi báo cáo ${roomName} về Toàn Khoa
             </button>
@@ -4772,7 +4775,7 @@
                 <th style="width:42px;">Vào khác</th>
                 <th style="width:42px;">Mổ CT</th>
                 <th style="width:42px;">Mổ CC</th>
-                <th style="width:42px;">Ra RH</th>
+                <th style="width:48px;">Ra viện hẳn</th>
                 <th style="width:42px;">Ra khác</th>
                 <th style="width:45px;">Tử vong</th>
                 <th style="width:50px; background:#e2e8f0;">Hiện có</th>
@@ -5121,6 +5124,405 @@
         container.innerHTML = generatePeriodPrintHtml();
       }
       window.print();
+    }
+
+    function showToast(msg, duration = 3000) {
+      let toastEl = document.getElementById('gb-global-toast');
+      if (!toastEl) {
+        toastEl = document.createElement('div');
+        toastEl.id = 'gb-global-toast';
+        toastEl.style.position = 'fixed';
+        toastEl.style.bottom = '24px';
+        toastEl.style.right = '24px';
+        toastEl.style.backgroundColor = '#0f172a';
+        toastEl.style.color = '#ffffff';
+        toastEl.style.padding = '12px 20px';
+        toastEl.style.borderRadius = '8px';
+        toastEl.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.3)';
+        toastEl.style.zIndex = '99999';
+        toastEl.style.fontSize = '0.9rem';
+        toastEl.style.fontWeight = '600';
+        toastEl.style.transition = 'all 0.3s ease';
+        toastEl.style.display = 'flex';
+        toastEl.style.alignItems = 'center';
+        toastEl.style.gap = '8px';
+        document.body.appendChild(toastEl);
+      }
+      toastEl.innerHTML = `<i class="fa-solid fa-circle-info" style="color:#38bdf8;"></i> ${escapeHtml(msg)}`;
+      toastEl.style.opacity = '1';
+      toastEl.style.transform = 'translateY(0)';
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toastEl.style.opacity = '0';
+        toastEl.style.transform = 'translateY(10px)';
+      }, duration);
+    }
+
+    /* =========================================================================
+       7. XUẤT ẢNH BÁO CÁO TRỰC PHÒNG (.PNG) CHUẨN FORM EXCEL THỦ CÔNG CỦA KHOA
+       ========================================================================= */
+    async function exportRoomReportPng(roomKey) {
+      if (!currentReport || !currentReport.roomReports) {
+        alert('Dữ liệu báo cáo chưa sẵn sàng!');
+        return;
+      }
+
+      const roomRep = currentReport.roomReports[roomKey] || {};
+      const roomName = ROOM_NAMES[roomKey] || roomKey.toUpperCase();
+      const p = roomRep.personnel || {};
+      const c = roomRep.census || {};
+      const admissions = roomRep.admissions || [];
+      const discharges = roomRep.discharges || [];
+
+      // Phân tách ngày / tháng / năm
+      const dateParts = currentDateKey.split('-');
+      const yyyy = dateParts[0] || '2026';
+      const mm = dateParts[1] || '01';
+      const dd = dateParts[2] || '01';
+
+      // Bác sĩ trực: Lấy từ danh sách bác sĩ trực ca của ngày
+      const overall = currentReport.overall || {};
+      let docNames = (overall.doctorsOnDuty && overall.doctorsOnDuty.length > 0)
+        ? overall.doctorsOnDuty.join(' – ')
+        : (dutyDoctorsAbbr || 'HẢI – TÀI – LUÂN – LƯƠNG');
+
+      // Điều dưỡng trực
+      let nurseNames = '';
+      if (roomKey === 'hstk') {
+        nurseNames = `${p.nursesDay ? 'Ngày: ' + p.nursesDay : ''} ${p.nursesNight ? ' | Đêm: ' + p.nursesNight : ''}`.trim() || p.nurses || '';
+      } else {
+        nurseNames = p.nurses || '';
+      }
+
+      // Hộ lý
+      const orderlyNames = p.orderly || '';
+
+      // Xuất viện hành chính (xv : 02)
+      const xvStr = String(p.xuatVien !== undefined ? p.xuatVien : (c.raRH || 0)).padStart(2, '0');
+
+      // Danh sách Bệnh Ra / Chuyển viện / Mổ CC kết hợp
+      const combinedDischarges = [...discharges];
+      const taggedMoCC = (currentReport.highlightCases || []).filter(h => h.roomKey === roomKey && h.category === 'MO_CC');
+      taggedMoCC.forEach(tc => {
+        if (!combinedDischarges.some(d => (d.mabn && d.mabn === tc.mabn) || (d.hoten && d.hoten.toLowerCase() === tc.hoten.toLowerCase()))) {
+          combinedDischarges.push({
+            mabn: tc.mabn,
+            hoten: tc.hoten,
+            tuoi: tc.tuoi,
+            isMoCC: true,
+            raHan: false,
+            baoHiem: true,
+            svv: tc.kipMo ? `BS ${tc.kipMo}` : 'Mổ CC',
+            note: tc.kipMo ? `BS ${tc.kipMo}` : 'Mổ CC'
+          });
+        }
+      });
+
+      // Số dòng tối thiểu là 9 dòng (chuẩn form mẫu như ảnh thực tế)
+      const maxRows = Math.max(admissions.length, combinedDischarges.length, 9);
+
+      let totalKkCount = 0;
+      let totalTngtCount = 0;
+      let totalRhCount = 0;
+      let totalBhCount = 0;
+
+      let detailRowsHtml = '';
+      for (let i = 0; i < maxRows; i++) {
+        const adm = admissions[i];
+        const dis = combinedDischarges[i];
+
+        let sttLeft = '';
+        let tenVao = '';
+        let tuoiVao = '';
+        let kkVal = '';
+        let tngtVal = '';
+        let chanDoanVao = '';
+        let diaChiVao = '';
+        let tinhTrangVao = '';
+
+        if (adm) {
+          sttLeft = i + 1;
+          tenVao = (adm.hoten || '').toUpperCase();
+          tuoiVao = adm.tuoi || '';
+          
+          // Kiểm tra Khoa khám
+          const isKk = (adm.source === 'KK' || !adm.source || adm.source.toLowerCase().includes('khám'));
+          if (isKk) {
+            kkVal = '1';
+            totalKkCount++;
+          } else {
+            kkVal = adm.source || '';
+          }
+
+          // Kiểm tra nguyên nhân
+          if (!adm.cause || adm.cause === 'TNGT') {
+            tngtVal = '1';
+            totalTngtCount++;
+          } else {
+            tngtVal = adm.cause;
+          }
+
+          chanDoanVao = adm.chanDoan || 'CTSN';
+          diaChiVao = adm.diaChi || '';
+          tinhTrangVao = adm.tinhTrang || '';
+        }
+
+        let tenRa = '';
+        let rhVal = '';
+        let bhVal = '';
+        let svvVal = '';
+
+        if (dis) {
+          tenRa = `${(dis.hoten || '').toUpperCase()}${dis.tuoi ? ' ' + dis.tuoi + ' Tuổi' : ''}`;
+          if (dis.isMoCC) {
+            rhVal = 'Mổ';
+            bhVal = 'CC';
+            svvVal = dis.svv || dis.note || '';
+          } else {
+            if (dis.raHan) {
+              rhVal = '1';
+              totalRhCount++;
+            }
+            if (dis.baoHiem) {
+              bhVal = '1';
+              totalBhCount++;
+            }
+            svvVal = dis.note || dis.svv || (dis.raHan ? 'Ra viện' : 'Chuyển viện');
+          }
+        }
+
+        detailRowsHtml += `
+          <tr style="height: 24px; font-size: 11.5px;">
+            <td style="border: 1px solid #000; text-align: center; font-weight: bold; width: 32px;">${sttLeft}</td>
+            <td style="border: 1px solid #000; padding: 2px 5px; font-weight: bold; text-align: left; width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenVao)}</td>
+            <td style="border: 1px solid #000; text-align: center; width: 40px;">${escapeHtml(String(tuoiVao))}</td>
+            <td style="border: 1px solid #000; text-align: center; width: 32px; font-weight: bold;">${escapeHtml(kkVal)}</td>
+            <td style="border: 1px solid #000; text-align: center; width: 50px; font-weight: bold;">${escapeHtml(tngtVal)}</td>
+            <td style="border: 1px solid #000; padding: 2px 5px; text-align: left; width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(chanDoanVao)}</td>
+            <td style="border: 1px solid #000; padding: 2px 5px; text-align: left; width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(diaChiVao)}</td>
+            <td style="border: 1px solid #000; padding: 2px 5px; text-align: left; width: 120px;">${escapeHtml(tinhTrangVao)}</td>
+            <td style="border: 1px solid #000; padding: 2px 5px; text-align: left; width: 185px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenRa)}</td>
+            <td style="border: 1px solid #000; text-align: center; width: 34px; font-weight: bold;">${escapeHtml(rhVal)}</td>
+            <td style="border: 1px solid #000; text-align: center; width: 34px; font-weight: bold;">${escapeHtml(bhVal)}</td>
+            <td style="border: 1px solid #000; padding: 2px 5px; text-align: left; width: 130px; font-size: 11px;">${escapeHtml(svvVal)}</td>
+          </tr>
+        `;
+      }
+
+      // Phần II: Bệnh Mổ CC
+      const moCcList = [];
+      (currentReport.highlightCases || []).forEach(hc => {
+        if (hc.roomKey === roomKey && (hc.category === 'MO_CC' || (hc.chanDoan && hc.chanDoan.toLowerCase().includes('mổ')))) {
+          moCcList.push(hc);
+        }
+      });
+      (roomRep.emergencySurgeries || []).forEach(es => {
+        if (!moCcList.some(m => m.mabn === es.mabn || (m.hoten && m.hoten.toLowerCase() === (es.patientName || '').toLowerCase()))) {
+          moCcList.push({
+            hoten: es.patientName || es.hoten,
+            tuoi: es.age || es.tuoi,
+            diaChi: es.address || es.diaChi,
+            chanDoan: es.diagnosis || es.chanDoan,
+            dienBien: es.description || es.dienBien,
+            kipMo: es.surgeons || es.kipMo,
+            gioMo: es.transferTime || ''
+          });
+        }
+      });
+
+      let moCcRowsHtml = '';
+      if (moCcList.length === 0) {
+        moCcRowsHtml = `
+          <tr>
+            <td style="border: 1px solid #000; text-align: center; width: 32px; padding: 4px;">1</td>
+            <td colspan="11" style="border: 1px solid #000; padding: 5px 8px; font-style: italic; color: #475569;">
+              (Trong ca trực không có ca mổ cấp cứu)
+            </td>
+          </tr>
+        `;
+      } else {
+        moCcList.forEach((mCase, idx) => {
+          moCcRowsHtml += `
+            <tr>
+              <td style="border: 1px solid #000; text-align: center; vertical-align: top; width: 32px; padding: 4px; font-weight: bold;">${idx + 1}</td>
+              <td colspan="11" style="border: 1px solid #000; padding: 4px 8px; line-height: 1.5; text-align: left; font-size: 12px;">
+                <strong>${escapeHtml((mCase.hoten || '').toUpperCase())}</strong> ${mCase.tuoi ? mCase.tuoi + ' Tuổi' : ''} 
+                ${mCase.diaChi ? 'ĐC: ' + escapeHtml(mCase.diaChi) : ''} 
+                VV: ${currentDateKey.slice(8, 10)}/${currentDateKey.slice(5, 7)} 
+                Chẩn đoán: <strong>${escapeHtml(mCase.chanDoan || 'Chấn thương sọ não')}</strong><br/>
+                ${escapeHtml(mCase.dienBien || 'Bệnh nhân tỉnh, đau đầu')}${mCase.gioMo ? ', chuyển mổ ' + escapeHtml(mCase.gioMo) : ''}${mCase.kipMo ? ' (Kíp mổ: ' + escapeHtml(mCase.kipMo) + ')' : ''}
+              </td>
+            </tr>
+          `;
+        });
+      }
+
+      // Tạo khung sân khấu DOM độc lập chuẩn xác 100% như ảnh mẫu Excel của khoa
+      const stage = document.createElement('div');
+      stage.id = 'room-png-export-stage';
+      stage.style.position = 'fixed';
+      stage.style.left = '-9999px';
+      stage.style.top = '0';
+      stage.style.width = '1180px';
+      stage.style.backgroundColor = '#ffffff';
+      stage.style.padding = '20px 24px';
+      stage.style.boxSizing = 'border-box';
+      stage.style.fontFamily = 'Arial, "Segoe UI", Tahoma, sans-serif';
+      stage.style.color = '#000000';
+      stage.style.zIndex = '-999';
+
+      stage.innerHTML = `
+        <div style="width: 100%; box-sizing: border-box;">
+          <!-- TIÊU ĐỀ ĐỎ CHÍNH GIỮA -->
+          <div style="text-align: center; color: #cc0000; font-size: 20px; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase;">
+            ${roomKey.toUpperCase()}-BÁO CÁO TRỰC NGÀY ${dd} THÁNG ${mm} NĂM ${yyyy}
+          </div>
+
+          <!-- BẢNG HEADER: BÁC SỸ, ĐIỀU DƯỠNG, HỘ LÝ, XV -->
+          <table style="width: 100%; border-collapse: collapse; border: 1.5px solid #000; margin-bottom: 6px; font-size: 13px;">
+            <tr>
+              <td style="width: 130px; font-weight: bold; border: 1px solid #000; padding: 4px 8px;">BÁC SỸ:</td>
+              <td style="font-weight: bold; border: 1px solid #000; padding: 4px 8px; text-transform: uppercase;">${escapeHtml(docNames)}</td>
+              <td style="width: 170px; font-weight: bold; border: 1px solid #000; padding: 4px 12px; font-size: 14px; text-align: left;">
+                xv : &nbsp; ${xvStr}
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; border: 1px solid #000; padding: 4px 8px;">ĐIỀU DƯỠNG:</td>
+              <td style="font-weight: bold; border: 1px solid #000; padding: 4px 8px; text-transform: uppercase;">${escapeHtml(nurseNames)}</td>
+              <td style="font-style: italic; font-size: 10.5px; border: 1px solid #000; padding: 3px 6px; color: #1e293b; text-align: left;">
+                Quy ước: KHÔNG đánh "X", đánh số "1" cho các cột tổng hợp
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; border: 1px solid #000; padding: 4px 8px;">HỘ LÝ:</td>
+              <td style="font-weight: bold; border: 1px solid #000; padding: 4px 8px; text-transform: uppercase;">${escapeHtml(orderlyNames)}</td>
+              <td style="border: 1px solid #000; padding: 4px 8px;"></td>
+            </tr>
+          </table>
+
+          <!-- BẢNG CHỈ SỐ GIAO BAN: VÀNG VÀ XANH LÁ NHẠT -->
+          <table style="width: 100%; border-collapse: collapse; border: 1.5px solid #000; margin-bottom: 6px; text-align: center;">
+            <thead>
+              <tr style="background-color: #ffff00; font-weight: bold; font-size: 11.5px;">
+                <th rowspan="2" style="border: 1px solid #000; width: 6.5%; padding: 4px 2px; vertical-align: middle;">BỆNH<br/>CŨ</th>
+                <th colspan="2" style="border: 1px solid #000; width: 22%; padding: 4px 2px;">BỆNH VÀO</th>
+                <th colspan="2" style="border: 1px solid #000; width: 20%; padding: 4px 2px;">BỆNH MỔ</th>
+                <th colspan="2" style="border: 1px solid #000; width: 20%; padding: 4px 2px;">BỆNH RA</th>
+                <th rowspan="2" style="border: 1px solid #000; width: 10.5%; padding: 4px 2px; vertical-align: middle;">TỬ VONG</th>
+                <th rowspan="2" style="border: 1px solid #000; width: 11%; padding: 4px 2px; vertical-align: middle;">HIỆN CÓ</th>
+                <th rowspan="2" style="border: 1px solid #000; width: 10%; padding: 4px 2px; vertical-align: middle;">BẢO HIỂM</th>
+              </tr>
+              <tr style="background-color: #c6efce; font-weight: bold; font-size: 10.5px;">
+                <th style="border: 1px solid #000; width: 11%; padding: 3px 2px;">KHOA KHÁM</th>
+                <th style="border: 1px solid #000; width: 11%; padding: 3px 2px;">KHÁC</th>
+                <th style="border: 1px solid #000; width: 10%; padding: 3px 2px;">CHƯƠNG TRÌNH</th>
+                <th style="border: 1px solid #000; width: 10%; padding: 3px 2px;">CẤP CỨU</th>
+                <th style="border: 1px solid #000; width: 10%; padding: 3px 2px;">RA HẲN</th>
+                <th style="border: 1px solid #000; width: 10%; padding: 3px 2px;">KHÁC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="font-weight: bold; font-size: 18px; height: 36px;">
+                <td style="border: 1px solid #000; padding: 4px 2px;">${c.benhCu || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px;">${c.vaoKK || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px;">${c.vaoKhac || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px;">${c.moCT || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px;">${c.moCC || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px;">${c.raRH || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px;">${c.raKhac || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px; color: ${Number(c.tuVong || 0) > 0 ? '#cc0000' : '#000'};">${c.tuVong || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px; font-size: 20px;">${c.hienCo || 0}</td>
+                <td style="border: 1px solid #000; padding: 4px 2px;">${c.bhyt || 0}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- BẢNG CHI TIẾT BỆNH VÀO / BỆNH RA (HEADER XANH #C6EFCE) -->
+          <table style="width: 100%; border-collapse: collapse; border: 1.5px solid #000; margin-bottom: 8px;">
+            <thead>
+              <tr style="background-color: #c6efce; font-weight: bold; font-size: 11px; height: 26px;">
+                <th style="border: 1px solid #000; text-align: center; width: 32px;">STT</th>
+                <th style="border: 1px solid #000; text-align: center; width: 180px;">BỆNH VÀO</th>
+                <th style="border: 1px solid #000; text-align: center; width: 40px;">TUỔI</th>
+                <th style="border: 1px solid #000; text-align: center; width: 32px;">KK</th>
+                <th style="border: 1px solid #000; text-align: center; width: 50px;">TNGT</th>
+                <th style="border: 1px solid #000; text-align: center; width: 150px;">CHẨN ĐOÁN</th>
+                <th style="border: 1px solid #000; text-align: center; width: 170px;">ĐỊA CHỈ</th>
+                <th style="border: 1px solid #000; text-align: center; width: 120px;">TÌNH TRẠNG BỆNH</th>
+                <th style="border: 1px solid #000; text-align: center; width: 185px;">BỆNH RA</th>
+                <th style="border: 1px solid #000; text-align: center; width: 34px;">RH</th>
+                <th style="border: 1px solid #000; text-align: center; width: 34px;">BH</th>
+                <th style="border: 1px solid #000; text-align: center; width: 130px;">SVV</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${detailRowsHtml}
+              <!-- DÒNG TỔNG HỢP CUỐI BẢNG -->
+              <tr style="height: 24px; font-weight: bold; font-size: 11.5px; background: #ffffff;">
+                <td colspan="3" style="border: 1px solid #000; text-align: right; padding-right: 8px; font-style: italic;">
+                  TỔNG HỢP
+                </td>
+                <td style="border: 1px solid #000; text-align: center;">${totalKkCount || ''}</td>
+                <td style="border: 1px solid #000; text-align: center;">${totalTngtCount || ''}</td>
+                <td style="border: 1px solid #000;"></td>
+                <td style="border: 1px solid #000;"></td>
+                <td style="border: 1px solid #000;"></td>
+                <td style="border: 1px solid #000;"></td>
+                <td style="border: 1px solid #000; text-align: center;">${totalRhCount || 0}</td>
+                <td style="border: 1px solid #000; text-align: center;">${totalBhCount || 0}</td>
+                <td style="border: 1px solid #000;"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- PHẦN II: BỆNH MỔ CC -->
+          <div style="margin-top: 6px;">
+            <div style="font-weight: bold; font-size: 13px; margin-bottom: 4px; text-transform: uppercase;">
+              II &nbsp; BỆNH MỔ CC:
+            </div>
+            <table style="width: 100%; border-collapse: collapse; border: 1.5px solid #000;">
+              <tbody>
+                ${moCcRowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(stage);
+
+      showToast(`📸 Đang kết xuất ảnh báo cáo trực ${roomName}...`);
+
+      try {
+        if (typeof html2canvas === 'undefined') {
+          throw new Error('Thư viện html2canvas chưa được tải. Hãy tải lại trang web!');
+        }
+
+        const canvas = await html2canvas(stage, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          backgroundColor: '#ffffff'
+        });
+
+        const imageUri = canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `${roomKey.toUpperCase()}_Bao_Cao_Truc_${currentDateKey}.png`;
+        downloadLink.href = imageUri;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+        showToast(`🎉 Đã xuất thành công file ảnh báo cáo phòng ${roomName}!`, 3500);
+      } catch (err) {
+        console.error('Lỗi khi xuất ảnh PNG:', err);
+        alert('Có lỗi khi tạo ảnh PNG: ' + err.message);
+      } finally {
+        if (stage.parentNode) {
+          document.body.removeChild(stage);
+        }
+      }
     }
 
   </script>
