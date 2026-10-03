@@ -420,9 +420,11 @@
         <div class="dept-title">KHOA NGOẠI THẦN KINH - CỘT SỐNG</div>
       </div>
     </a>
-    <a href="/" class="btn-back-home">
-      <i class="fa-solid fa-arrow-left"></i> Về Trang Chủ
-    </a>
+    <div id="topHeaderRight">
+      <span class="btn-back-home" style="cursor: default; opacity: 0.9; border-color: #cbd5e1; background: #f8fafc; color: #0284c7; font-weight: 700;">
+        <i class="fa-solid fa-shield-halved"></i> Cổng Xác Thực Nội Bộ
+      </span>
+    </div>
   </header>
 
   <!-- Login Area -->
@@ -488,6 +490,11 @@
             <button type="submit" class="btn-submit" id="btnSubmitLogin">
               <i class="fa-solid fa-right-to-bracket"></i> ĐĂNG NHẬP
             </button>
+
+            <div style="margin-top: 18px; padding-top: 14px; border-top: 1px dashed #e2e8f0; font-size: 0.8rem; color: #64748b; text-align: center; line-height: 1.4;">
+              <i class="fa-solid fa-circle-info" style="color: #0284c7; margin-right: 4px;"></i>
+              Đăng nhập bằng <strong>Tên đăng nhập</strong> hoặc <strong>Số điện thoại</strong> đã đăng ký của cán bộ y tế.
+            </div>
           </form>
         </div>
 
@@ -534,6 +541,15 @@
       document.getElementById('loginFormSection').style.display = 'none';
       const section = document.getElementById('alreadyLoggedSection');
       section.classList.add('active');
+
+      const topRight = document.getElementById('topHeaderRight');
+      if (topRight) {
+        topRight.innerHTML = `
+          <a href="${redirectUrl}" class="btn-back-home" style="color: #0369a1; border-color: #bae6fd; background: #e0f2fe; font-weight: 800;">
+            <i class="fa-solid fa-arrow-right"></i> Vào Hệ Thống
+          </a>
+        `;
+      }
 
       const avatarLetter = (user.name || 'U').trim().split(/\s+/).pop().charAt(0).toUpperCase();
       document.getElementById('alreadyUserAvatar').textContent = avatarLetter;

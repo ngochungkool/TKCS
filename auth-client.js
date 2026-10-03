@@ -380,6 +380,43 @@
 
   let currentUser = null;
 
+  // Intercept window.fetch to automatically include credentials & Authorization header
+  const _origFetch = window.fetch;
+  window.fetch = async function(input, init = {}) {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      init.headers = init.headers || {};
+      if (init.headers instanceof Headers) {
+        if (!init.headers.has('Authorization')) {
+          init.headers.set('Authorization', `Bearer ${token}`);
+        }
+      } else if (Array.isArray(init.headers)) {
+        if (!init.headers.some(([k]) => k.toLowerCase() === 'authorization')) {
+          init.headers.push(['Authorization', `Bearer ${token}`]);
+        }
+      } else {
+        if (!init.headers['Authorization'] && !init.headers['authorization']) {
+          init.headers['Authorization'] = `Bearer ${token}`;
+        }
+      }
+    }
+    init.credentials = init.credentials || 'include';
+    const res = await _origFetch.call(this, input, init);
+    const p = window.location.pathname;
+    const isLogin = p === '/dang-nhap' || p === '/dang-nhap.html' || p === '/login';
+    if (res.status === 401 && !isLogin) {
+      try {
+        const clone = res.clone();
+        const data = await clone.json();
+        if (data && data.requireLogin) {
+          const redirectTarget = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
+          window.location.replace(`/dang-nhap?redirect=${redirectTarget}`);
+        }
+      } catch (e) {}
+    }
+    return res;
+  };
+
   // Fetch current user from server
   async function fetchCurrentUser() {
     try {
@@ -675,16 +712,15 @@
   }
 
   async function logout() {
-    if (!confirm('Bạn có chắc chắn muốn đăng xuất?')) return;
+    if (!confirm('Bạn có chắc chắn muốn đăng xuất khỏi hệ thống?')) return;
     try {
       await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('auth_user');
-      window.location.reload();
     } catch (e) {
       console.error('Logout error:', e);
-      window.location.reload();
     }
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_user');
+    window.location.replace('/dang-nhap');
   }
 
   // Global exports
@@ -701,6 +737,15 @@
   async function init() {
     injectStyles();
     const user = await fetchCurrentUser();
+    const p = window.location.pathname;
+    const isLogin = p === '/dang-nhap' || p === '/dang-nhap.html' || p === '/login';
+
+    if (!isLogin && !user) {
+      const redirectTarget = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
+      window.location.replace(`/dang-nhap?redirect=${redirectTarget}`);
+      return;
+    }
+
     renderAuthBadge(user);
   }
 

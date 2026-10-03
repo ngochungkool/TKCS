@@ -764,6 +764,26 @@ const server = http.createServer(async (req, res) => {
 
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, message: 'Đổi mật khẩu thành công! Hãy ghi nhớ mật khẩu mới của bạn.' }));
+    return;
+  }
+
+  // --- BẢO MẬT TẤT CẢ DỮ LIỆU & THAO TÁC API: BẮT BUỘC ĐÃ ĐĂNG NHẬP ---
+  const isPublicApi = pathname === '/api/ping' ||
+                      pathname === '/api/auth/login' ||
+                      pathname === '/api/auth/logout' ||
+                      pathname === '/api/auth/me';
+
+  if (pathname.startsWith('/api/') && !isPublicApi) {
+    const authUser = getAuthUser(req);
+    if (!authUser) {
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        ok: false,
+        error: 'Yêu cầu đăng nhập: Vui lòng đăng nhập vào hệ thống để xem hoặc thao tác thông tin!',
+        requireLogin: true
+      }));
+      return;
+    }
   }
 
   // Auto-compute from uploads_his if not yet computed
@@ -3802,10 +3822,32 @@ const server = http.createServer(async (req, res) => {
   else if (cleanRoute === '/dang-nhap' || cleanRoute === '/login') cleanRoute = '/dang-nhap.html';
 
   // Protect sensitive credential and session files from direct HTTP static download
-  if (cleanRoute === '/users.json' || cleanRoute === '/auth_sessions.json') {
+  if (cleanRoute === '/users.json' || cleanRoute === '/auth_sessions.json' || cleanRoute === '/state_db.json' || cleanRoute.endsWith('.json')) {
     res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
-    res.end('403 Forbidden: Truy cập tệp xác thực bị từ chối.');
+    res.end('403 Forbidden: Truy cập tệp xác thực và cơ sở dữ liệu bị từ chối.');
     return;
+  }
+
+  // BẢO VỆ CÁC TRANG NỘI BỘ (TRANG CHỦ VÀ CÁC TRANG TÍNH NĂNG): BẮT BUỘC ĐÃ ĐĂNG NHẬP
+  const protectedPages = [
+    '/index.html',
+    '/quan-ly-user.html',
+    '/hanh-chinh-khoa.html',
+    '/di-buong-hang-ngay.html',
+    '/bao-cao-giao-ban.html'
+  ];
+
+  if (protectedPages.includes(cleanRoute)) {
+    const authUser = getAuthUser(req);
+    if (!authUser) {
+      const redirectTarget = encodeURIComponent(cleanRoute === '/index.html' ? '/' : (pathname + (parsedUrl.search || '')));
+      res.writeHead(302, {
+        'Location': `/dang-nhap?redirect=${redirectTarget}`,
+        'Cache-Control': 'no-store, no-cache, must-revalidate, private'
+      });
+      res.end();
+      return;
+    }
   }
 
   const filePath = path.join(ROOT, cleanRoute);

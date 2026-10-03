@@ -10,6 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    // Bảo vệ trang chủ: kiểm tra phiên đăng nhập ngay khi tải
+    (function() {
+      const hasAuthCookie = document.cookie.split(';').some(c => c.trim().startsWith('auth_token='));
+      const hasAuthStorage = localStorage.getItem('auth_token') || localStorage.getItem('auth_user');
+      if (!hasAuthCookie && !hasAuthStorage) {
+        window.location.replace('/dang-nhap?redirect=' + encodeURIComponent(window.location.pathname + window.location.search + window.location.hash));
+      }
+    })();
+  </script>
   <script src="auth-client.js" defer></script>
 </head>
 <body>
@@ -193,6 +203,11 @@
     }
 
     async function openHomeSurgeryModal() {
+      if (window.TKCSAuth && !window.TKCSAuth.getUser()) {
+        showToast('🔒 Vui lòng đăng nhập để thực hiện báo mổ!');
+        setTimeout(() => { window.location.href = '/dang-nhap?redirect=/'; }, 800);
+        return;
+      }
       const dlg = document.getElementById('surgery-quick-dialog');
       const grid = document.getElementById('surgery-short-name-grid');
       const startInp = document.getElementById('surgery-start-time');
@@ -268,6 +283,11 @@
 
     document.getElementById('surgery-quick-form').addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (window.TKCSAuth && !window.TKCSAuth.getUser()) {
+        showToast('🔒 Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!');
+        setTimeout(() => { window.location.href = '/dang-nhap?redirect=/'; }, 800);
+        return;
+      }
       if (selectedSurgeryIds.size === 0) {
         showToast('⚠️ Vui lòng chọn ít nhất 1 bác sĩ đi mổ!');
         return;
