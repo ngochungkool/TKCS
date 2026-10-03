@@ -2,3 +2,5 @@ node_modules/
 .DS_Store
 *.log
 auth_sessions.json
+backup_before_clean_test_data.json
+test_data_archive/
