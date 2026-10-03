@@ -1183,38 +1183,60 @@
       color: #14532d;
     }
 
-    /* Print styles */
+    /* Dedicated Print Sheet for Publication-Grade Official A4 */
+    #print-sheet-a4 {
+      display: none;
+    }
+
     @media print {
-      body {
+      html, body {
         background: #ffffff !important;
         color: #000000 !important;
-        font-family: 'Times New Roman', serif !important;
+        font-family: 'Times New Roman', Times, serif !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
+      .page-wrapper,
       .dept-header-bar,
+      .gb-mode-switcher-bar,
       .gb-top-bar,
       .gb-tabs-nav,
+      #gb-view-container,
+      .modal-backdrop,
+      .theater-mode,
+      .lightbox-modal,
       .no-print {
         display: none !important;
       }
-      .page-wrapper {
+      #print-sheet-a4 {
+        display: block !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-family: 'Times New Roman', Times, serif !important;
         padding: 0 !important;
-        max-width: 100% !important;
-      }
-      .official-census-card {
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        margin-bottom: 14px !important;
-      }
-      .official-table {
-        font-size: 10pt !important;
-      }
-      .official-table th, .official-table td {
-        padding: 6px 4px !important;
+        margin: 0 !important;
       }
       @page {
         size: A4 landscape;
-        margin: 10mm;
+        margin: 8mm 10mm 8mm 10mm;
+      }
+      .print-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Times New Roman', Times, serif;
+      }
+      .print-table th, .print-table td {
+        border: 1px solid #000000 !important;
+        padding: 5px 6px;
+        color: #000000 !important;
+      }
+      .print-table th {
+        background: #f1f5f9 !important;
+        font-weight: bold;
+        text-align: center;
       }
     }
   </style>
@@ -1291,16 +1313,13 @@
         <button type="button" class="btn-gb-action btn-gb-present" onclick="openPresentationMode()" title="Bật màn hình trình chiếu giao ban toàn khoa">
           <i class="fa-solid fa-tv"></i> Trình chiếu giao ban
         </button>
-        <button type="button" class="btn-gb-action btn-gb-zalo" onclick="copyBriefingTextForZalo()" title="Sao chép toàn bộ nội dung text để dán nhanh vào Zalo giao ban khoa">
-          <i class="fa-solid fa-copy"></i> Sao chép cho Zalo
-        </button>
         <button type="button" class="btn-gb-action btn-gb-sync" onclick="autoFetchFromHis()" title="Trích xuất số liệu mới nhất từ các file Excel HIS">
           <i class="fa-solid fa-arrows-rotate"></i> Lấy dữ liệu HIS
         </button>
         <button type="button" class="btn-gb-action btn-gb-save" onclick="saveActiveReport()" title="Lưu và gửi dữ liệu ca trực">
           <i class="fa-solid fa-floppy-disk"></i> Lưu báo cáo
         </button>
-        <button type="button" class="btn-gb-action btn-gb-print" onclick="window.print()" title="In báo cáo A4 ngang chuẩn y tế">
+        <button type="button" class="btn-gb-action btn-gb-print" onclick="printOfficialA4Report()" title="In bản Báo cáo Giao ban A4 chuẩn Bộ Y tế">
           <i class="fa-solid fa-print"></i> In A4
         </button>
       </div>
@@ -1414,13 +1433,13 @@
     </div>
   </div>
 
-  <!-- MODAL: ĐIỀU DƯỠNG THÊM CA NẶNG / ĐỘT XUẤT PHÒNG -->
+  <!-- MODAL: ĐIỀU DƯỠNG CHỌN BỆNH NHÂN THEO DÕI / GIAO BAN BUỒNG BỆNH -->
   <div id="modal-room-add-case" class="modal-backdrop" onclick="closeRoomAddCaseModal(event)">
-    <div class="modal-card" style="max-width: 650px;" onclick="event.stopPropagation()">
+    <div class="modal-card" style="max-width: 860px;" onclick="event.stopPropagation()">
       <div class="modal-header">
         <div class="modal-title" id="modal-room-add-title">
-          <i class="fa-solid fa-hospital-user" style="color:#dc2626;"></i>
-          THÊM CA ĐỘT XUẤT / NẶNG
+          <i class="fa-solid fa-bed-pulse" style="color:#0284c7;"></i>
+          CHỌN BỆNH NHÂN THEO DÕI / GIAO BAN — <span id="modal-room-header-name"></span>
         </div>
         <button type="button" class="btn-theater btn-theater-close" style="padding:4px 10px;" onclick="closeRoomAddCaseModal()">
           &times;
@@ -1429,63 +1448,29 @@
 
       <div class="modal-body">
         <div style="margin-bottom:12px;">
-          <label style="font-weight:700;font-size:0.85rem;color:#334155;display:block;margin-bottom:4px;">Chọn nhanh bệnh nhân đang điều trị tại phòng:</label>
-          <select id="modal-room-select-existing" class="gb-input-control" style="width:100%;font-weight:700;padding:8px;" onchange="onRoomExistingPatientSelected(this.value)">
-            <option value="">-- Chọn bệnh nhân có sẵn hoặc nhập mới bên dưới --</option>
-          </select>
+          <input type="text" id="modal-room-search-input" class="patient-picker-search" placeholder="🔍 Tìm nhanh theo Họ tên, Mã BN, Giường, Chẩn đoán..." oninput="renderRoomPatientPickerList()" />
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-          <div>
-            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Mã bệnh nhân:</label>
-            <input type="text" id="modal-room-mabn" class="gb-input-control" placeholder="Mã BN..." />
+        <!-- Thanh tiến độ rà soát danh sách buồng bệnh -->
+        <div id="modal-room-progress-bar" style="display:flex;justify-content:space-between;align-items:center;background:#f0f9ff;padding:10px 16px;border-radius:12px;margin-bottom:14px;border:1px solid #bae6fd;flex-wrap:wrap;gap:8px;">
+          <div style="font-size:0.92rem;font-weight:700;color:#0369a1;">
+            <i class="fa-solid fa-list-check"></i> Tiến độ rà soát buồng: <span id="modal-room-counter-tagged" style="color:#dc2626;font-size:1.15rem;font-weight:900;">0</span> / <span id="modal-room-counter-total" style="font-weight:800;">0</span> bệnh nhân đã gắn nhãn
           </div>
-          <div>
-            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Họ và tên (*):</label>
-            <input type="text" id="modal-room-hoten" class="gb-input-control" placeholder="Họ và tên bệnh nhân..." />
+          <div style="font-size:0.82rem;color:#64748b;">
+            💡 Bấm các nút gắn nhãn bên phải mỗi bệnh nhân để đưa vào báo cáo
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:10px;margin-bottom:10px;">
-          <div>
-            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Tuổi:</label>
-            <input type="text" id="modal-room-tuoi" class="gb-input-control" placeholder="Tuổi..." />
-          </div>
-          <div>
-            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Giới tính:</label>
-            <select id="modal-room-gioitinh" class="gb-input-control">
-              <option value="NAM">NAM</option>
-              <option value="NỮ">NỮ</option>
-            </select>
-          </div>
-          <div>
-            <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Địa chỉ:</label>
-            <input type="text" id="modal-room-diachi" class="gb-input-control" placeholder="Địa chỉ..." />
-          </div>
-        </div>
-
-        <div style="margin-bottom:10px;">
-          <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Chẩn đoán:</label>
-          <input type="text" id="modal-room-chandoan" class="gb-input-control" placeholder="Chẩn đoán bệnh..." />
-        </div>
-
-        <div style="margin-bottom:12px;">
-          <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Gắn nhãn giao ban (*):</label>
-          <div id="modal-room-tag-options" style="display:flex;gap:8px;flex-wrap:wrap;">
-            <!-- Rendered based on whether room is HSTK or TK1-4 -->
-          </div>
-        </div>
-
-        <div>
-          <label style="font-weight:700;font-size:0.82rem;color:#475569;display:block;margin-bottom:4px;">Diễn biến ca trực / Ghi chú bàn giao:</label>
-          <textarea id="modal-room-dienbien" class="gb-input-control" style="width:100%;height:60px;" placeholder="Tri giác, sinh hiệu, tình trạng cần theo dõi..."></textarea>
+        <!-- Danh sách bệnh nhân trong buồng để điều dưỡng dò -->
+        <div class="patient-picker-list" id="modal-room-patient-list" style="max-height: 52vh;">
+          <!-- Dynamically populated -->
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn-gb-action btn-gb-print" onclick="closeRoomAddCaseModal()">Hủy</button>
-        <button type="button" class="btn-gb-action btn-gb-save" onclick="saveRoomAddCase()">
-          <i class="fa-solid fa-check"></i> Lưu &amp; Đưa vào báo cáo
+        <span style="font-size:0.83rem;color:#64748b;">Dữ liệu gắn nhãn sẽ tự động cập nhật ngay vào Báo cáo buồng & Toàn khoa</span>
+        <button type="button" class="btn-gb-action btn-gb-save" onclick="closeRoomAddCaseModal()">
+          <i class="fa-solid fa-check"></i> Đã chọn xong (Đóng)
         </button>
       </div>
     </div>
@@ -1712,10 +1697,54 @@
       window.location.href = url;
     }
 
-    // Download PowerPoint file (.pptx)
-    function downloadPowerPointFile() {
-      const url = `/api/export-briefing-pptx?date=${currentDateKey}`;
-      window.location.href = url;
+    // Download PowerPoint file (.pptx) - Có xử lý lưu nháp trước & tải dạng blob
+    async function downloadPowerPointFile() {
+      const btn = document.querySelector('.btn-gb-pptx');
+      const originalHtml = btn ? btn.innerHTML : '';
+      try {
+        if (btn) {
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang tạo PPTX...';
+          btn.disabled = true;
+        }
+
+        // Tự động lưu dữ liệu hiện tại trước để PPTX luôn có dữ liệu mới nhất
+        if (currentReport) {
+          await fetch('/api/briefing-report', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              dateKey: currentDateKey,
+              roomKey: activeTab,
+              overall: currentReport.overall,
+              highlightCases: currentReport.highlightCases
+            })
+          });
+        }
+
+        const res = await fetch(`/api/export-briefing-pptx?date=${currentDateKey}`);
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || 'Lỗi server khi tạo PowerPoint');
+        }
+
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Bao_Cao_Giao_Ban_${currentDateKey}.pptx`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      } catch (err) {
+        console.error(err);
+        alert('Không thể tải PowerPoint: ' + err.message);
+      } finally {
+        if (btn) {
+          btn.innerHTML = originalHtml;
+          btn.disabled = false;
+        }
+      }
     }
 
     // Copy formatted report text for Zalo
@@ -2257,7 +2286,9 @@
               <td style="font-weight:700;color:#0f172a;">${adm.hoten || '--'}</td>
               <td style="text-align:center;">${adm.tuoi || '--'}</td>
               <td><span style="font-size:0.75rem;padding:2px 6px;border-radius:4px;background:#f1f5f9;">${adm.cause || 'Bệnh'}</span></td>
-              <td style="font-size:0.83rem;">${adm.chanDoan || '--'}</td>
+              <td style="padding:4px 6px;">
+                <input type="text" class="gb-input-control" style="width:100%;font-size:0.83rem;padding:4px 6px;border:1px solid #cbd5e1;background:#fff;" value="${escapeHtml(adm.chanDoan || '')}" onchange="updateRoomAdmissionField('${roomKey}', '${adm.id}', 'chanDoan', this.value)" placeholder="Chẩn đoán..." />
+              </td>
               <td style="text-align:center;white-space:nowrap;">
                 <button type="button" class="btn-tag-chip ${isMoCC ? 'active-tag-mo-cc' : ''}" onclick="togglePatientTag('${roomKey}', '${adm.id}', 'MO_CC')" title="Mổ cấp cứu">
                   🔪 Mổ CC
@@ -2345,14 +2376,20 @@
               <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:8px;margin-bottom:10px;font-size:0.85rem;">
                 <div><strong>Địa chỉ:</strong> ${escapeHtml(adm.diaChi || 'Gia Lai')}</div>
                 <div><strong>Ngày vào viện:</strong> ${adm.ngayVaoVien || currentDateKey}</div>
-                <div><strong>Chẩn đoán:</strong> <span style="color:#0369a1;font-weight:700;">${escapeHtml(adm.chanDoan || '--')}</span></div>
+                <div style="grid-column: 1 / -1;">
+                  <label style="font-size:0.8rem;font-weight:700;color:#0369a1;display:block;margin-bottom:2px;">Chẩn đoán bệnh (* có thể chỉnh sửa):</label>
+                  <input type="text" class="gb-input-control" style="font-weight:700;color:#0369a1;background:#eff6ff;width:100%;" value="${escapeHtml(adm.chanDoan || mCase.chanDoan || '')}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'chanDoan', this.value)" placeholder="Chẩn đoán bệnh..." />
+                </div>
               </div>
 
               <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:10px;margin-bottom:10px;">
                 ${isMoCC ? `
                   <div>
-                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Ngày phẫu thuật:</label>
-                    <input type="date" class="gb-input-control" value="${adm.ngayPhauThuat || mCase.ngayPhauThuat || currentDateKey}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'ngayPhauThuat', this.value)" />
+                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Giờ &amp; Ngày phẫu thuật:</label>
+                    <div style="display:flex;gap:6px;">
+                      <input type="time" class="gb-input-control" style="width:115px;" value="${adm.gioPhauThuat || '08:00'}" onchange="updateTaggedSurgeryTime('${roomKey}', '${adm.id}', 'gio', this.value)" />
+                      <input type="date" class="gb-input-control" style="flex:1;" value="${adm.ngayPhauThuatDate || currentDateKey}" onchange="updateTaggedSurgeryTime('${roomKey}', '${adm.id}', 'ngay', this.value)" />
+                    </div>
                   </div>
                   <div>
                     <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Kíp mổ / PTV:</label>
@@ -2363,12 +2400,7 @@
                     <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">${isTuVong ? 'Thời gian tử vong:' : 'Thời gian xin về:'}</label>
                     <input type="text" class="gb-input-control" placeholder="Giờ, ngày..." value="${escapeHtml(adm.ngayXinVe || mCase.ngayXinVe || currentDateKey)}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'ngayXinVe', this.value)" />
                   </div>
-                ` : `
-                  <div>
-                    <label style="font-size:0.8rem;font-weight:700;color:#334155;display:block;margin-bottom:2px;">Tình trạng cần theo dõi:</label>
-                    <input type="text" class="gb-input-control" placeholder="Theo dõi tri giác, dẫn lưu..." value="${escapeHtml(adm.dienBien || mCase.dienBien || '')}" onchange="updateTaggedCaseDetails('${roomKey}', '${adm.id}', 'dienBien', this.value)" />
-                  </div>
-                `}
+                ` : ''}
               </div>
 
               <div>
@@ -2470,9 +2502,9 @@
         sum.hienCo += Number(c.hienCo || 0);
         sum.bhyt += Number(c.bhyt || 0);
 
-        // Hộ lý đã được bỏ theo yêu cầu
+        // Hộ lý đã được bỏ theo yêu cầu; HSTK xuống hàng ca ngày và đêm
         const personnelStr = (r.key === 'hstk')
-          ? `Ngày: <strong>${escapeHtml(p.nursesDay || '--')}</strong> | Đêm: <strong>${escapeHtml(p.nursesNight || '--')}</strong>`
+          ? `<div style="line-height:1.5;"><span style="color:#0284c7;font-weight:700;">☀️ Ngày:</span> <strong>${escapeHtml(p.nursesDay || '--')}</strong><br><span style="color:#4f46e5;font-weight:700;">🌙 Đêm:</span> <strong>${escapeHtml(p.nursesNight || '--')}</strong></div>`
           : `ĐD: <strong>${escapeHtml(p.nurses || '--')}</strong>`;
 
         const statusBadge = isSub
@@ -2626,154 +2658,274 @@
       renderCurrentView();
     }
 
-    // Modal: Thêm ca đột xuất / nặng tại các buồng
+    // Sửa trực tiếp chẩn đoán bệnh nhân ở bảng vào buồng
+    function updateRoomAdmissionField(roomKey, admissionId, field, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.admissions)) return;
+      const adm = rep.admissions.find(a => a.id === admissionId);
+      if (adm) {
+        adm[field] = val;
+      }
+      if (currentReport.highlightCases && adm) {
+        const masterCase = currentReport.highlightCases.find(c => c.mabn === adm.mabn && c.roomKey === roomKey);
+        if (masterCase) {
+          masterCase[field] = val;
+        }
+      }
+    }
+
+    // Cập nhật giờ và ngày phẫu thuật
+    function updateTaggedSurgeryTime(roomKey, admissionId, type, val) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.admissions)) return;
+      const adm = rep.admissions.find(a => a.id === admissionId);
+      if (!adm) return;
+
+      if (type === 'gio') adm.gioPhauThuat = val;
+      if (type === 'ngay') adm.ngayPhauThuatDate = val;
+
+      const gio = adm.gioPhauThuat || '08:00';
+      const ngay = adm.ngayPhauThuatDate || currentDateKey;
+      const parts = ngay.split('-');
+      const dmy = (parts.length === 3) ? `${parts[2]}/${parts[1]}/${parts[0]}` : ngay;
+      const fullStr = `${gio} ngày ${dmy}`;
+      adm.ngayPhauThuat = fullStr;
+
+      if (currentReport.highlightCases) {
+        const masterCase = currentReport.highlightCases.find(c => c.mabn === adm.mabn && c.roomKey === roomKey);
+        if (masterCase) {
+          masterCase.ngayPhauThuat = fullStr;
+          masterCase.gioPhauThuat = gio;
+          masterCase.ngayPhauThuatDate = ngay;
+        }
+      }
+    }
+
+    // Modal: Chọn bệnh nhân theo dõi / giao ban từ danh sách buồng (Không nhập tay, dò list biết khi nào xong)
     function addManualRoomCase(roomKey) {
       activeRoomAddCaseRoomKey = roomKey;
       const roomName = ROOM_NAMES[roomKey] || roomKey;
-      const titleEl = document.getElementById('modal-room-add-title');
-      if (titleEl) {
-        titleEl.innerHTML = `<i class="fa-solid fa-hospital-user" style="color:#dc2626;"></i> THÊM CA ĐỘT XUẤT / NẶNG — ${roomName.toUpperCase()}`;
-      }
+      const headerNameEl = document.getElementById('modal-room-header-name');
+      if (headerNameEl) headerNameEl.textContent = roomName.toUpperCase();
 
-      // Populate existing patients dropdown for this room
-      const selectExisting = document.getElementById('modal-room-select-existing');
-      if (selectExisting) {
-        const roomPatients = (inpatientList || []).filter(p => p.roomKey === roomKey);
-        let optHtml = '<option value="">-- Chọn bệnh nhân có sẵn tại phòng hoặc nhập mới bên dưới --</option>';
-        roomPatients.forEach(p => {
-          optHtml += `<option value="${p.mabn}">${escapeHtml(p.hoten)} — ${p.mabn} (${p.tuoi}T, Giường: ${p.bed || '--'}) — ${escapeHtml(p.chanDoan)}</option>`;
-        });
-        selectExisting.innerHTML = optHtml;
-      }
+      const searchInput = document.getElementById('modal-room-search-input');
+      if (searchInput) searchInput.value = '';
 
-      // Populate tag choices: HSTK gets all 4, TK1-4 only gets MO_CC & THEO_DOI
-      const tagContainer = document.getElementById('modal-room-tag-options');
-      if (tagContainer) {
-        const isHSTK = (roomKey === 'hstk');
-        let tagsHtml = `
-          <label style="display:inline-flex;align-items:center;gap:6px;background:#fee2e2;color:#991b1b;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.88rem;border:1px solid #fca5a5;">
-            <input type="radio" name="modal-room-tag" value="MO_CC" checked /> 🔪 Mổ Cấp Cứu
-          </label>
-          <label style="display:inline-flex;align-items:center;gap:6px;background:#fef3c7;color:#92400e;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.88rem;border:1px solid #fde68a;">
-            <input type="radio" name="modal-room-tag" value="THEO_DOI" /> ⚠️ Theo Dõi
-          </label>
-        `;
-        if (isHSTK) {
-          tagsHtml += `
-            <label style="display:inline-flex;align-items:center;gap:6px;background:#fef2f2;color:#7f1d1d;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.88rem;border:1px solid #f87171;">
-              <input type="radio" name="modal-room-tag" value="TU_VONG" /> ⚰️ Tử Vong
-            </label>
-            <label style="display:inline-flex;align-items:center;gap:6px;background:#ffedd5;color:#c2410c;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.88rem;border:1px solid #fed7aa;">
-              <input type="radio" name="modal-room-tag" value="XIN_VE" /> 🏠 Nặng Xin Về
-            </label>
-          `;
-        }
-        tagContainer.innerHTML = tagsHtml;
-      }
-
-      // Reset fields
-      document.getElementById('modal-room-mabn').value = '';
-      document.getElementById('modal-room-hoten').value = '';
-      document.getElementById('modal-room-tuoi').value = '';
-      document.getElementById('modal-room-gioitinh').value = 'NAM';
-      document.getElementById('modal-room-diachi').value = 'Gia Lai';
-      document.getElementById('modal-room-chandoan').value = '';
-      document.getElementById('modal-room-dienbien').value = '';
-
+      renderRoomPatientPickerList();
       document.getElementById('modal-room-add-case').classList.add('active');
     }
 
-    function closeRoomAddCaseModal(e) {
-      if (e && e.target !== e.currentTarget && e.target.id !== 'modal-room-add-case') return;
-      document.getElementById('modal-room-add-case').classList.remove('active');
+    function filterRoomPatientList() {
+      renderRoomPatientPickerList();
     }
 
-    function onRoomExistingPatientSelected(mabn) {
-      if (!mabn) return;
-      const p = (inpatientList || []).find(item => item.mabn === mabn);
-      if (p) {
-        document.getElementById('modal-room-mabn').value = p.mabn || '';
-        document.getElementById('modal-room-hoten').value = p.hoten || '';
-        document.getElementById('modal-room-tuoi').value = p.tuoi || '';
-        document.getElementById('modal-room-gioitinh').value = (p.gioiTinh && p.gioiTinh.toUpperCase().includes('NỮ')) ? 'NỮ' : 'NAM';
-        document.getElementById('modal-room-diachi').value = p.diaChi || 'Gia Lai';
-        document.getElementById('modal-room-chandoan').value = p.chanDoan || '';
-      }
-    }
-
-    function saveRoomAddCase() {
-      if (!activeRoomAddCaseRoomKey) return;
+    function renderRoomPatientPickerList() {
       const roomKey = activeRoomAddCaseRoomKey;
-      const hoten = (document.getElementById('modal-room-hoten').value || '').trim().toUpperCase();
-      if (!hoten) {
-        alert('Vui lòng nhập Họ và tên bệnh nhân!');
+      if (!roomKey) return;
+      const isHSTK = (roomKey === 'hstk');
+      const rep = (currentReport.roomReports && currentReport.roomReports[roomKey]) || { admissions: [] };
+      const admissions = rep.admissions || [];
+
+      // Lấy tất cả bệnh nhân thuộc buồng này
+      const roomPatients = (inpatientList || []).filter(p => p.roomKey === roomKey);
+      const searchInput = document.getElementById('modal-room-search-input');
+      const query = (searchInput ? searchInput.value : '').trim().toLowerCase();
+
+      let filtered = roomPatients;
+      if (query) {
+        filtered = roomPatients.filter(p => {
+          return (p.hoten && p.hoten.toLowerCase().includes(query)) ||
+                 (p.mabn && p.mabn.toLowerCase().includes(query)) ||
+                 (p.bed && p.bed.toLowerCase().includes(query)) ||
+                 (p.chanDoan && p.chanDoan.toLowerCase().includes(query));
+        });
+      }
+
+      // Đếm số bệnh nhân đã gắn nhãn trong buồng này
+      const taggedCount = roomPatients.filter(p => admissions.some(a => a.mabn === p.mabn && !!a.category)).length;
+      const counterTaggedEl = document.getElementById('modal-room-counter-tagged');
+      const counterTotalEl = document.getElementById('modal-room-counter-total');
+      if (counterTaggedEl) counterTaggedEl.textContent = taggedCount;
+      if (counterTotalEl) counterTotalEl.textContent = roomPatients.length;
+
+      const container = document.getElementById('modal-room-patient-list');
+      if (!container) return;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center;padding:32px;color:#64748b;">
+            <i class="fa-solid fa-user-xmark" style="font-size:2rem;color:#cbd5e1;margin-bottom:8px;"></i>
+            <div style="font-weight:700;">Không tìm thấy bệnh nhân nào khớp với từ khóa tìm kiếm.</div>
+          </div>
+        `;
         return;
       }
-      const mabn = (document.getElementById('modal-room-mabn').value || '').trim() || `BN-${Date.now().toString().slice(-4)}`;
-      const tuoi = (document.getElementById('modal-room-tuoi').value || '').trim();
-      const gioiTinh = document.getElementById('modal-room-gioitinh').value || 'NAM';
-      const diaChi = (document.getElementById('modal-room-diachi').value || '').trim() || 'Gia Lai';
-      const chanDoan = (document.getElementById('modal-room-chandoan').value || '').trim();
-      const dienBien = (document.getElementById('modal-room-dienbien').value || '').trim();
 
-      const selectedTagEl = document.querySelector('input[name="modal-room-tag"]:checked');
-      const tag = selectedTagEl ? selectedTagEl.value : 'MO_CC';
+      container.innerHTML = filtered.map(p => {
+        const taggedAdm = admissions.find(a => a.mabn === p.mabn && !!a.category);
+        const isTagged = !!taggedAdm;
+
+        let tagBadgeHtml = '';
+        if (isTagged) {
+          const cat = taggedAdm.category;
+          const label = (cat === 'MO_CC') ? '🔪 MỔ CẤP CỨU'
+            : (cat === 'THEO_DOI') ? '⚠️ THEO DÕI'
+            : (cat === 'TU_VONG') ? '⚰️ TỬ VONG'
+            : '🏠 NẶNG XIN VỀ';
+          tagBadgeHtml = `
+            <span style="background:#dcfce7;color:#15803d;border:1.5px solid #86efac;padding:3px 10px;border-radius:8px;font-weight:900;font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;">
+              <i class="fa-solid fa-circle-check"></i> ${label}
+            </span>
+            <button type="button" class="btn-gb-action" style="padding:4px 10px;font-size:0.78rem;background:#fee2e2;color:#b91c1c;border-color:#fca5a5;" onclick="unTagPatientInRoomPicker('${p.mabn}')" title="Bỏ gắn nhãn ca này">
+              <i class="fa-solid fa-xmark"></i> Bỏ nhãn
+            </button>
+          `;
+        } else {
+          tagBadgeHtml = `
+            <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'MO_CC')" title="Đưa vào ca Mổ cấp cứu">
+              🔪 Mổ CC
+            </button>
+            <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'THEO_DOI')" title="Đưa vào ca Theo dõi diễn biến nặng">
+              ⚠️ Theo dõi
+            </button>
+            ${isHSTK ? `
+              <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'TU_VONG')" title="Đưa vào ca Tử vong">
+                ⚰️ Tử vong
+              </button>
+              <button type="button" class="btn-tag-chip" onclick="tagPatientInRoomPicker('${p.mabn}', 'XIN_VE')" title="Đưa vào ca Bệnh nặng xin về">
+                🏠 Xin về
+              </button>
+            ` : ''}
+          `;
+        }
+
+        return `
+          <div class="patient-picker-item" style="background:${isTagged ? '#f0fdf4' : '#ffffff'}; border-color:${isTagged ? '#86efac' : '#e2e8f0'};">
+            <div style="flex:1;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">
+                <span style="font-size:1.05rem;font-weight:900;color:#0f172a;text-transform:uppercase;">${escapeHtml(p.hoten)}</span>
+                <span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:6px;font-weight:700;font-size:0.8rem;">Mã: ${p.mabn}</span>
+                <span style="background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:6px;font-size:0.8rem;font-weight:700;">${p.tuoi} tuổi • ${p.gioiTinh || 'NAM'}</span>
+                <span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:6px;font-size:0.8rem;font-weight:800;">Giường: ${p.bed || '--'}</span>
+              </div>
+              <div style="font-size:0.86rem;color:#0369a1;font-weight:700;margin-bottom:2px;">
+                <i class="fa-solid fa-stethoscope"></i> ${escapeHtml(p.chanDoan || 'Chưa có chẩn đoán')}
+              </div>
+              <div style="font-size:0.78rem;color:#64748b;">
+                BS điều trị: <strong>${escapeHtml(p.doctor || '--')}</strong> • Địa chỉ: ${escapeHtml(p.diaChi || 'Gia Lai')}
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+              ${tagBadgeHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function tagPatientInRoomPicker(mabn, category) {
+      const roomKey = activeRoomAddCaseRoomKey;
+      if (!roomKey) return;
+      const p = (inpatientList || []).find(item => item.mabn === mabn);
+      if (!p) return;
 
       const rep = currentReport.roomReports[roomKey];
       if (!rep) return;
       if (!Array.isArray(rep.admissions)) rep.admissions = [];
 
-      const newAdmId = `adm-${Date.now()}`;
-      const newAdm = {
-        id: newAdmId,
-        mabn,
-        hoten,
-        tuoi,
-        gioiTinh,
-        diaChi,
-        chanDoan,
-        cause: (tag === 'MO_CC') ? 'Chấn thương' : 'Bệnh lý',
-        category: tag,
-        isHighlight: true,
-        dienBien: dienBien,
-        ngayVaoVien: currentDateKey,
-        ngayPhauThuat: (tag === 'MO_CC') ? currentDateKey : '',
-        ngayXinVe: (tag === 'XIN_VE' || tag === 'TU_VONG') ? currentDateKey : ''
-      };
-
-      rep.admissions.unshift(newAdm);
+      let adm = rep.admissions.find(a => a.mabn === mabn);
+      if (!adm) {
+        adm = {
+          id: `adm-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          mabn: p.mabn,
+          hoten: p.hoten,
+          tuoi: p.tuoi,
+          gioiTinh: p.gioiTinh || 'NAM',
+          diaChi: p.diaChi || 'Gia Lai',
+          chanDoan: p.chanDoan || '',
+          cause: (category === 'MO_CC') ? 'Chấn thương' : 'Bệnh lý',
+          category: category,
+          isHighlight: true,
+          ngayVaoVien: currentDateKey,
+          gioPhauThuat: '08:00',
+          ngayPhauThuatDate: currentDateKey,
+          ngayPhauThuat: (category === 'MO_CC') ? `08:00 ngày ${formatDateDMY(currentDateKey)}` : '',
+          ngayXinVe: (category === 'XIN_VE' || category === 'TU_VONG') ? currentDateKey : '',
+          dienBien: ''
+        };
+        rep.admissions.unshift(adm);
+      } else {
+        adm.category = category;
+        adm.isHighlight = true;
+      }
 
       // Sync to master highlight cases
       const prefix = roomKey.toUpperCase();
-      const catText = (tag === 'MO_CC') ? `${prefix} – BỆNH MỔ CẤP CỨU`
-        : (tag === 'THEO_DOI') ? `${prefix} – BỆNH THEO DÕI`
-        : (tag === 'TU_VONG') ? `${prefix} – BỆNH NHÂN TỬ VONG`
+      const catText = (category === 'MO_CC') ? `${prefix} – BỆNH MỔ CẤP CỨU`
+        : (category === 'THEO_DOI') ? `${prefix} – BỆNH THEO DÕI`
+        : (category === 'TU_VONG') ? `${prefix} – BỆNH NHÂN TỬ VONG`
         : `${prefix} – BỆNH NẶNG XIN VỀ`;
 
       if (!Array.isArray(currentReport.highlightCases)) currentReport.highlightCases = [];
-      currentReport.highlightCases.push({
-        id: `case-${Date.now()}`,
-        stt: currentReport.highlightCases.length + 1,
-        mabn,
-        hoten,
-        tuoi,
-        gioiTinh,
-        diaChi,
-        ngayVaoVien: currentDateKey,
-        ngayPhauThuat: (tag === 'MO_CC') ? currentDateKey : '',
-        ngayXinVe: (tag === 'XIN_VE' || tag === 'TU_VONG') ? currentDateKey : '',
-        roomKey,
-        roomName: ROOM_NAMES[roomKey],
-        category: catText,
-        chanDoan,
-        selectedForSlide: true,
-        dienBien,
-        images: []
-      });
+      let masterCase = currentReport.highlightCases.find(c => c.mabn === mabn && c.roomKey === roomKey);
+      if (!masterCase) {
+        masterCase = {
+          id: `case-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          stt: currentReport.highlightCases.length + 1,
+          mabn: p.mabn,
+          hoten: p.hoten,
+          tuoi: p.tuoi,
+          gioiTinh: p.gioiTinh || 'NAM',
+          diaChi: p.diaChi || 'Gia Lai',
+          ngayVaoVien: currentDateKey,
+          gioPhauThuat: '08:00',
+          ngayPhauThuatDate: currentDateKey,
+          ngayPhauThuat: (category === 'MO_CC') ? `08:00 ngày ${formatDateDMY(currentDateKey)}` : '',
+          ngayXinVe: (category === 'XIN_VE' || category === 'TU_VONG') ? currentDateKey : '',
+          roomKey,
+          roomName: ROOM_NAMES[roomKey],
+          category: catText,
+          chanDoan: p.chanDoan,
+          selectedForSlide: true,
+          dienBien: '',
+          images: []
+        };
+        currentReport.highlightCases.push(masterCase);
+      } else {
+        masterCase.category = catText;
+      }
 
-      closeRoomAddCaseModal();
+      renderRoomPatientPickerList();
+    }
+
+    function unTagPatientInRoomPicker(mabn) {
+      const roomKey = activeRoomAddCaseRoomKey;
+      if (!roomKey) return;
+      const rep = currentReport.roomReports[roomKey];
+      if (rep && Array.isArray(rep.admissions)) {
+        const adm = rep.admissions.find(a => a.mabn === mabn);
+        if (adm) {
+          adm.category = '';
+          adm.isHighlight = false;
+        }
+      }
+      if (currentReport.highlightCases) {
+        currentReport.highlightCases = currentReport.highlightCases.filter(c => !(c.mabn === mabn && c.roomKey === roomKey));
+      }
+      renderRoomPatientPickerList();
+    }
+
+    function closeRoomAddCaseModal(e) {
+      if (e && e.target !== e.currentTarget && e.target.id !== 'modal-room-add-case') return;
+      document.getElementById('modal-room-add-case').classList.remove('active');
       renderCurrentView();
-      alert(`✅ Đã thêm ca [${hoten}] vào ${ROOM_NAMES[roomKey]} và tự động chuyển lên Bác sĩ toàn khoa!`);
+    }
+
+    function formatDateDMY(dateStr) {
+      if (!dateStr) return '';
+      const parts = dateStr.split('-');
+      if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
+      return dateStr;
     }
 
     // Modal: Bác sĩ chọn bệnh nhân trong danh sách khoa
@@ -3969,6 +4121,247 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
+
+    /* =========================================================================
+       6. CHUẨN HÓA IN BÁO CÁO GIAO BAN A4 CHUẨN BỘ Y TẾ (CỰC ĐẸP)
+       ========================================================================= */
+    function generateOfficialA4PrintHtml() {
+      if (!currentReport) return '';
+      const overall = currentReport.overall || {};
+      const grand = overall.grandCensus || {};
+      const roomReports = currentReport.roomReports || {};
+      const highlightCases = (currentReport.highlightCases || []).filter(c => c.selectedForSlide !== false);
+
+      const docsDutyStr = (overall.doctorsOnDuty && overall.doctorsOnDuty.length > 0)
+        ? overall.doctorsOnDuty.join(' – ')
+        : (dutyDoctorsAbbr || 'HẢI – CƯ – LUÂN');
+
+      const rooms = [
+        { key: 'tk1', name: 'Thần kinh 1' },
+        { key: 'tk2', name: 'Thần kinh 2' },
+        { key: 'tk3', name: 'Thần kinh 3' },
+        { key: 'tk4', name: 'Thần kinh 4' },
+        { key: 'hstk', name: 'Hồi sức thần kinh (HSTK)' }
+      ];
+
+      let sum = { benhCu: 0, vaoKK: 0, vaoKhac: 0, moCT: 0, moCC: 0, raRH: 0, raKhac: 0, tuVong: 0, hienCo: 0, bhyt: 0 };
+
+      const roomRowsHtml = rooms.map((r, idx) => {
+        const rep = roomReports[r.key] || { census: {}, personnel: {} };
+        const c = rep.census || {};
+        const p = rep.personnel || {};
+        sum.benhCu += Number(c.benhCu || 0);
+        sum.vaoKK += Number(c.vaoKK || 0);
+        sum.vaoKhac += Number(c.vaoKhac || 0);
+        sum.moCT += Number(c.moCT || 0);
+        sum.moCC += Number(c.moCC || 0);
+        sum.raRH += Number(c.raRH || 0);
+        sum.raKhac += Number(c.raKhac || 0);
+        sum.tuVong += Number(c.tuVong || 0);
+        sum.hienCo += Number(c.hienCo || 0);
+        sum.bhyt += Number(c.bhyt || 0);
+
+        const nursesStr = (r.key === 'hstk')
+          ? `Ngày: ${p.nursesDay || '--'} | Đêm: ${p.nursesNight || '--'}`
+          : (p.nurses || '--');
+
+        return `
+          <tr>
+            <td style="text-align:center;">${idx + 1}</td>
+            <td style="text-align:left;font-weight:bold;">${r.name}</td>
+            <td style="text-align:left;font-size:9pt;">${escapeHtml(nursesStr)}</td>
+            <td style="text-align:center;">${c.benhCu || 0}</td>
+            <td style="text-align:center;">${c.vaoKK || 0}</td>
+            <td style="text-align:center;">${c.vaoKhac || 0}</td>
+            <td style="text-align:center;">${c.moCT || 0}</td>
+            <td style="text-align:center;font-weight:bold;">${c.moCC || 0}</td>
+            <td style="text-align:center;">${c.raRH || 0}</td>
+            <td style="text-align:center;">${c.raKhac || 0}</td>
+            <td style="text-align:center;font-weight:bold;">${c.tuVong || 0}</td>
+            <td style="text-align:center;font-weight:bold;background:#f8fafc;">${c.hienCo || 0}</td>
+            <td style="text-align:center;">${c.bhyt || 0}</td>
+          </tr>
+        `;
+      }).join('');
+
+      let casesRowsHtml = '';
+      if (highlightCases.length === 0) {
+        casesRowsHtml = `<tr><td colspan="10" style="text-align:center;padding:12px;font-style:italic;">Không có ca trọng điểm nào được ghi nhận trong ngày.</td></tr>`;
+      } else {
+        casesRowsHtml = highlightCases.map((c, idx) => `
+          <tr>
+            <td style="text-align:center;font-weight:bold;">${c.stt || idx + 1}</td>
+            <td style="text-align:left;font-weight:bold;text-transform:uppercase;">${escapeHtml(c.hoten || '')}</td>
+            <td style="text-align:center;">${c.tuoi || ''}T / ${c.gioiTinh || 'NAM'}</td>
+            <td style="text-align:left;font-size:9pt;">${escapeHtml(c.diaChi || 'Gia Lai')}</td>
+            <td style="text-align:center;font-weight:bold;font-size:9pt;">${escapeHtml(c.roomName || c.roomKey || '--')}</td>
+            <td style="text-align:left;font-weight:bold;font-size:9pt;">${escapeHtml(c.category || 'CA TRỌNG ĐIỂM')}</td>
+            <td style="text-align:center;font-size:9pt;font-weight:bold;color:#000;">${escapeHtml(c.ngayPhauThuat || c.ngayXinVe || c.ngayVaoVien || '--')}</td>
+            <td style="text-align:left;font-size:9pt;">${escapeHtml(c.kipMo || '--')}</td>
+            <td style="text-align:left;font-size:9.5pt;font-weight:bold;">${escapeHtml(c.chanDoan || '')}</td>
+            <td style="text-align:left;font-size:9pt;">${escapeHtml(c.dienBien || c.notes || '--')}</td>
+          </tr>
+        `).join('');
+      }
+
+      return `
+        <div style="font-family:'Times New Roman', Times, serif; color:#000; width:100%; max-width:100%; margin:0 auto; padding:0;">
+          <!-- QUỐC HUY & TIÊU NGỮ Y TẾ -->
+          <table style="width:100%; border:none; border-collapse:collapse; margin-bottom:8px;">
+            <tr>
+              <td style="width:45%; border:none; text-align:center; vertical-align:top; line-height:1.35;">
+                <div style="font-size:10pt; font-weight:bold; text-transform:uppercase;">SỞ Y TẾ TỈNH GIA LAI</div>
+                <div style="font-size:10pt; font-weight:bold; text-transform:uppercase;">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+                <div style="font-size:11pt; font-weight:bold; text-transform:uppercase; margin-top:2px;">KHOA NGOẠI THẦN KINH - CỘT SỐNG</div>
+                <div style="width:140px; height:1px; background:#000; margin:3px auto 0 auto;"></div>
+              </td>
+              <td style="width:55%; border:none; text-align:center; vertical-align:top; line-height:1.35;">
+                <div style="font-size:10.5pt; font-weight:bold; text-transform:uppercase;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                <div style="font-size:10.5pt; font-weight:bold; font-style:italic;">Độc lập – Tự do – Hạnh phúc</div>
+                <div style="width:170px; height:1px; background:#000; margin:3px auto 0 auto;"></div>
+                <div style="font-size:10pt; font-style:italic; margin-top:4px;">Gia Lai, ${formatDateDisplayVN(currentDateKey)}</div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- TIÊU ĐỀ BÁO CÁO -->
+          <div style="text-align:center; margin-bottom:12px;">
+            <div style="font-size:17pt; font-weight:bold; letter-spacing:0.03em;">BÁO CÁO GIAO BAN BUỔI SÁNG</div>
+            <div style="font-size:11pt; font-weight:bold; margin-top:2px;">
+              ${formatDateDisplayVN(currentDateKey)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+              BÁC SĨ TRỰC: <span style="font-size:12pt; text-transform:uppercase;">${escapeHtml(docsDutyStr)}</span>
+            </div>
+          </div>
+
+          <!-- PHẦN I: TÌNH HÌNH BỆNH NHÂN TOÀN KHOA -->
+          <div style="font-size:10.5pt; font-weight:bold; margin-bottom:4px; text-transform:uppercase;">
+            I. TÌNH HÌNH BỆNH NHÂN TOÀN KHOA (8 CHỈ SỐ GIAO BAN)
+          </div>
+          <table class="print-table" style="text-align:center; margin-bottom:10px;">
+            <thead>
+              <tr style="background:#f1f5f9;">
+                <th style="padding:6px 4px;">Bệnh cũ</th>
+                <th style="padding:6px 4px;">Vào viện</th>
+                <th style="padding:6px 4px;">Ra viện</th>
+                <th style="padding:6px 4px;">Tử vong</th>
+                <th style="padding:6px 4px;">Chuyển viện</th>
+                <th style="padding:6px 4px;">Mổ cấp cứu</th>
+                <th style="padding:6px 4px; font-weight:bold; background:#e2e8f0;">Hiện có</th>
+                <th style="padding:6px 4px;">Bảo hiểm Y tế</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="font-size:12.5pt; font-weight:bold;">
+                <td style="padding:6px 4px;">${grand.benhCu || 0}</td>
+                <td style="padding:6px 4px;">${grand.vao || 0}</td>
+                <td style="padding:6px 4px;">${grand.ra || 0}</td>
+                <td style="padding:6px 4px;">${grand.tuVong || 0}</td>
+                <td style="padding:6px 4px;">${grand.chuyen || 0}</td>
+                <td style="padding:6px 4px;">${grand.mo || 0}</td>
+                <td style="padding:6px 4px; background:#f8fafc; font-size:13.5pt;">${grand.hienCo || 0}</td>
+                <td style="padding:6px 4px;">${grand.bhyt || 0}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- PHẦN II: SỐ LIỆU ĐỐI CHIẾU TIẾN ĐỘ 5 BUỒNG BỆNH -->
+          <div style="font-size:10.5pt; font-weight:bold; margin-bottom:4px; text-transform:uppercase;">
+            II. SỐ LIỆU ĐỐI CHIẾU TIẾN ĐỘ 5 BUỒNG BỆNH TRONG CA TRỰC
+          </div>
+          <table class="print-table" style="margin-bottom:10px;">
+            <thead>
+              <tr style="background:#f1f5f9; font-size:9pt;">
+                <th style="width:25px;">STT</th>
+                <th style="width:130px; text-align:left;">Buồng bệnh</th>
+                <th style="text-align:left;">Kíp Điều dưỡng trực</th>
+                <th style="width:45px;">Bệnh cũ</th>
+                <th style="width:42px;">Vào KK</th>
+                <th style="width:42px;">Vào khác</th>
+                <th style="width:42px;">Mổ CT</th>
+                <th style="width:42px;">Mổ CC</th>
+                <th style="width:42px;">Ra RH</th>
+                <th style="width:42px;">Ra khác</th>
+                <th style="width:45px;">Tử vong</th>
+                <th style="width:50px; background:#e2e8f0;">Hiện có</th>
+                <th style="width:42px;">BHYT</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${roomRowsHtml}
+              <tr style="font-weight:bold; background:#f1f5f9;">
+                <td colspan="3" style="text-align:center;">TỔNG CỘNG 5 PHÒNG</td>
+                <td style="text-align:center;">${sum.benhCu}</td>
+                <td style="text-align:center;">${sum.vaoKK}</td>
+                <td style="text-align:center;">${sum.vaoKhac}</td>
+                <td style="text-align:center;">${sum.moCT}</td>
+                <td style="text-align:center;">${sum.moCC}</td>
+                <td style="text-align:center;">${sum.raRH}</td>
+                <td style="text-align:center;">${sum.raKhac}</td>
+                <td style="text-align:center;">${sum.tuVong}</td>
+                <td style="text-align:center; background:#e2e8f0; font-size:10pt;">${sum.hienCo}</td>
+                <td style="text-align:center;">${sum.bhyt}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- PHẦN III: DANH SÁCH BỆNH NHÂN TRỌNG ĐIỂM -->
+          <div style="font-size:10.5pt; font-weight:bold; margin-bottom:4px; text-transform:uppercase;">
+            III. DANH SÁCH BỆNH NHÂN TRỌNG ĐIỂM (MỔ CẤP CỨU / THEO DÕI / XIN VỀ / TỬ VONG)
+          </div>
+          <table class="print-table" style="margin-bottom:14px;">
+            <thead>
+              <tr style="background:#f1f5f9; font-size:8.5pt;">
+                <th style="width:25px;">STT</th>
+                <th style="width:125px; text-align:left;">Họ và tên</th>
+                <th style="width:60px;">Tuổi/GT</th>
+                <th style="width:120px; text-align:left;">Địa chỉ</th>
+                <th style="width:75px;">Buồng</th>
+                <th style="width:130px; text-align:left;">Phân loại</th>
+                <th style="width:120px;">Giờ/Ngày PT/Xử trí</th>
+                <th style="width:110px; text-align:left;">Kíp mổ / PTV</th>
+                <th style="text-align:left; min-width:150px;">Chẩn đoán</th>
+                <th style="text-align:left; min-width:120px;">Diễn biến ca trực / Bàn giao</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${casesRowsHtml}
+            </tbody>
+          </table>
+
+          <!-- PHẦN IV: CHỮ KÝ XÁC NHẬN KÍP TRỰC -->
+          <table style="width:100%; border:none; border-collapse:collapse; margin-top:14px; page-break-inside:avoid;">
+            <tr>
+              <td style="width:33.3%; border:none; text-align:center; vertical-align:top;">
+                <div style="font-size:10.5pt; font-weight:bold; text-transform:uppercase;">ĐIỀU DƯỠNG TRƯỞNG KHOA</div>
+                <div style="font-size:9pt; font-style:italic; margin-top:2px;">(Ký và ghi rõ họ tên)</div>
+                <div style="height:60px;"></div>
+              </td>
+              <td style="width:33.3%; border:none; text-align:center; vertical-align:top;">
+                <div style="font-size:10.5pt; font-weight:bold; text-transform:uppercase;">BÁC SĨ TRỰC KHOA</div>
+                <div style="font-size:9pt; font-style:italic; margin-top:2px;">(Ký và ghi rõ họ tên)</div>
+                <div style="height:60px;"></div>
+              </td>
+              <td style="width:33.3%; border:none; text-align:center; vertical-align:top;">
+                <div style="font-size:10.5pt; font-weight:bold; text-transform:uppercase;">TRƯỞNG KHOA</div>
+                <div style="font-size:9pt; font-style:italic; margin-top:2px;">(Duyệt và ký tên)</div>
+                <div style="height:60px;"></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      `;
+    }
+
+    function printOfficialA4Report() {
+      const container = document.getElementById('print-sheet-a4');
+      if (container) {
+        container.innerHTML = generateOfficialA4PrintHtml();
+      }
+      window.print();
+    }
+
   </script>
+  <!-- DEDICATED OFFICIAL A4 MEDICAL PRINT SHEET -->
+  <div id="print-sheet-a4"></div>
 </body>
 </html>

@@ -2930,6 +2930,18 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && pathname === '/api/export-briefing-pptx') {
     const reqUrl = new URL(req.url, 'http://localhost');
     const qDate = reqUrl.searchParams.get('date') || getDateKey(new Date());
+
+    try {
+      const db = getDatabase();
+      if (!db.briefingReports) db.briefingReports = {};
+      if (!db.briefingReports[qDate]) {
+        db.briefingReports[qDate] = getOrBuildBriefingReport(qDate);
+        saveDatabase(db);
+      }
+    } catch (e) {
+      console.warn('Could not auto-persist draft before PPTX export:', e);
+    }
+
     const tempPptx = path.join(ROOT, `briefing_${qDate}_${Date.now()}.pptx`);
     const scriptPath = path.join(ROOT, 'scripts', 'generate_briefing_pptx.py');
     const pythonCmd = `python "${scriptPath}" --date ${qDate} --out "${tempPptx}"`;
