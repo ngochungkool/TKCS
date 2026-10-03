@@ -6,6 +6,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const crypto = require('crypto');
 const XLSX = require('xlsx');
+const ExcelJS = require('exceljs');
 
 const PORT = 8080;
 const ROOT = __dirname;
@@ -2913,19 +2914,139 @@ const server = http.createServer(async (req, res) => {
     };
   }
 
-  function generateBriefingPeriodExcel(summary) {
-    const wb = XLSX.utils.book_new();
+  async function generateBriefingPeriodExcel(summary) {
+    const wb = new ExcelJS.Workbook();
+    wb.creator = 'Khoa Ngoại Thần Kinh - Cột Sống (BVĐK Tỉnh Gia Lai)';
+    wb.created = new Date();
 
-    // Sheet 1: Tong_Hop_So_Lieu
-    const rows1 = [
-      ['BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI - KHOA NGOẠI THẦN KINH - CỘT SỐNG'],
-      [`BÁO CÁO TỔNG HỢP SỐ LIỆU GIAO BAN (${summary.periodLabel})`],
-      [],
-      ['STT', 'Ngày', 'Thứ', 'Bệnh cũ', 'Vào', 'Ra', 'Tử vong', 'Chuyển', 'Mổ', 'Hiện có', 'Bảo hiểm', 'BS Trực đêm', 'Số ca giao ban']
+    const borderThin = {
+      top: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+      bottom: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+      left: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+      right: { style: 'thin', color: { argb: 'FFCBD5E1' } }
+    };
+
+    const borderDoubleBottom = {
+      top: { style: 'thin', color: { argb: 'FF94A3B8' } },
+      bottom: { style: 'double', color: { argb: 'FF0F172A' } },
+      left: { style: 'thin', color: { argb: 'FFCBD5E1' } },
+      right: { style: 'thin', color: { argb: 'FFCBD5E1' } }
+    };
+
+    // =========================================================================
+    // SHEET 1: Tong_Hop_So_Lieu
+    // =========================================================================
+    const ws1 = wb.addWorksheet('Tong_Hop_So_Lieu', {
+      views: [{ showGridLines: true }],
+      pageSetup: { orientation: 'landscape', paperSize: 9, fitToPage: true, fitToWidth: 1, fitToHeight: 0 }
+    });
+
+    // 1. Hospital Header
+    ws1.mergeCells('A1:O1');
+    const cellA1 = ws1.getCell('A1');
+    cellA1.value = 'BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI';
+    cellA1.font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FF004AAD' } };
+    cellA1.alignment = { horizontal: 'left', vertical: 'middle' };
+
+    ws1.mergeCells('A2:O2');
+    const cellA2 = ws1.getCell('A2');
+    cellA2.value = 'KHOA NGOẠI THẦN KINH - CỘT SỐNG';
+    cellA2.font = { name: 'Segoe UI', size: 11, bold: true, color: { argb: 'FF00A651' } };
+    cellA2.alignment = { horizontal: 'left', vertical: 'middle' };
+
+    // 2. Title Banner
+    ws1.mergeCells('A3:O3');
+    const cellTitle = ws1.getCell('A3');
+    cellTitle.value = `BÁO CÁO TỔNG HỢP SỐ LIỆU GIAO BAN (${summary.periodLabel.toUpperCase()})`;
+    cellTitle.font = { name: 'Segoe UI', size: 15, bold: true, color: { argb: 'FF004AAD' } };
+    cellTitle.alignment = { horizontal: 'center', vertical: 'middle' };
+    ws1.getRow(3).height = 30;
+
+    ws1.mergeCells('A4:O4');
+    const cellSub = ws1.getCell('A4');
+    cellSub.value = `Thời gian tổng hợp: ${summary.periodLabel}  •  Dữ liệu hợp lệ: ${summary.validDaysCount}/${summary.days.length} ngày`;
+    cellSub.font = { name: 'Segoe UI', size: 9, italic: true, color: { argb: 'FF64748B' } };
+    cellSub.alignment = { horizontal: 'center', vertical: 'middle' };
+
+    // 3. KPI Summary Cards (Row 6 - 7)
+    // Card 1: VÀO VIỆN (A6:C7)
+    ws1.mergeCells('A6:C6');
+    ws1.getCell('A6').value = 'TỔNG VÀO VIỆN';
+    ws1.getCell('A6').font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FFFFFFFF' } };
+    ws1.getCell('A6').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0284C7' } };
+    ws1.getCell('A6').alignment = { horizontal: 'center', vertical: 'middle' };
+
+    ws1.mergeCells('A7:C7');
+    ws1.getCell('A7').value = `${summary.totals.totalVao || 0} lượt (TB: ${summary.averages.avgVao || 0}/ngày)`;
+    ws1.getCell('A7').font = { name: 'Segoe UI', size: 11, bold: true, color: { argb: 'FF0369A1' } };
+    ws1.getCell('A7').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE0F2FE' } };
+    ws1.getCell('A7').alignment = { horizontal: 'center', vertical: 'middle' };
+    ws1.getCell('A7').border = borderThin;
+
+    // Card 2: PHẪU THUẬT (D6:G6, D7:G7)
+    ws1.mergeCells('D6:G6');
+    ws1.getCell('D6').value = 'TỔNG CA PHẪU THUẬT';
+    ws1.getCell('D6').font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FFFFFFFF' } };
+    ws1.getCell('D6').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFDC2626' } };
+    ws1.getCell('D6').alignment = { horizontal: 'center', vertical: 'middle' };
+
+    ws1.mergeCells('D7:G7');
+    const totalMoVal = summary.totals.totalMo !== '-' ? summary.totals.totalMo : 0;
+    const moCCVal = summary.totals.totalMoCC !== '-' ? summary.totals.totalMoCC : summary.emergencySurgeries.length;
+    const moCTVal = summary.totals.totalMoCT !== '-' ? summary.totals.totalMoCT : Math.max(0, totalMoVal - moCCVal);
+    ws1.getCell('D7').value = `${totalMoVal} ca (Mổ CC: ${moCCVal} • Mổ phiên: ${moCTVal})`;
+    ws1.getCell('D7').font = { name: 'Segoe UI', size: 11, bold: true, color: { argb: 'FF991B1B' } };
+    ws1.getCell('D7').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEE2E2' } };
+    ws1.getCell('D7').alignment = { horizontal: 'center', vertical: 'middle' };
+    ws1.getCell('D7').border = borderThin;
+
+    // Card 3: CÔNG SUẤT GIƯỜNG (H6:K6, H7:K7)
+    ws1.mergeCells('H6:K6');
+    ws1.getCell('H6').value = 'CÔNG SUẤT GIƯỜNG TRUNG BÌNH';
+    ws1.getCell('H6').font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FFFFFFFF' } };
+    ws1.getCell('H6').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF7C3AED' } };
+    ws1.getCell('H6').alignment = { horizontal: 'center', vertical: 'middle' };
+
+    ws1.mergeCells('H7:K7');
+    ws1.getCell('H7').value = `${summary.averages.avgHienCo || 0} BN / ngày`;
+    ws1.getCell('H7').font = { name: 'Segoe UI', size: 11, bold: true, color: { argb: 'FF6D28D9' } };
+    ws1.getCell('H7').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF3E8FF' } };
+    ws1.getCell('H7').alignment = { horizontal: 'center', vertical: 'middle' };
+    ws1.getCell('H7').border = borderThin;
+
+    // Card 4: TỬ VONG & NẶNG XIN VỀ (L6:O6, L7:O7)
+    ws1.mergeCells('L6:O6');
+    ws1.getCell('L6').value = 'TỬ VONG & NẶNG XIN VỀ';
+    ws1.getCell('L6').font = { name: 'Segoe UI', size: 9, bold: true, color: { argb: 'FFFFFFFF' } };
+    ws1.getCell('L6').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF991B1B' } };
+    ws1.getCell('L6').alignment = { horizontal: 'center', vertical: 'middle' };
+
+    ws1.mergeCells('L7:O7');
+    ws1.getCell('L7').value = `${summary.fatalitiesAndCritical.length} ca (Tử vong: ${summary.totals.totalTuVong || 0})`;
+    ws1.getCell('L7').font = { name: 'Segoe UI', size: 11, bold: true, color: { argb: 'FF7F1D1D' } };
+    ws1.getCell('L7').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEE2E2' } };
+    ws1.getCell('L7').alignment = { horizontal: 'center', vertical: 'middle' };
+    ws1.getCell('L7').border = borderThin;
+
+    // 4. Matrix Table Headers (Row 9)
+    const headers1 = [
+      'STT', 'Ngày', 'Thứ', 'Bệnh cũ', 'Vào viện', 'Ra viện', 'Tử vong', 'Chuyển',
+      'Tổng mổ', 'Mổ CC', 'Mổ phiên', 'Hiện có', 'BHYT', 'Bác sĩ trực đêm', 'Số ca G.Ban'
     ];
+    const headerRow1 = ws1.addRow(headers1);
+    headerRow1.height = 28;
+    headerRow1.eachCell((cell, colNum) => {
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0F2E5C' } };
+      cell.font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FFFFFFFF' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+      cell.border = borderThin;
+    });
 
+    // 5. Data Rows
     summary.days.forEach((d, idx) => {
-      rows1.push([
+      const isEven = idx % 2 === 0;
+      const rowFill = isEven ? 'FFFFFFFF' : 'FFF8FAFC';
+      const row = ws1.addRow([
         idx + 1,
         d.dateKey,
         d.dayName,
@@ -2935,73 +3056,160 @@ const server = http.createServer(async (req, res) => {
         d.tuVong,
         d.chuyen,
         d.mo,
+        d.moCC !== undefined ? d.moCC : '-',
+        d.moCT !== undefined ? d.moCT : '-',
         d.hienCo,
         d.bhyt,
-        d.doctorsOnDuty,
+        d.doctorsOnDuty || '-',
         d.highlightCount
       ]);
+      row.height = 22;
+
+      row.eachCell((cell, colNum) => {
+        cell.border = borderThin;
+        cell.font = { name: 'Segoe UI', size: 9.5, color: { argb: 'FF1E293B' } };
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: rowFill } };
+
+        if (colNum === 14) {
+          cell.alignment = { horizontal: 'left', vertical: 'middle' };
+        } else {
+          cell.alignment = { horizontal: 'center', vertical: 'middle' };
+        }
+
+        if (!d.hasData) {
+          cell.font = { name: 'Segoe UI', size: 9.5, color: { argb: 'FF94A3B8' } };
+        } else {
+          if (colNum === 5) cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: 'FF0284C7' } };
+          if (colNum === 7 && Number(d.tuVong) > 0) {
+            cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: 'FFDC2626' } };
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEE2E2' } };
+          }
+          if (colNum === 9) cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: 'FFB91C1C' } };
+          if (colNum === 10 && Number(d.moCC) > 0) {
+            cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: 'FFDC2626' } };
+          }
+          if (colNum === 12) {
+            cell.font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FFB45309' } };
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEF3C7' } };
+          }
+        }
+      });
     });
 
-    // Totals & Averages
-    rows1.push([
-      '',
-      'TỔNG CỘNG',
-      '-',
-      '-',
+    // 6. Summary Totals Row
+    const totRow = ws1.addRow([
+      '', 'TỔNG CỘNG', '-', '-',
       summary.totals.totalVao,
       summary.totals.totalRa,
       summary.totals.totalTuVong,
       summary.totals.totalChuyen,
       summary.totals.totalMo,
-      '-',
-      '-',
-      '-',
+      summary.totals.totalMoCC,
+      summary.totals.totalMoCT,
+      '-', '-', '-',
       summary.emergencySurgeries.length + summary.fatalitiesAndCritical.length
     ]);
+    totRow.height = 24;
+    totRow.eachCell((cell, colNum) => {
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE0F2FE' } };
+      cell.font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FF0369A1' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      cell.border = borderDoubleBottom;
+    });
 
-    rows1.push([
-      '',
-      'TRUNG BÌNH/NGÀY',
-      '-',
-      '-',
+    // 7. Averages Row
+    const avgRow = ws1.addRow([
+      '', 'TRUNG BÌNH / NGÀY', '-', '-',
       summary.averages.avgVao,
       summary.averages.avgRa,
-      '-',
-      '-',
+      '-', '-',
       summary.averages.avgMo,
+      '-', '-',
       summary.averages.avgHienCo,
-      '-',
-      '-',
-      '-'
+      '-', '-', '-'
     ]);
+    avgRow.height = 22;
+    avgRow.eachCell((cell, colNum) => {
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF1F5F9' } };
+      cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: 'FF334155' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      cell.border = borderThin;
+    });
 
-    const ws1 = XLSX.utils.aoa_to_sheet(rows1);
-    ws1['!cols'] = [
-      { wch: 6 },
-      { wch: 14 },
-      { wch: 12 },
-      { wch: 10 },
-      { wch: 10 },
-      { wch: 10 },
-      { wch: 10 },
-      { wch: 10 },
-      { wch: 10 },
-      { wch: 12 },
-      { wch: 10 },
-      { wch: 30 },
-      { wch: 16 }
-    ];
-    XLSX.utils.book_append_sheet(wb, ws1, 'Tong_Hop_So_Lieu');
+    // 8. Signatures Block
+    ws1.addRow([]);
+    const sigRow1 = ws1.addRow(['', 'NGƯỜI LẬP BIỂU', '', '', '', '', '', 'ĐIỀU DƯỠNG TRƯỞNG KHOA', '', '', '', '', 'TRƯỞNG KHOA', '']);
+    sigRow1.height = 22;
+    sigRow1.eachCell(cell => {
+      if (cell.value) {
+        cell.font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FF0F172A' } };
+        cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      }
+    });
 
-    // Sheet 2: Danh_Sach_Mo_Cap_Cuu
-    const rows2 = [
-      [`DANH SÁCH CA MỔ CẤP CỨU (${summary.periodLabel}) - TỔNG: ${summary.emergencySurgeries.length} CA`],
-      [],
-      ['STT', 'Ngày', 'Phòng', 'Họ tên bệnh nhân', 'Tuổi', 'Giới tính', 'Địa chỉ', 'Ngày vào viện', 'Ngày phẫu thuật', 'Chẩn đoán', 'Kíp mổ / PTV', 'Diễn biến ca trực']
+    const sigRow2 = ws1.addRow(['', '(Ký và ghi rõ họ tên)', '', '', '', '', '', '(Ký và ghi rõ họ tên)', '', '', '', '', '(Ký và ghi rõ họ tên)', '']);
+    sigRow2.height = 18;
+    sigRow2.eachCell(cell => {
+      if (cell.value) {
+        cell.font = { name: 'Segoe UI', size: 8.5, italic: true, color: { argb: 'FF64748B' } };
+        cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      }
+    });
+
+    ws1.columns = [
+      { width: 6 },
+      { width: 14 },
+      { width: 9 },
+      { width: 10 },
+      { width: 11 },
+      { width: 11 },
+      { width: 10 },
+      { width: 11 },
+      { width: 11 },
+      { width: 10 },
+      { width: 10 },
+      { width: 12 },
+      { width: 10 },
+      { width: 34 },
+      { width: 14 }
     ];
+
+    // =========================================================================
+    // SHEET 2: Danh_Sach_Mo_Cap_Cuu
+    // =========================================================================
+    const ws2 = wb.addWorksheet('Danh_Sach_Mo_Cap_Cuu', {
+      views: [{ showGridLines: true }],
+      pageSetup: { orientation: 'landscape', paperSize: 9 }
+    });
+
+    ws2.mergeCells('A1:L1');
+    ws2.getCell('A1').value = 'BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI - KHOA NGOẠI THẦN KINH - CỘT SỐNG';
+    ws2.getCell('A1').font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FF004AAD' } };
+
+    ws2.mergeCells('A2:L2');
+    ws2.getCell('A2').value = `DANH SÁCH CA MỔ CẤP CỨU (${summary.periodLabel.toUpperCase()})`;
+    ws2.getCell('A2').font = { name: 'Segoe UI', size: 14, bold: true, color: { argb: 'FF991B1B' } };
+    ws2.getCell('A2').alignment = { horizontal: 'center', vertical: 'middle' };
+    ws2.getRow(2).height = 28;
+
+    ws2.mergeCells('A3:L3');
+    ws2.getCell('A3').value = `Tổng cộng: ${summary.emergencySurgeries.length} ca phẫu thuật cấp cứu trong kỳ`;
+    ws2.getCell('A3').font = { name: 'Segoe UI', size: 9.5, italic: true, color: { argb: 'FF64748B' } };
+    ws2.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' };
+
+    const headers2 = ['STT', 'Ngày', 'Phòng', 'Họ tên bệnh nhân', 'Tuổi', 'Giới', 'Địa chỉ', 'Ngày vào viện', 'Ngày/Giờ phẫu thuật', 'Chẩn đoán', 'Kíp mổ / PTV', 'Diễn biến ca trực'];
+    const headerRow2 = ws2.addRow(headers2);
+    headerRow2.height = 26;
+    headerRow2.eachCell(cell => {
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF991B1B' } };
+      cell.font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FFFFFFFF' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      cell.border = borderThin;
+    });
 
     summary.emergencySurgeries.forEach((c, idx) => {
-      rows2.push([
+      const isEven = idx % 2 === 0;
+      const row = ws2.addRow([
         idx + 1,
         c.dateKey,
         c.roomName || c.roomKey || '',
@@ -3015,38 +3223,75 @@ const server = http.createServer(async (req, res) => {
         c.kipMo || '',
         c.dienBien || ''
       ]);
+      row.height = 24;
+      row.eachCell((cell, colNum) => {
+        cell.border = borderThin;
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: isEven ? 'FFFFFFFF' : 'FFFDF2F2' } };
+        cell.font = { name: 'Segoe UI', size: 9.5, color: { argb: 'FF1E293B' } };
+        if (colNum === 4 || colNum === 11) cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: 'FF0F172A' } };
+        if ([1, 2, 5, 6, 8, 9].includes(colNum)) {
+          cell.alignment = { horizontal: 'center', vertical: 'middle' };
+        } else {
+          cell.alignment = { horizontal: 'left', vertical: 'middle', wrapText: true };
+        }
+      });
     });
 
-    const ws2 = XLSX.utils.aoa_to_sheet(rows2);
-    ws2['!cols'] = [
-      { wch: 6 },
-      { wch: 14 },
-      { wch: 16 },
-      { wch: 24 },
-      { wch: 8 },
-      { wch: 10 },
-      { wch: 30 },
-      { wch: 14 },
-      { wch: 14 },
-      { wch: 45 },
-      { wch: 25 },
-      { wch: 35 }
+    ws2.columns = [
+      { width: 6 },
+      { width: 13 },
+      { width: 16 },
+      { width: 25 },
+      { width: 8 },
+      { width: 9 },
+      { width: 28 },
+      { width: 14 },
+      { width: 18 },
+      { width: 45 },
+      { width: 26 },
+      { width: 36 }
     ];
-    XLSX.utils.book_append_sheet(wb, ws2, 'Danh_Sach_Mo_Cap_Cuu');
 
-    // Sheet 3: Tu_Vong_Va_Xin_Ve
-    const rows3 = [
-      [`DANH SÁCH CA TỬ VONG & NẶNG XIN VỀ (${summary.periodLabel}) - TỔNG: ${summary.fatalitiesAndCritical.length} CA`],
-      [],
-      ['STT', 'Ngày', 'Phòng', 'Phân loại', 'Họ tên bệnh nhân', 'Tuổi', 'Giới tính', 'Địa chỉ', 'Ngày vào viện', 'Ngày xin về / Tử vong', 'Chẩn đoán', 'Diễn biến / Ghi chú']
-    ];
+    // =========================================================================
+    // SHEET 3: Tu_Vong_Va_Xin_Ve
+    // =========================================================================
+    const ws3 = wb.addWorksheet('Tu_Vong_Va_Xin_Ve', {
+      views: [{ showGridLines: true }],
+      pageSetup: { orientation: 'landscape', paperSize: 9 }
+    });
+
+    ws3.mergeCells('A1:L1');
+    ws3.getCell('A1').value = 'BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI - KHOA NGOẠI THẦN KINH - CỘT SỐNG';
+    ws3.getCell('A1').font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FF004AAD' } };
+
+    ws3.mergeCells('A2:L2');
+    ws3.getCell('A2').value = `DANH SÁCH CA TỬ VONG & NẶNG XIN VỀ (${summary.periodLabel.toUpperCase()})`;
+    ws3.getCell('A2').font = { name: 'Segoe UI', size: 14, bold: true, color: { argb: 'FF334155' } };
+    ws3.getCell('A2').alignment = { horizontal: 'center', vertical: 'middle' };
+    ws3.getRow(2).height = 28;
+
+    ws3.mergeCells('A3:L3');
+    ws3.getCell('A3').value = `Tổng cộng: ${summary.fatalitiesAndCritical.length} ca (Tử vong: ${summary.totals.totalTuVong || 0} • Nặng xin về: ${Math.max(0, summary.fatalitiesAndCritical.length - (Number(summary.totals.totalTuVong) || 0))})`;
+    ws3.getCell('A3').font = { name: 'Segoe UI', size: 9.5, italic: true, color: { argb: 'FF64748B' } };
+    ws3.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' };
+
+    const headers3 = ['STT', 'Ngày', 'Phòng', 'Phân loại', 'Họ tên bệnh nhân', 'Tuổi', 'Giới', 'Địa chỉ', 'Ngày vào viện', 'Ngày xin về / Tử vong', 'Chẩn đoán', 'Diễn biến / Ghi chú'];
+    const headerRow3 = ws3.addRow(headers3);
+    headerRow3.height = 26;
+    headerRow3.eachCell(cell => {
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF334155' } };
+      cell.font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FFFFFFFF' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      cell.border = borderThin;
+    });
 
     summary.fatalitiesAndCritical.forEach((c, idx) => {
-      rows3.push([
+      const isTuVong = (c.category || '').toUpperCase().includes('TỬ VONG') || c.categoryKey === 'TU_VONG';
+      const row = ws3.addRow([
         idx + 1,
         c.dateKey,
         c.roomName || c.roomKey || '',
-        c.category || '',
+        c.category || (isTuVong ? 'Tử vong' : 'Nặng xin về'),
         c.hoten || '',
         c.tuoi || '',
         c.gioiTinh || 'NAM',
@@ -3056,51 +3301,138 @@ const server = http.createServer(async (req, res) => {
         c.chanDoan || '',
         c.dienBien || ''
       ]);
+      row.height = 24;
+      row.eachCell((cell, colNum) => {
+        cell.border = borderThin;
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: isTuVong ? 'FFFEE2E2' : 'FFFEF3C7' } };
+        cell.font = { name: 'Segoe UI', size: 9.5, color: { argb: 'FF1E293B' } };
+        if (colNum === 4 || colNum === 5) cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: isTuVong ? 'FF991B1B' : 'FF92400E' } };
+        if ([1, 2, 6, 7, 9, 10].includes(colNum)) {
+          cell.alignment = { horizontal: 'center', vertical: 'middle' };
+        } else {
+          cell.alignment = { horizontal: 'left', vertical: 'middle', wrapText: true };
+        }
+      });
     });
 
-    const ws3 = XLSX.utils.aoa_to_sheet(rows3);
-    ws3['!cols'] = [
-      { wch: 6 },
-      { wch: 14 },
-      { wch: 16 },
-      { wch: 24 },
-      { wch: 24 },
-      { wch: 8 },
-      { wch: 10 },
-      { wch: 30 },
-      { wch: 14 },
-      { wch: 16 },
-      { wch: 45 },
-      { wch: 35 }
+    ws3.columns = [
+      { width: 6 },
+      { width: 13 },
+      { width: 16 },
+      { width: 18 },
+      { width: 25 },
+      { width: 8 },
+      { width: 9 },
+      { width: 28 },
+      { width: 14 },
+      { width: 18 },
+      { width: 45 },
+      { width: 36 }
     ];
-    XLSX.utils.book_append_sheet(wb, ws3, 'Tu_Vong_Va_Xin_Ve');
 
-    // Sheet 4: Lich_Truc_Bac_Si
-    const rows4 = [
-      [`THỐNG KÊ KÍP TRỰC BÁC SĨ (${summary.periodLabel})`],
-      [],
-      ['STT', 'Bác sĩ trực', 'Tổng số ca trực', 'Chi tiết các ngày trực']
-    ];
+    // =========================================================================
+    // SHEET 4: Lich_Truc_Theo_Ngay
+    // =========================================================================
+    const ws4 = wb.addWorksheet('Lich_Truc_Theo_Ngay', {
+      views: [{ showGridLines: true }],
+      pageSetup: { orientation: 'landscape', paperSize: 9 }
+    });
+
+    ws4.mergeCells('A1:F1');
+    ws4.getCell('A1').value = 'BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI - KHOA NGOẠI THẦN KINH - CỘT SỐNG';
+    ws4.getCell('A1').font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FF004AAD' } };
+
+    ws4.mergeCells('A2:F2');
+    ws4.getCell('A2').value = `BẢNG TỔNG HỢP LỊCH TRỰC THEO NGÀY (${summary.periodLabel.toUpperCase()})`;
+    ws4.getCell('A2').font = { name: 'Segoe UI', size: 14, bold: true, color: { argb: 'FF0F766E' } };
+    ws4.getCell('A2').alignment = { horizontal: 'center', vertical: 'middle' };
+    ws4.getRow(2).height = 28;
+
+    const headers4 = ['STT', 'Ngày', 'Thứ', 'Bác sĩ trực đêm', 'Số ca giao ban', 'Tình trạng dữ liệu'];
+    const headerRow4 = ws4.addRow(headers4);
+    headerRow4.height = 26;
+    headerRow4.eachCell(cell => {
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0F766E' } };
+      cell.font = { name: 'Segoe UI', size: 10, bold: true, color: { argb: 'FFFFFFFF' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      cell.border = borderThin;
+    });
+
+    summary.days.forEach((d, idx) => {
+      const isEven = idx % 2 === 0;
+      const row = ws4.addRow([
+        idx + 1,
+        d.dateKey,
+        d.dayName,
+        d.doctorsOnDuty || '-',
+        d.highlightCount,
+        d.hasData ? 'Đã có báo cáo' : (d.isFuture ? 'Chưa tới' : 'Chưa nhập')
+      ]);
+      row.height = 22;
+      row.eachCell((cell, colNum) => {
+        cell.border = borderThin;
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: isEven ? 'FFFFFFFF' : 'FFF0FDFA' } };
+        cell.font = { name: 'Segoe UI', size: 9.5, color: { argb: 'FF1E293B' } };
+        if (colNum === 4) cell.alignment = { horizontal: 'left', vertical: 'middle' };
+        else cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      });
+    });
+
+    // Thống kê ca trực bác sĩ phía dưới
+    ws4.addRow([]);
+    const subTitleRow = ws4.addRow(['', 'THỐNG KÊ SỐ CA TRỰC THEO BÁC SĨ']);
+    subTitleRow.getCell(2).font = { name: 'Segoe UI', size: 11, bold: true, color: { argb: 'FF0F766E' } };
+
+    const docHeaders = ['', 'STT', 'Bác sĩ trực', 'Số ca trực trong kỳ', 'Chi tiết các ngày trực'];
+    const docHeaderRow = ws4.addRow(docHeaders);
+    docHeaderRow.height = 24;
+    docHeaderRow.eachCell((cell, colNum) => {
+      if (colNum >= 2) {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF134E4A' } };
+        cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: 'FFFFFFFF' } };
+        cell.alignment = { horizontal: 'center', vertical: 'middle' };
+        cell.border = borderThin;
+      }
+    });
 
     summary.doctorDutySummary.forEach((doc, idx) => {
-      rows4.push([
+      const row = ws4.addRow([
+        '',
         idx + 1,
         doc.name,
         doc.shifts,
         (doc.dates || []).join(', ')
       ]);
+      row.height = 22;
+      row.eachCell((cell, colNum) => {
+        if (colNum >= 2) {
+          cell.border = borderThin;
+          cell.font = { name: 'Segoe UI', size: 9.5 };
+          if (colNum === 3) {
+            cell.font = { name: 'Segoe UI', size: 9.5, bold: true };
+            cell.alignment = { horizontal: 'left', vertical: 'middle' };
+          } else if (colNum === 4) {
+            cell.font = { name: 'Segoe UI', size: 9.5, bold: true, color: { argb: 'FF0F766E' } };
+            cell.alignment = { horizontal: 'center', vertical: 'middle' };
+          } else if (colNum === 5) {
+            cell.alignment = { horizontal: 'left', vertical: 'middle' };
+          } else {
+            cell.alignment = { horizontal: 'center', vertical: 'middle' };
+          }
+        }
+      });
     });
 
-    const ws4 = XLSX.utils.aoa_to_sheet(rows4);
-    ws4['!cols'] = [
-      { wch: 6 },
-      { wch: 24 },
-      { wch: 16 },
-      { wch: 50 }
+    ws4.columns = [
+      { width: 4 },
+      { width: 6 },
+      { width: 14 },
+      { width: 34 },
+      { width: 16 },
+      { width: 45 }
     ];
-    XLSX.utils.book_append_sheet(wb, ws4, 'Lich_Truc_Bac_Si');
 
-    return XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+    return await wb.xlsx.writeBuffer();
   }
 
   // GET /api/briefing-report
@@ -3431,7 +3763,7 @@ const server = http.createServer(async (req, res) => {
 
     try {
       const summary = getBriefingPeriodSummary(startDate, endDate, label);
-      const buffer = generateBriefingPeriodExcel(summary);
+      const buffer = await generateBriefingPeriodExcel(summary);
       const cleanLabel = (label || 'Ky_Bao_Cao').replace(/[^a-zA-Z0-9_\-]/g, '_');
       res.writeHead(200, {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
