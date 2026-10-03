@@ -4,6 +4,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const XLSX = require('xlsx');
 
 const PORT = 8080;
 const ROOT = __dirname;
@@ -22,7 +23,8 @@ const MIME_TYPES = {
   '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
-  '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+  '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 };
 
 const ROOMS = [
@@ -2233,6 +2235,499 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  function getDayNameVN(dateStr) {
+    const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    const parts = String(dateStr).split('-');
+    if (parts.length === 3) {
+      const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+      return days[d.getDay()] || '';
+    }
+    return '';
+  }
+
+  function getDateRangeKeys(startDateStr, endDateStr) {
+    const keys = [];
+    const [sy, sm, sd] = startDateStr.split('-').map(Number);
+    const [ey, em, ed] = endDateStr.split('-').map(Number);
+    let curr = new Date(sy, sm - 1, sd);
+    const end = new Date(ey, em - 1, ed);
+    while (curr <= end) {
+      const y = curr.getFullYear();
+      const m = String(curr.getMonth() + 1).padStart(2, '0');
+      const d = String(curr.getDate()).padStart(2, '0');
+      keys.push(`${y}-${m}-${d}`);
+      curr.setDate(curr.getDate() + 1);
+    }
+    return keys;
+  }
+
+  function generateBriefingDailyExcel(dateKey) {
+    const report = getOrBuildBriefingReport(dateKey);
+    const overall = report.overall || {};
+    const grand = overall.grandCensus || {};
+    const roomReports = report.roomReports || {};
+    const highlightCases = report.highlightCases || [];
+
+    const docsStr = Array.isArray(overall.doctorsOnDuty) ? overall.doctorsOnDuty.join(' – ') : (overall.doctorsOnDuty || '');
+    const wb = XLSX.utils.book_new();
+
+    // Sheet 1: Tong_Hop_Giao_Ban
+    const rows1 = [
+      ['BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI - KHOA NGOẠI THẦN KINH - CỘT SỐNG'],
+      [`BÁO CÁO GIAO BAN NGÀY ${dateKey} - BÁC SĨ TRỰC: ${docsStr}`],
+      [],
+      ['I. BẢNG 8 CHỈ SỐ GIAO BAN TOÀN KHOA'],
+      ['Bệnh cũ', 'Vào', 'Ra', 'Tử vong', 'Chuyển', 'Mổ', 'Hiện có', 'Bảo hiểm'],
+      [
+        grand.benhCu || 0,
+        grand.vao || (Number(grand.vaoKK || 0) + Number(grand.vaoKhac || 0)),
+        grand.ra || (Number(grand.raRH || 0) + Number(grand.raKhac || 0)),
+        grand.tuVong || 0,
+        grand.chuyen || Number(grand.raKhac || 0),
+        grand.mo || (Number(grand.moCT || 0) + Number(grand.moCC || 0)),
+        grand.hienCo || 0,
+        grand.bhyt || 0
+      ],
+      [],
+      ['II. BẢNG CHI TIẾT 5 PHÒNG BỆNH'],
+      ['STT', 'Phòng bệnh', 'Bệnh cũ', 'Vào KK', 'Vào khác', 'Mổ CT', 'Mổ CC', 'Ra RH', 'Ra khác', 'Tử vong', 'Hiện có', 'BHYT', 'Kíp trực / Nhân lực', 'Trạng thái nộp']
+    ];
+
+    const roomsList = [
+      { key: 'tk1', name: 'Thần kinh 1' },
+      { key: 'tk2', name: 'Thần kinh 2' },
+      { key: 'tk3', name: 'Thần kinh 3' },
+      { key: 'tk4', name: 'Thần kinh 4' },
+      { key: 'hstk', name: 'Hồi sức thần kinh (HSTK)' }
+    ];
+
+    roomsList.forEach((r, idx) => {
+      const rRep = roomReports[r.key] || { census: {}, personnel: {} };
+      const c = rRep.census || {};
+      const p = rRep.personnel || {};
+      const personnelStr = (r.key === 'hstk')
+        ? `Ngày: ${p.nursesDay || '--'} | Đêm: ${p.nursesNight || '--'} | Hộ lý: ${p.orderly || '--'}`
+        : `ĐD: ${p.nurses || '--'} | Hộ lý: ${p.orderly || '--'}`;
+      const statusStr = rRep.status === 'SUBMITTED' ? 'Đã nộp' : 'Chờ nộp';
+
+      rows1.push([
+        idx + 1,
+        r.name,
+        c.benhCu || 0,
+        c.vaoKK || 0,
+        c.vaoKhac || 0,
+        c.moCT || 0,
+        c.moCC || 0,
+        c.raRH || 0,
+        c.raKhac || 0,
+        c.tuVong || 0,
+        c.hienCo || 0,
+        c.bhyt || 0,
+        personnelStr,
+        statusStr
+      ]);
+    });
+
+    // Total row
+    rows1.push([
+      '',
+      'TỔNG TOÀN KHOA',
+      grand.benhCu || 0,
+      grand.vaoKK || 0,
+      grand.vaoKhac || 0,
+      grand.moCT || 0,
+      grand.moCC || 0,
+      grand.raRH || 0,
+      grand.raKhac || 0,
+      grand.tuVong || 0,
+      grand.hienCo || 0,
+      grand.bhyt || 0,
+      `BS trực: ${docsStr}`,
+      '-'
+    ]);
+
+    rows1.push([]);
+    rows1.push(['III. Ý KIẾN CHỈ ĐẠO CỦA CHỦ TỌA GIAO BAN']);
+    rows1.push([overall.doctorNotes || '']);
+
+    const ws1 = XLSX.utils.aoa_to_sheet(rows1);
+    ws1['!cols'] = [
+      { wch: 6 },
+      { wch: 26 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 12 },
+      { wch: 10 },
+      { wch: 40 },
+      { wch: 14 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws1, 'Tong_Hop_Giao_Ban');
+
+    // Sheet 2: Ca_Trong_Diem
+    const rows2 = [
+      [`DANH SÁCH CA TRỌNG ĐIỂM BÁO CÁO GIAO BAN - NGÀY ${dateKey}`],
+      [],
+      ['STT', 'Phân loại / Nhóm', 'Phòng', 'Họ và tên', 'Tuổi', 'Giới tính', 'Địa chỉ', 'Ngày vào viện', 'Ngày PT / Xin về', 'Chẩn đoán', 'Kíp mổ / PTV', 'Diễn biến ca trực', 'Ý kiến BS trực']
+    ];
+
+    highlightCases.forEach((c, idx) => {
+      rows2.push([
+        c.stt || (idx + 1),
+        c.category || '',
+        c.roomName || c.roomKey || '',
+        c.hoten || '',
+        c.tuoi || '',
+        c.gioiTinh || 'NAM',
+        c.diaChi || '',
+        c.ngayVaoVien || '',
+        c.ngayPhauThuat || c.ngayXinVe || '',
+        c.chanDoan || '',
+        c.kipMo || '',
+        c.dienBien || '',
+        c.notesBs || ''
+      ]);
+    });
+
+    const ws2 = XLSX.utils.aoa_to_sheet(rows2);
+    ws2['!cols'] = [
+      { wch: 6 },
+      { wch: 28 },
+      { wch: 18 },
+      { wch: 24 },
+      { wch: 8 },
+      { wch: 10 },
+      { wch: 32 },
+      { wch: 14 },
+      { wch: 16 },
+      { wch: 45 },
+      { wch: 25 },
+      { wch: 35 },
+      { wch: 30 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws2, 'Ca_Trong_Diem');
+
+    return XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+  }
+
+  function getBriefingPeriodSummary(startDate, endDate, periodLabel) {
+    const dateKeys = getDateRangeKeys(startDate, endDate);
+    const days = [];
+    const emergencySurgeries = [];
+    const fatalitiesAndCritical = [];
+    const doctorDutyCount = {};
+
+    let sumBenhCu = 0, sumVao = 0, sumRa = 0, sumTuVong = 0, sumChuyen = 0, sumMo = 0, sumHienCo = 0, sumBhyt = 0;
+    let sumMoCC = 0, sumMoCT = 0;
+
+    for (const dk of dateKeys) {
+      let rep = (db.briefingReports && db.briefingReports[dk]) ? db.briefingReports[dk] : null;
+      if (!rep) {
+        rep = getOrBuildBriefingReport(dk);
+      }
+
+      const ov = (rep && rep.overall) || {};
+      const gc = ov.grandCensus || {};
+      const hlCases = (rep && rep.highlightCases) || [];
+
+      const valBenhCu = Number(gc.benhCu || 0);
+      const valVao = Number(gc.vao || (Number(gc.vaoKK || 0) + Number(gc.vaoKhac || 0)));
+      const valRa = Number(gc.ra || (Number(gc.raRH || 0) + Number(gc.raKhac || 0)));
+      const valTuVong = Number(gc.tuVong || 0);
+      const valChuyen = Number(gc.chuyen || Number(gc.raKhac || 0));
+      const valMo = Number(gc.mo || (Number(gc.moCT || 0) + Number(gc.moCC || 0)));
+      const valMoCC = Number(gc.moCC || 0);
+      const valMoCT = Number(gc.moCT || 0);
+      const valHienCo = Number(gc.hienCo || 0);
+      const valBhyt = Number(gc.bhyt || 0);
+
+      sumBenhCu += valBenhCu;
+      sumVao += valVao;
+      sumRa += valRa;
+      sumTuVong += valTuVong;
+      sumChuyen += valChuyen;
+      sumMo += valMo;
+      sumMoCC += valMoCC;
+      sumMoCT += valMoCT;
+      sumHienCo += valHienCo;
+      sumBhyt += valBhyt;
+
+      const docsDuty = Array.isArray(ov.doctorsOnDuty) ? ov.doctorsOnDuty : [];
+      docsDuty.forEach(docName => {
+        const cleanName = String(docName).replace('BS.', '').replace('BS', '').trim();
+        if (cleanName) {
+          if (!doctorDutyCount[cleanName]) {
+            doctorDutyCount[cleanName] = { name: cleanName, shifts: 0, dates: [] };
+          }
+          doctorDutyCount[cleanName].shifts += 1;
+          doctorDutyCount[cleanName].dates.push(dk);
+        }
+      });
+
+      hlCases.forEach(c => {
+        const cat = (c.category || '').toUpperCase();
+        if (cat.includes('MỔ') || cat.includes('MO_CC') || c.categoryKey === 'MO_CC') {
+          emergencySurgeries.push({
+            dateKey: dk,
+            ...c
+          });
+        }
+        if (cat.includes('TỬ VONG') || cat.includes('TU_VONG') || cat.includes('XIN VỀ') || cat.includes('XIN_VE') || c.categoryKey === 'TU_VONG' || c.categoryKey === 'XIN_VE') {
+          fatalitiesAndCritical.push({
+            dateKey: dk,
+            ...c
+          });
+        }
+      });
+
+      days.push({
+        dateKey: dk,
+        dayName: getDayNameVN(dk),
+        benhCu: valBenhCu,
+        vao: valVao,
+        ra: valRa,
+        tuVong: valTuVong,
+        chuyen: valChuyen,
+        mo: valMo,
+        moCC: valMoCC,
+        moCT: valMoCT,
+        hienCo: valHienCo,
+        bhyt: valBhyt,
+        doctorsOnDuty: docsDuty.join(' – '),
+        highlightCount: hlCases.length,
+        hasData: Boolean(db.briefingReports && db.briefingReports[dk])
+      });
+    }
+
+    const daysCount = Math.max(1, dateKeys.length);
+    const averages = {
+      avgHienCo: Math.round((sumHienCo / daysCount) * 10) / 10,
+      avgVao: Math.round((sumVao / daysCount) * 10) / 10,
+      avgRa: Math.round((sumRa / daysCount) * 10) / 10,
+      avgMo: Math.round((sumMo / daysCount) * 10) / 10
+    };
+
+    const totals = {
+      totalVao: sumVao,
+      totalRa: sumRa,
+      totalTuVong: sumTuVong,
+      totalChuyen: sumChuyen,
+      totalMo: sumMo,
+      totalMoCC: sumMoCC,
+      totalMoCT: sumMoCT,
+      daysCount
+    };
+
+    const doctorDutySummary = Object.values(doctorDutyCount).sort((a, b) => b.shifts - a.shifts);
+
+    return {
+      startDate,
+      endDate,
+      periodLabel: periodLabel || `Từ ${startDate} đến ${endDate}`,
+      days,
+      totals,
+      averages,
+      emergencySurgeries,
+      fatalitiesAndCritical,
+      doctorDutySummary
+    };
+  }
+
+  function generateBriefingPeriodExcel(summary) {
+    const wb = XLSX.utils.book_new();
+
+    // Sheet 1: Tong_Hop_So_Lieu
+    const rows1 = [
+      ['BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI - KHOA NGOẠI THẦN KINH - CỘT SỐNG'],
+      [`BÁO CÁO TỔNG HỢP SỐ LIỆU GIAO BAN (${summary.periodLabel})`],
+      [],
+      ['STT', 'Ngày', 'Thứ', 'Bệnh cũ', 'Vào', 'Ra', 'Tử vong', 'Chuyển', 'Mổ', 'Hiện có', 'Bảo hiểm', 'BS Trực đêm', 'Số ca trọng điểm']
+    ];
+
+    summary.days.forEach((d, idx) => {
+      rows1.push([
+        idx + 1,
+        d.dateKey,
+        d.dayName,
+        d.benhCu,
+        d.vao,
+        d.ra,
+        d.tuVong,
+        d.chuyen,
+        d.mo,
+        d.hienCo,
+        d.bhyt,
+        d.doctorsOnDuty,
+        d.highlightCount
+      ]);
+    });
+
+    // Totals & Averages
+    rows1.push([
+      '',
+      'TỔNG CỘNG',
+      '-',
+      '-',
+      summary.totals.totalVao,
+      summary.totals.totalRa,
+      summary.totals.totalTuVong,
+      summary.totals.totalChuyen,
+      summary.totals.totalMo,
+      '-',
+      '-',
+      '-',
+      summary.emergencySurgeries.length + summary.fatalitiesAndCritical.length
+    ]);
+
+    rows1.push([
+      '',
+      'TRUNG BÌNH/NGÀY',
+      '-',
+      '-',
+      summary.averages.avgVao,
+      summary.averages.avgRa,
+      '-',
+      '-',
+      summary.averages.avgMo,
+      summary.averages.avgHienCo,
+      '-',
+      '-',
+      '-'
+    ]);
+
+    const ws1 = XLSX.utils.aoa_to_sheet(rows1);
+    ws1['!cols'] = [
+      { wch: 6 },
+      { wch: 14 },
+      { wch: 12 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 12 },
+      { wch: 10 },
+      { wch: 30 },
+      { wch: 16 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws1, 'Tong_Hop_So_Lieu');
+
+    // Sheet 2: Danh_Sach_Mo_Cap_Cuu
+    const rows2 = [
+      [`DANH SÁCH CA MỔ CẤP CỨU (${summary.periodLabel}) - TỔNG: ${summary.emergencySurgeries.length} CA`],
+      [],
+      ['STT', 'Ngày', 'Phòng', 'Họ tên bệnh nhân', 'Tuổi', 'Giới tính', 'Địa chỉ', 'Ngày vào viện', 'Ngày phẫu thuật', 'Chẩn đoán', 'Kíp mổ / PTV', 'Diễn biến ca trực']
+    ];
+
+    summary.emergencySurgeries.forEach((c, idx) => {
+      rows2.push([
+        idx + 1,
+        c.dateKey,
+        c.roomName || c.roomKey || '',
+        c.hoten || '',
+        c.tuoi || '',
+        c.gioiTinh || 'NAM',
+        c.diaChi || '',
+        c.ngayVaoVien || '',
+        c.ngayPhauThuat || '',
+        c.chanDoan || '',
+        c.kipMo || '',
+        c.dienBien || ''
+      ]);
+    });
+
+    const ws2 = XLSX.utils.aoa_to_sheet(rows2);
+    ws2['!cols'] = [
+      { wch: 6 },
+      { wch: 14 },
+      { wch: 16 },
+      { wch: 24 },
+      { wch: 8 },
+      { wch: 10 },
+      { wch: 30 },
+      { wch: 14 },
+      { wch: 14 },
+      { wch: 45 },
+      { wch: 25 },
+      { wch: 35 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws2, 'Danh_Sach_Mo_Cap_Cuu');
+
+    // Sheet 3: Tu_Vong_Va_Xin_Ve
+    const rows3 = [
+      [`DANH SÁCH CA TỬ VONG & NẶNG XIN VỀ (${summary.periodLabel}) - TỔNG: ${summary.fatalitiesAndCritical.length} CA`],
+      [],
+      ['STT', 'Ngày', 'Phòng', 'Phân loại', 'Họ tên bệnh nhân', 'Tuổi', 'Giới tính', 'Địa chỉ', 'Ngày vào viện', 'Ngày xin về / Tử vong', 'Chẩn đoán', 'Diễn biến / Ghi chú']
+    ];
+
+    summary.fatalitiesAndCritical.forEach((c, idx) => {
+      rows3.push([
+        idx + 1,
+        c.dateKey,
+        c.roomName || c.roomKey || '',
+        c.category || '',
+        c.hoten || '',
+        c.tuoi || '',
+        c.gioiTinh || 'NAM',
+        c.diaChi || '',
+        c.ngayVaoVien || '',
+        c.ngayXinVe || c.dateKey,
+        c.chanDoan || '',
+        c.dienBien || ''
+      ]);
+    });
+
+    const ws3 = XLSX.utils.aoa_to_sheet(rows3);
+    ws3['!cols'] = [
+      { wch: 6 },
+      { wch: 14 },
+      { wch: 16 },
+      { wch: 24 },
+      { wch: 24 },
+      { wch: 8 },
+      { wch: 10 },
+      { wch: 30 },
+      { wch: 14 },
+      { wch: 16 },
+      { wch: 45 },
+      { wch: 35 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws3, 'Tu_Vong_Va_Xin_Ve');
+
+    // Sheet 4: Lich_Truc_Bac_Si
+    const rows4 = [
+      [`THỐNG KÊ KÍP TRỰC BÁC SĨ (${summary.periodLabel})`],
+      [],
+      ['STT', 'Bác sĩ trực', 'Tổng số ca trực', 'Chi tiết các ngày trực']
+    ];
+
+    summary.doctorDutySummary.forEach((doc, idx) => {
+      rows4.push([
+        idx + 1,
+        doc.name,
+        doc.shifts,
+        (doc.dates || []).join(', ')
+      ]);
+    });
+
+    const ws4 = XLSX.utils.aoa_to_sheet(rows4);
+    ws4['!cols'] = [
+      { wch: 6 },
+      { wch: 24 },
+      { wch: 16 },
+      { wch: 50 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws4, 'Lich_Truc_Bac_Si');
+
+    return XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+  }
+
   // GET /api/briefing-report
   if (req.method === 'GET' && pathname === '/api/briefing-report') {
     const reqUrl = new URL(req.url, 'http://localhost');
@@ -2408,6 +2903,114 @@ const server = http.createServer(async (req, res) => {
         try { fs.unlinkSync(tempPptx); } catch (e) {}
       });
     });
+    return;
+  }
+
+  // GET /api/export-briefing-excel?date=YYYY-MM-DD
+  if (req.method === 'GET' && pathname === '/api/export-briefing-excel') {
+    const reqUrl = new URL(req.url, 'http://localhost');
+    const qDate = reqUrl.searchParams.get('date') || getDateKey(new Date());
+    try {
+      const buffer = generateBriefingDailyExcel(qDate);
+      res.writeHead(200, {
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'Content-Disposition': `attachment; filename="Bao_Cao_Giao_Ban_${qDate}.xlsx"`,
+        'Cache-Control': 'no-cache'
+      });
+      res.end(buffer);
+    } catch (err) {
+      console.error('Daily excel export error:', err);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Không thể tạo file Excel: ' + err.message }));
+    }
+    return;
+  }
+
+  // GET /api/briefing-period-summary
+  if (req.method === 'GET' && pathname === '/api/briefing-period-summary') {
+    const reqUrl = new URL(req.url, 'http://localhost');
+    const mode = reqUrl.searchParams.get('mode') || 'month'; // 'month' | 'week' | 'custom'
+    let startDate = reqUrl.searchParams.get('startDate');
+    let endDate = reqUrl.searchParams.get('endDate');
+    let label = reqUrl.searchParams.get('label');
+
+    const now = new Date();
+    if (mode === 'month') {
+      const year = Number(reqUrl.searchParams.get('year')) || now.getFullYear();
+      const month = Number(reqUrl.searchParams.get('month')) || (now.getMonth() + 1);
+      const endD = new Date(year, month, 0); // last day of month
+      startDate = `${year}-${String(month).padStart(2, '0')}-01`;
+      endDate = `${year}-${String(month).padStart(2, '0')}-${String(endD.getDate()).padStart(2, '0')}`;
+      label = `Tháng ${String(month).padStart(2, '0')}/${year}`;
+    } else if (mode === 'week') {
+      if (!startDate) {
+        const d = new Date();
+        const day = d.getDay();
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1); // Monday
+        const monday = new Date(d.setDate(diff));
+        const sunday = new Date(d.setDate(diff + 6));
+        startDate = getDateKey(monday);
+        endDate = getDateKey(sunday);
+        label = `Tuần từ ${startDate} đến ${endDate}`;
+      }
+    }
+
+    try {
+      const summary = getBriefingPeriodSummary(startDate, endDate, label);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, summary }));
+    } catch (err) {
+      console.error('Period summary error:', err);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Lỗi tổng hợp số liệu: ' + err.message }));
+    }
+    return;
+  }
+
+  // GET /api/export-briefing-period-excel
+  if (req.method === 'GET' && pathname === '/api/export-briefing-period-excel') {
+    const reqUrl = new URL(req.url, 'http://localhost');
+    const mode = reqUrl.searchParams.get('mode') || 'month';
+    let startDate = reqUrl.searchParams.get('startDate');
+    let endDate = reqUrl.searchParams.get('endDate');
+    let label = reqUrl.searchParams.get('label');
+
+    const now = new Date();
+    if (mode === 'month') {
+      const year = Number(reqUrl.searchParams.get('year')) || now.getFullYear();
+      const month = Number(reqUrl.searchParams.get('month')) || (now.getMonth() + 1);
+      const endD = new Date(year, month, 0);
+      startDate = `${year}-${String(month).padStart(2, '0')}-01`;
+      endDate = `${year}-${String(month).padStart(2, '0')}-${String(endD.getDate()).padStart(2, '0')}`;
+      label = `Tháng ${String(month).padStart(2, '0')}/${year}`;
+    } else if (mode === 'week') {
+      if (!startDate) {
+        const d = new Date();
+        const day = d.getDay();
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+        const monday = new Date(d.setDate(diff));
+        const sunday = new Date(d.setDate(diff + 6));
+        startDate = getDateKey(monday);
+        endDate = getDateKey(sunday);
+      }
+      if (!label) label = `Tuần từ ${startDate} đến ${endDate}`;
+    }
+
+    try {
+      const summary = getBriefingPeriodSummary(startDate, endDate, label);
+      const buffer = generateBriefingPeriodExcel(summary);
+      const cleanLabel = (label || 'Ky_Bao_Cao').replace(/[^a-zA-Z0-9_\-]/g, '_');
+      res.writeHead(200, {
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'Content-Disposition': `attachment; filename="Tong_Hop_Giao_Ban_${cleanLabel}.xlsx"`,
+        'Cache-Control': 'no-cache'
+      });
+      res.end(buffer);
+    } catch (err) {
+      console.error('Period excel export error:', err);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Không thể tạo file Excel tổng hợp: ' + err.message }));
+    }
     return;
   }
 

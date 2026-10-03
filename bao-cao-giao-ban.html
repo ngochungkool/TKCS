@@ -185,6 +185,274 @@
       box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
     }
 
+    .btn-gb-excel {
+      background: linear-gradient(135deg, #107c41 0%, #0b5a2f 100%);
+      color: #ffffff;
+      border-color: #0b5a2f;
+    }
+    .btn-gb-excel:hover {
+      background: linear-gradient(135deg, #0d6535 0%, #084323 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(16, 124, 65, 0.35);
+    }
+
+    /* Mode Switcher Bar */
+    .gb-mode-switcher-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 8px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .gb-mode-buttons {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn-mode-tab {
+      border: none;
+      background: transparent;
+      color: #475569;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 8px 16px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-mode-tab:hover {
+      color: #0f172a;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .btn-mode-tab.active {
+      background: #ffffff;
+      color: #0284c7;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .gb-mode-info {
+      font-size: 0.86rem;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 5-Room Monitoring Table */
+    .monitoring-room-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: center;
+      background: #ffffff;
+    }
+    .monitoring-room-table th {
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 700;
+      padding: 10px 8px;
+      border-bottom: 2px solid #cbd5e1;
+      white-space: nowrap;
+    }
+    .monitoring-room-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+    .monitoring-room-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    .badge-status-submitted {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: 700;
+      font-size: 0.76rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid #bbf7d0;
+      white-space: nowrap;
+    }
+    .badge-status-pending {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fef3c7;
+      color: #b45309;
+      font-weight: 700;
+      font-size: 0.76rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid #fde68a;
+      white-space: nowrap;
+    }
+
+    .btn-sm-view-room {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-sm-view-room:hover {
+      background: #15803d;
+      color: #ffffff;
+      border-color: #15803d;
+    }
+
+    /* Period Summary Views */
+    .period-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .period-kpi-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+    .period-kpi-label {
+      font-size: 0.82rem;
+      color: #64748b;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .period-kpi-val {
+      font-size: 2.1rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .period-kpi-sub {
+      font-size: 0.82rem;
+      color: #64748b;
+    }
+
+    .period-matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: center;
+      background: #ffffff;
+    }
+    .period-matrix-table th {
+      background: #0f172a;
+      color: #f8fafc;
+      font-weight: 700;
+      padding: 10px 6px;
+      border: 1px solid #334155;
+      white-space: nowrap;
+    }
+    .period-matrix-table td {
+      padding: 8px 6px;
+      border: 1px solid #e2e8f0;
+      font-weight: 600;
+    }
+    .period-matrix-table tr:hover td {
+      background: #f8fafc;
+    }
+    .period-matrix-table .matrix-row-danger {
+      background: #fef2f2 !important;
+    }
+    .period-matrix-table .matrix-row-today {
+      background: #eff6ff !important;
+      border-left: 4px solid #2563eb;
+    }
+    .period-matrix-table tfoot td {
+      background: #f1f5f9;
+      font-weight: 800;
+      border-top: 2px solid #0f172a;
+    }
+
+    .period-subtabs-nav {
+      display: flex;
+      gap: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .period-subtab-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #475569;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+    .period-subtab-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    .period-subtab-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+
+    .badge-doc-date {
+      display: inline-block;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin: 2px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .badge-doc-date:hover {
+      background: #1d4ed8;
+      color: #ffffff;
+    }
+
     /* Role & Room Tabs */
     .gb-tabs-nav {
       display: flex;
@@ -827,8 +1095,27 @@
       </div>
     </header>
 
-    <!-- MAIN TOP TOOLBAR -->
-    <div class="gb-top-bar no-print">
+    <!-- VIEW MODE SWITCHER BAR (BÁO CÁO NGÀY | TỔNG HỢP TUẦN | TỔNG HỢP THÁNG) -->
+    <div class="gb-mode-switcher-bar no-print">
+      <div class="gb-mode-buttons">
+        <button type="button" class="btn-mode-tab active" id="btn-mode-daily" onclick="switchViewMode('daily')">
+          <i class="fa-solid fa-calendar-day"></i> Báo Cáo Ngày
+        </button>
+        <button type="button" class="btn-mode-tab" id="btn-mode-week" onclick="switchViewMode('week')">
+          <i class="fa-solid fa-calendar-week"></i> Tổng Hợp Tuần
+        </button>
+        <button type="button" class="btn-mode-tab" id="btn-mode-month" onclick="switchViewMode('month')">
+          <i class="fa-solid fa-chart-column"></i> Tổng Hợp Tháng
+        </button>
+      </div>
+
+      <div class="gb-mode-info" id="gb-mode-info-tag">
+        <i class="fa-solid fa-circle-info" style="color: #0284c7;"></i> Chế độ: <strong>Báo cáo ca trực hàng ngày</strong>
+      </div>
+    </div>
+
+    <!-- MAIN TOP TOOLBAR (DAILY MODE) -->
+    <div class="gb-top-bar no-print" id="gb-daily-toolbar">
       <!-- Date Picker navigation -->
       <div class="gb-date-nav">
         <button type="button" class="gb-btn-nav" onclick="shiftDate(-1)" title="Lùi 1 ngày">◀ Hôm trước</button>
@@ -839,6 +1126,9 @@
 
       <!-- Action Buttons -->
       <div class="gb-actions-group">
+        <button type="button" class="btn-gb-action btn-gb-excel" onclick="downloadDailyExcel()" title="Tải file Excel (.xlsx) báo cáo giao ban ngày gồm 2 sheet: Tổng hợp 8 chỉ số & Ca trọng điểm">
+          <i class="fa-solid fa-file-excel"></i> Tải Excel Ngày (.xlsx)
+        </button>
         <button type="button" class="btn-gb-action btn-gb-pptx" onclick="downloadPowerPointFile()" title="Tải file PowerPoint (.pptx) chuẩn 16:9 với đầy đủ slide và ảnh CT/MRI">
           <i class="fa-solid fa-file-powerpoint"></i> Tải PowerPoint (.pptx)
         </button>
@@ -856,6 +1146,25 @@
         </button>
         <button type="button" class="btn-gb-action btn-gb-print" onclick="window.print()" title="In báo cáo A4 ngang chuẩn y tế">
           <i class="fa-solid fa-print"></i> In A4
+        </button>
+      </div>
+    </div>
+
+    <!-- PERIOD (WEEK / MONTH) TOOLBAR -->
+    <div class="gb-top-bar no-print" id="gb-period-toolbar" style="display:none;">
+      <div class="gb-date-nav" id="period-nav-controls">
+        <!-- Rendered dynamically depending on week or month -->
+      </div>
+
+      <div class="gb-actions-group">
+        <button type="button" class="btn-gb-action btn-gb-excel" onclick="downloadPeriodExcel()" id="btn-period-excel" title="Tải file Excel (.xlsx) tổng hợp 4 sheet (Số liệu, Mổ cấp cứu, Tử vong/Xin về, Lịch trực BS)">
+          <i class="fa-solid fa-file-excel"></i> Tải Excel Tổng Hợp (.xlsx)
+        </button>
+        <button type="button" class="btn-gb-action btn-gb-sync" onclick="fetchPeriodSummary()" title="Làm mới lại dữ liệu từ server">
+          <i class="fa-solid fa-arrows-rotate"></i> Làm mới dữ liệu
+        </button>
+        <button type="button" class="btn-gb-action btn-gb-print" onclick="window.print()" title="In bảng tổng hợp">
+          <i class="fa-solid fa-print"></i> In tổng hợp
         </button>
       </div>
     </div>
@@ -943,6 +1252,15 @@
     let currentSlideIndex = 0;
     let activePasteCaseId = null;
 
+    // View Mode & Period state
+    let currentViewMode = 'daily'; // 'daily' | 'week' | 'month'
+    let periodYear = 2026;
+    let periodMonth = 9;
+    let periodWeekStart = '';
+    let periodWeekEnd = '';
+    let periodSummaryData = null;
+    let activePeriodSubTab = 'surgeries'; // 'surgeries' | 'fatalities' | 'doctors'
+
     // Room Metadata
     const ROOM_NAMES = {
       tk1: 'Thần kinh 1',
@@ -971,6 +1289,7 @@
     // Initialize Page
     document.addEventListener('DOMContentLoaded', () => {
       initRealtimeClock();
+      initPeriodDefaults();
       document.getElementById('gb-date-picker').value = currentDateKey;
       fetchBriefingReport(currentDateKey);
       setupGlobalPasteListener();
@@ -1068,6 +1387,12 @@
           dot.classList.toggle('status-submitted', rep.status === 'SUBMITTED');
         }
       });
+    }
+
+    // Download Daily Excel file (.xlsx)
+    function downloadDailyExcel() {
+      const url = `/api/export-briefing-excel?date=${currentDateKey}`;
+      window.location.href = url;
     }
 
     // Download PowerPoint file (.pptx)
@@ -1233,6 +1558,56 @@
             <button type="button" class="btn-gb-action btn-gb-sync" style="padding:4px 12px;font-size:0.8rem;" onclick="recalcGrandTotalsFromRooms()">
               🔄 Tính lại tổng từ 5 phòng
             </button>
+          </div>
+        </div>
+
+        <!-- BẢNG GIÁM SÁT TIẾN ĐỘ & ĐỐI CHIẾU 5 PHÒNG BỆNH -->
+        <div class="gb-card" style="border-left: 5px solid #0284c7; background: #ffffff;">
+          <div class="gb-card-header">
+            <div>
+              <div class="gb-card-title">
+                <i class="fa-solid fa-clipboard-check" style="color:#0284c7;"></i> 
+                GIÁM SÁT TIẾN ĐỘ 5 PHÒNG BỆNH &amp; ĐỐI CHIẾU SỐ LIỆU CA TRỰC
+              </div>
+              <div style="font-size:0.83rem;color:#64748b;margin-top:4px;">
+                Số liệu do điều dưỡng trực các phòng nhập lúc khuya/sáng sớm • Tiến độ: <strong>${countSubmittedRooms(roomReports)}/5 phòng đã nộp</strong>
+              </div>
+            </div>
+            <div class="gb-actions-group">
+              <button type="button" class="btn-gb-action btn-gb-sync" onclick="recalcGrandTotalsFromRooms()" title="Lấy tổng dồn từ 5 phòng nộp lên điền vào Bảng 8 chỉ số Toàn khoa">
+                <i class="fa-solid fa-calculator"></i> 🔄 Đồng bộ dồn tổng lên Toàn khoa
+              </button>
+            </div>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="monitoring-room-table">
+              <thead>
+                <tr>
+                  <th style="text-align:left;">Phòng bệnh</th>
+                  <th>Trạng thái</th>
+                  <th style="text-align:left;">Nhân lực ca trực</th>
+                  <th>Bệnh cũ</th>
+                  <th>Vào KK</th>
+                  <th>Vào khác</th>
+                  <th>Mổ CT</th>
+                  <th>Mổ CC</th>
+                  <th>Ra RH</th>
+                  <th>Ra khác</th>
+                  <th>Tử vong</th>
+                  <th style="background:#e0f2fe;color:#0369a1;font-weight:800;">Hiện có</th>
+                  <th>BHYT</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${renderMonitoringRoomRows(roomReports)}
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top:10px;font-size:0.82rem;color:#64748b;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <span>💡 Bác sĩ bấm <strong>"Xem phòng"</strong> để duyệt chi tiết từng phòng hoặc bấm <strong>"Đồng bộ dồn tổng lên Toàn khoa"</strong> để kiểm tra khớp số liệu.</span>
+            <span style="font-weight:700;color:#0f172a;">Tiến độ nộp: ${countSubmittedRooms(roomReports)}/5 phòng đã nộp</span>
           </div>
         </div>
 
@@ -1645,6 +2020,638 @@
       });
       currentReport.overall.grandCensus = { benhCu, vao, ra, tuVong, chuyen, mo, hienCo, bhyt };
       renderCurrentView();
+    }
+
+    function countSubmittedRooms(roomReports) {
+      if (!roomReports) return 0;
+      return ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].filter(k => roomReports[k] && roomReports[k].status === 'SUBMITTED').length;
+    }
+
+    function renderMonitoringRoomRows(roomReports) {
+      const rooms = [
+        { key: 'tk1', name: 'Thần kinh 1' },
+        { key: 'tk2', name: 'Thần kinh 2' },
+        { key: 'tk3', name: 'Thần kinh 3' },
+        { key: 'tk4', name: 'Thần kinh 4' },
+        { key: 'hstk', name: '🚨 Hồi sức TK (HSTK)' }
+      ];
+
+      let sum = { benhCu: 0, vaoKK: 0, vaoKhac: 0, moCT: 0, moCC: 0, raRH: 0, raKhac: 0, tuVong: 0, hienCo: 0, bhyt: 0 };
+      let rowsHtml = '';
+
+      rooms.forEach(r => {
+        const rep = (roomReports && roomReports[r.key]) || { census: {}, personnel: {}, status: 'DRAFT' };
+        const c = rep.census || {};
+        const p = rep.personnel || {};
+        const isSub = rep.status === 'SUBMITTED';
+
+        sum.benhCu += Number(c.benhCu || 0);
+        sum.vaoKK += Number(c.vaoKK || 0);
+        sum.vaoKhac += Number(c.vaoKhac || 0);
+        sum.moCT += Number(c.moCT || 0);
+        sum.moCC += Number(c.moCC || 0);
+        sum.raRH += Number(c.raRH || 0);
+        sum.raKhac += Number(c.raKhac || 0);
+        sum.tuVong += Number(c.tuVong || 0);
+        sum.hienCo += Number(c.hienCo || 0);
+        sum.bhyt += Number(c.bhyt || 0);
+
+        const personnelStr = (r.key === 'hstk')
+          ? `Ngày: <strong>${escapeHtml(p.nursesDay || '--')}</strong> | Đêm: <strong>${escapeHtml(p.nursesNight || '--')}</strong> | HL: <strong>${escapeHtml(p.orderly || '--')}</strong>`
+          : `ĐD: <strong>${escapeHtml(p.nurses || '--')}</strong> | HL: <strong>${escapeHtml(p.orderly || '--')}</strong>`;
+
+        const statusBadge = isSub
+          ? `<span class="badge-status-submitted"><i class="fa-solid fa-circle-check"></i> ĐÃ NỘP</span>`
+          : `<span class="badge-status-pending"><i class="fa-solid fa-clock"></i> CHỜ NỘP</span>`;
+
+        rowsHtml += `
+          <tr>
+            <td style="text-align:left;font-weight:700;color:#0f172a;white-space:nowrap;">
+              <a href="javascript:void(0)" onclick="switchTab('${r.key}')" style="color:#0284c7;text-decoration:none;">${r.name}</a>
+            </td>
+            <td>${statusBadge}</td>
+            <td style="text-align:left;font-size:0.82rem;color:#334155;">${personnelStr}</td>
+            <td style="font-weight:700;">${c.benhCu || 0}</td>
+            <td style="color:#2563eb;font-weight:700;">${c.vaoKK || 0}</td>
+            <td style="color:#2563eb;">${c.vaoKhac || 0}</td>
+            <td>${c.moCT || 0}</td>
+            <td style="color:#dc2626;font-weight:800;">${c.moCC || 0}</td>
+            <td>${c.raRH || 0}</td>
+            <td>${c.raKhac || 0}</td>
+            <td style="font-weight:800;color:${Number(c.tuVong || 0) > 0 ? '#dc2626' : '#64748b'};">${c.tuVong || 0}</td>
+            <td style="background:#e0f2fe;font-weight:800;color:#0369a1;font-size:1.05rem;">${c.hienCo || 0}</td>
+            <td>${c.bhyt || 0}</td>
+            <td>
+              <button type="button" class="btn-sm-view-room" onclick="switchTab('${r.key}')" title="Xem danh sách bệnh nhân và ca giao ban phòng này">
+                Xem phòng <i class="fa-solid fa-angle-right"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      // Footer row: TỔNG 5 PHÒNG
+      rowsHtml += `
+        <tr style="background:#f8fafc;border-top:2px solid #cbd5e1;font-weight:800;">
+          <td colspan="2" style="text-align:left;color:#0284c7;padding:10px 8px;">TỔNG CỘNG 5 PHÒNG</td>
+          <td style="font-size:0.8rem;color:#64748b;text-align:left;">Tổng dồn điều dưỡng nộp</td>
+          <td>${sum.benhCu}</td>
+          <td style="color:#2563eb;">${sum.vaoKK}</td>
+          <td style="color:#2563eb;">${sum.vaoKhac}</td>
+          <td>${sum.moCT}</td>
+          <td style="color:#dc2626;">${sum.moCC}</td>
+          <td>${sum.raRH}</td>
+          <td>${sum.raKhac}</td>
+          <td style="color:${sum.tuVong > 0 ? '#dc2626' : '#0f172a'};">${sum.tuVong}</td>
+          <td style="background:#bae6fd;color:#0284c7;font-size:1.15rem;">${sum.hienCo}</td>
+          <td>${sum.bhyt}</td>
+          <td>
+            <button type="button" class="btn-gb-action btn-gb-sync" style="padding:3px 8px;font-size:0.75rem;" onclick="recalcGrandTotalsFromRooms()" title="Lấy số liệu này điền lên bảng 8 chỉ số Toàn khoa">
+              Đồng bộ lên
+            </button>
+          </td>
+        </tr>
+      `;
+
+      return rowsHtml;
+    }
+
+    /* =========================================================================
+       PERIOD (WEEK / MONTH) AGGREGATION & REPORTING
+       ========================================================================= */
+    function initPeriodDefaults() {
+      const now = new Date();
+      if (currentDateKey && currentDateKey.startsWith('2026-09')) {
+        periodYear = 2026;
+        periodMonth = 9;
+      } else {
+        periodYear = now.getFullYear();
+        periodMonth = now.getMonth() + 1;
+      }
+
+      const d = new Date(currentDateKey || new Date());
+      const day = d.getDay();
+      const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+      const mon = new Date(d);
+      mon.setDate(diff);
+      const sun = new Date(d);
+      sun.setDate(diff + 6);
+      periodWeekStart = mon.toISOString().slice(0, 10);
+      periodWeekEnd = sun.toISOString().slice(0, 10);
+    }
+
+    function switchViewMode(mode) {
+      currentViewMode = mode;
+      document.querySelectorAll('.btn-mode-tab').forEach(b => {
+        b.classList.toggle('active', b.id === `btn-mode-${mode}`);
+      });
+
+      const modeInfoTag = document.getElementById('gb-mode-info-tag');
+      const dailyToolbar = document.getElementById('gb-daily-toolbar');
+      const periodToolbar = document.getElementById('gb-period-toolbar');
+      const tabsContainer = document.getElementById('gb-tabs-container');
+
+      if (mode === 'daily') {
+        if (modeInfoTag) modeInfoTag.innerHTML = '<i class="fa-solid fa-circle-info" style="color: #0284c7;"></i> Chế độ: <strong>Báo cáo ca trực hàng ngày</strong>';
+        if (dailyToolbar) dailyToolbar.style.display = 'flex';
+        if (periodToolbar) periodToolbar.style.display = 'none';
+        if (tabsContainer) tabsContainer.style.display = 'flex';
+        renderCurrentView();
+      } else {
+        const modeLabel = (mode === 'month') ? 'Tổng hợp số liệu toàn khoa theo THÁNG' : 'Tổng hợp số liệu toàn khoa theo TUẦN';
+        if (modeInfoTag) modeInfoTag.innerHTML = `<i class="fa-solid fa-chart-line" style="color: #107c41;"></i> Chế độ: <strong>${modeLabel}</strong>`;
+        if (dailyToolbar) dailyToolbar.style.display = 'none';
+        if (periodToolbar) periodToolbar.style.display = 'flex';
+        if (tabsContainer) tabsContainer.style.display = 'none';
+
+        renderPeriodNavControls();
+        fetchPeriodSummary();
+      }
+    }
+
+    function renderPeriodNavControls() {
+      const container = document.getElementById('period-nav-controls');
+      if (!container) return;
+
+      if (currentViewMode === 'month') {
+        container.innerHTML = `
+          <span style="font-weight:700;color:#334155;font-size:0.9rem;display:flex;align-items:center;gap:6px;">
+            <i class="fa-solid fa-calendar-days" style="color:#0284c7;"></i> Chọn Tháng:
+          </span>
+          <select id="period-month-select" class="gb-date-input" style="padding:4px 8px;font-weight:700;" onchange="onPeriodMonthChanged()">
+            ${[1,2,3,4,5,6,7,8,9,10,11,12].map(m => `<option value="${m}" ${m === periodMonth ? 'selected' : ''}>Tháng ${String(m).padStart(2, '0')}</option>`).join('')}
+          </select>
+          <select id="period-year-select" class="gb-date-input" style="padding:4px 8px;font-weight:700;" onchange="onPeriodMonthChanged()">
+            ${[2025, 2026, 2027].map(y => `<option value="${y}" ${y === periodYear ? 'selected' : ''}>${y}</option>`).join('')}
+          </select>
+          <button type="button" class="gb-btn-nav" onclick="setQuickMonth(9, 2026)">Tháng 9/2026</button>
+          <button type="button" class="gb-btn-nav" onclick="setQuickMonth(10, 2026)">Tháng 10/2026</button>
+        `;
+      } else {
+        container.innerHTML = `
+          <span style="font-weight:700;color:#334155;font-size:0.9rem;display:flex;align-items:center;gap:6px;">
+            <i class="fa-solid fa-calendar-week" style="color:#0284c7;"></i> Từ ngày:
+          </span>
+          <input type="date" id="period-week-start" class="gb-date-input" value="${periodWeekStart}" onchange="onPeriodWeekChanged()" />
+          <span style="font-weight:700;color:#334155;">đến</span>
+          <input type="date" id="period-week-end" class="gb-date-input" value="${periodWeekEnd}" onchange="onPeriodWeekChanged()" />
+          <button type="button" class="gb-btn-nav" onclick="setQuickWeek(0)">Tuần này</button>
+          <button type="button" class="gb-btn-nav" onclick="setQuickWeek(-1)">Tuần trước</button>
+        `;
+      }
+    }
+
+    function onPeriodMonthChanged() {
+      const mEl = document.getElementById('period-month-select');
+      const yEl = document.getElementById('period-year-select');
+      if (mEl) periodMonth = Number(mEl.value);
+      if (yEl) periodYear = Number(yEl.value);
+      fetchPeriodSummary();
+    }
+
+    function setQuickMonth(m, y) {
+      periodMonth = m;
+      periodYear = y;
+      renderPeriodNavControls();
+      fetchPeriodSummary();
+    }
+
+    function onPeriodWeekChanged() {
+      const sEl = document.getElementById('period-week-start');
+      const eEl = document.getElementById('period-week-end');
+      if (sEl) periodWeekStart = sEl.value;
+      if (eEl) periodWeekEnd = eEl.value;
+      fetchPeriodSummary();
+    }
+
+    function setQuickWeek(offsetWeeks) {
+      const d = new Date();
+      d.setDate(d.getDate() + (offsetWeeks * 7));
+      const day = d.getDay();
+      const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+      const monday = new Date(d);
+      monday.setDate(diff);
+      const sunday = new Date(d);
+      sunday.setDate(diff + 6);
+      periodWeekStart = monday.toISOString().slice(0, 10);
+      periodWeekEnd = sunday.toISOString().slice(0, 10);
+      renderPeriodNavControls();
+      fetchPeriodSummary();
+    }
+
+    async function fetchPeriodSummary() {
+      const container = document.getElementById('gb-view-container');
+      if (!container) return;
+      container.innerHTML = `
+        <div style="text-align:center;padding:50px 20px;color:#0284c7;font-weight:700;">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size:2.4rem;margin-bottom:14px;color:#0284c7;"></i>
+          <div style="font-size:1.15rem;color:#0f172a;">Đang tổng hợp số liệu giao ban ${currentViewMode === 'month' ? `Tháng ${periodMonth}/${periodYear}` : `từ ${periodWeekStart} đến ${periodWeekEnd}`}...</div>
+          <div style="font-size:0.85rem;color:#64748b;margin-top:4px;">Tổng hợp ma trận 8 chỉ số, ca mổ cấp cứu, bệnh nhân nặng và lịch trực bác sĩ</div>
+        </div>
+      `;
+
+      try {
+        let url = '';
+        if (currentViewMode === 'month') {
+          url = `/api/briefing-period-summary?mode=month&year=${periodYear}&month=${periodMonth}`;
+        } else {
+          url = `/api/briefing-period-summary?mode=week&startDate=${periodWeekStart}&endDate=${periodWeekEnd}`;
+        }
+
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.ok && data.summary) {
+          periodSummaryData = data.summary;
+          renderPeriodView();
+        } else {
+          container.innerHTML = `<div style="text-align:center;padding:40px;color:#dc2626;font-weight:700;">Lỗi tổng hợp số liệu: ${data.error || 'Server error'}</div>`;
+        }
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<div style="text-align:center;padding:40px;color:#dc2626;font-weight:700;">Lỗi kết nối máy chủ khi tổng hợp số liệu giao ban!</div>';
+      }
+    }
+
+    function downloadPeriodExcel() {
+      let url = '';
+      if (currentViewMode === 'month') {
+        url = `/api/export-briefing-period-excel?mode=month&year=${periodYear}&month=${periodMonth}&label=Thang_${periodMonth}_${periodYear}`;
+      } else {
+        url = `/api/export-briefing-period-excel?mode=week&startDate=${periodWeekStart}&endDate=${periodWeekEnd}&label=Tuan_${periodWeekStart}_den_${periodWeekEnd}`;
+      }
+      window.location.href = url;
+    }
+
+    function openDayBriefing(dateKey) {
+      currentDateKey = dateKey;
+      const picker = document.getElementById('gb-date-picker');
+      if (picker) picker.value = currentDateKey;
+      switchViewMode('daily');
+      fetchBriefingReport(currentDateKey);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderPeriodView() {
+      const container = document.getElementById('gb-view-container');
+      if (!container || !periodSummaryData) return;
+
+      const s = periodSummaryData;
+      const totals = s.totals || {};
+      const averages = s.averages || {};
+      const days = s.days || [];
+      const emergencySurgeries = s.emergencySurgeries || [];
+      const fatalitiesAndCritical = s.fatalitiesAndCritical || [];
+      const doctorDutySummary = s.doctorDutySummary || [];
+
+      let html = `
+        <div class="period-view-container">
+          <!-- 4 KPI SUMMARY CARDS -->
+          <div class="period-kpi-grid">
+            <div class="period-kpi-card" style="border-top: 4px solid #0284c7;">
+              <div class="period-kpi-label"><i class="fa-solid fa-hospital-user" style="color:#0284c7;"></i> TỔNG VÀO VIỆN</div>
+              <div class="period-kpi-val" style="color:#0284c7;">${totals.totalVao || 0} <span style="font-size:1rem;font-weight:600;color:#64748b;">lượt</span></div>
+              <div class="period-kpi-sub">Trung bình: <strong>${averages.avgVao || 0}</strong> ca / ngày • Ra viện: <strong>${totals.totalRa || 0}</strong></div>
+            </div>
+
+            <div class="period-kpi-card" style="border-top: 4px solid #dc2626;">
+              <div class="period-kpi-label"><i class="fa-solid fa-scissors" style="color:#dc2626;"></i> TỔNG CA PHẪU THUẬT</div>
+              <div class="period-kpi-val" style="color:#dc2626;">${totals.totalMo || 0} <span style="font-size:1rem;font-weight:600;color:#64748b;">ca</span></div>
+              <div class="period-kpi-sub">Mổ cấp cứu: <strong style="color:#dc2626;">${emergencySurgeries.length}</strong> ca • Mổ phiên: <strong>${Math.max(0, (totals.totalMo || 0) - emergencySurgeries.length)}</strong> ca</div>
+            </div>
+
+            <div class="period-kpi-card" style="border-top: 4px solid #7c3aed;">
+              <div class="period-kpi-label"><i class="fa-solid fa-bed-pulse" style="color:#7c3aed;"></i> CÔNG SUẤT GIƯỜNG TB</div>
+              <div class="period-kpi-val" style="color:#7c3aed;">${averages.avgHienCo || 0} <span style="font-size:1rem;font-weight:600;color:#64748b;">BN / ngày</span></div>
+              <div class="period-kpi-sub">Duy trì xuyên suốt ${days.length} ngày trong kỳ</div>
+            </div>
+
+            <div class="period-kpi-card" style="border-top: 4px solid #991b1b;">
+              <div class="period-kpi-label"><i class="fa-solid fa-triangle-exclamation" style="color:#991b1b;"></i> TỬ VONG & NẶNG XIN VỀ</div>
+              <div class="period-kpi-val" style="color:#991b1b;">${fatalitiesAndCritical.length} <span style="font-size:1rem;font-weight:600;color:#64748b;">ca</span></div>
+              <div class="period-kpi-sub">Tử vong: <strong>${totals.totalTuVong || 0}</strong> • Nặng xin về: <strong>${Math.max(0, fatalitiesAndCritical.length - (totals.totalTuVong || 0))}</strong> ca</div>
+            </div>
+          </div>
+
+          <!-- BẢNG MA TRẬN TỔNG HỢP SỐ LIỆU THEO NGÀY -->
+          <div class="gb-card">
+            <div class="gb-card-header">
+              <div class="gb-card-title">
+                <i class="fa-solid fa-table-cells" style="color:#0284c7;"></i>
+                BẢNG MA TRẬN DIỄN TIẾN GIAO BAN THEO NGÀY (${escapeHtml(s.periodLabel)})
+              </div>
+              <div class="gb-actions-group">
+                <button type="button" class="btn-gb-action btn-gb-excel" onclick="downloadPeriodExcel()">
+                  <i class="fa-solid fa-file-excel"></i> Xuất Excel kỳ này (.xlsx)
+                </button>
+              </div>
+            </div>
+
+            <div style="overflow-x:auto;">
+              <table class="period-matrix-table">
+                <thead>
+                  <tr>
+                    <th style="width:38px;">STT</th>
+                    <th style="width:105px;">Ngày</th>
+                    <th style="width:85px;">Thứ</th>
+                    <th>Bệnh cũ</th>
+                    <th style="color:#93c5fd;">Vào</th>
+                    <th>Ra</th>
+                    <th style="color:#fca5a5;">Tử vong</th>
+                    <th>Chuyển</th>
+                    <th style="color:#fca5a5;">Mổ</th>
+                    <th style="background:#0284c7;color:#ffffff;font-size:0.95rem;">Hiện có</th>
+                    <th>BHYT</th>
+                    <th style="text-align:left;min-width:180px;">Bác sĩ trực đêm</th>
+                    <th style="width:85px;">Ca T.Điểm</th>
+                    <th style="width:90px;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${renderMatrixDaysRows(days)}
+                </tbody>
+                <tfoot>
+                  <tr style="background:#f1f5f9;">
+                    <td colspan="3" style="text-align:center;color:#0284c7;font-weight:900;">TỔNG CỘNG TRONG KỲ</td>
+                    <td>-</td>
+                    <td style="color:#2563eb;font-weight:900;">${totals.totalVao || 0}</td>
+                    <td style="font-weight:900;">${totals.totalRa || 0}</td>
+                    <td style="color:${(totals.totalTuVong || 0) > 0 ? '#dc2626' : '#0f172a'};font-weight:900;">${totals.totalTuVong || 0}</td>
+                    <td style="font-weight:900;">${totals.totalChuyen || 0}</td>
+                    <td style="color:#dc2626;font-weight:900;">${totals.totalMo || 0}</td>
+                    <td style="background:#e0f2fe;color:#0369a1;font-weight:900;">-</td>
+                    <td>-</td>
+                    <td style="text-align:left;font-size:0.8rem;color:#64748b;">${days.length} ngày tổng kết</td>
+                    <td style="font-weight:900;">${emergencySurgeries.length + fatalitiesAndCritical.length}</td>
+                    <td>-</td>
+                  </tr>
+                  <tr style="background:#e2e8f0;">
+                    <td colspan="3" style="text-align:center;color:#334155;font-weight:900;">TRUNG BÌNH MỖI NGÀY</td>
+                    <td>-</td>
+                    <td style="font-weight:900;color:#2563eb;">${averages.avgVao || 0}</td>
+                    <td style="font-weight:900;">${averages.avgRa || 0}</td>
+                    <td>${Math.round(((totals.totalTuVong || 0) / Math.max(1, days.length)) * 10) / 10}</td>
+                    <td>-</td>
+                    <td style="font-weight:900;color:#dc2626;">${averages.avgMo || 0}</td>
+                    <td style="background:#bae6fd;color:#0369a1;font-size:1.15rem;font-weight:900;">${averages.avgHienCo || 0}</td>
+                    <td>-</td>
+                    <td colspan="3" style="font-size:0.8rem;color:#475569;text-align:center;">Công suất buồng bệnh duy trì ổn định</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- 3 CHUYÊN ĐỀ THEO KỲ: MỔ CẤP CỨU | TỬ VONG & XIN VỀ | LỊCH TRỰC BS -->
+          <div class="gb-card">
+            <div class="period-subtabs-nav">
+              <button type="button" class="period-subtab-btn ${activePeriodSubTab === 'surgeries' ? 'active' : ''}" onclick="switchPeriodSubTab('surgeries')">
+                <i class="fa-solid fa-scissors" style="color:#dc2626;"></i> Ca Mổ Cấp Cứu (${emergencySurgeries.length})
+              </button>
+              <button type="button" class="period-subtab-btn ${activePeriodSubTab === 'fatalities' ? 'active' : ''}" onclick="switchPeriodSubTab('fatalities')">
+                <i class="fa-solid fa-triangle-exclamation" style="color:#991b1b;"></i> Tử Vong & Nặng Xin Về (${fatalitiesAndCritical.length})
+              </button>
+              <button type="button" class="period-subtab-btn ${activePeriodSubTab === 'doctors' ? 'active' : ''}" onclick="switchPeriodSubTab('doctors')">
+                <i class="fa-solid fa-user-doctor" style="color:#0284c7;"></i> Lịch Trực & Ca Trực Bác Sĩ (${doctorDutySummary.length})
+              </button>
+            </div>
+
+            <div id="period-subtab-content">
+              ${renderPeriodSubTabContent()}
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    function renderMatrixDaysRows(days) {
+      if (!days || days.length === 0) {
+        return `<tr><td colspan="14" style="padding:24px;text-align:center;color:#64748b;">Không có dữ liệu trong khoảng thời gian này.</td></tr>`;
+      }
+
+      return days.map((d, idx) => {
+        const isCurrentActive = d.dateKey === currentDateKey;
+        const hasDeath = Number(d.tuVong || 0) > 0;
+        const rowClass = hasDeath ? 'matrix-row-danger' : (isCurrentActive ? 'matrix-row-today' : '');
+
+        return `
+          <tr class="${rowClass}">
+            <td style="color:#64748b;">${idx + 1}</td>
+            <td style="font-weight:700;">
+              <a href="javascript:void(0)" onclick="openDayBriefing('${d.dateKey}')" title="Mở chi tiết báo cáo giao ban ngày này" style="color:#0284c7;text-decoration:underline;">
+                ${d.dateKey}
+              </a>
+            </td>
+            <td style="font-size:0.83rem;color:#475569;">${d.dayName}</td>
+            <td>${d.benhCu || 0}</td>
+            <td style="color:#2563eb;font-weight:700;">${d.vao || 0}</td>
+            <td>${d.ra || 0}</td>
+            <td style="font-weight:800;color:${hasDeath ? '#dc2626' : '#64748b'};">${d.tuVong || 0}</td>
+            <td>${d.chuyen || 0}</td>
+            <td style="color:#dc2626;font-weight:700;">${d.mo || 0}</td>
+            <td style="background:#e0f2fe;color:#0369a1;font-weight:800;font-size:1.05rem;">${d.hienCo || 0}</td>
+            <td>${d.bhyt || 0}</td>
+            <td style="text-align:left;font-size:0.83rem;color:#334155;">${escapeHtml(d.doctorsOnDuty || '--')}</td>
+            <td>
+              ${d.highlightCount > 0 
+                ? `<span style="background:#fee2e2;color:#b91c1c;padding:2px 7px;border-radius:6px;font-weight:700;font-size:0.8rem;">${d.highlightCount} ca</span>`
+                : `<span style="color:#94a3b8;font-size:0.8rem;">0</span>`
+              }
+            </td>
+            <td>
+              <button type="button" class="btn-sm-view-room" onclick="openDayBriefing('${d.dateKey}')" title="Mở báo cáo & trình chiếu slide ngày này">
+                Xem ngày <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function switchPeriodSubTab(tab) {
+      activePeriodSubTab = tab;
+      document.querySelectorAll('.period-subtab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(tab));
+      });
+      const contentEl = document.getElementById('period-subtab-content');
+      if (contentEl) {
+        contentEl.innerHTML = renderPeriodSubTabContent();
+      }
+    }
+
+    function renderPeriodSubTabContent() {
+      if (!periodSummaryData) return '';
+
+      if (activePeriodSubTab === 'surgeries') {
+        const surgeries = periodSummaryData.emergencySurgeries || [];
+        if (surgeries.length === 0) {
+          return `
+            <div style="text-align:center;padding:32px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
+              <i class="fa-solid fa-shield-heart" style="font-size:2rem;color:#10b981;margin-bottom:8px;"></i>
+              <div style="font-weight:700;">Không có ca mổ cấp cứu nào được ghi nhận trong kỳ báo cáo này.</div>
+            </div>
+          `;
+        }
+
+        return `
+          <div style="overflow-x:auto;">
+            <table class="monitoring-room-table">
+              <thead>
+                <tr>
+                  <th style="width:38px;">STT</th>
+                  <th style="width:100px;">Ngày</th>
+                  <th>Phòng</th>
+                  <th style="text-align:left;">Họ tên bệnh nhân</th>
+                  <th>Tuổi</th>
+                  <th>Giới tính</th>
+                  <th style="text-align:left;">Địa chỉ</th>
+                  <th>Ngày PT</th>
+                  <th style="text-align:left;min-width:200px;">Chẩn đoán</th>
+                  <th style="text-align:left;min-width:140px;">Kíp mổ / PTV</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${surgeries.map((c, idx) => `
+                  <tr>
+                    <td>${idx + 1}</td>
+                    <td style="font-weight:700;">
+                      <a href="javascript:void(0)" onclick="openDayBriefing('${c.dateKey}')" style="color:#0284c7;text-decoration:underline;">
+                        ${c.dateKey}
+                      </a>
+                    </td>
+                    <td><span style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.8rem;font-weight:700;">${c.roomName || c.roomKey || '--'}</span></td>
+                    <td style="text-align:left;font-weight:700;color:#0f172a;">${escapeHtml(c.hoten || '')}</td>
+                    <td>${c.tuoi || '--'}</td>
+                    <td>${c.gioiTinh || 'NAM'}</td>
+                    <td style="text-align:left;font-size:0.82rem;color:#475569;">${escapeHtml(c.diaChi || '--')}</td>
+                    <td style="font-weight:700;color:#dc2626;">${c.ngayPhauThuat || c.dateKey}</td>
+                    <td style="text-align:left;font-size:0.85rem;color:#0369a1;font-weight:700;">${escapeHtml(c.chanDoan || '')}</td>
+                    <td style="text-align:left;font-size:0.82rem;color:#334155;">${escapeHtml(c.kipMo || '--')}</td>
+                    <td>
+                      <button type="button" class="btn-sm-view-room" onclick="openDayBriefing('${c.dateKey}')" title="Xem chi tiết ca mổ và hình ảnh CT/MRI">
+                        Chi tiết <i class="fa-solid fa-angle-right"></i>
+                      </button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else if (activePeriodSubTab === 'fatalities') {
+        const fatalities = periodSummaryData.fatalitiesAndCritical || [];
+        if (fatalities.length === 0) {
+          return `
+            <div style="text-align:center;padding:32px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
+              <i class="fa-solid fa-circle-check" style="font-size:2rem;color:#10b981;margin-bottom:8px;"></i>
+              <div style="font-weight:700;color:#15803d;">Tuyệt vời! Không có ca tử vong hay bệnh nặng xin về nào trong kỳ báo cáo này.</div>
+            </div>
+          `;
+        }
+
+        return `
+          <div style="overflow-x:auto;">
+            <table class="monitoring-room-table">
+              <thead>
+                <tr>
+                  <th style="width:38px;">STT</th>
+                  <th style="width:100px;">Ngày</th>
+                  <th>Phòng</th>
+                  <th>Phân loại</th>
+                  <th style="text-align:left;">Họ tên bệnh nhân</th>
+                  <th>Tuổi</th>
+                  <th style="text-align:left;">Địa chỉ</th>
+                  <th>Ngày vào viện</th>
+                  <th>Ngày xin về / TV</th>
+                  <th style="text-align:left;min-width:200px;">Chẩn đoán</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${fatalities.map((c, idx) => {
+                  const isDeath = (c.category || '').toUpperCase().includes('TỬ VONG');
+                  const catBadge = isDeath
+                    ? `<span style="background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;padding:2px 8px;border-radius:6px;font-weight:800;font-size:0.78rem;">⚰️ TỬ VONG</span>`
+                    : `<span style="background:#ffedd5;color:#c2410c;border:1px solid #fed7aa;padding:2px 8px;border-radius:6px;font-weight:800;font-size:0.78rem;">🏠 NẶNG XIN VỀ</span>`;
+
+                  return `
+                    <tr style="background:${isDeath ? '#fef2f2' : '#ffffff'};">
+                      <td>${idx + 1}</td>
+                      <td style="font-weight:700;">
+                        <a href="javascript:void(0)" onclick="openDayBriefing('${c.dateKey}')" style="color:#0284c7;text-decoration:underline;">
+                          ${c.dateKey}
+                        </a>
+                      </td>
+                      <td><span style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:0.8rem;font-weight:700;">${c.roomName || c.roomKey || '--'}</span></td>
+                      <td>${catBadge}</td>
+                      <td style="text-align:left;font-weight:700;color:#0f172a;">${escapeHtml(c.hoten || '')}</td>
+                      <td>${c.tuoi || '--'}</td>
+                      <td style="text-align:left;font-size:0.82rem;color:#475569;">${escapeHtml(c.diaChi || '--')}</td>
+                      <td>${c.ngayVaoVien || '--'}</td>
+                      <td style="font-weight:700;color:#991b1b;">${c.ngayXinVe || c.dateKey}</td>
+                      <td style="text-align:left;font-size:0.85rem;color:#0369a1;font-weight:700;">${escapeHtml(c.chanDoan || '')}</td>
+                      <td>
+                        <button type="button" class="btn-sm-view-room" onclick="openDayBriefing('${c.dateKey}')" title="Xem hồ sơ ca này">
+                          Xem ca <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else {
+        // doctors
+        const docs = periodSummaryData.doctorDutySummary || [];
+        if (docs.length === 0) {
+          return `
+            <div style="text-align:center;padding:32px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
+              <div style="font-weight:700;">Chưa có dữ liệu thống kê trực bác sĩ trong kỳ này.</div>
+            </div>
+          `;
+        }
+
+        return `
+          <div style="overflow-x:auto;">
+            <table class="monitoring-room-table">
+              <thead>
+                <tr>
+                  <th style="width:45px;">STT</th>
+                  <th style="text-align:left;min-width:180px;">Bác sĩ trực</th>
+                  <th style="width:130px;">Tổng ca trực đêm</th>
+                  <th style="text-align:left;">Chi tiết các ngày trực (Bấm ngày để xem giao ban)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${docs.map((doc, idx) => `
+                  <tr>
+                    <td>${idx + 1}</td>
+                    <td style="text-align:left;font-weight:800;color:#0f172a;font-size:0.95rem;">
+                      <i class="fa-solid fa-user-doctor" style="color:#0284c7;margin-right:6px;"></i> ${escapeHtml(doc.name)}
+                    </td>
+                    <td>
+                      <span style="background:#e0f2fe;color:#0284c7;font-weight:900;font-size:1.15rem;padding:3px 12px;border-radius:8px;">
+                        ${doc.shifts}
+                      </span> ca
+                    </td>
+                    <td style="text-align:left;">
+                      ${(doc.dates || []).map(dt => `
+                        <span class="badge-doc-date" onclick="openDayBriefing('${dt}')" title="Mở báo cáo giao ban ngày ${dt}">
+                          📅 ${dt}
+                        </span>
+                      `).join('')}
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
     }
 
     function updateCaseField(caseId, field, val) {
