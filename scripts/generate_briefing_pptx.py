@@ -159,7 +159,7 @@ def generate_pptx_for_date(date_key, db_path, out_pptx_path):
             cp.alignment = PP_ALIGN.CENTER
 
     # =========================================================================
-    # SLIDES CHO TỪNG CA BỆNH TRỌNG ĐIỂM
+    # SLIDES CHO TỪNG CA BỆNH GIAO BAN
     # =========================================================================
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

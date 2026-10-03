@@ -55,6 +55,11 @@
       </div>
     </section>
 
+    <!-- WORKING STAFF LIVE LOG (Nhân sự đang làm việc với User Bác sĩ) -->
+    <div id="working-staff-banner" class="working-staff-banner">
+      <!-- Populated by app.js -->
+    </div>
+
     <!-- Main Card: Trạng thái & dòng thời gian -->
     <section class="timeline-card" aria-label="Trạng thái và dòng thời gian">
       <div class="timeline-header">
@@ -137,6 +142,7 @@
       <div class="modal-body">
         <input type="hidden" id="receive-target-doc-id" />
         <div class="receive-summary-line" id="receive-dialog-summary"></div>
+        <div class="receive-staff-line" id="receive-dialog-staff" style="font-size: 0.82rem; color: #0284c7; margin-bottom: 0.75rem; background: #f0f9ff; padding: 6px 10px; border-radius: 6px; border: 1px solid #bae6fd;"></div>
 
         <div class="time-form-row">
           <div class="time-field">
@@ -261,6 +267,7 @@
             <tr>
               <th>Bác sĩ</th>
               <th>Phòng / Trạng thái</th>
+              <th>Nhân sự thực hiện</th>
               <th>Giờ bắt đầu</th>
               <th>Giờ kết thúc</th>
               <th>Thời lượng</th>

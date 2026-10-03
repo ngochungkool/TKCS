@@ -1504,7 +1504,8 @@
     }
 
     // Cảnh báo BN đã từng bấm xoá nhưng vẫn còn trong file Excel HIS
-    const removedActivePatients = (tk1State.latestExcelMabns || [])
+    const isRemovedAlertDismissed = tk1State.dismissedRemovedAlert || sessionStorage.getItem('tk1_dismissed_removed_alert') === 'true';
+    const removedActivePatients = isRemovedAlertDismissed ? [] : (tk1State.latestExcelMabns || [])
       .map(m => tk1State.patientRecords[m])
       .filter(r => r && r.removed?.isRemoved);
     if (removedActivePatients.length > 0) {
@@ -1515,12 +1516,15 @@
               ⚠️ Có ${removedActivePatients.length} BN đã bấm xoá/chuyển nhưng vẫn còn tên trong file Excel HIS:
               ${removedActivePatients.map(p => `<strong>${p.hoten}</strong> (${p.removed.previousBed ? formatBedLabel(p.removed.previousBed) : 'Chưa giường'})`).join(', ')}
             </span>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;align-items:center;">
               ${removedActivePatients.map(p => `
                 <button type="button" class="btn-bed-mini" style="background:#fef08a;color:#713f12;border-color:#eab308;font-weight:700;" data-restore-removed-mabn="${p.mabn}">
                   🔄 Khôi phục [${p.hoten.split(' ').pop()}]
                 </button>
               `).join('')}
+              <button type="button" class="btn-bed-mini" id="btn-dismiss-removed-alert" style="background:#fee2e2;color:#991b1b;border-color:#fca5a5;font-weight:700;" title="Đóng thông báo này">
+                ✕ Đóng thông báo
+              </button>
             </div>
           </div>
         </div>
@@ -1648,6 +1652,15 @@
         }
       });
     });
+
+    const btnDismissRemoved = alertContainer.querySelector('#btn-dismiss-removed-alert');
+    if (btnDismissRemoved) {
+      btnDismissRemoved.addEventListener('click', () => {
+        tk1State.dismissedRemovedAlert = true;
+        sessionStorage.setItem('tk1_dismissed_removed_alert', 'true');
+        renderTk1Alerts();
+      });
+    }
 
     const btnReleaseAllMissing = document.getElementById('btn-release-all-missing-beds');
     if (btnReleaseAllMissing) {

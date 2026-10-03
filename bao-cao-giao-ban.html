@@ -1305,7 +1305,7 @@
 
       <!-- Action Buttons -->
       <div class="gb-actions-group">
-        <button type="button" class="btn-gb-action btn-gb-excel" onclick="downloadDailyExcel()" title="Tải file Excel (.xlsx) báo cáo giao ban ngày gồm 2 sheet: Tổng hợp 8 chỉ số & Ca trọng điểm">
+        <button type="button" class="btn-gb-action btn-gb-excel" onclick="downloadDailyExcel()" title="Tải file Excel (.xlsx) báo cáo giao ban ngày gồm 2 sheet: Tổng hợp 8 chỉ số & Ca giao ban">
           <i class="fa-solid fa-file-excel"></i> Tải Excel Ngày (.xlsx)
         </button>
         <button type="button" class="btn-gb-action btn-gb-pptx" onclick="downloadPowerPointFile()" title="Tải file PowerPoint (.pptx) chuẩn 16:9 với đầy đủ slide và ảnh CT/MRI">
@@ -1835,7 +1835,7 @@
 
       const cases = currentReport.highlightCases || [];
       cases.forEach((c, idx) => {
-        text += `${c.category || 'CA TRỌNG ĐIỂM'}\n`;
+        text += `${c.category || 'CA GIAO BAN'}\n`;
         text += `${c.stt || idx + 1}. ${c.hoten || ''}\t${c.tuoi || ''} tuổi\t${c.gioiTinh || 'NAM'}\n`;
         if (c.diaChi) text += `Địa chỉ: ${c.diaChi}\n`;
         if (c.ngayVaoVien) text += `Ngày vào viện : ${c.ngayVaoVien}\n`;
@@ -2033,12 +2033,12 @@
           </div>
         </div>
 
-        <!-- DANH SÁCH CA TRỌNG ĐIỂM BÁO CÁO GIAO BAN -->
+        <!-- DANH SÁCH CÁC CA BÁO CÁO GIAO BAN -->
         <div class="gb-card">
           <div class="gb-card-header">
             <div class="gb-card-title">
               <i class="fa-solid fa-hospital-user" style="color:#dc2626;"></i> 
-              DANH SÁCH CÁC CA TRỌNG ĐIỂM BÁO CÁO GIAO BAN (${highlightCases.length} ca)
+              DANH SÁCH CÁC CA BÁO CÁO GIAO BAN (${highlightCases.length} ca)
             </div>
             <div class="gb-actions-group">
               <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="openSelectPatientModal()">
@@ -2054,7 +2054,7 @@
         html += `
           <div style="text-align:center;padding:32px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
             <i class="fa-solid fa-circle-check" style="font-size:2rem;color:#10b981;margin-bottom:8px;"></i>
-            <div style="font-weight:700;">Chưa có ca trọng điểm nào cho ngày này.</div>
+            <div style="font-weight:700;">Chưa có ca báo cáo giao ban nào cho ngày này.</div>
           </div>
         `;
       } else {
@@ -2071,7 +2071,7 @@
               <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;">
                 <div class="case-group-banner">
                   <i class="fa-solid fa-folder-open"></i>
-                  <input type="text" style="font-family:'Times New Roman',serif;font-size:1.35rem;font-weight:900;color:#990000;border:1px dashed #cbd5e1;padding:2px 8px;border-radius:6px;width:380px;background:#fff;" value="${escapeHtml(c.category || 'CA TRỌNG ĐIỂM')}" onchange="updateCaseField('${c.id}', 'category', this.value)" />
+                  <input type="text" style="font-family:'Times New Roman',serif;font-size:1.35rem;font-weight:900;color:#990000;border:1px dashed #cbd5e1;padding:2px 8px;border-radius:6px;width:380px;background:#fff;" value="${escapeHtml(c.category || 'CA GIAO BAN')}" onchange="updateCaseField('${c.id}', 'category', this.value)" />
                 </div>
 
                 <div style="display:flex;align-items:center;gap:12px;">
@@ -3738,8 +3738,8 @@
                 <thead>
                   <tr>
                     <th style="width:38px;">STT</th>
-                    <th style="width:105px;">Ngày</th>
-                    <th style="width:85px;">Thứ</th>
+                    <th style="min-width:125px;width:125px;white-space:nowrap;">Ngày</th>
+                    <th style="width:85px;white-space:nowrap;">Thứ</th>
                     <th>Bệnh cũ</th>
                     <th style="color:#93c5fd;">Vào</th>
                     <th>Ra</th>
@@ -3749,7 +3749,7 @@
                     <th style="background:#0284c7;color:#ffffff;font-size:0.95rem;">Hiện có</th>
                     <th>BHYT</th>
                     <th style="text-align:left;min-width:180px;">Bác sĩ trực đêm</th>
-                    <th style="width:85px;">Ca T.Điểm</th>
+                    <th style="width:85px;white-space:nowrap;">Ca G.Ban</th>
                     <th style="width:90px;">Thao tác</th>
                   </tr>
                 </thead>
@@ -3760,35 +3760,35 @@
                   <tr style="background:#f1f5f9;">
                     <td colspan="3" style="text-align:center;color:#0284c7;font-weight:900;">TỔNG CỘNG TRONG KỲ</td>
                     <td>-</td>
-                    <td style="color:#2563eb;font-weight:900;">${totals.totalVao || 0}</td>
-                    <td style="font-weight:900;">${totals.totalRa || 0}</td>
-                    <td style="color:${(totals.totalTuVong || 0) > 0 ? '#dc2626' : '#0f172a'};font-weight:900;">${totals.totalTuVong || 0}</td>
-                    <td style="font-weight:900;">${totals.totalChuyen || 0}</td>
-                    <td style="color:#dc2626;font-weight:900;">${totals.totalMo || 0}</td>
+                    <td style="color:#2563eb;font-weight:900;">${totals.totalVao}</td>
+                    <td style="font-weight:900;">${totals.totalRa}</td>
+                    <td style="color:${totals.totalTuVong !== '-' && Number(totals.totalTuVong) > 0 ? '#dc2626' : '#0f172a'};font-weight:900;">${totals.totalTuVong}</td>
+                    <td style="font-weight:900;">${totals.totalChuyen}</td>
+                    <td style="color:#dc2626;font-weight:900;">${totals.totalMo}</td>
                     <td style="background:#e0f2fe;color:#0369a1;font-weight:900;">-</td>
                     <td>-</td>
-                    <td style="text-align:left;font-size:0.8rem;color:#64748b;">${days.length} ngày tổng kết</td>
+                    <td style="text-align:left;font-size:0.8rem;color:#64748b;">${s.validDaysCount || 0}/${days.length} ngày có dữ liệu</td>
                     <td style="font-weight:900;">${emergencySurgeries.length + fatalitiesAndCritical.length}</td>
                     <td>-</td>
                   </tr>
                   <tr style="background:#e2e8f0;">
                     <td colspan="3" style="text-align:center;color:#334155;font-weight:900;">TRUNG BÌNH MỖI NGÀY</td>
                     <td>-</td>
-                    <td style="font-weight:900;color:#2563eb;">${averages.avgVao || 0}</td>
-                    <td style="font-weight:900;">${averages.avgRa || 0}</td>
-                    <td>${Math.round(((totals.totalTuVong || 0) / Math.max(1, days.length)) * 10) / 10}</td>
+                    <td style="font-weight:900;color:#2563eb;">${averages.avgVao}</td>
+                    <td style="font-weight:900;">${averages.avgRa}</td>
+                    <td>${totals.totalTuVong !== '-' ? (Math.round((Number(totals.totalTuVong) / Math.max(1, s.validDaysCount || 1)) * 10) / 10) : '-'}</td>
                     <td>-</td>
-                    <td style="font-weight:900;color:#dc2626;">${averages.avgMo || 0}</td>
-                    <td style="background:#bae6fd;color:#0369a1;font-size:1.15rem;font-weight:900;">${averages.avgHienCo || 0}</td>
+                    <td style="font-weight:900;color:#dc2626;">${averages.avgMo}</td>
+                    <td style="background:#bae6fd;color:#0369a1;font-size:1.15rem;font-weight:900;">${averages.avgHienCo}</td>
                     <td>-</td>
-                    <td colspan="3" style="font-size:0.8rem;color:#475569;text-align:center;">Công suất buồng bệnh duy trì ổn định</td>
+                    <td colspan="3">-</td>
                   </tr>
                 </tfoot>
               </table>
             </div>
           </div>
 
-          <!-- 3 CHUYÊN ĐỀ THEO KỲ: MỔ CẤP CỨU | TỬ VONG & XIN VỀ | LỊCH TRỰC BS -->
+          <!-- 3 CHUYÊN ĐỀ THEO KỲ: MỔ CẤP CỨU | TỬ VONG & XIN VỀ | LỊCH TRỰC THEO NGÀY -->
           <div class="gb-card">
             <div class="period-subtabs-nav">
               <button type="button" class="period-subtab-btn ${activePeriodSubTab === 'surgeries' ? 'active' : ''}" onclick="switchPeriodSubTab('surgeries')">
@@ -3798,7 +3798,7 @@
                 <i class="fa-solid fa-triangle-exclamation" style="color:#991b1b;"></i> Tử Vong & Nặng Xin Về (${fatalitiesAndCritical.length})
               </button>
               <button type="button" class="period-subtab-btn ${activePeriodSubTab === 'doctors' ? 'active' : ''}" onclick="switchPeriodSubTab('doctors')">
-                <i class="fa-solid fa-user-doctor" style="color:#0284c7;"></i> Lịch Trực & Ca Trực Bác Sĩ (${doctorDutySummary.length})
+                <i class="fa-solid fa-calendar-days" style="color:#0284c7;"></i> Lịch Trực Theo Ngày (${days.filter(d => d.hasData && d.doctorsOnDuty !== '-').length}/${days.length})
               </button>
             </div>
 
@@ -3819,37 +3819,39 @@
 
       return days.map((d, idx) => {
         const isCurrentActive = d.dateKey === currentDateKey;
-        const hasDeath = Number(d.tuVong || 0) > 0;
+        const hasDeath = d.hasData && Number(d.tuVong || 0) > 0;
         const rowClass = hasDeath ? 'matrix-row-danger' : (isCurrentActive ? 'matrix-row-today' : '');
 
         return `
-          <tr class="${rowClass}">
+          <tr class="${rowClass}" style="${!d.hasData ? 'color:#94a3b8;background:#fafafa;' : ''}">
             <td style="color:#64748b;">${idx + 1}</td>
-            <td style="font-weight:700;">
-              <a href="javascript:void(0)" onclick="openDayBriefing('${d.dateKey}')" title="Mở chi tiết báo cáo giao ban ngày này" style="color:#0284c7;text-decoration:underline;">
-                ${d.dateKey}
-              </a>
+            <td style="font-weight:700;white-space:nowrap;min-width:125px;">
+              ${d.hasData 
+                ? `<a href="javascript:void(0)" onclick="openDayBriefing('${d.dateKey}')" title="Mở chi tiết báo cáo giao ban ngày này" style="color:#0284c7;text-decoration:underline;">${d.dateKey}</a>`
+                : `<span style="color:#94a3b8;">${d.dateKey}</span>`
+              }
             </td>
-            <td style="font-size:0.83rem;color:#475569;">${d.dayName}</td>
-            <td>${d.benhCu || 0}</td>
-            <td style="color:#2563eb;font-weight:700;">${d.vao || 0}</td>
-            <td>${d.ra || 0}</td>
-            <td style="font-weight:800;color:${hasDeath ? '#dc2626' : '#64748b'};">${d.tuVong || 0}</td>
-            <td>${d.chuyen || 0}</td>
-            <td style="color:#dc2626;font-weight:700;">${d.mo || 0}</td>
-            <td style="background:#e0f2fe;color:#0369a1;font-weight:800;font-size:1.05rem;">${d.hienCo || 0}</td>
-            <td>${d.bhyt || 0}</td>
-            <td style="text-align:left;font-size:0.83rem;color:#334155;">${escapeHtml(d.doctorsOnDuty || '--')}</td>
+            <td style="font-size:0.83rem;color:#475569;white-space:nowrap;">${d.dayName}</td>
+            <td>${d.benhCu}</td>
+            <td style="${d.vao !== '-' ? 'color:#2563eb;font-weight:700;' : ''}">${d.vao}</td>
+            <td>${d.ra}</td>
+            <td style="${hasDeath ? 'font-weight:800;color:#dc2626;' : ''}">${d.tuVong}</td>
+            <td>${d.chuyen}</td>
+            <td style="${d.mo !== '-' ? 'color:#dc2626;font-weight:700;' : ''}">${d.mo}</td>
+            <td style="${d.hienCo !== '-' ? 'background:#e0f2fe;color:#0369a1;font-weight:800;font-size:1.05rem;' : ''}">${d.hienCo}</td>
+            <td>${d.bhyt}</td>
+            <td style="text-align:left;font-size:0.83rem;color:${d.hasData && d.doctorsOnDuty !== '-' ? '#334155' : '#94a3b8'};white-space:nowrap;">${escapeHtml(d.doctorsOnDuty)}</td>
             <td>
-              ${d.highlightCount > 0 
+              ${d.highlightCount !== '-' && Number(d.highlightCount) > 0 
                 ? `<span style="background:#fee2e2;color:#b91c1c;padding:2px 7px;border-radius:6px;font-weight:700;font-size:0.8rem;">${d.highlightCount} ca</span>`
-                : `<span style="color:#94a3b8;font-size:0.8rem;">0</span>`
+                : (d.hasData ? `<span style="color:#94a3b8;font-size:0.8rem;">0</span>` : `-`)
               }
             </td>
             <td>
-              <button type="button" class="btn-sm-view-room" onclick="openDayBriefing('${d.dateKey}')" title="Mở báo cáo & trình chiếu slide ngày này">
-                Xem ngày <i class="fa-solid fa-arrow-right"></i>
-              </button>
+              ${d.hasData 
+                ? `<button type="button" class="btn-sm-view-room" onclick="openDayBriefing('${d.dateKey}')" title="Mở báo cáo & trình chiếu slide ngày này">Xem ngày <i class="fa-solid fa-arrow-right"></i></button>`
+                : `<span style="color:#94a3b8;font-size:0.8rem;">-</span>`
+              }
             </td>
           </tr>
         `;
@@ -3992,12 +3994,12 @@
           </div>
         `;
       } else {
-        // doctors
-        const docs = periodSummaryData.doctorDutySummary || [];
-        if (docs.length === 0) {
+        // Lịch trực tổng hợp theo ngày (không theo bác sĩ)
+        const days = periodSummaryData.days || [];
+        if (days.length === 0) {
           return `
             <div style="text-align:center;padding:32px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
-              <div style="font-weight:700;">Chưa có dữ liệu thống kê trực bác sĩ trong kỳ này.</div>
+              <div style="font-weight:700;">Chưa có dữ liệu lịch trực trong kỳ này.</div>
             </div>
           `;
         }
@@ -4008,32 +4010,50 @@
               <thead>
                 <tr>
                   <th style="width:45px;">STT</th>
-                  <th style="text-align:left;min-width:180px;">Bác sĩ trực</th>
-                  <th style="width:130px;">Tổng ca trực đêm</th>
-                  <th style="text-align:left;">Chi tiết các ngày trực (Bấm ngày để xem giao ban)</th>
+                  <th style="min-width:130px;width:130px;white-space:nowrap;">Ngày</th>
+                  <th style="width:90px;white-space:nowrap;">Thứ</th>
+                  <th style="text-align:left;min-width:240px;">Bác sĩ trực ca đêm</th>
+                  <th style="width:130px;text-align:center;">Trạng thái</th>
+                  <th style="width:105px;text-align:center;">Thao tác</th>
                 </tr>
               </thead>
               <tbody>
-                ${docs.map((doc, idx) => `
-                  <tr>
-                    <td>${idx + 1}</td>
-                    <td style="text-align:left;font-weight:800;color:#0f172a;font-size:0.95rem;">
-                      <i class="fa-solid fa-user-doctor" style="color:#0284c7;margin-right:6px;"></i> ${escapeHtml(doc.name)}
-                    </td>
-                    <td>
-                      <span style="background:#e0f2fe;color:#0284c7;font-weight:900;font-size:1.15rem;padding:3px 12px;border-radius:8px;">
-                        ${doc.shifts}
-                      </span> ca
-                    </td>
-                    <td style="text-align:left;">
-                      ${(doc.dates || []).map(dt => `
-                        <span class="badge-doc-date" onclick="openDayBriefing('${dt}')" title="Mở báo cáo giao ban ngày ${dt}">
-                          📅 ${dt}
-                        </span>
-                      `).join('')}
-                    </td>
-                  </tr>
-                `).join('')}
+                ${days.map((d, idx) => {
+                  const hasDoctor = d.hasData && d.doctorsOnDuty && d.doctorsOnDuty !== '-';
+                  return `
+                    <tr style="${!d.hasData ? 'background:#fafafa;color:#94a3b8;' : ''}">
+                      <td>${idx + 1}</td>
+                      <td style="font-weight:700;white-space:nowrap;">
+                        ${d.hasData 
+                          ? `<a href="javascript:void(0)" onclick="openDayBriefing('${d.dateKey}')" style="color:#0284c7;text-decoration:underline;">${d.dateKey}</a>`
+                          : `<span>${d.dateKey}</span>`
+                        }
+                      </td>
+                      <td style="font-size:0.85rem;color:#475569;white-space:nowrap;">${d.dayName}</td>
+                      <td style="text-align:left;font-weight:700;color:${hasDoctor ? '#0f172a' : '#94a3b8'};">
+                        ${hasDoctor 
+                          ? `<i class="fa-solid fa-user-doctor" style="color:#0284c7;margin-right:6px;"></i> ${escapeHtml(d.doctorsOnDuty)}`
+                          : '-'
+                        }
+                      </td>
+                      <td style="text-align:center;">
+                        ${d.hasData 
+                          ? `<span style="background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:6px;font-size:0.8rem;font-weight:700;">Đã có báo cáo</span>`
+                          : (d.isFuture 
+                            ? `<span style="background:#f1f5f9;color:#94a3b8;padding:2px 8px;border-radius:6px;font-size:0.8rem;">Chưa đến ngày</span>`
+                            : `<span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:6px;font-size:0.8rem;">Chưa nhập</span>`
+                          )
+                        }
+                      </td>
+                      <td style="text-align:center;">
+                        ${d.hasData 
+                          ? `<button type="button" class="btn-sm-view-room" onclick="openDayBriefing('${d.dateKey}')">Xem ngày <i class="fa-solid fa-arrow-right"></i></button>`
+                          : '-'
+                        }
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
               </tbody>
             </table>
           </div>
@@ -4414,7 +4434,7 @@
         const c = slide.data;
         viewport.innerHTML = `
           <div class="slide-patient-box">
-            <div class="slide-pt-category">${escapeHtml(c.category || 'CA TRỌNG ĐIỂM')}</div>
+            <div class="slide-pt-category">${escapeHtml(c.category || 'CA GIAO BAN')}</div>
             <div class="slide-pt-name-row">
               <span>${c.stt || 1}. ${escapeHtml(c.hoten || '')}</span>
               <span>${c.tuoi || ''} tuổi</span>
@@ -4548,7 +4568,7 @@
 
       let casesRowsHtml = '';
       if (highlightCases.length === 0) {
-        casesRowsHtml = `<tr><td colspan="10" style="text-align:center;padding:12px;font-style:italic;">Không có ca trọng điểm nào được ghi nhận trong ngày.</td></tr>`;
+        casesRowsHtml = `<tr><td colspan="10" style="text-align:center;padding:12px;font-style:italic;">Không có ca giao ban nào được ghi nhận trong ngày.</td></tr>`;
       } else {
         casesRowsHtml = highlightCases.map((c, idx) => `
           <tr>
@@ -4557,7 +4577,7 @@
             <td style="text-align:center;">${c.tuoi || ''}T / ${c.gioiTinh || 'NAM'}</td>
             <td style="text-align:left;font-size:9pt;">${escapeHtml(c.diaChi || 'Gia Lai')}</td>
             <td style="text-align:center;font-weight:bold;font-size:9pt;">${escapeHtml(c.roomName || c.roomKey || '--')}</td>
-            <td style="text-align:left;font-weight:bold;font-size:9pt;">${escapeHtml(c.category || 'CA TRỌNG ĐIỂM')}</td>
+            <td style="text-align:left;font-weight:bold;font-size:9pt;">${escapeHtml(c.category || 'CA GIAO BAN')}</td>
             <td style="text-align:center;font-size:9pt;font-weight:bold;color:#000;">${escapeHtml(c.ngayPhauThuat || c.ngayXinVe || c.ngayVaoVien || '--')}</td>
             <td style="text-align:left;font-size:9pt;">${escapeHtml(c.kipMo || '--')}</td>
             <td style="text-align:left;font-size:9.5pt;font-weight:bold;">${escapeHtml(c.chanDoan || '')}</td>
@@ -4666,9 +4686,9 @@
             </tbody>
           </table>
 
-          <!-- PHẦN III: DANH SÁCH BỆNH NHÂN TRỌNG ĐIỂM -->
+          <!-- PHẦN III: DANH SÁCH BỆNH NHÂN GIAO BAN -->
           <div style="font-size:10.5pt; font-weight:bold; margin-bottom:4px; text-transform:uppercase;">
-            III. DANH SÁCH BỆNH NHÂN TRỌNG ĐIỂM (MỔ CẤP CỨU / THEO DÕI / XIN VỀ / TỬ VONG)
+            III. DANH SÁCH BỆNH NHÂN GIAO BAN (MỔ CẤP CỨU / THEO DÕI / XIN VỀ / TỬ VONG)
           </div>
           <table class="print-table" style="margin-bottom:14px;">
             <thead>

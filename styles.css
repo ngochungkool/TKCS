@@ -4100,3 +4100,143 @@ body {
   text-decoration: underline;
 }
 
+/* ==========================================================================
+   WORKING STAFF ACTIVITY BANNER & TIMELINE STAFF INFO
+   ========================================================================== */
+.working-staff-banner {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--brand-blue);
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.staff-banner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.staff-banner-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.staff-banner-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.staff-activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 0.45rem;
+}
+
+.staff-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.42rem 0.7rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.staff-activity-item.is-active {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #14532d;
+}
+
+.staff-activity-item.is-finished {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+
+.staff-activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.staff-activity-dot.dot-active {
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+.staff-activity-dot.dot-finished {
+  background: #94a3b8;
+}
+
+.staff-activity-text {
+  flex: 1;
+}
+
+.staff-empty-hint {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-style: italic;
+  padding: 0.1rem 0;
+}
+
+/* Col 1 Staff Info Line */
+.doc-staff-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  margin-top: 0.18rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  line-height: 1.25;
+}
+
+.doc-staff-info.active {
+  background: #eff6ff;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.doc-staff-info.finished {
+  background: #f8fafc;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+/* Col 2 Concise Time Subtext */
+.status-subtext.time-concise {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0284c7;
+  letter-spacing: 0.01em;
+}
+
+.status-subtext.time-unavailable {
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+

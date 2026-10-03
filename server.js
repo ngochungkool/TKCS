@@ -805,12 +805,16 @@ const server = http.createServer(async (req, res) => {
 
   // POST receive user (or report surgery for 1 or multiple doctors with custom startMin & optional endMin)
   if (req.method === 'POST' && pathname === '/api/receive') {
-    const { docIds, docId, roomName, startMin, endMin } = await readBody(req);
+    const { docIds, docId, roomName, startMin, endMin, staffName, staffRole } = await readBody(req);
     const nowMin = getNowEpochMinutes();
     const targetIds = Array.isArray(docIds) ? docIds : [docId];
 
     const actualStart = typeof startMin === 'number' ? startMin : nowMin;
     const actualEnd = typeof endMin === 'number' && endMin > actualStart ? endMin : null;
+
+    const authUser = getAuthUser(req);
+    const finalStaffName = (staffName && String(staffName).trim()) || authUser?.fullName || null;
+    const finalStaffRole = (staffRole && String(staffRole).trim()) || authUser?.roleTitle || authUser?.role || 'Điều dưỡng';
 
     const assignedNames = [];
 
@@ -847,15 +851,19 @@ const server = http.createServer(async (req, res) => {
         startMin: actualStart,
         endMin: actualEnd,
         lastConfirmedMin: actualStart,
-        warnedAtMin: null
+        warnedAtMin: null,
+        receivedBy: finalStaffName,
+        receivedRole: finalStaffRole,
+        receivedAt: new Date().toISOString()
       });
       assignedNames.push(doc.shortName || doc.name);
     }
 
+    const staffPrefix = finalStaffName ? `[${finalStaffRole} ${finalStaffName}] ` : '';
     broadcastState(
       roomName === 'Đang mổ'
-        ? `🩺 Đã báo mổ cho BS: ${assignedNames.join(', ')}`
-        : `✅ Phòng [${roomName}] đã nhận User BS ${assignedNames.join(', ')}`
+        ? `🩺 ${staffPrefix}Đã báo mổ cho BS: ${assignedNames.join(', ')}`
+        : `✅ ${staffPrefix}Phòng [${roomName}] đã nhận User BS ${assignedNames.join(', ')}`
     );
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, db }));
@@ -864,7 +872,7 @@ const server = http.createServer(async (req, res) => {
 
   // POST release user (Enforces: ONLY the room that received the user can release it!)
   if (req.method === 'POST' && pathname === '/api/release') {
-    const { docId, requestRoomName } = await readBody(req);
+    const { docId, requestRoomName, staffName, staffRole } = await readBody(req);
     const nowMin = getNowEpochMinutes();
     const doc = db.doctors.find((d) => d.id === docId);
     const active = doc && getActiveUsageAt(doc, nowMin);
@@ -887,10 +895,19 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    const authUser = getAuthUser(req);
+    const finalStaffName = (staffName && String(staffName).trim()) || authUser?.fullName || null;
+    const finalStaffRole = (staffRole && String(staffRole).trim()) || authUser?.roleTitle || authUser?.role || 'Điều dưỡng';
+
     active.endMin = Math.max(active.startMin + 1, nowMin);
     active.releasedEarly = true;
     active.warnedAtMin = null;
-    broadcastState(`🔓 [${active.roomName}] đã trả User BS ${doc.shortName || doc.name}`);
+    active.releasedBy = finalStaffName;
+    active.releasedRole = finalStaffRole;
+    active.releasedAt = new Date().toISOString();
+
+    const staffPrefix = finalStaffName ? `[${finalStaffRole} ${finalStaffName}] ` : '';
+    broadcastState(`🔓 ${staffPrefix}[${active.roomName}] đã trả User BS ${doc.shortName || doc.name}`);
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, db }));
@@ -2699,9 +2716,9 @@ const server = http.createServer(async (req, res) => {
     ];
     XLSX.utils.book_append_sheet(wb, ws1, 'Tong_Hop_Giao_Ban');
 
-    // Sheet 2: Ca_Trong_Diem
+    // Sheet 2: Ca_Giao_Ban
     const rows2 = [
-      [`DANH SÁCH CA TRỌNG ĐIỂM BÁO CÁO GIAO BAN - NGÀY ${dateKey}`],
+      [`DANH SÁCH CÁC CA BÁO CÁO GIAO BAN - NGÀY ${dateKey}`],
       [],
       ['STT', 'Phân loại / Nhóm', 'Phòng', 'Họ và tên', 'Tuổi', 'Giới tính', 'Địa chỉ', 'Ngày vào viện', 'Ngày PT / Xin về', 'Chẩn đoán', 'Kíp mổ / PTV', 'Diễn biến ca trực', 'Ý kiến BS trực']
     ];
@@ -2740,13 +2757,14 @@ const server = http.createServer(async (req, res) => {
       { wch: 35 },
       { wch: 30 }
     ];
-    XLSX.utils.book_append_sheet(wb, ws2, 'Ca_Trong_Diem');
+    XLSX.utils.book_append_sheet(wb, ws2, 'Ca_Giao_Ban');
 
     return XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
   }
 
   function getBriefingPeriodSummary(startDate, endDate, periodLabel) {
     const dateKeys = getDateRangeKeys(startDate, endDate);
+    const todayKey = getDateKey(new Date());
     const days = [];
     const emergencySurgeries = [];
     const fatalitiesAndCritical = [];
@@ -2754,13 +2772,36 @@ const server = http.createServer(async (req, res) => {
 
     let sumBenhCu = 0, sumVao = 0, sumRa = 0, sumTuVong = 0, sumChuyen = 0, sumMo = 0, sumHienCo = 0, sumBhyt = 0;
     let sumMoCC = 0, sumMoCT = 0;
+    let validDaysCount = 0;
 
     for (const dk of dateKeys) {
-      let rep = (db.briefingReports && db.briefingReports[dk]) ? db.briefingReports[dk] : null;
-      if (!rep) {
-        rep = getOrBuildBriefingReport(dk);
+      const isFuture = dk > todayKey;
+      const hasActualReport = Boolean(db.briefingReports && db.briefingReports[dk]);
+
+      // Những ngày chưa tới hoặc không có dữ liệu: mặc định là '-', không tự động điền
+      if (isFuture || !hasActualReport) {
+        days.push({
+          dateKey: dk,
+          dayName: getDayNameVN(dk),
+          benhCu: '-',
+          vao: '-',
+          ra: '-',
+          tuVong: '-',
+          chuyen: '-',
+          mo: '-',
+          moCC: '-',
+          moCT: '-',
+          hienCo: '-',
+          bhyt: '-',
+          doctorsOnDuty: '-',
+          highlightCount: '-',
+          hasData: false,
+          isFuture
+        });
+        continue;
       }
 
+      const rep = db.briefingReports[dk];
       const ov = (rep && rep.overall) || {};
       const gc = ov.grandCensus || {};
       const hlCases = (rep && rep.highlightCases) || [];
@@ -2786,6 +2827,7 @@ const server = http.createServer(async (req, res) => {
       sumMoCT += valMoCT;
       sumHienCo += valHienCo;
       sumBhyt += valBhyt;
+      validDaysCount++;
 
       const docsDuty = Array.isArray(ov.doctorsOnDuty) ? ov.doctorsOnDuty : [];
       docsDuty.forEach(docName => {
@@ -2828,29 +2870,31 @@ const server = http.createServer(async (req, res) => {
         moCT: valMoCT,
         hienCo: valHienCo,
         bhyt: valBhyt,
-        doctorsOnDuty: docsDuty.join(' – '),
+        doctorsOnDuty: docsDuty.join(' – ') || '-',
         highlightCount: hlCases.length,
-        hasData: Boolean(db.briefingReports && db.briefingReports[dk])
+        hasData: true,
+        isFuture: false
       });
     }
 
-    const daysCount = Math.max(1, dateKeys.length);
+    const divisor = Math.max(1, validDaysCount);
     const averages = {
-      avgHienCo: Math.round((sumHienCo / daysCount) * 10) / 10,
-      avgVao: Math.round((sumVao / daysCount) * 10) / 10,
-      avgRa: Math.round((sumRa / daysCount) * 10) / 10,
-      avgMo: Math.round((sumMo / daysCount) * 10) / 10
+      avgHienCo: validDaysCount > 0 ? Math.round((sumHienCo / divisor) * 10) / 10 : '-',
+      avgVao: validDaysCount > 0 ? Math.round((sumVao / divisor) * 10) / 10 : '-',
+      avgRa: validDaysCount > 0 ? Math.round((sumRa / divisor) * 10) / 10 : '-',
+      avgMo: validDaysCount > 0 ? Math.round((sumMo / divisor) * 10) / 10 : '-'
     };
 
     const totals = {
-      totalVao: sumVao,
-      totalRa: sumRa,
-      totalTuVong: sumTuVong,
-      totalChuyen: sumChuyen,
-      totalMo: sumMo,
-      totalMoCC: sumMoCC,
-      totalMoCT: sumMoCT,
-      daysCount
+      totalVao: validDaysCount > 0 ? sumVao : '-',
+      totalRa: validDaysCount > 0 ? sumRa : '-',
+      totalTuVong: validDaysCount > 0 ? sumTuVong : '-',
+      totalChuyen: validDaysCount > 0 ? sumChuyen : '-',
+      totalMo: validDaysCount > 0 ? sumMo : '-',
+      totalMoCC: validDaysCount > 0 ? sumMoCC : '-',
+      totalMoCT: validDaysCount > 0 ? sumMoCT : '-',
+      validDaysCount,
+      daysCount: dateKeys.length
     };
 
     const doctorDutySummary = Object.values(doctorDutyCount).sort((a, b) => b.shifts - a.shifts);
@@ -2862,6 +2906,7 @@ const server = http.createServer(async (req, res) => {
       days,
       totals,
       averages,
+      validDaysCount,
       emergencySurgeries,
       fatalitiesAndCritical,
       doctorDutySummary
@@ -2876,7 +2921,7 @@ const server = http.createServer(async (req, res) => {
       ['BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI - KHOA NGOẠI THẦN KINH - CỘT SỐNG'],
       [`BÁO CÁO TỔNG HỢP SỐ LIỆU GIAO BAN (${summary.periodLabel})`],
       [],
-      ['STT', 'Ngày', 'Thứ', 'Bệnh cũ', 'Vào', 'Ra', 'Tử vong', 'Chuyển', 'Mổ', 'Hiện có', 'Bảo hiểm', 'BS Trực đêm', 'Số ca trọng điểm']
+      ['STT', 'Ngày', 'Thứ', 'Bệnh cũ', 'Vào', 'Ra', 'Tử vong', 'Chuyển', 'Mổ', 'Hiện có', 'Bảo hiểm', 'BS Trực đêm', 'Số ca giao ban']
     ];
 
     summary.days.forEach((d, idx) => {

@@ -59,6 +59,15 @@ function formatDateVN(epochMin) {
   return `${dd}/${mm}/${yyyy}`;
 }
 
+function getCurrentStaffAuth() {
+  const authUser = (window.TKCSAuth && window.TKCSAuth.getUser && window.TKCSAuth.getUser()) ||
+                   JSON.parse(localStorage.getItem('auth_user') || 'null');
+  return {
+    staffName: authUser?.fullName || '',
+    staffRole: authUser?.roleTitle || authUser?.role || 'Điều dưỡng'
+  };
+}
+
 function getDateKey(dateObj) {
   const yyyy = dateObj.getFullYear();
   const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -452,6 +461,91 @@ function renderTimeAxisHeader(windowStart, windowEnd, nowMin) {
   axisEl.innerHTML = ticks.map((tMin) => `<div class="time-tick-label">${formatHHMM(tMin)}</div>`).join('');
 }
 
+// Render Live Working Staff Activity Banner
+function renderWorkingStaffBanner() {
+  const container = document.getElementById('working-staff-banner');
+  if (!container) return;
+
+  const nowMin = getNowEpochMinutes();
+  const activeEntries = [];
+  const recentEntries = [];
+
+  for (const doc of dbState.doctors || []) {
+    const active = getActiveUsage(doc);
+    if (active) {
+      activeEntries.push({ doc, usage: active });
+    }
+
+    const finished = (doc.usages || []).filter((u) => u.endMin !== null && !isUsageActiveAt(u, nowMin));
+    for (const f of finished) {
+      recentEntries.push({ doc, usage: f });
+    }
+  }
+
+  // Sort recent entries newest first
+  recentEntries.sort((a, b) => (b.usage.endMin || 0) - (a.usage.endMin || 0));
+
+  let itemsHtml = '';
+
+  if (activeEntries.length > 0) {
+    itemsHtml += activeEntries
+      .map(({ doc, usage }) => {
+        const staffRole = usage.receivedRole || 'Điều dưỡng';
+        const staffName = usage.receivedBy || 'chưa ghi danh';
+        const endStr = usage.endMin !== null ? ` (dự kiến đến ${formatHHMM(usage.endMin)})` : ' (Đang làm việc)';
+        return `
+          <div class="staff-activity-item is-active">
+            <span class="staff-activity-dot dot-active"></span>
+            <div class="staff-activity-text">
+              <b>${staffRole} ${staffName}</b> đã nhận user <b>BS ${doc.shortName || doc.name}</b> vào <b>${usage.roomName}</b> lúc <b>${formatHHMM(usage.startMin)}</b>${endStr}
+            </div>
+          </div>
+        `;
+      })
+      .join('');
+  }
+
+  const recentSlice = recentEntries.slice(0, activeEntries.length > 0 ? 3 : 5);
+  if (recentSlice.length > 0) {
+    itemsHtml += recentSlice
+      .map(({ doc, usage }) => {
+        const recRole = usage.receivedRole || 'Điều dưỡng';
+        const recName = usage.receivedBy || 'chưa ghi danh';
+        const relRole = usage.releasedRole || recRole;
+        const relName = usage.releasedBy || recName;
+        const byReleasedStr = usage.releasedBy && usage.releasedBy !== usage.receivedBy ? ` (bởi ${relRole} ${relName})` : '';
+        return `
+          <div class="staff-activity-item is-finished">
+            <span class="staff-activity-dot dot-finished"></span>
+            <div class="staff-activity-text">
+              <b>${recRole} ${recName}</b> đã nhận user <b>BS ${doc.shortName || doc.name}</b> vào <b>${usage.roomName}</b> lúc <b>${formatHHMM(usage.startMin)}</b> — Trả lúc <b>${formatHHMM(usage.endMin)}</b>${byReleasedStr}
+            </div>
+          </div>
+        `;
+      })
+      .join('');
+  }
+
+  if (!itemsHtml) {
+    itemsHtml = `<div class="staff-empty-hint">ℹ️ Chưa có phiên nhận User Bác sĩ nào được ghi nhận. Tất cả tài khoản đang ở trạng thái sẵn sàng.</div>`;
+  }
+
+  container.innerHTML = `
+    <div class="staff-banner-header">
+      <div class="staff-banner-title">
+        <i class="fa-solid fa-users-viewfinder"></i>
+        <span>Nhật ký nhân sự đang làm việc với User Bác sĩ</span>
+      </div>
+      <span class="staff-banner-badge">
+        ${activeEntries.length > 0 ? `🟢 ${activeEntries.length} Bác sĩ đang sử dụng` : '⚪ Tất cả User sẵn sàng'}
+      </span>
+    </div>
+    <div class="staff-activity-grid">
+      ${itemsHtml}
+    </div>
+  `;
+}
+
 // Render Timeline Rows (Sorted by Rule 6: Available first -> Doctors of selectedRoomName first -> Seniority 1..14)
 function renderTimelineRows() {
   const { nowMin, windowStart, windowEnd, duration } = getTimelineWindow();
@@ -473,6 +567,32 @@ function renderTimelineRows() {
       const shiftInfo = getDoctorShiftInfoAtMinute(doc, nowMin);
       const isRoomMatch = doc.assignedRoom === selectedRoomName;
 
+      // Find most recent finished usage
+      const finishedUsages = (doc.usages || []).filter((u) => u.endMin !== null && !isUsageActiveAt(u, nowMin));
+      finishedUsages.sort((a, b) => (b.endMin || 0) - (a.endMin || 0));
+      const recentUsage = finishedUsages[0];
+
+      let staffInfoHtml = '';
+      if (activeUsage) {
+        const staffName = activeUsage.receivedBy || 'chưa ghi danh';
+        const staffRole = activeUsage.receivedRole || 'ĐD';
+        staffInfoHtml = `
+          <div class="doc-staff-info active" title="Nhân sự đang sử dụng">
+            <i class="fa-solid fa-user-check"></i>
+            <span><b>${staffRole} ${staffName}</b> nhận vào <b>${activeUsage.roomName}</b> lúc <b>${formatHHMM(activeUsage.startMin)}</b></span>
+          </div>
+        `;
+      } else if (recentUsage) {
+        const recStaff = recentUsage.receivedBy ? `${recentUsage.receivedRole || 'ĐD'} ${recentUsage.receivedBy}` : 'ĐD';
+        const relStaff = recentUsage.releasedBy ? `${recentUsage.releasedRole || 'ĐD'} ${recentUsage.releasedBy}` : recStaff;
+        staffInfoHtml = `
+          <div class="doc-staff-info finished" title="Lần sử dụng gần nhất">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>${recStaff} nhận ${formatHHMM(recentUsage.startMin)} · Trả lúc <b>${formatHHMM(recentUsage.endMin)}</b></span>
+          </div>
+        `;
+      }
+
       let statusBadgeHtml = '';
       let statusSubHtml = '';
       let actionBtnHtml = '';
@@ -482,12 +602,8 @@ function renderTimelineRows() {
         const isSameRoomOwner = selectedRoomName === activeUsage.roomName;
         const endStr = activeUsage.endMin !== null ? ` → ${formatHHMM(activeUsage.endMin)}` : '';
 
-        statusBadgeHtml = `<span class="status-badge unavailable">● Không sử dụng được</span>`;
-        statusSubHtml = isGoingSurgery
-          ? `<span class="status-subtext">🩺 <b>Đang đi mổ</b> (${formatHHMM(activeUsage.startMin)}${endStr})</span>`
-          : `<span class="status-subtext">Đang dùng tại <b>${activeUsage.roomName}</b> (${formatHHMM(
-              activeUsage.startMin
-            )}${endStr})</span>`;
+        statusBadgeHtml = `<span class="status-badge unavailable">● ${isGoingSurgery ? 'Đang mổ' : activeUsage.roomName}</span>`;
+        statusSubHtml = `<span class="status-subtext time-concise">${formatHHMM(activeUsage.startMin)}${endStr}</span>`;
 
         if (isSameRoomOwner) {
           actionBtnHtml = `
@@ -508,8 +624,12 @@ function renderTimelineRows() {
           `;
         }
       } else if (allowedRightNow) {
-        statusBadgeHtml = `<span class="status-badge available">● Có thể sử dụng</span>`;
-        statusSubHtml = `<span class="status-subtext">${shiftInfo.subText}</span>`;
+        statusBadgeHtml = `<span class="status-badge available">● Có thể dùng</span>`;
+        const todayDateKey = getDateKey(new Date(nowMin * 60000));
+        const intervals = getAllowedIntervalsForDate(doc, todayDateKey);
+        const activeIv = intervals.find(([s, e]) => nowMin >= s && nowMin < e);
+        const timeRange = activeIv ? `${formatHHMM(activeIv[0])} – ${formatHHMM(activeIv[1])}` : '07:00 – 11:30';
+        statusSubHtml = `<span class="status-subtext time-concise">${timeRange}</span>`;
         actionBtnHtml = `
           <button
             type="button"
@@ -522,8 +642,18 @@ function renderTimelineRows() {
           </button>
         `;
       } else {
-        statusBadgeHtml = `<span class="status-badge unavailable">● Không sử dụng được</span>`;
-        statusSubHtml = `<span class="status-subtext">${shiftInfo.subText}</span>`;
+        statusBadgeHtml = `<span class="status-badge unavailable">● Không dùng</span>`;
+        const dt = new Date(nowMin * 60000);
+        const minsOfDay = dt.getHours() * 60 + dt.getMinutes();
+        let unavailTime = 'Ngoài giờ';
+        if (minsOfDay >= 11 * 60 + 30 && minsOfDay < 13 * 60 + 30) {
+          unavailTime = '11:30 – 13:30';
+        } else if (minsOfDay >= 17 * 60) {
+          unavailTime = 'Sau 17:00';
+        } else if (minsOfDay < 7 * 60) {
+          unavailTime = 'Trước 07:00';
+        }
+        statusSubHtml = `<span class="status-subtext time-unavailable">${unavailTime}</span>`;
         actionBtnHtml = `<button type="button" class="btn-action-disabled" disabled>Không khả dụng</button>`;
       }
 
@@ -601,6 +731,7 @@ function renderTimelineRows() {
               <span class="doc-room-sep">·</span>
               <span class="doc-assigned-room ${isRoomMatch ? 'match-selected' : ''}">${doc.assignedRoom}</span>
             </div>
+            ${staffInfoHtml}
           </div>
 
           <!-- Col 2: Current Status -->
@@ -640,6 +771,7 @@ function renderTimelineRows() {
 function renderAll() {
   renderHeaderClock();
   renderGlobal60mWarnings();
+  renderWorkingStaffBanner();
   renderRoomsGrid();
   renderTimelineRows();
 }
@@ -675,6 +807,16 @@ function openReceiveTimeDialog(docId) {
   document.getElementById('receive-dialog-summary').innerHTML = `
     Phòng nhận: <strong>${selectedRoomName}</strong> • Tài khoản: <b>${doc.handle}</b>
   `;
+
+  const staff = getCurrentStaffAuth();
+  const staffEl = document.getElementById('receive-dialog-staff');
+  if (staffEl) {
+    if (staff.staffName) {
+      staffEl.innerHTML = `<i class="fa-solid fa-user-check"></i> Nhân sự thao tác: <b>${staff.staffRole} ${staff.staffName}</b>`;
+    } else {
+      staffEl.innerHTML = `<i class="fa-solid fa-user-clock"></i> Nhân sự thao tác: <i>Chưa đăng nhập (sẽ ghi nhận theo ca trực)</i>`;
+    }
+  }
 
   document.getElementById('receive-start-time').value = formatHHMM(nowMin);
   document.getElementById('receive-end-time').value = ''; // Mặc định không có thời gian kết thúc
@@ -837,7 +979,7 @@ function renderHistoryLookupTable() {
   if (!tbody) return;
 
   if (allRecords.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#64748b; padding: 1.2rem;">Chưa có dữ liệu lịch sử phù hợp bộ lọc.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#64748b; padding: 1.2rem;">Chưa có dữ liệu lịch sử phù hợp bộ lọc.</td></tr>`;
     return;
   }
 
@@ -848,10 +990,18 @@ function renderHistoryLookupTable() {
         ? `<span class="status-badge unavailable" style="font-size:0.72rem; padding:0.15rem 0.5rem;">Đang hoạt động</span>`
         : `<span class="status-badge available" style="font-size:0.72rem; padding:0.15rem 0.5rem;">Đã kết thúc</span>`;
 
+      let staffInfo = rec.usage.receivedBy
+        ? `<b>${rec.usage.receivedRole || 'ĐD'} ${rec.usage.receivedBy}</b>`
+        : '<span style="color:#94a3b8;">—</span>';
+      if (rec.usage.releasedBy) {
+        staffInfo += `<br><span style="font-size:0.74rem; color:#64748b;">Trả: ${rec.usage.releasedRole || 'ĐD'} ${rec.usage.releasedBy}</span>`;
+      }
+
       return `
         <tr>
           <td><strong>${rec.doc.name}</strong> <span style="color:#64748b;">(${rec.doc.handle})</span></td>
           <td><b>${rec.usage.roomName}</b></td>
+          <td>${staffInfo}</td>
           <td>${rec.dateLabel} <b>${formatHHMM(rec.usage.startMin)}</b></td>
           <td><b>${endLabel}</b></td>
           <td>${rec.durationMins} phút</td>
@@ -974,7 +1124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (action === 'open-receive-box') {
       openReceiveTimeDialog(docId);
     } else if (action === 'release-user') {
-      postApi('/api/release', { docId, requestRoomName: selectedRoomName });
+      const { staffName, staffRole } = getCurrentStaffAuth();
+      postApi('/api/release', { docId, requestRoomName: selectedRoomName, staffName, staffRole });
     }
   });
 
@@ -1018,12 +1169,15 @@ document.addEventListener('DOMContentLoaded', () => {
       endMin += 1440;
     }
 
+    const { staffName, staffRole } = getCurrentStaffAuth();
     windowOffsetMinutes = 0;
     postApi('/api/receive', {
       docId,
       roomName: selectedRoomName,
       startMin,
-      endMin
+      endMin,
+      staffName,
+      staffRole
     });
     receiveDialog.close();
   });
@@ -1063,12 +1217,15 @@ document.addEventListener('DOMContentLoaded', () => {
       endMin += 1440;
     }
 
+    const { staffName, staffRole } = getCurrentStaffAuth();
     windowOffsetMinutes = 0;
     postApi('/api/receive', {
       docIds: Array.from(selectedSurgeryDocIds),
       roomName: 'Đang mổ',
       startMin,
-      endMin
+      endMin,
+      staffName,
+      staffRole
     });
     surgeryDialog.close();
   });
@@ -1131,7 +1288,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const relBtn = e.target.closest('button[data-release-now-doc]');
     if (relBtn) {
-      postApi('/api/release', { docId: relBtn.getAttribute('data-release-now-doc') });
+      const { staffName, staffRole } = getCurrentStaffAuth();
+      postApi('/api/release', { docId: relBtn.getAttribute('data-release-now-doc'), staffName, staffRole });
     }
   });
 
