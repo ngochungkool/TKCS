@@ -2154,15 +2154,15 @@ const server = http.createServer(async (req, res) => {
         status: 'DRAFT',
         updatedAt: new Date().toISOString(),
         personnel: {
-          nurses: rk === 'hstk' ? '' : 'Linh - Hiếu',
-          nursesDay: rk === 'hstk' ? 'Việt - Quyên - Tân' : '',
-          nursesNight: rk === 'hstk' ? 'Quyện - Nguyên - Vĩ' : '',
-          orderly: 'Phượng',
+          nurses: '',
+          nursesDay: '',
+          nursesNight: '',
+          orderly: '',
           xuatVien: 0,
-          chamSocCap2: 4,
-          hoiChan: 2,
-          tangTren: rk === 'tk3' ? 2 : 0,
-          tangDuoi: rk === 'tk3' ? 1 : 0
+          chamSocCap2: 0,
+          hoiChan: 0,
+          tangTren: 0,
+          tangDuoi: 0
         },
         census: {
           benhCu: 0,

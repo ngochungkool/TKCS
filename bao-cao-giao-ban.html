@@ -1240,6 +1240,73 @@
         text-align: center;
       }
     }
+
+    /* Nguyên nhân vào viện: TNGT, TNSH, TNLĐ, Bệnh */
+    .cause-selector-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: #f8fafc;
+      padding: 2px 4px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .btn-cause-pill {
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #64748b;
+      font-size: 0.73rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+    .btn-cause-pill:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+    .active-cause-tngt {
+      background: #fee2e2 !important;
+      color: #b91c1c !important;
+      border-color: #fca5a5 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 1px 2px rgba(185, 28, 28, 0.15);
+    }
+    .active-cause-tnsh {
+      background: #fef3c7 !important;
+      color: #b45309 !important;
+      border-color: #fcd34d !important;
+      font-weight: 800 !important;
+      box-shadow: 0 1px 2px rgba(180, 83, 9, 0.15);
+    }
+    .active-cause-tnld {
+      background: #e0e7ff !important;
+      color: #4338ca !important;
+      border-color: #a5b4fc !important;
+      font-weight: 800 !important;
+      box-shadow: 0 1px 2px rgba(67, 56, 202, 0.15);
+    }
+    .active-cause-benh {
+      background: #f1f5f9 !important;
+      color: #334155 !important;
+      border-color: #94a3b8 !important;
+      font-weight: 700 !important;
+    }
+    .badge-cause-count {
+      display: inline-block;
+      padding: 2px 7px;
+      margin: 0 2px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .badge-cause-count.badge-tngt { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+    .badge-cause-count.badge-tnsh { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+    .badge-cause-count.badge-tnld { background: #e0e7ff; color: #4338ca; border: 1px solid #a5b4fc; }
+    .badge-cause-count.badge-benh { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
   </style>
 </head>
 <body>
@@ -2334,7 +2401,7 @@
                   <th style="width:95px;">Mã BN</th>
                   <th>Họ và tên</th>
                   <th style="width:55px;text-align:center;">Tuổi</th>
-                  <th style="width:85px;">Nguyên nhân</th>
+                  <th style="width:175px;text-align:center;">Nguyên nhân</th>
                   <th>Chẩn đoán vào viện</th>
                   <th style="width:280px;text-align:center;">Gắn nhãn giao ban</th>
                 </tr>
@@ -2342,6 +2409,7 @@
               <tbody>
       `;
 
+      let countTngt = 0, countTnsh = 0, countTnld = 0, countBenh = 0;
       if (admissions.length === 0) {
         html += `<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày. Bấm "+ Thêm ca đột xuất / nặng" để bổ sung ca.</td></tr>`;
       } else {
@@ -2351,13 +2419,26 @@
           const isTuVong = adm.category === 'TU_VONG';
           const isXinVe = adm.category === 'XIN_VE';
 
+          const c = adm.cause || 'Bệnh lý';
+          if (c === 'TNGT') countTngt++;
+          else if (c === 'TNSH') countTnsh++;
+          else if (c === 'TNLĐ') countTnld++;
+          else countBenh++;
+
           html += `
             <tr style="background:${adm.isHighlight ? '#fffbeb' : '#ffffff'};">
               <td style="text-align:center;font-weight:700;">${idx + 1}</td>
               <td style="font-weight:700;color:#0284c7;">${adm.mabn || '--'}</td>
               <td style="font-weight:700;color:#0f172a;">${adm.hoten || '--'}</td>
               <td style="text-align:center;">${adm.tuoi || '--'}</td>
-              <td><span style="font-size:0.75rem;padding:2px 6px;border-radius:4px;background:#f1f5f9;">${adm.cause || 'Bệnh'}</span></td>
+              <td style="text-align:center;padding:4px 2px;">
+                <div class="cause-selector-group">
+                  <button type="button" class="btn-cause-pill ${adm.cause === 'TNGT' ? 'active-cause-tngt' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNGT')" title="Tai nạn giao thông">TNGT</button>
+                  <button type="button" class="btn-cause-pill ${adm.cause === 'TNSH' ? 'active-cause-tnsh' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNSH')" title="Tai nạn sinh hoạt">TNSH</button>
+                  <button type="button" class="btn-cause-pill ${adm.cause === 'TNLĐ' ? 'active-cause-tnld' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'TNLĐ')" title="Tai nạn lao động">TNLĐ</button>
+                  <button type="button" class="btn-cause-pill ${(!adm.cause || adm.cause === 'Bệnh lý' || adm.cause === 'Bệnh') ? 'active-cause-benh' : ''}" onclick="setAdmissionCause('${roomKey}', '${adm.id}', 'Bệnh lý')" title="Bệnh lý (không phải chấn thương)">Bệnh</button>
+                </div>
+              </td>
               <td style="padding:4px 6px;">
                 <input type="text" class="gb-input-control" style="width:100%;font-size:0.83rem;padding:4px 6px;border:1px solid #cbd5e1;background:#fff;" value="${escapeHtml(adm.chanDoan || '')}" onchange="updateRoomAdmissionField('${roomKey}', '${adm.id}', 'chanDoan', this.value)" placeholder="Chẩn đoán..." />
               </td>
@@ -2384,6 +2465,24 @@
 
       html += `
               </tbody>
+              ${admissions.length > 0 ? `
+                <tfoot>
+                  <tr style="background:#f8fafc;font-weight:700;font-size:0.83rem;border-top:2px solid #e2e8f0;">
+                    <td colspan="4" style="text-align:right;color:#475569;padding:6px 10px;">
+                      Tổng hợp nguyên nhân ca vào viện:
+                    </td>
+                    <td style="text-align:center;white-space:nowrap;padding:6px 2px;">
+                      <span class="badge-cause-count badge-tngt" title="Tai nạn giao thông">TNGT: <strong>${countTngt}</strong></span>
+                      <span class="badge-cause-count badge-tnsh" title="Tai nạn sinh hoạt">TNSH: <strong>${countTnsh}</strong></span>
+                      <span class="badge-cause-count badge-tnld" title="Tai nạn lao động">TNLĐ: <strong>${countTnld}</strong></span>
+                      <span class="badge-cause-count badge-benh" title="Bệnh lý">Bệnh: <strong>${countBenh}</strong></span>
+                    </td>
+                    <td colspan="2" style="text-align:right;color:#64748b;padding:6px 12px;">
+                      Tổng vào buồng: <strong style="color:#16a34a;font-size:0.95rem;">${admissions.length}</strong> BN
+                    </td>
+                  </tr>
+                </tfoot>
+              ` : ''}
             </table>
           </div>
         </div>
@@ -2847,6 +2946,15 @@
         if (masterCase) {
           masterCase[field] = val;
         }
+      }
+    }
+
+    // Chọn nhanh nguyên nhân vào viện: TNGT, TNSH, TNLĐ, Bệnh lý
+    function setAdmissionCause(roomKey, admissionId, causeVal) {
+      updateRoomAdmissionField(roomKey, admissionId, 'cause', causeVal);
+      const container = document.getElementById('gb-view-container');
+      if (container) {
+        renderRoomView(container, roomKey);
       }
     }
 
