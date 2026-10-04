@@ -1,5 +1,5 @@
 {
-  "version": 1791127703728,
+  "version": 1791154045237,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3226,7 +3226,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T15:28:23.727Z"
+      "updatedAt": "2026-10-04T22:47:25.033Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5548,7 +5548,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T15:28:23.727Z"
+      "updatedAt": "2026-10-04T22:47:25.033Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6776,7 +6776,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T15:28:23.728Z"
+      "updatedAt": "2026-10-04T22:47:25.033Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10717,7 +10717,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T15:28:23.728Z"
+      "updatedAt": "2026-10-04T22:47:25.034Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11629,7 +11629,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T15:28:23.728Z"
+      "updatedAt": "2026-10-04T22:47:25.034Z"
     }
   },
   "episodeConsultations": {},
@@ -12387,7 +12387,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 25,
+            "benhCu": 27,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -12395,8 +12395,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 25,
-            "bhyt": 22
+            "hienCo": 27,
+            "bhyt": 24
           },
           "admissions": [],
           "discharges": [],
@@ -12519,7 +12519,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 9,
+            "benhCu": 8,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -12527,8 +12527,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 9,
-            "bhyt": 9
+            "hienCo": 8,
+            "bhyt": 8
           },
           "admissions": [],
           "discharges": [],
@@ -12544,7 +12544,7 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 111,
+          "benhCu": 112,
           "vaoKK": 0,
           "vaoKhac": 0,
           "moCT": 0,
@@ -12552,14 +12552,14 @@
           "raRH": 0,
           "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 111,
-          "bhyt": 103
+          "hienCo": 112,
+          "bhyt": 104
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791100614318.4583,
-      "lastHisSyncTime": "2026-10-04T08:07:15.425Z"
+      "lastHisSyncTimeMs": 1791127664230.676,
+      "lastHisSyncTime": "2026-10-04T22:47:25.237Z"
     }
   },
   "announcement": {
