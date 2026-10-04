@@ -1,5 +1,5 @@
 {
-  "version": 1791124138373,
+  "version": 1791124158775,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3226,7 +3226,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:58.372Z"
+      "updatedAt": "2026-10-04T14:29:18.774Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5548,7 +5548,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:58.372Z"
+      "updatedAt": "2026-10-04T14:29:18.775Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6776,7 +6776,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:58.372Z"
+      "updatedAt": "2026-10-04T14:29:18.775Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7173,7 +7173,7 @@
           "surgicalConsultationsByDate": {
             "2026-10-05": {
               "isConsulted": true,
-              "isSurgical": false,
+              "isSurgical": true,
               "dateKey": "2026-10-05",
               "postConsultDiagnosis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
               "surgeryMethod": "",
@@ -7183,12 +7183,12 @@
               "treatmentPlan": "",
               "roomKey": "tk4",
               "roomName": "Thần kinh 4",
-              "updatedAt": "2026-10-04T14:28:45.283Z"
+              "updatedAt": "2026-10-04T14:29:18.775Z"
             }
           },
           "surgicalConsultation": {
             "isConsulted": true,
-            "isSurgical": false,
+            "isSurgical": true,
             "dateKey": "2026-10-05",
             "postConsultDiagnosis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
             "surgeryMethod": "",
@@ -7198,7 +7198,7 @@
             "treatmentPlan": "",
             "roomKey": "tk4",
             "roomName": "Thần kinh 4",
-            "updatedAt": "2026-10-04T14:28:45.283Z"
+            "updatedAt": "2026-10-04T14:29:18.775Z"
           }
         },
         "0001422398": {
@@ -10653,7 +10653,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:58.373Z"
+      "updatedAt": "2026-10-04T14:29:18.775Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11565,7 +11565,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:58.373Z"
+      "updatedAt": "2026-10-04T14:29:18.775Z"
     }
   },
   "episodeConsultations": {},
