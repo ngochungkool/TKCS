@@ -1,5 +1,5 @@
 {
-  "version": 1791084203105,
+  "version": 1791086463012,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -276,7 +276,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 53903,
-      "uploadedAt": "10:23:20 4/10/2026",
+      "uploadedAt": "11:01:01 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -284,7 +284,7 @@
       "categoryCode": "VAO_KHOA",
       "savedPath": "/opt/render/project/src/uploads_his/vao_khoa.xlsx",
       "sizeBytes": 9648,
-      "uploadedAt": "10:23:19 4/10/2026",
+      "uploadedAt": "11:01:00 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -292,7 +292,7 @@
       "categoryCode": "RA_VIEN",
       "savedPath": "/opt/render/project/src/uploads_his/ra_vien.xlsx",
       "sizeBytes": 10938,
-      "uploadedAt": "10:23:18 4/10/2026",
+      "uploadedAt": "11:00:59 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -306,8 +306,8 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 109,
-      "benhVao": 1,
+      "dauCa": 107,
+      "benhVao": 3,
       "raVien": 3,
       "chuyenDen": 0,
       "chuyenDi": 0,
@@ -318,8 +318,8 @@
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 24,
-        "benhVao": 1,
+        "dauCa": 22,
+        "benhVao": 3,
         "raVien": 2,
         "chuyenDen": 0,
         "chuyenDi": 0,
@@ -373,7 +373,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T03:23:21.210Z"
+    "updatedAt": "2026-10-04T04:01:02.218Z"
   },
   "wardRounds": {
     "tk1": {
@@ -2822,7 +2822,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:23:22.712Z"
+      "updatedAt": "2026-10-04T04:01:02.219Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -4863,7 +4863,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:23:22.712Z"
+      "updatedAt": "2026-10-04T04:01:02.305Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6078,7 +6078,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:23:22.712Z"
+      "updatedAt": "2026-10-04T04:01:02.305Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -9509,7 +9509,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:23:22.713Z"
+      "updatedAt": "2026-10-04T04:01:02.305Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10413,11 +10413,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:23:22.713Z"
+      "updatedAt": "2026-10-04T04:01:02.305Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "10:23 ngày 04/10/2026",
+  "lastExcelUploadTime": "11:01 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -10440,8 +10440,8 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 26,
-            "vaoKK": 0,
+            "benhCu": 24,
+            "vaoKK": 2,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
@@ -10451,7 +10451,36 @@
             "hienCo": 23,
             "bhyt": 20
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-tk1-2",
+              "stt": 2,
+              "mabn": "0001425123",
+              "hoten": "TRẦN THANH VINH",
+              "tuoi": "55",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.80-Tổn thương nội sọ khác, không có vết thương nội sọ hở",
+              "diaChi": "21 nguyễn quý đức-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-3",
+              "stt": 3,
+              "mabn": "0001425126",
+              "hoten": "PHAN NGUYỄN NHẬT KHÔI",
+              "tuoi": "21",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "LÃNH CAO-Xã Xuân Lãnh--Tỉnh Đắk Lắk",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [
             {
               "id": "dis-tk1-1",
@@ -10640,8 +10669,8 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 110,
-          "vaoKK": 0,
+          "benhCu": 108,
+          "vaoKK": 2,
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
@@ -10654,8 +10683,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791084200913.6638,
-      "lastHisSyncTime": "2026-10-04T03:23:21.913Z"
+      "lastHisSyncTimeMs": 1791086461913.7454,
+      "lastHisSyncTime": "2026-10-04T04:01:03.010Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
