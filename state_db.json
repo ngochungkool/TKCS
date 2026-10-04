@@ -1,5 +1,5 @@
 {
-  "version": 1791089519364,
+  "version": 1791089535053,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:51:59.363Z"
+      "updatedAt": "2026-10-04T04:52:14.967Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3219,12 +3219,24 @@
           "hanTheDen": "31/05/2027",
           "diaChi": "Trung Tín 1-Xã Tuy Phước--Tỉnh Gia Lai",
           "chanDoanHis": "D32.0-U lành ở màng não",
-          "customDiagnosis": "D32.0-U lành ở màng não",
+          "customDiagnosis": "Hậu phẫu ngày 8 phẫu thuật Bóc u não",
           "bsDieuTri": "Ngô Văn Cư",
           "ngayVaoStr": "26/09/2026",
           "hisBed": "H036",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [
+                "Cắt chỉ"
+              ],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3233,11 +3245,11 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "NONE",
-            "markedDate": "",
+            "status": "SCHEDULED",
+            "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": ""
+            "note": "Không hẹn tái khám"
           },
           "removed": {
             "isRemoved": false,
@@ -3247,8 +3259,8 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
-            "surgeryDate": ""
+            "surgeryName": "Bóc u não",
+            "surgeryDate": "2026-09-26"
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
@@ -5183,7 +5195,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:51:59.363Z"
+      "updatedAt": "2026-10-04T04:52:14.968Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6398,7 +6410,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:51:59.363Z"
+      "updatedAt": "2026-10-04T04:52:14.968Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10331,7 +10343,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:51:59.364Z"
+      "updatedAt": "2026-10-04T04:52:15.053Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11235,7 +11247,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:51:59.364Z"
+      "updatedAt": "2026-10-04T04:52:15.053Z"
     }
   },
   "episodeConsultations": {},
