@@ -1,5 +1,5 @@
 {
-  "version": 1791079608464,
+  "version": 1791079975622,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -282,7 +282,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:05:35.754Z"
+      "updatedAt": "2026-10-04T02:12:55.623Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -308,7 +308,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:05:35.754Z"
+      "updatedAt": "2026-10-04T02:12:55.623Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -334,7 +334,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:05:35.754Z"
+      "updatedAt": "2026-10-04T02:12:55.623Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -360,7 +360,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:05:35.754Z"
+      "updatedAt": "2026-10-04T02:12:55.623Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -386,7 +386,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:05:35.754Z"
+      "updatedAt": "2026-10-04T02:12:55.623Z"
     }
   },
   "episodeConsultations": {},
