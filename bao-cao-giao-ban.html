@@ -1935,8 +1935,17 @@
 
   <!-- SCRIPT LOGIC -->
   <script>
+    function getTodayIsoDate() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
     // Global State
-    let currentDateKey = '2026-09-30'; // Default to the latest loaded briefing date
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentDateKey = urlParams.get('date') || getTodayIsoDate(); // Defaults to current shift date
     let activeTab = 'overall'; // 'overall' | 'tk1' | 'tk2' | 'tk3' | 'tk4' | 'hstk'
     let currentReport = null;
     let doctorsList = [];
@@ -2061,7 +2070,7 @@
     }
 
     function setToday() {
-      currentDateKey = new Date().toISOString().slice(0, 10);
+      currentDateKey = getTodayIsoDate();
       document.getElementById('gb-date-picker').value = currentDateKey;
       fetchBriefingReport(currentDateKey);
     }

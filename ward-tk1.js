@@ -209,9 +209,27 @@
 
   function formatBedLabel(bedCode) {
     if (!bedCode) return 'Chưa phân giường';
-    const str = String(bedCode);
-    if (str.endsWith('X')) {
-      return `Xếp ${str.replace('X', '')}`;
+    const str = String(bedCode).trim();
+    const isFold = str.endsWith('X') || str.toLowerCase().startsWith('xếp ');
+    const rawCode = str.replace(/^xếp\s+/i, '').replace(/X$/, '');
+    const num = parseInt(rawCode, 10);
+
+    if (currentRoomKey === 'tk4') {
+      if (!isNaN(num)) {
+        if (num >= 1 && num <= 16) {
+          return isFold ? `Xếp A${num}` : `A${num}`;
+        } else if (num >= 17 && num <= 31) {
+          const bNum = num - 16;
+          return isFold ? `Xếp B${bNum}` : `B${bNum}`;
+        }
+      } else if (/^[ab]\d+$/i.test(rawCode)) {
+        const upper = rawCode.toUpperCase();
+        return isFold ? `Xếp ${upper}` : upper;
+      }
+    }
+
+    if (isFold) {
+      return `Xếp ${rawCode}`;
     }
     return `${str}`;
   }
@@ -246,9 +264,10 @@
           }
         }
 
-        const label = isFold
-          ? `[${wingLabel}] Giường xếp ${i} — ${statusNote}`
-          : `[${wingLabel}] Giường ${String(i).padStart(2, '0')} — ${statusNote}`;
+        const bedDisplayName = currentRoomKey === 'tk4'
+          ? formatBedLabel(code)
+          : (isFold ? `Giường xếp ${i}` : `Giường ${String(i).padStart(2, '0')}`);
+        const label = `[${wingLabel}] ${bedDisplayName} — ${statusNote}`;
 
         options.push(`<option value="${code}" ${isSelf ? 'selected' : ''}>${label}</option>`);
       }
@@ -384,7 +403,7 @@
 
   // 5. Không hiển thị chẩn đoán đi cùng ở bảng hiển thị ngoài; chỉ giữ số giường và nút + xếp gọn gàng
   function renderSingleBedCardHtml(bedCode, bedNumber, isFolding, rec, attachedFoldRec, isFoldHiddenManually) {
-    const badgeTitle = isFolding ? `Xếp ${bedNumber}` : `${bedNumber}`;
+    const badgeTitle = formatBedLabel(bedCode);
     const quickSelectHint = quickAssignSelectedMabn && tk1State.patientRecords[quickAssignSelectedMabn]
       ? ` · Bấm để xếp [${tk1State.patientRecords[quickAssignSelectedMabn].hoten}] vào đây`
       : '';
@@ -1893,10 +1912,14 @@
       }
 
       if (wingATitle) {
-        wingATitle.textContent = `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
+        wingATitle.textContent = currentRoomKey === 'tk4'
+          ? 'DÃY A — GIƯỜNG A01 ĐẾN A16'
+          : `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
       }
       if (wingBTitle) {
-        wingBTitle.textContent = `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
+        wingBTitle.textContent = currentRoomKey === 'tk4'
+          ? 'DÃY B — GIƯỜNG B01 ĐẾN B15 (GIƯỜNG 17-31)'
+          : `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
       }
       if (wingASub) {
         wingASub.textContent = `Đang nằm: ${countMainA}/${totalBedsA}${countFoldA > 0 ? ` (+${countFoldA} xếp)` : ''} · Trống: ${totalBedsA - countMainA}`;
@@ -2211,11 +2234,11 @@
     return `
       <div class="tk1-vbed-tile ${tileCls}" data-vbed-select="${mainCode}">
         <div class="vbed-num-row">
-          <span class="vbed-num">${bedNum}</span>
+          <span class="vbed-num">${formatBedLabel(mainCode)}</span>
           <button
             type="button"
             class="vbed-fold-btn"
-            title="Chọn giường xếp ${bedNum}"
+            title="Chọn giường xếp ${formatBedLabel(foldCode)}"
             data-vbed-select-fold="${foldCode}"
           >
             ${foldBtnLabel}
@@ -2266,7 +2289,7 @@
         <div class="tk1-vbed-wings-wrap">
           <div class="tk1-vbed-wing-box">
             <div class="tk1-vbed-wing-title">
-              <span>Dãy A (${startA} – ${endA})</span>
+              <span>${currentRoomKey === 'tk4' ? 'Dãy A (A01 – A16)' : `Dãy A (${startA} – ${endA})`}</span>
             </div>
             <div class="tk1-vbed-grid grid-wing-a">
               ${tilesA.join('')}
@@ -2275,7 +2298,7 @@
 
           <div class="tk1-vbed-wing-box">
             <div class="tk1-vbed-wing-title" style="color:#0f766e;">
-              <span>Dãy B (${startB} – ${endB})</span>
+              <span>${currentRoomKey === 'tk4' ? 'Dãy B (B01 – B15 / Giường 17–31)' : `Dãy B (${startB} – ${endB})`}</span>
             </div>
             <div class="tk1-vbed-grid grid-wing-b">
               ${tilesB.join('')}
@@ -3034,9 +3057,11 @@
         const fRec = tk1State.bedAssignments[foldCode] ? tk1State.patientRecords[tk1State.bedAssignments[foldCode]] : null;
         const isFoldHidden = Boolean(tk1State.hiddenFoldingBeds && tk1State.hiddenFoldingBeds[mainCode]);
 
-        items.push({ bedCode: mainCode, label: `G.${String(i).padStart(2, '0')}`, isFolding: false, rec: mRec });
+        const mainLabel = currentRoomKey === 'tk4' ? `G.${formatBedLabel(mainCode)}` : `G.${String(i).padStart(2, '0')}`;
+        const foldLabel = currentRoomKey === 'tk4' ? formatBedLabel(foldCode) : `Xếp ${String(i).padStart(2, '0')}`;
+        items.push({ bedCode: mainCode, label: mainLabel, isFolding: false, rec: mRec });
         if (fRec && !isFoldHidden) {
-          items.push({ bedCode: foldCode, label: `Xếp ${String(i).padStart(2, '0')}`, isFolding: true, rec: fRec });
+          items.push({ bedCode: foldCode, label: foldLabel, isFolding: true, rec: fRec });
         }
       }
       return items;
@@ -3132,8 +3157,12 @@
     } else {
       layoutsA = wingAItems.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
       layoutsB = wingBItems.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
-      colTitleA = `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
-      colTitleB = `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
+      colTitleA = currentRoomKey === 'tk4'
+        ? 'DÃY A — GIƯỜNG A01 ĐẾN A16'
+        : `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
+      colTitleB = currentRoomKey === 'tk4'
+        ? 'DÃY B — GIƯỜNG B01 ĐẾN B15 (GIƯỜNG 17-31)'
+        : `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
     }
 
     const totalHeightA = layoutsA.reduce((acc, x) => acc + x.layout.height + 8, 0);
