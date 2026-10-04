@@ -1,5 +1,5 @@
 {
-  "version": 1791089243965,
+  "version": 1791089257658,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:47:23.962Z"
+      "updatedAt": "2026-10-04T04:47:37.657Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3466,12 +3466,22 @@
           "hanTheDen": "14/11/2026",
           "diaChi": "Hòa Đa-Xã Tuy An Nam--Tỉnh Đắk Lắk",
           "chanDoanHis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
-          "customDiagnosis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
+          "customDiagnosis": "Hậu phẫu ngày 4 phẫu thuật Lún sọ",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H038",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3494,8 +3504,8 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
-            "surgeryDate": ""
+            "surgeryName": "Lún sọ",
+            "surgeryDate": "2026-09-30"
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
@@ -5093,7 +5103,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:47:23.964Z"
+      "updatedAt": "2026-10-04T04:47:37.657Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6308,7 +6318,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:47:23.964Z"
+      "updatedAt": "2026-10-04T04:47:37.657Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10241,7 +10251,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:47:23.964Z"
+      "updatedAt": "2026-10-04T04:47:37.657Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11145,7 +11155,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:47:23.964Z"
+      "updatedAt": "2026-10-04T04:47:37.657Z"
     }
   },
   "episodeConsultations": {},
