@@ -1,5 +1,5 @@
 {
-  "version": 1791106493754,
+  "version": 1791106648255,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3122,7 +3122,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:34:53.753Z"
+      "updatedAt": "2026-10-04T09:37:28.045Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5444,7 +5444,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:34:53.753Z"
+      "updatedAt": "2026-10-04T09:37:28.045Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6659,7 +6659,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:34:53.753Z"
+      "updatedAt": "2026-10-04T09:37:28.045Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6944,8 +6944,28 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "L02.3-Áp xe da, nhọt và/hoặc cụm nhọt ở mông",
+              "surgeryMethod": "",
+              "decision": "Đồng ý",
+              "advancePayment": "",
+              "bloodMl": "",
+              "updatedAt": "2026-10-04T09:37:28.252Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-05",
+            "postConsultDiagnosis": "L02.3-Áp xe da, nhọt và/hoặc cụm nhọt ở mông",
+            "surgeryMethod": "",
+            "decision": "Đồng ý",
+            "advancePayment": "",
+            "bloodMl": "",
+            "updatedAt": "2026-10-04T09:37:28.252Z"
+          }
         },
         "0001418775": {
           "mabn": "0001418775",
@@ -10499,7 +10519,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:34:53.754Z"
+      "updatedAt": "2026-10-04T09:37:28.046Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11403,7 +11423,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:34:53.754Z"
+      "updatedAt": "2026-10-04T09:37:28.046Z"
     }
   },
   "episodeConsultations": {},
@@ -12296,8 +12316,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791100614318.4583,
-      "lastHisSyncTime": "2026-10-04T08:07:15.425Z"
+      "lastHisSyncTimeMs": 1791106168047.057,
+      "lastHisSyncTime": "2026-10-04T09:37:28.249Z"
     }
   },
   "announcement": {
