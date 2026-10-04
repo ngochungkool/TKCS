@@ -1,5 +1,5 @@
 {
-  "version": 1791125114543,
+  "version": 1791125802080,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3198,7 +3198,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-04T14:56:42.080Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5495,7 +5495,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-04T14:56:42.080Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6708,7 +6708,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-04T14:56:42.080Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7065,10 +7065,10 @@
               "decision": "Đồng ý phẫu thuật",
               "advancePayment": "5 triệu",
               "bloodMl": "",
-              "treatmentPlan": "CĐ: HP SINH THIẾT • Mổ 23/9",
+              "treatmentPlan": "",
               "roomKey": "tk4",
               "roomName": "Thần kinh 4",
-              "updatedAt": "2026-10-04T14:45:02.006Z"
+              "updatedAt": "2026-10-04T14:56:42.080Z"
             }
           },
           "surgicalConsultation": {
@@ -7080,10 +7080,10 @@
             "decision": "Đồng ý phẫu thuật",
             "advancePayment": "5 triệu",
             "bloodMl": "",
-            "treatmentPlan": "CĐ: HP SINH THIẾT • Mổ 23/9",
+            "treatmentPlan": "",
             "roomKey": "tk4",
             "roomName": "Thần kinh 4",
-            "updatedAt": "2026-10-04T14:45:02.006Z"
+            "updatedAt": "2026-10-04T14:56:42.080Z"
           },
           "consultTreatment": "CĐ: HP SINH THIẾT • Mổ 23/9"
         },
@@ -10582,7 +10582,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-04T14:56:42.080Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11485,7 +11485,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-04T14:56:42.080Z"
     }
   },
   "episodeConsultations": {},
