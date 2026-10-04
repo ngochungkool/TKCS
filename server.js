@@ -238,6 +238,59 @@ async function ensureCloudBranchExists() {
   }
 }
 
+async function pushFileToCloud(localFilePath, cloudFileName) {
+  const token = getCloudToken();
+  if (!token || !fs.existsSync(localFilePath)) return false;
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/vnd.github+json',
+    'Content-Type': 'application/json',
+    'User-Agent': 'TKCS-Cloud-Persistence'
+  };
+
+  try {
+    await ensureCloudBranchExists();
+    let currentSha = null;
+    const curRes = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/${cloudFileName}?ref=${CLOUD_BRANCH}`, { headers });
+    if (curRes.ok) {
+      const curMeta = await curRes.json();
+      currentSha = curMeta.sha || null;
+    }
+
+    const contentBuffer = fs.readFileSync(localFilePath);
+    const contentBase64 = contentBuffer.toString('base64');
+    const bodyObj = {
+      message: `Auto-backup ${cloudFileName} (${new Date().toLocaleString('vi-VN')})`,
+      content: contentBase64,
+      branch: CLOUD_BRANCH
+    };
+    if (currentSha) bodyObj.sha = currentSha;
+
+    let putRes = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/${cloudFileName}`, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(bodyObj)
+    });
+
+    if (putRes.status === 409 || putRes.status === 422) {
+      const refRes = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/${cloudFileName}?ref=${CLOUD_BRANCH}`, { headers });
+      if (refRes.ok) {
+        const rMeta = await refRes.json();
+        bodyObj.sha = rMeta.sha;
+        putRes = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/${cloudFileName}`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify(bodyObj)
+        });
+      }
+    }
+    return putRes.ok;
+  } catch (e) {
+    console.warn(`[CloudBackup] Lỗi khi đồng bộ ${cloudFileName} lên GitHub:`, e.message);
+    return false;
+  }
+}
+
 async function restoreDbFromCloudIfNewer() {
   const token = getCloudToken();
   if (!token) return;
@@ -248,27 +301,53 @@ async function restoreDbFromCloudIfNewer() {
   };
   try {
     await ensureCloudBranchExists();
+
+    // 1. Khôi phục state_db.json nếu đám mây có dữ liệu mới hơn
     const res = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/state_db.json?ref=${CLOUD_BRANCH}`, { headers });
-    if (!res.ok) return;
-    const meta = await res.json();
-    if (meta && meta.sha) lastCloudSha = meta.sha;
+    if (res.ok) {
+      const meta = await res.json();
+      if (meta && meta.sha) lastCloudSha = meta.sha;
 
-    let rawJson = '';
-    if (meta && meta.content) {
-      rawJson = Buffer.from(meta.content, 'base64').toString('utf-8');
-    } else if (meta && meta.download_url) {
-      const dl = await fetch(meta.download_url, { headers });
-      if (dl.ok) rawJson = await dl.text();
+      let rawJson = '';
+      if (meta && meta.content) {
+        rawJson = Buffer.from(meta.content, 'base64').toString('utf-8');
+      } else if (meta && meta.download_url) {
+        const dl = await fetch(meta.download_url, { headers });
+        if (dl.ok) rawJson = await dl.text();
+      }
+      if (rawJson) {
+        const cloudDb = JSON.parse(rawJson);
+        const localVer = Number(db?.version || 0);
+        const cloudVer = Number(cloudDb?.version || 0);
+        if (cloudDb && Array.isArray(cloudDb.doctors) && cloudVer >= localVer) {
+          db = cloudDb;
+          fs.writeFileSync(DATA_FILE, JSON.stringify(db, null, 2), 'utf-8');
+          console.log(`[CloudBackup] Đã khôi phục dữ liệu state_db.json mới nhất từ GitHub (${CLOUD_BRANCH}) - version ${cloudVer}`);
+        }
+      }
     }
-    if (!rawJson) return;
 
-    const cloudDb = JSON.parse(rawJson);
-    const localVer = Number(db?.version || 0);
-    const cloudVer = Number(cloudDb?.version || 0);
-    if (cloudDb && Array.isArray(cloudDb.doctors) && cloudVer >= localVer) {
-      db = cloudDb;
-      fs.writeFileSync(DATA_FILE, JSON.stringify(db, null, 2), 'utf-8');
-      console.log(`[CloudBackup] Đã khôi phục dữ liệu mới nhất từ GitHub (${CLOUD_BRANCH}) - version ${cloudVer}`);
+    // 2. Khôi phục users.json nếu đám mây có dữ liệu người dùng
+    const resUsers = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/users.json?ref=${CLOUD_BRANCH}`, { headers });
+    if (resUsers.ok) {
+      const uMeta = await resUsers.json();
+      let rawUJson = '';
+      if (uMeta && uMeta.content) {
+        rawUJson = Buffer.from(uMeta.content, 'base64').toString('utf-8');
+      } else if (uMeta && uMeta.download_url) {
+        const dl = await fetch(uMeta.download_url, { headers });
+        if (dl.ok) rawUJson = await dl.text();
+      }
+      if (rawUJson) {
+        const cloudUsers = JSON.parse(rawUJson);
+        if (Array.isArray(cloudUsers) && cloudUsers.length > 0) {
+          const localUsers = loadUsers();
+          if (!localUsers || localUsers.length <= cloudUsers.length) {
+            fs.writeFileSync(USERS_FILE, JSON.stringify(cloudUsers, null, 2), 'utf-8');
+            console.log(`[CloudBackup] Đã khôi phục users.json từ GitHub (${CLOUD_BRANCH}) - ${cloudUsers.length} tài khoản`);
+          }
+        }
+      }
     }
   } catch (e) {
     console.warn('[CloudBackup] Không thể tải bản sao lưu từ GitHub:', e.message);
@@ -283,60 +362,15 @@ async function pushDbToCloudNow() {
     return;
   }
   cloudSyncInProgress = true;
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-    'Accept': 'application/vnd.github+json',
-    'Content-Type': 'application/json',
-    'User-Agent': 'TKCS-Cloud-Persistence'
-  };
 
   try {
     await ensureCloudBranchExists();
-    if (!lastCloudSha) {
-      const curRes = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/state_db.json?ref=${CLOUD_BRANCH}`, { headers });
-      if (curRes.ok) {
-        const curMeta = await curRes.json();
-        lastCloudSha = curMeta.sha || null;
-      }
-    }
-
-    const contentBase64 = Buffer.from(JSON.stringify(db, null, 2), 'utf-8').toString('base64');
-    const bodyObj = {
-      message: `Auto-backup state_db.json (${new Date().toLocaleString('vi-VN')})`,
-      content: contentBase64,
-      branch: CLOUD_BRANCH
-    };
-    if (lastCloudSha) bodyObj.sha = lastCloudSha;
-
-    let putRes = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/state_db.json`, {
-      method: 'PUT',
-      headers,
-      body: JSON.stringify(bodyObj)
-    });
-
-    if (putRes.status === 409 || putRes.status === 422) {
-      // SHA changed, refresh SHA and retry once
-      const refreshRes = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/state_db.json?ref=${CLOUD_BRANCH}`, { headers });
-      if (refreshRes.ok) {
-        const rMeta = await refreshRes.json();
-        lastCloudSha = rMeta.sha;
-        bodyObj.sha = lastCloudSha;
-        putRes = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/state_db.json`, {
-          method: 'PUT',
-          headers,
-          body: JSON.stringify(bodyObj)
-        });
-      }
-    }
-
-    if (putRes.ok) {
-      const savedData = await putRes.json();
-      if (savedData?.content?.sha) {
-        lastCloudSha = savedData.content.sha;
-      }
+    await pushFileToCloud(DATA_FILE, 'state_db.json');
+    if (fs.existsSync(USERS_FILE)) {
+      await pushFileToCloud(USERS_FILE, 'users.json');
     }
   } catch (e) {
-    console.warn('[CloudBackup] Lỗi khi đồng bộ state_db.json lên GitHub:', e.message);
+    console.warn('[CloudBackup] Lỗi trong quá trình sao lưu dữ liệu lên GitHub:', e.message);
   } finally {
     cloudSyncInProgress = false;
     if (cloudSyncPending) {
@@ -565,6 +599,7 @@ function loadUsers() {
 function saveUsers(users) {
   try {
     fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2), 'utf8');
+    scheduleCloudBackup();
     return true;
   } catch (e) {
     console.error('Error saving users:', e);
