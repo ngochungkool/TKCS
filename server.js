@@ -2699,15 +2699,26 @@ const server = http.createServer(async (req, res) => {
         continue;
       }
 
-      // 1. Sync Census from HIS while preserving manually entered moCT, moCC
+      // 1. Sync Census from HIS while preserving manually entered moCT, moCC and accounting for deleted admissions
       if (!curRoom.census) curRoom.census = {};
       const existingMoCT = Number(curRoom.census.moCT) || 0;
       const existingMoCC = Number(curRoom.census.moCC) || 0;
 
+      const deletedMabns = new Set((curRoom.deletedAdmissionMabns || []).map(m => String(m).trim()));
+      let deletedVaoKK = 0;
+      let deletedVaoKhac = 0;
+      for (const freshAdm of (freshRoom.admissions || [])) {
+        if (freshAdm.mabn && deletedMabns.has(String(freshAdm.mabn).trim())) {
+          const isChuyenDen = freshAdm.source && freshAdm.source !== 'KK';
+          if (isChuyenDen) deletedVaoKhac++;
+          else deletedVaoKK++;
+        }
+      }
+
       curRoom.census.hienCo = freshRoom.census.hienCo;
       curRoom.census.bhyt = freshRoom.census.bhyt;
-      curRoom.census.vaoKK = freshRoom.census.vaoKK;
-      curRoom.census.vaoKhac = freshRoom.census.vaoKhac;
+      curRoom.census.vaoKK = Math.max(0, freshRoom.census.vaoKK - deletedVaoKK);
+      curRoom.census.vaoKhac = Math.max(0, freshRoom.census.vaoKhac - deletedVaoKhac);
       curRoom.census.raRH = freshRoom.census.raRH;
       curRoom.census.raKhac = freshRoom.census.raKhac;
       curRoom.census.tuVong = freshRoom.census.tuVong;
@@ -2719,24 +2730,26 @@ const server = http.createServer(async (req, res) => {
       if (!curRoom.personnel) curRoom.personnel = {};
       curRoom.personnel.xuatVien = curRoom.census.raRH;
 
-      // 3. Admissions: update list, preserving manual flags if mabn matches
+      // 3. Admissions: update list, preserving manual flags if mabn matches, ignoring manually deleted ones
       const oldAdmMap = new Map();
       for (const a of (curRoom.admissions || [])) {
         if (a.mabn) oldAdmMap.set(String(a.mabn).trim(), a);
       }
-      curRoom.admissions = (freshRoom.admissions || []).map(freshAdm => {
-        const old = freshAdm.mabn ? oldAdmMap.get(String(freshAdm.mabn).trim()) : null;
-        if (old) {
-          return {
-            ...freshAdm,
-            isHighlight: old.isHighlight !== undefined ? old.isHighlight : freshAdm.isHighlight,
-            category: old.category || freshAdm.category,
-            tinhTrang: old.tinhTrang || freshAdm.tinhTrang,
-            notesBs: old.notesBs || freshAdm.notesBs || ''
-          };
-        }
-        return freshAdm;
-      });
+      curRoom.admissions = (freshRoom.admissions || [])
+        .filter(freshAdm => !freshAdm.mabn || !deletedMabns.has(String(freshAdm.mabn).trim()))
+        .map(freshAdm => {
+          const old = freshAdm.mabn ? oldAdmMap.get(String(freshAdm.mabn).trim()) : null;
+          if (old) {
+            return {
+              ...freshAdm,
+              isHighlight: old.isHighlight !== undefined ? old.isHighlight : freshAdm.isHighlight,
+              category: old.category || freshAdm.category,
+              tinhTrang: old.tinhTrang || freshAdm.tinhTrang,
+              notesBs: old.notesBs || freshAdm.notesBs || ''
+            };
+          }
+          return freshAdm;
+        });
 
       // 4. Discharges: update list, preserving manual tags if mabn matches
       const oldDisMap = new Map();
@@ -3790,6 +3803,48 @@ const server = http.createServer(async (req, res) => {
       }
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(targetDate) }));
+      return;
+    }
+
+    if (action === 'DELETE_ROOM_ADMISSION') {
+      const { admissionId, mabn } = body;
+      const room = report.roomReports && report.roomReports[roomKey];
+      if (room && Array.isArray(room.admissions)) {
+        const targetAdm = room.admissions.find(a => a.id === admissionId || (mabn && a.mabn === mabn));
+        const admName = targetAdm ? targetAdm.hoten : 'bệnh nhân';
+
+        // Decrement census for this room if applicable
+        if (targetAdm && room.census) {
+          const isChuyenDen = targetAdm.source && targetAdm.source !== 'KK';
+          if (isChuyenDen && room.census.vaoKhac > 0) {
+            room.census.vaoKhac = Math.max(0, room.census.vaoKhac - 1);
+          } else if (room.census.vaoKK > 0) {
+            room.census.vaoKK = Math.max(0, room.census.vaoKK - 1);
+          }
+          room.census.benhCu = Math.max(0, (room.census.hienCo || 0) - ((room.census.vaoKK || 0) + (room.census.vaoKhac || 0)) + ((room.census.raRH || 0) + (room.census.raKhac || 0) + (room.census.tuVong || 0)));
+        }
+
+        // Remember deleted mabn so re-sync from HIS does not resurrect it
+        if (targetAdm && targetAdm.mabn) {
+          if (!Array.isArray(room.deletedAdmissionMabns)) room.deletedAdmissionMabns = [];
+          if (!room.deletedAdmissionMabns.includes(targetAdm.mabn)) {
+            room.deletedAdmissionMabns.push(targetAdm.mabn);
+          }
+        }
+
+        room.admissions = room.admissions.filter(a => a.id !== admissionId && (!mabn || a.mabn !== mabn));
+
+        // Also clean from master highlight cases if it originated from here
+        if (Array.isArray(report.highlightCases)) {
+          report.highlightCases = report.highlightCases.filter(c => !(c.roomKey === roomKey && ((targetAdm && targetAdm.mabn && c.mabn === targetAdm.mabn) || (targetAdm && targetAdm.hoten && c.hoten === targetAdm.hoten))));
+        }
+
+        recalculateGrandCensus(report);
+        saveDb();
+        broadcastState(`🗑️ Đã xóa ca vào buồng ${admName} tại ${room.roomName}`);
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, report }));
       return;
     }
 

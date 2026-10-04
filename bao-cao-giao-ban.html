@@ -2646,6 +2646,7 @@
                   <th style="width:${isHSTK ? '230px' : isTK2 ? '210px' : (isTK3 || isTK4) ? '225px' : '175px'};text-align:center;">${(isHSTK || isTK3 || isTK4) ? 'Nguồn vào &amp; Nguyên nhân' : isTK2 ? 'Nguồn vào buồng' : 'Nguyên nhân'}</th>
                   <th>Chẩn đoán &amp; Tình trạng vào viện</th>
                   <th style="width:280px;text-align:center;">Gắn nhãn giao ban</th>
+                  <th style="width:52px;text-align:center;">Xóa</th>
                 </tr>
               </thead>
               <tbody>
@@ -2656,7 +2657,7 @@
       let countTk1 = 0, countTk2 = 0, countDotQuy = 0, countNoiTiet = 0, countGmhs = 0, countOther = 0;
 
       if (admissions.length === 0) {
-        html += `<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày. Bấm nút "Thêm" để bổ sung ca.</td></tr>`;
+        html += `<tr><td colspan="8" style="text-align:center;padding:20px;color:#64748b;">Không có bệnh nhân vào buồng trong ngày. Bấm nút "Thêm" để bổ sung ca.</td></tr>`;
       } else {
         admissions.forEach((adm, idx) => {
           const isMoCT = adm.category === 'MO_CT';
@@ -2799,6 +2800,11 @@
                   </button>
                 `}
               </td>
+              <td style="text-align:center;">
+                <button type="button" class="btn-delete-adm" onclick="deleteRoomAdmission('${roomKey}', '${adm.id}')" title="Xóa ca vào viện này (dành cho ca nhận diện sai)" style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;cursor:pointer;font-size:0.85rem;padding:4px 8px;border-radius:6px;transition:all 0.15s ease;" onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='#fef2f2'">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </td>
             </tr>
           `;
         });
@@ -2852,7 +2858,7 @@
                         <span class="badge-cause-count badge-benh" title="Bệnh lý">Bệnh: <strong>${countBenh}</strong></span>
                       `}
                     </td>
-                    <td colspan="2" style="text-align:right;color:#64748b;padding:6px 12px;">
+                    <td colspan="3" style="text-align:right;color:#64748b;padding:6px 12px;">
                       Tổng vào buồng: <strong style="color:#16a34a;font-size:0.95rem;">${admissions.length}</strong> BN
                     </td>
                   </tr>
@@ -3690,6 +3696,73 @@
       rep.discharges = rep.discharges.filter(d => d.id !== dischargeId);
       const container = document.getElementById('gb-view-container');
       if (container) renderRoomView(container, roomKey);
+    }
+
+    async function deleteRoomAdmission(roomKey, admissionId) {
+      const rep = currentReport.roomReports[roomKey];
+      if (!rep || !Array.isArray(rep.admissions)) return;
+      const targetAdm = rep.admissions.find(a => a.id === admissionId);
+      if (!targetAdm) return;
+
+      const bnName = targetAdm.hoten || 'này';
+      if (!confirm(`Bạn có chắc muốn xóa ca bệnh nhân [${bnName}] (Mã BN: ${targetAdm.mabn || '--'}) khỏi danh sách vào buồng của ${rep.roomName}?\n(Hệ thống sẽ cập nhật lại số liệu vào buồng và không đưa ca này lên slide giao ban).`)) {
+        return;
+      }
+
+      // 1. Cập nhật cục bộ ngay lập tức để giao diện phản hồi tức thì
+      const isChuyenDen = targetAdm.source && targetAdm.source !== 'KK';
+      if (rep.census) {
+        if (isChuyenDen && rep.census.vaoKhac > 0) {
+          rep.census.vaoKhac = Math.max(0, rep.census.vaoKhac - 1);
+        } else if (rep.census.vaoKK > 0) {
+          rep.census.vaoKK = Math.max(0, rep.census.vaoKK - 1);
+        }
+        rep.census.benhCu = Math.max(0, (rep.census.hienCo || 0) - ((rep.census.vaoKK || 0) + (rep.census.vaoKhac || 0)) + ((rep.census.raRH || 0) + (rep.census.raKhac || 0) + (rep.census.tuVong || 0)));
+      }
+
+      // Ghi nhớ mã BN đã xóa để khi đồng bộ lại từ HIS không tự hồi phục lại ca này
+      if (targetAdm.mabn) {
+        if (!Array.isArray(rep.deletedAdmissionMabns)) rep.deletedAdmissionMabns = [];
+        if (!rep.deletedAdmissionMabns.includes(targetAdm.mabn)) {
+          rep.deletedAdmissionMabns.push(targetAdm.mabn);
+        }
+      }
+
+      rep.admissions = rep.admissions.filter(a => a.id !== admissionId);
+
+      // Xóa khỏi danh sách highlight nếu ca này đã được gắn nhãn
+      if (Array.isArray(currentReport.highlightCases)) {
+        currentReport.highlightCases = currentReport.highlightCases.filter(c => !(c.roomKey === roomKey && ((targetAdm.mabn && c.mabn === targetAdm.mabn) || (targetAdm.hoten && c.hoten === targetAdm.hoten))));
+      }
+
+      // Tính lại tổng số giao ban toàn khoa
+      recalcGrandTotalsFromRooms();
+
+      const container = document.getElementById('gb-view-container');
+      if (container) renderRoomView(container, roomKey);
+
+      // 2. Gửi lệnh lưu lên server
+      try {
+        const res = await fetch('/api/briefing-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'DELETE_ROOM_ADMISSION',
+            dateKey: currentDateKey,
+            roomKey,
+            admissionId,
+            mabn: targetAdm.mabn
+          })
+        });
+        const data = await res.json();
+        if (data.ok && data.report) {
+          currentReport = data.report;
+          showToast(`🗑️ Đã xóa thành công ca ${bnName} khỏi buồng ${rep.roomName}`);
+          if (container) renderRoomView(container, roomKey);
+        }
+      } catch (err) {
+        console.error('Lỗi khi xóa ca vào buồng:', err);
+      }
     }
 
 
