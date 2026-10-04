@@ -2240,7 +2240,11 @@ const server = http.createServer(async (req, res) => {
     db.lastExcelUploadTime = `${String(nowDt.getHours()).padStart(2, '0')}:${String(nowDt.getMinutes()).padStart(2, '0')} ngày ${String(nowDt.getDate()).padStart(2, '0')}/${String(nowDt.getMonth() + 1).padStart(2, '0')}/${nowDt.getFullYear()}`;
     recomputePatientStatsFromHisUploads();
 
-    broadcastState(`📂 Đã tự động nhận diện [${detectedCat.label}] (${rowCount} dòng) từ file "${fileName}" và cập nhật 9 chỉ số!`);
+    // Auto-sync briefing reports for today with latest HIS Excel data
+    const todayDateKey = getDateKey(nowDt);
+    syncBriefingReportWithHis(todayDateKey);
+
+    broadcastState(`📂 Đã tự động nhận diện [${detectedCat.label}] (${rowCount} dòng) từ file "${fileName}", cập nhật 9 chỉ số và đồng bộ Báo cáo Giao ban!`);
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, savedPath, detectedCat, rowCount, lastExcelUploadTime: db.lastExcelUploadTime, db }));
     return;
@@ -2648,12 +2652,134 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  function getLatestHisUploadMtime() {
+    try {
+      const uploadDir = path.join(ROOT, 'uploads_his');
+      if (!fs.existsSync(uploadDir)) return 0;
+      const files = fs.readdirSync(uploadDir).filter(f => /\.(xlsx|xls|csv)$/i.test(f));
+      let maxMtime = 0;
+      for (const f of files) {
+        const stat = fs.statSync(path.join(uploadDir, f));
+        if (stat.mtimeMs > maxMtime) maxMtime = stat.mtimeMs;
+      }
+      return maxMtime;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  function syncBriefingReportWithHis(targetDateKey) {
+    if (!db.briefingReports) db.briefingReports = {};
+    const fresh = buildBriefingDraftFromHis(targetDateKey);
+    const latestMtime = getLatestHisUploadMtime();
+
+    if (!db.briefingReports[targetDateKey]) {
+      fresh.lastHisSyncTimeMs = latestMtime || Date.now();
+      fresh.lastHisSyncTime = new Date().toISOString();
+      db.briefingReports[targetDateKey] = fresh;
+      recalculateGrandCensus(fresh);
+      saveDb();
+      return fresh;
+    }
+
+    const report = db.briefingReports[targetDateKey];
+    if (!report.roomReports) report.roomReports = {};
+
+    const roomKeys = ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'];
+    for (const rk of roomKeys) {
+      const curRoom = report.roomReports[rk];
+      const freshRoom = fresh.roomReports[rk];
+      if (!curRoom) {
+        report.roomReports[rk] = freshRoom;
+        continue;
+      }
+
+      // 1. Sync Census from HIS while preserving manually entered moCT, moCC
+      if (!curRoom.census) curRoom.census = {};
+      const existingMoCT = Number(curRoom.census.moCT) || 0;
+      const existingMoCC = Number(curRoom.census.moCC) || 0;
+
+      curRoom.census.hienCo = freshRoom.census.hienCo;
+      curRoom.census.bhyt = freshRoom.census.bhyt;
+      curRoom.census.vaoKK = freshRoom.census.vaoKK;
+      curRoom.census.vaoKhac = freshRoom.census.vaoKhac;
+      curRoom.census.raRH = freshRoom.census.raRH;
+      curRoom.census.raKhac = freshRoom.census.raKhac;
+      curRoom.census.tuVong = freshRoom.census.tuVong;
+      curRoom.census.moCT = existingMoCT;
+      curRoom.census.moCC = existingMoCC;
+      curRoom.census.benhCu = Math.max(0, curRoom.census.hienCo - (curRoom.census.vaoKK + curRoom.census.vaoKhac) + (curRoom.census.raRH + curRoom.census.raKhac + curRoom.census.tuVong));
+
+      // 2. Personnel: update xuatVien from raRH, keep other manual inputs
+      if (!curRoom.personnel) curRoom.personnel = {};
+      curRoom.personnel.xuatVien = curRoom.census.raRH;
+
+      // 3. Admissions: update list, preserving manual flags if mabn matches
+      const oldAdmMap = new Map();
+      for (const a of (curRoom.admissions || [])) {
+        if (a.mabn) oldAdmMap.set(String(a.mabn).trim(), a);
+      }
+      curRoom.admissions = (freshRoom.admissions || []).map(freshAdm => {
+        const old = freshAdm.mabn ? oldAdmMap.get(String(freshAdm.mabn).trim()) : null;
+        if (old) {
+          return {
+            ...freshAdm,
+            isHighlight: old.isHighlight !== undefined ? old.isHighlight : freshAdm.isHighlight,
+            category: old.category || freshAdm.category,
+            tinhTrang: old.tinhTrang || freshAdm.tinhTrang,
+            notesBs: old.notesBs || freshAdm.notesBs || ''
+          };
+        }
+        return freshAdm;
+      });
+
+      // 4. Discharges: update list, preserving manual tags if mabn matches
+      const oldDisMap = new Map();
+      for (const d of (curRoom.discharges || [])) {
+        if (d.mabn) oldDisMap.set(String(d.mabn).trim(), d);
+      }
+      curRoom.discharges = (freshRoom.discharges || []).map(freshDis => {
+        const old = freshDis.mabn ? oldDisMap.get(String(freshDis.mabn).trim()) : null;
+        if (old) {
+          return {
+            ...freshDis,
+            isHighlight: old.isHighlight !== undefined ? old.isHighlight : freshDis.isHighlight,
+            category: old.category || freshDis.category,
+            note: old.note || freshDis.note
+          };
+        }
+        return freshDis;
+      });
+    }
+
+    // 5. Highlight Cases: merge any new auto-flagged severe cases without wiping existing ones
+    if (!Array.isArray(report.highlightCases)) report.highlightCases = [];
+    for (const fc of (fresh.highlightCases || [])) {
+      const existing = report.highlightCases.find(c => (fc.mabn && c.mabn === fc.mabn) || (fc.hoten && c.hoten && c.hoten.toLowerCase() === fc.hoten.toLowerCase()));
+      if (!existing) {
+        report.highlightCases.push(fc);
+      }
+    }
+
+    recalculateGrandCensus(report);
+    report.lastHisSyncTimeMs = latestMtime || Date.now();
+    report.lastHisSyncTime = new Date().toISOString();
+    saveDb();
+    return report;
+  }
+
   function getOrBuildBriefingReport(targetDateKey) {
     if (!db.briefingReports) db.briefingReports = {};
+    const latestMtime = getLatestHisUploadMtime();
+
     if (!db.briefingReports[targetDateKey]) {
-      db.briefingReports[targetDateKey] = buildBriefingDraftFromHis(targetDateKey);
+      return syncBriefingReportWithHis(targetDateKey);
     }
+
     const report = db.briefingReports[targetDateKey];
+    if (latestMtime > 0 && (!report.lastHisSyncTimeMs || latestMtime > report.lastHisSyncTimeMs)) {
+      return syncBriefingReportWithHis(targetDateKey);
+    }
 
     const dutyDocsShort = getDutyDoctorsAbbr(targetDateKey);
 
@@ -3774,17 +3900,19 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && pathname === '/api/briefing-auto-fetch-his') {
     const { dateKey, roomKey } = await readBody(req);
     const targetDate = dateKey || getDateKey(new Date());
-    const freshDraft = buildBriefingDraftFromHis(targetDate);
+    const syncedReport = syncBriefingReportWithHis(targetDate);
+
+    broadcastState(`🔄 Đã đồng bộ số liệu mới nhất từ HIS vào Báo cáo Giao ban ngày ${targetDate}`);
 
     if (roomKey && roomKey !== 'all') {
-      const roomDraft = freshDraft.roomReports[roomKey];
+      const roomDraft = syncedReport.roomReports[roomKey];
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, roomKey, roomReport: roomDraft }));
+      res.end(JSON.stringify({ ok: true, roomKey, roomReport: roomDraft, report: syncedReport }));
       return;
     }
 
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ ok: true, report: freshDraft }));
+    res.end(JSON.stringify({ ok: true, report: syncedReport }));
     return;
   }
 

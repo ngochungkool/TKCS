@@ -4,3 +4,6 @@ node_modules/
 auth_sessions.json
 backup_before_clean_test_data.json
 test_data_archive/
+uploads_his/
+uploads_clinical/
+__pycache__/

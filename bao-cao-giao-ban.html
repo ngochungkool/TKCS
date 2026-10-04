@@ -1771,7 +1771,33 @@
       fetchBriefingReport(currentDateKey);
       setupGlobalPasteListener();
       setupKeyboardNavigation();
+      initStreamListener();
     });
+
+    // Realtime SSE Listener for auto updates
+    function initStreamListener() {
+      try {
+        const es = new EventSource('/api/stream');
+        es.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            if (data && data.type === 'STATE_UPDATE') {
+              const note = (data.eventNote || '').toLowerCase();
+              if (note.includes('file') || note.includes('his') || note.includes('giao ban') || note.includes('đồng bộ')) {
+                // If user is currently focused in an input/textarea, do not interrupt
+                const activeEl = document.activeElement;
+                const isTyping = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA');
+                if (!isTyping) {
+                  fetchBriefingReport(currentDateKey);
+                }
+              }
+            }
+          } catch (e) {}
+        };
+      } catch (err) {
+        console.warn('SSE stream error:', err);
+      }
+    }
 
     // Realtime Clock
     function initRealtimeClock() {
