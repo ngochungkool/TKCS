@@ -1,5 +1,5 @@
 {
-  "version": 1791120832765,
+  "version": 1791121095970,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -276,7 +276,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 55728,
-      "uploadedAt": "20:26:44 4/10/2026",
+      "uploadedAt": "20:38:14 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -306,9 +306,9 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 107,
+      "dauCa": 106,
       "benhVao": 6,
-      "raVien": 1,
+      "raVien": 0,
       "chuyenDen": 0,
       "chuyenDi": 0,
       "tuVong": 0,
@@ -362,9 +362,9 @@
         "baoHiem": 38
       },
       "Hồi sức thần kinh": {
-        "dauCa": 9,
+        "dauCa": 8,
         "benhVao": 0,
-        "raVien": 1,
+        "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
@@ -373,7 +373,7 @@
         "baoHiem": 8
       }
     },
-    "updatedAt": "2026-10-04T13:26:45.467Z"
+    "updatedAt": "2026-10-04T13:38:15.374Z"
   },
   "wardRounds": {
     "tk1": {
@@ -3207,7 +3207,9 @@
         "0001425123",
         "0001425126",
         "0001103734",
-        "0000757171"
+        "0000757171",
+        "0001425221",
+        "0001425233"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -3224,7 +3226,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T13:33:52.763Z"
+      "updatedAt": "2026-10-04T13:38:15.374Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5546,7 +5548,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T13:33:52.764Z"
+      "updatedAt": "2026-10-04T13:38:15.374Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6774,7 +6776,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T13:33:52.764Z"
+      "updatedAt": "2026-10-04T13:38:15.374Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10635,7 +10637,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T13:33:52.764Z"
+      "updatedAt": "2026-10-04T13:38:15.375Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11527,7 +11529,6 @@
         "0001416828",
         "0001420321",
         "0001422339",
-        "0001423465",
         "0001423868",
         "0001421963",
         "0001412378",
@@ -11548,11 +11549,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T13:33:52.765Z"
+      "updatedAt": "2026-10-04T13:38:15.375Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "20:26 ngày 04/10/2026",
+  "lastExcelUploadTime": "20:38 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -11638,7 +11639,8 @@
               "diaChi": "Thạch Bàn Tây-Xã Hội Sơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-4",
@@ -11655,7 +11657,8 @@
               "diaChi": "thiết tràng-Phường An Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -11811,40 +11814,26 @@
             "nursesDay": "Việt - Quyên - Tân",
             "nursesNight": "Quyện - Nguyên - Vĩ",
             "orderly": "Phượng",
-            "xuatVien": 1,
+            "xuatVien": 0,
             "chamSocCap2": 4,
             "hoiChan": 2,
             "tangTren": 0,
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 9,
+            "benhCu": 8,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 1,
+            "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
             "hienCo": 8,
             "bhyt": 8
           },
           "admissions": [],
-          "discharges": [
-            {
-              "id": "dis-hstk-1",
-              "stt": 1,
-              "mabn": "0001423465",
-              "hoten": "TRÌNH THỊ CÚC HOA",
-              "tuoi": "76",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600371685",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            }
-          ],
+          "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
         }
@@ -11857,12 +11846,12 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 107,
+          "benhCu": 106,
           "vaoKK": 6,
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
-          "raRH": 1,
+          "raRH": 0,
           "raKhac": 0,
           "tuVong": 0,
           "hienCo": 112,
@@ -11871,8 +11860,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791120404868.7363,
-      "lastHisSyncTime": "2026-10-04T13:26:46.469Z"
+      "lastHisSyncTimeMs": 1791121094562.0388,
+      "lastHisSyncTime": "2026-10-04T13:38:15.968Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
