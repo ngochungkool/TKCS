@@ -1,5 +1,5 @@
 {
-  "version": 1791101249422,
+  "version": 1791101255421,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3122,7 +3122,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:07:29.418Z"
+      "updatedAt": "2026-10-04T08:07:35.418Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5444,7 +5444,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:07:29.418Z"
+      "updatedAt": "2026-10-04T08:07:35.418Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6659,7 +6659,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:07:29.419Z"
+      "updatedAt": "2026-10-04T08:07:35.418Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7304,7 +7304,8 @@
               "advancePayment": "",
               "updatedAt": "2026-10-04T04:31:19.332Z"
             }
-          }
+          },
+          "surgicalConsultation": null
         },
         "0001423062": {
           "mabn": "0001423062",
@@ -7752,26 +7753,9 @@
               "decision": "Đồng ý",
               "advancePayment": "10 triệu",
               "updatedAt": "2026-10-04T04:31:19.333Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "ĐAU LƯNG",
-              "surgeryMethod": "Phẫu thuật CSTL",
-              "decision": "Đồng ý",
-              "advancePayment": "10 triệu",
-              "updatedAt": "2026-10-04T04:31:19.333Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "ĐAU LƯNG",
-            "surgeryMethod": "Phẫu thuật CSTL",
-            "decision": "Đồng ý",
-            "advancePayment": "10 triệu",
-            "updatedAt": "2026-10-04T04:31:19.333Z"
-          }
+          "surgicalConsultation": null
         },
         "0001424144": {
           "mabn": "0001424144",
@@ -7889,25 +7873,7 @@
               "decision": "Đồng ý",
               "advancePayment": "10 triệu",
               "updatedAt": "2026-10-04T04:31:19.332Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "CT CSTL",
-              "surgeryMethod": "Phẫu thuật CT CSTL",
-              "decision": "Đồng ý",
-              "advancePayment": "10 triệu",
-              "updatedAt": "2026-10-04T04:31:19.332Z"
             }
-          },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "CT CSTL",
-            "surgeryMethod": "Phẫu thuật CT CSTL",
-            "decision": "Đồng ý",
-            "advancePayment": "10 triệu",
-            "updatedAt": "2026-10-04T04:31:19.332Z"
           }
         },
         "0001424346": {
@@ -10610,7 +10576,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:07:29.419Z"
+      "updatedAt": "2026-10-04T08:07:35.419Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11514,7 +11480,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:07:29.419Z"
+      "updatedAt": "2026-10-04T08:07:35.419Z"
     }
   },
   "episodeConsultations": {},
