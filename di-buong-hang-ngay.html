@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20261004_consult" />
   <script src="auth-client.js" defer></script>
 </head>
 <body>
@@ -76,7 +76,10 @@
               </div>
             </div>
 
-            <div class="tk1-toolbar-right">
+            <div class="tk1-toolbar-right" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <button type="button" class="btn-dept-consult-select" id="btn-open-select-consult-dept" title="Chọn bệnh nhân của phòng đưa vào danh sách Hội chẩn khoa theo ngày">
+                👨‍⚕️ Chọn bệnh hội chẩn khoa
+              </button>
               <button type="button" class="btn-tk1-png-a4" id="btn-tk1-export-png-a4">
                 📸 Tải sơ đồ giường
               </button>
@@ -299,6 +302,58 @@
         </div>
       </div>
       <div id="feature-slot-hstk"></div>
+    </section>
+
+    <!-- =======================================================================
+         HỘI CHẨN KHOA (TAB HỘI CHẨN MỔ HẰNG NGÀY CHO TOÀN KHOA)
+         ======================================================================= -->
+    <section id="room-workspace-hoi-chan-khoa" class="room-workspace-panel" data-room-key="hoi-chan-khoa" data-room-name="Hội chẩn khoa">
+      <div class="dept-consult-ws-header">
+        <div style="width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+            <div class="dept-consult-brand-badge">
+              <span style="font-size:1.6rem;">👨‍⚕️</span>
+              <div>
+                <h3 style="color:#15803d;margin:0;font-size:1.25rem;font-weight:800;font-family:'Be Vietnam Pro',sans-serif;">HỘI CHẨN KHOA</h3>
+                <div style="font-size:0.78rem;color:#475569;font-weight:600;">Hội đồng hội chẩn duyệt mổ & điều trị hằng ngày · Toàn khoa Ngoại Thần Kinh</div>
+              </div>
+            </div>
+
+            <!-- Bộ chọn ngày hội chẩn (BẮT BUỘC theo yêu cầu 3) -->
+            <div class="dept-consult-date-wrap">
+              <label for="dept-consult-date-picker" style="font-size:0.82rem;font-weight:800;color:#166534;margin:0;">📅 Ngày hội chẩn:</label>
+              <input type="date" id="dept-consult-date-picker" class="ward-date-selector date-input" style="height:32px;font-size:0.85rem;font-weight:800;font-family:'Be Vietnam Pro',sans-serif;padding:2px 8px;border-color:#22c55e;" />
+              <button type="button" class="btn-bed-mini" id="btn-dept-consult-today" style="font-size:0.75rem;padding:3px 9px;background:#15803d;color:#ffffff;border-color:#14532d;font-weight:700;">Hôm nay</button>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <input type="text" id="dept-consult-search-input" placeholder="🔍 Tìm theo tên, giường, phòng, CĐ, PP mổ..." class="date-input" style="height:34px;width:260px;font-size:0.82rem;" />
+            <button type="button" class="btn-primary-sm" id="btn-dept-consult-add-patient" style="background:#15803d;border-color:#14532d;height:34px;font-weight:800;font-size:0.84rem;display:inline-flex;align-items:center;gap:5px;cursor:pointer;">
+              ➕ Thêm BN vào HC khoa
+            </button>
+            <button type="button" class="btn-tool-lookup" id="btn-dept-consult-print" style="margin:0;height:34px;background:#0369a1;color:#ffffff;border:1px solid #0284c7;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;" title="Xem bản in danh sách hội chẩn A4">
+              🖨️ In danh sách A4
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. Thanh KPI Dashboard thống kê nhanh -->
+      <div class="dept-consult-kpi-bar" id="dept-consult-kpi-bar"></div>
+
+      <!-- 2. Bộ lọc theo phòng -->
+      <div class="dept-consult-room-filters" id="dept-consult-room-filters">
+        <button type="button" class="dept-filter-pill active" data-filter-room="ALL">Toàn khoa (<span id="dept-filter-cnt-all">0</span>)</button>
+        <button type="button" class="dept-filter-pill" data-filter-room="tk1">Thần kinh 1 (<span id="dept-filter-cnt-tk1">0</span>)</button>
+        <button type="button" class="dept-filter-pill" data-filter-room="tk2">Thần kinh 2 (<span id="dept-filter-cnt-tk2">0</span>)</button>
+        <button type="button" class="dept-filter-pill" data-filter-room="tk3">Thần kinh 3 (<span id="dept-filter-cnt-tk3">0</span>)</button>
+        <button type="button" class="dept-filter-pill" data-filter-room="tk4">Thần kinh 4 (<span id="dept-filter-cnt-tk4">0</span>)</button>
+        <button type="button" class="dept-filter-pill" data-filter-room="hstk">Hồi sức TK (<span id="dept-filter-cnt-hstk">0</span>)</button>
+      </div>
+
+      <!-- 3. Lưới các thẻ bệnh nhân hội chẩn -->
+      <div class="dept-consult-cards-container" id="dept-consult-cards-container"></div>
     </section>
   </div>
 
@@ -638,14 +693,135 @@
     <div class="modal-body" id="tk4-pick-patient-sc-body" style="padding:1rem 1.25rem;font-family:'Be Vietnam Pro',sans-serif;"></div>
   </dialog>
 
-  <script src="ward-tk1.js"></script>
+  <!-- MODAL 5: CHỌN BỆNH NHÂN ĐƯA VÀO HỘI CHẨN KHOA (TK1, TK2, TK3, HSTK & Tab Hội Chẩn) -->
+  <dialog id="dept-consult-select-modal" class="modal-dialog dept-consult-select-dialog">
+    <div class="modal-header" style="background:linear-gradient(135deg, #15803d 0%, #166534 100%);color:#ffffff;padding:0.9rem 1.35rem;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:1.3rem;">👨‍⚕️</span>
+        <h4 id="dept-consult-select-title" style="margin:0;font-size:1.05rem;font-weight:800;color:#ffffff;font-family:'Be Vietnam Pro',sans-serif;">
+          Chọn bệnh nhân đưa vào Hội chẩn khoa
+        </h4>
+      </div>
+      <button type="button" class="btn-secondary" onclick="document.getElementById('dept-consult-select-modal').close()" style="color:#ffffff;background:rgba(255,255,255,0.2);border:none;">✕</button>
+    </div>
+    <div class="modal-body" style="padding:1.1rem 1.35rem;display:flex;flex-direction:column;gap:1rem;font-family:'Be Vietnam Pro',sans-serif;">
+      <!-- Chọn ngày hội chẩn (BẮT BUỘC theo yêu cầu 3) & Chọn phòng -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#f0fdf4;border:1.5px solid #86efac;border-radius:11px;padding:0.75rem 1rem;">
+        <div>
+          <label style="font-size:0.8rem;font-weight:800;color:#166534;display:block;margin-bottom:4px;">
+            📅 Ngày hội chẩn (Bắt buộc):
+          </label>
+          <input type="date" id="dept-consult-modal-date" class="date-input" style="width:100%;height:36px;font-size:0.85rem;font-weight:800;border-color:#22c55e;" />
+        </div>
+        <div>
+          <label style="font-size:0.8rem;font-weight:800;color:#166534;display:block;margin-bottom:4px;">
+            🏥 Phòng điều trị:
+          </label>
+          <select id="dept-consult-modal-room-sel" class="date-input" style="width:100%;height:36px;font-size:0.85rem;font-weight:700;">
+            <option value="tk1">Thần kinh 1</option>
+            <option value="tk2">Thần kinh 2</option>
+            <option value="tk3">Thần kinh 3</option>
+            <option value="tk4">Thần kinh 4</option>
+            <option value="hstk">Hồi sức thần kinh</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Ô tìm kiếm bệnh nhân nhanh trong phòng -->
+      <div>
+        <input type="text" id="dept-consult-modal-search" class="date-input" placeholder="🔍 Tìm nhanh theo tên, số giường, SVV, chẩn đoán..." style="width:100%;height:36px;font-size:0.84rem;" />
+      </div>
+
+      <!-- Danh sách bệnh nhân trong phòng -->
+      <div style="font-size:0.78rem;font-weight:800;color:#475569;margin-bottom:-4px;">
+        DANH SÁCH BỆNH NHÂN HIỆN CÓ TRONG PHÒNG:
+      </div>
+      <div id="dept-consult-modal-patient-list" style="max-height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px;">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+    <div class="modal-footer" style="padding:0.85rem 1.35rem;background:#f8fafc;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+      <span id="dept-consult-modal-status-text" style="font-size:0.8rem;color:#15803d;font-weight:700;"></span>
+      <div style="display:flex;gap:8px;">
+        <button type="button" class="btn-secondary" onclick="document.getElementById('dept-consult-select-modal').close()">Đóng</button>
+        <button type="button" class="btn-tool-lookup" id="btn-dept-consult-modal-goto-tab" style="background:#0284c7;color:#ffffff;border:1px solid #0369a1;font-weight:700;display:none;">
+          🚀 Xem Tab Hội Chẩn Khoa
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL 6: HỘP THOẠI RIÊNG CHO THẦN KINH 4 (YÊU CẦU 2: CHỈ CHỌN NGÀY & CHẨN ĐOÁN BAN ĐẦU) -->
+  <dialog id="tk4-add-consult-simple-dialog" class="modal-dialog tk4-simple-consult-dialog">
+    <div class="modal-header" style="background:linear-gradient(135deg, #15803d 0%, #166534 100%);color:#ffffff;padding:0.9rem 1.3rem;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:1.3rem;">🔪</span>
+        <h4 style="margin:0;font-size:1.05rem;font-weight:800;color:#ffffff;font-family:'Be Vietnam Pro',sans-serif;">
+          Đưa bệnh nhân vào Hội chẩn khoa
+        </h4>
+      </div>
+      <button type="button" class="btn-secondary" onclick="document.getElementById('tk4-add-consult-simple-dialog').close()" style="color:#ffffff;background:rgba(255,255,255,0.2);border:none;">✕</button>
+    </div>
+    <div class="modal-body" style="padding:1.15rem 1.3rem;display:flex;flex-direction:column;gap:1rem;font-family:'Be Vietnam Pro',sans-serif;">
+      <!-- Tóm tắt thông tin bệnh nhân -->
+      <div id="tk4-simple-consult-patient-box" style="background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:10px;padding:0.75rem 0.95rem;font-size:0.85rem;"></div>
+
+      <!-- Chọn ngày hội chẩn (BẮT BUỘC) -->
+      <div>
+        <label for="tk4-simple-consult-date" style="font-size:0.82rem;font-weight:800;color:#166534;display:block;margin-bottom:4px;">
+          📅 Ngày hội chẩn (Bắt buộc):
+        </label>
+        <input type="date" id="tk4-simple-consult-date" class="date-input" style="width:100%;height:38px;font-size:0.88rem;font-weight:800;border-color:#22c55e;" required />
+      </div>
+
+      <!-- Chẩn đoán ban đầu (Bác sĩ có thể chỉnh sửa) -->
+      <div>
+        <label for="tk4-simple-consult-diag" style="font-size:0.82rem;font-weight:800;color:#166534;display:block;margin-bottom:4px;">
+          📝 Chẩn đoán ban đầu:
+        </label>
+        <input type="text" id="tk4-simple-consult-diag" class="date-input" style="width:100%;height:38px;font-size:0.85rem;font-weight:700;" placeholder="Nhập chẩn đoán ban đầu đưa ra hội chẩn..." />
+        <div style="font-size:0.74rem;color:#64748b;margin-top:4px;">
+          💡 Các thông tin còn lại (Phẫu thuật, PP mổ, Tiền ứng, Máu...) sẽ thao tác trong Tab Hội chẩn khoa.
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" style="padding:0.85rem 1.3rem;background:#f8fafc;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+      <button type="button" class="btn-secondary" onclick="document.getElementById('tk4-add-consult-simple-dialog').close()">Đóng</button>
+      <div style="display:flex;gap:8px;">
+        <button type="button" class="btn-primary-sm" id="btn-tk4-simple-consult-save" style="background:#15803d;border-color:#14532d;padding:0.55rem 1.25rem;font-weight:800;cursor:pointer;">
+          💾 Xác nhận đưa vào Hội chẩn
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL 7: XEM TRƯỚC VÀ IN DANH SÁCH HỘI CHẨN A4 -->
+  <dialog id="dept-consult-print-modal" class="modal-dialog dept-consult-print-dialog">
+    <div class="modal-header" style="background:#1e293b;color:#ffffff;padding:0.85rem 1.35rem;display:flex;align-items:center;justify-content:space-between;">
+      <h4 style="margin:0;color:#ffffff;font-size:1.05rem;font-weight:800;">🖨️ Danh sách Hội chẩn mổ khoa — Bản in A4</h4>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button type="button" class="btn-primary-sm" onclick="window.print()" style="background:#0284c7;border-color:#0369a1;padding:0.45rem 1rem;font-weight:800;cursor:pointer;">
+          🖨️ In trang này
+        </button>
+        <button type="button" class="btn-secondary" onclick="document.getElementById('dept-consult-print-modal').close()">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" style="padding:1.5rem;background:#f8fafc;max-height:80vh;overflow-y:auto;">
+      <div id="dept-consult-print-area" style="background:#ffffff;padding:1.5rem;border:1px solid #cbd5e1;border-radius:8px;font-family:'Be Vietnam Pro',sans-serif;">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </dialog>
+
+  <script src="ward-tk1.js?v=20261004_consult"></script>
   <script>
     const WARD_ROOMS_CONFIG = [
       { key: 'tk1',  name: 'Thần kinh 1',       isHstk: false },
       { key: 'tk2',  name: 'Thần kinh 2',       isHstk: false },
       { key: 'tk3',  name: 'Thần kinh 3',       isHstk: false },
       { key: 'tk4',  name: 'Thần kinh 4',       isHstk: false },
-      { key: 'hstk', name: 'Hồi sức thần kinh', isHstk: true  }
+      { key: 'hstk', name: 'Hồi sức thần kinh', isHstk: true  },
+      { key: 'hoi-chan-khoa', name: 'Hội chẩn khoa', isConsultTab: true }
     ];
 
     const SHIFT_LABELS = {
@@ -663,7 +839,8 @@
       tk2:  { roomName: 'Thần kinh 2',       init() {} },
       tk3:  { roomName: 'Thần kinh 3',       init() {} },
       tk4:  { roomName: 'Thần kinh 4',       init() {} },
-      hstk: { roomName: 'Hồi sức thần kinh', init() {} }
+      hstk: { roomName: 'Hồi sức thần kinh', init() {} },
+      'hoi-chan-khoa': { roomName: 'Hội chẩn khoa', init() {} }
     };
 
     let currentSelectedRoomKey = 'tk1';
@@ -708,6 +885,15 @@
         panel.classList.toggle('active', isMatch);
       });
 
+      if (found.key === 'hoi-chan-khoa') {
+        if (window.TK1Module && window.TK1Module.switchRoom) {
+          window.TK1Module.switchRoom('hoi-chan-khoa');
+        } else if (window.TK1Module && window.TK1Module.renderDeptConsultWorkspace) {
+          window.TK1Module.renderDeptConsultWorkspace();
+        }
+        return;
+      }
+
       const sharedDom = document.getElementById('ward-shared-workspace-dom');
       const targetSlot = document.getElementById(`feature-slot-${found.key}`);
       if (sharedDom && targetSlot && sharedDom.parentElement !== targetSlot) {
@@ -723,20 +909,90 @@
         if (scModalSection) scModalSection.style.display = 'none';
       }
 
+      // Ẩn/Hiện nút "Chọn bệnh hội chẩn khoa" ở các phòng
+      const btnDeptConsult = document.getElementById('btn-open-select-consult-dept');
+      if (btnDeptConsult) {
+        btnDeptConsult.style.display = (found.key === 'tk4') ? 'none' : 'inline-flex';
+      }
+
       if (window.TK1Module && window.TK1Module.switchRoom) {
         window.TK1Module.switchRoom(found.key);
       }
     }
 
-    // Bỏ nút "Đang mở / Mở ...", phòng đang chọn mở rộng, 4 phòng còn lại tự động thu nhỏ gọn gàng
+    // Render thanh phòng + tab Hội chẩn khoa
     function renderWard5RoomsGrid() {
       const gridEl = document.getElementById('ward-5rooms-grid');
       if (!gridEl) return;
 
       const byRoomStats = (wardDbState.patientStats && wardDbState.patientStats.byRoom) || {};
+      const todayKey = getDateKey(new Date());
 
       gridEl.innerHTML = WARD_ROOMS_CONFIG.map((room) => {
         const isSelected = room.key === currentSelectedRoomKey;
+
+        // Xử lý riêng cho tab Hội Chẩn Khoa
+        if (room.isConsultTab) {
+          let consultCount = 0;
+          let surgCount = 0;
+          if (window.TK1Module && window.TK1Module.getDeptConsultStatsForDate) {
+            const stats = window.TK1Module.getDeptConsultStatsForDate(todayKey);
+            consultCount = stats.total;
+            surgCount = stats.surg;
+          }
+
+          if (isSelected) {
+            return `
+              <div
+                class="ward-room-card ward-consult-tab-card active"
+                data-select-room="${room.key}"
+                role="button"
+                tabindex="0"
+                style="background:linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);border-color:#16a34a;"
+              >
+                <div>
+                  <div class="ward-room-top" style="display:flex;align-items:center;gap:6px;">
+                    <span style="font-size:1.15rem;">👨‍⚕️</span>
+                    <div class="ward-room-name" style="color:#15803d;font-weight:900;">HỘI CHẨN KHOA</div>
+                    <span class="ward-consult-active-pill">Đang mở</span>
+                  </div>
+                  <div class="ward-room-docs" style="margin-top:0.2rem;color:#166534;">
+                    Hội đồng duyệt mổ & điều trị hằng ngày
+                  </div>
+                </div>
+
+                <div class="ward-room-stats-row">
+                  <div class="ward-mini-stat" style="background:#dcfce7;border:1.5px solid #86efac;padding:2px 10px;border-radius:6px;">
+                    <span class="wms-lbl" style="font-weight:800;color:#166534;">Hôm nay:</span>
+                    <span class="wms-val" style="font-weight:900;color:#14532d;font-size:0.92rem;">${consultCount} ca (${surgCount} mổ)</span>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+
+          return `
+            <div
+              class="ward-room-card ward-consult-tab-card is-compact"
+              data-select-room="${room.key}"
+              role="button"
+              tabindex="0"
+              title="Bấm để mở danh sách Hội chẩn khoa"
+              style="border-color:#86efac;background:#f0fdf4;"
+            >
+              <div class="ward-room-top" style="display:flex;align-items:center;justify-content:space-between;gap:4px;">
+                <div class="ward-room-name" style="color:#15803d;font-weight:800;display:flex;align-items:center;gap:4px;">
+                  <span>👨‍⚕️</span> Hội chẩn khoa
+                </div>
+                <span class="ward-compact-count-pill" style="background:#15803d;color:#ffffff;font-weight:800;">${consultCount} ca</span>
+              </div>
+              <div class="ward-room-docs" style="color:#166534;font-size:0.75rem;">
+                Duyệt mổ toàn khoa
+              </div>
+            </div>
+          `;
+        }
+
         const roomDocs = (wardDbState.doctors || [])
           .filter(d => d.assignedRoom === room.name)
           .sort((a, b) => (a.seniority || 999) - (b.seniority || 999));
@@ -806,6 +1062,7 @@
       const byRoomStats = (wardDbState.patientStats && wardDbState.patientStats.byRoom) || {};
 
       for (const room of WARD_ROOMS_CONFIG) {
+        if (room.isConsultTab) continue;
         const docsEl = document.getElementById(`ws-docs-${room.key}`);
 
         const roomDocs = (wardDbState.doctors || [])

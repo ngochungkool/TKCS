@@ -2130,38 +2130,80 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (action === 'SAVE_SURGICAL_CONSULTATION') {
-      const { mabn, dateKey, postConsultDiagnosis, surgeryMethod, decision, advancePayment, bloodMl, isConsulted } = body;
-      const rec = tk1.patientRecords[mabn];
+      const { mabn, dateKey, postConsultDiagnosis, surgeryMethod, decision, advancePayment, bloodMl, isConsulted, isSurgical, treatmentPlan } = body;
+      let rec = tk1.patientRecords ? tk1.patientRecords[mabn] : null;
+      let foundRoom = tk1;
+      if (!rec && db.wardRounds) {
+        for (const [rk, rObj] of Object.entries(db.wardRounds)) {
+          if (rObj && rObj.patientRecords && rObj.patientRecords[mabn]) {
+            rec = rObj.patientRecords[mabn];
+            foundRoom = rObj;
+            break;
+          }
+        }
+      }
       if (rec) {
         const targetDate = dateKey || todayKey;
         if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
+        const isSurgVal = isSurgical !== undefined
+          ? Boolean(isSurgical)
+          : (decision === 'Đồng ý' || (surgeryMethod && surgeryMethod.length > 0));
+
         const consultObj = {
           isConsulted: isConsulted !== undefined ? Boolean(isConsulted) : true,
+          isSurgical: isSurgVal,
           dateKey: targetDate,
           postConsultDiagnosis: String(postConsultDiagnosis !== undefined ? postConsultDiagnosis : (rec.chanDoanHis || '')).trim(),
           surgeryMethod: String(surgeryMethod || '').trim(),
           decision: String(decision || '').trim(),
           advancePayment: String(advancePayment || '').trim(),
           bloodMl: String(bloodMl || '').trim(),
+          treatmentPlan: String(treatmentPlan || '').trim(),
+          roomKey: foundRoom.roomKey || 'tk1',
+          roomName: foundRoom.roomName || 'Khoa Ngoại Thần Kinh',
           updatedAt: new Date().toISOString()
         };
         rec.surgicalConsultationsByDate[targetDate] = consultObj;
         rec.surgicalConsultation = consultObj;
-        broadcastState(`🔪 Đã lưu hội chẩn mổ BN ${rec.hoten} (${tk1.roomName})`);
+
+        // Đồng bộ ngược với thông tin bệnh nhân của phòng:
+        if (postConsultDiagnosis && postConsultDiagnosis.trim()) {
+          rec.customDiagnosis = postConsultDiagnosis.trim();
+        }
+        if (treatmentPlan && treatmentPlan.trim()) {
+          rec.consultTreatment = treatmentPlan.trim();
+          if (!rec.tasksByDate) rec.tasksByDate = {};
+          if (!rec.tasksByDate[targetDate]) rec.tasksByDate[targetDate] = {};
+          rec.tasksByDate[targetDate].note = treatmentPlan.trim();
+        }
+
+        broadcastState(`🔪 Đã lưu hội chẩn khoa BN ${rec.hoten} (${foundRoom.roomName || 'Khoa'})`);
       }
       return sendWardResponse();
     }
 
     if (action === 'DELETE_SURGICAL_CONSULTATION') {
       const { mabn, dateKey } = body;
-      const rec = tk1.patientRecords[mabn];
+      let rec = tk1.patientRecords ? tk1.patientRecords[mabn] : null;
+      let foundRoom = tk1;
+      if (!rec && db.wardRounds) {
+        for (const [rk, rObj] of Object.entries(db.wardRounds)) {
+          if (rObj && rObj.patientRecords && rObj.patientRecords[mabn]) {
+            rec = rObj.patientRecords[mabn];
+            foundRoom = rObj;
+            break;
+          }
+        }
+      }
       if (rec) {
         const targetDate = dateKey || todayKey;
         if (rec.surgicalConsultationsByDate) {
           delete rec.surgicalConsultationsByDate[targetDate];
         }
-        delete rec.surgicalConsultation;
-        broadcastState(`🗑️ Đã xoá BN ${rec.hoten} khỏi danh sách hội chẩn mổ (${tk1.roomName})`);
+        if (rec.surgicalConsultation && rec.surgicalConsultation.dateKey === targetDate) {
+          delete rec.surgicalConsultation;
+        }
+        broadcastState(`🗑️ Đã xoá BN ${rec.hoten} khỏi danh sách hội chẩn khoa (${foundRoom.roomName || 'Khoa'})`);
       }
       return sendWardResponse();
     }
@@ -4620,7 +4662,11 @@ const server = http.createServer(async (req, res) => {
       return;
     }
     const ext = path.extname(filePath).toLowerCase();
-    res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || 'application/octet-stream' });
+    const headers = { 'Content-Type': MIME_TYPES[ext] || 'application/octet-stream' };
+    if (ext === '.html' || ext === '.css' || ext === '.js') {
+      headers['Cache-Control'] = 'no-cache, must-revalidate';
+    }
+    res.writeHead(200, headers);
     res.end(data);
   });
 });

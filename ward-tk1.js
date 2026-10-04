@@ -540,54 +540,33 @@
       `;
     }
 
-    let tk4SurgConsultBannerHtml = '';
-    if (currentRoomKey === 'tk4') {
-      const sc = getPatientSurgicalConsultation(rec, curDateKey);
-      const isConsulted = Boolean(sc && sc.isConsulted);
-      if (isConsulted) {
-        const dec = sc.decision || '';
-        let badgeBg = '#f0fdf4';
-        let badgeBorder = '#86efac';
-        let badgeColor = '#166534';
-        let badgeText = 'Đã đưa vào HC mổ';
+    let deptConsultRoomTagHtml = '';
+    const sc = getPatientSurgicalConsultation(rec, curDateKey);
+    const isConsulted = Boolean(sc && sc.isConsulted);
+    if (isConsulted) {
+      const isSurg = Boolean(sc.isSurgical !== undefined ? sc.isSurgical : (sc.decision === 'Đồng ý' || (sc.surgeryMethod && sc.surgeryMethod.length > 0)));
+      let badgeCls = isSurg ? 'is-surg' : 'is-nosurg';
+      let badgeText = isSurg ? '✓ Có phẫu thuật' : (sc.decision || 'Chờ duyệt');
 
-        if (dec === 'Đồng ý') {
-          badgeBg = '#dcfce7';
-          badgeBorder = '#4ade80';
-          badgeColor = '#15803d';
-          badgeText = '✓ Đồng ý mổ';
-        } else if (dec === 'Hội ý') {
-          badgeBg = '#fef3c7';
-          badgeBorder = '#fcd34d';
-          badgeColor = '#b45309';
-          badgeText = '💬 Hội ý thêm';
-        } else if (dec === 'Không đồng ý') {
-          badgeBg = '#fee2e2';
-          badgeBorder = '#fca5a5';
-          badgeColor = '#dc2626';
-          badgeText = '✕ Không đồng ý';
-        }
+      const methodStr = sc.surgeryMethod ? ` · <strong>PP:</strong> ${sc.surgeryMethod}` : '';
+      const diagStr = sc.postConsultDiagnosis ? ` · <strong>CĐ:</strong> ${sc.postConsultDiagnosis}` : '';
+      const bloodStr = sc.bloodMl ? ` · <strong>Máu:</strong> ${sc.bloodMl}` : '';
+      const payStr = sc.advancePayment ? ` · <strong>Ứng:</strong> ${sc.advancePayment}` : '';
 
-        const methodStr = sc.surgeryMethod ? ` · <strong>PP:</strong> ${sc.surgeryMethod}` : '';
-        const diagStr = sc.postConsultDiagnosis ? ` · <strong>CĐ:</strong> ${sc.postConsultDiagnosis}` : '';
-        const bloodStr = sc.bloodMl ? ` · <strong>Máu:</strong> ${sc.bloodMl}` : '';
-        const payStr = sc.advancePayment ? ` · <strong>Ứng:</strong> ${sc.advancePayment}` : '';
-
-        tk4SurgConsultBannerHtml = `
-          <div class="tk4-card-surg-banner" style="background:${badgeBg};border:1px solid ${badgeBorder};cursor:pointer;" data-open-tk4-consult="${rec.mabn}" title="Bấm để xem/sửa thông tin hội chẩn mổ">
-            <div style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.75rem;color:${badgeColor};">
-              🔪 <span style="font-weight:800;padding:1px 6px;border-radius:4px;background:#ffffff;border:1px solid ${badgeBorder};">${badgeText}</span>
-              ${methodStr || diagStr}
-              ${bloodStr}
-              ${payStr}
-            </div>
-            <div style="display:flex;align-items:center;gap:3px;flex-shrink:0;" onclick="event.stopPropagation();">
-              <button type="button" class="btn-bed-mini" data-open-tk4-consult="${rec.mabn}" style="padding:1px 6px;font-size:0.7rem;color:${badgeColor};border-color:${badgeBorder};">Sửa</button>
-              <button type="button" class="btn-bed-mini" data-remove-tk4-consult="${rec.mabn}" style="padding:1px 5px;font-size:0.7rem;color:#dc2626;border-color:#fca5a5;background:#fee2e2;" title="Xoá ca này khỏi danh sách hội chẩn mổ hôm nay">✕</button>
-            </div>
+      deptConsultRoomTagHtml = `
+        <div class="dept-consult-room-tag" onclick="event.stopPropagation(); window.TK1Module.goToDeptConsultDate('${curDateKey}', '${rec.mabn}')" title="Bệnh nhân có trong danh sách Hội chẩn khoa ngày ${formatDateDisplayVN(curDateKey)} — Bấm để chuyển tới Tab Hội chẩn khoa">
+          <div class="dc-tag-main">
+            <span class="dc-tag-badge">👨‍⚕️ HC KHOA [${formatDateDisplayVN(curDateKey)}]</span>
+            <span class="dc-tag-surg-status ${badgeCls}">${badgeText}</span>
+            ${methodStr || diagStr}
+            ${bloodStr}
+            ${payStr}
           </div>
-        `;
-      }
+          <button type="button" class="btn-bed-mini dc-tag-view-btn" onclick="event.stopPropagation(); window.TK1Module.goToDeptConsultDate('${curDateKey}', '${rec.mabn}')" title="Xem ca này trong Tab Hội chẩn khoa">
+            Xem HC ➔
+          </button>
+        </div>
+      `;
     }
 
     return `
@@ -608,12 +587,12 @@
             ${
               currentRoomKey === 'tk4'
                 ? (function() {
-                    const sc = getPatientSurgicalConsultation(rec, curDateKey);
-                    const isAdded = Boolean(sc && sc.isConsulted);
+                    const scItem = getPatientSurgicalConsultation(rec, curDateKey);
+                    const isAdded = Boolean(scItem && scItem.isConsulted);
                     if (isAdded) {
-                      return `<button type="button" class="btn-bed-mini" style="background:#dcfce7;color:#15803d;border-color:#86efac;font-weight:800;" title="Đã có trong danh sách HC mổ hôm nay — Bấm để sửa" data-open-tk4-consult="${rec.mabn}">✓ Đã thêm HC mổ</button>`;
+                      return `<button type="button" class="btn-bed-mini" style="background:#dcfce7;color:#15803d;border-color:#4ade80;font-weight:800;" title="Đã có trong danh sách HC ngày ${formatDateDisplayVN(curDateKey)} — Bấm để sửa ngày/CĐ ban đầu" onclick="event.stopPropagation(); window.TK1Module.openTk4SimpleConsultDialog('${rec.mabn}')">✓ Đã thêm HC</button>`;
                     } else {
-                      return `<button type="button" class="btn-bed-mini" style="background:#f0fdf4;color:#166534;border-color:#86efac;font-weight:700;" title="Đưa ca này vào danh sách Hội chẩn mổ ngày hôm nay" data-add-tk4-consult="${rec.mabn}">➕ Thêm hội chẩn mổ</button>`;
+                      return `<button type="button" class="btn-bed-mini" style="background:#f0fdf4;color:#166534;border-color:#86efac;font-weight:700;" title="Đưa ca này vào danh sách Hội chẩn khoa" onclick="event.stopPropagation(); window.TK1Module.openTk4SimpleConsultDialog('${rec.mabn}')">➕ Thêm hội chẩn</button>`;
                     }
                   })()
                 : ''
@@ -642,7 +621,7 @@
         </div>
 
         ${tk2SurgeryBarHtml}
-        ${tk4SurgConsultBannerHtml}
+        ${deptConsultRoomTagHtml}
 
         ${
           recentHist
@@ -985,6 +964,991 @@
         });
       }
     }
+  }
+
+  // =========================================================================
+  // HỘI CHẨN KHOA: QUẢN LÝ HỘI CHẨN MỔ HẰNG NGÀY TOÀN KHOA
+  // (Đồng bộ đa phòng, thẻ bệnh nhân fit đẹp, quản lý theo ngày, hộp thoại riêng TK4)
+  // =========================================================================
+  let activeDeptConsultDate = getTodayKey();
+  let activeDeptConsultFilterRoom = 'ALL';
+  let deptConsultSearchQuery = '';
+  let activeTk4SimpleMabn = null;
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // Lấy toàn bộ bệnh nhân đang điều trị từ cả 5 phòng trong khoa
+  function getAllActivePatientsAcrossDept() {
+    const list = [];
+    const roomConfigs = [
+      { key: 'tk1', name: 'Thần kinh 1' },
+      { key: 'tk2', name: 'Thần kinh 2' },
+      { key: 'tk3', name: 'Thần kinh 3' },
+      { key: 'tk4', name: 'Thần kinh 4' },
+      { key: 'hstk', name: 'Hồi sức thần kinh' }
+    ];
+    roomConfigs.forEach(r => {
+      const rState = allRoomsState[r.key];
+      if (!rState || !rState.patientRecords) return;
+      Object.values(rState.patientRecords).forEach(rec => {
+        if (rec.removed?.isRemoved) return;
+        let bedCode = null;
+        for (const [b, m] of Object.entries(rState.bedAssignments || {})) {
+          if (m === rec.mabn) { bedCode = b; break; }
+        }
+        list.push({
+          ...rec,
+          patientRoomKey: r.key,
+          patientRoomName: r.name,
+          patientBedCode: bedCode
+        });
+      });
+    });
+    return list;
+  }
+
+  // Lấy danh sách bệnh nhân có hội chẩn theo ngày cụ thể
+  function getAllConsultPatientsForDate(dateKey) {
+    const allPts = getAllActivePatientsAcrossDept();
+    const dKey = dateKey || activeDeptConsultDate;
+    return allPts
+      .filter(p => {
+        const sc = getPatientSurgicalConsultation(p, dKey);
+        return Boolean(sc && sc.isConsulted);
+      })
+      .map(p => ({
+        ...p,
+        consultData: getPatientSurgicalConsultation(p, dKey)
+      }));
+  }
+
+  // Thống kê nhanh hội chẩn cho một ngày
+  function getDeptConsultStatsForDate(dateKey) {
+    const pts = getAllConsultPatientsForDate(dateKey);
+    let surg = 0;
+    let noSurg = 0;
+    let discuss = 0;
+    let totalAdvance = 0;
+    let totalBlood = 0;
+
+    pts.forEach(p => {
+      const c = p.consultData || {};
+      const isS = Boolean(c.isSurgical !== undefined ? c.isSurgical : (c.decision === 'Đồng ý' || (c.surgeryMethod && c.surgeryMethod.length > 0)));
+      if (isS) surg++;
+      else noSurg++;
+
+      if (c.decision === 'Hội ý') discuss++;
+
+      const payNum = parseFloat(String(c.advancePayment || '').replace(/[^\d.]/g, ''));
+      if (!isNaN(payNum)) totalAdvance += payNum;
+
+      const bNum = parseFloat(String(c.bloodMl || '').replace(/[^\d.]/g, ''));
+      if (!isNaN(bNum)) totalBlood += bNum;
+    });
+
+    return {
+      total: pts.length,
+      surg,
+      noSurg,
+      discuss,
+      totalAdvance,
+      totalBlood
+    };
+  }
+
+  // Render toàn bộ Workspace Hội Chẩn Khoa
+  function renderDeptConsultWorkspace() {
+    const wsSection = document.getElementById('room-workspace-hoi-chan-khoa');
+    if (!wsSection) return;
+
+    // Đảm bảo activeDeptConsultDate hợp lệ
+    if (!activeDeptConsultDate) activeDeptConsultDate = getSelectedDateKey();
+
+    // 1. Cập nhật date picker
+    const datePicker = document.getElementById('dept-consult-date-picker');
+    if (datePicker && datePicker.value !== activeDeptConsultDate) {
+      datePicker.value = activeDeptConsultDate;
+    }
+
+    // 2. Lấy dữ liệu hội chẩn ngày được chọn
+    const consultPts = getAllConsultPatientsForDate(activeDeptConsultDate);
+    const stats = getDeptConsultStatsForDate(activeDeptConsultDate);
+
+    // 3. Render thanh KPI
+    const kpiEl = document.getElementById('dept-consult-kpi-bar');
+    if (kpiEl) {
+      kpiEl.innerHTML = `
+        <div class="dept-kpi-card" style="border-left:4px solid #15803d;">
+          <div class="dept-kpi-icon" style="background:#dcfce7;color:#15803d;">📋</div>
+          <div class="dept-kpi-info">
+            <span class="dept-kpi-label">Tổng ca hội chẩn</span>
+            <span class="dept-kpi-value" style="color:#15803d;">${stats.total} ca</span>
+          </div>
+        </div>
+
+        <div class="dept-kpi-card" style="border-left:4px solid #16a34a;">
+          <div class="dept-kpi-icon" style="background:#dcfce7;color:#16a34a;">🔪</div>
+          <div class="dept-kpi-info">
+            <span class="dept-kpi-label">Chỉ định phẫu thuật</span>
+            <span class="dept-kpi-value" style="color:#16a34a;">${stats.surg} ca</span>
+          </div>
+        </div>
+
+        <div class="dept-kpi-card" style="border-left:4px solid #64748b;">
+          <div class="dept-kpi-icon" style="background:#f1f5f9;color:#475569;">💊</div>
+          <div class="dept-kpi-info">
+            <span class="dept-kpi-label">Điều trị nội khoa</span>
+            <span class="dept-kpi-value" style="color:#475569;">${stats.noSurg} ca</span>
+          </div>
+        </div>
+
+        <div class="dept-kpi-card" style="border-left:4px solid #d97706;">
+          <div class="dept-kpi-icon" style="background:#fef3c7;color:#d97706;">💬</div>
+          <div class="dept-kpi-info">
+            <span class="dept-kpi-label">Cần hội ý thêm</span>
+            <span class="dept-kpi-value" style="color:#d97706;">${stats.discuss} ca</span>
+          </div>
+        </div>
+
+        <div class="dept-kpi-card" style="border-left:4px solid #ea580c;">
+          <div class="dept-kpi-icon" style="background:#ffedd5;color:#ea580c;">💰</div>
+          <div class="dept-kpi-info">
+            <span class="dept-kpi-label">Tổng tiền tạm ứng</span>
+            <span class="dept-kpi-value" style="color:#ea580c;">${stats.totalAdvance > 0 ? `${stats.totalAdvance} triệu` : '0 tr'}</span>
+          </div>
+        </div>
+
+        <div class="dept-kpi-card" style="border-left:4px solid #dc2626;">
+          <div class="dept-kpi-icon" style="background:#fee2e2;color:#dc2626;">🩸</div>
+          <div class="dept-kpi-info">
+            <span class="dept-kpi-label">Tổng máu dự trù</span>
+            <span class="dept-kpi-value" style="color:#dc2626;">${stats.totalBlood > 0 ? `${stats.totalBlood} ml` : '0 ml'}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // 4. Cập nhật số đếm trên các filter pills
+    const cntAll = document.getElementById('dept-filter-cnt-all');
+    if (cntAll) cntAll.textContent = stats.total;
+
+    ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].forEach(rk => {
+      const el = document.getElementById(`dept-filter-cnt-${rk}`);
+      if (el) {
+        el.textContent = consultPts.filter(p => p.patientRoomKey === rk).length;
+      }
+    });
+
+    document.querySelectorAll('#dept-consult-room-filters .dept-filter-pill').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-filter-room') === activeDeptConsultFilterRoom);
+    });
+
+    // 5. Lọc danh sách bệnh nhân
+    const q = (deptConsultSearchQuery || '').toLowerCase().trim();
+    const filteredList = consultPts.filter(p => {
+      if (activeDeptConsultFilterRoom !== 'ALL' && p.patientRoomKey !== activeDeptConsultFilterRoom) {
+        return false;
+      }
+      if (!q) return true;
+      const c = p.consultData || {};
+      const bed = p.patientBedCode || '';
+      const text = `${p.hoten} ${p.mabn} ${p.tuoi} ${bed} ${p.patientRoomName} ${p.chanDoanHis || ''} ${p.customDiagnosis || ''} ${c.postConsultDiagnosis || ''} ${c.surgeryMethod || ''} ${c.decision || ''}`.toLowerCase();
+      return text.includes(q);
+    });
+
+    // Sắp xếp: TK4 trước, rồi theo giường
+    const roomWeight = { tk4: 1, tk1: 2, tk2: 3, tk3: 4, hstk: 5 };
+    filteredList.sort((a, b) => {
+      const wA = roomWeight[a.patientRoomKey] || 99;
+      const wB = roomWeight[b.patientRoomKey] || 99;
+      if (wA !== wB) return wA - wB;
+      const bedA = a.patientBedCode || '';
+      const bedB = b.patientBedCode || '';
+      if (bedA && !bedB) return -1;
+      if (!bedA && bedB) return 1;
+      if (bedA && bedB) return bedA.localeCompare(bedB, undefined, { numeric: true });
+      return a.hoten.localeCompare(b.hoten, 'vi');
+    });
+
+    // 6. Render danh sách thẻ
+    const containerEl = document.getElementById('dept-consult-cards-container');
+    if (!containerEl) return;
+
+    if (consultPts.length === 0) {
+      containerEl.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; background: #ffffff; border: 1.5px dashed #86efac; border-radius: 14px;">
+          <div style="font-size: 2.4rem; margin-bottom: 8px;">📋</div>
+          <div style="font-size: 1.1rem; font-weight: 800; color: #15803d; margin-bottom: 6px;">
+            Chưa có bệnh nhân nào trong danh sách Hội chẩn khoa ngày ${formatDateDisplayVN(activeDeptConsultDate)}
+          </div>
+          <div style="font-size: 0.85rem; color: #64748b; margin-bottom: 16px;">
+            Mỗi phòng (TK1, TK2, TK3, HSTK) có nút <strong>"Chọn bệnh hội chẩn khoa"</strong>, riêng Thần kinh 4 có nút <strong>"Thêm hội chẩn"</strong> trên từng bệnh nhân.<br>
+            Hoặc bạn có thể bấm nút bên dưới để chọn bệnh nhân ngay tại đây:
+          </div>
+          <button type="button" class="btn-primary-sm" onclick="window.TK1Module.openSelectPatientForConsultDeptModal('ALL')" style="background:#15803d;border-color:#14532d;padding:0.6rem 1.4rem;font-weight:800;font-size:0.9rem;cursor:pointer;">
+            ➕ Chọn bệnh nhân đưa vào Hội chẩn khoa
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    if (filteredList.length === 0) {
+      containerEl.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 2rem 1rem; background: #ffffff; border: 1.5px dashed #cbd5e1; border-radius: 14px; color: #64748b;">
+          Không tìm thấy bệnh nhân nào khớp với bộ lọc hoặc từ khoá "<strong>${escapeHtml(q)}</strong>".
+        </div>
+      `;
+      return;
+    }
+
+    containerEl.innerHTML = filteredList.map(p => renderDeptConsultPatientCard(p)).join('');
+  }
+
+  // Render thẻ chi tiết bệnh nhân trong Tab Hội Chẩn Khoa (Đảm bảo Yêu cầu 5)
+  function renderDeptConsultPatientCard(p) {
+    const c = p.consultData || {};
+    const roomKey = p.patientRoomKey || 'tk1';
+    const roomCls = `dc-room-${roomKey}`;
+    const bedLabel = p.patientBedCode ? formatBedLabel(p.patientBedCode) : 'Chưa xếp giường';
+    const isSurg = Boolean(c.isSurgical !== undefined ? c.isSurgical : (c.decision === 'Đồng ý' || (c.surgeryMethod && c.surgeryMethod.length > 0)));
+    const dec = c.decision || '';
+
+    return `
+      <div class="dept-consult-card ${isSurg ? 'is-surg' : 'is-nonsurg'}" id="dc-card-${p.mabn}">
+        <!-- Card Header: Thông tin cơ bản -->
+        <div class="dc-card-header">
+          <div class="dc-card-title-group">
+            <span class="dc-room-badge ${roomCls}">${p.patientRoomName}</span>
+            <span class="dc-bed-badge">${bedLabel}</span>
+            <a href="javascript:void(0)" class="dc-patient-name" onclick="window.TK1Module.openPatientModal('${p.mabn}')" title="Xem hồ sơ bệnh nhân">
+              ${p.hoten}
+            </a>
+            <span class="dc-patient-meta">· ${p.tuoi || '--'} · SVV: <strong>${p.soVaoVien || p.maKcb || p.mabn}</strong> · Vào viện: ${p.ngayVaoStr || '--'}</span>
+          </div>
+          <div>
+            <span class="dc-tag-surg-status ${isSurg ? 'is-surg' : 'is-nosurg'}">
+              ${isSurg ? '✓ Có phẫu thuật' : (dec ? dec : 'Chờ duyệt')}
+            </span>
+          </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="dc-card-body">
+          <!-- Chẩn đoán ban đầu / HIS để đối chiếu -->
+          <div class="dc-initial-diag-row">
+            <strong>🔍 CĐ ban đầu (HIS):</strong> ${escapeHtml(p.chanDoanHis || p.customDiagnosis || 'Chưa có chẩn đoán ban đầu')}
+          </div>
+
+          <!-- Chẩn đoán sau hội chẩn (Yêu cầu 5) -->
+          <div class="dc-field-block">
+            <label class="dc-field-label" for="dc-diag-${p.mabn}">
+              📝 Chẩn đoán sau hội chẩn:
+            </label>
+            <input
+              type="text"
+              class="date-input"
+              id="dc-diag-${p.mabn}"
+              value="${escapeHtml(c.postConsultDiagnosis || p.customDiagnosis || p.chanDoanHis || '')}"
+              placeholder="Nhập kết luận chẩn đoán sau khi hội chẩn..."
+              style="width:100%;height:35px;font-size:0.85rem;font-weight:700;color:#0f172a;"
+            />
+          </div>
+
+          <!-- Phẫu thuật: tick có / không tick (Yêu cầu 5) + Kết luận duyệt mổ -->
+          <div class="dc-surg-toggle-row">
+            <label class="dc-surg-chk-label">
+              <input
+                type="checkbox"
+                id="dc-surg-${p.mabn}"
+                ${isSurg ? 'checked' : ''}
+                onchange="window.TK1Module.toggleCardSurgStatus('${p.mabn}', this.checked)"
+              />
+              <span>Phẫu thuật</span>
+            </label>
+
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-size:0.75rem;font-weight:700;color:#166534;">Kết luận:</span>
+              <select class="dc-decision-select" id="dc-dec-${p.mabn}">
+                <option value="" ${!dec ? 'selected' : ''}>-- Kết luận duyệt --</option>
+                <option value="Đồng ý" ${dec === 'Đồng ý' ? 'selected' : ''} style="color:#15803d;font-weight:800;">✓ Đồng ý phẫu thuật</option>
+                <option value="Hội ý" ${dec === 'Hội ý' ? 'selected' : ''} style="color:#b45309;font-weight:800;">💬 Cần hội ý thêm</option>
+                <option value="Không đồng ý" ${dec === 'Không đồng ý' ? 'selected' : ''} style="color:#dc2626;font-weight:800;">✕ Không đồng ý</option>
+                <option value="Điều trị nội khoa" ${dec === 'Điều trị nội khoa' ? 'selected' : ''} style="color:#475569;font-weight:800;">💊 Điều trị nội khoa</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Phương pháp phẫu thuật, Tiền ứng, Máu (Yêu cầu 5) -->
+          <div class="dc-surg-details-grid">
+            <div class="dc-field-block">
+              <label class="dc-field-label" for="dc-method-${p.mabn}">
+                🔪 Phương pháp phẫu thuật:
+              </label>
+              <input
+                type="text"
+                class="date-input"
+                id="dc-method-${p.mabn}"
+                value="${escapeHtml(c.surgeryMethod || '')}"
+                placeholder="VD: Mở sọ bóc u, Cố định CS..."
+                style="width:100%;height:35px;font-size:0.83rem;font-weight:700;color:#1e40af;"
+              />
+            </div>
+
+            <div class="dc-field-block">
+              <label class="dc-field-label" for="dc-pay-${p.mabn}">
+                💰 Tiền ứng (triệu):
+              </label>
+              <input
+                type="text"
+                class="date-input"
+                id="dc-pay-${p.mabn}"
+                value="${cleanPaymentForInput(c.advancePayment)}"
+                placeholder="VD: 5, 10..."
+                title="Nhập số tiền ứng, đơn vị là triệu VNĐ"
+                style="width:100%;height:35px;font-size:0.83rem;font-weight:800;color:#b45309;"
+              />
+            </div>
+
+            <div class="dc-field-block">
+              <label class="dc-field-label" for="dc-blood-${p.mabn}">
+                🩸 Máu (ml):
+              </label>
+              <input
+                type="text"
+                class="date-input"
+                id="dc-blood-${p.mabn}"
+                value="${cleanBloodForInput(c.bloodMl)}"
+                placeholder="VD: 250, 500..."
+                title="Lượng máu cần dự trù (ml)"
+                style="width:100%;height:35px;font-size:0.83rem;font-weight:700;color:#b91c1c;"
+              />
+            </div>
+          </div>
+
+          <!-- Hướng xử trí / Ghi chú (Đồng bộ với đi buồng) -->
+          <div class="dc-field-block">
+            <label class="dc-field-label" for="dc-plan-${p.mabn}" style="color:#0369a1;">
+              📋 Hướng xử trí / Ghi chú kết luận:
+            </label>
+            <input
+              type="text"
+              class="date-input"
+              id="dc-plan-${p.mabn}"
+              value="${escapeHtml(c.treatmentPlan || p.tasksByDate?.[activeDeptConsultDate]?.note || p.consultDetails?.consultTreatment || '')}"
+              placeholder="Hướng chuẩn bị, hội ý chuyên khoa, ghi chú xử trí..."
+              style="width:100%;height:33px;font-size:0.82rem;"
+            />
+          </div>
+        </div>
+
+        <!-- Card Footer: Nút Thao tác -->
+        <div class="dc-card-footer">
+          <button
+            type="button"
+            class="btn-bed-mini"
+            style="background:#fee2e2;color:#dc2626;border-color:#fca5a5;font-weight:700;height:32px;padding:0 9px;"
+            onclick="window.TK1Module.removePatientFromDeptConsult('${p.mabn}')"
+            title="Xoá ca này khỏi danh sách hội chẩn ngày ${formatDateDisplayVN(activeDeptConsultDate)}"
+          >
+            🗑️ Xoá khỏi HC
+          </button>
+
+          <div style="display:flex;align-items:center;gap:6px;">
+            <button
+              type="button"
+              class="btn-bed-mini"
+              style="background:#f1f5f9;color:#334155;border-color:#cbd5e1;font-weight:700;height:32px;padding:0 9px;"
+              onclick="window.TK1Module.openPatientModal('${p.mabn}')"
+              title="Xem đầy đủ hồ sơ bệnh nhân"
+            >
+              🔍 Xem BN
+            </button>
+            <button
+              type="button"
+              class="btn-primary-sm"
+              id="btn-save-dc-${p.mabn}"
+              style="background:#15803d;border-color:#14532d;font-weight:800;height:32px;padding:0 14px;cursor:pointer;"
+              onclick="window.TK1Module.saveDeptConsultCard('${p.mabn}', this)"
+              title="Lưu thông tin hội chẩn ca này và đồng bộ về phòng"
+            >
+              💾 Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Chuyển đổi trạng thái phẫu thuật trên thẻ
+  function toggleCardSurgStatus(mabn, isChecked) {
+    const card = document.getElementById(`dc-card-${mabn}`);
+    const decSel = document.getElementById(`dc-dec-${mabn}`);
+    if (card) {
+      card.classList.toggle('is-surg', isChecked);
+      card.classList.toggle('is-nonsurg', !isChecked);
+    }
+    if (decSel) {
+      if (isChecked && !decSel.value) {
+        decSel.value = 'Đồng ý';
+      } else if (!isChecked && decSel.value === 'Đồng ý') {
+        decSel.value = 'Điều trị nội khoa';
+      }
+    }
+  }
+
+  // Lưu thẻ hội chẩn trong Tab Hội Chẩn Khoa
+  async function saveDeptConsultCard(mabn, btnEl) {
+    const dKey = activeDeptConsultDate || getSelectedDateKey();
+    const diag = (document.getElementById(`dc-diag-${mabn}`)?.value || '').trim();
+    const isSurg = Boolean(document.getElementById(`dc-surg-${mabn}`)?.checked);
+    const decision = document.getElementById(`dc-dec-${mabn}`)?.value || '';
+    const method = (document.getElementById(`dc-method-${mabn}`)?.value || '').trim();
+    const rawPayment = (document.getElementById(`dc-pay-${mabn}`)?.value || '').trim();
+    const rawBlood = (document.getElementById(`dc-blood-${mabn}`)?.value || '').trim();
+    const treatmentPlan = (document.getElementById(`dc-plan-${mabn}`)?.value || '').trim();
+
+    const payment = formatPaymentWithMillion(rawPayment);
+    const bloodMl = formatBloodMl(rawBlood);
+
+    const origText = btnEl ? btnEl.innerHTML : '💾 Lưu';
+    if (btnEl) btnEl.innerHTML = '⏳';
+
+    await callTk1Api({
+      action: 'SAVE_SURGICAL_CONSULTATION',
+      mabn,
+      dateKey: dKey,
+      postConsultDiagnosis: diag,
+      surgeryMethod: method,
+      decision,
+      advancePayment: payment,
+      bloodMl,
+      isSurgical: isSurg,
+      treatmentPlan,
+      isConsulted: true
+    });
+
+    // Cập nhật local state
+    const consultObj = {
+      isConsulted: true,
+      isSurgical: isSurg,
+      dateKey: dKey,
+      postConsultDiagnosis: diag,
+      surgeryMethod: method,
+      decision,
+      advancePayment: payment,
+      bloodMl,
+      treatmentPlan,
+      updatedAt: new Date().toISOString()
+    };
+
+    if (allRoomsState) {
+      Object.values(allRoomsState).forEach(r => {
+        if (r && r.patientRecords && r.patientRecords[mabn]) {
+          const rec = r.patientRecords[mabn];
+          if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
+          rec.surgicalConsultationsByDate[dKey] = consultObj;
+          rec.surgicalConsultation = consultObj;
+          if (diag) rec.customDiagnosis = diag;
+          if (treatmentPlan) {
+            rec.consultTreatment = treatmentPlan;
+            if (!rec.tasksByDate) rec.tasksByDate = {};
+            if (!rec.tasksByDate[dKey]) rec.tasksByDate[dKey] = {};
+            rec.tasksByDate[dKey].note = treatmentPlan;
+          }
+        }
+      });
+    }
+
+    if (btnEl) {
+      btnEl.innerHTML = '✓ Đã lưu';
+      btnEl.style.background = '#16a34a';
+      setTimeout(() => {
+        btnEl.innerHTML = origText;
+        btnEl.style.background = '#15803d';
+      }, 1400);
+    }
+
+    // Cập nhật KPI và thanh phòng
+    renderDeptConsultWorkspace();
+    if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
+  }
+
+  // Xoá bệnh nhân khỏi hội chẩn khoa
+  async function removePatientFromDeptConsult(mabn) {
+    const dKey = activeDeptConsultDate || getSelectedDateKey();
+    let pName = mabn;
+    if (allRoomsState) {
+      for (const r of Object.values(allRoomsState)) {
+        if (r?.patientRecords?.[mabn]) {
+          pName = r.patientRecords[mabn].hoten;
+          break;
+        }
+      }
+    }
+
+    if (!confirm(`Bạn có chắc muốn xoá bệnh nhân [${pName}] khỏi danh sách Hội chẩn khoa ngày ${formatDateDisplayVN(dKey)}?`)) {
+      return;
+    }
+
+    await callTk1Api({
+      action: 'DELETE_SURGICAL_CONSULTATION',
+      mabn,
+      dateKey: dKey
+    });
+
+    if (allRoomsState) {
+      Object.values(allRoomsState).forEach(r => {
+        if (r?.patientRecords?.[mabn]) {
+          const rec = r.patientRecords[mabn];
+          if (rec.surgicalConsultationsByDate) {
+            delete rec.surgicalConsultationsByDate[dKey];
+          }
+          if (rec.surgicalConsultation && (!rec.surgicalConsultation.dateKey || rec.surgicalConsultation.dateKey === dKey)) {
+            delete rec.surgicalConsultation;
+          }
+        }
+      });
+    }
+
+    renderDeptConsultWorkspace();
+    if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
+  }
+
+  // Mở modal chọn bệnh nhân đưa vào Hội chẩn khoa (Yêu cầu 1 & 3)
+  function openSelectPatientForConsultDeptModal(defaultRoomKey = 'ALL') {
+    const dlg = document.getElementById('dept-consult-select-modal');
+    if (!dlg) return;
+
+    const dateInp = document.getElementById('dept-consult-modal-date');
+    const roomSel = document.getElementById('dept-consult-modal-room-sel');
+    const searchInp = document.getElementById('dept-consult-modal-search');
+    const titleEl = document.getElementById('dept-consult-select-title');
+
+    // Ngày hội chẩn (BẮT BUỘC)
+    const targetDate = activeDeptConsultDate || getSelectedDateKey();
+    if (dateInp) dateInp.value = targetDate;
+
+    // Phòng điều trị
+    const initialRoom = (defaultRoomKey && defaultRoomKey !== 'ALL') ? defaultRoomKey : currentRoomKey;
+    const finalRoom = (initialRoom && initialRoom !== 'hoi-chan-khoa') ? initialRoom : 'tk1';
+    if (roomSel) roomSel.value = finalRoom;
+
+    if (searchInp) searchInp.value = '';
+
+    const roomNames = {
+      tk1: 'Thần kinh 1',
+      tk2: 'Thần kinh 2',
+      tk3: 'Thần kinh 3',
+      tk4: 'Thần kinh 4',
+      hstk: 'Hồi sức thần kinh'
+    };
+    if (titleEl) {
+      titleEl.innerHTML = `Chọn bệnh nhân đưa vào Hội chẩn khoa — <strong>${roomNames[finalRoom] || 'Toàn khoa'}</strong>`;
+    }
+
+    renderDeptConsultSelectModalList();
+    dlg.showModal();
+  }
+
+  // Render danh sách bệnh nhân trong modal chọn bệnh nhân
+  function renderDeptConsultSelectModalList() {
+    const listEl = document.getElementById('dept-consult-modal-patient-list');
+    const dateInp = document.getElementById('dept-consult-modal-date');
+    const roomSel = document.getElementById('dept-consult-modal-room-sel');
+    const searchInp = document.getElementById('dept-consult-modal-search');
+    if (!listEl || !dateInp || !roomSel) return;
+
+    const selDate = dateInp.value || getTodayKey();
+    const selRoom = roomSel.value || 'tk1';
+    const q = (searchInp?.value || '').toLowerCase().trim();
+
+    const targetRoomState = allRoomsState?.[selRoom] || (currentRoomKey === selRoom ? tk1State : null);
+    const patients = Object.values(targetRoomState?.patientRecords || {}).filter(r => !r.removed?.isRemoved);
+
+    const filtered = patients.filter(p => {
+      if (!q) return true;
+      let bed = '';
+      for (const [b, m] of Object.entries(targetRoomState?.bedAssignments || {})) {
+        if (m === p.mabn) { bed = b; break; }
+      }
+      const text = `${p.hoten} ${p.mabn} ${p.tuoi} ${bed} ${p.chanDoanHis || ''} ${p.customDiagnosis || ''}`.toLowerCase();
+      return text.includes(q);
+    });
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = `
+        <div style="text-align:center;padding:1.5rem;color:#64748b;font-size:0.85rem;">
+          Không tìm thấy bệnh nhân nào trong phòng này${q ? ` khớp từ khoá "${escapeHtml(q)}"` : ''}.
+        </div>
+      `;
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(p => {
+      let bedCode = null;
+      for (const [b, m] of Object.entries(targetRoomState?.bedAssignments || {})) {
+        if (m === p.mabn) { bedCode = b; break; }
+      }
+      const bedLabel = bedCode ? formatBedLabel(bedCode) : 'Chưa xếp giường';
+      const sc = getPatientSurgicalConsultation(p, selDate);
+      const isAlreadyAdded = Boolean(sc && sc.isConsulted);
+
+      return `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#ffffff;border:1.5px solid ${isAlreadyAdded ? '#86efac' : '#e2e8f0'};border-radius:10px;padding:0.65rem 0.9rem;">
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+              <span class="dc-bed-badge">${bedLabel}</span>
+              <strong style="color:#0f172a;font-size:0.92rem;">${p.hoten}</strong>
+              <span style="font-size:0.75rem;color:#64748b;">· ${p.tuoi || '--'} · SVV: ${p.soVaoVien || p.maKcb || p.mabn}</span>
+            </div>
+            <div style="font-size:0.75rem;color:#475569;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+              <strong>CĐ ban đầu:</strong> ${escapeHtml(p.customDiagnosis || p.chanDoanHis || 'Chưa có')}
+            </div>
+          </div>
+
+          <div style="flex-shrink:0;">
+            ${
+              isAlreadyAdded
+                ? `<span style="font-size:0.75rem;font-weight:800;color:#15803d;background:#dcfce7;border:1px solid #86efac;padding:4px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;">
+                    ✓ Đã trong HC ngày ${formatDateDisplayVN(selDate)}
+                  </span>`
+                : `<button
+                    type="button"
+                    class="btn-primary-sm"
+                    style="background:#15803d;border-color:#14532d;font-weight:800;font-size:0.8rem;padding:0.4rem 0.9rem;cursor:pointer;"
+                    onclick="window.TK1Module.addPatientToConsultFromModal('${p.mabn}', this)"
+                  >
+                    ➕ Đưa vào HC
+                  </button>`
+            }
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Thao tác bấm thêm bệnh nhân từ trong modal
+  async function addPatientToConsultFromModal(mabn, btnEl) {
+    const dateInp = document.getElementById('dept-consult-modal-date');
+    const targetDate = dateInp?.value || getTodayKey();
+
+    let pRec = null;
+    if (allRoomsState) {
+      for (const r of Object.values(allRoomsState)) {
+        if (r?.patientRecords?.[mabn]) {
+          pRec = r.patientRecords[mabn];
+          break;
+        }
+      }
+    }
+    const defaultDiag = pRec?.customDiagnosis || pRec?.chanDoanHis || '';
+
+    if (btnEl) {
+      btnEl.innerHTML = '⏳';
+      btnEl.disabled = true;
+    }
+
+    await callTk1Api({
+      action: 'SAVE_SURGICAL_CONSULTATION',
+      mabn,
+      dateKey: targetDate,
+      postConsultDiagnosis: defaultDiag,
+      surgeryMethod: '',
+      decision: '',
+      advancePayment: '',
+      bloodMl: '',
+      isSurgical: false,
+      isConsulted: true
+    });
+
+    const consultObj = {
+      isConsulted: true,
+      isSurgical: false,
+      dateKey: targetDate,
+      postConsultDiagnosis: defaultDiag,
+      surgeryMethod: '',
+      decision: '',
+      advancePayment: '',
+      bloodMl: '',
+      updatedAt: new Date().toISOString()
+    };
+
+    if (allRoomsState) {
+      Object.values(allRoomsState).forEach(r => {
+        if (r?.patientRecords?.[mabn]) {
+          const rec = r.patientRecords[mabn];
+          if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
+          rec.surgicalConsultationsByDate[targetDate] = consultObj;
+          rec.surgicalConsultation = consultObj;
+        }
+      });
+    }
+
+    // Hiển thị nút xem Tab Hội Chẩn Khoa
+    const gotoBtn = document.getElementById('btn-dept-consult-modal-goto-tab');
+    if (gotoBtn) gotoBtn.style.display = 'inline-flex';
+
+    const statusText = document.getElementById('dept-consult-modal-status-text');
+    if (statusText) {
+      statusText.textContent = `✓ Đã thêm ${pRec?.hoten || 'BN'} vào HC ngày ${formatDateDisplayVN(targetDate)}!`;
+    }
+
+    renderDeptConsultSelectModalList();
+    renderDeptConsultWorkspace();
+    renderTk1Workspace();
+    if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
+  }
+
+  // Hộp thoại đơn giản riêng cho Thần kinh 4 (Yêu cầu 2: Chỉ chọn ngày hội chẩn & chẩn đoán ban đầu)
+  function openTk4SimpleConsultDialog(mabn) {
+    activeTk4SimpleMabn = mabn;
+    const rec = tk1State.patientRecords?.[mabn] || allRoomsState?.tk4?.patientRecords?.[mabn];
+    if (!rec) return;
+
+    const dlg = document.getElementById('tk4-add-consult-simple-dialog');
+    const patientBox = document.getElementById('tk4-simple-consult-patient-box');
+    const dateInp = document.getElementById('tk4-simple-consult-date');
+    const diagInp = document.getElementById('tk4-simple-consult-diag');
+    if (!dlg) return;
+
+    const curDateKey = getSelectedDateKey();
+    const bedCode = getBedOfPatient(mabn);
+    const bedLabel = bedCode ? formatBedLabel(bedCode) : 'Chưa xếp giường';
+
+    if (patientBox) {
+      patientBox.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+          <div>
+            <span class="dc-bed-badge" style="background:#dcfce7;color:#166534;border-color:#86efac;">${bedLabel}</span>
+            <strong style="font-size:0.96rem;color:#0f172a;margin-left:5px;">${rec.hoten}</strong>
+            <span style="font-size:0.78rem;color:#64748b;">· ${rec.tuoi || '--'}</span>
+          </div>
+          <span style="font-size:0.78rem;color:#004aad;font-weight:700;">SVV: ${rec.soVaoVien || rec.maKcb || rec.mabn}</span>
+        </div>
+        <div style="font-size:0.76rem;color:#475569;margin-top:4px;">
+          <strong>Chẩn đoán HIS:</strong> ${escapeHtml(rec.chanDoanHis || 'Chưa có')}
+        </div>
+      `;
+    }
+
+    if (dateInp) {
+      dateInp.value = curDateKey;
+    }
+
+    if (diagInp) {
+      const existingSc = getPatientSurgicalConsultation(rec, curDateKey);
+      diagInp.value = existingSc?.postConsultDiagnosis || rec.customDiagnosis || rec.chanDoanHis || '';
+    }
+
+    dlg.showModal();
+  }
+
+  // Xác nhận lưu từ hộp thoại đơn giản riêng của TK4
+  async function saveTk4SimpleConsult() {
+    if (!activeTk4SimpleMabn) return;
+    const mabn = activeTk4SimpleMabn;
+    const dateInp = document.getElementById('tk4-simple-consult-date');
+    const diagInp = document.getElementById('tk4-simple-consult-diag');
+    const saveBtn = document.getElementById('btn-tk4-simple-consult-save');
+
+    const targetDate = dateInp?.value;
+    if (!targetDate) {
+      alert('Vui lòng chọn ngày hội chẩn!');
+      return;
+    }
+
+    const diag = (diagInp?.value || '').trim();
+
+    if (saveBtn) {
+      saveBtn.innerHTML = '⏳ Đang lưu...';
+      saveBtn.disabled = true;
+    }
+
+    await callTk1Api({
+      action: 'SAVE_SURGICAL_CONSULTATION',
+      mabn,
+      dateKey: targetDate,
+      postConsultDiagnosis: diag,
+      surgeryMethod: '',
+      decision: '',
+      advancePayment: '',
+      bloodMl: '',
+      isSurgical: false,
+      isConsulted: true
+    });
+
+    const consultObj = {
+      isConsulted: true,
+      isSurgical: false,
+      dateKey: targetDate,
+      postConsultDiagnosis: diag,
+      surgeryMethod: '',
+      decision: '',
+      advancePayment: '',
+      bloodMl: '',
+      updatedAt: new Date().toISOString()
+    };
+
+    if (allRoomsState) {
+      Object.values(allRoomsState).forEach(r => {
+        if (r?.patientRecords?.[mabn]) {
+          const rec = r.patientRecords[mabn];
+          if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
+          rec.surgicalConsultationsByDate[targetDate] = consultObj;
+          rec.surgicalConsultation = consultObj;
+          if (diag) rec.customDiagnosis = diag;
+        }
+      });
+    }
+
+    if (saveBtn) {
+      saveBtn.innerHTML = '💾 Xác nhận đưa vào Hội chẩn';
+      saveBtn.disabled = false;
+    }
+
+    const dlg = document.getElementById('tk4-add-consult-simple-dialog');
+    if (dlg) dlg.close();
+
+    renderTk1Workspace();
+    renderDeptConsultWorkspace();
+    if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
+
+    // Thông báo toast
+    let pName = mabn;
+    if (allRoomsState?.tk4?.patientRecords?.[mabn]) {
+      pName = allRoomsState.tk4.patientRecords[mabn].hoten;
+    }
+    showWardToast(`✓ Đã đưa BN ${pName} vào Hội chẩn khoa ngày ${formatDateDisplayVN(targetDate)}! Các thông tin còn lại thao tác tại Tab Hội chẩn khoa.`);
+  }
+
+  // Chuyển tới Tab Hội Chẩn Khoa và cuộn đến bệnh nhân cụ thể
+  function goToDeptConsultDate(dateKey, mabn) {
+    if (dateKey) {
+      activeDeptConsultDate = dateKey;
+    }
+    if (typeof selectWardRoom === 'function') {
+      selectWardRoom('hoi-chan-khoa');
+    }
+    renderDeptConsultWorkspace();
+
+    if (mabn) {
+      setTimeout(() => {
+        const card = document.getElementById(`dc-card-${mabn}`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.style.outline = '3px solid #16a34a';
+          card.style.boxShadow = '0 0 20px rgba(22, 163, 74, 0.4)';
+          setTimeout(() => {
+            card.style.outline = '';
+            card.style.boxShadow = '';
+          }, 2400);
+        }
+      }, 250);
+    }
+  }
+
+  // In danh sách Hội Chẩn Khoa A4 chuẩn y tế
+  function openDeptConsultPrintModal() {
+    const dlg = document.getElementById('dept-consult-print-modal');
+    const area = document.getElementById('dept-consult-print-area');
+    if (!dlg || !area) return;
+
+    const dKey = activeDeptConsultDate || getTodayKey();
+    const pts = getAllConsultPatientsForDate(dKey);
+
+    area.innerHTML = `
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div style="font-size:0.9rem;font-weight:700;color:#334155;text-transform:uppercase;">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
+        <div style="font-size:1rem;font-weight:800;color:#15803d;text-transform:uppercase;">KHOA NGOẠI THẦN KINH - CỘT SỐNG</div>
+        <div style="margin:1rem 0 0.5rem;font-size:1.35rem;font-weight:900;color:#0f172a;letter-spacing:-0.3px;">
+          DANH SÁCH BỆNH NHÂN HỘI CHẨN MỔ
+        </div>
+        <div style="font-size:0.88rem;color:#475569;font-weight:700;">
+          Ngày hội chẩn: ${formatDateDisplayVN(dKey)} · Tổng số: ${pts.length} ca
+        </div>
+      </div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;font-family:'Be Vietnam Pro',sans-serif;">
+        <thead>
+          <tr style="background:#f1f5f9;border-top:1.5px solid #0f172a;border-bottom:1.5px solid #0f172a;">
+            <th style="padding:7px 5px;border:1px solid #cbd5e1;width:35px;text-align:center;">STT</th>
+            <th style="padding:7px 8px;border:1px solid #cbd5e1;width:110px;">Phòng / Giường</th>
+            <th style="padding:7px 8px;border:1px solid #cbd5e1;width:160px;">Họ và tên</th>
+            <th style="padding:7px 5px;border:1px solid #cbd5e1;width:45px;text-align:center;">Tuổi</th>
+            <th style="padding:7px 8px;border:1px solid #cbd5e1;">Chẩn đoán sau hội chẩn</th>
+            <th style="padding:7px 8px;border:1px solid #cbd5e1;">Phương pháp phẫu thuật</th>
+            <th style="padding:7px 5px;border:1px solid #cbd5e1;width:75px;text-align:center;">Máu</th>
+            <th style="padding:7px 5px;border:1px solid #cbd5e1;width:75px;text-align:center;">Ứng</th>
+            <th style="padding:7px 8px;border:1px solid #cbd5e1;width:100px;text-align:center;">Kết luận duyệt</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${
+            pts.length > 0
+              ? pts.map((p, idx) => {
+                  const c = p.consultData || {};
+                  const bedLabel = p.patientBedCode ? formatBedLabel(p.patientBedCode) : 'Chưa xếp';
+                  const isSurg = Boolean(c.isSurgical !== undefined ? c.isSurgical : (c.decision === 'Đồng ý' || (c.surgeryMethod && c.surgeryMethod.length > 0)));
+                  return `
+                    <tr style="border-bottom:1px solid #cbd5e1;">
+                      <td style="padding:6px 4px;border:1px solid #cbd5e1;text-align:center;font-weight:700;">${idx + 1}</td>
+                      <td style="padding:6px 8px;border:1px solid #cbd5e1;">
+                        <span style="font-weight:700;">${p.patientRoomName}</span><br>
+                        <span style="color:#0369a1;font-weight:800;">${bedLabel}</span>
+                      </td>
+                      <td style="padding:6px 8px;border:1px solid #cbd5e1;">
+                        <strong style="color:#0f172a;font-size:0.86rem;">${p.hoten}</strong><br>
+                        <span style="font-size:0.72rem;color:#64748b;">SVV: ${p.soVaoVien || p.maKcb || p.mabn}</span>
+                      </td>
+                      <td style="padding:6px 4px;border:1px solid #cbd5e1;text-align:center;">${p.tuoi || '--'}</td>
+                      <td style="padding:6px 8px;border:1px solid #cbd5e1;font-weight:700;">
+                        ${escapeHtml(c.postConsultDiagnosis || p.customDiagnosis || p.chanDoanHis || '--')}
+                      </td>
+                      <td style="padding:6px 8px;border:1px solid #cbd5e1;color:#1e40af;font-weight:700;">
+                        ${escapeHtml(c.surgeryMethod || (isSurg ? 'Chưa nhập phương pháp' : 'Điều trị nội khoa'))}
+                      </td>
+                      <td style="padding:6px 4px;border:1px solid #cbd5e1;text-align:center;color:#b91c1c;font-weight:800;">
+                        ${c.bloodMl || '--'}
+                      </td>
+                      <td style="padding:6px 4px;border:1px solid #cbd5e1;text-align:center;color:#b45309;font-weight:800;">
+                        ${c.advancePayment || '--'}
+                      </td>
+                      <td style="padding:6px 8px;border:1px solid #cbd5e1;text-align:center;font-weight:800;">
+                        ${c.decision || (isSurg ? 'Đồng ý' : 'Nội khoa')}
+                      </td>
+                    </tr>
+                  `;
+                }).join('')
+              : `<tr><td colspan="9" style="text-align:center;padding:1.5rem;color:#64748b;">Không có bệnh nhân nào trong danh sách ngày này.</td></tr>`
+          }
+        </tbody>
+      </table>
+
+      <div style="display:flex;justify-content:space-between;margin-top:2.5rem;padding:0 2rem;font-size:0.88rem;">
+        <div style="text-align:center;">
+          <strong>BÁC SĨ ĐIỀU TRỊ</strong><br>
+          <span style="font-size:0.75rem;color:#64748b;">(Ký và ghi rõ họ tên)</span>
+        </div>
+        <div style="text-align:center;">
+          <strong>PHẪU THUẬT VIÊN</strong><br>
+          <span style="font-size:0.75rem;color:#64748b;">(Ký và ghi rõ họ tên)</span>
+        </div>
+        <div style="text-align:center;">
+          <strong>CHỦ TOẠ / TRƯỞNG KHOA</strong><br>
+          <span style="font-size:0.75rem;color:#64748b;">(Ký và ghi rõ họ tên)</span>
+        </div>
+      </div>
+    `;
+
+    dlg.showModal();
   }
 
   // =========================================================================
@@ -2655,12 +3619,27 @@
   }
 
   function openPatientModal(mabn) {
-    const rec = tk1State.patientRecords[mabn];
+    let rec = tk1State.patientRecords ? tk1State.patientRecords[mabn] : null;
+    let foundRoomKey = currentRoomKey;
+    if (!rec && allRoomsState) {
+      for (const [rk, rObj] of Object.entries(allRoomsState)) {
+        if (rObj?.patientRecords?.[mabn]) {
+          rec = rObj.patientRecords[mabn];
+          foundRoomKey = rk;
+          break;
+        }
+      }
+    }
     if (!rec) return;
     activeModalMabn = mabn;
 
     const curDateKey = getSelectedDateKey();
-    const curBed = getBedOfPatient(mabn);
+    let curBed = getBedOfPatient(mabn);
+    if (!curBed && allRoomsState?.[foundRoomKey]?.bedAssignments) {
+      for (const [b, m] of Object.entries(allRoomsState[foundRoomKey].bedAssignments)) {
+        if (m === mabn) { curBed = b; break; }
+      }
+    }
     const existingToday = (rec.tasksByDate && rec.tasksByDate[curDateKey]) || {};
 
     modalDraftTasks = {
@@ -3795,6 +4774,93 @@
     if (btnBoxAddPatient) {
       btnBoxAddPatient.addEventListener('click', openAddPatientToScDialog);
     }
+
+    // Gắn sự kiện cho các nút Hội Chẩn Khoa mới
+    const btnDeptConsult = document.getElementById('btn-open-select-consult-dept');
+    if (btnDeptConsult) {
+      btnDeptConsult.addEventListener('click', () => {
+        openSelectPatientForConsultDeptModal(currentRoomKey);
+      });
+    }
+
+    const dcDatePicker = document.getElementById('dept-consult-date-picker');
+    if (dcDatePicker) {
+      dcDatePicker.addEventListener('change', (e) => {
+        activeDeptConsultDate = e.target.value || getTodayKey();
+        renderDeptConsultWorkspace();
+        if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
+      });
+    }
+
+    const btnDcToday = document.getElementById('btn-dept-consult-today');
+    if (btnDcToday) {
+      btnDcToday.addEventListener('click', () => {
+        activeDeptConsultDate = getTodayKey();
+        const dp = document.getElementById('dept-consult-date-picker');
+        if (dp) dp.value = activeDeptConsultDate;
+        renderDeptConsultWorkspace();
+        if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
+      });
+    }
+
+    const dcSearchInp = document.getElementById('dept-consult-search-input');
+    if (dcSearchInp) {
+      dcSearchInp.addEventListener('input', (e) => {
+        deptConsultSearchQuery = e.target.value;
+        renderDeptConsultWorkspace();
+      });
+    }
+
+    const btnDcAddPatient = document.getElementById('btn-dept-consult-add-patient');
+    if (btnDcAddPatient) {
+      btnDcAddPatient.addEventListener('click', () => {
+        openSelectPatientForConsultDeptModal('ALL');
+      });
+    }
+
+    const btnDcPrint = document.getElementById('btn-dept-consult-print');
+    if (btnDcPrint) {
+      btnDcPrint.addEventListener('click', openDeptConsultPrintModal);
+    }
+
+    document.querySelectorAll('#dept-consult-room-filters .dept-filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeDeptConsultFilterRoom = btn.getAttribute('data-filter-room') || 'ALL';
+        renderDeptConsultWorkspace();
+      });
+    });
+
+    // Modal chọn bệnh nhân vào Hội chẩn khoa
+    const modalDcDate = document.getElementById('dept-consult-modal-date');
+    if (modalDcDate) {
+      modalDcDate.addEventListener('change', renderDeptConsultSelectModalList);
+    }
+
+    const modalDcRoom = document.getElementById('dept-consult-modal-room-sel');
+    if (modalDcRoom) {
+      modalDcRoom.addEventListener('change', renderDeptConsultSelectModalList);
+    }
+
+    const modalDcSearch = document.getElementById('dept-consult-modal-search');
+    if (modalDcSearch) {
+      modalDcSearch.addEventListener('input', renderDeptConsultSelectModalList);
+    }
+
+    const btnModalGotoTab = document.getElementById('btn-dept-consult-modal-goto-tab');
+    if (btnModalGotoTab) {
+      btnModalGotoTab.addEventListener('click', () => {
+        const dlg = document.getElementById('dept-consult-select-modal');
+        if (dlg) dlg.close();
+        const modalDate = document.getElementById('dept-consult-modal-date')?.value || getTodayKey();
+        goToDeptConsultDate(modalDate);
+      });
+    }
+
+    // Modal đơn giản riêng cho Thần kinh 4 (Yêu cầu 2)
+    const btnTk4SimpleSave = document.getElementById('btn-tk4-simple-consult-save');
+    if (btnTk4SimpleSave) {
+      btnTk4SimpleSave.addEventListener('click', saveTk4SimpleConsult);
+    }
   }
 
   async function fetchTk1InitialState() {
@@ -3819,7 +4885,13 @@
           }
         }
         if (data.episodeConsultations) globalEpisodeConsultations = data.episodeConsultations;
-        renderTk1Workspace();
+        
+        if (currentRoomKey === 'hoi-chan-khoa') {
+          renderDeptConsultWorkspace();
+        } else {
+          renderTk1Workspace();
+        }
+        if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
       }
     } catch (e) {
       console.error('Failed to load ward state:', e);
@@ -3835,6 +4907,12 @@
       if (!roomKey) return;
       currentRoomKey = roomKey;
       quickAssignSelectedMabn = null;
+
+      if (roomKey === 'hoi-chan-khoa') {
+        renderDeptConsultWorkspace();
+        if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
+        return;
+      }
 
       if (roomKey !== 'tk4') {
         const boxEl = document.getElementById('tk4-surgical-consult-box');
@@ -3857,6 +4935,7 @@
       } else {
         fetchTk1InitialState();
       }
+      if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
     },
     onServerStateUpdate(dbObj) {
       if (dbObj && dbObj.wardRounds) {
@@ -3872,7 +4951,13 @@
           }
         }
         if (dbObj.episodeConsultations) globalEpisodeConsultations = dbObj.episodeConsultations;
-        renderTk1Workspace();
+        
+        if (currentRoomKey === 'hoi-chan-khoa') {
+          renderDeptConsultWorkspace();
+        } else {
+          renderTk1Workspace();
+        }
+        if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
       }
     },
     openPatientModal,
@@ -3912,6 +4997,19 @@
         consultDetails: rec.consultDetails
       });
     },
+    // Expose các tính năng Hội Chẩn Khoa
+    renderDeptConsultWorkspace,
+    getDeptConsultStatsForDate,
+    openSelectPatientForConsultDeptModal,
+    addPatientToConsultFromModal,
+    openTk4SimpleConsultDialog,
+    saveTk4SimpleConsult,
+    saveDeptConsultCard,
+    removePatientFromDeptConsult,
+    toggleCardSurgStatus,
+    goToDeptConsultDate,
+    openDeptConsultPrintModal,
+    // Legacy support
     openTk4SurgConsultDialog,
     saveInlineScRow,
     renderTk4SurgicalConsultBox,
