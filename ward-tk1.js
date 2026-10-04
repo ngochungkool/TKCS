@@ -710,17 +710,24 @@
       sumTitleEl.textContent = `📋 Tổng hợp đi buồng — Ngày ${formatDateDisplayVN(curDateKey)}`;
     }
 
-    const { wingB } = getCurrentRoomConfig();
-    const maxBedNum = wingB[1];
+    const cfg = getCurrentRoomConfig();
+    const maxBedNum = (cfg.wingB && cfg.wingB[1]) || (cfg.wingA && cfg.wingA[1]) || 31;
     const assignedEntries = [];
     for (let i = 1; i <= maxBedNum; i++) {
       for (const code of [String(i), `${i}X`]) {
-        const mabn = tk1State.bedAssignments[code];
-        if (mabn && tk1State.patientRecords[mabn]) {
+        const mabn = tk1State.bedAssignments && tk1State.bedAssignments[code];
+        if (mabn && tk1State.patientRecords && tk1State.patientRecords[mabn]) {
           assignedEntries.push({ bedCode: code, rec: tk1State.patientRecords[mabn] });
         }
       }
     }
+    Object.entries(tk1State.bedAssignments || {}).forEach(([code, mabn]) => {
+      if (mabn && tk1State.patientRecords && tk1State.patientRecords[mabn]) {
+        if (!assignedEntries.some(e => e.bedCode === code)) {
+          assignedEntries.push({ bedCode: code, rec: tk1State.patientRecords[mabn] });
+        }
+      }
+    });
 
     // 1. Tab Xét nghiệm + CĐHA (Gộp cả Chỉ định XN, CT, XQ, SA, Thủ thuật & Ghi chú đi buồng)
     const xnRows = assignedEntries.filter(({ rec }) => {
@@ -3433,8 +3440,8 @@
 
   function getOrderedOccupiedBedEntries() {
     const entries = [];
-    const { wingB } = getCurrentRoomConfig();
-    const maxBed = wingB[1];
+    const cfg = getCurrentRoomConfig();
+    const maxBed = (cfg.wingB && cfg.wingB[1]) || (cfg.wingA && cfg.wingA[1]) || 31;
     for (let i = 1; i <= maxBed; i++) {
       for (const code of [String(i), `${i}X`]) {
         const m = tk1State.bedAssignments && tk1State.bedAssignments[code];
@@ -3443,6 +3450,13 @@
         }
       }
     }
+    Object.entries(tk1State.bedAssignments || {}).forEach(([code, mabn]) => {
+      if (mabn && tk1State.patientRecords && tk1State.patientRecords[mabn]) {
+        if (!entries.some(e => e.bedCode === code)) {
+          entries.push({ bedCode: code, mabn, rec: tk1State.patientRecords[mabn] });
+        }
+      }
+    });
     return entries;
   }
 
@@ -4911,6 +4925,12 @@
         if (modalSc) modalSc.style.display = 'none';
         if (activeSummaryTab === 'hoi-chan-mo') {
           activeSummaryTab = 'xn-cdha';
+          document.querySelectorAll('[data-tk1-sum-tab]').forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-tk1-sum-tab') === 'xn-cdha');
+          });
+          document.querySelectorAll('.tk1-sum-tab-panel').forEach(p => {
+            p.classList.toggle('active', p.id === 'tk1-sum-panel-xn-cdha');
+          });
         }
       }
 
