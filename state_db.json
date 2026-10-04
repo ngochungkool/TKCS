@@ -1,5 +1,5 @@
 {
-  "version": 1791089209762,
+  "version": 1791089236161,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:46:49.761Z"
+      "updatedAt": "2026-10-04T04:47:16.161Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3771,12 +3771,22 @@
           "hanTheDen": "31/12/2029",
           "diaChi": "Xã Bình Phú--Tỉnh Gia Lai",
           "chanDoanHis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
-          "customDiagnosis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
+          "customDiagnosis": "Hậu phẫu ngày 6 phẫu thuật TLIF L1-S1",
           "bsDieuTri": "Đặng Ngọc Trí",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H047",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3799,8 +3809,8 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
-            "surgeryDate": ""
+            "surgeryName": "TLIF L1-S1",
+            "surgeryDate": "2026-09-28"
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
@@ -5082,7 +5092,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:46:49.761Z"
+      "updatedAt": "2026-10-04T04:47:16.161Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6297,7 +6307,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:46:49.761Z"
+      "updatedAt": "2026-10-04T04:47:16.161Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10230,7 +10240,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:46:49.762Z"
+      "updatedAt": "2026-10-04T04:47:16.161Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11134,7 +11144,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:46:49.762Z"
+      "updatedAt": "2026-10-04T04:47:16.161Z"
     }
   },
   "episodeConsultations": {},
