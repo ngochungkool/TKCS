@@ -1,5 +1,5 @@
 {
-  "version": 1791082288859,
+  "version": 1791082300005,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3616,7 +3616,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:51:28.747Z"
+      "updatedAt": "2026-10-04T02:51:39.826Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5655,7 +5655,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:51:28.748Z"
+      "updatedAt": "2026-10-04T02:51:39.826Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6869,7 +6869,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:51:28.748Z"
+      "updatedAt": "2026-10-04T02:51:39.827Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10300,7 +10300,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:51:28.749Z"
+      "updatedAt": "2026-10-04T02:51:39.827Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11207,7 +11207,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:51:28.750Z"
+      "updatedAt": "2026-10-04T02:51:39.828Z"
     }
   },
   "episodeConsultations": {},
@@ -11258,7 +11258,8 @@
               "diaChi": "An Hòa-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-2",
@@ -11272,7 +11273,8 @@
               "diaChi": "Cẩm Văn-Phường An Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-3",
@@ -11286,7 +11288,8 @@
               "diaChi": "phú thạnh-Xã Tuy An Nam--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-4",
@@ -11300,7 +11303,8 @@
               "diaChi": "bình đê-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [
@@ -11401,7 +11405,8 @@
               "diaChi": "suối cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -11449,7 +11454,8 @@
               "diaChi": "Phụng Sơn-Xã Tuy Phước Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk3-2",
@@ -11463,7 +11469,8 @@
               "diaChi": "vân hội 1-Xã Tuy Phước--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -11511,7 +11518,8 @@
               "diaChi": "Tấn Thạnh 2-Phường Hoài Nhơn Tây--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-2",
@@ -11525,7 +11533,8 @@
               "diaChi": "Thượng Giang 1-Xã Bình Khê--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-3",
@@ -11539,7 +11548,8 @@
               "diaChi": "Phường An Nhơn Nam--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-4",
@@ -11553,7 +11563,8 @@
               "diaChi": "Xã Ân Tường--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-5",
@@ -11567,7 +11578,8 @@
               "diaChi": "Chánh định-Xã Ngô Mây--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-6",
@@ -11581,7 +11593,8 @@
               "diaChi": "hiệp vinh-Xã Canh Vinh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-7",
@@ -11595,7 +11608,8 @@
               "diaChi": "Xã Hội Sơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-8",
@@ -11609,7 +11623,8 @@
               "diaChi": "Làng Cát-Xã Canh Liên--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-9",
@@ -11623,7 +11638,8 @@
               "diaChi": "Xã Cát Tiến--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -11671,7 +11687,8 @@
               "diaChi": "canh phước-Xã Vân Canh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-hstk-2",
@@ -11685,7 +11702,8 @@
               "diaChi": "thượng an 1-Phường An Khê--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -11716,7 +11734,7 @@
         "approvedBy": ""
       },
       "lastHisSyncTimeMs": 1790606048420.7217,
-      "lastHisSyncTime": "2026-10-04T02:51:28.858Z"
+      "lastHisSyncTime": "2026-10-04T02:51:39.993Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
