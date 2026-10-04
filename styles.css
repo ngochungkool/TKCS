@@ -5010,56 +5010,12 @@ body {
   font-family: 'Be Vietnam Pro', sans-serif;
 }
 
-/* Modal In danh sách A4 (Fit màn hình, hiển thị hiện đại) */
-.dept-consult-print-dialog {
-  width: min(920px, 94vw);
-  max-width: 920px;
-  height: 88vh;
-  max-height: 90vh;
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.4);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  padding: 0;
-  margin: auto;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  background: #ffffff;
+/* Vùng in Danh sách Duyệt mổ A4: Ẩn tuyệt đối trên màn hình */
+.dept-consult-print-only {
+  display: none !important;
 }
 
-.dept-consult-print-dialog .modal-header {
-  flex-shrink: 0;
-  background: #1e293b;
-  color: #ffffff;
-  padding: 0.85rem 1.35rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.dept-consult-print-dialog .modal-body {
-  flex: 1;
-  overflow-y: auto;
-  background: #f1f5f9;
-  padding: 1.25rem;
-  display: flex;
-  justify-content: center;
-}
-
-#dept-consult-print-area {
-  background: #ffffff;
-  width: 100%;
-  max-width: 820px;
-  min-height: 100%;
-  padding: 1.5rem 1.8rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
-}
-
-/* Quy tắc in ấn khổ A4 portrait chuẩn y tế */
+/* Quy tắc in ấn khổ A4 portrait chuẩn y tế (Mở trực tiếp từ window.print()) */
 @page {
   size: A4 portrait;
   margin: 10mm 10mm 12mm 10mm;
@@ -5073,60 +5029,32 @@ body {
     font-family: 'Be Vietnam Pro', sans-serif !important;
   }
 
-  /* Ẩn toàn bộ giao diện phần mềm khi in */
-  body * {
-    visibility: hidden !important;
+  /* Ẩn toàn bộ giao diện màn hình ứng dụng */
+  body > *:not(#dept-consult-print-area),
+  .page-wrapper,
+  header,
+  nav,
+  aside,
+  dialog {
+    display: none !important;
   }
 
-  /* Chỉ hiển thị khu vực trang in */
-  #dept-consult-print-area,
-  #dept-consult-print-area * {
-    visibility: visible !important;
-  }
-
-  #dept-consult-print-area {
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
+  /* Chỉ hiển thị khu vực trang in A4 */
+  #dept-consult-print-area.dept-consult-print-only {
+    display: block !important;
+    position: static !important;
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     box-shadow: none !important;
-    border-radius: 0 !important;
     background: #ffffff !important;
+    visibility: visible !important;
   }
 
-  .dept-consult-print-dialog {
-    display: block !important;
-    position: static !important;
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    overflow: visible !important;
-    background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .dept-consult-print-dialog::backdrop {
-    display: none !important;
-  }
-
-  .dept-consult-print-dialog .modal-header {
-    display: none !important;
-  }
-
-  .dept-consult-print-dialog .modal-body {
-    display: block !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: visible !important;
-    background: transparent !important;
-    max-height: none !important;
+  #dept-consult-print-area * {
+    visibility: visible !important;
   }
 }
 

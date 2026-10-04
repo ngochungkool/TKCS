@@ -1268,7 +1268,7 @@
                 type="text"
                 class="date-input"
                 id="dc-diag-${p.mabn}"
-                value="${escapeHtml(c.postConsultDiagnosis || p.customDiagnosis || p.chanDoanHis || '')}"
+                value="${escapeHtml(c.postConsultDiagnosis || '')}"
                 placeholder="Nhập chẩn đoán sau khi hội chẩn..."
                 style="width:100%;height:35px;font-size:0.85rem;font-weight:700;color:#0f172a;"
               />
@@ -1611,7 +1611,7 @@
               <span style="font-size:0.75rem;color:#64748b;">· ${p.tuoi || '--'} · SVV: ${p.soVaoVien || p.maKcb || p.mabn}</span>
             </div>
             <div style="font-size:0.75rem;color:#475569;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-              <strong>CĐ ban đầu:</strong> ${escapeHtml(p.customDiagnosis || p.chanDoanHis || 'Chưa có')}
+              <span style="color:#64748b;">Chẩn đoán HIS vào viện:</span> ${escapeHtml(p.chanDoanHis || 'Chưa có')}
             </div>
           </div>
 
@@ -1636,7 +1636,7 @@
     }).join('');
   }
 
-  // Thao tác bấm thêm bệnh nhân từ trong modal
+  // Thao tác bấm thêm bệnh nhân từ trong modal (Yêu cầu: Chẩn đoán mặc định là TRỐNG)
   async function addPatientToConsultFromModal(mabn, btnEl) {
     const dateInp = document.getElementById('dept-consult-modal-date');
     const targetDate = dateInp?.value || getTodayKey();
@@ -1650,7 +1650,6 @@
         }
       }
     }
-    const defaultDiag = pRec?.customDiagnosis || pRec?.chanDoanHis || '';
 
     if (btnEl) {
       btnEl.innerHTML = '⏳';
@@ -1661,7 +1660,7 @@
       action: 'SAVE_SURGICAL_CONSULTATION',
       mabn,
       dateKey: targetDate,
-      postConsultDiagnosis: defaultDiag,
+      postConsultDiagnosis: '', // MẶC ĐỊNH LÀ TRỐNG
       surgeryMethod: '',
       decision: '',
       advancePayment: '',
@@ -1674,7 +1673,7 @@
       isConsulted: true,
       isSurgical: false,
       dateKey: targetDate,
-      postConsultDiagnosis: defaultDiag,
+      postConsultDiagnosis: '', // MẶC ĐỊNH LÀ TRỐNG
       surgeryMethod: '',
       decision: '',
       advancePayment: '',
@@ -1708,7 +1707,7 @@
     if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
   }
 
-  // Hộp thoại đơn giản riêng cho Thần kinh 4 (Yêu cầu 2: Chỉ chọn ngày hội chẩn & chẩn đoán ban đầu)
+  // Hộp thoại đơn giản riêng cho Thần kinh 4 (Yêu cầu 2: Chỉ chọn ngày hội chẩn & chẩn đoán ban đầu - Mặc định TRỐNG)
   function openTk4SimpleConsultDialog(mabn) {
     activeTk4SimpleMabn = mabn;
     const rec = tk1State.patientRecords?.[mabn] || allRoomsState?.tk4?.patientRecords?.[mabn];
@@ -1746,7 +1745,8 @@
 
     if (diagInp) {
       const existingSc = getPatientSurgicalConsultation(rec, curDateKey);
-      diagInp.value = existingSc?.postConsultDiagnosis || rec.customDiagnosis || rec.chanDoanHis || '';
+      // MẶC ĐỊNH LÀ TRỐNG, chỉ lấy nếu đã được nhập trước đó
+      diagInp.value = existingSc?.postConsultDiagnosis || '';
     }
 
     dlg.showModal();
@@ -1856,11 +1856,10 @@
     }
   }
 
-  // In danh sách Hội Chẩn Khoa A4 chuẩn y tế (Chỉ in các ca duyệt phẫu thuật)
+  // In danh sách Hội Chẩn Khoa A4 chuẩn y tế (Chỉ in các ca duyệt phẫu thuật - Mở thẳng trình đơn in)
   function openDeptConsultPrintModal() {
-    const dlg = document.getElementById('dept-consult-print-modal');
     const area = document.getElementById('dept-consult-print-area');
-    if (!dlg || !area) return;
+    if (!area) return;
 
     const dKey = activeDeptConsultDate || getTodayKey();
     const allPts = getAllConsultPatientsForDate(dKey);
@@ -1871,8 +1870,13 @@
       return dec === 'Đồng ý phẫu thuật' || dec === 'Đồng ý';
     });
 
+    if (pts.length === 0) {
+      alert(`Chưa có bệnh nhân nào được duyệt [Đồng ý phẫu thuật] trong ngày ${formatDateDisplayVN(dKey)} để in! Vui lòng chọn kết luận "Đồng ý phẫu thuật" cho ca cần mổ trước khi in.`);
+      return;
+    }
+
     area.innerHTML = `
-      <div style="font-family:'Be Vietnam Pro',sans-serif;color:#0f172a;line-height:1.4;">
+      <div style="font-family:'Be Vietnam Pro',sans-serif;color:#0f172a;line-height:1.4;background:#ffffff;padding:10px;">
         <!-- Header Quốc gia & Bệnh viện -->
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1.5px solid #cbd5e1;">
           <div style="text-align:center;">
@@ -1915,41 +1919,39 @@
           </thead>
           <tbody>
             ${
-              pts.length > 0
-                ? pts.map((p, idx) => {
-                    const c = p.consultData || {};
-                    const bedLabel = p.patientBedCode ? formatBedLabel(p.patientBedCode) : 'Chưa xếp';
-                    return `
-                      <tr style="border-bottom:1px solid #cbd5e1;">
-                        <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;font-weight:700;">${idx + 1}</td>
-                        <td style="padding:6px 5px;border:1px solid #64748b;text-align:center;">
-                          <div style="font-weight:700;font-size:0.75rem;">${p.patientRoomName}</div>
-                          <div style="color:#0369a1;font-weight:800;font-size:0.76rem;">${bedLabel}</div>
-                        </td>
-                        <td style="padding:6px 7px;border:1px solid #64748b;">
-                          <strong style="color:#0f172a;font-size:0.83rem;">${p.hoten}</strong>
-                          <div style="font-size:0.7rem;color:#64748b;">SVV: ${p.soVaoVien || p.maKcb || p.mabn}</div>
-                        </td>
-                        <td style="padding:6px 2px;border:1px solid #64748b;text-align:center;font-weight:600;">${p.tuoi || '--'}</td>
-                        <td style="padding:6px 7px;border:1px solid #64748b;font-weight:700;color:#0f172a;">
-                          ${escapeHtml(c.postConsultDiagnosis || p.customDiagnosis || p.chanDoanHis || '--')}
-                        </td>
-                        <td style="padding:6px 7px;border:1px solid #64748b;color:#1e40af;font-weight:700;">
-                          ${escapeHtml(c.surgeryMethod || 'Theo chỉ định PTV')}
-                        </td>
-                        <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;color:#b91c1c;font-weight:800;">
-                          ${c.bloodMl || '--'}
-                        </td>
-                        <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;color:#b45309;font-weight:800;">
-                          ${c.advancePayment || '--'}
-                        </td>
-                        <td style="padding:6px 6px;border:1px solid #64748b;font-size:0.74rem;color:#334155;">
-                          ${escapeHtml(c.treatmentPlan || '')}
-                        </td>
-                      </tr>
-                    `;
-                  }).join('')
-                : `<tr><td colspan="9" style="text-align:center;padding:2rem 1rem;color:#64748b;font-style:italic;">Chưa có bệnh nhân nào được duyệt [Đồng ý phẫu thuật] trong ngày ${formatDateDisplayVN(dKey)}.</td></tr>`
+              pts.map((p, idx) => {
+                const c = p.consultData || {};
+                const bedLabel = p.patientBedCode ? formatBedLabel(p.patientBedCode) : 'Chưa xếp';
+                return `
+                  <tr style="border-bottom:1px solid #cbd5e1;">
+                    <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;font-weight:700;">${idx + 1}</td>
+                    <td style="padding:6px 5px;border:1px solid #64748b;text-align:center;">
+                      <div style="font-weight:700;font-size:0.75rem;">${p.patientRoomName}</div>
+                      <div style="color:#0369a1;font-weight:800;font-size:0.76rem;">${bedLabel}</div>
+                    </td>
+                    <td style="padding:6px 7px;border:1px solid #64748b;">
+                      <strong style="color:#0f172a;font-size:0.83rem;">${p.hoten}</strong>
+                      <div style="font-size:0.7rem;color:#64748b;">SVV: ${p.soVaoVien || p.maKcb || p.mabn}</div>
+                    </td>
+                    <td style="padding:6px 2px;border:1px solid #64748b;text-align:center;font-weight:600;">${p.tuoi || '--'}</td>
+                    <td style="padding:6px 7px;border:1px solid #64748b;font-weight:700;color:#0f172a;">
+                      ${escapeHtml(c.postConsultDiagnosis || '--')}
+                    </td>
+                    <td style="padding:6px 7px;border:1px solid #64748b;color:#1e40af;font-weight:700;">
+                      ${escapeHtml(c.surgeryMethod || 'Theo chỉ định PTV')}
+                    </td>
+                    <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;color:#b91c1c;font-weight:800;">
+                      ${c.bloodMl || '--'}
+                    </td>
+                    <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;color:#b45309;font-weight:800;">
+                      ${c.advancePayment || '--'}
+                    </td>
+                    <td style="padding:6px 6px;border:1px solid #64748b;font-size:0.74rem;color:#334155;">
+                      ${escapeHtml(c.treatmentPlan || '')}
+                    </td>
+                  </tr>
+                `;
+              }).join('')
             }
           </tbody>
         </table>
@@ -1973,7 +1975,10 @@
       </div>
     `;
 
-    dlg.showModal();
+    // Đi thẳng tới trình đơn in của hệ thống / trình duyệt
+    setTimeout(() => {
+      window.print();
+    }, 50);
   }
 
   // =========================================================================
@@ -2319,7 +2324,7 @@
     }
 
     const sc = getPatientSurgicalConsultation(rec, curDateKey) || {};
-    if (inpDiag) inpDiag.value = sc.postConsultDiagnosis || rec.chanDoanHis || '';
+    if (inpDiag) inpDiag.value = sc.postConsultDiagnosis || '';
     if (inpMethod) inpMethod.value = sc.surgeryMethod || '';
     if (inpBlood) inpBlood.value = cleanBloodForInput(sc.bloodMl);
     if (inpPayment) inpPayment.value = cleanPaymentForInput(sc.advancePayment);
@@ -2404,7 +2409,7 @@
     const rec = tk1State.patientRecords[mabn];
     if (!rec) return;
 
-    const defaultDiag = rec.chanDoanHis || '';
+    const defaultDiag = '';
     await callTk1Api({
       action: 'SAVE_SURGICAL_CONSULTATION',
       mabn,
@@ -3837,7 +3842,7 @@
         const inpBlood = document.getElementById('tk4-modal-sc-inp-blood');
         const inpPay = document.getElementById('tk4-modal-sc-inp-payment');
 
-        if (inpDiag) inpDiag.value = sc.postConsultDiagnosis || (isIncluded ? rec.chanDoanHis || '' : '');
+        if (inpDiag) inpDiag.value = sc.postConsultDiagnosis || '';
         if (inpMethod) inpMethod.value = sc.surgeryMethod || '';
         if (selDec) {
           selDec.value = dec;
@@ -4083,7 +4088,7 @@
         surgicalConsultation = {
           isConsulted: true,
           dateKey: curDateKey,
-          postConsultDiagnosis: diag || (rec.chanDoanHis || ''),
+          postConsultDiagnosis: diag,
           surgeryMethod: method,
           decision,
           bloodMl,
