@@ -1,5 +1,5 @@
 {
-  "version": 1791089057166,
+  "version": 1791089126954,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,13 +3017,15 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:44:17.165Z"
+      "updatedAt": "2026-10-04T04:45:26.872Z"
     },
     "tk2": {
       "roomKey": "tk2",
       "roomName": "Thần kinh 2",
       "initializedSeed": true,
-      "bedAssignments": {},
+      "bedAssignments": {
+        "1": "0001425022"
+      },
       "hiddenFoldingBeds": {},
       "patientRecords": {
         "0001265243": {
@@ -5058,7 +5060,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:44:17.165Z"
+      "updatedAt": "2026-10-04T04:45:26.953Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6273,7 +6275,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:44:17.165Z"
+      "updatedAt": "2026-10-04T04:45:26.953Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10206,7 +10208,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:44:17.166Z"
+      "updatedAt": "2026-10-04T04:45:26.954Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11110,7 +11112,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:44:17.166Z"
+      "updatedAt": "2026-10-04T04:45:26.954Z"
     }
   },
   "episodeConsultations": {},
