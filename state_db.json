@@ -1,5 +1,5 @@
 {
-  "version": 1791089293957,
+  "version": 1791089304455,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:13.956Z"
+      "updatedAt": "2026-10-04T04:48:24.455Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3580,12 +3580,22 @@
           "hanTheDen": "07/01/2027",
           "diaChi": "an xuân 3-Xã Cửu An--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
-          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "Hậu phẫu ngày 3 phẫu thuật Máu tụ ngoài màng cứng",
           "bsDieuTri": "Đặng Ngọc Trí",
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H045",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3608,8 +3618,8 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
-            "surgeryDate": ""
+            "surgeryName": "Máu tụ ngoài màng cứng",
+            "surgeryDate": "2026-10-01"
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
@@ -5115,7 +5125,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:13.956Z"
+      "updatedAt": "2026-10-04T04:48:24.455Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6330,7 +6340,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:13.956Z"
+      "updatedAt": "2026-10-04T04:48:24.455Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10263,7 +10273,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:13.957Z"
+      "updatedAt": "2026-10-04T04:48:24.455Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11167,7 +11177,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:13.957Z"
+      "updatedAt": "2026-10-04T04:48:24.455Z"
     }
   },
   "episodeConsultations": {},
