@@ -278,6 +278,16 @@
         border: '#fca5a5'
       };
     }
+    if (d === 'Hội chẩn lại') {
+      return {
+        key: 'reconsult',
+        cls: 'tag-reconsult',
+        text: '🔄 Hội chẩn lại',
+        bg: '#ffedd5',
+        color: '#c2410c',
+        border: '#fdba74'
+      };
+    }
     if (d === 'Điều trị nội khoa') {
       return {
         key: 'medical',
@@ -1322,22 +1332,23 @@
               <option value="" ${!dec ? 'selected' : ''}>-- Chọn kết luận duyệt --</option>
               <option value="Đồng ý phẫu thuật" ${dec === 'Đồng ý phẫu thuật' || dec === 'Đồng ý' ? 'selected' : ''} style="color:#15803d;font-weight:800;">✓ Đồng ý phẫu thuật</option>
               <option value="Cần hội ý thêm" ${dec === 'Cần hội ý thêm' || dec === 'Hội ý' ? 'selected' : ''} style="color:#b45309;font-weight:800;">💬 Cần hội ý thêm</option>
+              <option value="Hội chẩn lại" ${dec === 'Hội chẩn lại' ? 'selected' : ''} style="color:#c2410c;font-weight:800;">🔄 Hội chẩn lại</option>
               <option value="Không phẫu thuật" ${dec === 'Không phẫu thuật' || dec === 'Không đồng ý' ? 'selected' : ''} style="color:#dc2626;font-weight:800;">✕ Không phẫu thuật</option>
               <option value="Điều trị nội khoa" ${dec === 'Điều trị nội khoa' ? 'selected' : ''} style="color:#4338ca;font-weight:800;">💊 Điều trị nội khoa</option>
             </select>
           </div>
 
-          <!-- Hàng 3: HƯỚNG XỬ TRÍ / GHI CHÚ (NẰM NGAY DƯỚI KẾT LUẬN) -->
+          <!-- Hàng 3: GHI CHÚ (MẶC ĐỊNH TRỐNG, NẰM NGAY DƯỚI KẾT LUẬN) -->
           <div class="dc-field-block">
             <label class="dc-field-label" for="dc-plan-${p.mabn}" style="color:#0369a1;">
-              📋 Hướng xử trí / Ghi chú kết luận:
+              📋 Ghi chú:
             </label>
             <input
               type="text"
               class="date-input"
               id="dc-plan-${p.mabn}"
-              value="${escapeHtml(c.treatmentPlan || p.tasksByDate?.[activeDeptConsultDate]?.note || p.consultDetails?.consultTreatment || '')}"
-              placeholder="Hướng chuẩn bị, hội ý chuyên khoa, ghi chú xử trí..."
+              value="${escapeHtml(c.treatmentPlan || '')}"
+              placeholder="Nhập ghi chú ca bệnh nếu có..."
               style="width:100%;height:34px;font-size:0.83rem;"
             />
           </div>
@@ -1391,7 +1402,7 @@
       tagEl.textContent = tagMeta.text;
     }
     if (card) {
-      card.classList.remove('tag-agree', 'tag-discuss', 'tag-no-surg', 'tag-medical', 'tag-pending');
+      card.classList.remove('tag-agree', 'tag-discuss', 'tag-reconsult', 'tag-no-surg', 'tag-medical', 'tag-pending');
       card.classList.add(tagMeta.cls);
     }
   }
@@ -1452,12 +1463,7 @@
           rec.surgicalConsultationsByDate[dKey] = consultObj;
           rec.surgicalConsultation = consultObj;
           if (diag) rec.customDiagnosis = diag;
-          if (treatmentPlan) {
-            rec.consultTreatment = treatmentPlan;
-            if (!rec.tasksByDate) rec.tasksByDate = {};
-            if (!rec.tasksByDate[dKey]) rec.tasksByDate[dKey] = {};
-            rec.tasksByDate[dKey].note = treatmentPlan;
-          }
+          rec.consultTreatment = treatmentPlan;
         }
       });
     }
@@ -1850,95 +1856,119 @@
     }
   }
 
-  // In danh sách Hội Chẩn Khoa A4 chuẩn y tế
+  // In danh sách Hội Chẩn Khoa A4 chuẩn y tế (Chỉ in các ca duyệt phẫu thuật)
   function openDeptConsultPrintModal() {
     const dlg = document.getElementById('dept-consult-print-modal');
     const area = document.getElementById('dept-consult-print-area');
     if (!dlg || !area) return;
 
     const dKey = activeDeptConsultDate || getTodayKey();
-    const pts = getAllConsultPatientsForDate(dKey);
+    const allPts = getAllConsultPatientsForDate(dKey);
+
+    // Yêu cầu: CHỈ IN NHỮNG CA ĐỒNG Ý MỔ
+    const pts = allPts.filter(p => {
+      const dec = p.consultData?.decision || '';
+      return dec === 'Đồng ý phẫu thuật' || dec === 'Đồng ý';
+    });
 
     area.innerHTML = `
-      <div style="text-align:center;margin-bottom:1.5rem;">
-        <div style="font-size:0.9rem;font-weight:700;color:#334155;text-transform:uppercase;">BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI</div>
-        <div style="font-size:1rem;font-weight:800;color:#15803d;text-transform:uppercase;">KHOA NGOẠI THẦN KINH - CỘT SỐNG</div>
-        <div style="margin:1rem 0 0.5rem;font-size:1.35rem;font-weight:900;color:#0f172a;letter-spacing:-0.3px;">
-          DANH SÁCH BỆNH NHÂN HỘI CHẨN MỔ
+      <div style="font-family:'Be Vietnam Pro',sans-serif;color:#0f172a;line-height:1.4;">
+        <!-- Header Quốc gia & Bệnh viện -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1.5px solid #cbd5e1;">
+          <div style="text-align:center;">
+            <div style="font-size:0.8rem;font-weight:700;color:#475569;text-transform:uppercase;">SỞ Y TẾ TỈNH GIA LAI</div>
+            <div style="font-size:0.86rem;font-weight:800;color:#0f172a;text-transform:uppercase;">BỆNH VIỆN ĐA KHOA TỈNH</div>
+            <div style="font-size:0.82rem;font-weight:800;color:#15803d;text-transform:uppercase;margin-top:2px;">KHOA NGOẠI THẦN KINH - CỘT SỐNG</div>
+            <div style="width:70px;height:1.5px;background:#15803d;margin:4px auto 0;"></div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:0.82rem;font-weight:800;color:#0f172a;text-transform:uppercase;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+            <div style="font-size:0.82rem;font-weight:700;color:#0f172a;">Độc lập - Tự do - Hạnh phúc</div>
+            <div style="width:120px;height:1px;background:#0f172a;margin:4px auto 0;"></div>
+          </div>
         </div>
-        <div style="font-size:0.88rem;color:#475569;font-weight:700;">
-          Ngày hội chẩn: ${formatDateDisplayVN(dKey)} · Tổng số: ${pts.length} ca
-        </div>
-      </div>
 
-      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;font-family:'Be Vietnam Pro',sans-serif;">
-        <thead>
-          <tr style="background:#f1f5f9;border-top:1.5px solid #0f172a;border-bottom:1.5px solid #0f172a;">
-            <th style="padding:7px 5px;border:1px solid #cbd5e1;width:35px;text-align:center;">STT</th>
-            <th style="padding:7px 8px;border:1px solid #cbd5e1;width:110px;">Phòng / Giường</th>
-            <th style="padding:7px 8px;border:1px solid #cbd5e1;width:160px;">Họ và tên</th>
-            <th style="padding:7px 5px;border:1px solid #cbd5e1;width:45px;text-align:center;">Tuổi</th>
-            <th style="padding:7px 8px;border:1px solid #cbd5e1;">Chẩn đoán sau hội chẩn</th>
-            <th style="padding:7px 8px;border:1px solid #cbd5e1;">Phương pháp phẫu thuật</th>
-            <th style="padding:7px 5px;border:1px solid #cbd5e1;width:75px;text-align:center;">Máu</th>
-            <th style="padding:7px 5px;border:1px solid #cbd5e1;width:75px;text-align:center;">Ứng</th>
-            <th style="padding:7px 8px;border:1px solid #cbd5e1;width:100px;text-align:center;">Kết luận duyệt</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${
-            pts.length > 0
-              ? pts.map((p, idx) => {
-                  const c = p.consultData || {};
-                  const bedLabel = p.patientBedCode ? formatBedLabel(p.patientBedCode) : 'Chưa xếp';
-                  const isSurg = Boolean(c.isSurgical !== undefined ? c.isSurgical : (c.decision === 'Đồng ý' || (c.surgeryMethod && c.surgeryMethod.length > 0)));
-                  return `
-                    <tr style="border-bottom:1px solid #cbd5e1;">
-                      <td style="padding:6px 4px;border:1px solid #cbd5e1;text-align:center;font-weight:700;">${idx + 1}</td>
-                      <td style="padding:6px 8px;border:1px solid #cbd5e1;">
-                        <span style="font-weight:700;">${p.patientRoomName}</span><br>
-                        <span style="color:#0369a1;font-weight:800;">${bedLabel}</span>
-                      </td>
-                      <td style="padding:6px 8px;border:1px solid #cbd5e1;">
-                        <strong style="color:#0f172a;font-size:0.86rem;">${p.hoten}</strong><br>
-                        <span style="font-size:0.72rem;color:#64748b;">SVV: ${p.soVaoVien || p.maKcb || p.mabn}</span>
-                      </td>
-                      <td style="padding:6px 4px;border:1px solid #cbd5e1;text-align:center;">${p.tuoi || '--'}</td>
-                      <td style="padding:6px 8px;border:1px solid #cbd5e1;font-weight:700;">
-                        ${escapeHtml(c.postConsultDiagnosis || p.customDiagnosis || p.chanDoanHis || '--')}
-                      </td>
-                      <td style="padding:6px 8px;border:1px solid #cbd5e1;color:#1e40af;font-weight:700;">
-                        ${escapeHtml(c.surgeryMethod || (isSurg ? 'Chưa nhập phương pháp' : 'Điều trị nội khoa'))}
-                      </td>
-                      <td style="padding:6px 4px;border:1px solid #cbd5e1;text-align:center;color:#b91c1c;font-weight:800;">
-                        ${c.bloodMl || '--'}
-                      </td>
-                      <td style="padding:6px 4px;border:1px solid #cbd5e1;text-align:center;color:#b45309;font-weight:800;">
-                        ${c.advancePayment || '--'}
-                      </td>
-                      <td style="padding:6px 8px;border:1px solid #cbd5e1;text-align:center;font-weight:800;">
-                        ${c.decision || (isSurg ? 'Đồng ý' : 'Nội khoa')}
-                      </td>
-                    </tr>
-                  `;
-                }).join('')
-              : `<tr><td colspan="9" style="text-align:center;padding:1.5rem;color:#64748b;">Không có bệnh nhân nào trong danh sách ngày này.</td></tr>`
-          }
-        </tbody>
-      </table>
+        <!-- Tiêu đề bản in -->
+        <div style="text-align:center;margin-bottom:1.2rem;">
+          <div style="font-size:1.3rem;font-weight:900;color:#0f172a;letter-spacing:-0.2px;text-transform:uppercase;">
+            DANH SÁCH BỆNH NHÂN DUYỆT PHẪU THUẬT
+          </div>
+          <div style="font-size:0.86rem;color:#334155;font-weight:700;margin-top:4px;">
+            Ngày duyệt mổ: <strong>${formatDateDisplayVN(dKey)}</strong> · Tổng số ca duyệt mổ: <span style="color:#15803d;font-weight:900;font-size:0.95rem;">${pts.length}</span> ca
+          </div>
+        </div>
 
-      <div style="display:flex;justify-content:space-between;margin-top:2.5rem;padding:0 2rem;font-size:0.88rem;">
-        <div style="text-align:center;">
-          <strong>BÁC SĨ ĐIỀU TRỊ</strong><br>
-          <span style="font-size:0.75rem;color:#64748b;">(Ký và ghi rõ họ tên)</span>
-        </div>
-        <div style="text-align:center;">
-          <strong>PHẪU THUẬT VIÊN</strong><br>
-          <span style="font-size:0.75rem;color:#64748b;">(Ký và ghi rõ họ tên)</span>
-        </div>
-        <div style="text-align:center;">
-          <strong>CHỦ TOẠ / TRƯỞNG KHOA</strong><br>
-          <span style="font-size:0.75rem;color:#64748b;">(Ký và ghi rõ họ tên)</span>
+        <!-- Bảng danh sách A4 dọc -->
+        <table style="width:100%;border-collapse:collapse;font-size:0.78rem;font-family:'Be Vietnam Pro',sans-serif;color:#0f172a;">
+          <thead>
+            <tr style="background:#f1f5f9;border-top:1.5px solid #0f172a;border-bottom:1.5px solid #0f172a;">
+              <th style="padding:6px 3px;border:1px solid #64748b;width:28px;text-align:center;">STT</th>
+              <th style="padding:6px 6px;border:1px solid #64748b;width:75px;text-align:center;">Phòng/Giường</th>
+              <th style="padding:6px 8px;border:1px solid #64748b;width:130px;text-align:left;">Họ và tên</th>
+              <th style="padding:6px 2px;border:1px solid #64748b;width:34px;text-align:center;">Tuổi</th>
+              <th style="padding:6px 8px;border:1px solid #64748b;text-align:left;">Chẩn đoán sau hội chẩn</th>
+              <th style="padding:6px 8px;border:1px solid #64748b;text-align:left;">Phương pháp phẫu thuật</th>
+              <th style="padding:6px 3px;border:1px solid #64748b;width:55px;text-align:center;">Máu</th>
+              <th style="padding:6px 3px;border:1px solid #64748b;width:55px;text-align:center;">Ứng</th>
+              <th style="padding:6px 6px;border:1px solid #64748b;width:95px;text-align:left;">Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${
+              pts.length > 0
+                ? pts.map((p, idx) => {
+                    const c = p.consultData || {};
+                    const bedLabel = p.patientBedCode ? formatBedLabel(p.patientBedCode) : 'Chưa xếp';
+                    return `
+                      <tr style="border-bottom:1px solid #cbd5e1;">
+                        <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;font-weight:700;">${idx + 1}</td>
+                        <td style="padding:6px 5px;border:1px solid #64748b;text-align:center;">
+                          <div style="font-weight:700;font-size:0.75rem;">${p.patientRoomName}</div>
+                          <div style="color:#0369a1;font-weight:800;font-size:0.76rem;">${bedLabel}</div>
+                        </td>
+                        <td style="padding:6px 7px;border:1px solid #64748b;">
+                          <strong style="color:#0f172a;font-size:0.83rem;">${p.hoten}</strong>
+                          <div style="font-size:0.7rem;color:#64748b;">SVV: ${p.soVaoVien || p.maKcb || p.mabn}</div>
+                        </td>
+                        <td style="padding:6px 2px;border:1px solid #64748b;text-align:center;font-weight:600;">${p.tuoi || '--'}</td>
+                        <td style="padding:6px 7px;border:1px solid #64748b;font-weight:700;color:#0f172a;">
+                          ${escapeHtml(c.postConsultDiagnosis || p.customDiagnosis || p.chanDoanHis || '--')}
+                        </td>
+                        <td style="padding:6px 7px;border:1px solid #64748b;color:#1e40af;font-weight:700;">
+                          ${escapeHtml(c.surgeryMethod || 'Theo chỉ định PTV')}
+                        </td>
+                        <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;color:#b91c1c;font-weight:800;">
+                          ${c.bloodMl || '--'}
+                        </td>
+                        <td style="padding:6px 3px;border:1px solid #64748b;text-align:center;color:#b45309;font-weight:800;">
+                          ${c.advancePayment || '--'}
+                        </td>
+                        <td style="padding:6px 6px;border:1px solid #64748b;font-size:0.74rem;color:#334155;">
+                          ${escapeHtml(c.treatmentPlan || '')}
+                        </td>
+                      </tr>
+                    `;
+                  }).join('')
+                : `<tr><td colspan="9" style="text-align:center;padding:2rem 1rem;color:#64748b;font-style:italic;">Chưa có bệnh nhân nào được duyệt [Đồng ý phẫu thuật] trong ngày ${formatDateDisplayVN(dKey)}.</td></tr>`
+            }
+          </tbody>
+        </table>
+
+        <!-- Khối Chữ Ký Cuối Trang -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:2.2rem;padding:0 0.8rem;font-size:0.82rem;page-break-inside:avoid;">
+          <div style="text-align:center;width:30%;">
+            <strong>BÁC SĨ ĐIỀU TRỊ</strong><br>
+            <span style="font-size:0.72rem;color:#64748b;font-style:italic;">(Ký và ghi rõ họ tên)</span>
+          </div>
+          <div style="text-align:center;width:30%;">
+            <strong>PHẪU THUẬT VIÊN</strong><br>
+            <span style="font-size:0.72rem;color:#64748b;font-style:italic;">(Ký và ghi rõ họ tên)</span>
+          </div>
+          <div style="text-align:center;width:35%;">
+            <em style="font-size:0.76rem;">Ngày ..... tháng ..... năm 20...</em><br>
+            <strong>LÃNH ĐẠO KHOA / CHỦ TOẠ</strong><br>
+            <span style="font-size:0.72rem;color:#64748b;font-style:italic;">(Ký và ghi rõ họ tên)</span>
+          </div>
         </div>
       </div>
     `;
