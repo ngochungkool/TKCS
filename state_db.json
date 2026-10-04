@@ -1,5 +1,5 @@
 {
-  "version": 1791090533360,
+  "version": 1791090572862,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -276,7 +276,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 54646,
-      "uploadedAt": "12:08:12 4/10/2026",
+      "uploadedAt": "12:09:31 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -373,7 +373,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T05:08:13.067Z"
+    "updatedAt": "2026-10-04T05:09:32.257Z"
   },
   "wardRounds": {
     "tk1": {
@@ -3070,7 +3070,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:08:53.359Z"
+      "updatedAt": "2026-10-04T05:09:32.257Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5392,7 +5392,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:08:53.359Z"
+      "updatedAt": "2026-10-04T05:09:32.257Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6607,7 +6607,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:08:53.359Z"
+      "updatedAt": "2026-10-04T05:09:32.257Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10592,7 +10592,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:08:53.360Z"
+      "updatedAt": "2026-10-04T05:09:32.258Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11496,11 +11496,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:08:53.360Z"
+      "updatedAt": "2026-10-04T05:09:32.258Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "12:08 ngày 04/10/2026",
+  "lastExcelUploadTime": "12:09 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -11799,8 +11799,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791090492258.2402,
-      "lastHisSyncTime": "2026-10-04T05:08:13.667Z"
+      "lastHisSyncTimeMs": 1791090571361.108,
+      "lastHisSyncTime": "2026-10-04T05:09:32.859Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
