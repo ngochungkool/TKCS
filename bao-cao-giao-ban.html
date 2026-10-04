@@ -4381,9 +4381,18 @@
        ========================================================================= */
     let isBriefingConsultedCollapsed = true;
 
-    function openAddTk4ConsultDialog() {
+    async function openAddTk4ConsultDialog() {
       const modal = document.getElementById('modal-tk4-pick-patient');
       if (!modal) return;
+      if (!inpatientList || inpatientList.length === 0) {
+        try {
+          const res = await fetch(`/api/briefing-report?date=${currentDateKey}`);
+          const data = await res.json();
+          if (data && data.inpatientList && data.inpatientList.length > 0) {
+            inpatientList = data.inpatientList;
+          }
+        } catch (e) {}
+      }
       renderBriefingTk4Picker('');
       modal.classList.add('active');
     }
@@ -4411,9 +4420,9 @@
       });
 
       // Group 1: TK4 not yet consulted
-      const tk4Unconsulted = filtered.filter(p => (p.roomKey === 'tk4' || !p.roomKey) && !consultedMabnSet.has(p.mabn));
+      const tk4Unconsulted = filtered.filter(p => (p.roomKey === 'tk4' || !p.roomKey || (p.roomName && p.roomName.toLowerCase().includes('4'))) && !consultedMabnSet.has(p.mabn));
       // Group 2: Other rooms not yet consulted
-      const otherUnconsulted = filtered.filter(p => p.roomKey && p.roomKey !== 'tk4' && !consultedMabnSet.has(p.mabn));
+      const otherUnconsulted = filtered.filter(p => p.roomKey !== 'tk4' && !(p.roomName && p.roomName.toLowerCase().includes('4')) && p.roomKey && !consultedMabnSet.has(p.mabn));
       // Group 3: Already in consultations
       const alreadyInList = (tk4Consultations || []).filter(c => {
         if (!term) return true;

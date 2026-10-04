@@ -2864,48 +2864,110 @@ const server = http.createServer(async (req, res) => {
 
   function getAllInpatientsList() {
     try {
-      const hisDir = path.join(ROOT, 'uploads_his');
-      if (!fs.existsSync(hisDir)) return [];
-      const files = fs.readdirSync(hisDir);
-      const dangDieuTriFile = files.find(f => f.toLowerCase().includes('dang') || f.toLowerCase().includes('đang'));
-      if (!dangDieuTriFile) return [];
-      const wb = XLSX.readFile(path.join(hisDir, dangDieuTriFile));
-      const sheet = wb.Sheets[wb.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(sheet);
+      const map = new Map();
 
-      return rows.map((r, idx) => {
-        const rawRoom = String(r['Phòng'] || r['tendonnguyen'] || '').toLowerCase();
-        let rk = 'tk1', rName = 'Thần kinh 1';
-        if (rawRoom.includes('hstk') || rawRoom.includes('hồi sức')) {
-          rk = 'hstk'; rName = 'Hồi sức thần kinh (HSTK)';
-        } else if (rawRoom.includes('2')) {
-          rk = 'tk2'; rName = 'Thần kinh 2';
-        } else if (rawRoom.includes('3')) {
-          rk = 'tk3'; rName = 'Thần kinh 3';
-        } else if (rawRoom.includes('4')) {
-          rk = 'tk4'; rName = 'Thần kinh 4';
+      // 1. Lấy toàn bộ bệnh nhân từ db.wardRounds (Khoa Ngoại Thần Kinh: TK4, TK1, TK2, TK3, HSTK)
+      // Nguồn dữ liệu sống, luôn luôn sẵn sàng trên Render / Cloud / Local
+      const roomKeys = ['tk4', 'tk1', 'tk2', 'tk3', 'hstk'];
+      const roomNames = {
+        tk4: 'Thần kinh 4',
+        tk1: 'Thần kinh 1',
+        tk2: 'Thần kinh 2',
+        tk3: 'Thần kinh 3',
+        hstk: 'Hồi sức thần kinh (HSTK)'
+      };
+
+      if (db.wardRounds) {
+        for (const rk of roomKeys) {
+          const room = db.wardRounds[rk];
+          if (!room || !room.patientRecords) continue;
+          const bedAssignments = room.bedAssignments || {};
+          const mabnToBed = {};
+          for (const [bCode, m] of Object.entries(bedAssignments)) {
+            if (m) mabnToBed[m] = bCode;
+          }
+
+          for (const [mabn, rec] of Object.entries(room.patientRecords)) {
+            if (!rec || (rec.removed && rec.removed.isRemoved)) continue;
+            const svv = rec.soVaoVien || rec.maKcb || rec.svv || mabn;
+            const bedCode = mabnToBed[mabn] || rec.giuong || rec.bed || '';
+            map.set(mabn, {
+              id: `inpatient-${rk}-${mabn}`,
+              mabn: String(rec.mabn || mabn).trim(),
+              soVaoVien: svv,
+              maKcb: svv,
+              svv: svv,
+              hoten: String(rec.hoten || '').trim(),
+              tuoi: String(rec.tuoi || '').replace(/\s*tuổi/gi, '').trim(),
+              gioiTinh: rec.gioiTinh || 'NAM',
+              diaChi: rec.diaChi || 'Gia Lai',
+              chanDoan: rec.chanDoanHis || rec.customDiagnosis || '',
+              roomKey: rk,
+              roomName: roomNames[rk] || rk,
+              bed: bedCode,
+              giuong: bedCode,
+              doctor: rec.doctor || ''
+            });
+          }
         }
+      }
 
-        const isFemale = String(r['GT'] || '').toUpperCase().includes('NỮ') || Number(r['maphai']) === 2;
-        const svv = String(r['Mã KCB'] || r['makcb'] || r['madieutri'] || r['mayte'] || r['mabn'] || '').trim();
-        return {
-          id: `inpatient-${idx + 1}`,
-          mabn: String(r['mabn'] || '').trim(),
-          soVaoVien: svv,
-          maKcb: svv,
-          svv: svv,
-          hoten: String(r['Họ tên'] || '').trim(),
-          tuoi: String(r['Tuổi'] || '').replace(/\s*tuổi/gi, '').trim(),
-          gioiTinh: isFemale ? 'NỮ' : 'NAM',
-          diaChi: String(r['Địa chỉ'] || r['diachi'] || 'Gia Lai').trim(),
-          chanDoan: String(r['Chẩn đoán'] || r['chandoan'] || '').trim(),
-          roomKey: rk,
-          roomName: rName,
-          bed: String(r['sogiuong'] || '').trim(),
-          giuong: String(r['sogiuong'] || '').trim(),
-          doctor: String(r['Bác sỹ điều trị'] || '').trim()
-        };
-      });
+      // 2. Bổ sung từ file Excel uploads_his (nếu có file)
+      const hisDir = path.join(ROOT, 'uploads_his');
+      if (fs.existsSync(hisDir)) {
+        const files = fs.readdirSync(hisDir);
+        const dangDieuTriFile = files.find(f => f.toLowerCase().includes('dang') || f.toLowerCase().includes('đang'));
+        if (dangDieuTriFile) {
+          const wb = XLSX.readFile(path.join(hisDir, dangDieuTriFile));
+          const sheet = wb.Sheets[wb.SheetNames[0]];
+          const rows = XLSX.utils.sheet_to_json(sheet);
+          for (let idx = 0; idx < rows.length; idx++) {
+            const r = rows[idx];
+            const m = String(r['mabn'] || '').trim();
+            if (!m) continue;
+            const rawRoom = String(r['Phòng'] || r['tendonnguyen'] || '').toLowerCase();
+            let rk = 'tk1', rName = 'Thần kinh 1';
+            if (rawRoom.includes('hstk') || rawRoom.includes('hồi sức')) {
+              rk = 'hstk'; rName = 'Hồi sức thần kinh (HSTK)';
+            } else if (rawRoom.includes('2')) {
+              rk = 'tk2'; rName = 'Thần kinh 2';
+            } else if (rawRoom.includes('3')) {
+              rk = 'tk3'; rName = 'Thần kinh 3';
+            } else if (rawRoom.includes('4')) {
+              rk = 'tk4'; rName = 'Thần kinh 4';
+            }
+
+            const isFemale = String(r['GT'] || '').toUpperCase().includes('NỮ') || Number(r['maphai']) === 2;
+            const svv = String(r['Mã KCB'] || r['makcb'] || r['madieutri'] || r['mayte'] || r['mabn'] || '').trim();
+            const existing = map.get(m);
+            if (existing) {
+              if (!existing.chanDoan) existing.chanDoan = String(r['Chẩn đoán'] || r['chandoan'] || '').trim();
+              if (!existing.bed) existing.bed = String(r['sogiuong'] || '').trim();
+              if (!existing.giuong) existing.giuong = existing.bed;
+            } else {
+              map.set(m, {
+                id: `inpatient-his-${idx + 1}`,
+                mabn: m,
+                soVaoVien: svv,
+                maKcb: svv,
+                svv: svv,
+                hoten: String(r['Họ tên'] || '').trim(),
+                tuoi: String(r['Tuổi'] || '').replace(/\s*tuổi/gi, '').trim(),
+                gioiTinh: isFemale ? 'NỮ' : 'NAM',
+                diaChi: String(r['Địa chỉ'] || r['diachi'] || 'Gia Lai').trim(),
+                chanDoan: String(r['Chẩn đoán'] || r['chandoan'] || '').trim(),
+                roomKey: rk,
+                roomName: rName,
+                bed: String(r['sogiuong'] || '').trim(),
+                giuong: String(r['sogiuong'] || '').trim(),
+                doctor: String(r['Bác sỹ điều trị'] || '').trim()
+              });
+            }
+          }
+        }
+      }
+
+      return Array.from(map.values());
     } catch (e) {
       console.warn('Error extracting inpatients list:', e.message);
       return [];
