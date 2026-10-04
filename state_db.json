@@ -1,5 +1,5 @@
 {
-  "version": 1791124158775,
+  "version": 1791124860074,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3182,35 +3182,7 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [
-        "0001420337",
-        "0001421064",
-        "0001421561",
-        "0001421945",
-        "0001421962",
-        "0001422158",
-        "0001032592",
-        "0001422706",
-        "0001423331",
-        "0000037245",
-        "0001423919",
-        "0001423930",
-        "0001245654",
-        "0001424352",
-        "0001424848",
-        "0001424868",
-        "0001424870",
-        "0001424881",
-        "0001424929",
-        "0001425070",
-        "0001425068",
-        "0001425123",
-        "0001425126",
-        "0001103734",
-        "0000757171",
-        "0001425221",
-        "0001425233"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -3226,7 +3198,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:29:18.774Z"
+      "updatedAt": "2026-10-04T14:41:00.073Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5507,32 +5479,7 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [
-        "0001265243",
-        "0001419943",
-        "0000462435",
-        "0000789370",
-        "0001422302",
-        "0001422775",
-        "0001325103",
-        "0001423438",
-        "0001423447",
-        "0001421947",
-        "0001423960",
-        "0000844175",
-        "0001423400",
-        "0001422360",
-        "0001420070",
-        "0001352007",
-        "0001424078",
-        "0001422435",
-        "0001424859",
-        "0001424892",
-        "0001420757",
-        "0001425022",
-        "0001424994",
-        "0001424989"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -5548,7 +5495,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:29:18.775Z"
+      "updatedAt": "2026-10-04T14:41:00.073Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6745,22 +6692,7 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [
-        "0001383920",
-        "0001327863",
-        "0001413514",
-        "0001422911",
-        "0001417494",
-        "0001420565",
-        "0001220543",
-        "0001423182",
-        "0001181071",
-        "0001262499",
-        "0001423451",
-        "0001423393",
-        "0001422326",
-        "0001424428"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -6776,7 +6708,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:29:18.775Z"
+      "updatedAt": "2026-10-04T14:41:00.073Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7060,7 +6992,7 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "Hà Giao-Xã Vân Canh--Tỉnh Gia Lai",
           "chanDoanHis": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
-          "customDiagnosis": "HP SINH THIẾT",
+          "customDiagnosis": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "24/09/2026",
           "hisBed": "H079",
@@ -7098,24 +7030,32 @@
           "surgicalConsultationsByDate": {
             "2026-10-04": {
               "isConsulted": true,
+              "isSurgical": false,
               "dateKey": "2026-10-04",
               "postConsultDiagnosis": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
               "surgeryMethod": "",
               "decision": "",
               "advancePayment": "",
               "bloodMl": "",
-              "updatedAt": "2026-10-04T09:13:15.923Z"
+              "treatmentPlan": "",
+              "roomKey": "tk4",
+              "roomName": "Thần kinh 4",
+              "updatedAt": "2026-10-04T14:41:00.074Z"
             }
           },
           "surgicalConsultation": {
             "isConsulted": true,
+            "isSurgical": false,
             "dateKey": "2026-10-04",
             "postConsultDiagnosis": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
             "surgeryMethod": "",
             "decision": "",
             "advancePayment": "",
             "bloodMl": "",
-            "updatedAt": "2026-10-04T09:13:15.923Z"
+            "treatmentPlan": "",
+            "roomKey": "tk4",
+            "roomName": "Thần kinh 4",
+            "updatedAt": "2026-10-04T14:41:00.074Z"
           }
         },
         "0001422079": {
@@ -10597,47 +10537,7 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [
-        "0001415940",
-        "0001418784",
-        "0001411127",
-        "0001421285",
-        "0001418775",
-        "0001422079",
-        "0001422398",
-        "0001422488",
-        "0001200590",
-        "0001423036",
-        "0001423062",
-        "0001423344",
-        "0001423307",
-        "0001422572",
-        "0001423830",
-        "0001423904",
-        "0001423932",
-        "0001419899",
-        "0001424144",
-        "0001424276",
-        "0001424346",
-        "0001068291",
-        "0001424410",
-        "0001424436",
-        "0001424446",
-        "0000995488",
-        "0000811741",
-        "0001355818",
-        "0001383953",
-        "0001008234",
-        "0001424521",
-        "0001422464",
-        "0001424820",
-        "0001424939",
-        "0001424955",
-        "0001424966",
-        "0001425000",
-        "0001302334",
-        "0001425205"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -10653,7 +10553,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:29:18.775Z"
+      "updatedAt": "2026-10-04T14:41:00.073Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11540,16 +11440,7 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [
-        "0001412464",
-        "0001416828",
-        "0001420321",
-        "0001422339",
-        "0001423868",
-        "0001421963",
-        "0001412378",
-        "0001425116"
-      ],
+      "latestExcelMabns": [],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -11565,7 +11456,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:29:18.775Z"
+      "updatedAt": "2026-10-04T14:41:00.073Z"
     }
   },
   "episodeConsultations": {},
