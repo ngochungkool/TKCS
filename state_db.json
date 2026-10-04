@@ -1,5 +1,5 @@
 {
-  "version": 1791089744861,
+  "version": 1791089771362,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:55:44.860Z"
+      "updatedAt": "2026-10-04T04:56:11.362Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3452,12 +3452,22 @@
           "hanTheDen": "09/06/2027",
           "diaChi": "Nhơn Thiện-Phường An Nhơn Bắc--Tỉnh Gia Lai",
           "chanDoanHis": "S06.61-Xuất huyết dưới màng nhện do chấn thương, có vết thương nội sọ hở",
-          "customDiagnosis": "S06.61-Xuất huyết dưới màng nhện do chấn thương, có vết thương nội sọ hở",
+          "customDiagnosis": "Hậu phẫu ngày 5 phẫu thuật Vết thương sọ não",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H055",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3466,11 +3476,11 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "NONE",
-            "markedDate": "",
+            "status": "SCHEDULED",
+            "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": ""
+            "note": "Không hẹn tái khám"
           },
           "removed": {
             "isRemoved": false,
@@ -3480,8 +3490,8 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
-            "surgeryDate": ""
+            "surgeryName": "Vết thương sọ não",
+            "surgeryDate": "2026-09-29"
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
@@ -5270,7 +5280,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:55:44.860Z"
+      "updatedAt": "2026-10-04T04:56:11.362Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6485,7 +6495,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:55:44.860Z"
+      "updatedAt": "2026-10-04T04:56:11.362Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10418,7 +10428,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:55:44.861Z"
+      "updatedAt": "2026-10-04T04:56:11.362Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11322,7 +11332,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:55:44.861Z"
+      "updatedAt": "2026-10-04T04:56:11.362Z"
     }
   },
   "episodeConsultations": {},
