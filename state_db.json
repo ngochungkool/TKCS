@@ -1,5 +1,5 @@
 {
-  "version": 1791080537102,
+  "version": 1791079323417,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -21,7 +21,38 @@
         "2026-09-28": "RA_TRUC",
         "2026-09-29": "LAM_NGAY"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791079300511-v0u9",
+          "roomName": "Thần kinh 1",
+          "startMin": 29851321,
+          "endMin": 29851322,
+          "lastConfirmedMin": 29851321,
+          "warnedAtMin": null,
+          "receivedBy": "Đào Văn Nhân",
+          "receivedRole": "Trưởng khoa",
+          "receivedAt": "2026-10-04T02:01:40.511Z",
+          "releasedEarly": true,
+          "releasedBy": "Đào Văn Nhân",
+          "releasedRole": "Trưởng khoa",
+          "releasedAt": "2026-10-04T02:01:40.526Z"
+        },
+        {
+          "id": "u-1791079323405-na7c",
+          "roomName": "Thần kinh 1",
+          "startMin": 29851322,
+          "endMin": 29851323,
+          "lastConfirmedMin": 29851322,
+          "warnedAtMin": null,
+          "receivedBy": "Nguyễn Thị Mai",
+          "receivedRole": "Điều dưỡng trưởng",
+          "receivedAt": "2026-10-04T02:02:03.405Z",
+          "releasedEarly": true,
+          "releasedBy": "Nguyễn Thị Mai",
+          "releasedRole": "Điều dưỡng trưởng",
+          "releasedAt": "2026-10-04T02:02:03.417Z"
+        }
+      ],
       "currentRoom": null
     },
     {
@@ -266,7 +297,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:22:17.008Z"
+      "updatedAt": "2026-10-04T01:53:58.928Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -292,7 +323,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:22:17.008Z"
+      "updatedAt": "2026-10-04T01:53:58.928Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -318,7 +349,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:22:17.008Z"
+      "updatedAt": "2026-10-04T01:53:58.928Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -344,7 +375,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:22:17.008Z"
+      "updatedAt": "2026-10-04T01:53:58.928Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -370,7 +401,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:22:17.008Z"
+      "updatedAt": "2026-10-04T01:53:58.928Z"
     }
   },
   "episodeConsultations": {},
@@ -765,9 +796,9 @@
   },
   "announcement": {
     "title": "Bảng thông báo chung",
-    "content": "Chào mừng toàn thể cán bộ nhân viên Khoa Ngoại Thần Kinh - Cột Sống! Toàn khoa thực hiện tốt quy chế chuyên môn, giao ban đúng giờ và phối hợp cấp cứu khẩn trương.",
-    "updatedAt": "2026-10-04T01:51:33.456Z",
-    "updatedBy": "Đào Văn Nhân",
-    "updatedRole": "Trưởng khoa"
+    "content": "Chào mừng toàn thể cán bộ nhân viên Khoa Ngoại Thần Kinh - Cột Sống!",
+    "updatedAt": "2026-10-04T01:53:49.233Z",
+    "updatedBy": "Huỳnh Ngọc Hưng",
+    "updatedRole": "Bác sĩ"
   }
 }
