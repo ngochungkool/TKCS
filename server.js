@@ -8,7 +8,7 @@ const crypto = require('crypto');
 const XLSX = require('xlsx');
 const ExcelJS = require('exceljs');
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const ROOT = __dirname;
 const DATA_FILE = path.join(ROOT, 'state_db.json');
 const USERS_FILE = path.join(ROOT, 'users.json');
@@ -4351,8 +4351,8 @@ const server = http.createServer(async (req, res) => {
     }
 
     const tempPptx = path.join(ROOT, `briefing_${qDate}_${Date.now()}.pptx`);
-    const scriptPath = path.join(ROOT, 'scripts', 'generate_briefing_pptx.py');
-    const pythonCmd = `python "${scriptPath}" --date ${qDate} --out "${tempPptx}"`;
+    const pyCmd = process.platform === 'win32' ? 'python' : 'python3';
+    const pythonCmd = `${pyCmd} "${scriptPath}" --date ${qDate} --out "${tempPptx}"`;
 
     exec(pythonCmd, (err, stdout, stderr) => {
       if (err || !fs.existsSync(tempPptx)) {
