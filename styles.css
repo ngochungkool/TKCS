@@ -4119,7 +4119,7 @@ body {
 
 .tk4-sc-row-card {
   display: grid;
-  grid-template-columns: 190px 1.2fr 1.2fr 155px 120px 75px;
+  grid-template-columns: 165px 1.2fr 1.2fr 140px 95px 105px 125px;
   gap: 8px;
   align-items: center;
   background: #f8fafc;
@@ -4145,6 +4145,12 @@ body {
   .tk4-sc-row-card {
     grid-template-columns: 1fr;
     gap: 6px;
+  }
+}
+
+@media (max-width: 900px) {
+  #tk1-wing-a-body {
+    grid-template-columns: 1fr !important;
   }
 }
 

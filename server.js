@@ -86,6 +86,51 @@ function parseHisDateToDateKey(val) {
   return null;
 }
 
+function parseHisDateTime(val) {
+  if (!val && val !== 0) return null;
+  if (val instanceof Date) return val;
+  if (typeof val === 'number') {
+    try {
+      const XLSX = require('xlsx');
+      const p = XLSX.SSF.parse_date_code(val);
+      if (p && p.y && p.m && p.d) {
+        return new Date(Date.UTC(p.y, p.m - 1, p.d, p.H || 0, p.M || 0, p.S || 0));
+      }
+    } catch (e) {}
+  }
+  const str = String(val).trim();
+  const dmyMatch = str.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})(?:\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?/);
+  if (dmyMatch) {
+    const [, d, m, y, h, min, s] = dmyMatch;
+    return new Date(Date.UTC(Number(y), Number(m) - 1, Number(d), Number(h || 0), Number(min || 0), Number(s || 0)));
+  }
+  const ymdMatch = str.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})(?:[\sT]+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?/);
+  if (ymdMatch) {
+    const [, y, m, d, h, min, s] = ymdMatch;
+    return new Date(Date.UTC(Number(y), Number(m) - 1, Number(d), Number(h || 0), Number(min || 0), Number(s || 0)));
+  }
+  return null;
+}
+
+// Tính ngày tua trực: Mỗi ca trực bắt đầu từ 07:00:00 ngày D đến 06:59:59 ngày D+1
+function getShiftDateKey(val) {
+  if (!val && val !== 0) return null;
+  const dt = parseHisDateTime(val);
+  if (!dt) return null;
+  if (typeof val === 'string') {
+    const str = val.trim();
+    if (!str.includes(':') && !str.includes(' ')) {
+      return parseHisDateToDateKey(str);
+    }
+  }
+  // Lùi 7 tiếng: 07:00 ngày D -> 00:00 ngày D; 06:59 ngày D+1 -> 23:59 ngày D
+  const shiftDt = new Date(dt.getTime() - 7 * 3600 * 1000);
+  const y = shiftDt.getUTCFullYear();
+  const m = String(shiftDt.getUTCMonth() + 1).padStart(2, '0');
+  const d = String(shiftDt.getUTCDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 function getEffectiveShiftForDate(doc, dateKey) {
   if (doc.scheduleByDate && doc.scheduleByDate[dateKey]) {
     return doc.scheduleByDate[dateKey];
@@ -1433,9 +1478,15 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
+      const curShiftDateKey = getShiftDateKey(new Date());
+
       // 2. Process vào khoa -> Bệnh vào (dangky == 1) vs Chuyển đến (dangky == 0 hoặc có Khoa chuyển đến)
       const countedAdmMabns = new Set();
       for (const r of vaoKhoaRows) {
+        const rawDate = r['Ngày đăng ký'] || r['ngaydangky'] || r['Ngày vào'] || r['ngayvao'];
+        const shiftDate = getShiftDateKey(rawDate);
+        if (shiftDate && shiftDate !== curShiftDateKey) continue;
+
         const mabn = String(r['mabn'] || '').trim();
         if (mabn) countedAdmMabns.add(mabn);
         const rm = mabnToRoom[mabn] || mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
@@ -1451,17 +1502,16 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      // 2b. Smart Admission Filter: phát hiện ca mới vào từ đối chiếu file Đang điều trị hoặc theo Ngày vào hôm nay
+      // 2b. Smart Admission Filter: phát hiện ca mới vào từ đối chiếu file Đang điều trị hoặc theo Ngày vào ca trực hôm nay
       const prevMabnSet = new Set(dangDieuTriPrevRows.map(r => String(r['mabn'] || '').trim()).filter(Boolean));
-      const todayDateKey = getDateKey(new Date());
 
       for (const r of dangDieuTriRows) {
         const m = String(r['mabn'] || '').trim();
         if (!m || countedAdmMabns.has(m)) continue;
 
         const isNewByDiff = prevMabnSet.size > 0 && !prevMabnSet.has(m);
-        const admDate = parseHisDateToDateKey(r['Ngày vào'] || r['ngayvao']);
-        const isNewByDate = admDate && (admDate === todayDateKey);
+        const admDate = getShiftDateKey(r['Ngày vào'] || r['ngayvao'] || r['Ngày đăng ký']);
+        const isNewByDate = admDate && (admDate === curShiftDateKey);
 
         if (isNewByDiff || isNewByDate) {
           const rm = mabnToRoom[m] || mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
@@ -1479,6 +1529,10 @@ const server = http.createServer(async (req, res) => {
 
       // 3. Process chuyển khoa -> Chuyển đi
       for (const r of chuyenKhoaRows) {
+        const rawDate = r['Ngày chuyển'] || r['ngaychuyen'];
+        const shiftDate = getShiftDateKey(rawDate);
+        if (shiftDate && shiftDate !== curShiftDateKey) continue;
+
         const mabn = String(r['mabn'] || '').trim();
         const rm = mabnToRoom[mabn] || mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
         total.chuyenDi += 1;
@@ -1488,6 +1542,10 @@ const server = http.createServer(async (req, res) => {
       // 4. Process ra viện -> Ra viện vs Tử vong
       const countedDisMabns = new Set([...raVienRows, ...chuyenKhoaRows].map(r => String(r['mabn'] || '').trim()).filter(Boolean));
       for (const r of raVienRows) {
+        const rawDate = r['Ngày ra'] || r['ngayra'] || r['ngaycv'] || r['ngaytt'];
+        const shiftDate = getShiftDateKey(rawDate);
+        if (shiftDate && shiftDate !== curShiftDateKey) continue;
+
         const mabn = String(r['mabn'] || '').trim();
         const rm = mabnToRoom[mabn] || mapHisRoomToDeptRoom(r['tenphong'] || r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
         const lyDoStr = String(r['malydo'] || '').toLowerCase();
@@ -1999,6 +2057,7 @@ const server = http.createServer(async (req, res) => {
             surgeryMethod: String(surgicalConsultation.surgeryMethod || '').trim(),
             decision: String(surgicalConsultation.decision || '').trim(),
             advancePayment: String(surgicalConsultation.advancePayment || '').trim(),
+            bloodMl: String(surgicalConsultation.bloodMl || '').trim(),
             updatedAt: new Date().toISOString()
           };
           rec.surgicalConsultationsByDate[targetDate] = scObj;
@@ -2071,7 +2130,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (action === 'SAVE_SURGICAL_CONSULTATION') {
-      const { mabn, dateKey, postConsultDiagnosis, surgeryMethod, decision, advancePayment, isConsulted } = body;
+      const { mabn, dateKey, postConsultDiagnosis, surgeryMethod, decision, advancePayment, bloodMl, isConsulted } = body;
       const rec = tk1.patientRecords[mabn];
       if (rec) {
         const targetDate = dateKey || todayKey;
@@ -2083,6 +2142,7 @@ const server = http.createServer(async (req, res) => {
           surgeryMethod: String(surgeryMethod || '').trim(),
           decision: String(decision || '').trim(),
           advancePayment: String(advancePayment || '').trim(),
+          bloodMl: String(bloodMl || '').trim(),
           updatedAt: new Date().toISOString()
         };
         rec.surgicalConsultationsByDate[targetDate] = consultObj;
@@ -2507,6 +2567,10 @@ const server = http.createServer(async (req, res) => {
         const existingAdmMabns = new Set();
         let sttAdm = { tk1: 1, tk2: 1, tk3: 1, tk4: 1, hstk: 1 };
         for (const r of vaoKhoaRows) {
+          const rawDate = r['Ngày đăng ký'] || r['ngaydangky'] || r['Ngày vào'] || r['ngayvao'];
+          const shiftDate = getShiftDateKey(rawDate);
+          if (shiftDate && shiftDate !== targetDateKey) continue;
+
           const m = String(r['mabn'] || '').trim();
           if (m) existingAdmMabns.add(m);
           const rk = mabnToRoomKey[m] || 'tk1';
@@ -2554,8 +2618,8 @@ const server = http.createServer(async (req, res) => {
           if (!m || existingAdmMabns.has(m)) continue;
 
           const isNewByDiff = prevMabnSet.size > 0 && !prevMabnSet.has(m);
-          const admDate = parseHisDateToDateKey(r['Ngày vào'] || r['ngayvao']);
-          const isNewByDate = admDate && (admDate === targetDateKey);
+          const admShiftDate = getShiftDateKey(r['Ngày vào'] || r['ngayvao'] || r['Ngày đăng ký']);
+          const isNewByDate = admShiftDate && (admShiftDate === targetDateKey);
 
           if (isNewByDiff || isNewByDate) {
             const rmName = mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
@@ -2602,6 +2666,10 @@ const server = http.createServer(async (req, res) => {
         const existingDisMabns = new Set();
         let sttDis = { tk1: 1, tk2: 1, tk3: 1, tk4: 1, hstk: 1 };
         for (const r of raVienRows) {
+          const rawDate = r['Ngày ra'] || r['ngayra'] || r['ngaycv'] || r['ngaytt'];
+          const shiftDate = getShiftDateKey(rawDate);
+          if (shiftDate && shiftDate !== targetDateKey) continue;
+
           const m = String(r['mabn'] || '').trim();
           if (m) existingDisMabns.add(m);
           const rk = mabnToRoomKey[m] || 'tk1';
@@ -2642,6 +2710,10 @@ const server = http.createServer(async (req, res) => {
         }
 
         for (const r of chuyenKhoaRows) {
+          const rawDate = r['Ngày chuyển'] || r['ngaychuyen'];
+          const shiftDate = getShiftDateKey(rawDate);
+          if (shiftDate && shiftDate !== targetDateKey) continue;
+
           const m = String(r['mabn'] || '').trim();
           if (m) existingDisMabns.add(m);
           const rk = mabnToRoomKey[m] || 'tk1';
@@ -2856,6 +2928,7 @@ const server = http.createServer(async (req, res) => {
             surgeryMethod: sc.surgeryMethod || '',
             decision: sc.decision || 'Đồng ý',
             advancePayment: sc.advancePayment || '',
+            bloodMl: sc.bloodMl || '',
             dateKey: sc.dateKey || dKey,
             targetConsultDate: dKey,
             updatedAt: sc.updatedAt || ''
@@ -3979,7 +4052,7 @@ const server = http.createServer(async (req, res) => {
     const report = getOrBuildBriefingReport(targetDate);
 
     if (action === 'SAVE_TK4_CONSULTATION') {
-      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, isConsulted, targetDate: explicitTargetDate } = body;
+      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, bloodMl, isConsulted, targetDate: explicitTargetDate } = body;
       const tk4 = db.wardRounds && db.wardRounds.tk4;
       const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : addDaysToKey(targetDate, 1));
       if (tk4 && tk4.patientRecords && tk4.patientRecords[mabn]) {
@@ -3992,6 +4065,7 @@ const server = http.createServer(async (req, res) => {
           surgeryMethod: String(surgeryMethod || '').trim(),
           decision: String(decision || 'Đồng ý').trim(),
           advancePayment: String(advancePayment || '').trim(),
+          bloodMl: String(bloodMl || '').trim(),
           updatedAt: new Date().toISOString()
         };
         rec.surgicalConsultationsByDate[consultDate] = scObj;

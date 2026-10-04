@@ -59,10 +59,50 @@
   const ROOM_LAYOUT_CONFIGS = {
     tk1:  { wingA: [1, 9],  wingB: [10, 24], extraTasks: [] },
     tk2:  { wingA: [1, 11], wingB: [12, 25], extraTasks: ['Rút dẫn lưu', 'Rút sonde tiểu', 'Cắt chỉ'] },
-    tk3:  { wingA: [1, 9],  wingB: [10, 24], extraTasks: [] },
+    tk3:  { wingA: [1, 10], wingB: [11, 16], extraTasks: [] },
     tk4:  { wingA: [1, 16], wingB: [17, 31], extraTasks: [] },
     hstk: { wingA: [1, 12], wingB: null,     extraTasks: ['Cai máy thở', 'Đặt NKQ thở máy', 'Rút NKQ', 'Khai khí quản', 'Đặt tĩnh mạch trung tâm'] }
   };
+
+  function cleanPaymentForInput(val) {
+    if (!val) return '';
+    const str = String(val).trim();
+    const match = str.match(/^([\d.,]+)\s*(triệu|trieu|tr)?$/i);
+    if (match) return match[1];
+    return str;
+  }
+
+  function formatPaymentWithMillion(val) {
+    if (!val) return '';
+    const str = String(val).trim();
+    if (!str) return '';
+    if (/triệu$/i.test(str)) return str;
+    if (/^[\d.,]+$/.test(str)) {
+      return `${str} triệu`;
+    }
+    const m = str.match(/^([\d.,]+)\s*(tr|trieu)$/i);
+    if (m) {
+      return `${m[1]} triệu`;
+    }
+    return str;
+  }
+
+  function cleanBloodForInput(val) {
+    if (!val) return '';
+    const str = String(val).trim();
+    const match = str.match(/^(\d+)\s*(ml)?$/i);
+    if (match) return match[1];
+    return str;
+  }
+
+  function formatBloodMl(val) {
+    if (!val) return '';
+    const str = String(val).trim();
+    if (!str) return '';
+    if (/ml$/i.test(str)) return str;
+    if (/^\d+$/.test(str)) return `${str} ml`;
+    return str;
+  }
 
   function getCurrentRoomConfig() {
     return ROOM_LAYOUT_CONFIGS[currentRoomKey] || ROOM_LAYOUT_CONFIGS.tk1;
@@ -242,7 +282,9 @@
     for (let i = 1; i <= endB; i++) {
       const mainCode = String(i);
       const foldCode = `${i}X`;
-      const wingLabel = !wingB ? 'Hồi sức' : (i <= endA ? 'Dãy A' : 'Dãy B');
+      const wingLabel = currentRoomKey === 'tk3'
+        ? (i <= endA ? 'Dãy Trên' : 'Dãy Dịch Vụ')
+        : (!wingB ? 'Hồi sức' : (i <= endA ? 'Dãy A' : 'Dãy B'));
 
       for (const code of [mainCode, foldCode]) {
         const isFold = code.endsWith('X');
@@ -523,6 +565,7 @@
 
         const methodStr = sc.surgeryMethod ? ` · <strong>PP:</strong> ${sc.surgeryMethod}` : '';
         const diagStr = sc.postConsultDiagnosis ? ` · <strong>CĐ:</strong> ${sc.postConsultDiagnosis}` : '';
+        const bloodStr = sc.bloodMl ? ` · <strong>Máu:</strong> ${sc.bloodMl}` : '';
         const payStr = sc.advancePayment ? ` · <strong>Ứng:</strong> ${sc.advancePayment}` : '';
 
         tk4SurgConsultBannerHtml = `
@@ -530,6 +573,7 @@
             <div style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.75rem;color:${badgeColor};">
               🔪 <span style="font-weight:800;padding:1px 6px;border-radius:4px;background:#ffffff;border:1px solid ${badgeBorder};">${badgeText}</span>
               ${methodStr || diagStr}
+              ${bloodStr}
               ${payStr}
             </div>
             <div style="display:flex;align-items:center;gap:3px;flex-shrink:0;" onclick="event.stopPropagation();">
@@ -885,7 +929,6 @@
                   </td>
                   <td>
                     <strong style="color:#0f172a;">${sc.postConsultDiagnosis || '<span style="color:#94a3b8;font-weight:normal;font-style:italic;">Chưa nhập CĐ sau HC</span>'}</strong>
-                    <div style="font-size:0.72rem;color:#64748b;margin-top:2px;">HIS: ${rec.chanDoanHis || '--'}</div>
                   </td>
                   <td>
                     <span style="font-weight:700;color:#1e40af;">${sc.surgeryMethod || '<span style="color:#94a3b8;font-weight:normal;font-style:italic;">Chưa nhập phương pháp mổ</span>'}</span>
@@ -893,6 +936,7 @@
                   <td>${decBadgeHtml}</td>
                   <td>
                     <strong style="color:#b45309;">${sc.advancePayment || '<span style="color:#94a3b8;font-weight:normal;font-style:italic;">--</span>'}</strong>
+                    ${sc.bloodMl ? `<div style="font-size:0.75rem;color:#b91c1c;font-weight:700;margin-top:2px;">Máu: ${sc.bloodMl}</div>` : ''}
                   </td>
                   <td style="text-align:center;">
                     <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
@@ -961,6 +1005,15 @@
     const statsBadge = document.getElementById('tk4-sc-box-stats-badge');
     const collapseBtn = document.getElementById('btn-toggle-tk4-sc-collapse');
 
+    const mainTitleEl = document.getElementById('tk4-sc-box-main-title');
+    const subTitleEl = document.getElementById('tk4-sc-box-sub-title');
+    if (mainTitleEl) {
+      mainTitleEl.textContent = `HỘI CHẨN MỔ — THẦN KINH 4 (${formatDateDisplayVN(curDateKey)})`;
+    }
+    if (subTitleEl) {
+      subTitleEl.textContent = `Danh sách hội chẩn mổ ngày ${formatDateDisplayVN(curDateKey)} · Nhập thông tin & kết luận duyệt mổ`;
+    }
+
     if (bodyEl) {
       bodyEl.style.display = tk4ScBoxCollapsed ? 'none' : 'flex';
     }
@@ -990,7 +1043,7 @@
       if (!q) return true;
       const bed = getBedOfPatient(r.mabn) || '';
       const sc = getPatientSurgicalConsultation(r, curDateKey) || {};
-      const searchStr = `${r.hoten} ${r.mabn} ${r.tuoi} ${bed} ${r.chanDoanHis || ''} ${sc.postConsultDiagnosis || ''} ${sc.surgeryMethod || ''} ${sc.decision || ''} ${sc.advancePayment || ''}`.toLowerCase();
+      const searchStr = `${r.hoten} ${r.mabn} ${r.tuoi} ${bed} ${r.chanDoanHis || ''} ${sc.postConsultDiagnosis || ''} ${sc.surgeryMethod || ''} ${sc.decision || ''} ${sc.bloodMl || ''} ${sc.advancePayment || ''}`.toLowerCase();
       return searchStr.includes(q);
     });
 
@@ -1054,9 +1107,6 @@
               </a>
               <span style="font-size:0.75rem;color:#64748b;">· ${rec.tuoi || '--'}</span>
             </div>
-            <div style="font-size:0.72rem;color:#64748b;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="HIS: ${rec.chanDoanHis || '--'}">
-              HIS: ${rec.chanDoanHis || 'Chưa có CĐ'}
-            </div>
           </div>
 
           <!-- Cột 2: Chẩn đoán sau hội chẩn -->
@@ -1098,19 +1148,33 @@
             </select>
           </div>
 
-          <!-- Cột 5: Tiền ứng -->
+          <!-- Cột 5: Máu -->
+          <div>
+            <input
+              type="text"
+              class="date-input"
+              id="sc-blood-${rec.mabn}"
+              value="${cleanBloodForInput(sc.bloodMl)}"
+              placeholder="Máu: ...ml"
+              title="Lượng máu cần chuẩn bị (ml)"
+              style="width:100%;height:34px;font-size:0.8rem;font-weight:700;color:#b91c1c;font-family:'Be Vietnam Pro',sans-serif;"
+            />
+          </div>
+
+          <!-- Cột 6: Tiền ứng -->
           <div>
             <input
               type="text"
               class="date-input"
               id="sc-payment-${rec.mabn}"
-              value="${(sc.advancePayment || '').replace(/"/g, '&quot;')}"
-              placeholder="Tiền ứng: ..."
+              value="${cleanPaymentForInput(sc.advancePayment)}"
+              placeholder="Ứng: ... tr"
+              title="Chỉ cần nhập số, đơn vị mặc định là triệu"
               style="width:100%;height:34px;font-size:0.8rem;font-weight:800;color:#b45309;font-family:'Be Vietnam Pro',sans-serif;"
             />
           </div>
 
-          <!-- Cột 6: Thao tác -->
+          <!-- Cột 7: Thao tác -->
           <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;">
             <button
               type="button"
@@ -1176,7 +1240,10 @@
     const diag = (document.getElementById(`sc-diag-${mabn}`)?.value || '').trim();
     const method = (document.getElementById(`sc-method-${mabn}`)?.value || '').trim();
     const decision = document.getElementById(`sc-decision-${mabn}`)?.value || '';
-    const payment = (document.getElementById(`sc-payment-${mabn}`)?.value || '').trim();
+    const rawBlood = (document.getElementById(`sc-blood-${mabn}`)?.value || '').trim();
+    const rawPayment = (document.getElementById(`sc-payment-${mabn}`)?.value || '').trim();
+    const bloodMl = formatBloodMl(rawBlood);
+    const payment = formatPaymentWithMillion(rawPayment);
 
     const origHtml = btnEl ? btnEl.innerHTML : '💾 Lưu';
     if (btnEl) btnEl.innerHTML = '⏳';
@@ -1188,6 +1255,7 @@
       postConsultDiagnosis: diag,
       surgeryMethod: method,
       decision,
+      bloodMl,
       advancePayment: payment,
       isConsulted: true
     });
@@ -1201,6 +1269,7 @@
         postConsultDiagnosis: diag,
         surgeryMethod: method,
         decision,
+        bloodMl,
         advancePayment: payment,
         updatedAt: new Date().toISOString()
       };
@@ -1233,6 +1302,7 @@
     const infoEl = document.getElementById('tk4-sc-modal-patient-info');
     const inpDiag = document.getElementById('tk4-sc-modal-inp-diag');
     const inpMethod = document.getElementById('tk4-sc-modal-inp-method');
+    const inpBlood = document.getElementById('tk4-sc-modal-inp-blood');
     const inpPayment = document.getElementById('tk4-sc-modal-inp-payment');
 
     const bedCode = getBedOfPatient(mabn);
@@ -1257,7 +1327,8 @@
     const sc = getPatientSurgicalConsultation(rec, curDateKey) || {};
     if (inpDiag) inpDiag.value = sc.postConsultDiagnosis || rec.chanDoanHis || '';
     if (inpMethod) inpMethod.value = sc.surgeryMethod || '';
-    if (inpPayment) inpPayment.value = sc.advancePayment || '';
+    if (inpBlood) inpBlood.value = cleanBloodForInput(sc.bloodMl);
+    if (inpPayment) inpPayment.value = cleanPaymentForInput(sc.advancePayment);
 
     const curDec = sc.decision || '';
     document.querySelectorAll('input[name="tk4-sc-decision"]').forEach(r => {
@@ -1273,13 +1344,15 @@
     const curDateKey = getSelectedDateKey();
     const inpDiag = document.getElementById('tk4-sc-modal-inp-diag');
     const inpMethod = document.getElementById('tk4-sc-modal-inp-method');
+    const inpBlood = document.getElementById('tk4-sc-modal-inp-blood');
     const inpPayment = document.getElementById('tk4-sc-modal-inp-payment');
     const selectedRadio = document.querySelector('input[name="tk4-sc-decision"]:checked');
 
     const diag = (inpDiag?.value || '').trim();
     const method = (inpMethod?.value || '').trim();
     const decision = selectedRadio ? selectedRadio.value : '';
-    const payment = (inpPayment?.value || '').trim();
+    const bloodMl = formatBloodMl((inpBlood?.value || '').trim());
+    const payment = formatPaymentWithMillion((inpPayment?.value || '').trim());
 
     await callTk1Api({
       action: 'SAVE_SURGICAL_CONSULTATION',
@@ -1288,6 +1361,7 @@
       postConsultDiagnosis: diag,
       surgeryMethod: method,
       decision,
+      bloodMl,
       advancePayment: payment,
       isConsulted: true
     });
@@ -1301,6 +1375,7 @@
         postConsultDiagnosis: diag,
         surgeryMethod: method,
         decision,
+        bloodMl,
         advancePayment: payment,
         updatedAt: new Date().toISOString()
       };
@@ -1846,6 +1921,15 @@
     checkClientSideMorningRelease();
     renderTk1TopAlerts();
 
+    if (currentRoomKey !== 'tk4') {
+      const scBox = document.getElementById('tk4-surgical-consult-box');
+      if (scBox) scBox.style.display = 'none';
+      const scTabBtn = document.getElementById('tk1-sum-tab-btn-hcm');
+      if (scTabBtn) scTabBtn.style.display = 'none';
+      const scModal = document.getElementById('tk4-modal-sc-section');
+      if (scModal) scModal.style.display = 'none';
+    }
+
     const curDate = getSelectedDateKey();
     document.querySelectorAll('.ward-date-selector').forEach(inp => {
       if (inp.value !== curDate) {
@@ -1891,11 +1975,38 @@
       }
       if (wingABody) {
         wingABody.style.display = 'grid';
-        wingABody.style.gridTemplateColumns = 'repeat(auto-fit, minmax(360px, 1fr))';
-        wingABody.style.gap = '0.75rem';
-        const listA = [];
-        for (let i = startA; i <= endA; i++) listA.push(renderBedPairHtml(i));
-        wingABody.innerHTML = listA.join('');
+        wingABody.style.gridTemplateColumns = 'repeat(3, minmax(280px, 1fr))';
+        wingABody.style.gap = '1rem';
+        wingABody.style.alignItems = 'start';
+
+        // 3 Cột tăng theo chiều dọc: Cột 1: 1-4, Cột 2: 5-8, Cột 3: 9-12
+        const col1Beds = [];
+        const col2Beds = [];
+        const col3Beds = [];
+        for (let i = 1; i <= 4; i++) col1Beds.push(renderBedPairHtml(i));
+        for (let i = 5; i <= 8; i++) col2Beds.push(renderBedPairHtml(i));
+        for (let i = 9; i <= 12; i++) col3Beds.push(renderBedPairHtml(i));
+
+        wingABody.innerHTML = `
+          <div class="hstk-bed-column" style="display:flex;flex-direction:column;gap:0.75rem;min-width:0;">
+            <div style="font-weight:800;font-size:0.8rem;color:#0369a1;background:#e0f2fe;padding:4px 8px;border-radius:6px;border:1px solid #bae6fd;text-align:center;">
+              CỘT 1 (GIƯỜNG 01 - 04)
+            </div>
+            ${col1Beds.join('')}
+          </div>
+          <div class="hstk-bed-column" style="display:flex;flex-direction:column;gap:0.75rem;min-width:0;">
+            <div style="font-weight:800;font-size:0.8rem;color:#0369a1;background:#e0f2fe;padding:4px 8px;border-radius:6px;border:1px solid #bae6fd;text-align:center;">
+              CỘT 2 (GIƯỜNG 05 - 08)
+            </div>
+            ${col2Beds.join('')}
+          </div>
+          <div class="hstk-bed-column" style="display:flex;flex-direction:column;gap:0.75rem;min-width:0;">
+            <div style="font-weight:800;font-size:0.8rem;color:#0369a1;background:#e0f2fe;padding:4px 8px;border-radius:6px;border:1px solid #bae6fd;text-align:center;">
+              CỘT 3 (GIƯỜNG 09 - 12)
+            </div>
+            ${col3Beds.join('')}
+          </div>
+        `;
       }
     } else {
       if (wingCardB) wingCardB.style.display = '';
@@ -1912,14 +2023,22 @@
       }
 
       if (wingATitle) {
-        wingATitle.textContent = currentRoomKey === 'tk4'
-          ? 'DÃY A — GIƯỜNG A01 ĐẾN A16'
-          : `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
+        if (currentRoomKey === 'tk3') {
+          wingATitle.textContent = `DÃY TRÊN — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
+        } else if (currentRoomKey === 'tk4') {
+          wingATitle.textContent = 'DÃY A — GIƯỜNG A01 ĐẾN A16';
+        } else {
+          wingATitle.textContent = `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
+        }
       }
       if (wingBTitle) {
-        wingBTitle.textContent = currentRoomKey === 'tk4'
-          ? 'DÃY B — GIƯỜNG B01 ĐẾN B15 (GIƯỜNG 17-31)'
-          : `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
+        if (currentRoomKey === 'tk3') {
+          wingBTitle.textContent = `DÃY DỊCH VỤ — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
+        } else if (currentRoomKey === 'tk4') {
+          wingBTitle.textContent = 'DÃY B — GIƯỜNG B01 ĐẾN B15 (GIƯỜNG 17-31)';
+        } else {
+          wingBTitle.textContent = `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
+        }
       }
       if (wingASub) {
         wingASub.textContent = `Đang nằm: ${countMainA}/${totalBedsA}${countFoldA > 0 ? ` (+${countFoldA} xếp)` : ''} · Trống: ${totalBedsA - countMainA}`;
@@ -2275,7 +2394,7 @@
             <div class="tk1-vbed-wing-title">
               <span>Dãy Giường Hồi Sức (${startA} – ${endA})</span>
             </div>
-            <div class="tk1-vbed-grid grid-wing-a" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
+            <div class="tk1-vbed-grid grid-wing-a" style="grid-template-columns: repeat(3, minmax(130px, 1fr)); grid-auto-flow: column; grid-template-rows: repeat(4, auto);">
               ${tilesA.join('')}
             </div>
           </div>
@@ -2289,7 +2408,7 @@
         <div class="tk1-vbed-wings-wrap">
           <div class="tk1-vbed-wing-box">
             <div class="tk1-vbed-wing-title">
-              <span>${currentRoomKey === 'tk4' ? 'Dãy A (A01 – A16)' : `Dãy A (${startA} – ${endA})`}</span>
+              <span>${currentRoomKey === 'tk3' ? 'Dãy Trên (01 – 10)' : currentRoomKey === 'tk4' ? 'Dãy A (A01 – A16)' : `Dãy A (${startA} – ${endA})`}</span>
             </div>
             <div class="tk1-vbed-grid grid-wing-a">
               ${tilesA.join('')}
@@ -2298,7 +2417,7 @@
 
           <div class="tk1-vbed-wing-box">
             <div class="tk1-vbed-wing-title" style="color:#0f766e;">
-              <span>${currentRoomKey === 'tk4' ? 'Dãy B (B01 – B15 / Giường 17–31)' : `Dãy B (${startB} – ${endB})`}</span>
+              <span>${currentRoomKey === 'tk3' ? 'Dãy Dịch Vụ (11 – 16)' : currentRoomKey === 'tk4' ? 'Dãy B (B01 – B15 / Giường 17–31)' : `Dãy B (${startB} – ${endB})`}</span>
             </div>
             <div class="tk1-vbed-grid grid-wing-b">
               ${tilesB.join('')}
@@ -2699,6 +2818,7 @@
         const inpDiag = document.getElementById('tk4-modal-sc-inp-diag');
         const inpMethod = document.getElementById('tk4-modal-sc-inp-method');
         const selDec = document.getElementById('tk4-modal-sc-sel-decision');
+        const inpBlood = document.getElementById('tk4-modal-sc-inp-blood');
         const inpPay = document.getElementById('tk4-modal-sc-inp-payment');
 
         if (inpDiag) inpDiag.value = sc.postConsultDiagnosis || (isIncluded ? rec.chanDoanHis || '' : '');
@@ -2710,7 +2830,8 @@
             updateTk4ModalScStatusBadge(selDec.value, Boolean(chkInc && chkInc.checked));
           };
         }
-        if (inpPay) inpPay.value = sc.advancePayment || '';
+        if (inpBlood) inpBlood.value = cleanBloodForInput(sc.bloodMl);
+        if (inpPay) inpPay.value = cleanPaymentForInput(sc.advancePayment);
       } else {
         tk4ScSec.style.display = 'none';
       }
@@ -2939,7 +3060,8 @@
       const diag = (document.getElementById('tk4-modal-sc-inp-diag')?.value || '').trim();
       const method = (document.getElementById('tk4-modal-sc-inp-method')?.value || '').trim();
       const decision = document.getElementById('tk4-modal-sc-sel-decision')?.value || '';
-      const payment = (document.getElementById('tk4-modal-sc-inp-payment')?.value || '').trim();
+      const bloodMl = formatBloodMl((document.getElementById('tk4-modal-sc-inp-blood')?.value || '').trim());
+      const payment = formatPaymentWithMillion((document.getElementById('tk4-modal-sc-inp-payment')?.value || '').trim());
 
       if (isIncluded) {
         surgicalConsultation = {
@@ -2948,6 +3070,7 @@
           postConsultDiagnosis: diag || (rec.chanDoanHis || ''),
           surgeryMethod: method,
           decision,
+          bloodMl,
           advancePayment: payment,
           updatedAt: new Date().toISOString()
         };
@@ -2961,6 +3084,7 @@
           postConsultDiagnosis: '',
           surgeryMethod: '',
           decision: '',
+          bloodMl: '',
           advancePayment: '',
           updatedAt: new Date().toISOString()
         };
@@ -3114,12 +3238,13 @@
       let surgConsultLines = [];
       if (currentRoomKey === 'tk4') {
         const sc = rec.surgicalConsultation;
-        if (sc && (sc.decision || sc.postConsultDiagnosis || sc.surgeryMethod || sc.advancePayment)) {
+        if (sc && (sc.decision || sc.postConsultDiagnosis || sc.surgeryMethod || sc.bloodMl || sc.advancePayment)) {
           const decStr = sc.decision ? `[HC MỔ: ${sc.decision}]` : '[HC MỔ]';
           const methodStr = sc.surgeryMethod ? ` · PP: ${sc.surgeryMethod}` : '';
           const diagStr = sc.postConsultDiagnosis ? ` · CĐ: ${sc.postConsultDiagnosis}` : '';
+          const bloodStr = sc.bloodMl ? ` · Máu: ${sc.bloodMl}` : '';
           const payStr = sc.advancePayment ? ` · Ứng: ${sc.advancePayment}` : '';
-          surgConsultLines = wrapCanvasText(mCtx, `${decStr}${methodStr || diagStr}${payStr}`, colWidth - 28);
+          surgConsultLines = wrapCanvasText(mCtx, `${decStr}${methodStr || diagStr}${bloodStr}${payStr}`, colWidth - 28);
         }
       }
 
@@ -3157,12 +3282,12 @@
     } else {
       layoutsA = wingAItems.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
       layoutsB = wingBItems.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
-      colTitleA = currentRoomKey === 'tk4'
-        ? 'DÃY A — GIƯỜNG A01 ĐẾN A16'
-        : `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
-      colTitleB = currentRoomKey === 'tk4'
-        ? 'DÃY B — GIƯỜNG B01 ĐẾN B15 (GIƯỜNG 17-31)'
-        : `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
+      colTitleA = currentRoomKey === 'tk3'
+        ? `DÃY TRÊN — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`
+        : (currentRoomKey === 'tk4' ? 'DÃY A — GIƯỜNG A01 ĐẾN A16' : `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`);
+      colTitleB = currentRoomKey === 'tk3'
+        ? `DÃY DỊCH VỤ — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`
+        : (currentRoomKey === 'tk4' ? 'DÃY B — GIƯỜNG B01 ĐẾN B15 (GIƯỜNG 17-31)' : `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`);
     }
 
     const totalHeightA = layoutsA.reduce((acc, x) => acc + x.layout.height + 8, 0);
@@ -3705,6 +3830,19 @@
       if (!roomKey) return;
       currentRoomKey = roomKey;
       quickAssignSelectedMabn = null;
+
+      if (roomKey !== 'tk4') {
+        const boxEl = document.getElementById('tk4-surgical-consult-box');
+        if (boxEl) boxEl.style.display = 'none';
+        const tabBtn = document.getElementById('tk1-sum-tab-btn-hcm');
+        if (tabBtn) tabBtn.style.display = 'none';
+        const modalSc = document.getElementById('tk4-modal-sc-section');
+        if (modalSc) modalSc.style.display = 'none';
+        if (activeSummaryTab === 'hoi-chan-mo') {
+          activeSummaryTab = 'xn-cdha';
+        }
+      }
+
       if (allRoomsState && allRoomsState[roomKey]) {
         tk1State = allRoomsState[roomKey];
         if (!tk1State.lastExcelUploadTime && lastExcelUploadTimeGlobal) {
