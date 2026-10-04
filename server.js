@@ -63,6 +63,29 @@ function addDaysToKey(dateKey, offsetDays) {
   return `${yyyy}-${mm}-${dd}`;
 }
 
+function parseHisDateToDateKey(val) {
+  if (!val && val !== 0) return null;
+  if (typeof val === 'number') {
+    try {
+      const XLSX = require('xlsx');
+      const p = XLSX.SSF.parse_date_code(val);
+      if (p && p.y && p.m && p.d) {
+        return `${p.y}-${String(p.m).padStart(2, '0')}-${String(p.d).padStart(2, '0')}`;
+      }
+    } catch (e) {}
+  }
+  const str = String(val).trim();
+  const dmyMatch = str.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+  if (dmyMatch) {
+    return `${dmyMatch[3]}-${dmyMatch[2].padStart(2, '0')}-${dmyMatch[1].padStart(2, '0')}`;
+  }
+  const ymdMatch = str.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
+  if (ymdMatch) {
+    return `${ymdMatch[1]}-${ymdMatch[2].padStart(2, '0')}-${ymdMatch[3].padStart(2, '0')}`;
+  }
+  return null;
+}
+
 function getEffectiveShiftForDate(doc, dateKey) {
   if (doc.scheduleByDate && doc.scheduleByDate[dateKey]) {
     return doc.scheduleByDate[dateKey];
@@ -1361,17 +1384,35 @@ const server = http.createServer(async (req, res) => {
       }
 
       let dangDieuTriRows = [];
+      let dangDieuTriPrevRows = [];
       let vaoKhoaRows = [];
       let raVienRows = [];
       let chuyenKhoaRows = [];
 
+      const prevFile = files.find(f => f.name.toLowerCase().includes('previous') || f.name.toLowerCase().includes('prev'));
+      if (prevFile) {
+        try {
+          const wbP = XLSX.readFile(prevFile.fullPath);
+          const wsP = wbP.Sheets[wbP.SheetNames[0]];
+          dangDieuTriPrevRows = XLSX.utils.sheet_to_json(wsP, { defval: '' });
+        } catch (e) {}
+      }
+
       for (const fObj of files) {
+        if (fObj.name === (prevFile && prevFile.name)) continue;
         const wb = XLSX.readFile(fObj.fullPath);
         const ws = wb.Sheets[wb.SheetNames[0]];
         const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
         const cat = detectHisExcelCategory(rows, fObj.name);
 
-        if (cat.code === 'DANG_DIEU_TRI') dangDieuTriRows = rows;
+        if (cat.code === 'DANG_DIEU_TRI') {
+          if (dangDieuTriRows.length > 0 && dangDieuTriPrevRows.length === 0) {
+            dangDieuTriPrevRows = dangDieuTriRows;
+            dangDieuTriRows = rows;
+          } else {
+            dangDieuTriRows = rows;
+          }
+        }
         else if (cat.code === 'VAO_KHOA') vaoKhoaRows = rows;
         else if (cat.code === 'RA_VIEN') raVienRows = rows;
         else if (cat.code === 'CHUYEN_KHOA') chuyenKhoaRows = rows;
@@ -1393,8 +1434,10 @@ const server = http.createServer(async (req, res) => {
       }
 
       // 2. Process vào khoa -> Bệnh vào (dangky == 1) vs Chuyển đến (dangky == 0 hoặc có Khoa chuyển đến)
+      const countedAdmMabns = new Set();
       for (const r of vaoKhoaRows) {
         const mabn = String(r['mabn'] || '').trim();
+        if (mabn) countedAdmMabns.add(mabn);
         const rm = mabnToRoom[mabn] || mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
         const hasFromDept = String(r['Khoa chuyển đến'] || '').trim() !== '' || (r['makkc'] !== '' && r['makkc'] !== undefined && Number(r['makkc']) !== 0);
         const isChuyenDen = Number(r['dangky']) === 0 || hasFromDept;
@@ -1408,6 +1451,32 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
+      // 2b. Smart Admission Filter: phát hiện ca mới vào từ đối chiếu file Đang điều trị hoặc theo Ngày vào hôm nay
+      const prevMabnSet = new Set(dangDieuTriPrevRows.map(r => String(r['mabn'] || '').trim()).filter(Boolean));
+      const todayDateKey = getDateKey(new Date());
+
+      for (const r of dangDieuTriRows) {
+        const m = String(r['mabn'] || '').trim();
+        if (!m || countedAdmMabns.has(m)) continue;
+
+        const isNewByDiff = prevMabnSet.size > 0 && !prevMabnSet.has(m);
+        const admDate = parseHisDateToDateKey(r['Ngày vào'] || r['ngayvao']);
+        const isNewByDate = admDate && (admDate === todayDateKey);
+
+        if (isNewByDiff || isNewByDate) {
+          const rm = mabnToRoom[m] || mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
+          const hasFromDept = String(r['tenkhoachuyenden'] || '').trim() !== '';
+          if (hasFromDept) {
+            total.chuyenDen += 1;
+            byRoom[rm].chuyenDen += 1;
+          } else {
+            total.benhVao += 1;
+            byRoom[rm].benhVao += 1;
+          }
+          countedAdmMabns.add(m);
+        }
+      }
+
       // 3. Process chuyển khoa -> Chuyển đi
       for (const r of chuyenKhoaRows) {
         const mabn = String(r['mabn'] || '').trim();
@@ -1417,6 +1486,7 @@ const server = http.createServer(async (req, res) => {
       }
 
       // 4. Process ra viện -> Ra viện vs Tử vong
+      const countedDisMabns = new Set([...raVienRows, ...chuyenKhoaRows].map(r => String(r['mabn'] || '').trim()).filter(Boolean));
       for (const r of raVienRows) {
         const mabn = String(r['mabn'] || '').trim();
         const rm = mabnToRoom[mabn] || mapHisRoomToDeptRoom(r['tenphong'] || r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
@@ -1428,6 +1498,21 @@ const server = http.createServer(async (req, res) => {
         } else {
           total.raVien += 1;
           byRoom[rm].raVien += 1;
+        }
+      }
+
+      // 4b. Smart Discharge Filter: phát hiện ca ra viện/chuyển đi từ đối chiếu snapshot file Đang điều trị
+      const currMabnSet = new Set(dangDieuTriRows.map(r => String(r['mabn'] || '').trim()).filter(Boolean));
+      if (dangDieuTriPrevRows.length > 0) {
+        for (const r of dangDieuTriPrevRows) {
+          const m = String(r['mabn'] || '').trim();
+          if (!m || countedDisMabns.has(m)) continue;
+          if (!currMabnSet.has(m)) {
+            const rm = mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
+            total.raVien += 1;
+            byRoom[rm].raVien += 1;
+            countedDisMabns.add(m);
+          }
         }
       }
 
@@ -2226,6 +2311,15 @@ const server = http.createServer(async (req, res) => {
     // Save to canonical filename for that category (so new uploads automatically replace old files of the same report type!)
     const targetFileName = detectedCat.canonicalFile || fileName.replace(/[^a-zA-Z0-9._\-\s\u00C0-\u1EF9]/g, '_');
     const savedPath = path.join(uploadDir, targetFileName);
+
+    // Smart snapshot preservation: lưu lại bản chụp Đang điều trị liền trước để đối chiếu ca vào / ra trong ca trực
+    if (detectedCat.code === 'DANG_DIEU_TRI' && fs.existsSync(savedPath)) {
+      try {
+        const prevPath = path.join(uploadDir, 'dang_dieu_tri_previous.xlsx');
+        fs.copyFileSync(savedPath, prevPath);
+      } catch (e) {}
+    }
+
     fs.writeFileSync(savedPath, buffer);
 
     if (!db.uploadedHisFiles) db.uploadedHisFiles = [];
@@ -2364,17 +2458,35 @@ const server = http.createServer(async (req, res) => {
           .sort((a, b) => a.mtime - b.mtime);
 
         let dangDieuTriRows = [];
+        let dangDieuTriPrevRows = [];
         let vaoKhoaRows = [];
         let raVienRows = [];
         let chuyenKhoaRows = [];
 
+        const prevFile = files.find(f => f.name.toLowerCase().includes('previous') || f.name.toLowerCase().includes('prev'));
+        if (prevFile) {
+          try {
+            const wbP = XLSX.readFile(prevFile.fullPath);
+            const wsP = wbP.Sheets[wbP.SheetNames[0]];
+            dangDieuTriPrevRows = XLSX.utils.sheet_to_json(wsP, { defval: '' });
+          } catch (e) {}
+        }
+
         for (const fObj of files) {
+          if (fObj.name === (prevFile && prevFile.name)) continue;
           const wb = XLSX.readFile(fObj.fullPath);
           const ws = wb.Sheets[wb.SheetNames[0]];
           const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
           const cat = detectHisExcelCategory(rows, fObj.name);
 
-          if (cat.code === 'DANG_DIEU_TRI') dangDieuTriRows = rows;
+          if (cat.code === 'DANG_DIEU_TRI') {
+            if (dangDieuTriRows.length > 0 && dangDieuTriPrevRows.length === 0) {
+              dangDieuTriPrevRows = dangDieuTriRows;
+              dangDieuTriRows = rows;
+            } else {
+              dangDieuTriRows = rows;
+            }
+          }
           else if (cat.code === 'VAO_KHOA') vaoKhoaRows = rows;
           else if (cat.code === 'RA_VIEN') raVienRows = rows;
           else if (cat.code === 'CHUYEN_KHOA') chuyenKhoaRows = rows;
@@ -2392,9 +2504,11 @@ const server = http.createServer(async (req, res) => {
           if (isBhyt) roomReports[rk].census.bhyt += 1;
         }
 
+        const existingAdmMabns = new Set();
         let sttAdm = { tk1: 1, tk2: 1, tk3: 1, tk4: 1, hstk: 1 };
         for (const r of vaoKhoaRows) {
           const m = String(r['mabn'] || '').trim();
+          if (m) existingAdmMabns.add(m);
           const rk = mabnToRoomKey[m] || 'tk1';
           const hasFromDept = String(r['Khoa chuyển đến'] || '').trim() !== '' || (r['makkc'] !== '' && r['makkc'] !== undefined && Number(r['makkc']) !== 0);
           const isChuyenDen = Number(r['dangky']) === 0 || hasFromDept;
@@ -2433,9 +2547,63 @@ const server = http.createServer(async (req, res) => {
           });
         }
 
+        // Smart Admission Filter: Nhận diện tự động bệnh nhân mới vào viện qua đối chiếu Đang điều trị hoặc Ngày vào
+        const prevMabnSet = new Set(dangDieuTriPrevRows.map(r => String(r['mabn'] || '').trim()).filter(Boolean));
+        for (const r of dangDieuTriRows) {
+          const m = String(r['mabn'] || '').trim();
+          if (!m || existingAdmMabns.has(m)) continue;
+
+          const isNewByDiff = prevMabnSet.size > 0 && !prevMabnSet.has(m);
+          const admDate = parseHisDateToDateKey(r['Ngày vào'] || r['ngayvao']);
+          const isNewByDate = admDate && (admDate === targetDateKey);
+
+          if (isNewByDiff || isNewByDate) {
+            const rmName = mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
+            const rk = getRoomKeyFromName(rmName);
+            const hasFromDept = String(r['tenkhoachuyenden'] || '').trim() !== '';
+
+            if (hasFromDept) {
+              roomReports[rk].census.vaoKhac += 1;
+            } else {
+              roomReports[rk].census.vaoKK += 1;
+            }
+
+            const name = String(r['Họ tên'] || '').trim();
+            const age = String(r['Tuổi'] || '').replace(/\D/g, '') || String(r['Tuổi'] || '');
+            const addr = String(r['Địa chỉ'] || r['diachi'] || '').trim();
+            const diag = String(r['Chẩn đoán'] || r['chandoan'] || '').trim() || 'Chấn thương sọ não';
+
+            let cause = 'TNGT';
+            const diagLower = diag.toLowerCase();
+            if (diagLower.includes('sinh hoạt') || diagLower.includes('té') || diagLower.includes('ngã')) cause = 'TNSH';
+            else if (diagLower.includes('đánh') || diagLower.includes('đả thương')) cause = 'Đánh';
+            else if (diagLower.includes('lao động')) cause = 'TNLĐ';
+            else if (diagLower.includes('thoát vị') || diagLower.includes('u não') || diagLower.includes('xẹp')) cause = 'Bệnh';
+
+            roomReports[rk].admissions.push({
+              id: `adm-${rk}-${sttAdm[rk]}`,
+              stt: sttAdm[rk]++,
+              mabn: m,
+              hoten: name,
+              tuoi: age,
+              cause,
+              source: hasFromDept ? (r['tenkhoachuyenden'] || 'Khác') : 'KK',
+              chanDoan: diag,
+              diaChi: addr,
+              tinhTrang: 'Tỉnh',
+              isHighlight: false,
+              category: ''
+            });
+
+            existingAdmMabns.add(m);
+          }
+        }
+
+        const existingDisMabns = new Set();
         let sttDis = { tk1: 1, tk2: 1, tk3: 1, tk4: 1, hstk: 1 };
         for (const r of raVienRows) {
           const m = String(r['mabn'] || '').trim();
+          if (m) existingDisMabns.add(m);
           const rk = mabnToRoomKey[m] || 'tk1';
           const lyDoStr = String(r['malydo'] || '').toLowerCase();
           const isTuVong = lyDoStr.includes('tử vong') || Number(r['malydo']) === 4 || Number(r['malydo']) === 5;
@@ -2475,6 +2643,7 @@ const server = http.createServer(async (req, res) => {
 
         for (const r of chuyenKhoaRows) {
           const m = String(r['mabn'] || '').trim();
+          if (m) existingDisMabns.add(m);
           const rk = mabnToRoomKey[m] || 'tk1';
           roomReports[rk].census.raKhac += 1;
 
@@ -2496,6 +2665,41 @@ const server = http.createServer(async (req, res) => {
             isHighlight: false,
             category: ''
           });
+        }
+
+        // Smart Discharge Filter: Nhận diện tự động bệnh nhân ra viện/chuyển đi từ đối chiếu snapshot file Đang điều trị
+        const currMabnSet = new Set(dangDieuTriRows.map(r => String(r['mabn'] || '').trim()).filter(Boolean));
+        if (dangDieuTriPrevRows.length > 0) {
+          for (const r of dangDieuTriPrevRows) {
+            const m = String(r['mabn'] || '').trim();
+            if (!m || existingDisMabns.has(m)) continue;
+            if (!currMabnSet.has(m)) {
+              const rmName = mapHisRoomToDeptRoom(r['Phòng'], r['tendonnguyen'], r['madonnguyen'], r['maphong']) || 'Thần kinh 1';
+              const rk = getRoomKeyFromName(rmName);
+              roomReports[rk].census.raRH += 1;
+
+              const name = String(r['Họ tên'] || '').trim();
+              const age = String(r['Tuổi'] || '').replace(/\D/g, '') || String(r['Tuổi'] || '');
+              const svv = String(r['Mã KCB'] || r['mayte'] || m).trim();
+              const isBhyt = String(r['Đối tượng'] || '').toUpperCase().includes('BHYT') || Number(r['madoituong']) === 1;
+
+              roomReports[rk].discharges.push({
+                id: `dis-${rk}-${sttDis[rk]}`,
+                stt: sttDis[rk]++,
+                mabn: m,
+                hoten: name,
+                tuoi: age,
+                raHan: true,
+                baoHiem: isBhyt,
+                svv,
+                note: 'Ra viện (đối chiếu Đang điều trị)',
+                isHighlight: false,
+                category: ''
+              });
+
+              existingDisMabns.add(m);
+            }
+          }
         }
 
         roomKeys.forEach(rk => {
@@ -2623,7 +2827,7 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  function getTk4SurgicalConsultations(targetDateKey) {
+  function getTk4SurgicalConsultations(targetDateKey, fallbackDateKey = null) {
     try {
       const tk4 = db.wardRounds && db.wardRounds.tk4;
       if (!tk4 || !tk4.patientRecords) return [];
@@ -2631,8 +2835,15 @@ const server = http.createServer(async (req, res) => {
       const list = [];
       for (const [mabn, rec] of Object.entries(tk4.patientRecords)) {
         if (rec.removed && rec.removed.isRemoved) continue;
-        const sc = (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[dKey]) ||
-                   (rec.surgicalConsultation && (!rec.surgicalConsultation.dateKey || rec.surgicalConsultation.dateKey === dKey) ? rec.surgicalConsultation : null);
+        let sc = (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[dKey]) ||
+                 (rec.surgicalConsultation && rec.surgicalConsultation.dateKey === dKey ? rec.surgicalConsultation : null);
+        if (!sc && fallbackDateKey) {
+          sc = (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[fallbackDateKey]) ||
+               (rec.surgicalConsultation && rec.surgicalConsultation.dateKey === fallbackDateKey ? rec.surgicalConsultation : null);
+        }
+        if (!sc && rec.surgicalConsultation && !rec.surgicalConsultation.dateKey) {
+          sc = rec.surgicalConsultation;
+        }
         if (sc && sc.isConsulted) {
           list.push({
             mabn: rec.mabn || mabn,
@@ -2645,7 +2856,8 @@ const server = http.createServer(async (req, res) => {
             surgeryMethod: sc.surgeryMethod || '',
             decision: sc.decision || 'Đồng ý',
             advancePayment: sc.advancePayment || '',
-            dateKey: dKey,
+            dateKey: sc.dateKey || dKey,
+            targetConsultDate: dKey,
             updatedAt: sc.updatedAt || ''
           });
         }
@@ -3743,15 +3955,17 @@ const server = http.createServer(async (req, res) => {
     const qDate = reqUrl.searchParams.get('date') || getDateKey(new Date());
     const report = getOrBuildBriefingReport(qDate);
     const dutyDocsShort = getDutyDoctorsAbbr(qDate);
+    const nextDate = addDaysToKey(qDate, 1);
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({
       ok: true,
       dateKey: qDate,
+      nextDateKey: nextDate,
       report,
       doctors: db.doctors || [],
       dutyDoctorsAbbr: dutyDocsShort.join(' – '),
       inpatientList: getAllInpatientsList(),
-      tk4Consultations: getTk4SurgicalConsultations(qDate),
+      tk4Consultations: getTk4SurgicalConsultations(nextDate, qDate),
       availableDates: Object.keys(db.briefingReports || {})
     }));
     return;
@@ -3760,41 +3974,44 @@ const server = http.createServer(async (req, res) => {
   // POST /api/briefing-report
   if (req.method === 'POST' && pathname === '/api/briefing-report') {
     const body = await readBody(req);
-    const { dateKey, roomKey, roomReport, overall, highlightCases, action, targetDate: reqTargetDate } = body;
+    const { dateKey, roomKey, roomReport, overall, highlightCases, action, targetDate: reqTargetDate, shiftDate } = body;
     const targetDate = reqTargetDate || dateKey || getDateKey(new Date());
     const report = getOrBuildBriefingReport(targetDate);
 
     if (action === 'SAVE_TK4_CONSULTATION') {
-      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, isConsulted } = body;
+      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, isConsulted, targetDate: explicitTargetDate } = body;
       const tk4 = db.wardRounds && db.wardRounds.tk4;
+      const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : addDaysToKey(targetDate, 1));
       if (tk4 && tk4.patientRecords && tk4.patientRecords[mabn]) {
         const rec = tk4.patientRecords[mabn];
         if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
         const scObj = {
           isConsulted: isConsulted !== undefined ? Boolean(isConsulted) : true,
-          dateKey: targetDate,
+          dateKey: consultDate,
           postConsultDiagnosis: String(postConsultDiagnosis !== undefined ? postConsultDiagnosis : (rec.chanDoanHis || '')).trim(),
           surgeryMethod: String(surgeryMethod || '').trim(),
           decision: String(decision || 'Đồng ý').trim(),
           advancePayment: String(advancePayment || '').trim(),
           updatedAt: new Date().toISOString()
         };
-        rec.surgicalConsultationsByDate[targetDate] = scObj;
+        rec.surgicalConsultationsByDate[consultDate] = scObj;
         rec.surgicalConsultation = scObj;
         saveDb();
-        broadcastState(`🔪 Đã lưu hội chẩn mổ Thần kinh 4 cho BN ${rec.hoten}`);
+        broadcastState(`🔪 Đã lưu hội chẩn mổ Thần kinh 4 cho BN ${rec.hoten} (ngày ${consultDate})`);
       }
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(targetDate) }));
+      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate, targetDate) }));
       return;
     }
 
     if (action === 'DELETE_TK4_CONSULTATION') {
-      const { mabn } = body;
+      const { mabn, targetDate: explicitTargetDate } = body;
+      const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : addDaysToKey(targetDate, 1));
       const tk4 = db.wardRounds && db.wardRounds.tk4;
       if (tk4 && tk4.patientRecords && tk4.patientRecords[mabn]) {
         const rec = tk4.patientRecords[mabn];
         if (rec.surgicalConsultationsByDate) {
+          delete rec.surgicalConsultationsByDate[consultDate];
           delete rec.surgicalConsultationsByDate[targetDate];
         }
         delete rec.surgicalConsultation;
@@ -3802,7 +4019,7 @@ const server = http.createServer(async (req, res) => {
         broadcastState(`🗑️ Đã xóa BN ${rec.hoten} khỏi danh sách hội chẩn mổ Thần kinh 4`);
       }
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(targetDate) }));
+      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate, targetDate) }));
       return;
     }
 
@@ -3873,7 +4090,7 @@ const server = http.createServer(async (req, res) => {
 
     saveDb();
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ ok: true, report, tk4Consultations: getTk4SurgicalConsultations(targetDate) }));
+    res.end(JSON.stringify({ ok: true, report, tk4Consultations: getTk4SurgicalConsultations(addDaysToKey(targetDate, 1), targetDate) }));
     return;
   }
 

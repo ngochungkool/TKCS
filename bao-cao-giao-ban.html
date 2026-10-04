@@ -1485,6 +1485,72 @@
     .gb-personnel-badge-xv { background: #fef3c7; color: #b45309; }
     .gb-personnel-badge-cs { background: #dbeafe; color: #1e40af; }
     .gb-personnel-badge-hc { background: #f3e8ff; color: #7e22ce; }
+
+    /* Modern Handover Notes Card */
+    .gb-notes-card {
+      background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-top: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+    .gb-notes-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .gb-notes-chips-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .gb-notes-chip-btn {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .gb-notes-chip-btn:hover {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+      transform: translateY(-1px);
+    }
+    .gb-notes-textarea {
+      width: 100%;
+      min-height: 95px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: #0f172a;
+      line-height: 1.5;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    .gb-notes-textarea:focus {
+      outline: none;
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+    }
   </style>
 </head>
 <body>
@@ -1738,6 +1804,11 @@
 
       <div class="modal-body">
         <input type="hidden" id="modal-tk4-consult-mabn" />
+
+        <div style="display:flex;align-items:center;justify-content:space-between;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:8px 14px;margin-bottom:14px;font-size:0.85rem;">
+          <span style="color:#1e40af;font-weight:700;"><i class="fa-solid fa-calendar-day"></i> Kế hoạch HC / Mổ cho ngày:</span>
+          <span id="modal-tk4-target-date-badge" style="background:#2563eb;color:#ffffff;padding:2px 10px;border-radius:6px;font-weight:800;">--/--/----</span>
+        </div>
 
         <div id="modal-tk4-consult-select-wrapper" style="margin-bottom:14px;">
           <label style="font-size:0.85rem;font-weight:700;color:#334155;margin-bottom:4px;display:block;">Chọn bệnh nhân phòng Thần kinh 4:</label>
@@ -3341,7 +3412,7 @@
             <div class="gb-card-header">
               <div>
                 <div class="gb-card-title" style="color:#b45309;">
-                  <i class="fa-solid fa-tags"></i> DANH SÁCH CA GẮN NHÃN BÀN GIAO TOÀN KHOA (${taggedAdmissions.length} ca)
+                  <i class="fa-solid fa-bell"></i> DANH SÁCH BỆNH CẦN BÁO GIAO BAN (${taggedAdmissions.length} ca)
                 </div>
                 <div style="font-size:0.83rem;color:#64748b;margin-top:2px;">
                   Các ca này được tự động chuyển lên Bác sĩ toàn khoa để trình chiếu giao ban &amp; xuất slide
@@ -3353,9 +3424,9 @@
         if (taggedAdmissions.length === 0) {
           html += `
             <div style="text-align:center;padding:24px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
-              <i class="fa-solid fa-tag" style="font-size:1.8rem;color:#cbd5e1;margin-bottom:6px;"></i>
-              <div style="font-weight:700;">Chưa có bệnh nhân nào được gắn nhãn trong ca trực này.</div>
-              <div style="font-size:0.83rem;margin-top:2px;">Bấm nút gắn nhãn (Mổ CC, Theo dõi...) ở bảng trên hoặc bấm nút "Thêm" để đưa vào danh sách này.</div>
+              <i class="fa-solid fa-bell-slash" style="font-size:1.8rem;color:#cbd5e1;margin-bottom:6px;"></i>
+              <div style="font-weight:700;">Chưa có bệnh nhân nào cần báo giao ban trong ca trực này.</div>
+              <div style="font-size:0.83rem;margin-top:2px;">Bấm nút gắn nhãn (Mổ CC, Theo dõi...) ở bảng bệnh nhân trên hoặc nút "Thêm" để đưa vào danh sách này.</div>
             </div>
           `;
         } else {
@@ -3370,6 +3441,7 @@
 
       // DÀNH CHO PHÒNG THẦN KINH 4: DANH SÁCH CÁC CA HỘI CHẨN MỔ
       if (roomKey === 'tk4') {
+        const nextDateKey = getNextDateKey(currentDateKey);
         const dongYCount = (tk4Consultations || []).filter(c => (c.decision || 'Đồng ý') === 'Đồng ý').length;
         const hoiYCount = (tk4Consultations || []).filter(c => c.decision === 'Hội ý').length;
         const khongDongYCount = (tk4Consultations || []).filter(c => c.decision === 'Không đồng ý').length;
@@ -3382,9 +3454,12 @@
                 <div class="gb-card-title" style="color:#1d4ed8; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                   <i class="fa-solid fa-clipboard-check"></i> DANH SÁCH CÁC CA HỘI CHẨN MỔ — THẦN KINH 4
                   <span style="font-size:0.82rem;font-weight:800;background:#dbeafe;color:#1e40af;padding:3px 10px;border-radius:12px;">${(tk4Consultations || []).length} ca</span>
+                  <span style="font-size:0.8rem;font-weight:700;background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:6px;border:1px solid #fde68a;">
+                    Dự kiến HC/Mổ ngày: ${formatDateDMY(nextDateKey)}
+                  </span>
                 </div>
                 <div style="font-size:0.83rem;color:#64748b;margin-top:2px;">
-                  Đồng bộ trực tiếp với Sổ đi buồng &amp; Hồ sơ bệnh nhân Thần kinh 4 theo ngày giao ban
+                  Kíp trực ngày ${formatDateDMY(currentDateKey)} lập danh sách bàn giao • Đồng bộ trực tiếp với Sổ Đi Buồng ngày ${formatDateDMY(nextDateKey)}
                 </div>
               </div>
               <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -3404,7 +3479,7 @@
           html += `
             <div style="text-align:center;padding:24px;background:#f8fafc;border-radius:12px;border:1px dashed #cbd5e1;color:#64748b;">
               <i class="fa-solid fa-clipboard-check" style="font-size:1.8rem;color:#cbd5e1;margin-bottom:6px;"></i>
-              <div style="font-weight:700;">Chưa có ca hội chẩn mổ nào được ghi nhận cho Thần kinh 4 trong ngày ${currentDateKey}.</div>
+              <div style="font-weight:700;">Chưa có ca hội chẩn mổ nào được ghi nhận cho Thần kinh 4 dự kiến ngày ${formatDateDMY(nextDateKey)}.</div>
               <div style="font-size:0.83rem;margin-top:2px;">Bấm nút "+ Thêm ca hội chẩn mổ" để thêm bệnh nhân vào danh sách duyệt mổ.</div>
             </div>
           `;
@@ -3472,20 +3547,60 @@
 
       html += `
         <!-- GHI CHÚ BÀN GIAO PHÒNG -->
-        <div class="gb-card">
-          <div class="gb-card-header">
-            <div class="gb-card-title">
-              <i class="fa-solid fa-notes-medical" style="color:#0284c7;"></i> GHI CHÚ BÀN GIAO CA TRỰC PHÒNG ${roomName.toUpperCase()}
+        <div class="gb-notes-card">
+          <div class="gb-notes-card-header">
+            <div class="gb-personnel-header-left">
+              <div class="gb-personnel-icon-badge" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+                <i class="fa-solid fa-notes-medical"></i>
+              </div>
+              <div>
+                <div class="gb-personnel-card-title">GHI CHÚ BÀN GIAO CA TRỰC — ${roomName.toUpperCase()}</div>
+                <div class="gb-personnel-card-desc">Dặn dò kíp trực ca sau, các lưu ý theo dõi tri giác, dẫn lưu, chuẩn bị mổ &amp; y lệnh đặc biệt</div>
+              </div>
+            </div>
+            <div>
+              <span class="gb-personnel-badge gb-personnel-badge-nurse" style="font-size:0.8rem;padding:4px 10px;">
+                <i class="fa-solid fa-user-nurse"></i> Bàn giao điều dưỡng &amp; bác sĩ
+              </span>
             </div>
           </div>
-          <textarea class="gb-input-control" style="width:100%;min-height:75px;" onchange="updateRoomNotes('${roomKey}', this.value)" placeholder="Dặn dò điều dưỡng ca sau, bệnh nhân cần chú ý...">${escapeHtml(roomRep.criticalNotes || '')}</textarea>
-          <div style="margin-top:14px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;">
-            <button type="button" class="btn-gb-action" style="background:#0284c7;color:#fff;border-color:#0284c7;padding:8px 16px;font-weight:700;" onclick="exportRoomReportPng('${roomKey}')" title="Xuất ảnh báo cáo trực phòng định dạng PNG theo đúng mẫu Excel của khoa">
-              <i class="fa-solid fa-file-image"></i> Xuất ảnh Báo cáo (.PNG)
+
+          <!-- Quick notes chips -->
+          <div class="gb-notes-chips-bar">
+            <span style="font-size:0.75rem;font-weight:700;color:#64748b;margin-right:2px;">
+              <i class="fa-solid fa-wand-magic-sparkles" style="color:#0284c7;"></i> Mẫu nhanh:
+            </span>
+            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Theo dõi sát tri giác (GCS) & đồng tử mỗi 2 giờ.')">
+              🧠 Theo dõi tri giác
             </button>
-            <button type="button" class="btn-gb-action btn-gb-save" onclick="submitRoomReport('${roomKey}')">
-              <i class="fa-solid fa-check"></i> Lưu &amp; Gửi báo cáo ${roomName} về Toàn Khoa
+            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Kiểm tra bình dẫn lưu kín áp lực âm, theo dõi màu sắc và lượng dịch.')">
+              🧪 Bình dẫn lưu kín
             </button>
+            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Bệnh nhân nhịn ăn uống từ 00h để chuẩn bị mổ phiên.')">
+              🍽️ Nhịn ăn chuẩn bị mổ
+            </button>
+            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Chờ kết quả chụp lại MSCT sọ não kiểm tra.')">
+              📷 Chờ chụp MSCT sọ
+            </button>
+            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Đã bàn giao đầy đủ hồ sơ bệnh án, thuốc và vật tư tiêu hao.')">
+              📋 Bàn giao hồ sơ &amp; thuốc
+            </button>
+          </div>
+
+          <textarea id="gb-room-notes-${roomKey}" class="gb-notes-textarea" onchange="updateRoomNotes('${roomKey}', this.value)" placeholder="Nhập ghi chú dặn dò ca sau, diễn biến bệnh nhân cần theo dõi sát, y lệnh phát sinh...">${escapeHtml(roomRep.criticalNotes || '')}</textarea>
+
+          <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div style="font-size:0.78rem;color:#64748b;font-style:italic;">
+              * Ghi chú bàn giao sẽ được đồng bộ và hiển thị trên màn hình trình chiếu giao ban toàn khoa
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button type="button" class="btn-gb-action" style="background:#0284c7;color:#fff;border-color:#0284c7;padding:8px 16px;font-weight:700;" onclick="exportRoomReportPng('${roomKey}')" title="Xuất ảnh báo cáo trực phòng định dạng PNG theo đúng mẫu Excel của khoa">
+                <i class="fa-solid fa-file-image"></i> Xuất ảnh Báo cáo (.PNG)
+              </button>
+              <button type="button" class="btn-gb-action btn-gb-save" style="padding:8px 18px;font-weight:800;" onclick="submitRoomReport('${roomKey}')">
+                <i class="fa-solid fa-paper-plane"></i> GỬI BÁO CÁO VỀ TOÀN KHOA
+              </button>
+            </div>
           </div>
         </div>
       `;
@@ -4225,6 +4340,12 @@
       document.getElementById('modal-tk4-consult-decision').value = 'Đồng ý';
       document.getElementById('modal-tk4-consult-advance').value = '';
 
+      const nextDateKey = getNextDateKey(currentDateKey);
+      const dateBadge = document.getElementById('modal-tk4-target-date-badge');
+      if (dateBadge) {
+        dateBadge.textContent = `${formatDateDMY(nextDateKey)} (Ngày mai)`;
+      }
+
       const selectWrap = document.getElementById('modal-tk4-consult-select-wrapper');
       const infoBox = document.getElementById('modal-tk4-consult-patient-info');
       const selectEl = document.getElementById('modal-tk4-consult-patient-select');
@@ -4294,6 +4415,13 @@
       document.getElementById('modal-tk4-consult-decision').value = consult.decision || 'Đồng ý';
       document.getElementById('modal-tk4-consult-advance').value = consult.advancePayment || '';
 
+      const nextDateKey = getNextDateKey(currentDateKey);
+      const dateBadge = document.getElementById('modal-tk4-target-date-badge');
+      if (dateBadge) {
+        const displayDate = consult.dateKey ? formatDateDMY(consult.dateKey) : `${formatDateDMY(nextDateKey)} (Ngày mai)`;
+        dateBadge.textContent = displayDate;
+      }
+
       // Ẩn dropdown chọn BN, hiện thẻ thông tin BN
       const selectWrap = document.getElementById('modal-tk4-consult-select-wrapper');
       if (selectWrap) selectWrap.style.display = 'none';
@@ -4324,6 +4452,8 @@
       const decision = document.getElementById('modal-tk4-consult-decision').value;
       const advance = document.getElementById('modal-tk4-consult-advance').value.trim();
 
+      const nextDateKey = getNextDateKey(currentDateKey);
+
       try {
         const res = await fetch('/api/briefing-report', {
           method: 'POST',
@@ -4331,7 +4461,8 @@
           body: JSON.stringify({
             action: 'SAVE_TK4_CONSULTATION',
             mabn,
-            targetDate: currentDateKey,
+            targetDate: nextDateKey,
+            shiftDate: currentDateKey,
             postConsultDiagnosis: diag,
             surgeryMethod: method,
             decision,
@@ -4353,6 +4484,7 @@
             surgeryMethod: method,
             decision,
             advancePayment: advance,
+            dateKey: nextDateKey,
             updatedAt: new Date().toISOString()
           };
           if (existingIdx >= 0) {
@@ -4362,6 +4494,7 @@
           }
           closeTk4ConsultModal();
           renderCurrentView();
+          showToast(`🔪 Đã lưu ca hội chẩn mổ cho ngày ${formatDateDMY(nextDateKey)} (đồng bộ Đi buồng)`);
         } else {
           alert('Lỗi lưu ca hội chẩn: ' + (data.error || 'Server error'));
         }
@@ -4372,7 +4505,8 @@
     }
 
     async function deleteTk4Consult(mabn) {
-      if (!confirm(`Bạn có chắc muốn xóa ca này khỏi danh sách hội chẩn mổ TK4 ngày ${currentDateKey}?`)) return;
+      const nextDateKey = getNextDateKey(currentDateKey);
+      if (!confirm(`Bạn có chắc muốn xóa ca này khỏi danh sách hội chẩn mổ TK4 ngày ${formatDateDMY(nextDateKey)}?`)) return;
 
       try {
         const res = await fetch('/api/briefing-report', {
@@ -4381,13 +4515,15 @@
           body: JSON.stringify({
             action: 'DELETE_TK4_CONSULTATION',
             mabn,
-            targetDate: currentDateKey
+            targetDate: nextDateKey,
+            shiftDate: currentDateKey
           })
         });
         const data = await res.json();
         if (data.ok) {
           tk4Consultations = (tk4Consultations || []).filter(c => c.mabn !== mabn);
           renderCurrentView();
+          showToast(`🗑️ Đã xóa ca khỏi danh sách hội chẩn mổ ngày ${formatDateDMY(nextDateKey)}`);
         } else {
           alert('Lỗi xóa ca hội chẩn: ' + (data.error || 'Server error'));
         }
@@ -4395,6 +4531,27 @@
         console.error(err);
         alert('Lỗi kết nối khi xóa ca hội chẩn!');
       }
+    }
+
+    function getNextDateKey(dateKey) {
+      if (!dateKey) return '';
+      const [y, m, d] = String(dateKey).split('-').map(Number);
+      const dt = new Date(Date.UTC(y, m - 1, d, 12, 0, 0) + 86400000);
+      const yyyy = dt.getUTCFullYear();
+      const mm = String(dt.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(dt.getUTCDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function appendQuickNote(roomKey, text) {
+      const rep = currentReport && currentReport.roomReports && currentReport.roomReports[roomKey];
+      if (!rep) return;
+      const cur = (rep.criticalNotes || '').trim();
+      const nextNotes = cur ? `${cur}\n${text}` : text;
+      rep.criticalNotes = nextNotes;
+      const ta = document.getElementById(`gb-room-notes-${roomKey}`);
+      if (ta) ta.value = nextNotes;
+      showToast(`📝 Đã thêm dặn dò nhanh vào ca trực ${roomKey.toUpperCase()}`);
     }
 
     function formatDateDMY(dateStr) {
