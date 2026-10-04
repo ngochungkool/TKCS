@@ -1363,6 +1363,128 @@
     .tagged-theo-doi { border-left: 4px solid #d97706 !important; background: #fffbeb; }
     .tagged-tu-vong { border-left: 4px solid #991b1b !important; background: #fef2f2; }
     .tagged-xin-ve { border-left: 4px solid #ea580c !important; background: #fff7ed; }
+
+    /* Modern Personnel & Shift Staff Section */
+    .gb-personnel-card {
+      background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+    .gb-personnel-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .gb-personnel-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .gb-personnel-icon-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+      flex-shrink: 0;
+    }
+    .gb-personnel-card-title {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #0f172a;
+      letter-spacing: 0.2px;
+    }
+    .gb-personnel-card-desc {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 2px;
+    }
+    .gb-personnel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .gb-personnel-field {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+    .gb-personnel-field:focus-within {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+      background: #ffffff;
+    }
+    .gb-personnel-field.field-span-2 {
+      grid-column: span 2;
+    }
+    @media (max-width: 768px) {
+      .gb-personnel-field.field-span-2 {
+        grid-column: span 1;
+      }
+    }
+    .gb-personnel-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gb-personnel-label i {
+      font-size: 0.85rem;
+    }
+    .gb-personnel-input {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      padding: 7px 11px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #0f172a;
+      background: #f8fafc;
+      transition: border-color 0.15s, background-color 0.15s;
+      box-sizing: border-box;
+    }
+    .gb-personnel-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      background: #ffffff;
+    }
+    .gb-personnel-input[type="number"] {
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-align: center;
+      color: #0369a1;
+    }
+    .gb-personnel-badge {
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      margin-left: auto;
+    }
+    .gb-personnel-badge-nurse { background: #e0f2fe; color: #0369a1; }
+    .gb-personnel-badge-orderly { background: #f1f5f9; color: #475569; }
+    .gb-personnel-badge-xv { background: #fef3c7; color: #b45309; }
+    .gb-personnel-badge-cs { background: #dbeafe; color: #1e40af; }
+    .gb-personnel-badge-hc { background: #f3e8ff; color: #7e22ce; }
   </style>
 </head>
 <body>
@@ -1440,9 +1562,6 @@
         </button>
         <button type="button" class="btn-gb-action btn-gb-present" onclick="openPresentationMode()" title="Bật màn hình trình chiếu giao ban toàn khoa">
           <i class="fa-solid fa-tv"></i> Trình chiếu giao ban
-        </button>
-        <button type="button" class="btn-gb-action btn-gb-sync" onclick="autoFetchFromHis()" title="Trích xuất số liệu mới nhất từ các file Excel HIS">
-          <i class="fa-solid fa-arrows-rotate"></i> Lấy dữ liệu HIS
         </button>
         <button type="button" class="btn-gb-action btn-gb-save" onclick="saveActiveReport()" title="Lưu và gửi dữ liệu ca trực">
           <i class="fa-solid fa-floppy-disk"></i> Lưu báo cáo
@@ -2435,94 +2554,151 @@
           </div>
 
           <!-- NHÂN LỰC BUỒNG BỆNH -->
-          <div style="font-weight:700;font-size:0.95rem;color:#1e293b;margin-bottom:12px;">
-            <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp trực &amp; Nhân lực buồng bệnh
-          </div>
+          <div class="gb-personnel-card">
+            <div class="gb-personnel-card-header">
+              <div class="gb-personnel-header-left">
+                <div class="gb-personnel-icon-badge">
+                  <i class="fa-solid fa-user-nurse"></i>
+                </div>
+                <div>
+                  <div class="gb-personnel-card-title">KÍP TRỰC &amp; NHÂN LỰC BUỒNG BỆNH</div>
+                  <div class="gb-personnel-card-desc">Phân công điều dưỡng, hộ lý và các chỉ số ca trực phòng ${escapeHtml(roomName)}</div>
+                </div>
+              </div>
+            </div>
 
-          <div class="gb-personnel-grid">
+            <div class="gb-personnel-grid">
       `;
 
       if (isHSTK) {
         html += `
-          <div class="gb-input-group">
-            <label class="gb-input-label">Điều dưỡng Ca Ngày (7h - 19h):</label>
-            <input type="text" class="gb-input-control" value="${escapeHtml(p.nursesDay || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nursesDay', this.value)" placeholder="Tên điều dưỡng ca ngày (vd: VINH - NGUYÊN - VĨ)..." />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-sun" style="color:#f59e0b;"></i> Ca Ngày (7h - 19h)
+              <span class="gb-personnel-badge gb-personnel-badge-nurse">Điều dưỡng</span>
+            </label>
+            <input type="text" class="gb-personnel-input" value="${escapeHtml(p.nursesDay || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nursesDay', this.value)" placeholder="Tên điều dưỡng ca ngày (vd: VINH - NGUYÊN - VĨ)..." />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Điều dưỡng Ca Đêm (19h - 7h):</label>
-            <input type="text" class="gb-input-control" value="${escapeHtml(p.nursesNight || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nursesNight', this.value)" placeholder="Tên điều dưỡng ca đêm (vd: VIỆT - THOA B - TÙNG)..." />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-moon" style="color:#6366f1;"></i> Ca Đêm (19h - 7h)
+              <span class="gb-personnel-badge gb-personnel-badge-nurse">Điều dưỡng</span>
+            </label>
+            <input type="text" class="gb-personnel-input" value="${escapeHtml(p.nursesNight || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nursesNight', this.value)" placeholder="Tên điều dưỡng ca đêm (vd: VIỆT - THOA B - TÙNG)..." />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Hộ lý:</label>
-            <input type="text" class="gb-input-control" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" placeholder="Tên hộ lý (vd: TÂM)..." />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-hands-holding-child" style="color:#10b981;"></i> Hộ lý ca trực
+              <span class="gb-personnel-badge gb-personnel-badge-orderly">Hộ lý</span>
+            </label>
+            <input type="text" class="gb-personnel-input" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" placeholder="Tên hộ lý (vd: TÂM)..." />
           </div>
         `;
       } else if (isTK3) {
         html += `
-          <div class="gb-input-group" style="grid-column: span 2;">
-            <label class="gb-input-label">Kíp Điều dưỡng trực:</label>
-            <input type="text" class="gb-input-control" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên điều dưỡng trực (vd: Vân)..." />
+          <div class="gb-personnel-field field-span-2">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp Điều dưỡng trực
+              <span class="gb-personnel-badge gb-personnel-badge-nurse">Điều dưỡng</span>
+            </label>
+            <input type="text" class="gb-personnel-input" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên điều dưỡng trực (vd: VÂN)..." />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Hộ lý:</label>
-            <input type="text" class="gb-input-control" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" placeholder="Tên hộ lý (vd: Tâm)..." />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-hands-holding-child" style="color:#10b981;"></i> Hộ lý ca trực
+              <span class="gb-personnel-badge gb-personnel-badge-orderly">Hộ lý</span>
+            </label>
+            <input type="text" class="gb-personnel-input" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" placeholder="Tên hộ lý (vd: TÂM)..." />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Xuất viện:</label>
-            <input type="number" class="gb-input-control" value="${p.xuatVien !== undefined ? p.xuatVien : 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-person-walking-arrow-right" style="color:#d97706;"></i> Xuất viện
+              <span class="gb-personnel-badge gb-personnel-badge-xv">Chỉ số</span>
+            </label>
+            <input type="number" class="gb-personnel-input" value="${p.xuatVien !== undefined ? p.xuatVien : 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">CS Cấp II (Khu Trên):</label>
-            <input type="number" class="gb-input-control" value="${p.csTren !== undefined ? p.csTren : 0}" onchange="updateRoomPersonnel('${roomKey}', 'csTren', this.value)" />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-bed" style="color:#2563eb;"></i> CS Cấp II (Khu Trên)
+              <span class="gb-personnel-badge gb-personnel-badge-cs">Chỉ số</span>
+            </label>
+            <input type="number" class="gb-personnel-input" value="${p.csTren !== undefined ? p.csTren : 0}" onchange="updateRoomPersonnel('${roomKey}', 'csTren', this.value)" />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">CS Cấp II (Khu Dưới):</label>
-            <input type="number" class="gb-input-control" value="${p.csDuoi !== undefined ? p.csDuoi : (p.chamSocCap2 || 0)}" onchange="updateRoomPersonnel('${roomKey}', 'csDuoi', this.value)" />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-bed" style="color:#2563eb;"></i> CS Cấp II (Khu Dưới)
+              <span class="gb-personnel-badge gb-personnel-badge-cs">Chỉ số</span>
+            </label>
+            <input type="number" class="gb-personnel-input" value="${p.csDuoi !== undefined ? p.csDuoi : (p.chamSocCap2 || 0)}" onchange="updateRoomPersonnel('${roomKey}', 'csDuoi', this.value)" />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Hội chẩn (HC):</label>
-            <input type="number" class="gb-input-control" value="${p.hc !== undefined ? p.hc : 0}" onchange="updateRoomPersonnel('${roomKey}', 'hc', this.value)" />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-comments" style="color:#9333ea;"></i> Hội chẩn (HC)
+              <span class="gb-personnel-badge gb-personnel-badge-hc">Chỉ số</span>
+            </label>
+            <input type="number" class="gb-personnel-input" value="${p.hc !== undefined ? p.hc : 0}" onchange="updateRoomPersonnel('${roomKey}', 'hc', this.value)" />
           </div>
         `;
       } else if (isTK4) {
         html += `
-          <div class="gb-input-group" style="grid-column: span 2;">
-            <label class="gb-input-label">Kíp Điều dưỡng trực:</label>
-            <input type="text" class="gb-input-control" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên điều dưỡng trực (vd: TRINH - BẢO B)..." />
+          <div class="gb-personnel-field field-span-2">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp Điều dưỡng trực
+              <span class="gb-personnel-badge gb-personnel-badge-nurse">Điều dưỡng</span>
+            </label>
+            <input type="text" class="gb-personnel-input" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên điều dưỡng trực (vd: TRINH - BẢO B)..." />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Hộ lý:</label>
-            <input type="text" class="gb-input-control" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" placeholder="Tên hộ lý (vd: TÂM)..." />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-hands-holding-child" style="color:#10b981;"></i> Hộ lý ca trực
+              <span class="gb-personnel-badge gb-personnel-badge-orderly">Hộ lý</span>
+            </label>
+            <input type="text" class="gb-personnel-input" value="${escapeHtml(p.orderly || '')}" onchange="updateRoomPersonnel('${roomKey}', 'orderly', this.value)" placeholder="Tên hộ lý (vd: TÂM)..." />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Xuất viện (XV):</label>
-            <input type="number" class="gb-input-control" value="${p.xuatVien !== undefined ? p.xuatVien : 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-person-walking-arrow-right" style="color:#d97706;"></i> Xuất viện (XV)
+              <span class="gb-personnel-badge gb-personnel-badge-xv">Chỉ số</span>
+            </label>
+            <input type="number" class="gb-personnel-input" value="${p.xuatVien !== undefined ? p.xuatVien : 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Hội chẩn (HC):</label>
-            <input type="number" class="gb-input-control" value="${p.hc !== undefined ? p.hc : 0}" onchange="updateRoomPersonnel('${roomKey}', 'hc', this.value)" />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-comments" style="color:#9333ea;"></i> Hội chẩn (HC)
+              <span class="gb-personnel-badge gb-personnel-badge-hc">Chỉ số</span>
+            </label>
+            <input type="number" class="gb-personnel-input" value="${p.hc !== undefined ? p.hc : 0}" onchange="updateRoomPersonnel('${roomKey}', 'hc', this.value)" />
           </div>
         `;
       } else {
         html += `
-          <div class="gb-input-group" style="grid-column: span 2;">
-            <label class="gb-input-label">Kíp Điều dưỡng trực:</label>
-            <input type="text" class="gb-input-control" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên các điều dưỡng trực..." />
+          <div class="gb-personnel-field field-span-2">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-user-nurse" style="color:#0284c7;"></i> Kíp Điều dưỡng trực
+              <span class="gb-personnel-badge gb-personnel-badge-nurse">Điều dưỡng</span>
+            </label>
+            <input type="text" class="gb-personnel-input" value="${escapeHtml(p.nurses || '')}" onchange="updateRoomPersonnel('${roomKey}', 'nurses', this.value)" placeholder="Họ tên các điều dưỡng trực..." />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Xuất viện:</label>
-            <input type="number" class="gb-input-control" value="${p.xuatVien || 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-person-walking-arrow-right" style="color:#d97706;"></i> Xuất viện
+              <span class="gb-personnel-badge gb-personnel-badge-xv">Chỉ số</span>
+            </label>
+            <input type="number" class="gb-personnel-input" value="${p.xuatVien || 0}" onchange="updateRoomPersonnel('${roomKey}', 'xuatVien', this.value)" />
           </div>
-          <div class="gb-input-group">
-            <label class="gb-input-label">Chăm sóc cấp 2:</label>
-            <input type="number" class="gb-input-control" value="${p.chamSocCap2 || 0}" onchange="updateRoomPersonnel('${roomKey}', 'chamSocCap2', this.value)" />
+          <div class="gb-personnel-field">
+            <label class="gb-personnel-label">
+              <i class="fa-solid fa-bed" style="color:#2563eb;"></i> Chăm sóc cấp 2
+              <span class="gb-personnel-badge gb-personnel-badge-cs">Chỉ số</span>
+            </label>
+            <input type="number" class="gb-personnel-input" value="${p.chamSocCap2 || 0}" onchange="updateRoomPersonnel('${roomKey}', 'chamSocCap2', this.value)" />
           </div>
         `;
       }
 
       html += `
+            </div>
           </div>
-        </div>
 
         <!-- 8 CHỈ SỐ GIAO BAN PHÒNG (CÂN ĐỐI 100% ĐỘ RỘNG CÁC Ô) -->
         <div class="gb-card">
@@ -6314,37 +6490,37 @@
 
         if (isTK2) {
           detailRowsHtml += `
-            <tr style="height: 27px; background-color: ${rowBg}; font-size: 11px;">
-              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px;">${sttLeft}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; font-weight: 800; text-align: left; width: 175px; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenVao)}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; color: #334155; font-weight: 600;">${escapeHtml(String(tuoiVao))}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px;">${hsngVal}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px;">${kkVal}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 155px; color: #0369a1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(chanDoanVao)}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 165px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(diaChiVao)}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 125px; color: #1e293b;">${escapeHtml(tinhTrangVao)}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px;">${sttRight}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 175px; font-weight: 800; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenRa)}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${rhVal}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${bhVal}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 110px;">${svvVal}</td>
+            <tr style="min-height: 28px; background-color: ${rowBg}; font-size: 11px;">
+              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px; vertical-align: middle;">${sttLeft}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; font-weight: 800; text-align: left; width: 175px; color: #0f172a; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(tenVao)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; color: #334155; font-weight: 600; vertical-align: middle;">${escapeHtml(String(tuoiVao))}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; vertical-align: middle;">${hsngVal}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; vertical-align: middle;">${kkVal}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 155px; color: #0369a1; font-weight: 600; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(chanDoanVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 165px; color: #475569; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(diaChiVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 125px; color: #1e293b; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(tinhTrangVao)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px; vertical-align: middle;">${sttRight}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 175px; font-weight: 800; color: #0f172a; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(tenRa)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px; vertical-align: middle;">${rhVal}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px; vertical-align: middle;">${bhVal}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 110px; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${svvVal}</td>
             </tr>
           `;
         } else {
           detailRowsHtml += `
-            <tr style="height: 27px; background-color: ${rowBg}; font-size: 11px;">
-              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px;">${sttLeft}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; font-weight: 800; text-align: left; width: 175px; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenVao)}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; color: #334155; font-weight: 600;">${escapeHtml(String(tuoiVao))}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 34px;">${kkVal}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 52px;">${tngtVal}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 145px; color: #0369a1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(chanDoanVao)}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 165px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(diaChiVao)}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 120px; color: #1e293b;">${escapeHtml(tinhTrangVao)}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 180px; font-weight: 800; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(tenRa)}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${rhVal}</td>
-              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px;">${bhVal}</td>
-              <td style="border: 1px solid #cbd5e1; padding: 3px 6px; text-align: left; width: 135px;">${svvVal}</td>
+            <tr style="min-height: 28px; background-color: ${rowBg}; font-size: 11px;">
+              <td style="border: 1px solid #cbd5e1; text-align: center; font-weight: 700; color: #475569; width: 32px; vertical-align: middle;">${sttLeft}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; font-weight: 800; text-align: left; width: 175px; color: #0f172a; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(tenVao)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 38px; color: #334155; font-weight: 600; vertical-align: middle;">${escapeHtml(String(tuoiVao))}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 34px; vertical-align: middle;">${kkVal}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 52px; vertical-align: middle;">${tngtVal}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 145px; color: #0369a1; font-weight: 600; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(chanDoanVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 165px; color: #475569; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(diaChiVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 120px; color: #1e293b; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(tinhTrangVao)}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 180px; font-weight: 800; color: #0f172a; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${escapeHtml(tenRa)}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px; vertical-align: middle;">${rhVal}</td>
+              <td style="border: 1px solid #cbd5e1; text-align: center; width: 36px; vertical-align: middle;">${bhVal}</td>
+              <td style="border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; width: 135px; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.35; vertical-align: middle;">${svvVal}</td>
             </tr>
           `;
         }
