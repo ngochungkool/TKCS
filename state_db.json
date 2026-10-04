@@ -1,5 +1,5 @@
 {
-  "version": 1791089315561,
+  "version": 1791089326664,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:35.560Z"
+      "updatedAt": "2026-10-04T04:48:46.663Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3051,12 +3051,22 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "Trung Ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
-          "customDiagnosis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+          "customDiagnosis": "Hậu phẫu ngày 9 phẫu thuật TLIF L2-S1",
           "bsDieuTri": "Đặng Ngọc Trí",
           "ngayVaoStr": "25/09/2026",
           "hisBed": "H043",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3079,8 +3089,8 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
-            "surgeryDate": ""
+            "surgeryName": "TLIF L2-S1",
+            "surgeryDate": "2026-09-25"
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
@@ -5126,7 +5136,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:35.560Z"
+      "updatedAt": "2026-10-04T04:48:46.663Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6341,7 +6351,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:35.561Z"
+      "updatedAt": "2026-10-04T04:48:46.664Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10274,7 +10284,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:35.561Z"
+      "updatedAt": "2026-10-04T04:48:46.664Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11178,7 +11188,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:48:35.561Z"
+      "updatedAt": "2026-10-04T04:48:46.664Z"
     }
   },
   "episodeConsultations": {},
