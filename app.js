@@ -470,7 +470,7 @@ function renderRoomsGrid() {
             ${iconHtml}
             <span>${room.name}</span>
           </div>
-          ${isSelected ? `<span class="room-selected-pill">✓ Đang chọn</span>` : ''}
+          ${isSelected ? `<span class="room-selected-pill" title="Đang chọn phòng này"><i class="fa-solid fa-check"></i></span>` : ''}
         </div>
         <div class="room-count ${hasActive ? 'active-text' : ''}">
           ${countLabel}
