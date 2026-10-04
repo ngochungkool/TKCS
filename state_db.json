@@ -1,5 +1,5 @@
 {
-  "version": 1791083005053,
+  "version": 1791083279172,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -272,27 +272,27 @@
   ],
   "uploadedHisFiles": [
     {
-      "fileName": "đang điều trị.xlsx → [Đang điều trị: 116 dòng]",
+      "fileName": "1.xlsx → [Đang điều trị: 107 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
-      "savedPath": "D:\\Antigravity\\Phần mềm quản lý khoa\\uploads_his\\dang_dieu_tri.xlsx",
-      "sizeBytes": 57719,
-      "uploadedAt": "10:03:24 4/10/2026",
+      "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
+      "sizeBytes": 53903,
+      "uploadedAt": "10:07:57 4/10/2026",
       "extractedPreview": null
     },
     {
-      "fileName": "vào khoa.xlsx → [Vào khoa: 18 dòng]",
+      "fileName": "2.xlsx → [Vào khoa: 1 dòng]",
       "categoryCode": "VAO_KHOA",
-      "savedPath": "D:\\Antigravity\\Phần mềm quản lý khoa\\uploads_his\\vao_khoa.xlsx",
-      "sizeBytes": 12934,
-      "uploadedAt": "10:03:23 4/10/2026",
+      "savedPath": "/opt/render/project/src/uploads_his/vao_khoa.xlsx",
+      "sizeBytes": 9648,
+      "uploadedAt": "10:07:56 4/10/2026",
       "extractedPreview": null
     },
     {
-      "fileName": "ra viện.xlsx → [Ra viện: 1 dòng]",
+      "fileName": "3.xlsx → [Ra viện: 3 dòng]",
       "categoryCode": "RA_VIEN",
-      "savedPath": "D:\\Antigravity\\Phần mềm quản lý khoa\\uploads_his\\ra_vien.xlsx",
-      "sizeBytes": 10094,
-      "uploadedAt": "10:03:22 4/10/2026",
+      "savedPath": "/opt/render/project/src/uploads_his/ra_vien.xlsx",
+      "sizeBytes": 10938,
+      "uploadedAt": "10:07:55 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -306,53 +306,53 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 102,
-      "benhVao": 16,
-      "raVien": 1,
-      "chuyenDen": 2,
-      "chuyenDi": 3,
+      "dauCa": 109,
+      "benhVao": 1,
+      "raVien": 3,
+      "chuyenDen": 0,
+      "chuyenDi": 0,
       "tuVong": 0,
       "benhMo": 0,
-      "hienCo": 116,
-      "baoHiem": 105
+      "hienCo": 107,
+      "baoHiem": 99
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 31,
-        "benhVao": 4,
-        "raVien": 0,
+        "dauCa": 24,
+        "benhVao": 1,
+        "raVien": 2,
         "chuyenDen": 0,
-        "chuyenDi": 3,
+        "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 32,
-        "baoHiem": 25
+        "hienCo": 23,
+        "baoHiem": 20
       },
       "Thần kinh 2": {
-        "dauCa": 21,
-        "benhVao": 1,
+        "dauCa": 24,
+        "benhVao": 0,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 22,
-        "baoHiem": 21
+        "hienCo": 24,
+        "baoHiem": 22
       },
       "Thần kinh 3": {
-        "dauCa": 11,
-        "benhVao": 2,
+        "dauCa": 14,
+        "benhVao": 0,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 13,
-        "baoHiem": 13
+        "hienCo": 14,
+        "baoHiem": 12
       },
       "Thần kinh 4": {
-        "dauCa": 29,
-        "benhVao": 9,
+        "dauCa": 38,
+        "benhVao": 0,
         "raVien": 1,
         "chuyenDen": 0,
         "chuyenDi": 0,
@@ -362,18 +362,18 @@
         "baoHiem": 36
       },
       "Hồi sức thần kinh": {
-        "dauCa": 10,
+        "dauCa": 9,
         "benhVao": 0,
         "raVien": 0,
-        "chuyenDen": 2,
+        "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 12,
-        "baoHiem": 10
+        "hienCo": 9,
+        "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T03:03:24.739Z"
+    "updatedAt": "2026-10-04T03:07:57.778Z"
   },
   "wardRounds": {
     "tk1": {
@@ -403,7 +403,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "22/09/2026",
-          "hisBed": "H021",
+          "hisBed": "H030",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -556,7 +556,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "25/09/2026",
-          "hisBed": "H024",
+          "hisBed": "H033",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -760,7 +760,7 @@
           "customDiagnosis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
           "bsDieuTri": "Lê Đức Nhật",
           "ngayVaoStr": "28/09/2026",
-          "hisBed": "H025",
+          "hisBed": "H104",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -2783,38 +2783,29 @@
       },
       "archivedRecords": {},
       "latestExcelMabns": [
-        "0001418457",
         "0001420337",
-        "0001420728",
-        "0001420743",
-        "0001420755",
         "0001421064",
-        "0001421068",
-        "0001421398",
-        "0001352007",
-        "0001421512",
         "0001421561",
         "0001421945",
-        "0001421963",
         "0001421962",
-        "0000996031",
-        "0001421988",
-        "0001017823",
-        "0001422020",
         "0001422158",
         "0001032592",
-        "0001050501",
-        "0001422178",
-        "0001422326",
-        "0001422336",
-        "0001422332",
-        "0001422360",
-        "0001422366",
-        "0001422359",
-        "0001422413",
         "0001422706",
-        "0001422719",
-        "0001422908"
+        "0001423331",
+        "0000037245",
+        "0001423919",
+        "0001423930",
+        "0001245654",
+        "0001424352",
+        "0001424848",
+        "0001424868",
+        "0001424870",
+        "0001424881",
+        "0001424929",
+        "0001425070",
+        "0001425068",
+        "0001425123",
+        "0001425126"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -2831,7 +2822,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:03:24.739Z"
+      "updatedAt": "2026-10-04T03:07:58.578Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -2855,7 +2846,7 @@
           "tuyenDangKy": "Trái tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "trung ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
+          "diaChi": "Trung Ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "customDiagnosis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -2906,7 +2897,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "01/02/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "Xã Vạn Đức--Tỉnh Gia Lai",
+          "diaChi": "Vạn Hội 1-Xã Vạn Đức--Tỉnh Gia Lai",
           "chanDoanHis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "customDiagnosis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3110,7 +3101,7 @@
           "tuyenDangKy": "Đúng tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2026",
-          "diaChi": "suối cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
+          "diaChi": "Suối Cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
           "chanDoanHis": "D43.0-U tân sinh không tiên lượng được tiến triển và tính chất ở não, trên lều não",
           "customDiagnosis": "D43.0-U tân sinh không tiên lượng được tiến triển và tính chất ở não, trên lều não",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3875,12 +3866,12 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "08/05/2026",
           "hanTheDen": "07/05/2027",
-          "diaChi": "cửu lợi đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
+          "diaChi": "Cửu Lợi Đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
-          "bsDieuTri": "Đặng Ngọc Trí",
-          "ngayVaoStr": "28/09/2026",
-          "hisBed": "H052",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "03/10/2026",
+          "hisBed": "H044",
           "khoaChuyenDen": "",
           "tasksByDate": {},
           "consultDetails": {
@@ -4832,28 +4823,30 @@
       },
       "archivedRecords": {},
       "latestExcelMabns": [
-        "0001412378",
-        "0001418507",
-        "0001412616",
-        "0001419869",
-        "0000948030",
-        "0001397969",
-        "0001373574",
-        "0001420471",
-        "0001400167",
         "0001265243",
         "0001419943",
-        "0001418920",
         "0000462435",
         "0000789370",
-        "0001422060",
         "0001422302",
-        "0001220543",
+        "0001422775",
+        "0001325103",
+        "0001423438",
+        "0001423447",
+        "0001421947",
+        "0001423960",
+        "0000844175",
+        "0001423400",
+        "0001422360",
+        "0001420070",
+        "0001352007",
+        "0001424078",
+        "0001422435",
+        "0001424859",
+        "0001424892",
         "0001420757",
-        "0001418939",
-        "0001087442",
-        "0001359700",
-        "0001422775"
+        "0001425022",
+        "0001424994",
+        "0001424989"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -4870,7 +4863,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:03:24.739Z"
+      "updatedAt": "2026-10-04T03:07:58.578Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6055,19 +6048,20 @@
       },
       "archivedRecords": {},
       "latestExcelMabns": [
-        "0001307829",
-        "0001283135",
-        "0001160694",
-        "0001416882",
-        "0001410444",
-        "0001070375",
         "0001383920",
-        "0000167064",
-        "0000835346",
         "0001327863",
         "0001413514",
-        "0000893787",
-        "0001422911"
+        "0001422911",
+        "0001417494",
+        "0001420565",
+        "0001220543",
+        "0001423182",
+        "0001181071",
+        "0001262499",
+        "0001423451",
+        "0001423393",
+        "0001422326",
+        "0001424428"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -6084,7 +6078,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:03:24.740Z"
+      "updatedAt": "2026-10-04T03:07:58.578Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -9462,43 +9456,43 @@
       },
       "archivedRecords": {},
       "latestExcelMabns": [
-        "0001413526",
-        "0001418724",
         "0001415940",
-        "0001419157",
         "0001418784",
-        "0001287139",
-        "0001420526",
         "0001411127",
         "0001421285",
-        "0001227262",
         "0001418775",
-        "0001420910",
-        "0001040749",
-        "0001419435",
-        "0001418951",
-        "0001037354",
-        "0001377524",
-        "0001421838",
-        "0001421575",
-        "0001325103",
-        "0001417273",
         "0001422079",
-        "0001422096",
-        "0001291952",
-        "0001422207",
-        "0001422252",
-        "0001153038",
-        "0001422322",
         "0001422398",
         "0001422488",
-        "0001309625",
-        "0001422435",
-        "0001416348",
-        "0001422625",
-        "0001422644",
-        "0001422884",
-        "0001422894"
+        "0001200590",
+        "0001423036",
+        "0001423062",
+        "0001423344",
+        "0001423307",
+        "0001422572",
+        "0001423830",
+        "0001423904",
+        "0001423932",
+        "0001419899",
+        "0001424144",
+        "0001424276",
+        "0001424346",
+        "0001068291",
+        "0001424410",
+        "0001424436",
+        "0001424446",
+        "0000995488",
+        "0000811741",
+        "0001355818",
+        "0001383953",
+        "0001008234",
+        "0001424521",
+        "0001422464",
+        "0001424820",
+        "0001424939",
+        "0001424955",
+        "0001424966",
+        "0001425000"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -9515,7 +9509,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:03:24.740Z"
+      "updatedAt": "2026-10-04T03:07:58.579Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10395,17 +10389,14 @@
       "archivedRecords": {},
       "latestExcelMabns": [
         "0001412464",
-        "0000844175",
-        "0001416769",
         "0001416828",
         "0001420321",
-        "0001419674",
-        "0001417494",
-        "0001422300",
-        "0001420565",
         "0001422339",
-        "0001421947",
-        "0001420070"
+        "0001423465",
+        "0001423868",
+        "0001421963",
+        "0001412378",
+        "0001425116"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -10422,11 +10413,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T03:03:24.741Z"
+      "updatedAt": "2026-10-04T03:07:58.579Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "10:03 ngày 04/10/2026",
+  "lastExcelUploadTime": "10:07 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -10442,80 +10433,35 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "Phượng",
-            "xuatVien": 1,
+            "xuatVien": 3,
             "chamSocCap2": 4,
             "hoiChan": 2,
             "tangTren": 0,
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 32,
-            "vaoKK": 4,
+            "benhCu": 25,
+            "vaoKK": 1,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 1,
-            "raKhac": 3,
+            "raRH": 3,
+            "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 32,
-            "bhyt": 25
+            "hienCo": 23,
+            "bhyt": 20
           },
           "admissions": [
             {
               "id": "adm-tk1-1",
               "stt": 1,
-              "mabn": "0001422413",
-              "hoten": "TRƯƠNG HOÀNG THIỆN",
-              "tuoi": "21",
+              "mabn": "0001302334",
+              "hoten": "TRẦN VĂN TÌNH",
+              "tuoi": "53",
               "cause": "TNGT",
               "source": "KK",
               "chanDoan": "Chấn thương sọ não",
-              "diaChi": "An Hòa-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk1-2",
-              "stt": 2,
-              "mabn": "0001422706",
-              "hoten": "PHAN THỊ TUYẾT NHUNG",
-              "tuoi": "71",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Cẩm Văn-Phường An Nhơn Đông--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk1-3",
-              "stt": 3,
-              "mabn": "0001422719",
-              "hoten": "LÊ THỊ HƯỜNG",
-              "tuoi": "69",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "phú thạnh-Xã Tuy An Nam--Tỉnh Đắk Lắk",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk1-4",
-              "stt": 4,
-              "mabn": "0001422908",
-              "hoten": "NGUYỄN HỨA",
-              "tuoi": "79",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "bình đê-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+              "diaChi": "Thôn Tân Thanh-Xã Cát Tiến--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
               "category": "",
@@ -10526,12 +10472,12 @@
             {
               "id": "dis-tk1-1",
               "stt": 1,
-              "mabn": "0001420028",
-              "hoten": "PHẠM VĂN CƯ",
-              "tuoi": "67",
+              "mabn": "0001420755",
+              "hoten": "CÁP MINH TƯỜNG",
+              "tuoi": "38",
               "raHan": true,
               "baoHiem": true,
-              "svv": "2600358965",
+              "svv": "2600361609",
               "note": "Xuất viện",
               "isHighlight": false,
               "category": ""
@@ -10539,39 +10485,26 @@
             {
               "id": "dis-tk1-2",
               "stt": 2,
-              "mabn": "0001420772",
-              "hoten": "VÕ KIỆT",
-              "tuoi": "22",
-              "raHan": false,
+              "mabn": "0001424928",
+              "hoten": "TRẦN THỊ THANH",
+              "tuoi": "36",
+              "raHan": true,
               "baoHiem": true,
-              "svv": "2600361636",
-              "note": "Chuyển Khoa Ngoại Chấn thương - Bỏng",
+              "svv": "2600377012",
+              "note": "Xuất viện",
               "isHighlight": false,
               "category": ""
             },
             {
               "id": "dis-tk1-3",
               "stt": 3,
-              "mabn": "0001422335",
-              "hoten": "HỨA TRUNG BẢO",
-              "tuoi": "50",
-              "raHan": false,
+              "mabn": "0001424738",
+              "hoten": "BÙI TRỌNG LÂM",
+              "tuoi": "64",
+              "raHan": true,
               "baoHiem": true,
-              "svv": "2600367447",
-              "note": "Chuyển Khoa Răng Hàm Mặt",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk1-4",
-              "stt": 4,
-              "mabn": "0001422048",
-              "hoten": "NGÔ TÙNG THỊNH",
-              "tuoi": "53",
-              "raHan": false,
-              "baoHiem": false,
-              "svv": "2600366902",
-              "note": "Chuyển Khoa Tai Mũi Họng",
+              "svv": "2600376359",
+              "note": "Xuất viện",
               "isHighlight": false,
               "category": ""
             }
@@ -10596,34 +10529,18 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 21,
-            "vaoKK": 1,
+            "benhCu": 24,
+            "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 22,
-            "bhyt": 21
+            "hienCo": 24,
+            "bhyt": 22
           },
-          "admissions": [
-            {
-              "id": "adm-tk2-1",
-              "stt": 1,
-              "mabn": "0001422775",
-              "hoten": "LA O THỊ LIÊN",
-              "tuoi": "71",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "suối cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            }
-          ],
+          "admissions": [],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -10645,49 +10562,18 @@
             "tangDuoi": 1
           },
           "census": {
-            "benhCu": 11,
-            "vaoKK": 2,
+            "benhCu": 14,
+            "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 13,
-            "bhyt": 13
+            "hienCo": 14,
+            "bhyt": 12
           },
-          "admissions": [
-            {
-              "id": "adm-tk3-1",
-              "stt": 1,
-              "mabn": "0000893787",
-              "hoten": "NGUYỄN XUÂN HÀ",
-              "tuoi": "65",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Phụng Sơn-Xã Tuy Phước Đông--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk3-2",
-              "stt": 2,
-              "mabn": "0001422911",
-              "hoten": "NGUYỄN TRỌNG NHÂN KHOA",
-              "tuoi": "17",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "vân hội 1-Xã Tuy Phước--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            }
-          ],
+          "admissions": [],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -10709,8 +10595,8 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 28,
-            "vaoKK": 9,
+            "benhCu": 37,
+            "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
@@ -10720,143 +10606,7 @@
             "hienCo": 37,
             "bhyt": 36
           },
-          "admissions": [
-            {
-              "id": "adm-tk4-1",
-              "stt": 1,
-              "mabn": "0001422398",
-              "hoten": "NGUYỄN THỊ THANH",
-              "tuoi": "78",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Tấn Thạnh 2-Phường Hoài Nhơn Tây--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk4-2",
-              "stt": 2,
-              "mabn": "0001309625",
-              "hoten": "LƯƠNG THỊ NHƠN",
-              "tuoi": "78",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Thượng Giang 1-Xã Bình Khê--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk4-3",
-              "stt": 3,
-              "mabn": "0001422488",
-              "hoten": "NGUYỄN THÀNH LONG",
-              "tuoi": "72",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Phường An Nhơn Nam--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk4-4",
-              "stt": 4,
-              "mabn": "0001422435",
-              "hoten": "ĐÀM NGUYỄN QUỲNH HƯƠNG",
-              "tuoi": "14",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Xã Ân Tường--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk4-5",
-              "stt": 5,
-              "mabn": "0001416348",
-              "hoten": "ĐỒNG THỊ KÉN",
-              "tuoi": "78",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Chánh định-Xã Ngô Mây--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk4-6",
-              "stt": 6,
-              "mabn": "0001422625",
-              "hoten": "PHẠM THỊ LƯỚI",
-              "tuoi": "79",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "hiệp vinh-Xã Canh Vinh--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk4-7",
-              "stt": 7,
-              "mabn": "0001422644",
-              "hoten": "HUỲNH THỊ NHẠN",
-              "tuoi": "53",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Xã Hội Sơn--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk4-8",
-              "stt": 8,
-              "mabn": "0001422884",
-              "hoten": "ĐINH VĂN HIÊU",
-              "tuoi": "27",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Làng Cát-Xã Canh Liên--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk4-9",
-              "stt": 9,
-              "mabn": "0001422894",
-              "hoten": "NGUYỄN VĂN TUẤN",
-              "tuoi": "39",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "Xã Cát Tiến--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            }
-          ],
+          "admissions": [],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -10878,49 +10628,18 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 10,
+            "benhCu": 9,
             "vaoKK": 0,
-            "vaoKhac": 2,
+            "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 12,
-            "bhyt": 10
+            "hienCo": 9,
+            "bhyt": 9
           },
-          "admissions": [
-            {
-              "id": "adm-hstk-1",
-              "stt": 1,
-              "mabn": "0001422339",
-              "hoten": "RA LAN TRUNG",
-              "tuoi": "68",
-              "cause": "TNGT",
-              "source": "Khoa Thần kinh - Đột quỵ",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "canh phước-Xã Vân Canh--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-hstk-2",
-              "stt": 2,
-              "mabn": "0001421947",
-              "hoten": "TRẦN VĂN QUYẾT",
-              "tuoi": "49",
-              "cause": "TNGT",
-              "source": "Khoa Thần kinh - Đột quỵ",
-              "chanDoan": "Chấn thương sọ não",
-              "diaChi": "thượng an 1-Phường An Khê--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            }
-          ],
+          "admissions": [],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -10934,22 +10653,22 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 102,
-          "vaoKK": 16,
-          "vaoKhac": 2,
+          "benhCu": 109,
+          "vaoKK": 1,
+          "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
-          "raRH": 1,
-          "raKhac": 3,
+          "raRH": 3,
+          "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 116,
-          "bhyt": 105
+          "hienCo": 107,
+          "bhyt": 99
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791083004515.284,
-      "lastHisSyncTime": "2026-10-04T03:03:25.039Z"
+      "lastHisSyncTimeMs": 1791083277171.5583,
+      "lastHisSyncTime": "2026-10-04T03:07:58.176Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
@@ -10965,26 +10684,82 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "",
-            "xuatVien": 0,
+            "xuatVien": 3,
             "chamSocCap2": 0,
             "hoiChan": 0,
             "tangTren": 0,
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 0,
-            "vaoKK": 0,
+            "benhCu": 25,
+            "vaoKK": 1,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 0,
+            "raRH": 3,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
+            "hienCo": 23,
+            "bhyt": 20
           },
-          "admissions": [],
-          "discharges": [],
+          "admissions": [
+            {
+              "id": "adm-tk1-1",
+              "stt": 1,
+              "mabn": "0001302334",
+              "hoten": "TRẦN VĂN TÌNH",
+              "tuoi": "53",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Thôn Tân Thanh-Xã Cát Tiến--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": "",
+              "notesBs": ""
+            }
+          ],
+          "discharges": [
+            {
+              "id": "dis-tk1-1",
+              "stt": 1,
+              "mabn": "0001420755",
+              "hoten": "CÁP MINH TƯỜNG",
+              "tuoi": "38",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600361609",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-2",
+              "stt": 2,
+              "mabn": "0001424928",
+              "hoten": "TRẦN THỊ THANH",
+              "tuoi": "36",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600377012",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-3",
+              "stt": 3,
+              "mabn": "0001424738",
+              "hoten": "BÙI TRỌNG LÂM",
+              "tuoi": "64",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600376359",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "emergencySurgeries": [],
           "criticalNotes": ""
         },
@@ -11005,7 +10780,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 0,
+            "benhCu": 24,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -11013,8 +10788,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
+            "hienCo": 24,
+            "bhyt": 22
           },
           "admissions": [],
           "discharges": [],
@@ -11038,7 +10813,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 0,
+            "benhCu": 14,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -11046,8 +10821,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
+            "hienCo": 14,
+            "bhyt": 12
           },
           "admissions": [],
           "discharges": [],
@@ -11071,7 +10846,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 0,
+            "benhCu": 37,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -11079,8 +10854,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
+            "hienCo": 37,
+            "bhyt": 36
           },
           "admissions": [],
           "discharges": [],
@@ -11104,7 +10879,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 0,
+            "benhCu": 9,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -11112,8 +10887,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
+            "hienCo": 9,
+            "bhyt": 9
           },
           "admissions": [],
           "discharges": [],
@@ -11129,22 +10904,22 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 0,
-          "vaoKK": 0,
+          "benhCu": 109,
+          "vaoKK": 1,
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
-          "raRH": 0,
+          "raRH": 3,
           "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 0,
-          "bhyt": 0
+          "hienCo": 107,
+          "bhyt": 99
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791082598188,
-      "lastHisSyncTime": "2026-10-04T02:56:38.188Z"
+      "lastHisSyncTimeMs": 1791083277171.5583,
+      "lastHisSyncTime": "2026-10-04T03:07:59.172Z"
     }
   },
   "announcement": {
