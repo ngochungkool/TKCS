@@ -1,5 +1,5 @@
 {
-  "version": 1791079354461,
+  "version": 1791079376140,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -266,7 +266,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:02:34.461Z"
+      "updatedAt": "2026-10-04T02:02:56.141Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -292,7 +292,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:02:34.461Z"
+      "updatedAt": "2026-10-04T02:02:56.146Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -318,7 +318,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:02:34.461Z"
+      "updatedAt": "2026-10-04T02:02:56.146Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -344,7 +344,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:02:34.461Z"
+      "updatedAt": "2026-10-04T02:02:56.146Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -370,7 +370,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:02:34.461Z"
+      "updatedAt": "2026-10-04T02:02:56.146Z"
     }
   },
   "episodeConsultations": {},
@@ -765,9 +765,9 @@
   },
   "announcement": {
     "title": "Bảng thông báo chung",
-    "content": "Chào mừng toàn thể cán bộ nhân viên Khoa Ngoại Thần Kinh - Cột Sống!",
-    "updatedAt": "2026-10-04T01:53:49.233Z",
-    "updatedBy": "Huỳnh Ngọc Hưng",
-    "updatedRole": "Bác sĩ"
+    "content": "Chào mừng toàn thể cán bộ nhân viên Khoa Ngoại Thần Kinh - Cột Sống! Toàn khoa thực hiện tốt quy chế chuyên môn, giao ban đúng giờ và phối hợp cấp cứu khẩn trương.",
+    "updatedAt": "2026-10-04T01:51:33.456Z",
+    "updatedBy": "Đào Văn Nhân",
+    "updatedRole": "Trưởng khoa"
   }
 }
