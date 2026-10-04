@@ -2595,10 +2595,14 @@ const server = http.createServer(async (req, res) => {
           else if (diagLower.includes('lao động')) cause = 'TNLĐ';
           else if (diagLower.includes('thoát vị') || diagLower.includes('u não') || diagLower.includes('xẹp')) cause = 'Bệnh';
 
+          const admSvv = String(r['Mã KCB'] || r['makcb'] || r['madieutri'] || r['mayte'] || m).trim();
           roomReports[rk].admissions.push({
             id: `adm-${rk}-${sttAdm[rk]}`,
             stt: sttAdm[rk]++,
             mabn: m,
+            soVaoVien: admSvv,
+            maKcb: admSvv,
+            svv: admSvv,
             hoten: name,
             tuoi: age,
             cause,
@@ -2644,10 +2648,14 @@ const server = http.createServer(async (req, res) => {
             else if (diagLower.includes('lao động')) cause = 'TNLĐ';
             else if (diagLower.includes('thoát vị') || diagLower.includes('u não') || diagLower.includes('xẹp')) cause = 'Bệnh';
 
+            const diffSvv = String(r['Mã KCB'] || r['makcb'] || r['madieutri'] || r['mayte'] || m).trim();
             roomReports[rk].admissions.push({
               id: `adm-${rk}-${sttAdm[rk]}`,
               stt: sttAdm[rk]++,
               mabn: m,
+              soVaoVien: diffSvv,
+              maKcb: diffSvv,
+              svv: diffSvv,
               hoten: name,
               tuoi: age,
               cause,
@@ -2879,17 +2887,22 @@ const server = http.createServer(async (req, res) => {
         }
 
         const isFemale = String(r['GT'] || '').toUpperCase().includes('NỮ') || Number(r['maphai']) === 2;
+        const svv = String(r['Mã KCB'] || r['makcb'] || r['madieutri'] || r['mayte'] || r['mabn'] || '').trim();
         return {
           id: `inpatient-${idx + 1}`,
           mabn: String(r['mabn'] || '').trim(),
+          soVaoVien: svv,
+          maKcb: svv,
+          svv: svv,
           hoten: String(r['Họ tên'] || '').trim(),
-          tuoi: String(r['Tuổi'] || '').replace(/\D/g, '') || String(r['Tuổi'] || ''),
+          tuoi: String(r['Tuổi'] || '').replace(/\s*tuổi/gi, '').trim(),
           gioiTinh: isFemale ? 'NỮ' : 'NAM',
           diaChi: String(r['Địa chỉ'] || r['diachi'] || 'Gia Lai').trim(),
           chanDoan: String(r['Chẩn đoán'] || r['chandoan'] || '').trim(),
           roomKey: rk,
           roomName: rName,
           bed: String(r['sogiuong'] || '').trim(),
+          giuong: String(r['sogiuong'] || '').trim(),
           doctor: String(r['Bác sỹ điều trị'] || '').trim()
         };
       });
@@ -2919,10 +2932,13 @@ const server = http.createServer(async (req, res) => {
         if (sc && sc.isConsulted) {
           list.push({
             mabn: rec.mabn || mabn,
+            soVaoVien: rec.soVaoVien || rec.maKcb || rec.svv || rec.mabn || mabn,
+            maKcb: rec.maKcb || rec.soVaoVien || rec.svv || rec.mabn || mabn,
             hoten: rec.hoten || '',
-            tuoi: rec.tuoi || '',
+            tuoi: String(rec.tuoi || '').replace(/\s*tuổi/gi, '').trim(),
             gioiTinh: rec.gioiTinh || '',
-            giuong: rec.giuong || '',
+            giuong: rec.giuong || rec.bed || '',
+            bed: rec.giuong || rec.bed || '',
             chanDoanHis: rec.chanDoanHis || '',
             postConsultDiagnosis: sc.postConsultDiagnosis || rec.chanDoanHis || '',
             surgeryMethod: sc.surgeryMethod || '',
@@ -4052,27 +4068,78 @@ const server = http.createServer(async (req, res) => {
     const report = getOrBuildBriefingReport(targetDate);
 
     if (action === 'SAVE_TK4_CONSULTATION') {
-      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, bloodMl, isConsulted, targetDate: explicitTargetDate } = body;
-      const tk4 = db.wardRounds && db.wardRounds.tk4;
+      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, bloodMl, isConsulted, targetDate: explicitTargetDate, hoten, tuoi, gioiTinh, giuong, soVaoVien, maKcb } = body;
       const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : addDaysToKey(targetDate, 1));
-      if (tk4 && tk4.patientRecords && tk4.patientRecords[mabn]) {
-        const rec = tk4.patientRecords[mabn];
-        if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
-        const scObj = {
-          isConsulted: isConsulted !== undefined ? Boolean(isConsulted) : true,
-          dateKey: consultDate,
-          postConsultDiagnosis: String(postConsultDiagnosis !== undefined ? postConsultDiagnosis : (rec.chanDoanHis || '')).trim(),
-          surgeryMethod: String(surgeryMethod || '').trim(),
-          decision: String(decision || 'Đồng ý').trim(),
-          advancePayment: String(advancePayment || '').trim(),
-          bloodMl: String(bloodMl || '').trim(),
-          updatedAt: new Date().toISOString()
-        };
-        rec.surgicalConsultationsByDate[consultDate] = scObj;
-        rec.surgicalConsultation = scObj;
-        saveDb();
-        broadcastState(`🔪 Đã lưu hội chẩn mổ Thần kinh 4 cho BN ${rec.hoten} (ngày ${consultDate})`);
+      if (!db.wardRounds) db.wardRounds = {};
+      if (!db.wardRounds.tk4) db.wardRounds.tk4 = { patientRecords: {}, bedAssignments: {} };
+      if (!db.wardRounds.tk4.patientRecords) db.wardRounds.tk4.patientRecords = {};
+
+      const tk4 = db.wardRounds.tk4;
+      let rec = tk4.patientRecords[mabn];
+      if (!rec) {
+        // Fallback: search in other rooms
+        for (const rk of ['tk1', 'tk2', 'tk3', 'hstk']) {
+          if (db.wardRounds[rk] && db.wardRounds[rk].patientRecords && db.wardRounds[rk].patientRecords[mabn]) {
+            rec = { ...db.wardRounds[rk].patientRecords[mabn] };
+            break;
+          }
+        }
+        // Fallback: search in inpatientList from HIS
+        if (!rec) {
+          const inpatients = getAllInpatientsList();
+          const found = inpatients.find(p => p.mabn === mabn);
+          if (found) {
+            rec = {
+              mabn: found.mabn,
+              hoten: found.hoten,
+              tuoi: found.tuoi,
+              gioiTinh: found.gioiTinh,
+              giuong: found.bed || found.giuong || '',
+              soVaoVien: found.soVaoVien || found.maKcb || mabn,
+              maKcb: found.maKcb || found.soVaoVien || mabn,
+              chanDoanHis: found.chanDoan || ''
+            };
+          }
+        }
+        // If still not found, create bare record
+        if (!rec) {
+          rec = {
+            mabn,
+            hoten: hoten || '',
+            tuoi: tuoi || '',
+            gioiTinh: gioiTinh || 'NAM',
+            giuong: giuong || '',
+            soVaoVien: soVaoVien || maKcb || mabn,
+            maKcb: maKcb || soVaoVien || mabn,
+            chanDoanHis: postConsultDiagnosis || ''
+          };
+        }
+        tk4.patientRecords[mabn] = rec;
       }
+
+      if (hoten && !rec.hoten) rec.hoten = hoten;
+      if (tuoi && !rec.tuoi) rec.tuoi = tuoi;
+      if (soVaoVien || maKcb) {
+        rec.soVaoVien = soVaoVien || maKcb || rec.soVaoVien;
+        rec.maKcb = maKcb || soVaoVien || rec.maKcb;
+      }
+      if (giuong && !rec.giuong) rec.giuong = giuong;
+
+      if (!rec.surgicalConsultationsByDate) rec.surgicalConsultationsByDate = {};
+      const scObj = {
+        isConsulted: isConsulted !== undefined ? Boolean(isConsulted) : true,
+        dateKey: consultDate,
+        postConsultDiagnosis: String(postConsultDiagnosis !== undefined ? postConsultDiagnosis : (rec.chanDoanHis || '')).trim(),
+        surgeryMethod: String(surgeryMethod || '').trim(),
+        decision: String(decision || 'Đồng ý').trim(),
+        advancePayment: String(advancePayment || '').trim(),
+        bloodMl: String(bloodMl || '').trim(),
+        updatedAt: new Date().toISOString()
+      };
+      rec.surgicalConsultationsByDate[consultDate] = scObj;
+      rec.surgicalConsultation = scObj;
+      saveDb();
+      broadcastState(`🔪 Đã lưu hội chẩn mổ Thần kinh 4 cho BN ${rec.hoten || mabn} (ngày ${consultDate})`);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate, targetDate) }));
       return;

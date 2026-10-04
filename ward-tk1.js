@@ -1105,7 +1105,7 @@
               <a href="javascript:void(0)" onclick="window.TK1Module.openPatientModal('${rec.mabn}')" style="font-weight:800;color:#004aad;text-decoration:none;font-size:0.85rem;" title="Xem chi tiết bệnh nhân">
                 ${rec.hoten}
               </a>
-              <span style="font-size:0.75rem;color:#64748b;">· ${rec.tuoi || '--'}</span>
+              <span style="font-size:0.75rem;color:#64748b;">· ${String(rec.tuoi || '--').replace(/\s*tuổi/gi, '').trim()} · SVV: ${rec.soVaoVien || rec.maKcb || rec.mabn}</span>
             </div>
           </div>
 
@@ -1315,8 +1315,8 @@
     if (infoEl) {
       infoEl.innerHTML = `
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
-          <span><strong>${bedLabel}</strong> · ${rec.tuoi || '--'} · Vào viện: <strong>${rec.ngayVaoStr || '--'}</strong></span>
-          <span style="color:#004aad;font-weight:700;">Mã KCB: ${rec.maKcb || rec.mabn}</span>
+          <span><strong>${bedLabel}</strong> · ${String(rec.tuoi || '--').replace(/\s*tuổi/gi, '').trim()} · Vào viện: <strong>${rec.ngayVaoStr || '--'}</strong></span>
+          <span style="color:#004aad;font-weight:700;">Số vào viện: ${rec.soVaoVien || rec.maKcb || rec.mabn}</span>
         </div>
         <div style="margin-top:4px;color:#475569;">
           <strong>Chẩn đoán HIS:</strong> ${rec.chanDoanHis || 'Chưa có chẩn đoán ban đầu'}
@@ -1528,7 +1528,7 @@
             type="text"
             id="tk4-sc-picker-search-input"
             value="${searchTerm.replace(/"/g, '&quot;')}"
-            placeholder="🔍 Tìm kiếm bệnh nhân theo tên, số giường, mã BN..."
+            placeholder="🔍 Tìm kiếm bệnh nhân theo tên, số giường, số vào viện..."
             style="width:100%;height:38px;padding:6px 12px;border:1.5px solid #94a3b8;border-radius:8px;font-size:0.86rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;outline:none;"
           />
         </div>
@@ -2702,9 +2702,9 @@
       : `<span style="background:#fef3c7;color:#b45309;border:1px solid #fde68a;padding:2px 8px;border-radius:999px;font-weight:800;font-size:0.76rem;">Không BHYT</span>`;
 
     document.getElementById('tk1-modal-admin-info').innerHTML = `
-      <div><span style="color:#64748b;">Mã KCB:</span> <strong style="color:#004aad;">${rec.maKcb || rec.madieutri || rec.mabn || '--'}</strong></div>
+      <div><span style="color:#64748b;">Số vào viện:</span> <strong style="color:#004aad;">${rec.soVaoVien || rec.maKcb || rec.madieutri || rec.mabn || '--'}</strong></div>
       <div><span style="color:#64748b;">Tên:</span> <strong>${rec.hoten}</strong></div>
-      <div><span style="color:#64748b;">Tuổi:</span> <strong>${rec.tuoi}</strong></div>
+      <div><span style="color:#64748b;">Tuổi:</span> <strong>${String(rec.tuoi || '--').replace(/\s*tuổi/gi, '').trim()}</strong></div>
       <div><span style="color:#64748b;">Đối tượng:</span> ${bhytBadge}</div>
       <div style="flex:1 1 100%;border-top:1px dashed #e2e8f0;padding-top:5px;">
         <span style="color:#64748b;">Địa chỉ:</span> <strong>${rec.diaChi || '--'}</strong>

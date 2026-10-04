@@ -450,8 +450,8 @@ def add_patient_slides(c, stt_num, prs, blank_layout, project_root, date_key):
                     add_patient_slides(c, stt_counter, prs, blank_layout, project_root, date_key)
                     stt_counter += 1
 
-            # Slide tổng hợp số ca đợi hội chẩn mổ Thần kinh 4
-            add_tk4_consult_slide(prs, blank_layout, tk4_consults, date_key)
+            # Không báo HỘI CHẨN MỔ — THẦN KINH 4 trong slide giao ban (theo yêu cầu)
+            # add_tk4_consult_slide(prs, blank_layout, tk4_consults, date_key)
 
         elif r_key == 'tk2':
             # TK2: phòng hậu phẫu, báo tất cả Mổ chương trình (kể cả từ TK4/phòng khác), Mổ CC/mổ về, và Theo dõi

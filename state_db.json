@@ -1,5 +1,5 @@
 {
-  "version": 1791099007355,
+  "version": 1791101530950,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -276,7 +276,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 55520,
-      "uploadedAt": "14:30:05 4/10/2026",
+      "uploadedAt": "14:56:54 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -306,9 +306,9 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 108,
-      "benhVao": 6,
-      "raVien": 3,
+      "dauCa": 107,
+      "benhVao": 4,
+      "raVien": 0,
       "chuyenDen": 0,
       "chuyenDi": 0,
       "tuVong": 0,
@@ -319,8 +319,8 @@
     "byRoom": {
       "Thần kinh 1": {
         "dauCa": 23,
-        "benhVao": 4,
-        "raVien": 2,
+        "benhVao": 2,
+        "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
@@ -351,9 +351,9 @@
         "baoHiem": 12
       },
       "Thần kinh 4": {
-        "dauCa": 38,
+        "dauCa": 37,
         "benhVao": 2,
-        "raVien": 1,
+        "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
@@ -373,7 +373,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T07:30:06.655Z"
+    "updatedAt": "2026-10-04T07:56:55.229Z"
   },
   "wardRounds": {
     "tk1": {
@@ -3122,7 +3122,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T07:30:06.655Z"
+      "updatedAt": "2026-10-04T08:12:10.938Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5444,7 +5444,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T07:30:06.655Z"
+      "updatedAt": "2026-10-04T08:12:10.938Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6659,7 +6659,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T07:30:06.655Z"
+      "updatedAt": "2026-10-04T08:12:10.939Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6823,26 +6823,9 @@
               "decision": "Đồng ý",
               "advancePayment": "10 triệu",
               "updatedAt": "2026-10-04T04:31:19.333Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "CTSN",
-              "surgeryMethod": "Phẫu thuật CTSN",
-              "decision": "Đồng ý",
-              "advancePayment": "10 triệu",
-              "updatedAt": "2026-10-04T04:31:19.333Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "CTSN",
-            "surgeryMethod": "Phẫu thuật CTSN",
-            "decision": "Đồng ý",
-            "advancePayment": "10 triệu",
-            "updatedAt": "2026-10-04T04:31:19.333Z"
-          }
+          "surgicalConsultation": null
         },
         "0001411127": {
           "mabn": "0001411127",
@@ -7070,26 +7053,9 @@
               "decision": "Đồng ý",
               "advancePayment": "10 triệu",
               "updatedAt": "2026-10-04T04:31:19.329Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "CT CSTL",
-              "surgeryMethod": "Phẫu thuật CT CSTL",
-              "decision": "Đồng ý",
-              "advancePayment": "10 triệu",
-              "updatedAt": "2026-10-04T04:31:19.329Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "CT CSTL",
-            "surgeryMethod": "Phẫu thuật CT CSTL",
-            "decision": "Đồng ý",
-            "advancePayment": "10 triệu",
-            "updatedAt": "2026-10-04T04:31:19.329Z"
-          }
+          "surgicalConsultation": null
         },
         "0001422398": {
           "mabn": "0001422398",
@@ -7207,26 +7173,9 @@
               "decision": "Hội ý",
               "advancePayment": "",
               "updatedAt": "2026-10-04T04:31:19.332Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "ĐAU LƯNG",
-              "surgeryMethod": "",
-              "decision": "Hội ý",
-              "advancePayment": "",
-              "updatedAt": "2026-10-04T04:31:19.332Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "ĐAU LƯNG",
-            "surgeryMethod": "",
-            "decision": "Hội ý",
-            "advancePayment": "",
-            "updatedAt": "2026-10-04T04:31:19.332Z"
-          }
+          "surgicalConsultation": null
         },
         "0001200590": {
           "mabn": "0001200590",
@@ -7289,26 +7238,9 @@
               "decision": "Không đồng ý",
               "advancePayment": "",
               "updatedAt": "2026-10-04T04:31:19.333Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "ĐAU LƯNG",
-              "surgeryMethod": "",
-              "decision": "Không đồng ý",
-              "advancePayment": "",
-              "updatedAt": "2026-10-04T04:31:19.333Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "ĐAU LƯNG",
-            "surgeryMethod": "",
-            "decision": "Không đồng ý",
-            "advancePayment": "",
-            "updatedAt": "2026-10-04T04:31:19.333Z"
-          }
+          "surgicalConsultation": null
         },
         "0001423036": {
           "mabn": "0001423036",
@@ -7371,26 +7303,9 @@
               "decision": "Hội ý",
               "advancePayment": "",
               "updatedAt": "2026-10-04T04:31:19.332Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "ĐAU LƯNG",
-              "surgeryMethod": "",
-              "decision": "Hội ý",
-              "advancePayment": "",
-              "updatedAt": "2026-10-04T04:31:19.332Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "ĐAU LƯNG",
-            "surgeryMethod": "",
-            "decision": "Hội ý",
-            "advancePayment": "",
-            "updatedAt": "2026-10-04T04:31:19.332Z"
-          }
+          "surgicalConsultation": null
         },
         "0001423062": {
           "mabn": "0001423062",
@@ -7838,26 +7753,9 @@
               "decision": "Đồng ý",
               "advancePayment": "10 triệu",
               "updatedAt": "2026-10-04T04:31:19.333Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "ĐAU LƯNG",
-              "surgeryMethod": "Phẫu thuật CSTL",
-              "decision": "Đồng ý",
-              "advancePayment": "10 triệu",
-              "updatedAt": "2026-10-04T04:31:19.333Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "ĐAU LƯNG",
-            "surgeryMethod": "Phẫu thuật CSTL",
-            "decision": "Đồng ý",
-            "advancePayment": "10 triệu",
-            "updatedAt": "2026-10-04T04:31:19.333Z"
-          }
+          "surgicalConsultation": null
         },
         "0001424144": {
           "mabn": "0001424144",
@@ -7975,26 +7873,9 @@
               "decision": "Đồng ý",
               "advancePayment": "10 triệu",
               "updatedAt": "2026-10-04T04:31:19.332Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "CT CSTL",
-              "surgeryMethod": "Phẫu thuật CT CSTL",
-              "decision": "Đồng ý",
-              "advancePayment": "10 triệu",
-              "updatedAt": "2026-10-04T04:31:19.332Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "CT CSTL",
-            "surgeryMethod": "Phẫu thuật CT CSTL",
-            "decision": "Đồng ý",
-            "advancePayment": "10 triệu",
-            "updatedAt": "2026-10-04T04:31:19.332Z"
-          }
+          "surgicalConsultation": null
         },
         "0001424346": {
           "mabn": "0001424346",
@@ -8057,26 +7938,9 @@
               "decision": "Hội ý",
               "advancePayment": "",
               "updatedAt": "2026-10-04T04:31:19.333Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "CT CSTL",
-              "surgeryMethod": "",
-              "decision": "Hội ý",
-              "advancePayment": "",
-              "updatedAt": "2026-10-04T04:31:19.333Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "CT CSTL",
-            "surgeryMethod": "",
-            "decision": "Hội ý",
-            "advancePayment": "",
-            "updatedAt": "2026-10-04T04:31:19.333Z"
-          }
+          "surgicalConsultation": null
         },
         "0001068291": {
           "mabn": "0001068291",
@@ -8249,26 +8113,9 @@
               "decision": "Hội ý",
               "advancePayment": "",
               "updatedAt": "2026-10-04T04:31:19.332Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "ĐAU LƯNG",
-              "surgeryMethod": "",
-              "decision": "Hội ý",
-              "advancePayment": "",
-              "updatedAt": "2026-10-04T04:31:19.332Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "ĐAU LƯNG",
-            "surgeryMethod": "",
-            "decision": "Hội ý",
-            "advancePayment": "",
-            "updatedAt": "2026-10-04T04:31:19.332Z"
-          }
+          "surgicalConsultation": null
         },
         "0001424446": {
           "mabn": "0001424446",
@@ -8606,26 +8453,9 @@
               "decision": "Hội ý",
               "advancePayment": "",
               "updatedAt": "2026-10-04T04:31:19.332Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "ĐAU LƯNG",
-              "surgeryMethod": "",
-              "decision": "Hội ý",
-              "advancePayment": "",
-              "updatedAt": "2026-10-04T04:31:19.332Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "ĐAU LƯNG",
-            "surgeryMethod": "",
-            "decision": "Hội ý",
-            "advancePayment": "",
-            "updatedAt": "2026-10-04T04:31:19.332Z"
-          }
+          "surgicalConsultation": null
         },
         "0001424521": {
           "mabn": "0001424521",
@@ -8853,26 +8683,9 @@
               "decision": "Hội ý",
               "advancePayment": "",
               "updatedAt": "2026-10-04T04:31:19.333Z"
-            },
-            "2026-10-05": {
-              "isConsulted": true,
-              "dateKey": "2026-10-05",
-              "postConsultDiagnosis": "CTCS LƯNG",
-              "surgeryMethod": "",
-              "decision": "Hội ý",
-              "advancePayment": "",
-              "updatedAt": "2026-10-04T04:31:19.333Z"
             }
           },
-          "surgicalConsultation": {
-            "isConsulted": true,
-            "dateKey": "2026-10-04",
-            "postConsultDiagnosis": "CTCS LƯNG",
-            "surgeryMethod": "",
-            "decision": "Hội ý",
-            "advancePayment": "",
-            "updatedAt": "2026-10-04T04:31:19.333Z"
-          }
+          "surgicalConsultation": null
         },
         "0001424955": {
           "mabn": "0001424955",
@@ -10696,7 +10509,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T07:30:06.656Z"
+      "updatedAt": "2026-10-04T08:12:10.939Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11600,11 +11413,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T07:30:06.656Z"
+      "updatedAt": "2026-10-04T08:12:10.939Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "14:30 ngày 04/10/2026",
+  "lastExcelUploadTime": "14:56 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -11620,19 +11433,19 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "Phượng",
-            "xuatVien": 3,
+            "xuatVien": 0,
             "chamSocCap2": 4,
             "hoiChan": 2,
             "tangTren": 0,
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 24,
-            "vaoKK": 4,
+            "benhCu": 23,
+            "vaoKK": 2,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 3,
+            "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
             "hienCo": 25,
@@ -11642,36 +11455,6 @@
             {
               "id": "adm-tk1-1",
               "stt": 1,
-              "mabn": "0001425123",
-              "hoten": "TRẦN THANH VINH",
-              "tuoi": "55",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "S06.80-Tổn thương nội sọ khác, không có vết thương nội sọ hở",
-              "diaChi": "21 nguyễn quý đức-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk1-2",
-              "stt": 2,
-              "mabn": "0001425126",
-              "hoten": "PHAN NGUYỄN NHẬT KHÔI",
-              "tuoi": "21",
-              "cause": "TNGT",
-              "source": "KK",
-              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
-              "diaChi": "LÃNH CAO-Xã Xuân Lãnh--Tỉnh Đắk Lắk",
-              "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": "",
-              "notesBs": ""
-            },
-            {
-              "id": "adm-tk1-3",
-              "stt": 3,
               "mabn": "0001103734",
               "hoten": "NGUYỄN THỊ THANH HUYỀN",
               "tuoi": "48",
@@ -11685,8 +11468,8 @@
               "notesBs": ""
             },
             {
-              "id": "adm-tk1-4",
-              "stt": 4,
+              "id": "adm-tk1-2",
+              "stt": 2,
               "mabn": "0000757171",
               "hoten": "ĐINH NGỌC LIỆU",
               "tuoi": "71",
@@ -11696,50 +11479,11 @@
               "diaChi": "143A Trần Cao Vân-Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
-          "discharges": [
-            {
-              "id": "dis-tk1-1",
-              "stt": 1,
-              "mabn": "0001420755",
-              "hoten": "CÁP MINH TƯỜNG",
-              "tuoi": "38",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600361609",
-              "note": "Xuất viện",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk1-2",
-              "stt": 2,
-              "mabn": "0001424928",
-              "hoten": "TRẦN THỊ THANH",
-              "tuoi": "36",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600377012",
-              "note": "Xuất viện",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk1-3",
-              "stt": 3,
-              "mabn": "0001424738",
-              "hoten": "BÙI TRỌNG LÂM",
-              "tuoi": "64",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600376359",
-              "note": "Xuất viện",
-              "isHighlight": false,
-              "category": ""
-            }
-          ],
+          "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": "",
           "deletedAdmissionMabns": [
@@ -11815,8 +11559,8 @@
         "tk4": {
           "roomKey": "tk4",
           "roomName": "Thần kinh 4",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-03T18:33:34.278Z",
+          "status": "SUBMITTED",
+          "updatedAt": "2026-10-04T08:12:10.941Z",
           "personnel": {
             "nurses": "Linh - Hiếu",
             "nursesDay": "",
@@ -11849,7 +11593,7 @@
               "tuoi": "53",
               "cause": "TNGT",
               "source": "KK",
-              "chanDoan": "Chấn thương sọ não",
+              "chanDoan": "M54.10-Bệnh lý rễ thần kinh, nhiều vị trí của cột sống",
               "diaChi": "Thôn Tân Thanh-Xã Cát Tiến--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
@@ -11868,7 +11612,8 @@
               "diaChi": "Tiên Thuận-Xã Bình Khê--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -11917,12 +11662,12 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 108,
-          "vaoKK": 6,
+          "benhCu": 107,
+          "vaoKK": 4,
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
-          "raRH": 3,
+          "raRH": 0,
           "raKhac": 0,
           "tuVong": 0,
           "hienCo": 111,
@@ -11931,8 +11676,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791099005755.0613,
-      "lastHisSyncTime": "2026-10-04T07:30:07.261Z"
+      "lastHisSyncTimeMs": 1791100614318.4583,
+      "lastHisSyncTime": "2026-10-04T07:56:55.723Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
@@ -12356,6 +12101,201 @@
       },
       "lastHisSyncTimeMs": 1791087047150.1267,
       "lastHisSyncTime": "2026-10-04T04:13:18.946Z"
+    },
+    "2026-10-05": {
+      "dateKey": "2026-10-05",
+      "updatedAt": "2026-10-04T08:07:15.424Z",
+      "roomReports": {
+        "tk1": {
+          "roomKey": "tk1",
+          "roomName": "Thần kinh 1",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-04T08:07:15.223Z",
+          "personnel": {
+            "nurses": "",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "",
+            "xuatVien": 0,
+            "chamSocCap2": 0,
+            "hoiChan": 0,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 25,
+            "vaoKK": 0,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 25,
+            "bhyt": 22
+          },
+          "admissions": [],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        },
+        "tk2": {
+          "roomKey": "tk2",
+          "roomName": "Thần kinh 2",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-04T08:07:15.223Z",
+          "personnel": {
+            "nurses": "",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "",
+            "xuatVien": 0,
+            "chamSocCap2": 0,
+            "hoiChan": 0,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 24,
+            "vaoKK": 0,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 24,
+            "bhyt": 22
+          },
+          "admissions": [],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        },
+        "tk3": {
+          "roomKey": "tk3",
+          "roomName": "Thần kinh 3",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-04T08:07:15.223Z",
+          "personnel": {
+            "nurses": "",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "",
+            "xuatVien": 0,
+            "chamSocCap2": 0,
+            "hoiChan": 0,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 14,
+            "vaoKK": 0,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 14,
+            "bhyt": 12
+          },
+          "admissions": [],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        },
+        "tk4": {
+          "roomKey": "tk4",
+          "roomName": "Thần kinh 4",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-04T08:07:15.223Z",
+          "personnel": {
+            "nurses": "",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "",
+            "xuatVien": 0,
+            "chamSocCap2": 0,
+            "hoiChan": 0,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 39,
+            "vaoKK": 0,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 39,
+            "bhyt": 38
+          },
+          "admissions": [],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        },
+        "hstk": {
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "status": "DRAFT",
+          "updatedAt": "2026-10-04T08:07:15.223Z",
+          "personnel": {
+            "nurses": "",
+            "nursesDay": "",
+            "nursesNight": "",
+            "orderly": "",
+            "xuatVien": 0,
+            "chamSocCap2": 0,
+            "hoiChan": 0,
+            "tangTren": 0,
+            "tangDuoi": 0
+          },
+          "census": {
+            "benhCu": 9,
+            "vaoKK": 0,
+            "vaoKhac": 0,
+            "moCT": 0,
+            "moCC": 0,
+            "raRH": 0,
+            "raKhac": 0,
+            "tuVong": 0,
+            "hienCo": 9,
+            "bhyt": 9
+          },
+          "admissions": [],
+          "discharges": [],
+          "emergencySurgeries": [],
+          "criticalNotes": ""
+        }
+      },
+      "highlightCases": [],
+      "overall": {
+        "doctorsOnDuty": [
+          "HẢI",
+          "CƯ",
+          "LUÂN"
+        ],
+        "grandCensus": {
+          "benhCu": 111,
+          "vaoKK": 0,
+          "vaoKhac": 0,
+          "moCT": 0,
+          "moCC": 0,
+          "raRH": 0,
+          "raKhac": 0,
+          "tuVong": 0,
+          "hienCo": 111,
+          "bhyt": 103
+        },
+        "doctorNotes": "",
+        "approvedBy": ""
+      },
+      "lastHisSyncTimeMs": 1791100614318.4583,
+      "lastHisSyncTime": "2026-10-04T08:07:15.425Z"
     }
   },
   "announcement": {

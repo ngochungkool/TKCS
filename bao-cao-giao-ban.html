@@ -1761,7 +1761,7 @@
 
       <div class="modal-body">
         <div style="margin-bottom:12px;">
-          <input type="text" id="modal-room-search-input" class="patient-picker-search" placeholder="🔍 Tìm nhanh theo Họ tên, Mã BN, Giường, Chẩn đoán..." oninput="renderRoomPatientPickerList()" />
+          <input type="text" id="modal-room-search-input" class="patient-picker-search" placeholder="🔍 Tìm nhanh theo Họ tên, Số vào viện, Giường, Chẩn đoán..." oninput="renderRoomPatientPickerList()" />
         </div>
 
         <!-- Thanh tiến độ rà soát danh sách buồng bệnh -->
@@ -1862,7 +1862,7 @@
           <input type="text" id="modal-tk4-consult-method" class="gb-input-control" style="width:100%;" placeholder="Ví dụ: Mở nắp sọ giải áp + lấy máu tụ, Cố định cột sống..." />
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
           <div>
             <label style="font-size:0.85rem;font-weight:700;color:#334155;margin-bottom:4px;display:block;">Kết luận duyệt mổ:</label>
             <select id="modal-tk4-consult-decision" class="gb-input-control" style="width:100%;font-weight:700;">
@@ -1872,8 +1872,12 @@
             </select>
           </div>
           <div>
-            <label style="font-size:0.85rem;font-weight:700;color:#334155;margin-bottom:4px;display:block;">Tạm ứng phẫu thuật / Viện phí:</label>
-            <input type="text" id="modal-tk4-consult-advance" class="gb-input-control" style="width:100%;font-weight:700;color:#15803d;" placeholder="Ví dụ: 10 triệu, 5 triệu..." />
+            <label style="font-size:0.85rem;font-weight:700;color:#334155;margin-bottom:4px;display:block;">Máu chuẩn bị (ml):</label>
+            <input type="text" id="modal-tk4-consult-blood" class="gb-input-control" style="width:100%;font-weight:700;color:#b91c1c;" placeholder="Ví dụ: 500, 1000..." />
+          </div>
+          <div>
+            <label style="font-size:0.85rem;font-weight:700;color:#334155;margin-bottom:4px;display:block;">Tạm ứng (triệu đồng):</label>
+            <input type="text" id="modal-tk4-consult-advance" class="gb-input-control" style="width:100%;font-weight:700;color:#15803d;" placeholder="Chỉ nhập số, vd: 10, 5..." />
           </div>
         </div>
       </div>
@@ -2922,7 +2926,7 @@
               <thead>
                 <tr>
                   <th style="width:40px;text-align:center;">STT</th>
-                  <th style="width:95px;">Mã BN</th>
+                  <th style="width:105px;">Số vào viện</th>
                   <th>Họ và tên</th>
                   <th style="width:55px;text-align:center;">Tuổi</th>
                   <th style="width:${isHSTK ? '230px' : isTK2 ? '210px' : (isTK3 || isTK4) ? '225px' : '175px'};text-align:center;">${(isHSTK || isTK3 || isTK4) ? 'Nguồn vào &amp; Nguyên nhân' : isTK2 ? 'Nguồn vào buồng' : 'Nguyên nhân'}</th>
@@ -2968,9 +2972,9 @@
           html += `
             <tr style="background:${adm.isHighlight ? '#fffbeb' : '#ffffff'};">
               <td style="text-align:center;font-weight:700;">${idx + 1}</td>
-              <td style="font-weight:700;color:#0284c7;">${adm.mabn || '--'}</td>
-              <td style="font-weight:700;color:#0f172a;">${adm.hoten || '--'}</td>
-              <td style="text-align:center;">${adm.tuoi || '--'}</td>
+              <td style="font-weight:700;color:#0284c7;">${escapeHtml(adm.soVaoVien || adm.maKcb || adm.svv || adm.mabn || '--')}</td>
+              <td style="font-weight:700;color:#0f172a;">${escapeHtml(adm.hoten || '--')}</td>
+              <td style="text-align:center;">${escapeHtml(String(adm.tuoi || '--').replace(/\s*tuổi/gi, '').trim())}</td>
               <td style="text-align:center;padding:4px 2px;">
                 ${isHSTK ? `
                   <div style="display:flex;flex-direction:column;gap:3px;align-items:center;">
@@ -3503,6 +3507,7 @@
                   <span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:6px;border:1px solid #fde68a;">Hội ý: ${hoiYCount}</span>
                   ${khongDongYCount > 0 ? `<span style="background:#fee2e2;color:#991b1b;padding:3px 8px;border-radius:6px;border:1px solid #fca5a5;">Không ĐY: ${khongDongYCount}</span>` : ''}
                 </div>
+                <span id="tk4-autosave-indicator" style="font-size:0.8rem;color:#16a34a;font-weight:700;display:none;margin-right:8px;"><i class="fa-solid fa-circle-check"></i> Đã tự động lưu</span>
                 <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="openAddTk4ConsultDialog()">
                   <i class="fa-solid fa-plus"></i> Thêm ca hội chẩn mổ
                 </button>
@@ -3524,45 +3529,71 @@
               <table class="gb-table" style="text-align:left;">
                 <thead>
                   <tr>
-                    <th style="width:40px;text-align:center;">STT</th>
-                    <th style="width:75px;text-align:center;">Giường</th>
-                    <th style="width:95px;">Mã BN</th>
-                    <th>Họ và tên</th>
-                    <th style="width:50px;text-align:center;">Tuổi</th>
-                    <th>Chẩn đoán sau HC / Duyệt mổ</th>
-                    <th>Phương pháp phẫu thuật</th>
-                    <th style="width:110px;text-align:center;">Kết luận</th>
-                    <th style="width:95px;text-align:center;">Tạm ứng</th>
-                    <th style="width:100px;text-align:center;">Thao tác</th>
+                    <th style="width:38px;text-align:center;">STT</th>
+                    <th style="width:65px;text-align:center;">Giường</th>
+                    <th style="width:105px;">Số vào viện</th>
+                    <th style="min-width:140px;">Họ và tên</th>
+                    <th style="width:48px;text-align:center;">Tuổi</th>
+                    <th style="min-width:180px;">Chẩn đoán sau HC / Duyệt mổ</th>
+                    <th style="min-width:160px;">Phương pháp phẫu thuật</th>
+                    <th style="width:115px;text-align:center;">Kết luận</th>
+                    <th style="width:85px;text-align:center;">Máu (ml)</th>
+                    <th style="width:85px;text-align:center;">Ứng (tr)</th>
+                    <th style="width:75px;text-align:center;">Thao tác</th>
                   </tr>
                 </thead>
                 <tbody>
           `;
 
           tk4Consultations.forEach((item, idx) => {
-            const dec = item.decision || 'Đồng ý';
-            const decBadge = (dec === 'Đồng ý')
-              ? `<span style="background:#dcfce7;color:#15803d;padding:3px 8px;border-radius:6px;font-weight:800;font-size:0.8rem;border:1px solid #86efac;white-space:nowrap;"><i class="fa-solid fa-check"></i> Đồng ý</span>`
-              : (dec === 'Hội ý')
-                ? `<span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:6px;font-weight:800;font-size:0.8rem;border:1px solid #fde68a;white-space:nowrap;"><i class="fa-solid fa-comments"></i> Hội ý</span>`
-                : `<span style="background:#fee2e2;color:#991b1b;padding:3px 8px;border-radius:6px;font-weight:800;font-size:0.8rem;border:1px solid #fca5a5;white-space:nowrap;"><i class="fa-solid fa-xmark"></i> Không ĐY</span>`;
+            const cleanTuoi = String(item.tuoi || '--').replace(/\s*tuổi/gi, '').trim();
+            const svv = item.soVaoVien || item.maKcb || item.svv || item.mabn;
+            const bedVal = item.bed || item.giuong || '--';
 
             html += `
-              <tr style="cursor:pointer;" onclick="openEditTk4ConsultDialog('${escapeHtml(item.mabn)}')" title="Bấm vào hàng để xem và chỉnh sửa chi tiết duyệt mổ">
+              <tr id="tk4-consult-row-${escapeHtml(item.mabn)}">
                 <td style="text-align:center;font-weight:700;">${idx + 1}</td>
-                <td style="text-align:center;"><span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:6px;font-weight:800;font-size:0.82rem;">${escapeHtml(item.bed || '--')}</span></td>
-                <td style="font-weight:700;color:#0284c7;">${escapeHtml(item.mabn)}</td>
-                <td style="font-weight:800;color:#0f172a;text-transform:uppercase;">${escapeHtml(item.hoten)}</td>
-                <td style="text-align:center;">${escapeHtml(String(item.tuoi || '--'))}</td>
-                <td style="color:#0369a1;font-weight:600;">${escapeHtml(item.postConsultDiagnosis || item.chanDoanHis || '--')}</td>
-                <td>${escapeHtml(item.surgeryMethod || '--')}</td>
-                <td style="text-align:center;">${decBadge}</td>
-                <td style="text-align:center;font-weight:700;color:#15803d;">${escapeHtml(item.advancePayment || '--')}</td>
-                <td style="text-align:center;white-space:nowrap;" onclick="event.stopPropagation()">
-                  <button type="button" class="btn-gb-action" style="padding:3px 8px;font-size:0.75rem;background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;margin-right:4px;" onclick="openEditTk4ConsultDialog('${escapeHtml(item.mabn)}')" title="Chỉnh sửa ca hội chẩn này">
-                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                <td style="text-align:center;"><span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:6px;font-weight:800;font-size:0.82rem;">${escapeHtml(bedVal)}</span></td>
+                <td style="font-weight:700;color:#0284c7;">${escapeHtml(svv)}</td>
+                <td style="font-weight:800;color:#0f172a;text-transform:uppercase;">
+                  <a href="javascript:void(0)" onclick="openEditTk4ConsultDialog('${escapeHtml(item.mabn)}')" style="color:#0f172a;text-decoration:none;" title="Bấm để xem và sửa chi tiết">
+                    ${escapeHtml(item.hoten)}
+                  </a>
+                </td>
+                <td style="text-align:center;font-weight:700;">${escapeHtml(cleanTuoi)}</td>
+                <td>
+                  <input type="text" class="gb-input-control" value="${escapeHtml(item.postConsultDiagnosis || item.chanDoanHis || '')}"
+                    onchange="autoSaveTk4ConsultField('${escapeHtml(item.mabn)}', 'postConsultDiagnosis', this.value)"
+                    placeholder="Chẩn đoán sau HC..." style="font-size:0.82rem;font-weight:600;color:#0369a1;width:100%;padding:4px 6px;" />
+                </td>
+                <td>
+                  <input type="text" class="gb-input-control" value="${escapeHtml(item.surgeryMethod || '')}"
+                    onchange="autoSaveTk4ConsultField('${escapeHtml(item.mabn)}', 'surgeryMethod', this.value)"
+                    placeholder="Phương pháp phẫu thuật..." style="font-size:0.82rem;font-weight:600;width:100%;padding:4px 6px;" />
+                </td>
+                <td style="text-align:center;">
+                  <select class="gb-input-control" style="font-size:0.82rem;font-weight:800;width:100%;padding:4px 4px;${item.decision === 'Đồng ý' || !item.decision ? 'color:#15803d;' : item.decision === 'Hội ý' ? 'color:#b45309;' : 'color:#dc2626;'}"
+                    onchange="this.style.color = this.value === 'Đồng ý' ? '#15803d' : this.value === 'Hội ý' ? '#b45309' : '#dc2626'; autoSaveTk4ConsultField('${escapeHtml(item.mabn)}', 'decision', this.value)">
+                    <option value="Đồng ý" ${item.decision === 'Đồng ý' || !item.decision ? 'selected' : ''}>✓ Đồng ý</option>
+                    <option value="Hội ý" ${item.decision === 'Hội ý' ? 'selected' : ''}>💬 Hội ý</option>
+                    <option value="Không đồng ý" ${item.decision === 'Không đồng ý' ? 'selected' : ''}>✕ Không ĐY</option>
+                  </select>
+                </td>
+                <td style="text-align:center;">
+                  <input type="text" class="gb-input-control" value="${escapeHtml(item.bloodMl || '')}"
+                    onchange="autoSaveTk4ConsultField('${escapeHtml(item.mabn)}', 'bloodMl', this.value)"
+                    placeholder="... ml" style="font-size:0.82rem;font-weight:700;color:#b91c1c;width:75px;text-align:center;padding:4px 2px;" title="Lượng máu cần chuẩn bị (ml)" />
+                </td>
+                <td style="text-align:center;">
+                  <input type="text" class="gb-input-control" value="${escapeHtml(item.advancePayment || '')}"
+                    onchange="autoSaveTk4ConsultField('${escapeHtml(item.mabn)}', 'advancePayment', this.value)"
+                    placeholder="... tr" style="font-size:0.82rem;font-weight:800;color:#15803d;width:75px;text-align:center;padding:4px 2px;" title="Tạm ứng viện phí (đơn vị: triệu)" />
+                </td>
+                <td style="text-align:center;white-space:nowrap;">
+                  <button type="button" class="btn-gb-action" style="padding:3px 6px;font-size:0.75rem;background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;margin-right:2px;" onclick="openEditTk4ConsultDialog('${escapeHtml(item.mabn)}')" title="Mở hộp thoại chi tiết">
+                    <i class="fa-solid fa-pen-to-square"></i>
                   </button>
-                  <button type="button" class="btn-gb-action" style="padding:3px 8px;font-size:0.75rem;background:#fee2e2;color:#b91c1c;border-color:#fca5a5;" onclick="deleteTk4Consult('${escapeHtml(item.mabn)}')" title="Xóa khỏi danh sách duyệt mổ">
+                  <button type="button" class="btn-gb-action" style="padding:3px 6px;font-size:0.75rem;background:#fee2e2;color:#b91c1c;border-color:#fca5a5;" onclick="deleteTk4Consult('${escapeHtml(item.mabn)}')" title="Xóa khỏi danh sách duyệt mổ">
                     <i class="fa-solid fa-trash"></i>
                   </button>
                 </td>
@@ -3598,28 +3629,6 @@
                 <i class="fa-solid fa-user-nurse"></i> Bàn giao điều dưỡng &amp; bác sĩ
               </span>
             </div>
-          </div>
-
-          <!-- Quick notes chips -->
-          <div class="gb-notes-chips-bar">
-            <span style="font-size:0.75rem;font-weight:700;color:#64748b;margin-right:2px;">
-              <i class="fa-solid fa-wand-magic-sparkles" style="color:#0284c7;"></i> Mẫu nhanh:
-            </span>
-            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Theo dõi sát tri giác (GCS) & đồng tử mỗi 2 giờ.')">
-              🧠 Theo dõi tri giác
-            </button>
-            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Kiểm tra bình dẫn lưu kín áp lực âm, theo dõi màu sắc và lượng dịch.')">
-              🧪 Bình dẫn lưu kín
-            </button>
-            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Bệnh nhân nhịn ăn uống từ 00h để chuẩn bị mổ phiên.')">
-              🍽️ Nhịn ăn chuẩn bị mổ
-            </button>
-            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Chờ kết quả chụp lại MSCT sọ não kiểm tra.')">
-              📷 Chờ chụp MSCT sọ
-            </button>
-            <button type="button" class="gb-notes-chip-btn" onclick="appendQuickNote('${roomKey}', '• Đã bàn giao đầy đủ hồ sơ bệnh án, thuốc và vật tư tiêu hao.')">
-              📋 Bàn giao hồ sơ &amp; thuốc
-            </button>
           </div>
 
           <textarea id="gb-room-notes-${roomKey}" class="gb-notes-textarea" onchange="updateRoomNotes('${roomKey}', this.value)" placeholder="Nhập ghi chú dặn dò ca sau, diễn biến bệnh nhân cần theo dõi sát, y lệnh phát sinh...">${escapeHtml(roomRep.criticalNotes || '')}</textarea>
@@ -4031,7 +4040,8 @@
       if (!targetAdm) return;
 
       const bnName = targetAdm.hoten || 'này';
-      if (!confirm(`Bạn có chắc muốn xóa ca bệnh nhân [${bnName}] (Mã BN: ${targetAdm.mabn || '--'}) khỏi danh sách vào buồng của ${rep.roomName}?\n(Hệ thống sẽ cập nhật lại số liệu vào buồng và không đưa ca này lên slide giao ban).`)) {
+      const svvText = targetAdm.soVaoVien || targetAdm.maKcb || targetAdm.svv || targetAdm.mabn || '--';
+      if (!confirm(`Bạn có chắc muốn xóa ca bệnh nhân [${bnName}] (Số vào viện: ${svvText}) khỏi danh sách vào buồng của ${rep.roomName}?\n(Hệ thống sẽ cập nhật lại số liệu vào buồng và không đưa ca này lên slide giao ban).`)) {
         return;
       }
 
@@ -4418,7 +4428,7 @@
             type="text"
             id="tk4-briefing-picker-search-input"
             value="${searchTerm.replace(/"/g, '&quot;')}"
-            placeholder="🔍 Tìm kiếm bệnh nhân theo tên, mã BN, giường..."
+            placeholder="🔍 Tìm kiếm bệnh nhân theo tên, số vào viện, giường..."
             style="width:100%;height:38px;padding:6px 12px;border:1.5px solid #94a3b8;border-radius:8px;font-size:0.86rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;outline:none;"
           />
         </div>
@@ -4593,9 +4603,9 @@
 
       document.getElementById('modal-tk4-consult-mabn').value = p.mabn;
       document.getElementById('modal-tk4-info-name').textContent = p.hoten;
-      document.getElementById('modal-tk4-info-mabn').textContent = 'Mã: ' + p.mabn;
+      document.getElementById('modal-tk4-info-mabn').textContent = 'Số vào viện: ' + (p.soVaoVien || p.maKcb || p.mabn);
       document.getElementById('modal-tk4-info-bed').textContent = 'Giường: ' + (p.bed || '--');
-      document.getElementById('modal-tk4-info-age').textContent = `${p.tuoi || '--'} tuổi • ${p.gioiTinh || 'NAM'}`;
+      document.getElementById('modal-tk4-info-age').textContent = `${String(p.tuoi || '--').replace(/\s*tuổi/gi, '').trim()} • ${p.gioiTinh || 'NAM'}`;
       document.getElementById('modal-tk4-consult-patient-info').style.display = 'block';
 
       // Tự điền chẩn đoán nếu đang trống
@@ -4618,6 +4628,8 @@
       document.getElementById('modal-tk4-consult-method').value = consult.surgeryMethod || '';
       document.getElementById('modal-tk4-consult-decision').value = consult.decision || 'Đồng ý';
       document.getElementById('modal-tk4-consult-advance').value = consult.advancePayment || '';
+      const bloodInput = document.getElementById('modal-tk4-consult-blood');
+      if (bloodInput) bloodInput.value = consult.bloodMl || '';
 
       const nextDateKey = getNextDateKey(currentDateKey);
       const dateBadge = document.getElementById('modal-tk4-target-date-badge');
@@ -4631,9 +4643,9 @@
       if (selectWrap) selectWrap.style.display = 'none';
 
       document.getElementById('modal-tk4-info-name').textContent = consult.hoten;
-      document.getElementById('modal-tk4-info-mabn').textContent = 'Mã: ' + consult.mabn;
-      document.getElementById('modal-tk4-info-bed').textContent = 'Giường: ' + (consult.bed || '--');
-      document.getElementById('modal-tk4-info-age').textContent = `${consult.tuoi || '--'} tuổi • ${consult.gioiTinh || 'NAM'}`;
+      document.getElementById('modal-tk4-info-mabn').textContent = 'Số vào viện: ' + (consult.soVaoVien || consult.maKcb || consult.mabn);
+      document.getElementById('modal-tk4-info-bed').textContent = 'Giường: ' + (consult.bed || consult.giuong || '--');
+      document.getElementById('modal-tk4-info-age').textContent = `${String(consult.tuoi || '--').replace(/\s*tuổi/gi, '').trim()} • ${consult.gioiTinh || 'NAM'}`;
       document.getElementById('modal-tk4-consult-patient-info').style.display = 'block';
 
       modal.classList.add('active');
@@ -4655,8 +4667,12 @@
       const method = document.getElementById('modal-tk4-consult-method').value.trim();
       const decision = document.getElementById('modal-tk4-consult-decision').value;
       const advance = document.getElementById('modal-tk4-consult-advance').value.trim();
+      const blood = (document.getElementById('modal-tk4-consult-blood')?.value || '').trim();
 
       const nextDateKey = getNextDateKey(currentDateKey);
+      const p = (inpatientList || []).find(item => item.mabn === mabn) || {};
+      const existingIdx = (tk4Consultations || []).findIndex(c => c.mabn === mabn);
+      const existingItem = existingIdx >= 0 ? tk4Consultations[existingIdx] : {};
 
       try {
         const res = await fetch('/api/briefing-report', {
@@ -4667,27 +4683,35 @@
             mabn,
             targetDate: nextDateKey,
             shiftDate: currentDateKey,
+            hoten: p.hoten || existingItem.hoten || 'Bệnh nhân',
+            tuoi: p.tuoi || existingItem.tuoi || '',
+            gioiTinh: p.gioiTinh || existingItem.gioiTinh || 'NAM',
+            giuong: p.bed || existingItem.bed || existingItem.giuong || '--',
+            soVaoVien: p.soVaoVien || p.maKcb || existingItem.soVaoVien || existingItem.maKcb || mabn,
             postConsultDiagnosis: diag,
             surgeryMethod: method,
             decision,
             advancePayment: advance,
+            bloodMl: blood,
             isConsulted: true
           })
         });
         const data = await res.json();
         if (data.ok) {
-          const p = (inpatientList || []).find(item => item.mabn === mabn) || {};
-          const existingIdx = (tk4Consultations || []).findIndex(c => c.mabn === mabn);
           const updatedItem = {
             mabn,
-            hoten: p.hoten || (existingIdx >= 0 ? tk4Consultations[existingIdx].hoten : 'Bệnh nhân'),
-            tuoi: p.tuoi || (existingIdx >= 0 ? tk4Consultations[existingIdx].tuoi : ''),
-            gioiTinh: p.gioiTinh || (existingIdx >= 0 ? tk4Consultations[existingIdx].gioiTinh : 'NAM'),
-            bed: p.bed || (existingIdx >= 0 ? tk4Consultations[existingIdx].bed : '--'),
+            soVaoVien: p.soVaoVien || p.maKcb || existingItem.soVaoVien || existingItem.maKcb || mabn,
+            maKcb: p.maKcb || p.soVaoVien || existingItem.maKcb || mabn,
+            hoten: p.hoten || existingItem.hoten || 'Bệnh nhân',
+            tuoi: p.tuoi || existingItem.tuoi || '',
+            gioiTinh: p.gioiTinh || existingItem.gioiTinh || 'NAM',
+            bed: p.bed || existingItem.bed || existingItem.giuong || '--',
+            giuong: p.bed || existingItem.bed || existingItem.giuong || '--',
             postConsultDiagnosis: diag,
             surgeryMethod: method,
             decision,
             advancePayment: advance,
+            bloodMl: blood,
             dateKey: nextDateKey,
             updatedAt: new Date().toISOString()
           };
@@ -4705,6 +4729,56 @@
       } catch (err) {
         console.error(err);
         alert('Lỗi kết nối khi lưu ca hội chẩn!');
+      }
+    }
+
+    async function autoSaveTk4ConsultField(mabn, field, val) {
+      const item = (tk4Consultations || []).find(c => c.mabn === mabn);
+      if (item) {
+        item[field] = val;
+      }
+      const nextDateKey = getNextDateKey(currentDateKey);
+      const indicator = document.getElementById('tk4-autosave-indicator');
+      if (indicator) {
+        indicator.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:#0284c7;"></i> Đang lưu...';
+        indicator.style.display = 'inline-block';
+      }
+
+      try {
+        const payload = {
+          action: 'SAVE_TK4_CONSULTATION',
+          mabn,
+          targetDate: nextDateKey,
+          shiftDate: currentDateKey,
+          hoten: item ? item.hoten : '',
+          tuoi: item ? item.tuoi : '',
+          gioiTinh: item ? item.gioiTinh : '',
+          giuong: item ? (item.bed || item.giuong) : '',
+          soVaoVien: item ? (item.soVaoVien || item.maKcb) : '',
+          postConsultDiagnosis: item ? item.postConsultDiagnosis : (field === 'postConsultDiagnosis' ? val : ''),
+          surgeryMethod: item ? item.surgeryMethod : (field === 'surgeryMethod' ? val : ''),
+          decision: item ? item.decision : (field === 'decision' ? val : 'Đồng ý'),
+          advancePayment: item ? item.advancePayment : (field === 'advancePayment' ? val : ''),
+          bloodMl: item ? item.bloodMl : (field === 'bloodMl' ? val : ''),
+          isConsulted: true
+        };
+        const res = await fetch('/api/briefing-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.ok) {
+          if (indicator) {
+            indicator.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> Đã tự động lưu';
+            setTimeout(() => { if (indicator) indicator.style.display = 'none'; }, 2500);
+          }
+        }
+      } catch (err) {
+        console.error('autoSaveTk4ConsultField error:', err);
+        if (indicator) {
+          indicator.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:#dc2626;"></i> Lỗi tự động lưu!';
+        }
       }
     }
 
@@ -5765,12 +5839,7 @@
             }
           });
 
-          // Thêm slide tổng hợp số ca đợi hội chẩn mổ của Thần kinh 4
-          presentationSlides.push({
-            type: 'TK4_CONSULT_SUMMARY',
-            consultations: (tk4Consultations || []).slice()
-          });
-
+          // Không báo Hội chẩn mổ TK4 trong slide giao ban theo yêu cầu
         } else if (rKey === 'tk2') {
           // TK2 là phòng hậu phẫu: báo tất cả Mổ chương trình (kể cả từ TK4/phòng khác), Mổ CC/mổ về, và Theo dõi
           const tk2OwnCases = rawCases.filter(c => {
@@ -5943,7 +6012,7 @@
                   <tr style="background: #f1f5f9; color: #0f172a; font-weight: 800; border-bottom: 2px solid #cbd5e1;">
                     <th style="padding: 10px 8px; width: 45px; text-align: center;">STT</th>
                     <th style="padding: 10px 8px; width: 85px; text-align: center;">Giường</th>
-                    <th style="padding: 10px 8px; width: 110px;">Mã BN</th>
+                    <th style="padding: 10px 8px; width: 110px;">Số vào viện</th>
                     <th style="padding: 10px 8px; width: 220px;">Họ và tên</th>
                     <th style="padding: 10px 8px; width: 70px; text-align: center;">Tuổi</th>
                     <th style="padding: 10px 8px;">Chẩn đoán duyệt mổ</th>
@@ -5960,13 +6029,15 @@
                         ? `<span style="background:#fef3c7;color:#92400e;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.92rem;border:1px solid #fde68a;white-space:nowrap;">Hội ý</span>`
                         : `<span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:6px;font-weight:800;font-size:0.92rem;border:1px solid #fca5a5;white-space:nowrap;">Không ĐY</span>`;
                     const rowBg = idx % 2 === 0 ? '#ffffff' : '#f8fafc';
+                    const svv = item.soVaoVien || item.maKcb || item.svv || item.mabn;
+                    const cleanTuoi = String(item.tuoi || '--').replace(/\s*tuổi/gi, '').trim();
                     return `
                       <tr style="background: ${rowBg}; border-bottom: 1px solid #e2e8f0; height: 38px;">
                         <td style="padding: 8px; text-align: center; font-weight: 700;">${idx + 1}</td>
                         <td style="padding: 8px; text-align: center; font-weight: 800; color: #b45309;"><span style="background:#fef3c7;padding:2px 8px;border-radius:4px;">${escapeHtml(item.bed || '--')}</span></td>
-                        <td style="padding: 8px; font-weight: 700; color: #0284c7;">${escapeHtml(item.mabn)}</td>
+                        <td style="padding: 8px; font-weight: 700; color: #0284c7;">${escapeHtml(svv)}</td>
                         <td style="padding: 8px; font-weight: 800; color: #0f172a; text-transform: uppercase;">${escapeHtml(item.hoten)}</td>
-                        <td style="padding: 8px; text-align: center;">${escapeHtml(String(item.tuoi || '--'))}</td>
+                        <td style="padding: 8px; text-align: center;">${escapeHtml(cleanTuoi)}</td>
                         <td style="padding: 8px; color: #0369a1; font-weight: 700;">${escapeHtml(item.postConsultDiagnosis || item.chanDoanHis || '--')}</td>
                         <td style="padding: 8px; color: #334155;">${escapeHtml(item.surgeryMethod || '--')}</td>
                         <td style="padding: 8px; text-align: center;">${decBadge}</td>
