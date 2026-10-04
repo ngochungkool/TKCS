@@ -1,5 +1,5 @@
 {
-  "version": 1791081718317,
+  "version": 1791082006215,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -272,6 +272,14 @@
   ],
   "uploadedHisFiles": [
     {
+      "fileName": "2.xlsx → [Vào khoa: 1 dòng]",
+      "categoryCode": "VAO_KHOA",
+      "savedPath": "/opt/render/project/src/uploads_his/vao_khoa.xlsx",
+      "sizeBytes": 9648,
+      "uploadedAt": "09:46:45 4/10/2026",
+      "extractedPreview": null
+    },
+    {
       "fileName": "1.xlsx → [Đang điều trị: 107 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
@@ -282,8 +290,8 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 107,
-      "benhVao": 0,
+      "dauCa": 106,
+      "benhVao": 1,
       "raVien": 0,
       "chuyenDen": 0,
       "chuyenDi": 0,
@@ -294,8 +302,8 @@
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 23,
-        "benhVao": 0,
+        "dauCa": 22,
+        "benhVao": 1,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
@@ -349,7 +357,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T02:41:58.316Z"
+    "updatedAt": "2026-10-04T02:46:46.115Z"
   },
   "wardRounds": {
     "tk1": {
@@ -1574,7 +1582,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:41:58.317Z"
+      "updatedAt": "2026-10-04T02:46:46.116Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -2850,7 +2858,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:41:58.317Z"
+      "updatedAt": "2026-10-04T02:46:46.116Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -3606,7 +3614,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:41:58.317Z"
+      "updatedAt": "2026-10-04T02:46:46.116Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -5558,7 +5566,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:41:58.317Z"
+      "updatedAt": "2026-10-04T02:46:46.117Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -6054,11 +6062,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T02:41:58.317Z"
+      "updatedAt": "2026-10-04T02:46:46.214Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "09:41 ngày 04/10/2026",
+  "lastExcelUploadTime": "09:46 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
