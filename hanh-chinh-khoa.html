@@ -847,7 +847,8 @@
           });
           const data = await res.json();
           if (data.ok) {
-            showToast(`📂 Đã tải file "${file.name}" lên thư mục uploads_his/ thành công!`);
+            const catLabel = data.detectedCat ? data.detectedCat.label : 'Dữ liệu HIS';
+            showToast(`📂 Đã nhận diện [${catLabel}] (${data.rowCount || 0} dòng) từ file "${file.name}"!`);
             if (data.db && data.db.uploadedHisFiles) {
               renderUploadedHisFiles(data.db.uploadedHisFiles);
             }

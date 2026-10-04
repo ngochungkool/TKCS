@@ -1428,6 +1428,10 @@
 
       <!-- Action Buttons -->
       <div class="gb-actions-group">
+        <label class="btn-gb-action btn-gb-excel" style="cursor:pointer;margin:0;display:inline-flex;align-items:center;gap:6px;" title="Tải lên và tự động nhận diện dữ liệu Excel HIS (Đang điều trị, Vào khoa, Ra viện, Chuyển khoa)">
+          <i class="fa-solid fa-file-import"></i> Cập nhật Dữ liệu Excel
+          <input type="file" id="gb-upload-excel-input" accept=".xlsx,.xls,.csv" multiple style="display:none;" />
+        </label>
         <button type="button" class="btn-gb-action btn-gb-excel" onclick="downloadDailyExcel()" title="Tải file Excel (.xlsx) báo cáo giao ban ngày gồm 2 sheet: Tổng hợp 8 chỉ số & Ca giao ban">
           <i class="fa-solid fa-file-excel"></i> Tải Excel Ngày (.xlsx)
         </button>
@@ -2023,6 +2027,55 @@
         alert('Lỗi kết nối server khi lấy dữ liệu HIS!');
       }
     }
+
+    // Cập nhật Dữ liệu Excel thông minh trên Báo cáo giao ban
+    document.addEventListener('DOMContentLoaded', () => {
+      const gbExcelInp = document.getElementById('gb-upload-excel-input');
+      if (gbExcelInp) {
+        gbExcelInp.addEventListener('change', async (e) => {
+          const files = Array.from(e.target.files || []);
+          if (files.length === 0) return;
+
+          let successCount = 0;
+          for (const file of files) {
+            try {
+              const arrayBuf = await file.arrayBuffer();
+              const uint8 = new Uint8Array(arrayBuf);
+              let binary = '';
+              for (let i = 0; i < uint8.byteLength; i++) {
+                binary += String.fromCharCode(uint8[i]);
+              }
+              const base64Data = btoa(binary);
+
+              const res = await fetch('/api/upload-his-excel', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fileName: file.name, base64Data })
+              });
+              const data = await res.json();
+              if (data.ok) {
+                successCount++;
+                const catLabel = data.detectedCat ? data.detectedCat.label : 'Dữ liệu HIS';
+                showToast(`📂 Đã nhận diện [${catLabel}] (${data.rowCount || 0} dòng) từ file "${file.name}"!`);
+              } else {
+                showToast(`❌ Lỗi tải file ${file.name}: ${data.error || 'Thao tác thất bại'}`);
+              }
+            } catch (err) {
+              console.error('Lỗi tải file:', err);
+              showToast(`❌ Không thể tải file ${file.name}`);
+            }
+          }
+
+          if (successCount > 0) {
+            if (successCount > 1) {
+              showToast(`🎉 Đã đồng bộ thành công ${successCount} file Excel từ HIS!`, 4000);
+            }
+            await fetchBriefingReport(currentDateKey);
+          }
+          e.target.value = '';
+        });
+      }
+    });
 
     // Save Active Report
     async function saveActiveReport() {

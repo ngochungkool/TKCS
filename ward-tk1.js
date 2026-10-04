@@ -3174,22 +3174,74 @@
       btnPngA4.addEventListener('click', () => generateTk1A4PngAndPreview());
     }
 
+    function showWardToast(msg, duration = 3500) {
+      let box = document.getElementById('toast-box');
+      if (!box) {
+        box = document.createElement('div');
+        box.className = 'toast-box';
+        box.id = 'toast-box';
+        document.body.appendChild(box);
+      }
+      const item = document.createElement('div');
+      item.className = 'toast-msg';
+      item.textContent = msg;
+      box.appendChild(item);
+      setTimeout(() => item.remove(), duration);
+    }
+
     const excelInp = document.getElementById('tk1-upload-excel-input');
     if (excelInp) {
       excelInp.addEventListener('change', async (e) => {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = async () => {
-          const base64Data = String(reader.result).split(',')[1];
-          await fetch('/api/upload-his-excel', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fileName: file.name, base64Data })
-          });
-          await fetchTk1InitialState();
-        };
-        reader.readAsDataURL(file);
+        const files = Array.from(e.target.files || []);
+        if (files.length === 0) return;
+
+        let successCount = 0;
+        let lastData = null;
+
+        for (const file of files) {
+          try {
+            const arrayBuf = await file.arrayBuffer();
+            const uint8 = new Uint8Array(arrayBuf);
+            let binary = '';
+            for (let i = 0; i < uint8.byteLength; i++) {
+              binary += String.fromCharCode(uint8[i]);
+            }
+            const base64Data = btoa(binary);
+
+            const res = await fetch('/api/upload-his-excel', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ fileName: file.name, base64Data })
+            });
+            const data = await res.json();
+            if (data.ok) {
+              successCount++;
+              lastData = data;
+              const catLabel = data.detectedCat ? data.detectedCat.label : 'Dữ liệu HIS';
+              showWardToast(`📂 Đã nhận diện [${catLabel}] (${data.rowCount || 0} dòng) từ file "${file.name}"!`);
+            } else {
+              showWardToast(`❌ Lỗi tải file ${file.name}: ${data.error || 'Thao tác thất bại'}`);
+            }
+          } catch (err) {
+            console.error('Lỗi tải file:', err);
+            showWardToast(`❌ Không thể tải file ${file.name}`);
+          }
+        }
+
+        if (successCount > 1) {
+          showWardToast(`🎉 Đã cập nhật thành công ${successCount} file Excel từ HIS!`, 4000);
+        }
+
+        if (lastData && lastData.lastExcelUploadTime) {
+          const timeEl = document.getElementById('tk1-excel-time-text');
+          if (timeEl) timeEl.textContent = lastData.lastExcelUploadTime;
+        }
+
+        await fetchTk1InitialState();
+        if (typeof renderWard5RoomsGrid === 'function') renderWard5RoomsGrid();
+        if (typeof renderAllRoomWorkspaces === 'function') renderAllRoomWorkspaces();
+
+        e.target.value = '';
       });
     }
 

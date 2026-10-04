@@ -1292,35 +1292,40 @@ const server = http.createServer(async (req, res) => {
   function detectHisExcelCategory(rows, fileName = '') {
     const firstRow = (rows && rows[0]) || {};
     const cols = Object.keys(firstRow);
-    const colSet = new Set(cols.map(c => c.trim()));
+    const colSet = new Set();
+    for (const c of cols) {
+      const trimmed = String(c || '').trim();
+      colSet.add(trimmed);
+      colSet.add(trimmed.toLowerCase());
+    }
     const lowerName = String(fileName || '').toLowerCase();
 
     // 1. Check by exact HIS Column Signatures first (works even if file is named Book1.xlsx or Export.xlsx)
-    if (colSet.has('sogiuong') || colSet.has('magiuong') || (colSet.has('Phòng') && colSet.has('Tổng chi phí'))) {
+    if (colSet.has('sogiuong') || colSet.has('magiuong')) {
       return { code: 'DANG_DIEU_TRI', label: 'Đang điều trị', canonicalFile: 'dang_dieu_tri.xlsx' };
     }
-    if (colSet.has('Ngày đăng ký') || (colSet.has('dangky') && colSet.has('Khoa chuyển đến'))) {
-      return { code: 'VAO_KHOA', label: 'Vào khoa', canonicalFile: 'vao_khoa.xlsx' };
+    if (colSet.has('ngày ra') || colSet.has('ngay ra') || colSet.has('songaydieutri') || colSet.has('manvrv')) {
+      return { code: 'RA_VIEN', label: 'Ra viện', canonicalFile: 'ra_vien.xlsx' };
     }
-    if (colSet.has('Ngày chuyển') || colSet.has('Chờ?')) {
+    if (colSet.has('ngày chuyển') || colSet.has('ngay chuyen') || colSet.has('chờ?')) {
       return { code: 'CHUYEN_KHOA', label: 'Chuyển khoa', canonicalFile: 'chuyen_khoa.xlsx' };
     }
-    if (colSet.has('Ngày ra') || colSet.has('songaydieutri') || colSet.has('manvrv')) {
-      return { code: 'RA_VIEN', label: 'Ra viện', canonicalFile: 'ra_vien.xlsx' };
+    if (colSet.has('ngày đăng ký') || colSet.has('ngay dang ky') || (colSet.has('dangky') && colSet.has('makkc'))) {
+      return { code: 'VAO_KHOA', label: 'Vào khoa', canonicalFile: 'vao_khoa.xlsx' };
     }
 
     // 2. Fallback by filename keywords
-    if (lowerName.includes('điều trị') || lowerName.includes('dieu tri')) {
+    if (lowerName.includes('điều trị') || lowerName.includes('dieu tri') || lowerName.includes('dang_dieu_tri')) {
       return { code: 'DANG_DIEU_TRI', label: 'Đang điều trị', canonicalFile: 'dang_dieu_tri.xlsx' };
     }
-    if (lowerName.includes('vào khoa') || lowerName.includes('vao khoa')) {
-      return { code: 'VAO_KHOA', label: 'Vào khoa', canonicalFile: 'vao_khoa.xlsx' };
+    if (lowerName.includes('ra viện') || lowerName.includes('ra vien') || lowerName.includes('ra_vien')) {
+      return { code: 'RA_VIEN', label: 'Ra viện', canonicalFile: 'ra_vien.xlsx' };
     }
-    if (lowerName.includes('chuyển') || lowerName.includes('chuyen')) {
+    if (lowerName.includes('chuyển') || lowerName.includes('chuyen') || lowerName.includes('chuyen_khoa')) {
       return { code: 'CHUYEN_KHOA', label: 'Chuyển khoa', canonicalFile: 'chuyen_khoa.xlsx' };
     }
-    if (lowerName.includes('ra viện') || lowerName.includes('ra vien')) {
-      return { code: 'RA_VIEN', label: 'Ra viện', canonicalFile: 'ra_vien.xlsx' };
+    if (lowerName.includes('vào khoa') || lowerName.includes('vao khoa') || lowerName.includes('vao_khoa')) {
+      return { code: 'VAO_KHOA', label: 'Vào khoa', canonicalFile: 'vao_khoa.xlsx' };
     }
 
     return { code: 'UNKNOWN', label: 'Chưa rõ loại', canonicalFile: null };
