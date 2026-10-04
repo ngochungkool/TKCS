@@ -1,5 +1,5 @@
 {
-  "version": 1791105778424,
+  "version": 1791105793826,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3122,7 +3122,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:22:58.423Z"
+      "updatedAt": "2026-10-04T09:23:13.825Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5444,7 +5444,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:22:58.423Z"
+      "updatedAt": "2026-10-04T09:23:13.825Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6659,7 +6659,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:22:58.423Z"
+      "updatedAt": "2026-10-04T09:23:13.825Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7393,7 +7393,7 @@
               "decision": "",
               "advancePayment": "",
               "bloodMl": "",
-              "updatedAt": "2026-10-04T09:22:58.424Z"
+              "updatedAt": "2026-10-04T09:23:13.826Z"
             }
           },
           "surgicalConsultation": {
@@ -7404,7 +7404,7 @@
             "decision": "",
             "advancePayment": "",
             "bloodMl": "",
-            "updatedAt": "2026-10-04T09:22:58.424Z"
+            "updatedAt": "2026-10-04T09:23:13.826Z"
           }
         },
         "0001423307": {
@@ -10459,7 +10459,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:22:58.423Z"
+      "updatedAt": "2026-10-04T09:23:13.825Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11363,7 +11363,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:22:58.423Z"
+      "updatedAt": "2026-10-04T09:23:13.826Z"
     }
   },
   "episodeConsultations": {},
