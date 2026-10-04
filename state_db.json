@@ -1,5 +1,5 @@
 {
-  "version": 1791086463012,
+  "version": 1791087048254,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -276,7 +276,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 53903,
-      "uploadedAt": "11:01:01 4/10/2026",
+      "uploadedAt": "11:10:47 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -284,7 +284,7 @@
       "categoryCode": "VAO_KHOA",
       "savedPath": "/opt/render/project/src/uploads_his/vao_khoa.xlsx",
       "sizeBytes": 9648,
-      "uploadedAt": "11:01:00 4/10/2026",
+      "uploadedAt": "11:10:46 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -292,7 +292,7 @@
       "categoryCode": "RA_VIEN",
       "savedPath": "/opt/render/project/src/uploads_his/ra_vien.xlsx",
       "sizeBytes": 10938,
-      "uploadedAt": "11:00:59 4/10/2026",
+      "uploadedAt": "11:10:45 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -373,7 +373,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T04:01:02.218Z"
+    "updatedAt": "2026-10-04T04:10:47.755Z"
   },
   "wardRounds": {
     "tk1": {
@@ -2822,7 +2822,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:01:02.219Z"
+      "updatedAt": "2026-10-04T04:10:47.756Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -4863,7 +4863,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:01:02.305Z"
+      "updatedAt": "2026-10-04T04:10:47.756Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6078,7 +6078,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:01:02.305Z"
+      "updatedAt": "2026-10-04T04:10:47.756Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -9509,7 +9509,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:01:02.305Z"
+      "updatedAt": "2026-10-04T04:10:47.757Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10413,11 +10413,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:01:02.305Z"
+      "updatedAt": "2026-10-04T04:10:47.757Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "11:01 ngày 04/10/2026",
+  "lastExcelUploadTime": "11:10 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -10683,8 +10683,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791086461913.7454,
-      "lastHisSyncTime": "2026-10-04T04:01:03.010Z"
+      "lastHisSyncTimeMs": 1791087047150.1267,
+      "lastHisSyncTime": "2026-10-04T04:10:48.251Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
