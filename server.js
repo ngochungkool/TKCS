@@ -921,8 +921,16 @@ const server = http.createServer(async (req, res) => {
     const actualEnd = typeof endMin === 'number' && endMin > actualStart ? endMin : null;
 
     const authUser = getAuthUser(req);
-    const finalStaffName = (staffName && String(staffName).trim()) || authUser?.fullName || null;
-    const finalStaffRole = (staffRole && String(staffRole).trim()) || authUser?.roleTitle || authUser?.role || 'Điều dưỡng';
+    const authUserName = authUser?.name || authUser?.fullName || null;
+    let authUserRole = authUser?.title || authUser?.position || authUser?.specialty || '';
+    if (!authUserRole) {
+      if (authUser?.role === 'admin') authUserRole = 'Quản trị viên';
+      else if (authUser?.role === 'doctor') authUserRole = 'Bác sĩ';
+      else if (authUser?.role === 'nurse') authUserRole = 'Điều dưỡng';
+      else authUserRole = 'Điều dưỡng';
+    }
+    const finalStaffName = (staffName && String(staffName).trim()) || authUserName || null;
+    const finalStaffRole = (staffRole && String(staffRole).trim()) || authUserRole || 'Điều dưỡng';
 
     const assignedNames = [];
 
@@ -1004,8 +1012,16 @@ const server = http.createServer(async (req, res) => {
     }
 
     const authUser = getAuthUser(req);
-    const finalStaffName = (staffName && String(staffName).trim()) || authUser?.fullName || null;
-    const finalStaffRole = (staffRole && String(staffRole).trim()) || authUser?.roleTitle || authUser?.role || 'Điều dưỡng';
+    const authUserName = authUser?.name || authUser?.fullName || null;
+    let authUserRole = authUser?.title || authUser?.position || authUser?.specialty || '';
+    if (!authUserRole) {
+      if (authUser?.role === 'admin') authUserRole = 'Quản trị viên';
+      else if (authUser?.role === 'doctor') authUserRole = 'Bác sĩ';
+      else if (authUser?.role === 'nurse') authUserRole = 'Điều dưỡng';
+      else authUserRole = 'Điều dưỡng';
+    }
+    const finalStaffName = (staffName && String(staffName).trim()) || authUserName || null;
+    const finalStaffRole = (staffRole && String(staffRole).trim()) || authUserRole || 'Điều dưỡng';
 
     active.endMin = Math.max(active.startMin + 1, nowMin);
     active.releasedEarly = true;

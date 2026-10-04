@@ -60,11 +60,28 @@ function formatDateVN(epochMin) {
 }
 
 function getCurrentStaffAuth() {
-  const authUser = (window.TKCSAuth && window.TKCSAuth.getUser && window.TKCSAuth.getUser()) ||
-                   JSON.parse(localStorage.getItem('auth_user') || 'null');
+  let authUser = null;
+  if (window.TKCSAuth && typeof window.TKCSAuth.getUser === 'function') {
+    authUser = window.TKCSAuth.getUser();
+  }
+  if (!authUser) {
+    try {
+      authUser = JSON.parse(localStorage.getItem('auth_user') || 'null');
+    } catch (e) {}
+  }
+
+  const staffName = (authUser?.name || authUser?.fullName || '').trim();
+  let staffRole = (authUser?.title || authUser?.position || authUser?.specialty || '').trim();
+  if (!staffRole) {
+    if (authUser?.role === 'admin') staffRole = 'Quản trị viên';
+    else if (authUser?.role === 'doctor') staffRole = 'Bác sĩ';
+    else if (authUser?.role === 'nurse') staffRole = 'Điều dưỡng';
+    else staffRole = 'Điều dưỡng';
+  }
+
   return {
-    staffName: authUser?.fullName || '',
-    staffRole: authUser?.roleTitle || authUser?.role || 'Điều dưỡng'
+    staffName,
+    staffRole
   };
 }
 
@@ -1134,17 +1151,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const chip = e.target.closest('button[data-duration-mins]');
     if (!chip) return;
 
+    const endInput = document.getElementById('receive-end-time');
+    const wasActive = chip.classList.contains('active');
+
     document.querySelectorAll('#receive-quick-duration-group .duration-chip').forEach((b) => {
-      b.classList.toggle('active', b === chip);
+      b.classList.remove('active');
     });
 
-    const mins = Number(chip.getAttribute('data-duration-mins'));
-    const endInput = document.getElementById('receive-end-time');
-    if (mins === 0) {
+    if (wasActive) {
       endInput.value = '';
       return;
     }
 
+    chip.classList.add('active');
+    const mins = Number(chip.getAttribute('data-duration-mins'));
     const nowMin = getNowEpochMinutes();
     const startStr = document.getElementById('receive-start-time').value;
     const startEpoch = timeStringToEpochMin(startStr, nowMin) ?? nowMin;
