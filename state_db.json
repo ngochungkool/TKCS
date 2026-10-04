@@ -1,5 +1,5 @@
 {
-  "version": 1791089834761,
+  "version": 1791089852957,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:57:14.760Z"
+      "updatedAt": "2026-10-04T04:57:32.956Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3126,7 +3126,7 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "Vạn Hội 1-Xã Vạn Đức--Tỉnh Gia Lai",
           "chanDoanHis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
-          "customDiagnosis": "Hậu phẫu ngày 9 phẫu thuật",
+          "customDiagnosis": "Hậu phẫu ngày 9 phẫu thuật TLIF L3-L5",
           "bsDieuTri": "Đặng Ngọc Trí",
           "ngayVaoStr": "25/09/2026",
           "hisBed": "H054",
@@ -3168,7 +3168,7 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
+            "surgeryName": "TLIF L3-L5",
             "surgeryDate": "2026-09-25"
           },
           "surgicalConsultationsByDate": {},
@@ -5306,7 +5306,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:57:14.761Z"
+      "updatedAt": "2026-10-04T04:57:32.956Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6521,7 +6521,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:57:14.761Z"
+      "updatedAt": "2026-10-04T04:57:32.956Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10454,7 +10454,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:57:14.761Z"
+      "updatedAt": "2026-10-04T04:57:32.956Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11358,7 +11358,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:57:14.761Z"
+      "updatedAt": "2026-10-04T04:57:32.957Z"
     }
   },
   "episodeConsultations": {},
