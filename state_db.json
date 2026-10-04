@@ -1,5 +1,5 @@
 {
-  "version": 1791123853499,
+  "version": 1791123998671,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3226,7 +3226,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:24:13.172Z"
+      "updatedAt": "2026-10-04T14:26:38.580Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5548,7 +5548,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:24:13.172Z"
+      "updatedAt": "2026-10-04T14:26:38.670Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6776,7 +6776,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:24:13.172Z"
+      "updatedAt": "2026-10-04T14:26:38.670Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7135,7 +7135,7 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "06/30 Trần Thị Kỷ-Phường Bình Định--Tỉnh Gia Lai",
           "chanDoanHis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
-          "customDiagnosis": "CT CSTL",
+          "customDiagnosis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
           "bsDieuTri": "Đặng Ngọc Trí",
           "ngayVaoStr": "26/09/2026",
           "hisBed": "H081",
@@ -7173,24 +7173,32 @@
           "surgicalConsultationsByDate": {
             "2026-10-05": {
               "isConsulted": true,
+              "isSurgical": true,
               "dateKey": "2026-10-05",
               "postConsultDiagnosis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
               "surgeryMethod": "",
               "decision": "Đồng ý",
               "advancePayment": "",
               "bloodMl": "",
-              "updatedAt": "2026-10-04T09:57:48.163Z"
+              "treatmentPlan": "",
+              "roomKey": "tk4",
+              "roomName": "Thần kinh 4",
+              "updatedAt": "2026-10-04T14:26:38.671Z"
             }
           },
           "surgicalConsultation": {
             "isConsulted": true,
+            "isSurgical": true,
             "dateKey": "2026-10-05",
             "postConsultDiagnosis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
             "surgeryMethod": "",
             "decision": "Đồng ý",
             "advancePayment": "",
             "bloodMl": "",
-            "updatedAt": "2026-10-04T09:57:48.163Z"
+            "treatmentPlan": "",
+            "roomKey": "tk4",
+            "roomName": "Thần kinh 4",
+            "updatedAt": "2026-10-04T14:26:38.671Z"
           }
         },
         "0001422398": {
@@ -10637,7 +10645,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:24:13.172Z"
+      "updatedAt": "2026-10-04T14:26:38.670Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11549,7 +11557,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:24:13.173Z"
+      "updatedAt": "2026-10-04T14:26:38.671Z"
     }
   },
   "episodeConsultations": {},
