@@ -1,5 +1,5 @@
 {
-  "version": 1791088891761,
+  "version": 1791088904562,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -489,6 +489,14 @@
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-10-04": {
+              "xetNghiem": [
+                "Điện giải đồ"
+              ],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
               "note": "ĐGĐ"
             }
           },
@@ -2932,7 +2940,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:41:31.760Z"
+      "updatedAt": "2026-10-04T04:41:44.561Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -4973,7 +4981,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:41:31.760Z"
+      "updatedAt": "2026-10-04T04:41:44.562Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6188,7 +6196,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:41:31.761Z"
+      "updatedAt": "2026-10-04T04:41:44.562Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10121,7 +10129,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:41:31.761Z"
+      "updatedAt": "2026-10-04T04:41:44.562Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11025,7 +11033,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:41:31.761Z"
+      "updatedAt": "2026-10-04T04:41:44.562Z"
     }
   },
   "episodeConsultations": {},
