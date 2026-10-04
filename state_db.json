@@ -1,5 +1,5 @@
 {
-  "version": 1791089782363,
+  "version": 1791089807364,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:56:22.362Z"
+      "updatedAt": "2026-10-04T04:56:47.363Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3351,12 +3351,22 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "Suối Cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
           "chanDoanHis": "D43.0-U tân sinh không tiên lượng được tiến triển và tính chất ở não, trên lều não",
-          "customDiagnosis": "D43.0-U tân sinh không tiên lượng được tiến triển và tính chất ở não, trên lều não",
+          "customDiagnosis": "Hậu phẫu ngày 6 phẫu thuật U não",
           "bsDieuTri": "Đặng Ngọc Trí",
           "ngayVaoStr": "28/09/2026",
           "hisBed": "H053",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3379,8 +3389,8 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
-            "surgeryDate": ""
+            "surgeryName": "U não",
+            "surgeryDate": "2026-09-28"
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
@@ -5281,7 +5291,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:56:22.363Z"
+      "updatedAt": "2026-10-04T04:56:47.364Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6496,7 +6506,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:56:22.363Z"
+      "updatedAt": "2026-10-04T04:56:47.364Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10429,7 +10439,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:56:22.363Z"
+      "updatedAt": "2026-10-04T04:56:47.364Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11333,7 +11343,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:56:22.363Z"
+      "updatedAt": "2026-10-04T04:56:47.364Z"
     }
   },
   "episodeConsultations": {},
