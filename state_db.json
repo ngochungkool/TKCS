@@ -1,5 +1,5 @@
 {
-  "version": 1791090445463,
+  "version": 1791090493756,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -276,7 +276,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 54646,
-      "uploadedAt": "12:07:24 4/10/2026",
+      "uploadedAt": "12:08:12 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -373,7 +373,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T05:07:24.966Z"
+    "updatedAt": "2026-10-04T05:08:13.067Z"
   },
   "wardRounds": {
     "tk1": {
@@ -3069,7 +3069,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:07:24.966Z"
+      "updatedAt": "2026-10-04T05:08:13.068Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5391,7 +5391,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:07:24.966Z"
+      "updatedAt": "2026-10-04T05:08:13.153Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6606,7 +6606,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:07:24.966Z"
+      "updatedAt": "2026-10-04T05:08:13.153Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10591,7 +10591,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:07:24.966Z"
+      "updatedAt": "2026-10-04T05:08:13.154Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11495,11 +11495,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:07:24.966Z"
+      "updatedAt": "2026-10-04T05:08:13.154Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "12:07 ngày 04/10/2026",
+  "lastExcelUploadTime": "12:08 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -11576,7 +11576,8 @@
               "diaChi": "kv09-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [
@@ -11733,7 +11734,8 @@
               "diaChi": "Thôn Tân Thanh-Xã Cát Tiến--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -11796,8 +11798,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791090444165.1045,
-      "lastHisSyncTime": "2026-10-04T05:07:25.461Z"
+      "lastHisSyncTimeMs": 1791090492258.2402,
+      "lastHisSyncTime": "2026-10-04T05:08:13.667Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
