@@ -1,5 +1,5 @@
 {
-  "version": 1791090333556,
+  "version": 1791090445463,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -272,11 +272,11 @@
   ],
   "uploadedHisFiles": [
     {
-      "fileName": "1.xlsx → [Đang điều trị: 107 dòng]",
+      "fileName": "1.xlsx → [Đang điều trị: 109 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
-      "sizeBytes": 53920,
-      "uploadedAt": "12:05:32 4/10/2026",
+      "sizeBytes": 54646,
+      "uploadedAt": "12:07:24 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -306,27 +306,27 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 107,
-      "benhVao": 3,
+      "dauCa": 108,
+      "benhVao": 4,
       "raVien": 3,
       "chuyenDen": 0,
       "chuyenDi": 0,
       "tuVong": 0,
       "benhMo": 0,
-      "hienCo": 107,
-      "baoHiem": 99
+      "hienCo": 109,
+      "baoHiem": 101
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 22,
+        "dauCa": 23,
         "benhVao": 3,
         "raVien": 2,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 23,
-        "baoHiem": 20
+        "hienCo": 24,
+        "baoHiem": 21
       },
       "Thần kinh 2": {
         "dauCa": 24,
@@ -352,14 +352,14 @@
       },
       "Thần kinh 4": {
         "dauCa": 38,
-        "benhVao": 0,
+        "benhVao": 1,
         "raVien": 1,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 37,
-        "baoHiem": 36
+        "hienCo": 38,
+        "baoHiem": 37
       },
       "Hồi sức thần kinh": {
         "dauCa": 9,
@@ -373,7 +373,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T05:05:32.663Z"
+    "updatedAt": "2026-10-04T05:07:24.966Z"
   },
   "wardRounds": {
     "tk1": {
@@ -2974,6 +2974,57 @@
             "removedAtMs": 1791088507586
           },
           "giuong": "6"
+        },
+        "0001103734": {
+          "mabn": "0001103734",
+          "episodeKey": "2600377522",
+          "maKcb": "2600377522",
+          "madieutri": "951538",
+          "soBA": "26077914",
+          "hoten": "NGUYỄN THỊ THANH HUYỀN",
+          "tuoi": "48 tuổi",
+          "namSinh": "1978",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525221794952",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/04/2026",
+          "hanTheDen": "31/03/2027",
+          "diaChi": "kv09-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Phạm Thái Hoàng Luân",
+          "ngayVaoStr": "04/10/2026",
+          "hisBed": "H015",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
+          },
+          "surgicalConsultationsByDate": {},
+          "surgicalConsultation": null
         }
       },
       "archivedRecords": {},
@@ -3000,7 +3051,8 @@
         "0001425070",
         "0001425068",
         "0001425123",
-        "0001425126"
+        "0001425126",
+        "0001103734"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -3017,7 +3069,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:05:32.663Z"
+      "updatedAt": "2026-10-04T05:07:24.966Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5339,7 +5391,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:05:32.663Z"
+      "updatedAt": "2026-10-04T05:07:24.966Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6554,7 +6606,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:05:32.663Z"
+      "updatedAt": "2026-10-04T05:07:24.966Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10430,6 +10482,57 @@
           },
           "giuong": "24",
           "customDiagnosis": "HP BÓC U NÃO"
+        },
+        "0001302334": {
+          "mabn": "0001302334",
+          "episodeKey": "2600377487",
+          "maKcb": "2600377487",
+          "madieutri": "951548",
+          "soBA": "26077902",
+          "hoten": "TRẦN VĂN TÌNH",
+          "tuoi": "53 tuổi",
+          "namSinh": "1973",
+          "gioiTinh": "Nam",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525220997216",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "01/07/2026",
+          "hanTheDen": "30/06/2027",
+          "diaChi": "Thôn Tân Thanh-Xã Cát Tiến--Tỉnh Gia Lai",
+          "chanDoanHis": "M54.10-Bệnh lý rễ thần kinh, nhiều vị trí của cột sống",
+          "customDiagnosis": "M54.10-Bệnh lý rễ thần kinh, nhiều vị trí của cột sống",
+          "bsDieuTri": "Phạm Thái Hoàng Luân",
+          "ngayVaoStr": "04/10/2026",
+          "hisBed": "H083",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
+          },
+          "surgicalConsultationsByDate": {},
+          "surgicalConsultation": null
         }
       },
       "archivedRecords": {},
@@ -10470,7 +10573,8 @@
         "0001424939",
         "0001424955",
         "0001424966",
-        "0001425000"
+        "0001425000",
+        "0001302334"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -10487,7 +10591,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:05:32.663Z"
+      "updatedAt": "2026-10-04T05:07:24.966Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11391,11 +11495,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T05:05:32.663Z"
+      "updatedAt": "2026-10-04T05:07:24.966Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "12:05 ngày 04/10/2026",
+  "lastExcelUploadTime": "12:07 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -11419,20 +11523,20 @@
           },
           "census": {
             "benhCu": 24,
-            "vaoKK": 2,
+            "vaoKK": 3,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 3,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 23,
-            "bhyt": 20
+            "hienCo": 24,
+            "bhyt": 21
           },
           "admissions": [
             {
-              "id": "adm-tk1-2",
-              "stt": 2,
+              "id": "adm-tk1-1",
+              "stt": 1,
               "mabn": "0001425123",
               "hoten": "TRẦN THANH VINH",
               "tuoi": "55",
@@ -11446,8 +11550,8 @@
               "notesBs": ""
             },
             {
-              "id": "adm-tk1-3",
-              "stt": 3,
+              "id": "adm-tk1-2",
+              "stt": 2,
               "mabn": "0001425126",
               "hoten": "PHAN NGUYỄN NHẬT KHÔI",
               "tuoi": "21",
@@ -11459,6 +11563,20 @@
               "isHighlight": false,
               "category": "",
               "notesBs": ""
+            },
+            {
+              "id": "adm-tk1-3",
+              "stt": 3,
+              "mabn": "0001103734",
+              "hoten": "NGUYỄN THỊ THANH HUYỀN",
+              "tuoi": "48",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "kv09-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
             }
           ],
           "discharges": [
@@ -11592,17 +11710,32 @@
           },
           "census": {
             "benhCu": 37,
-            "vaoKK": 0,
+            "vaoKK": 1,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 37,
-            "bhyt": 36
+            "hienCo": 38,
+            "bhyt": 37
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-tk4-1",
+              "stt": 1,
+              "mabn": "0001302334",
+              "hoten": "TRẦN VĂN TÌNH",
+              "tuoi": "53",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "Chấn thương sọ não",
+              "diaChi": "Thôn Tân Thanh-Xã Cát Tiến--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -11650,21 +11783,21 @@
         ],
         "grandCensus": {
           "benhCu": 108,
-          "vaoKK": 2,
+          "vaoKK": 4,
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
           "raRH": 3,
           "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 107,
-          "bhyt": 99
+          "hienCo": 109,
+          "bhyt": 101
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791090332054.4568,
-      "lastHisSyncTime": "2026-10-04T05:05:33.553Z"
+      "lastHisSyncTimeMs": 1791090444165.1045,
+      "lastHisSyncTime": "2026-10-04T05:07:25.461Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
