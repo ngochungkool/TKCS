@@ -1,5 +1,5 @@
 {
-  "version": 1791087198946,
+  "version": 1791089279333,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -380,7 +380,31 @@
       "roomKey": "tk1",
       "roomName": "Thần kinh 1",
       "initializedSeed": true,
-      "bedAssignments": {},
+      "bedAssignments": {
+        "1": "0001421945",
+        "2": "0001424848",
+        "4": "0001425126",
+        "5": "0001422158",
+        "6": "TK1-NEW-06",
+        "7": "0001245654",
+        "8": "0000037245",
+        "9": "0001422706",
+        "10": "0001425068",
+        "11": "0001425070",
+        "12": "0001421962",
+        "13": "0001424870",
+        "14": "0001423930",
+        "15": "0001420337",
+        "16": "0001032592",
+        "17": "0001424929",
+        "18": "0001424352",
+        "19": "0001423331",
+        "20": "0001424868",
+        "21": "0001421561",
+        "22": "0001423919",
+        "23": "0001425123",
+        "24": "0001421064"
+      },
       "hiddenFoldingBeds": {},
       "patientRecords": {
         "0001420337": {
@@ -405,7 +429,14 @@
           "ngayVaoStr": "22/09/2026",
           "hisBed": "H030",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "13D, BS cắt chỉ",
+              "thuThuat": [
+                "Cắt chỉ"
+              ]
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -432,7 +463,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "15"
         },
         "0001421064": {
           "mabn": "0001421064",
@@ -456,7 +488,11 @@
           "ngayVaoStr": "23/09/2026",
           "hisBed": "H032",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "ĐGĐ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -483,7 +519,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "24"
         },
         "0001421561": {
           "mabn": "0001421561",
@@ -507,7 +544,9 @@
           "ngayVaoStr": "24/09/2026",
           "hisBed": "H031",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -534,7 +573,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "21"
         },
         "0001421945": {
           "mabn": "0001421945",
@@ -558,7 +598,11 @@
           "ngayVaoStr": "25/09/2026",
           "hisBed": "H033",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "bs Văn sọ não 1, Esogos 4H022"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -585,7 +629,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "1"
         },
         "0001421962": {
           "mabn": "0001421962",
@@ -609,7 +654,9 @@
           "ngayVaoStr": "25/09/2026",
           "hisBed": "H025",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -636,7 +683,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "12"
         },
         "0001422158": {
           "mabn": "0001422158",
@@ -660,7 +708,9 @@
           "ngayVaoStr": "27/09/2026",
           "hisBed": "H105",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -687,7 +737,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "5"
         },
         "0001032592": {
           "mabn": "0001032592",
@@ -711,7 +762,11 @@
           "ngayVaoStr": "27/09/2026",
           "hisBed": "H014",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "ĐGĐ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -738,7 +793,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "16"
         },
         "0001422706": {
           "mabn": "0001422706",
@@ -762,7 +818,9 @@
           "ngayVaoStr": "28/09/2026",
           "hisBed": "H104",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -789,7 +847,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "9"
         },
         "0001423331": {
           "mabn": "0001423331",
@@ -813,7 +872,11 @@
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H019",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "ĐGĐ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -840,7 +903,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "19"
         },
         "0000037245": {
           "mabn": "0000037245",
@@ -864,7 +928,9 @@
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H017",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -891,7 +957,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "8"
         },
         "0001423919": {
           "mabn": "0001423919",
@@ -915,7 +982,11 @@
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H029",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "ổn chuyển ngoại ct"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -942,7 +1013,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "22"
         },
         "0001423930": {
           "mabn": "0001423930",
@@ -966,7 +1038,11 @@
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H026",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "Ngoại ct k xử lý gì"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -993,7 +1069,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "14"
         },
         "0001245654": {
           "mabn": "0001245654",
@@ -1017,7 +1094,9 @@
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H016",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1044,7 +1123,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "7"
         },
         "0001424352": {
           "mabn": "0001424352",
@@ -1068,7 +1148,11 @@
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H021",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "ổn chuyển ngoại ct"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1095,7 +1179,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "18"
         },
         "0001424848": {
           "mabn": "0001424848",
@@ -1119,7 +1204,11 @@
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H024",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "ổn chuyển ngoại ct, CT sọ + TTGB"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1146,7 +1235,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "2"
         },
         "0001424868": {
           "mabn": "0001424868",
@@ -1170,7 +1260,9 @@
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H027",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1197,7 +1289,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "20"
         },
         "0001424870": {
           "mabn": "0001424870",
@@ -1221,7 +1314,11 @@
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H013",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "ĐGĐ (Đổi giường đến)"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1248,7 +1345,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "13"
         },
         "0001424881": {
           "mabn": "0001424881",
@@ -1323,7 +1421,9 @@
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H023",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1350,7 +1450,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "17"
         },
         "0001425070": {
           "mabn": "0001425070",
@@ -1374,7 +1475,9 @@
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H022",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1401,7 +1504,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "11"
         },
         "0001425068": {
           "mabn": "0001425068",
@@ -1425,7 +1529,9 @@
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H020",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1452,7 +1558,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "10"
         },
         "0001425123": {
           "mabn": "0001425123",
@@ -1476,7 +1583,11 @@
           "ngayVaoStr": "04/10/2026",
           "hisBed": "H028",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "XV (Xin về / Ra viện)"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1485,11 +1596,11 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "NONE",
+            "status": "SCHEDULED",
             "markedDate": "",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": ""
+            "note": "XV (Xin về / Ra viện)"
           },
           "removed": {
             "isRemoved": false,
@@ -1503,7 +1614,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "23"
         },
         "0001425126": {
           "mabn": "0001425126",
@@ -1527,7 +1639,9 @@
           "ngayVaoStr": "04/10/2026",
           "hisBed": "H034",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -1554,7 +1668,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "4"
         },
         "0001418457": {
           "mabn": "0001418457",
@@ -2779,6 +2894,21 @@
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
+        },
+        "TK1-NEW-06": {
+          "mabn": "TK1-NEW-06",
+          "hoten": "NGUYỄN THỊ THANH HUYỀN",
+          "tuoi": "40 tuổi",
+          "gioiTinh": "Nữ",
+          "chanDoanHis": "Chấn thương sọ não",
+          "ngayVaoStr": "04/10/2026",
+          "tasksByDate": {
+            "2026-10-04": {}
+          },
+          "removed": {
+            "isRemoved": false
+          },
+          "giuong": "6"
         }
       },
       "archivedRecords": {},
@@ -6084,7 +6214,46 @@
       "roomKey": "tk4",
       "roomName": "Thần kinh 4",
       "initializedSeed": true,
-      "bedAssignments": {},
+      "bedAssignments": {
+        "1": "0001422079",
+        "2": "0001423036",
+        "3": "0001383953",
+        "4": "0001422464",
+        "5": "0001423062",
+        "6": "0001418775",
+        "7": "0001424276",
+        "8": "0001424410",
+        "9": "0001422572",
+        "10": "0001423904",
+        "11": "0001422488",
+        "12": "0001422398",
+        "13": "0001424446",
+        "14": "0001415940",
+        "15": "0001424436",
+        "16": "0001008234",
+        "17": "0001424144",
+        "18": "0000995488",
+        "19": "0001424955",
+        "20": "0001411127",
+        "21": "0001418784",
+        "22": "0001423932",
+        "23": "0001424346",
+        "24": "TK4-NEW-B8",
+        "25": "0001419899",
+        "26": "0001068291",
+        "27": "0001355818",
+        "28": "0000811741",
+        "29": "0001423830",
+        "30": "0001421285",
+        "31": "0001200590",
+        "2X": "0001424966",
+        "4X": "0001424521",
+        "5X": "0001425000",
+        "15X": "0001424939",
+        "20X": "0001424820",
+        "29X": "0001423307",
+        "30X": "0001423344"
+      },
       "hiddenFoldingBeds": {},
       "patientRecords": {
         "0001415940": {
@@ -6104,12 +6273,16 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "thanh liêm-Phường An Nhơn Đông--Tỉnh Gia Lai",
           "chanDoanHis": "I61.1-Xuất huyết não tại bán cầu, vùng vỏ",
-          "customDiagnosis": "I61.1-Xuất huyết não tại bán cầu, vùng vỏ",
+          "customDiagnosis": "XHN",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "18/09/2026",
           "hisBed": "H103",
           "khoaChuyenDen": "Khoa Thần kinh - Đột quỵ",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: XHN"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6136,7 +6309,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "14"
         },
         "0001418784": {
           "mabn": "0001418784",
@@ -6155,12 +6329,16 @@
           "hanTheDen": "01/07/2027",
           "diaChi": "An Dinh 2-Phường Hoài Nhơn--Tỉnh Gia Lai",
           "chanDoanHis": "S06.80-Tổn thương nội sọ khác, không có vết thương nội sọ hở",
-          "customDiagnosis": "S06.80-Tổn thương nội sọ khác, không có vết thương nội sọ hở",
+          "customDiagnosis": "CTSN",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "18/09/2026",
           "hisBed": "H097",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CTSN • Chỉ định mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6186,8 +6364,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "CTSN",
+              "surgeryMethod": "Phẫu thuật CTSN",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "CTSN",
+              "surgeryMethod": "Phẫu thuật CTSN",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "CTSN",
+            "surgeryMethod": "Phẫu thuật CTSN",
+            "decision": "Đồng ý",
+            "advancePayment": "10 triệu",
+            "updatedAt": "2026-10-04T04:31:19.333Z"
+          },
+          "giuong": "21"
         },
         "0001411127": {
           "mabn": "0001411127",
@@ -6206,12 +6412,16 @@
           "hanTheDen": "05/11/2026",
           "diaChi": "Kim Giao Thiện-Phường Hoài Nhơn Đông--Tỉnh Gia Lai",
           "chanDoanHis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
-          "customDiagnosis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
+          "customDiagnosis": "BÍ TIỂU/ HP TLIF",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "23/09/2026",
           "hisBed": "H107",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: BÍ TIỂU/ HP TLIF"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6238,7 +6448,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "20"
         },
         "0001421285": {
           "mabn": "0001421285",
@@ -6257,12 +6468,16 @@
           "hanTheDen": "31/12/2028",
           "diaChi": "Thành Sơn Tây-Phường Tam Quan--Tỉnh Gia Lai",
           "chanDoanHis": "L02.3-Áp xe da, nhọt và/hoặc cụm nhọt ở mông",
-          "customDiagnosis": "L02.3-Áp xe da, nhọt và/hoặc cụm nhọt ở mông",
+          "customDiagnosis": "APXE",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "24/09/2026",
           "hisBed": "H085",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: APXE"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6289,7 +6504,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "30"
         },
         "0001418775": {
           "mabn": "0001418775",
@@ -6308,12 +6524,16 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "Hà Giao-Xã Vân Canh--Tỉnh Gia Lai",
           "chanDoanHis": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
-          "customDiagnosis": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
+          "customDiagnosis": "HP SINH THIẾT",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "24/09/2026",
           "hisBed": "H079",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: HP SINH THIẾT • Mổ 23/9"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6340,7 +6560,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "6"
         },
         "0001422079": {
           "mabn": "0001422079",
@@ -6359,12 +6580,16 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "06/30 Trần Thị Kỷ-Phường Bình Định--Tỉnh Gia Lai",
           "chanDoanHis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
-          "customDiagnosis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
+          "customDiagnosis": "CT CSTL",
           "bsDieuTri": "Đặng Ngọc Trí",
           "ngayVaoStr": "26/09/2026",
           "hisBed": "H081",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CT CSTL • Chỉ định mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6390,8 +6615,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "CT CSTL",
+              "surgeryMethod": "Phẫu thuật CT CSTL",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-04T04:31:19.329Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "CT CSTL",
+              "surgeryMethod": "Phẫu thuật CT CSTL",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-04T04:31:19.329Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "CT CSTL",
+            "surgeryMethod": "Phẫu thuật CT CSTL",
+            "decision": "Đồng ý",
+            "advancePayment": "10 triệu",
+            "updatedAt": "2026-10-04T04:31:19.329Z"
+          },
+          "giuong": "1"
         },
         "0001422398": {
           "mabn": "0001422398",
@@ -6410,12 +6663,16 @@
           "hanTheDen": "31/12/2028",
           "diaChi": "Tấn Thạnh 2-Phường Hoài Nhơn Tây--Tỉnh Gia Lai",
           "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
-          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "28/09/2026",
           "hisBed": "H076",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Điều trị nội khoa"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6442,7 +6699,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "12"
         },
         "0001422488": {
           "mabn": "0001422488",
@@ -6461,12 +6719,16 @@
           "hanTheDen": "10/06/2027",
           "diaChi": "Phường An Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
-          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "28/09/2026",
           "hisBed": "H080",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Hội chẩn"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6492,8 +6754,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "ĐAU LƯNG",
+            "surgeryMethod": "",
+            "decision": "Hội ý",
+            "advancePayment": "",
+            "updatedAt": "2026-10-04T04:31:19.332Z"
+          },
+          "giuong": "11"
         },
         "0001200590": {
           "mabn": "0001200590",
@@ -6512,12 +6802,16 @@
           "hanTheDen": "12/01/2027",
           "diaChi": "Đệ Đức 3-Phường Hoài Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
-          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H096",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Không đồng ý mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6543,8 +6837,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Không đồng ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Không đồng ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "ĐAU LƯNG",
+            "surgeryMethod": "",
+            "decision": "Không đồng ý",
+            "advancePayment": "",
+            "updatedAt": "2026-10-04T04:31:19.333Z"
+          },
+          "giuong": "31"
         },
         "0001423036": {
           "mabn": "0001423036",
@@ -6563,12 +6885,16 @@
           "hanTheDen": "31/12/2029",
           "diaChi": "Xã Bình Khê--Tỉnh Gia Lai",
           "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
-          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H082",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Hội chẩn"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6594,8 +6920,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "ĐAU LƯNG",
+            "surgeryMethod": "",
+            "decision": "Hội ý",
+            "advancePayment": "",
+            "updatedAt": "2026-10-04T04:31:19.332Z"
+          },
+          "giuong": "2"
         },
         "0001423062": {
           "mabn": "0001423062",
@@ -6614,12 +6968,16 @@
           "hanTheDen": "31/12/2028",
           "diaChi": "Tổ Ninh Thạnh Bắc, Khu Phố Tấn Thạnh 2-Phường Hoài Nhơn Tây--Tỉnh Gia Lai",
           "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
-          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H084",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Điều trị nội khoa"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6646,7 +7004,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "5"
         },
         "0001423344": {
           "mabn": "0001423344",
@@ -6665,12 +7024,16 @@
           "hanTheDen": "08/03/2027",
           "diaChi": "Phường Quy Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M50.1-Rối loạn đĩa đệm cột sống cổ có bệnh lý rễ thần kinh",
-          "customDiagnosis": "M50.1-Rối loạn đĩa đệm cột sống cổ có bệnh lý rễ thần kinh",
+          "customDiagnosis": "ĐAU CỔ",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H080",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU CỔ • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6697,7 +7060,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "30X"
         },
         "0001423307": {
           "mabn": "0001423307",
@@ -6716,12 +7080,16 @@
           "hanTheDen": "09/03/2027",
           "diaChi": "Xã Phù Mỹ Đông--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
-          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "ĐAU ĐẦU",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H076",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU ĐẦU • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6748,7 +7116,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "29X"
         },
         "0001422572": {
           "mabn": "0001422572",
@@ -6767,12 +7136,16 @@
           "hanTheDen": "31/03/2027",
           "diaChi": "chánh nhơn-Xã Xuân An--Tỉnh Gia Lai",
           "chanDoanHis": "R50.9-Sốt, không xác định",
-          "customDiagnosis": "R50.9-Sốt, không xác định",
+          "customDiagnosis": "ĐAU ĐẦU",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H095",
           "khoaChuyenDen": "Khoa Lão khoa",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU ĐẦU"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6799,7 +7172,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "9"
         },
         "0001423830": {
           "mabn": "0001423830",
@@ -6818,12 +7192,16 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "thế thạnh 1-Xã Vạn Đức--Tỉnh Gia Lai",
           "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
-          "customDiagnosis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H087",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6850,7 +7228,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "29"
         },
         "0001423904": {
           "mabn": "0001423904",
@@ -6869,12 +7248,16 @@
           "hanTheDen": "11/12/2026",
           "diaChi": "Phụ Đức-Phường Bồng Sơn--Tỉnh Gia Lai",
           "chanDoanHis": "M47.99-Thoái hóa đốt sống, không xác định, vị trí không xác định",
-          "customDiagnosis": "M47.99-Thoái hóa đốt sống, không xác định, vị trí không xác định",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H083",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6901,7 +7284,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "10"
         },
         "0001423932": {
           "mabn": "0001423932",
@@ -6920,12 +7304,16 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "Hiệp Vinh 1-Xã Canh Vinh--Tỉnh Gia Lai",
           "chanDoanHis": "I64-Đột quỵ, không xác định do xuất huyết hoặc nhồi máu",
-          "customDiagnosis": "I64-Đột quỵ, không xác định do xuất huyết hoặc nhồi máu",
+          "customDiagnosis": "U NÃO",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
           "ngayVaoStr": "30/09/2026",
           "hisBed": "H108",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: U NÃO • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -6952,7 +7340,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "22"
         },
         "0001419899": {
           "mabn": "0001419899",
@@ -6971,12 +7360,16 @@
           "hanTheDen": "31/01/2028",
           "diaChi": "Trung Lý, Nhơn Phong, An Nhơn, Bình Định-Phường An Nhơn Bắc--Tỉnh Gia Lai",
           "chanDoanHis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
-          "customDiagnosis": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H098",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Chỉ định mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7002,8 +7395,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "Phẫu thuật CSTL",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "Phẫu thuật CSTL",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "ĐAU LƯNG",
+            "surgeryMethod": "Phẫu thuật CSTL",
+            "decision": "Đồng ý",
+            "advancePayment": "10 triệu",
+            "updatedAt": "2026-10-04T04:31:19.333Z"
+          },
+          "giuong": "25"
         },
         "0001424144": {
           "mabn": "0001424144",
@@ -7022,12 +7443,16 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "an cửu-Xã An Nhơn Tây--Tỉnh Gia Lai",
           "chanDoanHis": "M48.30-Bệnh lý đốt sống do chấn thương, nhiều vị trí của cột sống",
-          "customDiagnosis": "M48.30-Bệnh lý đốt sống do chấn thương, nhiều vị trí của cột sống",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H099",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7054,7 +7479,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "17"
         },
         "0001424276": {
           "mabn": "0001424276",
@@ -7073,12 +7499,16 @@
           "hanTheDen": "26/06/2027",
           "diaChi": "vĩnh lộc-Xã Bình An--Tỉnh Gia Lai",
           "chanDoanHis": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
-          "customDiagnosis": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
+          "customDiagnosis": "CT CSTL",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H101",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CT CSTL • Chỉ định mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7104,8 +7534,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "CT CSTL",
+              "surgeryMethod": "Phẫu thuật CT CSTL",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "CT CSTL",
+              "surgeryMethod": "Phẫu thuật CT CSTL",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "CT CSTL",
+            "surgeryMethod": "Phẫu thuật CT CSTL",
+            "decision": "Đồng ý",
+            "advancePayment": "10 triệu",
+            "updatedAt": "2026-10-04T04:31:19.332Z"
+          },
+          "giuong": "7"
         },
         "0001424346": {
           "mabn": "0001424346",
@@ -7124,12 +7582,16 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "tùng chánh -Xã Hòa Hội--Tỉnh Gia Lai",
           "chanDoanHis": "T75.4-Tác động của dòng điện",
-          "customDiagnosis": "T75.4-Tác động của dòng điện",
+          "customDiagnosis": "CT CSTL",
           "bsDieuTri": "Ngô Văn Ri",
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H077",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CT CSTL • Hội chẩn"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7155,8 +7617,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "CT CSTL",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "CT CSTL",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "CT CSTL",
+            "surgeryMethod": "",
+            "decision": "Hội ý",
+            "advancePayment": "",
+            "updatedAt": "2026-10-04T04:31:19.333Z"
+          },
+          "giuong": "23"
         },
         "0001068291": {
           "mabn": "0001068291",
@@ -7175,12 +7665,16 @@
           "hanTheDen": "05/08/2027",
           "diaChi": "Chánh Oai-Xã Cát Tiến--Tỉnh Gia Lai",
           "chanDoanHis": "M51.3-Thoái hóa đĩa đệm cột sống xác định khác",
-          "customDiagnosis": "M51.3-Thoái hóa đĩa đệm cột sống xác định khác",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Ngô Văn Ri",
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H086",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7207,7 +7701,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "26"
         },
         "0001424410": {
           "mabn": "0001424410",
@@ -7226,12 +7721,16 @@
           "hanTheDen": "",
           "diaChi": "Xã Bình Dương--Tỉnh Gia Lai",
           "chanDoanHis": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
-          "customDiagnosis": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
+          "customDiagnosis": "CTCSTL",
           "bsDieuTri": "Ngô Văn Ri",
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H094",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CTCSTL"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7258,7 +7757,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "8"
         },
         "0001424436": {
           "mabn": "0001424436",
@@ -7277,12 +7777,16 @@
           "hanTheDen": "17/01/2027",
           "diaChi": "giao hội-Phường Hoài Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M51.9-Rối loạn đĩa đệm cột sống, không xác định",
-          "customDiagnosis": "M51.9-Rối loạn đĩa đệm cột sống, không xác định",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Ngô Văn Ri",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H075",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Hội chẩn"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7308,8 +7812,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "ĐAU LƯNG",
+            "surgeryMethod": "",
+            "decision": "Hội ý",
+            "advancePayment": "",
+            "updatedAt": "2026-10-04T04:31:19.332Z"
+          },
+          "giuong": "15"
         },
         "0001424446": {
           "mabn": "0001424446",
@@ -7328,12 +7860,16 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "Đại Khoan-Xã Hội Sơn--Tỉnh Gia Lai",
           "chanDoanHis": "M48.32-Bệnh lý đốt sống do chấn thương, vùng cổ",
-          "customDiagnosis": "M48.32-Bệnh lý đốt sống do chấn thương, vùng cổ",
+          "customDiagnosis": "CTCS CỔ",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H092",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CTCS CỔ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7360,7 +7896,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "13"
         },
         "0000995488": {
           "mabn": "0000995488",
@@ -7379,12 +7916,16 @@
           "hanTheDen": "31/12/2029",
           "diaChi": "An Dõng-Xã Bình An--Tỉnh Gia Lai",
           "chanDoanHis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
-          "customDiagnosis": "M47.86-Thoái hóa đốt sống khác, vùng thắt lưng",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H091",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7411,7 +7952,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "18"
         },
         "0000811741": {
           "mabn": "0000811741",
@@ -7430,12 +7972,16 @@
           "hanTheDen": "31/12/2028",
           "diaChi": "KV3-Phường Quy Nhơn--Tỉnh Gia Lai",
           "chanDoanHis": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
-          "customDiagnosis": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H090",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7462,7 +8008,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "28"
         },
         "0001355818": {
           "mabn": "0001355818",
@@ -7481,12 +8028,16 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "kv7-Phường Quy Nhơn Tây--Tỉnh Gia Lai",
           "chanDoanHis": "M48.56-Xẹp đốt sống, không phân loại mục khác, vùng thắt lưng",
-          "customDiagnosis": "M48.56-Xẹp đốt sống, không phân loại mục khác, vùng thắt lưng",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H089",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Chờ xử trí / chờ mổ"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7513,7 +8064,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "27"
         },
         "0001383953": {
           "mabn": "0001383953",
@@ -7532,12 +8084,16 @@
           "hanTheDen": "25/04/2027",
           "diaChi": "Mỹ Cang-Xã Tuy Phước Đông--Tỉnh Gia Lai",
           "chanDoanHis": "M48.56-Xẹp đốt sống, không phân loại mục khác, vùng thắt lưng",
-          "customDiagnosis": "M48.56-Xẹp đốt sống, không phân loại mục khác, vùng thắt lưng",
+          "customDiagnosis": "CTCSTL",
           "bsDieuTri": "Huỳnh Ngọc Hưng",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H093",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CTCSTL"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7564,7 +8120,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "3"
         },
         "0001008234": {
           "mabn": "0001008234",
@@ -7583,12 +8140,16 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "Thôn Nhơn Thiện-Phường An Nhơn Bắc--Tỉnh Gia Lai",
           "chanDoanHis": "M47.90-Thoái hóa đốt sống, không xác định, nhiều vị trí của cột sống",
-          "customDiagnosis": "M47.90-Thoái hóa đốt sống, không xác định, nhiều vị trí của cột sống",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H100",
           "khoaChuyenDen": "Khoa Nội tiết",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG • Hội chẩn"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7614,8 +8175,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "ĐAU LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.332Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "ĐAU LƯNG",
+            "surgeryMethod": "",
+            "decision": "Hội ý",
+            "advancePayment": "",
+            "updatedAt": "2026-10-04T04:31:19.332Z"
+          },
+          "giuong": "16"
         },
         "0001424521": {
           "mabn": "0001424521",
@@ -7634,12 +8223,16 @@
           "hanTheDen": "31/12/2026",
           "diaChi": "Xã Phù Mỹ Nam--Tỉnh Gia Lai",
           "chanDoanHis": "S06.90-Tổn thương nội sọ, không xác định, không có vết thương nội sọ hở",
-          "customDiagnosis": "S06.90-Tổn thương nội sọ, không xác định, không có vết thương nội sọ hở",
+          "customDiagnosis": "NÃO ÚNG THỦY",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H075",
           "khoaChuyenDen": "Khoa Thần kinh - Đột quỵ",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: NÃO ÚNG THỦY • Điều trị nội khoa"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7666,7 +8259,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "4X"
         },
         "0001422464": {
           "mabn": "0001422464",
@@ -7685,12 +8279,16 @@
           "hanTheDen": "12/06/2027",
           "diaChi": "Phường An Nhơn Đông--Tỉnh Gia Lai",
           "chanDoanHis": "I67.1-Phình động mạch não, không vỡ",
-          "customDiagnosis": "I67.1-Phình động mạch não, không vỡ",
+          "customDiagnosis": "PHÌNH MẠCH NÃO",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H088",
           "khoaChuyenDen": "Khoa Thần kinh - Đột quỵ",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: PHÌNH MẠCH NÃO • Điều trị nội khoa"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7717,7 +8315,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "4"
         },
         "0001424820": {
           "mabn": "0001424820",
@@ -7736,12 +8335,16 @@
           "hanTheDen": "01/04/2027",
           "diaChi": "Phú Hậu-Xã Cát Tiến--Tỉnh Gia Lai",
           "chanDoanHis": "M48.56-Xẹp đốt sống, không phân loại mục khác, vùng thắt lưng",
-          "customDiagnosis": "M48.56-Xẹp đốt sống, không phân loại mục khác, vùng thắt lưng",
+          "customDiagnosis": "CT CSTL",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H102",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CT CSTL • Xem KR XR gót"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7768,7 +8371,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "20X"
         },
         "0001424939": {
           "mabn": "0001424939",
@@ -7787,12 +8391,16 @@
           "hanTheDen": "30/04/2027",
           "diaChi": "kv 1-Phường Phú Yên--Tỉnh Đắk Lắk",
           "chanDoanHis": "S30.0-Đụng giập thắt lưng và/hoặc vùng chậu",
-          "customDiagnosis": "S30.0-Đụng giập thắt lưng và/hoặc vùng chậu",
+          "customDiagnosis": "CTCS LƯNG",
           "bsDieuTri": "Phạm Thái Hoàng Luân",
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H078",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CTCS LƯNG • Hội chẩn"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7818,8 +8426,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-04": {
+              "isConsulted": true,
+              "dateKey": "2026-10-04",
+              "postConsultDiagnosis": "CTCS LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            },
+            "2026-10-05": {
+              "isConsulted": true,
+              "dateKey": "2026-10-05",
+              "postConsultDiagnosis": "CTCS LƯNG",
+              "surgeryMethod": "",
+              "decision": "Hội ý",
+              "advancePayment": "",
+              "updatedAt": "2026-10-04T04:31:19.333Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "dateKey": "2026-10-04",
+            "postConsultDiagnosis": "CTCS LƯNG",
+            "surgeryMethod": "",
+            "decision": "Hội ý",
+            "advancePayment": "",
+            "updatedAt": "2026-10-04T04:31:19.333Z"
+          },
+          "giuong": "15X"
         },
         "0001424955": {
           "mabn": "0001424955",
@@ -7838,12 +8474,16 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "Đại Khoan-Xã Hội Sơn--Tỉnh Gia Lai",
           "chanDoanHis": "G91.8-Bệnh não úng thủy khác",
-          "customDiagnosis": "G91.8-Bệnh não úng thủy khác",
+          "customDiagnosis": "ĐAU ĐẦU",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H081",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU ĐẦU"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7870,7 +8510,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "19"
         },
         "0001424966": {
           "mabn": "0001424966",
@@ -7889,12 +8530,16 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "Đại Khoan-Xã Hội Sơn--Tỉnh Gia Lai",
           "chanDoanHis": "M48.02-Hẹp ống sống, vùng cổ",
-          "customDiagnosis": "M48.02-Hẹp ống sống, vùng cổ",
+          "customDiagnosis": "ĐAU LƯNG",
           "bsDieuTri": "Dương Minh Trí",
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H082",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: ĐAU LƯNG"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7921,7 +8566,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "2X"
         },
         "0001425000": {
           "mabn": "0001425000",
@@ -7940,12 +8586,16 @@
           "hanTheDen": "08/09/2027",
           "diaChi": "Hòa Mỹ-Xã Xuân Cảnh--Tỉnh Đắk Lắk",
           "chanDoanHis": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
-          "customDiagnosis": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
+          "customDiagnosis": "CT CSTL",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H079",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: CT CSTL"
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -7972,7 +8622,8 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultation": null,
+          "giuong": "5X"
         },
         "0001413526": {
           "mabn": "0001413526",
@@ -9452,6 +10103,24 @@
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
+        },
+        "TK4-NEW-B8": {
+          "mabn": "TK4-NEW-B8",
+          "hoten": "TRẦN THỊ THANH",
+          "tuoi": "55 tuổi",
+          "gioiTinh": "Nữ",
+          "chanDoanHis": "HP BÓC U NÃO",
+          "ngayVaoStr": "04/10/2026",
+          "tasksByDate": {
+            "2026-10-04": {
+              "note": "CĐ: HP BÓC U NÃO"
+            }
+          },
+          "removed": {
+            "isRemoved": false
+          },
+          "giuong": "24",
+          "customDiagnosis": "HP BÓC U NÃO"
         }
       },
       "archivedRecords": {},
