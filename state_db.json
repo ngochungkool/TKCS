@@ -1,5 +1,5 @@
 {
-  "version": 1791088959653,
+  "version": 1791088962354,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1433,7 +1433,15 @@
           "hisBed": "H023",
           "khoaChuyenDen": "",
           "tasksByDate": {
-            "2026-10-04": {}
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
           },
           "consultDetails": {
             "specialty": "",
@@ -2966,7 +2974,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:42:39.567Z"
+      "updatedAt": "2026-10-04T04:42:42.353Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5007,7 +5015,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:42:39.567Z"
+      "updatedAt": "2026-10-04T04:42:42.353Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6222,7 +6230,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:42:39.567Z"
+      "updatedAt": "2026-10-04T04:42:42.353Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10155,7 +10163,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:42:39.653Z"
+      "updatedAt": "2026-10-04T04:42:42.353Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11059,7 +11067,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:42:39.653Z"
+      "updatedAt": "2026-10-04T04:42:42.353Z"
     }
   },
   "episodeConsultations": {},
