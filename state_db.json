@@ -1,5 +1,5 @@
 {
-  "version": 1791089453663,
+  "version": 1791089462168,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:53.662Z"
+      "updatedAt": "2026-10-04T04:51:02.167Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3292,11 +3292,11 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "NONE",
-            "markedDate": "",
+            "status": "SCHEDULED",
+            "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": ""
+            "note": "Không hẹn tái khám"
           },
           "removed": {
             "isRemoved": false,
@@ -5171,7 +5171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:53.662Z"
+      "updatedAt": "2026-10-04T04:51:02.167Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6386,7 +6386,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:53.662Z"
+      "updatedAt": "2026-10-04T04:51:02.167Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10319,7 +10319,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:53.662Z"
+      "updatedAt": "2026-10-04T04:51:02.168Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11223,7 +11223,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:53.663Z"
+      "updatedAt": "2026-10-04T04:51:02.168Z"
     }
   },
   "episodeConsultations": {},
