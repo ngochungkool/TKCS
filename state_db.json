@@ -1,5 +1,5 @@
 {
-  "version": 1791103976504,
+  "version": 1791104057015,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -90,8 +90,9 @@
         "2026-09-30": "TRUC",
         "2026-10-01": "RA_TRUC",
         "2026-10-04": "NGHI",
-        "2026-10-05": "LAM_NGAY",
-        "2026-10-03": "TRUC"
+        "2026-10-05": "TRUC",
+        "2026-10-03": "TRUC",
+        "2026-10-06": "RA_TRUC"
       },
       "usages": [],
       "currentRoom": null
@@ -3117,7 +3118,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:51:19.533Z"
+      "updatedAt": "2026-10-04T08:52:59.282Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5414,7 +5415,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:51:19.533Z"
+      "updatedAt": "2026-10-04T08:52:59.282Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6614,7 +6615,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:51:19.533Z"
+      "updatedAt": "2026-10-04T08:52:59.282Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10413,7 +10414,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:51:19.533Z"
+      "updatedAt": "2026-10-04T08:52:59.282Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11307,7 +11308,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:51:19.533Z"
+      "updatedAt": "2026-10-04T08:52:59.282Z"
     }
   },
   "episodeConsultations": {},
