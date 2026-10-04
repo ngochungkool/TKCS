@@ -1,5 +1,5 @@
 {
-  "version": 1791124112876,
+  "version": 1791124125283,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3226,7 +3226,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:32.875Z"
+      "updatedAt": "2026-10-04T14:28:45.282Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5548,7 +5548,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:32.875Z"
+      "updatedAt": "2026-10-04T14:28:45.282Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6776,7 +6776,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:32.876Z"
+      "updatedAt": "2026-10-04T14:28:45.282Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7173,32 +7173,32 @@
           "surgicalConsultationsByDate": {
             "2026-10-05": {
               "isConsulted": true,
-              "isSurgical": true,
+              "isSurgical": false,
               "dateKey": "2026-10-05",
               "postConsultDiagnosis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
               "surgeryMethod": "",
-              "decision": "Điều trị nội khoa",
+              "decision": "Không đồng ý",
               "advancePayment": "",
               "bloodMl": "",
               "treatmentPlan": "",
               "roomKey": "tk4",
               "roomName": "Thần kinh 4",
-              "updatedAt": "2026-10-04T14:28:32.876Z"
+              "updatedAt": "2026-10-04T14:28:45.283Z"
             }
           },
           "surgicalConsultation": {
             "isConsulted": true,
-            "isSurgical": true,
+            "isSurgical": false,
             "dateKey": "2026-10-05",
             "postConsultDiagnosis": "S30.7-Đa tổn thương nông ở bụng, thắt lưng và/hoặc vùng chậu",
             "surgeryMethod": "",
-            "decision": "Điều trị nội khoa",
+            "decision": "Không đồng ý",
             "advancePayment": "",
             "bloodMl": "",
             "treatmentPlan": "",
             "roomKey": "tk4",
             "roomName": "Thần kinh 4",
-            "updatedAt": "2026-10-04T14:28:32.876Z"
+            "updatedAt": "2026-10-04T14:28:45.283Z"
           }
         },
         "0001422398": {
@@ -10645,7 +10645,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:32.876Z"
+      "updatedAt": "2026-10-04T14:28:45.282Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11557,7 +11557,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:32.876Z"
+      "updatedAt": "2026-10-04T14:28:45.283Z"
     }
   },
   "episodeConsultations": {},
