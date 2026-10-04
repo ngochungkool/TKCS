@@ -4055,7 +4055,8 @@ const server = http.createServer(async (req, res) => {
 
   // POST /api/briefing-report
   if (req.method === 'POST' && pathname === '/api/briefing-report') {
-    const body = await readBody(req);
+    try {
+      const body = await readBody(req);
     const { dateKey, roomKey, roomReport, overall, highlightCases, action, targetDate: reqTargetDate, shiftDate } = body;
     const targetDate = reqTargetDate || dateKey || getDateKey(new Date());
     const report = getOrBuildBriefingReport(targetDate);
@@ -4242,6 +4243,12 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, report, tk4Consultations: getTk4SurgicalConsultations(addDaysToKey(targetDate, 1)) }));
     return;
+    } catch (err) {
+      console.error('POST /api/briefing-report error:', err);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Lỗi máy chủ khi xử lý báo cáo giao ban: ' + err.message }));
+      return;
+    }
   }
 
   // POST /api/upload-clinical-image

@@ -4557,6 +4557,12 @@
             mabn,
             targetDate: nextDateKey,
             shiftDate: currentDateKey,
+            hoten: p ? p.hoten : '',
+            tuoi: p ? p.tuoi : '',
+            gioiTinh: p ? p.gioiTinh : '',
+            giuong: p ? (p.bed || p.giuong || '') : '',
+            soVaoVien: p ? (p.soVaoVien || p.maKcb || p.svv || mabn) : mabn,
+            maKcb: p ? (p.maKcb || p.soVaoVien || p.svv || mabn) : mabn,
             postConsultDiagnosis: p ? (p.chanDoanHis || p.chanDoan || '') : '',
             surgeryMethod: '',
             decision: 'Đồng ý',
@@ -4575,6 +4581,9 @@
               tuoi: p ? p.tuoi : '',
               gioiTinh: p ? p.gioiTinh : 'NAM',
               bed: p ? p.bed : '--',
+              giuong: p ? p.bed : '--',
+              soVaoVien: p ? (p.soVaoVien || p.maKcb || p.svv || mabn) : mabn,
+              maKcb: p ? (p.maKcb || p.soVaoVien || p.svv || mabn) : mabn,
               chanDoanHis: p ? p.chanDoanHis : '',
               postConsultDiagnosis: p ? (p.chanDoanHis || p.chanDoan || '') : '',
               surgeryMethod: '',
@@ -4588,13 +4597,14 @@
             else tk4Consultations.unshift(newItem);
           }
           closeTk4PickPatientModal();
-          renderBriefingReport();
+          renderCurrentView();
+          showToast(`🔪 Đã thêm ${p ? p.hoten : 'bệnh nhân'} vào Hội chẩn mổ ngày ${formatDateDMY(nextDateKey)}`);
         } else {
           alert('Lỗi: ' + (data.error || 'Không thể lưu hội chẩn'));
         }
       } catch (err) {
         console.error('Lỗi quickAddBriefingTk4Consult:', err);
-        alert('Có lỗi xảy ra khi thêm bệnh nhân vào hội chẩn mổ!');
+        alert('Có lỗi xảy ra khi thêm bệnh nhân vào hội chẩn mổ: ' + err.message);
       }
     }
 
