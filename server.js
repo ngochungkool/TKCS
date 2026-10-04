@@ -619,6 +619,37 @@ function getAuthUser(req) {
   return user || null;
 }
 
+function isUserAuthorizedForAnnouncement(user) {
+  if (!user) return false;
+  const username = (user.username || '').toLowerCase();
+  const name = (user.name || '').toLowerCase();
+
+  // Authorized usernames:
+  // - Điều dưỡng Mai: ntmai
+  // - Điều dưỡng Hồng Nhi: nthnhi
+  // - Điều dưỡng An: ptan
+  // - BS Nhân (Trưởng khoa): dvnhan
+  // - BS Vũ (Phó khoa): ltvu, tnavu
+  // - BS Hải (Phó khoa): pnhai
+  // - Tôi (Admin): hnhung
+  const allowedUsernames = ['ntmai', 'nthnhi', 'ptan', 'dvnhan', 'ltvu', 'tnavu', 'pnhai', 'hnhung'];
+  if (allowedUsernames.includes(username)) return true;
+  if (user.role === 'admin') return true;
+
+  if (name.includes('đào văn nhân') ||
+      name.includes('lê trọng vũ') ||
+      name.includes('thới nguyễn anh vũ') ||
+      name.includes('phạm ngọc hải') ||
+      name.includes('nguyễn thị mai') ||
+      name.includes('nguyễn thị hồng nhi') ||
+      name.includes('phạm thúy an') ||
+      name.includes('phạm thuý an') ||
+      name.includes('huỳnh ngọc hưng')) {
+    return true;
+  }
+  return false;
+}
+
 const server = http.createServer(async (req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   const pathname = decodeURIComponent(parsedUrl.pathname);
@@ -821,6 +852,62 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && pathname === '/api/state') {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, db }));
+    return;
+  }
+
+  // GET department general announcement
+  if (req.method === 'GET' && pathname === '/api/announcement') {
+    const ann = db.announcement || {
+      title: 'Bảng thông báo chung',
+      content: 'Chào mừng toàn thể cán bộ nhân viên Khoa Ngoại Thần Kinh - Cột Sống! Toàn khoa thực hiện tốt quy chế chuyên môn, giao ban đúng giờ và phối hợp cấp cứu khẩn trương.',
+      updatedAt: new Date().toISOString(),
+      updatedBy: 'Ban Chủ Nhiệm Khoa',
+      updatedRole: 'Trưởng khoa'
+    };
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, announcement: ann }));
+    return;
+  }
+
+  // POST update department general announcement (Authorized: ĐD Mai, ĐD Hồng Nhi, ĐD An, BS Nhân, BS Vũ, BS Hải, Admin Tôi)
+  if (req.method === 'POST' && pathname === '/api/announcement') {
+    const authUser = getAuthUser(req);
+    if (!authUser) {
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Vui lòng đăng nhập để thực hiện!' }));
+      return;
+    }
+
+    if (!isUserAuthorizedForAnnouncement(authUser)) {
+      res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        ok: false,
+        error: 'Bạn không có quyền chỉnh sửa bảng thông báo chung! Quyền hạn chỉ dành cho: Điều dưỡng Mai, Điều dưỡng Hồng Nhi, Điều dưỡng An, BS Nhân, BS Vũ, BS Hải và Ban Quản trị.'
+      }));
+      return;
+    }
+
+    const { title, content } = await readBody(req);
+    const cleanContent = String(content || '').trim();
+    if (!cleanContent) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Nội dung thông báo không được để trống!' }));
+      return;
+    }
+
+    db.announcement = {
+      title: String(title || 'Bảng thông báo chung').trim(),
+      content: cleanContent,
+      updatedAt: new Date().toISOString(),
+      updatedBy: authUser.name || 'Cán bộ quản lý',
+      updatedRole: authUser.title || authUser.position || authUser.specialty || 'Ban Quản Lý'
+    };
+    saveDb();
+
+    broadcastState(`📢 Đã cập nhật bảng thông báo chung của khoa`);
+
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, announcement: db.announcement, message: 'Đã cập nhật bảng thông báo chung thành công!' }));
     return;
   }
 

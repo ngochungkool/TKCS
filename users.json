@@ -19,7 +19,7 @@
     "role": "nurse",
     "avatar": "",
     "createdAt": "2026-10-03T15:06:03.367Z",
-    "lastLogin": "2026-10-03T15:10:58.110Z"
+    "lastLogin": "2026-10-04T01:51:33.472Z"
   },
   {
     "id": "u-2",
@@ -151,7 +151,9 @@
     "role": "nurse",
     "avatar": "",
     "createdAt": "2026-10-03T15:06:03.368Z",
-    "lastLogin": null
+    "lastLogin": null,
+    "title": "Điều dưỡng trưởng",
+    "position": "Điều dưỡng trưởng"
   },
   {
     "id": "u-8",
@@ -173,7 +175,9 @@
     "role": "doctor",
     "avatar": "",
     "createdAt": "2026-10-03T15:06:03.368Z",
-    "lastLogin": null
+    "lastLogin": "2026-10-04T01:51:33.413Z",
+    "title": "Trưởng khoa",
+    "position": "Trưởng khoa"
   },
   {
     "id": "u-9",
@@ -701,7 +705,9 @@
     "role": "doctor",
     "avatar": "",
     "createdAt": "2026-10-03T15:06:03.368Z",
-    "lastLogin": null
+    "lastLogin": null,
+    "title": "Phó khoa",
+    "position": "Phó khoa"
   },
   {
     "id": "u-33",
@@ -1251,7 +1257,9 @@
     "role": "doctor",
     "avatar": "",
     "createdAt": "2026-10-03T15:06:03.369Z",
-    "lastLogin": null
+    "lastLogin": null,
+    "title": "Phó khoa",
+    "position": "Phó khoa"
   },
   {
     "id": "u-58",

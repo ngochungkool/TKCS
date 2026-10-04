@@ -112,7 +112,58 @@
         </a>
       </div>
     </main>
+
+    <!-- BẢNG THÔNG BÁO CHUNG CHO KHOA (FIT TRANG, NỔI BẬT & CANH GIỮA) -->
+    <section class="home-announcement-card" id="home-announcement-section" aria-label="Bảng thông báo chung của khoa">
+      <div class="announcement-card-header">
+        <div class="announcement-card-title-group">
+          <span class="announcement-icon-badge" aria-hidden="true"><i class="fa-solid fa-bullhorn"></i></span>
+          <h2 class="announcement-main-title">Bảng thông báo chung</h2>
+          <span class="announcement-scope-tag">Toàn khoa</span>
+        </div>
+        <div class="announcement-header-actions">
+          <button type="button" class="btn-edit-announcement" id="btn-open-edit-announcement" style="display: none;" title="Chỉnh sửa thông báo chung của khoa">
+            <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
+          </button>
+        </div>
+      </div>
+      <div class="announcement-card-body">
+        <div class="announcement-highlight-container">
+          <div class="announcement-highlight-text" id="announcement-content">
+            Đang tải thông báo chung...
+          </div>
+        </div>
+      </div>
+      <div class="announcement-card-footer" id="announcement-meta" style="display: none;">
+        <span>Cập nhật: <strong id="announcement-updated-at">--</strong></span>
+        <span>•</span>
+        <span>Người đăng: <strong class="announcement-meta-author" id="announcement-updated-by">--</strong> (<span class="announcement-meta-role" id="announcement-updated-role">--</span>)</span>
+      </div>
+    </section>
   </div>
+
+  <!-- DIALOG CHỈNH SỬA THÔNG BÁO CHUNG -->
+  <dialog id="announcement-edit-dialog" class="announcement-dialog">
+    <form method="dialog" id="announcement-edit-form">
+      <div class="modal-header">
+        <h4><i class="fa-solid fa-bullhorn" style="color: #ea580c;"></i> Chỉnh Sửa Bảng Thông Báo Chung</h4>
+        <button type="button" class="btn-secondary" id="btn-close-announcement-dialog">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size: 0.88rem; color: #475569; font-weight: 600;">
+          Nội dung thông báo sẽ tự động được làm nổi bật và canh giữa bảng thông báo trên trang chủ của toàn khoa.
+        </div>
+        <textarea id="announcement-input" class="announcement-textarea" rows="6" placeholder="Nhập nội dung thông báo chung cho khoa..." required></textarea>
+        <div id="announcement-error-msg" style="display: none; color: #dc2626; font-size: 0.85rem; font-weight: 600;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="btn-cancel-announcement">Hủy</button>
+        <button type="submit" class="btn-primary" id="btn-save-announcement" style="min-width: 140px;">
+          <i class="fa-solid fa-floppy-disk"></i> Lưu Thông Báo
+        </button>
+      </div>
+    </form>
+  </dialog>
 
   <!-- HỘP BÁO MỔ TO RÕ TRỰC TIẾP TRÊN TRANG CHỦ (GIỐNG Y HỆT TRONG TRANG QUẢN LÝ USER) -->
   <dialog id="surgery-quick-dialog" class="modal-dialog surgery-large-dialog">
@@ -390,6 +441,11 @@
             }
           })
           .catch(() => {});
+
+        // Cập nhật bảng thông báo chung khi có stream
+        if (dbObj.announcement) {
+          renderAnnouncement(dbObj.announcement);
+        }
       } catch (e) {}
     };
 
@@ -434,6 +490,192 @@
       });
     }
     setup24hTimeInputs();
+
+    // =========================================================================
+    // QUẢN LÝ BẢNG THÔNG BÁO CHUNG CHO KHOA
+    // =========================================================================
+    let currentAnnouncementData = null;
+
+    function formatAnnouncementDateTime(isoStr) {
+      if (!isoStr) return '';
+      try {
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return isoStr;
+        const hh = String(d.getHours()).padStart(2, '0');
+        const mm = String(d.getMinutes()).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        const mo = String(d.getMonth() + 1).padStart(2, '0');
+        const yyyy = d.getFullYear();
+        return `${hh}:${mm} - ${dd}/${mo}/${yyyy}`;
+      } catch (e) {
+        return isoStr;
+      }
+    }
+
+    function renderAnnouncement(ann) {
+      if (!ann) return;
+      currentAnnouncementData = ann;
+      const contentEl = document.getElementById('announcement-content');
+      const metaEl = document.getElementById('announcement-meta');
+      const timeEl = document.getElementById('announcement-updated-at');
+      const authorEl = document.getElementById('announcement-updated-by');
+      const roleEl = document.getElementById('announcement-updated-role');
+
+      if (contentEl) {
+        contentEl.textContent = ann.content || 'Hiện chưa có thông báo chung nào.';
+      }
+
+      if (metaEl && (ann.updatedAt || ann.updatedBy)) {
+        metaEl.style.display = 'flex';
+        if (timeEl) timeEl.textContent = formatAnnouncementDateTime(ann.updatedAt) || '--';
+        if (authorEl) authorEl.textContent = ann.updatedBy || 'Cán bộ khoa';
+        if (roleEl) roleEl.textContent = ann.updatedRole || 'Ban Quản Lý';
+      }
+    }
+
+    async function fetchAnnouncement() {
+      try {
+        const res = await fetch('/api/announcement', { credentials: 'include' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.announcement) {
+            renderAnnouncement(data.announcement);
+          }
+        }
+      } catch (e) {
+        console.error('Lỗi khi tải thông báo chung:', e);
+      }
+    }
+
+    function isAuthorizedForAnnouncement(user) {
+      if (!user) return false;
+      const username = (user.username || '').toLowerCase();
+      const name = (user.name || '').toLowerCase();
+      const allowed = ['ntmai', 'nthnhi', 'ptan', 'dvnhan', 'ltvu', 'tnavu', 'pnhai', 'hnhung'];
+      if (allowed.includes(username)) return true;
+      if (user.role === 'admin') return true;
+      if (name.includes('đào văn nhân') ||
+          name.includes('lê trọng vũ') ||
+          name.includes('thới nguyễn anh vũ') ||
+          name.includes('phạm ngọc hải') ||
+          name.includes('nguyễn thị mai') ||
+          name.includes('nguyễn thị hồng nhi') ||
+          name.includes('phạm thúy an') ||
+          name.includes('phạm thuý an') ||
+          name.includes('huỳnh ngọc hưng')) {
+        return true;
+      }
+      return false;
+    }
+
+    function checkAnnouncementPermission() {
+      let user = null;
+      if (window.TKCSAuth && typeof window.TKCSAuth.getUser === 'function') {
+        user = window.TKCSAuth.getUser();
+      }
+      if (!user) {
+        try {
+          user = JSON.parse(localStorage.getItem('auth_user') || 'null');
+        } catch (e) {}
+      }
+
+      const canEdit = isAuthorizedForAnnouncement(user);
+      const editBtn = document.getElementById('btn-open-edit-announcement');
+      if (editBtn) {
+        editBtn.style.display = canEdit ? 'inline-flex' : 'none';
+      }
+    }
+
+    function setupAnnouncementEditor() {
+      const editBtn = document.getElementById('btn-open-edit-announcement');
+      const dialog = document.getElementById('announcement-edit-dialog');
+      const form = document.getElementById('announcement-edit-form');
+      const textarea = document.getElementById('announcement-input');
+      const errorEl = document.getElementById('announcement-error-msg');
+      const closeBtn = document.getElementById('btn-close-announcement-dialog');
+      const cancelBtn = document.getElementById('btn-cancel-announcement');
+      const saveBtn = document.getElementById('btn-save-announcement');
+
+      if (!dialog || !editBtn || !form) return;
+
+      editBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentAnnouncementData && currentAnnouncementData.content) {
+          textarea.value = currentAnnouncementData.content;
+        } else {
+          textarea.value = (document.getElementById('announcement-content')?.textContent || '').trim();
+        }
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.style.display = 'none';
+        }
+        dialog.showModal();
+        textarea.focus();
+      });
+
+      const closeDialog = () => {
+        if (dialog.open) dialog.close();
+      };
+
+      if (closeBtn) closeBtn.addEventListener('click', closeDialog);
+      if (cancelBtn) cancelBtn.addEventListener('click', closeDialog);
+
+      dialog.addEventListener('click', (e) => {
+        const rect = dialog.getBoundingClientRect();
+        const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                            rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+        if (!isInDialog) dialog.close();
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const content = textarea.value.trim();
+        if (!content) {
+          if (errorEl) {
+            errorEl.textContent = 'Vui lòng nhập nội dung thông báo.';
+            errorEl.style.display = 'block';
+          }
+          return;
+        }
+
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
+        if (errorEl) errorEl.style.display = 'none';
+
+        try {
+          const res = await fetch('/api/announcement', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ content })
+          });
+          const data = await res.json();
+          if (res.ok && data.ok) {
+            renderAnnouncement(data.announcement);
+            dialog.close();
+          } else {
+            if (errorEl) {
+              errorEl.textContent = data.error || 'Bạn không có quyền chỉnh sửa bảng thông báo này.';
+              errorEl.style.display = 'block';
+            }
+          }
+        } catch (err) {
+          if (errorEl) {
+            errorEl.textContent = 'Lỗi kết nối khi lưu thông báo. Vui lòng thử lại!';
+            errorEl.style.display = 'block';
+          }
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Lưu Thông Báo';
+        }
+      });
+    }
+
+    // Khởi chạy khi tải trang
+    fetchAnnouncement();
+    checkAnnouncementPermission();
+    setupAnnouncementEditor();
+    window.addEventListener('tkcs:user:loaded', checkAnnouncementPermission);
   </script>
 </body>
 </html>

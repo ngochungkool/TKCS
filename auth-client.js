@@ -57,6 +57,21 @@
         background: linear-gradient(135deg, #7c3aed, #4f46e5);
       }
 
+      .tkcs-avatar.role-truong-khoa {
+        background: linear-gradient(135deg, #dc2626, #991b1b);
+        box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
+      }
+
+      .tkcs-avatar.role-pho-khoa {
+        background: linear-gradient(135deg, #ea580c, #c2410c);
+        box-shadow: 0 2px 6px rgba(234, 88, 12, 0.35);
+      }
+
+      .tkcs-avatar.role-dd-truong {
+        background: linear-gradient(135deg, #059669, #047857);
+        box-shadow: 0 2px 6px rgba(5, 150, 105, 0.35);
+      }
+
       .tkcs-avatar.role-doctor {
         background: linear-gradient(135deg, #0284c7, #2563eb);
       }
@@ -87,6 +102,26 @@
         font-size: 0.7rem;
         font-weight: 700;
         color: #64748b;
+      }
+
+      .tkcs-user-role-badge.truong-khoa {
+        color: #dc2626;
+        font-weight: 800;
+      }
+
+      .tkcs-user-role-badge.pho-khoa {
+        color: #ea580c;
+        font-weight: 800;
+      }
+
+      .tkcs-user-role-badge.dd-truong {
+        color: #059669;
+        font-weight: 800;
+      }
+
+      .tkcs-user-role-badge.admin {
+        color: #7c3aed;
+        font-weight: 800;
       }
 
       .tkcs-dropdown-caret {
@@ -158,6 +193,28 @@
       .tkcs-menu-badge.admin {
         background: #f3e8ff;
         color: #7e22ce;
+        border: 1px solid #e9d5ff;
+      }
+
+      .tkcs-menu-badge.truong-khoa {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+        font-weight: 800;
+      }
+
+      .tkcs-menu-badge.pho-khoa {
+        background: #ffedd5;
+        color: #9a3412;
+        border: 1px solid #fed7aa;
+        font-weight: 800;
+      }
+
+      .tkcs-menu-badge.dd-truong {
+        background: #ccfbf1;
+        color: #0f766e;
+        border: 1px solid #99f6e4;
+        font-weight: 800;
       }
 
       .tkcs-menu-badge.doctor {
@@ -466,17 +523,54 @@
     else if (user.specialty === 'Điều dưỡng') prefix = 'ĐD. ';
 
     const displayName = `${prefix}${lastName}`;
-    const roleClass = `role-${user.role || 'staff'}`;
-    const roleBadgeName = user.role === 'admin' ? 'Quản trị viên' : (user.specialty || 'Cán bộ');
+
+    // Determine position & title badges: Trưởng khoa, Phó khoa, Điều dưỡng trưởng, Quản trị viên
+    const rawTitle = user.title || user.position || '';
+    const normalizedName = (user.name || '').toLowerCase();
+    const normalizedUsername = (user.username || '').toLowerCase();
+
+    let roleBadgeName = rawTitle;
+    let roleClass = `role-${user.role || 'staff'}`;
+    let badgeColorClass = 'staff';
+
+    if (rawTitle === 'Trưởng khoa' || normalizedName.includes('đào văn nhân') || normalizedUsername === 'dvnhan') {
+      roleBadgeName = 'Trưởng khoa';
+      roleClass = 'role-truong-khoa';
+      badgeColorClass = 'truong-khoa';
+    } else if (rawTitle === 'Phó khoa' || normalizedName.includes('lê trọng vũ') || normalizedName.includes('phạm ngọc hải') || normalizedUsername === 'ltvu' || normalizedUsername === 'pnhai') {
+      roleBadgeName = 'Phó khoa';
+      roleClass = 'role-pho-khoa';
+      badgeColorClass = 'pho-khoa';
+    } else if (rawTitle === 'Điều dưỡng trưởng' || normalizedName.includes('nguyễn thị mai') || normalizedUsername === 'ntmai') {
+      roleBadgeName = 'Điều dưỡng trưởng';
+      roleClass = 'role-dd-truong';
+      badgeColorClass = 'dd-truong';
+    } else if (user.role === 'admin') {
+      roleBadgeName = 'Quản trị viên';
+      roleClass = 'role-admin';
+      badgeColorClass = 'admin';
+    } else if (user.specialty === 'Bác sĩ') {
+      roleBadgeName = 'Bác sĩ';
+      roleClass = 'role-doctor';
+      badgeColorClass = 'doctor';
+    } else if (user.specialty === 'Điều dưỡng') {
+      roleBadgeName = 'Điều dưỡng';
+      roleClass = 'role-nurse';
+      badgeColorClass = 'nurse';
+    } else {
+      roleBadgeName = user.specialty || 'Cán bộ';
+      roleClass = 'role-staff';
+      badgeColorClass = 'staff';
+    }
 
     const authWrap = document.createElement('div');
     authWrap.className = 'tkcs-auth-wrap';
     authWrap.innerHTML = `
-      <div class="tkcs-auth-pill" id="tkcsAuthPill" title="${user.name} (${user.specialty || user.role})">
+      <div class="tkcs-auth-pill" id="tkcsAuthPill" title="${user.name} (${roleBadgeName})">
         <div class="tkcs-avatar ${roleClass}">${initial}</div>
         <div class="tkcs-user-info">
           <span class="tkcs-user-name">${displayName}</span>
-          <span class="tkcs-user-role-badge">${roleBadgeName}</span>
+          <span class="tkcs-user-role-badge ${badgeColorClass}">${roleBadgeName}</span>
         </div>
         <i class="fa-solid fa-chevron-down tkcs-dropdown-caret"></i>
       </div>
@@ -485,7 +579,7 @@
         <div class="tkcs-menu-header">
           <div class="tkcs-menu-fullname">${user.name}</div>
           <div class="tkcs-menu-sub">
-            <span class="tkcs-menu-badge ${user.role || 'staff'}">${roleBadgeName}</span>
+            <span class="tkcs-menu-badge ${badgeColorClass}">${roleBadgeName}</span>
             <span>@${user.username}</span>
           </div>
         </div>
@@ -521,6 +615,9 @@
     });
 
     headerRight.prepend(authWrap);
+    try {
+      window.dispatchEvent(new CustomEvent('tkcs:user:loaded', { detail: user }));
+    } catch (e) {}
   }
 
   // Profile modal
@@ -723,9 +820,32 @@
     window.location.replace('/dang-nhap');
   }
 
+  function isUserAuthorizedForAnnouncement(u) {
+    const user = u || currentUser;
+    if (!user) return false;
+    const username = (user.username || '').toLowerCase();
+    const name = (user.name || '').toLowerCase();
+    const allowed = ['ntmai', 'nthnhi', 'ptan', 'dvnhan', 'ltvu', 'tnavu', 'pnhai', 'hnhung'];
+    if (allowed.includes(username)) return true;
+    if (user.role === 'admin') return true;
+    if (name.includes('đào văn nhân') ||
+        name.includes('lê trọng vũ') ||
+        name.includes('thới nguyễn anh vũ') ||
+        name.includes('phạm ngọc hải') ||
+        name.includes('nguyễn thị mai') ||
+        name.includes('nguyễn thị hồng nhi') ||
+        name.includes('phạm thúy an') ||
+        name.includes('phạm thuý an') ||
+        name.includes('huỳnh ngọc hưng')) {
+      return true;
+    }
+    return false;
+  }
+
   // Global exports
   window.TKCSAuth = {
     getUser: () => currentUser,
+    isAuthorizedForAnnouncement: (u) => isUserAuthorizedForAnnouncement(u),
     logout,
     showProfileModal,
     showChangePasswordModal,
