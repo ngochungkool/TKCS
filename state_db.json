@@ -1,5 +1,5 @@
 {
-  "version": 1791124125283,
+  "version": 1791124138373,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3226,7 +3226,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:45.282Z"
+      "updatedAt": "2026-10-04T14:28:58.372Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5548,7 +5548,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:45.282Z"
+      "updatedAt": "2026-10-04T14:28:58.372Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6776,7 +6776,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:45.282Z"
+      "updatedAt": "2026-10-04T14:28:58.372Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7588,7 +7588,7 @@
           "hanTheDen": "09/03/2027",
           "diaChi": "Xã Phù Mỹ Đông--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
-          "customDiagnosis": "ĐAU ĐẦU",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Phạm Ngọc Hải",
           "ngayVaoStr": "29/09/2026",
           "hisBed": "H076",
@@ -7626,24 +7626,32 @@
           "surgicalConsultationsByDate": {
             "2026-10-05": {
               "isConsulted": true,
+              "isSurgical": true,
               "dateKey": "2026-10-05",
               "postConsultDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
               "surgeryMethod": "",
-              "decision": "Đồng ý",
+              "decision": "Hội ý",
               "advancePayment": "",
               "bloodMl": "",
-              "updatedAt": "2026-10-04T09:57:54.756Z"
+              "treatmentPlan": "",
+              "roomKey": "tk4",
+              "roomName": "Thần kinh 4",
+              "updatedAt": "2026-10-04T14:28:58.373Z"
             }
           },
           "surgicalConsultation": {
             "isConsulted": true,
+            "isSurgical": true,
             "dateKey": "2026-10-05",
             "postConsultDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
             "surgeryMethod": "",
-            "decision": "Đồng ý",
+            "decision": "Hội ý",
             "advancePayment": "",
             "bloodMl": "",
-            "updatedAt": "2026-10-04T09:57:54.756Z"
+            "treatmentPlan": "",
+            "roomKey": "tk4",
+            "roomName": "Thần kinh 4",
+            "updatedAt": "2026-10-04T14:28:58.373Z"
           }
         },
         "0001422572": {
@@ -10645,7 +10653,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:45.282Z"
+      "updatedAt": "2026-10-04T14:28:58.373Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11557,7 +11565,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:28:45.283Z"
+      "updatedAt": "2026-10-04T14:28:58.373Z"
     }
   },
   "episodeConsultations": {},
