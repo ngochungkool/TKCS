@@ -123,7 +123,7 @@
           <div class="admin-hero-stats" id="adminQuickStats">
             <div class="admin-stat-box">
               <span class="stat-num" id="statDutyCount">0</span>
-              <span class="stat-lbl">Trực (24h)</span>
+              <span class="stat-lbl">Trực (07h-07h)</span>
             </div>
             <div class="admin-stat-box">
               <span class="stat-num" id="statWorkCount">0</span>
@@ -141,6 +141,10 @@
               <span class="stat-num" id="statOffCount">0</span>
               <span class="stat-lbl">Nghỉ</span>
             </div>
+          </div>
+          <div style="width: 100%; font-size: 0.84rem; color: #1e293b; background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 0.5rem 0.85rem; margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>ℹ️</span>
+            <span><strong>Quy định ca trực:</strong> Bác sĩ chấm <strong>Trực</strong> ngày D sẽ trực từ <strong>07:00 sáng ngày D đến 07:00 sáng ngày D+1</strong> (tổng 24h). Sau 07:00 sáng ngày D+1 hệ thống tự động hiển thị trạng thái <strong>Ra trực</strong>.</span>
           </div>
         </div>
 
@@ -503,8 +507,8 @@
 
     const SCHEDULE_OPTIONS = [
       { code: 'LAM_NGAY', label: 'Làm ngày', cls: 'sched-btn-work', badgeBg: '#059669', badgeText: '#ffffff' },
-      { code: 'TRUC', label: 'Trực (24h)', cls: 'sched-btn-duty', badgeBg: '#dc2626', badgeText: '#ffffff' },
-      { code: 'RA_TRUC', label: 'Ra trực', cls: 'sched-btn-postduty', badgeBg: '#d97706', badgeText: '#ffffff' },
+      { code: 'TRUC', label: 'Trực (07h-07h)', cls: 'sched-btn-duty', badgeBg: '#dc2626', badgeText: '#ffffff' },
+      { code: 'RA_TRUC', label: 'Ra trực (sau 07h)', cls: 'sched-btn-postduty', badgeBg: '#d97706', badgeText: '#ffffff' },
       { code: 'PHONG_KHAM', label: 'Phòng khám', cls: 'sched-btn-clinic', badgeBg: '#0284c7', badgeText: '#ffffff' },
       { code: 'NGHI', label: 'Nghỉ', cls: 'sched-btn-off', badgeBg: '#475569', badgeText: '#ffffff' }
     ];

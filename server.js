@@ -168,13 +168,17 @@ function getAllowedIntervalsForDate(doc, dateKey) {
 
   const intervals = [];
 
+  // 1. Nửa sau ca trực hôm qua (tua 07:00 hôm qua -> 07:00 hôm nay):
   if (prevShift === 'TRUC') {
     intervals.push([dayStartMin + 0, dayStartMin + 420]); // 00:00 -> 07:00
   }
 
+  // 2. Ca làm việc trong ngày hôm nay:
   if (todayShift === 'TRUC') {
-    intervals.push([dayStartMin + 0, dayStartMin + 1440]); // 00:00 -> 24:00 (Trực 24h mở xuyên suốt cả ngày)
-  } else if (todayShift === 'RA_TRUC') {
+    // Tua trực bắt đầu từ 07:00 sáng hôm nay đến hết ngày hôm nay (tiếp tục sang 07:00 sáng hôm sau qua prevShift)
+    intervals.push([dayStartMin + 420, dayStartMin + 1440]); // 07:00 -> 24:00
+  } else if (todayShift === 'RA_TRUC' || prevShift === 'TRUC') {
+    // Sau 07:00: Ra trực buổi sáng ngày thường (giao ban & giải quyết hồ sơ bệnh án)
     if (!isWeekend) {
       intervals.push([dayStartMin + 420, dayStartMin + 690]); // 07:00 -> 11:30
     }
@@ -276,6 +280,7 @@ function getCloudToken() {
 let cloudSyncTimer = null;
 let cloudSyncInProgress = false;
 let cloudSyncPending = false;
+let initialCloudSyncDone = false;
 let lastCloudSha = null;
 
 async function ensureCloudBranchExists() {
@@ -361,7 +366,10 @@ async function pushFileToCloud(localFilePath, cloudFileName) {
 
 async function restoreDbFromCloudIfNewer() {
   const token = getCloudToken();
-  if (!token) return;
+  if (!token) {
+    initialCloudSyncDone = true;
+    return;
+  }
   const headers = {
     'Authorization': `Bearer ${token}`,
     'Accept': 'application/vnd.github+json',
@@ -370,7 +378,7 @@ async function restoreDbFromCloudIfNewer() {
   try {
     await ensureCloudBranchExists();
 
-    // 1. Khôi phục state_db.json nếu đám mây có dữ liệu mới hơn
+    // 1. Khôi phục state_db.json (hợp nhất lịch trực và chấm công từ đám mây, bảo vệ vĩnh viễn trước code deploy)
     const res = await fetch(`https://api.github.com/repos/${CLOUD_REPO}/contents/state_db.json?ref=${CLOUD_BRANCH}`, { headers });
     if (res.ok) {
       const meta = await res.json();
@@ -385,12 +393,41 @@ async function restoreDbFromCloudIfNewer() {
       }
       if (rawJson) {
         const cloudDb = JSON.parse(rawJson);
-        const localVer = Number(db?.version || 0);
-        const cloudVer = Number(cloudDb?.version || 0);
-        if (cloudDb && Array.isArray(cloudDb.doctors) && cloudVer >= localVer) {
-          db = cloudDb;
+        if (cloudDb && Array.isArray(cloudDb.doctors) && cloudDb.doctors.length > 0) {
+          // Luôn hợp nhất dữ liệu lịch chấm công và lượt dùng từ cloud
+          if (!db || !Array.isArray(db.doctors) || db.doctors.length === 0) {
+            db = cloudDb;
+          } else {
+            for (const cDoc of cloudDb.doctors) {
+              const lDoc = db.doctors.find((d) => d.id === cDoc.id || d.shortName === cDoc.shortName);
+              if (lDoc) {
+                // Hợp nhất scheduleByDate từ cloud (dữ liệu chấm công thực tế)
+                lDoc.scheduleByDate = { ...(lDoc.scheduleByDate || {}), ...(cDoc.scheduleByDate || {}) };
+                if (Array.isArray(cDoc.usages) && cDoc.usages.length > 0) {
+                  lDoc.usages = cDoc.usages;
+                }
+                if (cDoc.assignedRoom) lDoc.assignedRoom = cDoc.assignedRoom;
+              } else {
+                db.doctors.push(cDoc);
+              }
+            }
+            if (cloudDb.rooms && Array.isArray(cloudDb.rooms) && cloudDb.rooms.length > 0) {
+              db.rooms = cloudDb.rooms;
+            }
+            if (cloudDb.patientStatsByDate) {
+              db.patientStatsByDate = { ...(db.patientStatsByDate || {}), ...(cloudDb.patientStatsByDate || {}) };
+            }
+            if (cloudDb.patientStats) {
+              db.patientStats = { ...(cloudDb.patientStats || {}), ...(db.patientStats || {}) };
+            }
+          }
+          db.version = Math.max(Number(db.version || 0), Number(cloudDb.version || 0), Date.now());
           fs.writeFileSync(DATA_FILE, JSON.stringify(db, null, 2), 'utf-8');
-          console.log(`[CloudBackup] Đã khôi phục dữ liệu state_db.json mới nhất từ GitHub (${CLOUD_BRANCH}) - version ${cloudVer}`);
+          try {
+            const backupFile = DATA_FILE.replace('.json', '.backup.json');
+            fs.writeFileSync(backupFile, JSON.stringify(db, null, 2), 'utf-8');
+          } catch (_) {}
+          console.log(`[CloudBackup] Đã khôi phục và hợp nhất dữ liệu state_db.json từ GitHub (${CLOUD_BRANCH}) - ${cloudDb.doctors.length} bác sĩ`);
         }
       }
     }
@@ -409,22 +446,38 @@ async function restoreDbFromCloudIfNewer() {
       if (rawUJson) {
         const cloudUsers = JSON.parse(rawUJson);
         if (Array.isArray(cloudUsers) && cloudUsers.length > 0) {
-          const localUsers = loadUsers();
-          if (!localUsers || localUsers.length <= cloudUsers.length) {
-            fs.writeFileSync(USERS_FILE, JSON.stringify(cloudUsers, null, 2), 'utf-8');
-            console.log(`[CloudBackup] Đã khôi phục users.json từ GitHub (${CLOUD_BRANCH}) - ${cloudUsers.length} tài khoản`);
+          const localUsers = loadUsers() || [];
+          const userMap = new Map();
+          for (const u of localUsers) {
+            if (u && (u.id || u.username)) userMap.set(u.id || u.username, u);
           }
+          for (const cu of cloudUsers) {
+            if (cu && (cu.id || cu.username)) {
+              const k = cu.id || cu.username;
+              userMap.set(k, { ...(userMap.get(k) || {}), ...cu });
+            }
+          }
+          const mergedUsers = Array.from(userMap.values());
+          fs.writeFileSync(USERS_FILE, JSON.stringify(mergedUsers, null, 2), 'utf-8');
+          console.log(`[CloudBackup] Đã khôi phục và hợp nhất users.json từ GitHub (${CLOUD_BRANCH}) - ${mergedUsers.length} tài khoản`);
         }
       }
     }
   } catch (e) {
     console.warn('[CloudBackup] Không thể tải bản sao lưu từ GitHub:', e.message);
+  } finally {
+    initialCloudSyncDone = true;
   }
 }
 
 async function pushDbToCloudNow() {
   const token = getCloudToken();
   if (!token) return;
+  // Không bao giờ đẩy dữ liệu lên đám mây trước khi khôi phục dữ liệu ban đầu
+  if (!initialCloudSyncDone) {
+    scheduleCloudBackup(2000);
+    return;
+  }
   if (cloudSyncInProgress) {
     cloudSyncPending = true;
     return;
@@ -465,7 +518,20 @@ function loadDb() {
       }
     }
   } catch (e) {
-    console.warn('Could not read state_db.json, initializing fresh state:', e);
+    console.warn('Could not read state_db.json, trying backup:', e);
+  }
+  // Thử phục hồi từ file backup nếu file chính có sự cố
+  try {
+    const backupFile = DATA_FILE.replace('.json', '.backup.json');
+    if (fs.existsSync(backupFile)) {
+      const parsedBackup = JSON.parse(fs.readFileSync(backupFile, 'utf-8'));
+      if (parsedBackup && Array.isArray(parsedBackup.doctors) && parsedBackup.doctors[0]?.shortName) {
+        console.log('[loadDb] Đã phục hồi dữ liệu từ bản sao lưu state_db.backup.json');
+        return parsedBackup;
+      }
+    }
+  } catch (e) {
+    console.warn('Could not read backup file:', e);
   }
   const initial = createInitialDbState();
   saveDb(initial);
@@ -482,6 +548,10 @@ function saveDb(stateObj = db) {
   stateObj.version = Date.now();
   try {
     fs.writeFileSync(DATA_FILE, JSON.stringify(stateObj, null, 2), 'utf-8');
+    const backupFile = DATA_FILE.replace('.json', '.backup.json');
+    try {
+      fs.writeFileSync(backupFile, JSON.stringify(stateObj, null, 2), 'utf-8');
+    } catch (_) {}
     scheduleCloudBackup(2000);
   } catch (e) {
     console.warn('Could not write state_db.json:', e);

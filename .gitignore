@@ -7,3 +7,4 @@ test_data_archive/
 uploads_his/
 uploads_clinical/
 __pycache__/
+state_db.backup.json

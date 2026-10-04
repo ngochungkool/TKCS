@@ -176,28 +176,32 @@ function getAllowedIntervalsForDate(doc, dateKey) {
   const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
   const prevDateKey = addDaysToKey(dateKey, -1);
-  const prevShift = getEffectiveShiftForDate(doc, prevDateKey);
-  const todayShift = getEffectiveShiftForDate(doc, dateKey);
+  const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevDateKey]) || '';
+  const todayShift = (doc.scheduleByDate && doc.scheduleByDate[dateKey]) || (prevShift === 'TRUC' ? 'RA_TRUC' : 'LAM_NGAY');
 
   const intervals = [];
 
+  // 1. Nửa sau ca trực hôm qua (tua 07:00 hôm qua -> 07:00 hôm nay):
   if (prevShift === 'TRUC') {
-    intervals.push([dayStartMin + 0, dayStartMin + 420]);
+    intervals.push([dayStartMin + 0, dayStartMin + 420]); // 00:00 -> 07:00
   }
 
+  // 2. Ca làm việc trong ngày hôm nay:
   if (todayShift === 'TRUC') {
-    intervals.push([dayStartMin + 0, dayStartMin + 1440]);
-  } else if (todayShift === 'RA_TRUC') {
+    // Tua trực bắt đầu từ 07:00 sáng hôm nay đến hết ngày hôm nay (tiếp tục sang sáng hôm sau)
+    intervals.push([dayStartMin + 420, dayStartMin + 1440]); // 07:00 -> 24:00
+  } else if (todayShift === 'RA_TRUC' || prevShift === 'TRUC') {
+    // Sau 07:00: Ra trực buổi sáng ngày thường (giao ban & giải quyết hồ sơ bệnh án)
     if (!isWeekend) {
-      intervals.push([dayStartMin + 420, dayStartMin + 690]);
+      intervals.push([dayStartMin + 420, dayStartMin + 690]); // 07:00 -> 11:30
     }
   } else if (todayShift === 'LAM_NGAY') {
-    intervals.push([dayStartMin + 420, dayStartMin + 690]);
-    intervals.push([dayStartMin + 810, dayStartMin + 1020]);
+    intervals.push([dayStartMin + 420, dayStartMin + 690]);  // 07:00 -> 11:30
+    intervals.push([dayStartMin + 810, dayStartMin + 1020]); // 13:30 -> 17:00
   } else if (todayShift === 'NGHI_SANG') {
-    intervals.push([dayStartMin + 810, dayStartMin + 1020]);
+    intervals.push([dayStartMin + 810, dayStartMin + 1020]); // 13:30 -> 17:00
   } else if (todayShift === 'NGHI_CHIEU') {
-    intervals.push([dayStartMin + 420, dayStartMin + 690]);
+    intervals.push([dayStartMin + 420, dayStartMin + 690]);  // 07:00 -> 11:30
   }
 
   intervals.sort((a, b) => a[0] - b[0]);
@@ -240,35 +244,48 @@ function getDoctorShiftInfoAtMinute(doc, epochMin) {
   const dateKey = getDateKey(dt);
   const prevKey = addDaysToKey(dateKey, -1);
   const hh = dt.getHours();
+  const mm = dt.getMinutes();
+  const minsOfDay = hh * 60 + mm;
 
-  const prevShift = getEffectiveShiftForDate(doc, prevKey);
-  const todayShift = getEffectiveShiftForDate(doc, dateKey);
+  const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevKey]) || '';
+  const todayShift = (doc.scheduleByDate && doc.scheduleByDate[dateKey]) || '';
 
-  if (hh < 7) {
-    if (prevShift === 'TRUC' || todayShift === 'TRUC') {
+  // TRƯỜNG HỢP 1: TRƯỚC 07:00 SÁNG (00:00 - 06:59)
+  // Thuộc về ca trực của ngày hôm qua (bắt đầu từ 07:00 hôm qua đến 07:00 hôm nay)
+  if (minsOfDay < 420) {
+    if (prevShift === 'TRUC') {
       return {
         badgeText: 'Trực',
         badgeCls: 'badge-truc',
-        subText: 'Đang trực'
+        subText: 'Đang trực (tua 07:00 hôm qua – 07:00 hôm nay)'
       };
     }
-    const meta = SHIFT_METADATA[todayShift] || { label: todayShift, badgeCls: 'badge-off' };
     return {
-      badgeText: meta.label,
+      badgeText: 'Ngoài giờ',
       badgeCls: 'badge-off',
-      subText: 'Ngoài giờ làm việc (Chưa đến 07:00)'
+      subText: 'Ngoài giờ làm việc (Trước 07:00)'
     };
   }
 
-  if (todayShift === 'RA_TRUC') {
+  // TRƯỜNG HỢP 2: TỪ 07:00 SÁNG TRỞ ĐI (07:00 - 23:59)
+  // 2.1. Bác sĩ hôm nay TRỰC (bắt đầu từ 07:00 hôm nay đến 07:00 hôm sau):
+  if (todayShift === 'TRUC') {
+    return {
+      badgeText: 'Trực',
+      badgeCls: 'badge-truc',
+      subText: 'Đang trực (tua 07:00 hôm nay – 07:00 hôm sau)'
+    };
+  }
+
+  // 2.2. Bác sĩ trực hôm qua -> Sau 07:00 hôm nay chuyển sang RA TRỰC:
+  if (prevShift === 'TRUC' || todayShift === 'RA_TRUC') {
     const dayOfWeek = dt.getDay();
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-    const minsOfDay = hh * 60 + dt.getMinutes();
-    if (!isWeekend && minsOfDay < 11 * 60 + 30) {
+    if (!isWeekend && minsOfDay < 690) { // Trước 11:30 ngày thường
       return {
         badgeText: 'Ra trực',
         badgeCls: 'badge-ratruc',
-        subText: 'Đang trực từ hôm trước'
+        subText: 'Ra trực (Giao ban & làm việc 07:00 – 11:30)'
       };
     }
     return {
@@ -278,7 +295,9 @@ function getDoctorShiftInfoAtMinute(doc, epochMin) {
     };
   }
 
-  const meta = SHIFT_METADATA[todayShift] || { label: todayShift, badgeCls: 'badge-truc', desc: '' };
+  // 2.3. Các ca làm việc khác trong ngày:
+  const effectiveShift = todayShift || 'LAM_NGAY';
+  const meta = SHIFT_METADATA[effectiveShift] || { label: effectiveShift, badgeCls: 'badge-off', desc: '' };
   return {
     badgeText: meta.label,
     badgeCls: meta.badgeCls,
@@ -1114,7 +1133,21 @@ function setupTimelineDragToPan() {
 document.addEventListener('DOMContentLoaded', () => {
   const todayStr = getDateKey(new Date());
   const dateInput = document.getElementById('view-date-picker');
-  if (dateInput) dateInput.value = todayStr;
+  if (dateInput) {
+    dateInput.value = todayStr;
+    dateInput.addEventListener('change', () => {
+      const picked = dateInput.value;
+      if (!picked) return;
+      if (picked === todayStr) {
+        windowOffsetMinutes = 0;
+      } else {
+        const targetMin = dateAndTimeToEpochMin(picked, '07:00');
+        const nowMin = getNowEpochMinutes();
+        windowOffsetMinutes = targetMin - (nowMin - 15);
+      }
+      renderAll();
+    });
+  }
 
   connectRealtimeServer();
   setupTimelineDragToPan();
@@ -1136,6 +1169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('btn-jump-now')?.addEventListener('click', () => {
     windowOffsetMinutes = 0;
+    if (dateInput) dateInput.value = getDateKey(new Date());
     renderAll();
     showToast('🔴 LIVE: Đã đưa dòng thời gian về thời điểm hiện tại');
   });

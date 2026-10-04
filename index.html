@@ -246,9 +246,19 @@
       const minOfDay = now.getHours() * 60 + now.getMinutes();
       const isWeekend = now.getDay() === 0 || now.getDay() === 6;
 
-      if (minOfDay < 420 && prevShift === 'TRUC') return true;
+      // Trước 07:00: Nửa sau ca trực hôm qua
+      if (minOfDay < 420) {
+        if (prevShift === 'TRUC') return true;
+        return false;
+      }
+
+      // Từ 07:00 trở đi: Bác sĩ trực hôm nay (kéo dài đến 07:00 hôm sau)
       if (todayShift === 'TRUC') return true;
-      if (todayShift === 'RA_TRUC' && !isWeekend && minOfDay >= 420 && minOfDay < 690) return true;
+
+      // Ra trực buổi sáng ngày thường (07:00 - 11:30)
+      if ((todayShift === 'RA_TRUC' || prevShift === 'TRUC') && !isWeekend && minOfDay >= 420 && minOfDay < 690) return true;
+
+      // Làm ngày thông thường
       if (todayShift === 'LAM_NGAY' && ((minOfDay >= 420 && minOfDay < 690) || (minOfDay >= 810 && minOfDay < 1020))) return true;
       return false;
     }
