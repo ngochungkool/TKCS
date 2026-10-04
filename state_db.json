@@ -1,5 +1,5 @@
 {
-  "version": 1791088521662,
+  "version": 1791088542364,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -428,9 +428,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -482,9 +483,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -534,9 +536,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -588,9 +591,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -640,9 +644,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -692,9 +697,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -746,9 +752,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -798,9 +805,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -852,9 +860,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -1278,9 +1287,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791088507586
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -2886,7 +2896,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:21.263Z"
+      "updatedAt": "2026-10-04T04:35:42.363Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -4927,7 +4937,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:21.263Z"
+      "updatedAt": "2026-10-04T04:35:42.363Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6142,7 +6152,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:21.264Z"
+      "updatedAt": "2026-10-04T04:35:42.363Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10075,7 +10085,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:21.264Z"
+      "updatedAt": "2026-10-04T04:35:42.363Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10979,7 +10989,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:21.264Z"
+      "updatedAt": "2026-10-04T04:35:42.364Z"
     }
   },
   "episodeConsultations": {},
