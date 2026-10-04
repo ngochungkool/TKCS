@@ -11,6 +11,7 @@
       'Điện giải đồ',
       'Sinh hoá',
       'Glucose máu',
+      'Khí máu động mạch',
       'Khác'
     ],
     ct: [
@@ -59,8 +60,8 @@
     tk1:  { wingA: [1, 9],  wingB: [10, 24], extraTasks: [] },
     tk2:  { wingA: [1, 11], wingB: [12, 25], extraTasks: ['Rút dẫn lưu', 'Rút sonde tiểu', 'Cắt chỉ'] },
     tk3:  { wingA: [1, 9],  wingB: [10, 24], extraTasks: [] },
-    tk4:  { wingA: [1, 9],  wingB: [10, 24], extraTasks: [] },
-    hstk: { wingA: [1, 9],  wingB: [10, 24], extraTasks: [] }
+    tk4:  { wingA: [1, 16], wingB: [17, 31], extraTasks: [] },
+    hstk: { wingA: [1, 12], wingB: null,     extraTasks: ['Cai máy thở', 'Đặt NKQ thở máy', 'Rút NKQ', 'Khai khí quản', 'Đặt tĩnh mạch trung tâm'] }
   };
 
   function getCurrentRoomConfig() {
@@ -218,12 +219,12 @@
   function buildAllBedOptionsHtml(currentMabn) {
     const { wingA, wingB } = getCurrentRoomConfig();
     const endA = wingA[1];
-    const endB = wingB[1];
+    const endB = wingB ? wingB[1] : endA;
     const options = [];
     for (let i = 1; i <= endB; i++) {
       const mainCode = String(i);
       const foldCode = `${i}X`;
-      const wingLabel = i <= endA ? 'Dãy A' : 'Dãy B';
+      const wingLabel = !wingB ? 'Hồi sức' : (i <= endA ? 'Dãy A' : 'Dãy B');
 
       for (const code of [mainCode, foldCode]) {
         const isFold = code.endsWith('X');
@@ -1132,6 +1133,16 @@
       });
     });
 
+    bodyEl.querySelectorAll('.tk4-sc-row-card').forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('input, select, button, a')) return;
+        const id = card.id;
+        const mabn = id.replace('tk4-sc-row-', '');
+        if (mabn) openTk4SurgConsultDialog(mabn);
+      });
+    });
+
     bodyEl.querySelectorAll('[data-remove-tk4-consult]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1368,31 +1379,32 @@
 
   function openAddPatientToScDialog() {
     const dlg = document.getElementById('tk4-pick-patient-sc-dialog');
-    if (!dlg) return;
+    const bodyEl = document.getElementById('tk4-pick-patient-sc-body');
+    const titleEl = document.getElementById('tk4-pick-sc-title');
+    if (!dlg || !bodyEl) return;
 
-    const listEl = document.getElementById('tk4-pick-patient-sc-list');
-    const searchInp = document.getElementById('tk4-pick-patient-sc-search');
-    if (searchInp) {
-      searchInp.value = '';
+    const curDateKey = getSelectedDateKey();
+    if (titleEl) {
+      titleEl.innerHTML = `➕ Chọn bệnh nhân vào Hội chẩn mổ (${formatDateDisplayVN(curDateKey)})`;
     }
 
-    function renderScPickerList(query = '') {
-      if (!listEl) return;
-      const curDateKey = getSelectedDateKey();
-      const allActive = Object.values(tk1State.patientRecords || {})
-        .filter(r => !r.removed?.isRemoved);
+    const allActivePatients = Object.values(tk1State.patientRecords || {})
+      .filter(r => !r.removed?.isRemoved);
 
-      // Filter: only patients NOT yet in today's consultation list
-      const available = allActive.filter(r => {
-        const sc = getPatientSurgicalConsultation(r, curDateKey);
-        return !sc || !sc.isConsulted;
+    let isConsultedCollapsed = true;
+
+    function renderScPicker(searchTerm = '') {
+      const term = searchTerm.toLowerCase().trim();
+
+      const filtered = allActivePatients.filter(p => {
+        if (!term) return true;
+        const b = getBedOfPatient(p.mabn) || '';
+        return `${p.hoten || ''} ${p.mabn || ''} ${p.tuoi || ''} ${b} ${p.chanDoanHis || ''}`.toLowerCase().includes(term);
       });
 
-      const q = query.toLowerCase().trim();
-      const filtered = available.filter(r => {
-        if (!q) return true;
-        const bed = getBedOfPatient(r.mabn) || '';
-        return `${r.hoten} ${r.mabn} ${r.tuoi} ${bed} ${r.chanDoanHis || ''}`.toLowerCase().includes(q);
+      const unconsultedList = filtered.filter(p => {
+        const sc = getPatientSurgicalConsultation(p, curDateKey);
+        return !sc || !sc.isConsulted;
       }).sort((a, b) => {
         const bedA = getBedOfPatient(a.mabn);
         const bedB = getBedOfPatient(b.mabn);
@@ -1402,58 +1414,140 @@
         return a.hoten.localeCompare(b.hoten, 'vi');
       });
 
-      if (filtered.length === 0) {
-        listEl.innerHTML = `
-          <div style="text-align:center;padding:1.8rem;color:#64748b;font-size:0.85rem;">
-            ${q ? `Không tìm thấy bệnh nhân nào khớp "<strong>${q}</strong>".` : 'Tất cả bệnh nhân trong phòng đã được đưa vào danh sách hội chẩn mổ hôm nay.'}
+      const consultedList = filtered.filter(p => {
+        const sc = getPatientSurgicalConsultation(p, curDateKey);
+        return Boolean(sc && sc.isConsulted);
+      }).sort((a, b) => {
+        const bedA = getBedOfPatient(a.mabn);
+        const bedB = getBedOfPatient(b.mabn);
+        if (bedA && !bedB) return -1;
+        if (!bedA && bedB) return 1;
+        if (bedA && bedB) return bedA.localeCompare(bedB, undefined, { numeric: true });
+        return a.hoten.localeCompare(b.hoten, 'vi');
+      });
+
+      const showConsulted = term.length > 0 ? true : !isConsultedCollapsed;
+
+      bodyEl.innerHTML = `
+        <div style="margin-bottom:0.75rem;">
+          <input
+            type="text"
+            id="tk4-sc-picker-search-input"
+            value="${searchTerm.replace(/"/g, '&quot;')}"
+            placeholder="🔍 Tìm kiếm bệnh nhân theo tên, số giường, mã BN..."
+            style="width:100%;height:38px;padding:6px 12px;border:1.5px solid #94a3b8;border-radius:8px;font-size:0.86rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;outline:none;"
+          />
+        </div>
+
+        <div style="font-size:0.83rem;color:#475569;margin-bottom:0.6rem;">
+          Bấm chọn bệnh nhân để đưa ngay vào danh sách <strong>Hội chẩn mổ</strong> hôm nay:
+        </div>
+
+        <!-- PHẦN 1: BỆNH NHÂN CHƯA CÓ TRONG DS HỘI CHẨN MỔ (LUÔN MỞ, NỔI BẬT) -->
+        <div style="margin-bottom:1rem;">
+          <div style="font-size:0.85rem;font-weight:800;color:#15803d;margin-bottom:0.45rem;display:flex;align-items:center;gap:6px;">
+            <span>⚠️ Bệnh nhân phòng Thần kinh 4 chưa có trong DS Hội chẩn mổ (${unconsultedList.length} BN)</span>
           </div>
-        `;
-        return;
+          ${
+            unconsultedList.length > 0
+              ? `<div style="display:flex;flex-wrap:wrap;gap:0.45rem;max-height:35vh;overflow-y:auto;padding:2px;">
+                  ${unconsultedList.map(p => {
+                    const bedCode = getBedOfPatient(p.mabn);
+                    const bedLabel = bedCode ? formatBedLabel(bedCode) : 'Chưa xếp giường';
+                    return `
+                      <button
+                        type="button"
+                        class="tk1-unassigned-chip"
+                        style="cursor:pointer;border-color:#16a34a;background:#f0fdf4;"
+                        data-pick-sc-mabn="${p.mabn}"
+                        title="Bấm để đưa ${p.hoten} vào danh sách Hội chẩn mổ hôm nay"
+                      >
+                        <span><strong>${p.hoten}</strong> (${p.tuoi || '--'}T)</span>
+                        <span class="btn-chip-pick-bed" style="background:#15803d;">${bedLabel}</span>
+                      </button>
+                    `;
+                  }).join('')}
+                </div>`
+              : `<div style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">Không có bệnh nhân nào${term ? ' khớp từ khoá' : ''}.</div>`
+          }
+        </div>
+
+        <!-- PHẦN 2: BỆNH NHÂN ĐÃ CÓ TRONG DS HỘI CHẨN MỔ (THƯỜNG XUYÊN THU GỌN) -->
+        <div style="border-top:1px solid #e2e8f0;padding-top:0.75rem;">
+          <button
+            type="button"
+            id="btn-toggle-sc-consulted-section"
+            style="width:100%;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:0.83rem;font-weight:700;color:#334155;"
+          >
+            <span>✓ Đã có trong DS Hội chẩn mổ (${consultedList.length} BN — Bấm để mở chi tiết)</span>
+            <span style="font-size:0.8rem;color:#64748b;">${showConsulted ? '▾ Thu gọn' : '▸ Bấm để mở rộng'}</span>
+          </button>
+
+          <div id="tk4-sc-consulted-wrap" style="display:${showConsulted ? 'flex' : 'none'};flex-wrap:wrap;gap:0.45rem;margin-top:0.6rem;max-height:35vh;overflow-y:auto;padding:2px;">
+            ${
+              consultedList.length > 0
+                ? consultedList.map(p => {
+                    const bedCode = getBedOfPatient(p.mabn);
+                    const bedLabel = bedCode ? formatBedLabel(bedCode) : 'Chưa xếp';
+                    return `
+                      <button
+                        type="button"
+                        class="tk1-unassigned-chip"
+                        style="cursor:pointer;border-color:#93c5fd;background:#eff6ff;"
+                        data-open-detail-sc-mabn="${p.mabn}"
+                        title="Bấm để xem / sửa chi tiết hội chẩn mổ của ${p.hoten}"
+                      >
+                        <span><strong>${p.hoten}</strong> (${p.tuoi || '--'}T)</span>
+                        <span class="btn-chip-pick-bed" style="background:#0284c7;">${bedLabel} · Sửa chi tiết</span>
+                      </button>
+                    `;
+                  }).join('')
+                : `<div style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">Chưa có bệnh nhân nào trong danh sách.</div>`
+            }
+          </div>
+        </div>
+      `;
+
+      const searchInp = document.getElementById('tk4-sc-picker-search-input');
+      if (searchInp) {
+        searchInp.focus();
+        searchInp.selectionStart = searchInp.selectionEnd = searchInp.value.length;
+        searchInp.addEventListener('input', (e) => {
+          renderScPicker(e.target.value);
+        });
       }
 
-      listEl.innerHTML = filtered.map(rec => {
-        const bedCode = getBedOfPatient(rec.mabn);
-        const bedLabel = bedCode ? formatBedLabel(bedCode) : 'Chưa xếp giường';
-        return `
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#ffffff;border:1px solid #e2e8f0;border-radius:9px;gap:8px;">
-            <div style="flex:1;min-width:0;">
-              <div style="display:flex;align-items:center;gap:6px;">
-                <span class="tk1-bed-num-badge" style="min-width:24px;height:20px;font-size:0.72rem;padding:0 5px;background:#e0e7ff;color:#3730a3;border:1px solid #c7d2fe;">${bedLabel}</span>
-                <span style="font-weight:800;color:#0f172a;font-size:0.88rem;">${rec.hoten}</span>
-                <span style="font-size:0.75rem;color:#64748b;">· ${rec.tuoi || '--'}</span>
-              </div>
-              <div style="font-size:0.73rem;color:#64748b;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-                HIS: ${rec.chanDoanHis || 'Chưa có chẩn đoán ban đầu'}
-              </div>
-            </div>
-            <button
-              type="button"
-              class="btn-primary-sm"
-              style="background:#15803d;border-color:#14532d;padding:4px 10px;font-size:0.78rem;font-weight:800;white-space:nowrap;cursor:pointer;"
-              data-pick-sc-mabn="${rec.mabn}"
-            >
-              ➕ Thêm vào HC mổ
-            </button>
-          </div>
-        `;
-      }).join('');
+      const toggleBtn = document.getElementById('btn-toggle-sc-consulted-section');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          isConsultedCollapsed = !isConsultedCollapsed;
+          const currentTerm = document.getElementById('tk4-sc-picker-search-input')?.value || '';
+          renderScPicker(currentTerm);
+        });
+      }
 
-      listEl.querySelectorAll('[data-pick-sc-mabn]').forEach(btn => {
+      bodyEl.querySelectorAll('[data-pick-sc-mabn]').forEach(btn => {
         btn.addEventListener('click', () => {
           const mabn = btn.getAttribute('data-pick-sc-mabn');
           if (mabn) {
             dlg.close();
-            addPatientToSurgicalConsultation(mabn, true);
+            addPatientToSurgicalConsultation(mabn, false);
+          }
+        });
+      });
+
+      bodyEl.querySelectorAll('[data-open-detail-sc-mabn]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const mabn = btn.getAttribute('data-open-detail-sc-mabn');
+          if (mabn) {
+            dlg.close();
+            openTk4SurgConsultDialog(mabn);
           }
         });
       });
     }
 
-    if (searchInp) {
-      searchInp.oninput = () => renderScPickerList(searchInp.value);
-    }
-
-    renderScPickerList('');
+    renderScPicker('');
     dlg.showModal();
   }
 
@@ -1747,51 +1841,82 @@
 
     const { wingA, wingB } = getCurrentRoomConfig();
     const [startA, endA] = wingA;
-    const [startB, endB] = wingB;
     const totalBedsA = endA - startA + 1;
-    const totalBedsB = endB - startB + 1;
 
+    const wingCardA = document.getElementById('tk1-wing-card-a');
+    const wingCardB = document.getElementById('tk1-wing-card-b');
     const wingATitle = document.getElementById('tk1-wing-a-title');
     const wingBTitle = document.getElementById('tk1-wing-b-title');
-    if (wingATitle) {
-      wingATitle.textContent = `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
-    }
-    if (wingBTitle) {
-      wingBTitle.textContent = `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
-    }
+    const wingASub = document.getElementById('tk1-wing-a-sub');
+    const wingBSub = document.getElementById('tk1-wing-b-sub');
+    const wingABody = document.getElementById('tk1-wing-a-body');
+    const wingBBody = document.getElementById('tk1-wing-b-body');
 
     let countMainA = 0, countFoldA = 0;
     for (let i = startA; i <= endA; i++) {
       if (tk1State.bedAssignments[String(i)]) countMainA++;
       if (tk1State.bedAssignments[`${i}X`]) countFoldA++;
     }
-    let countMainB = 0, countFoldB = 0;
-    for (let i = startB; i <= endB; i++) {
-      if (tk1State.bedAssignments[String(i)]) countMainB++;
-      if (tk1State.bedAssignments[`${i}X`]) countFoldB++;
-    }
 
-    const wingASub = document.getElementById('tk1-wing-a-sub');
-    const wingBSub = document.getElementById('tk1-wing-b-sub');
-    if (wingASub) {
-      wingASub.textContent = `Đang nằm: ${countMainA}/${totalBedsA}${countFoldA > 0 ? ` (+${countFoldA} xếp)` : ''} · Trống: ${totalBedsA - countMainA}`;
-    }
-    if (wingBSub) {
-      wingBSub.textContent = `Đang nằm: ${countMainB}/${totalBedsB}${countFoldB > 0 ? ` (+${countFoldB} xếp)` : ''} · Trống: ${totalBedsB - countMainB}`;
-    }
+    if (!wingB) {
+      if (wingCardB) wingCardB.style.display = 'none';
+      if (wingCardA) {
+        wingCardA.style.gridColumn = '1 / -1';
+        wingCardA.style.width = '100%';
+      }
+      if (wingATitle) {
+        wingATitle.textContent = `DÃY GIƯỜNG HỒI SỨC — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
+      }
+      if (wingASub) {
+        wingASub.textContent = `Đang nằm: ${countMainA}/${totalBedsA}${countFoldA > 0 ? ` (+${countFoldA} xếp)` : ''} · Trống: ${totalBedsA - countMainA}`;
+      }
+      if (wingABody) {
+        wingABody.style.display = 'grid';
+        wingABody.style.gridTemplateColumns = 'repeat(auto-fit, minmax(360px, 1fr))';
+        wingABody.style.gap = '0.75rem';
+        const listA = [];
+        for (let i = startA; i <= endA; i++) listA.push(renderBedPairHtml(i));
+        wingABody.innerHTML = listA.join('');
+      }
+    } else {
+      if (wingCardB) wingCardB.style.display = '';
+      if (wingCardA) {
+        wingCardA.style.gridColumn = '';
+        wingCardA.style.width = '';
+      }
+      const [startB, endB] = wingB;
+      const totalBedsB = endB - startB + 1;
+      let countMainB = 0, countFoldB = 0;
+      for (let i = startB; i <= endB; i++) {
+        if (tk1State.bedAssignments[String(i)]) countMainB++;
+        if (tk1State.bedAssignments[`${i}X`]) countFoldB++;
+      }
 
-    const wingABody = document.getElementById('tk1-wing-a-body');
-    const wingBBody = document.getElementById('tk1-wing-b-body');
-
-    if (wingABody) {
-      const listA = [];
-      for (let i = startA; i <= endA; i++) listA.push(renderBedPairHtml(i));
-      wingABody.innerHTML = listA.join('');
-    }
-    if (wingBBody) {
-      const listB = [];
-      for (let i = startB; i <= endB; i++) listB.push(renderBedPairHtml(i));
-      wingBBody.innerHTML = listB.join('');
+      if (wingATitle) {
+        wingATitle.textContent = `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
+      }
+      if (wingBTitle) {
+        wingBTitle.textContent = `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
+      }
+      if (wingASub) {
+        wingASub.textContent = `Đang nằm: ${countMainA}/${totalBedsA}${countFoldA > 0 ? ` (+${countFoldA} xếp)` : ''} · Trống: ${totalBedsA - countMainA}`;
+      }
+      if (wingBSub) {
+        wingBSub.textContent = `Đang nằm: ${countMainB}/${totalBedsB}${countFoldB > 0 ? ` (+${countFoldB} xếp)` : ''} · Trống: ${totalBedsB - countMainB}`;
+      }
+      if (wingABody) {
+        wingABody.style.display = 'flex';
+        wingABody.style.gridTemplateColumns = '';
+        wingABody.style.gap = '0.65rem';
+        const listA = [];
+        for (let i = startA; i <= endA; i++) listA.push(renderBedPairHtml(i));
+        wingABody.innerHTML = listA.join('');
+      }
+      if (wingBBody) {
+        const listB = [];
+        for (let i = startB; i <= endB; i++) listB.push(renderBedPairHtml(i));
+        wingBBody.innerHTML = listB.join('');
+      }
     }
 
     const slotEl = document.getElementById('ward-shared-workspace-dom') || document.getElementById('feature-slot-tk1');
@@ -2115,12 +2240,50 @@
 
     const { wingA, wingB } = getCurrentRoomConfig();
     const [startA, endA] = wingA;
-    const [startB, endB] = wingB;
 
     const tilesA = [];
     for (let i = startA; i <= endA; i++) tilesA.push(renderVisualBedTileHtml(i, mabn));
-    const tilesB = [];
-    for (let i = startB; i <= endB; i++) tilesB.push(renderVisualBedTileHtml(i, mabn));
+
+    let wingsGridHtml = '';
+    if (!wingB) {
+      wingsGridHtml = `
+        <div class="tk1-vbed-wings-wrap" style="grid-template-columns: 1fr;">
+          <div class="tk1-vbed-wing-box">
+            <div class="tk1-vbed-wing-title">
+              <span>Dãy Giường Hồi Sức (${startA} – ${endA})</span>
+            </div>
+            <div class="tk1-vbed-grid grid-wing-a" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
+              ${tilesA.join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      const [startB, endB] = wingB;
+      const tilesB = [];
+      for (let i = startB; i <= endB; i++) tilesB.push(renderVisualBedTileHtml(i, mabn));
+      wingsGridHtml = `
+        <div class="tk1-vbed-wings-wrap">
+          <div class="tk1-vbed-wing-box">
+            <div class="tk1-vbed-wing-title">
+              <span>Dãy A (${startA} – ${endA})</span>
+            </div>
+            <div class="tk1-vbed-grid grid-wing-a">
+              ${tilesA.join('')}
+            </div>
+          </div>
+
+          <div class="tk1-vbed-wing-box">
+            <div class="tk1-vbed-wing-title" style="color:#0f766e;">
+              <span>Dãy B (${startB} – ${endB})</span>
+            </div>
+            <div class="tk1-vbed-grid grid-wing-b">
+              ${tilesB.join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
     bodyEl.innerHTML = `
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.65rem;font-size:0.8rem;color:#334155;">
@@ -2138,25 +2301,7 @@
         }
       </div>
 
-      <div class="tk1-vbed-wings-wrap">
-        <div class="tk1-vbed-wing-box">
-          <div class="tk1-vbed-wing-title">
-            <span>Dãy A (${startA} – ${endA})</span>
-          </div>
-          <div class="tk1-vbed-grid grid-wing-a">
-            ${tilesA.join('')}
-          </div>
-        </div>
-
-        <div class="tk1-vbed-wing-box">
-          <div class="tk1-vbed-wing-title" style="color:#0f766e;">
-            <span>Dãy B (${startB} – ${endB})</span>
-          </div>
-          <div class="tk1-vbed-grid grid-wing-b">
-            ${tilesB.join('')}
-          </div>
-        </div>
-      </div>
+      ${wingsGridHtml}
     `;
 
     const btnUnassign = document.getElementById('btn-unassign-bed-now');
@@ -2229,9 +2374,10 @@
     }
     barEl.style.display = 'flex';
     const selectedSet = new Set(modalDraftTasks.thuThuat || []);
+    const labelTitle = currentRoomKey === 'hstk' ? '🫁 Thủ thuật Hồi sức:' : (currentRoomKey === 'tk2' ? '🩹 Thủ thuật (Thần kinh 2):' : '🩹 Thủ thuật:');
     barEl.innerHTML = `
       <span style="font-size:0.79rem;font-weight:800;color:#0f766e;margin-right:4px;">
-        🩹 Thủ thuật (Thần kinh 2):
+        ${labelTitle}
       </span>
       ${extraTasks.map(taskName => {
         const isActive = selectedSet.has(taskName);
@@ -2877,7 +3023,7 @@
 
     const { wingA, wingB } = getCurrentRoomConfig();
     const [startA, endA] = wingA;
-    const [startB, endB] = wingB;
+    const [startB, endB] = wingB || [0, 0];
 
     function collectWingItems(startBed, endBed) {
       const items = [];
@@ -2897,7 +3043,7 @@
     }
 
     const wingAItems = collectWingItems(startA, endA);
-    const wingBItems = collectWingItems(startB, endB);
+    const wingBItems = wingB ? collectWingItems(startB, endB) : [];
 
     const measureCanvas = document.createElement('canvas');
     const mCtx = measureCanvas.getContext('2d');
@@ -2966,8 +3112,29 @@
       };
     }
 
-    const layoutsA = wingAItems.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
-    const layoutsB = wingBItems.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
+    let layoutsA = [];
+    let layoutsB = [];
+    let colTitleA = '';
+    let colTitleB = '';
+
+    if (!wingB) {
+      const half = Math.ceil(wingAItems.length / 2);
+      const itemsA = wingAItems.slice(0, half);
+      const itemsB = wingAItems.slice(half);
+      layoutsA = itemsA.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
+      layoutsB = itemsB.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
+      const firstA = itemsA[0]?.label || '01';
+      const lastA = itemsA[itemsA.length - 1]?.label || '06';
+      const firstB = itemsB[0]?.label || '07';
+      const lastB = itemsB[itemsB.length - 1]?.label || '12';
+      colTitleA = `DÃY HỒI SỨC — ${firstA} ĐẾN ${lastA}`;
+      colTitleB = `DÃY HỒI SỨC — ${firstB} ĐẾN ${lastB}`;
+    } else {
+      layoutsA = wingAItems.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
+      layoutsB = wingBItems.map(it => ({ item: it, layout: computeBedBoxLayout(it) }));
+      colTitleA = `DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`;
+      colTitleB = `DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`;
+    }
 
     const totalHeightA = layoutsA.reduce((acc, x) => acc + x.layout.height + 8, 0);
     const totalHeightB = layoutsB.reduce((acc, x) => acc + x.layout.height + 8, 0);
@@ -2993,7 +3160,7 @@
     ctx.fillText('BỆNH VIỆN ĐA KHOA TRUNG TÂM TỈNH GIA LAI  |  KHOA NGOẠI THẦN KINH - CỘT SỐNG', 36, 34);
 
     ctx.font = '800 24px "Be Vietnam Pro", sans-serif';
-    ctx.fillText(`BẢNG ĐI BUỒNG HẰNG NGÀY — ${(tk1State.roomName || 'THẦN KINH 1').toUpperCase()} (DÃY A & DÃY B) — NGÀY ${dateStrVN}`, 36, 72);
+    ctx.fillText(`BẢNG ĐI BUỒNG HẰNG NGÀY — ${(tk1State.roomName || 'THẦN KINH 1').toUpperCase()}${wingB ? ' (DÃY A & DÃY B)' : ''} — NGÀY ${dateStrVN}`, 36, 72);
 
     ctx.textAlign = 'right';
     ctx.font = '700 14px "Be Vietnam Pro", sans-serif';
@@ -3004,12 +3171,12 @@
     ctx.fillRect(leftColX, 110, colWidth, 34);
     ctx.fillStyle = '#ffffff';
     ctx.font = '800 16px "Montserrat", sans-serif';
-    ctx.fillText(`DÃY A — GIƯỜNG ${String(startA).padStart(2, '0')} ĐẾN ${String(endA).padStart(2, '0')}`, leftColX + 14, 133);
+    ctx.fillText(colTitleA, leftColX + 14, 133);
 
     ctx.fillStyle = '#0f766e';
     ctx.fillRect(rightColX, 110, colWidth, 34);
     ctx.fillStyle = '#ffffff';
-    ctx.fillText(`DÃY B — GIƯỜNG ${String(startB).padStart(2, '0')} ĐẾN ${String(endB).padStart(2, '0')}`, rightColX + 14, 133);
+    ctx.fillText(colTitleB, rightColX + 14, 133);
 
     function drawWingColumn(entries, startX, startY, accentColor) {
       let curY = startY;

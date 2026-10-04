@@ -1789,6 +1789,32 @@
     </div>
   </div>
 
+  <!-- MODAL: CHỌN BỆNH NHÂN VÀO HỘI CHẨN MỔ THẦN KINH 4 (ĐỒNG BỘ BOX CHỌN GIƯỜNG) -->
+  <div id="modal-tk4-pick-patient" class="modal-backdrop" onclick="closeTk4PickPatientModal(event)">
+    <div class="modal-card" style="max-width: 680px;" onclick="event.stopPropagation()">
+      <div class="modal-header" style="background:linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);color:#ffffff;padding:0.9rem 1.25rem;display:flex;align-items:center;justify-content:space-between;">
+        <div class="modal-title" style="color:#ffffff;display:flex;align-items:center;gap:8px;">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>CHỌN BỆNH NHÂN VÀO HỘI CHẨN MỔ — THẦN KINH 4</span>
+        </div>
+        <button type="button" class="btn-theater btn-theater-close" style="padding:4px 10px;color:#ffffff;" onclick="closeTk4PickPatientModal()">
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body" id="modal-tk4-pick-patient-body" style="padding:1.1rem 1.25rem;font-family:'Be Vietnam Pro',sans-serif;">
+        <!-- Populated dynamically identically to bed picker -->
+      </div>
+
+      <div class="modal-footer" style="padding:0.75rem 1.25rem;background:#f8fafc;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:0.82rem;color:#64748b;">Bấm chọn bệnh nhân để đưa ngay vào danh sách • Bấm vào thẻ để nhập chi tiết sau</span>
+        <button type="button" class="btn-gb-action" onclick="closeTk4PickPatientModal()">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: THÊM / CHỈNH SỬA CA HỘI CHẨN MỔ THẦN KINH 4 -->
   <div id="modal-tk4-consult" class="modal-backdrop" onclick="closeTk4ConsultModal(event)">
     <div class="modal-card" style="max-width: 680px;" onclick="event.stopPropagation()">
@@ -3513,7 +3539,7 @@
                 : `<span style="background:#fee2e2;color:#991b1b;padding:3px 8px;border-radius:6px;font-weight:800;font-size:0.8rem;border:1px solid #fca5a5;white-space:nowrap;"><i class="fa-solid fa-xmark"></i> Không ĐY</span>`;
 
             html += `
-              <tr>
+              <tr style="cursor:pointer;" onclick="openEditTk4ConsultDialog('${escapeHtml(item.mabn)}')" title="Bấm vào hàng để xem và chỉnh sửa chi tiết duyệt mổ">
                 <td style="text-align:center;font-weight:700;">${idx + 1}</td>
                 <td style="text-align:center;"><span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:6px;font-weight:800;font-size:0.82rem;">${escapeHtml(item.bed || '--')}</span></td>
                 <td style="font-weight:700;color:#0284c7;">${escapeHtml(item.mabn)}</td>
@@ -3523,7 +3549,7 @@
                 <td>${escapeHtml(item.surgeryMethod || '--')}</td>
                 <td style="text-align:center;">${decBadge}</td>
                 <td style="text-align:center;font-weight:700;color:#15803d;">${escapeHtml(item.advancePayment || '--')}</td>
-                <td style="text-align:center;white-space:nowrap;">
+                <td style="text-align:center;white-space:nowrap;" onclick="event.stopPropagation()">
                   <button type="button" class="btn-gb-action" style="padding:3px 8px;font-size:0.75rem;background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;margin-right:4px;" onclick="openEditTk4ConsultDialog('${escapeHtml(item.mabn)}')" title="Chỉnh sửa ca hội chẩn này">
                     <i class="fa-solid fa-pen-to-square"></i> Sửa
                   </button>
@@ -4329,54 +4355,223 @@
     /* =========================================================================
        MODAL & ACTIONS: THẦN KINH 4 HỘI CHẨN MỔ
        ========================================================================= */
-    function openAddTk4ConsultDialog() {
-      const modal = document.getElementById('modal-tk4-consult');
-      if (!modal) return;
+    let isBriefingConsultedCollapsed = true;
 
-      document.getElementById('modal-tk4-consult-title').textContent = 'THÊM CA HỘI CHẨN MỔ — THẦN KINH 4';
-      document.getElementById('modal-tk4-consult-mabn').value = '';
-      document.getElementById('modal-tk4-consult-diag').value = '';
-      document.getElementById('modal-tk4-consult-method').value = '';
-      document.getElementById('modal-tk4-consult-decision').value = 'Đồng ý';
-      document.getElementById('modal-tk4-consult-advance').value = '';
+    function openAddTk4ConsultDialog() {
+      const modal = document.getElementById('modal-tk4-pick-patient');
+      if (!modal) return;
+      renderBriefingTk4Picker('');
+      modal.classList.add('active');
+    }
+
+    function closeTk4PickPatientModal(e) {
+      if (e && e.target !== e.currentTarget && e.target.id !== 'modal-tk4-pick-patient' && !e.target.classList.contains('btn-theater-close')) return;
+      const modal = document.getElementById('modal-tk4-pick-patient');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function renderBriefingTk4Picker(searchTerm = '') {
+      const bodyEl = document.getElementById('modal-tk4-pick-patient-body');
+      if (!bodyEl) return;
 
       const nextDateKey = getNextDateKey(currentDateKey);
-      const dateBadge = document.getElementById('modal-tk4-target-date-badge');
-      if (dateBadge) {
-        dateBadge.textContent = `${formatDateDMY(nextDateKey)} (Ngày mai)`;
-      }
+      const term = (searchTerm || '').toLowerCase().trim();
 
-      const selectWrap = document.getElementById('modal-tk4-consult-select-wrapper');
-      const infoBox = document.getElementById('modal-tk4-consult-patient-info');
-      const selectEl = document.getElementById('modal-tk4-consult-patient-select');
+      const consultedMabnSet = new Set((tk4Consultations || []).map(c => c.mabn));
 
-      if (selectWrap) selectWrap.style.display = 'block';
-      if (infoBox) infoBox.style.display = 'none';
+      const filtered = (inpatientList || []).filter(p => {
+        if (!term) return true;
+        const b = p.bed || '';
+        const r = p.roomName || p.roomKey || '';
+        return `${p.hoten || ''} ${p.mabn || ''} ${p.tuoi || ''} ${b} ${r} ${p.chanDoan || ''}`.toLowerCase().includes(term);
+      });
 
-      // Lấy danh sách bệnh nhân: ưu tiên Thần kinh 4
-      const tk4Patients = (inpatientList || []).filter(p => p.roomKey === 'tk4' || !p.roomKey);
-      const otherPatients = (inpatientList || []).filter(p => p.roomKey && p.roomKey !== 'tk4');
+      // Group 1: TK4 not yet consulted
+      const tk4Unconsulted = filtered.filter(p => (p.roomKey === 'tk4' || !p.roomKey) && !consultedMabnSet.has(p.mabn));
+      // Group 2: Other rooms not yet consulted
+      const otherUnconsulted = filtered.filter(p => p.roomKey && p.roomKey !== 'tk4' && !consultedMabnSet.has(p.mabn));
+      // Group 3: Already in consultations
+      const alreadyInList = (tk4Consultations || []).filter(c => {
+        if (!term) return true;
+        return `${c.hoten || ''} ${c.mabn || ''} ${c.bed || ''}`.toLowerCase().includes(term);
+      });
 
-      let optHtml = '<option value="">-- Chọn bệnh nhân cần duyệt mổ --</option>';
-      if (tk4Patients.length > 0) {
-        optHtml += `<optgroup label="Bệnh nhân Thần kinh 4 (${tk4Patients.length} BN)">`;
-        tk4Patients.forEach(p => {
-          const bedStr = p.bed ? `[${p.bed}] ` : '';
-          optHtml += `<option value="${escapeHtml(p.mabn)}">${bedStr}${escapeHtml(p.hoten)} (${escapeHtml(p.mabn)}) - ${escapeHtml(String(p.tuoi || ''))}T</option>`;
+      const showConsulted = term.length > 0 ? true : !isBriefingConsultedCollapsed;
+
+      bodyEl.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:8px 14px;margin-bottom:12px;font-size:0.85rem;">
+          <span style="color:#1e40af;font-weight:700;"><i class="fa-solid fa-calendar-day"></i> Kế hoạch HC / Mổ cho ngày:</span>
+          <span style="background:#2563eb;color:#ffffff;padding:2px 10px;border-radius:6px;font-weight:800;">${formatDateDMY(nextDateKey)} (Ngày mai)</span>
+        </div>
+
+        <div style="margin-bottom:0.75rem;">
+          <input
+            type="text"
+            id="tk4-briefing-picker-search-input"
+            value="${searchTerm.replace(/"/g, '&quot;')}"
+            placeholder="🔍 Tìm kiếm bệnh nhân theo tên, mã BN, giường..."
+            style="width:100%;height:38px;padding:6px 12px;border:1.5px solid #94a3b8;border-radius:8px;font-size:0.86rem;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;outline:none;"
+          />
+        </div>
+
+        <div style="font-size:0.83rem;color:#475569;margin-bottom:0.6rem;">
+          Bấm chọn bệnh nhân để đưa ngay vào danh sách <strong>Hội chẩn mổ</strong>:
+        </div>
+
+        <!-- PHẦN 1: BỆNH NHÂN THẦN KINH 4 CHƯA CÓ TRONG DS (LUÔN MỞ, NỔI BẬT) -->
+        <div style="margin-bottom:1rem;">
+          <div style="font-size:0.85rem;font-weight:800;color:#1e40af;margin-bottom:0.45rem;display:flex;align-items:center;gap:6px;">
+            <span>⚠️ Bệnh nhân phòng Thần kinh 4 (${tk4Unconsulted.length} BN)</span>
+          </div>
+          ${
+            tk4Unconsulted.length > 0
+              ? `<div style="display:flex;flex-wrap:wrap;gap:0.45rem;max-height:30vh;overflow-y:auto;padding:2px;">
+                  ${tk4Unconsulted.map(p => `
+                    <button
+                      type="button"
+                      class="tk1-unassigned-chip"
+                      style="cursor:pointer;border-color:#2563eb;background:#eff6ff;"
+                      onclick="quickAddBriefingTk4Consult('${escapeHtml(p.mabn)}')"
+                      title="Bấm để đưa ${escapeHtml(p.hoten)} vào danh sách Hội chẩn mổ"
+                    >
+                      <span><strong>${escapeHtml(p.hoten)}</strong> (${escapeHtml(String(p.tuoi || '--'))}T)</span>
+                      <span class="btn-chip-pick-bed" style="background:#004aad;">${escapeHtml(p.bed ? `[${p.bed}]` : 'Chưa có giường')}</span>
+                    </button>
+                  `).join('')}
+                </div>`
+              : `<div style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">Không có bệnh nhân Thần kinh 4 nào${term ? ' khớp từ khoá' : ''}.</div>`
+          }
+        </div>
+
+        <!-- PHẦN 2: BỆNH NHÂN CÁC PHÒNG KHÁC -->
+        ${
+          otherUnconsulted.length > 0
+            ? `<div style="margin-bottom:1rem;">
+                <div style="font-size:0.85rem;font-weight:800;color:#0f766e;margin-bottom:0.45rem;display:flex;align-items:center;gap:6px;">
+                  <span>🏥 Bệnh nhân các phòng khác (${otherUnconsulted.length} BN)</span>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:0.45rem;max-height:25vh;overflow-y:auto;padding:2px;">
+                  ${otherUnconsulted.map(p => `
+                    <button
+                      type="button"
+                      class="tk1-unassigned-chip"
+                      style="cursor:pointer;border-color:#0d9488;background:#f0fdfa;"
+                      onclick="quickAddBriefingTk4Consult('${escapeHtml(p.mabn)}')"
+                      title="Bấm để đưa ${escapeHtml(p.hoten)} vào danh sách Hội chẩn mổ"
+                    >
+                      <span><strong>${escapeHtml(p.hoten)}</strong> (${escapeHtml(String(p.tuoi || '--'))}T)</span>
+                      <span class="btn-chip-pick-bed" style="background:#0f766e;">${escapeHtml(p.roomName || p.roomKey || 'Khác')}</span>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>`
+            : ''
+        }
+
+        <!-- PHẦN 3: BỆNH NHÂN ĐÃ CÓ TRONG DANH SÁCH DUYỆT MỔ (THU GỌN) -->
+        <div style="border-top:1px solid #e2e8f0;padding-top:0.75rem;">
+          <button
+            type="button"
+            id="btn-toggle-briefing-sc-consulted"
+            style="width:100%;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:0.83rem;font-weight:700;color:#334155;"
+          >
+            <span>✓ Đã có trong DS Hội chẩn mổ (${alreadyInList.length} BN — Bấm để mở chi tiết)</span>
+            <span style="font-size:0.8rem;color:#64748b;">${showConsulted ? '▾ Thu gọn' : '▸ Bấm để mở rộng'}</span>
+          </button>
+
+          <div id="briefing-sc-already-wrap" style="display:${showConsulted ? 'flex' : 'none'};flex-wrap:wrap;gap:0.45rem;margin-top:0.6rem;max-height:30vh;overflow-y:auto;padding:2px;">
+            ${
+              alreadyInList.length > 0
+                ? alreadyInList.map(c => `
+                    <button
+                      type="button"
+                      class="tk1-unassigned-chip"
+                      style="cursor:pointer;border-color:#93c5fd;background:#eff6ff;"
+                      onclick="closeTk4PickPatientModal(); openEditTk4ConsultDialog('${escapeHtml(c.mabn)}');"
+                      title="Bấm để sửa chi tiết hội chẩn mổ của ${escapeHtml(c.hoten)}"
+                    >
+                      <span><strong>${escapeHtml(c.hoten)}</strong> (${escapeHtml(String(c.tuoi || '--'))}T)</span>
+                      <span class="btn-chip-pick-bed" style="background:#0284c7;">${escapeHtml(c.bed || '--')} · Sửa chi tiết</span>
+                    </button>
+                  `).join('')
+                : `<div style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">Chưa có bệnh nhân nào.</div>`
+            }
+          </div>
+        </div>
+      `;
+
+      const searchInp = document.getElementById('tk4-briefing-picker-search-input');
+      if (searchInp) {
+        searchInp.focus();
+        searchInp.selectionStart = searchInp.selectionEnd = searchInp.value.length;
+        searchInp.addEventListener('input', (e) => {
+          renderBriefingTk4Picker(e.target.value);
         });
-        optHtml += `</optgroup>`;
       }
-      if (otherPatients.length > 0) {
-        optHtml += `<optgroup label="Bệnh nhân phòng khác (${otherPatients.length} BN)">`;
-        otherPatients.forEach(p => {
-          const roomStr = p.roomName || p.roomKey || '';
-          optHtml += `<option value="${escapeHtml(p.mabn)}">[${escapeHtml(roomStr)}] ${escapeHtml(p.hoten)} (${escapeHtml(p.mabn)})</option>`;
-        });
-        optHtml += `</optgroup>`;
-      }
-      if (selectEl) selectEl.innerHTML = optHtml;
 
-      modal.classList.add('active');
+      const toggleBtn = document.getElementById('btn-toggle-briefing-sc-consulted');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          isBriefingConsultedCollapsed = !isBriefingConsultedCollapsed;
+          const currentTerm = document.getElementById('tk4-briefing-picker-search-input')?.value || '';
+          renderBriefingTk4Picker(currentTerm);
+        });
+      }
+    }
+
+    async function quickAddBriefingTk4Consult(mabn) {
+      if (!mabn) return;
+      const p = (inpatientList || []).find(item => item.mabn === mabn);
+      const nextDateKey = getNextDateKey(currentDateKey);
+
+      try {
+        const res = await fetch('/api/briefing-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'SAVE_TK4_CONSULTATION',
+            mabn,
+            targetDate: nextDateKey,
+            shiftDate: currentDateKey,
+            postConsultDiagnosis: p ? (p.chanDoanHis || p.chanDoan || '') : '',
+            surgeryMethod: '',
+            decision: 'Đồng ý',
+            advancePayment: '',
+            isConsulted: true
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          if (data.tk4Consultations) {
+            tk4Consultations = data.tk4Consultations;
+          } else {
+            const newItem = {
+              mabn,
+              hoten: p ? p.hoten : 'Bệnh nhân',
+              tuoi: p ? p.tuoi : '',
+              gioiTinh: p ? p.gioiTinh : 'NAM',
+              bed: p ? p.bed : '--',
+              chanDoanHis: p ? p.chanDoanHis : '',
+              postConsultDiagnosis: p ? (p.chanDoanHis || p.chanDoan || '') : '',
+              surgeryMethod: '',
+              decision: 'Đồng ý',
+              advancePayment: '',
+              dateKey: nextDateKey,
+              targetConsultDate: nextDateKey
+            };
+            const existingIdx = (tk4Consultations || []).findIndex(c => c.mabn === mabn);
+            if (existingIdx >= 0) tk4Consultations[existingIdx] = newItem;
+            else tk4Consultations.unshift(newItem);
+          }
+          closeTk4PickPatientModal();
+          renderBriefingReport();
+        } else {
+          alert('Lỗi: ' + (data.error || 'Không thể lưu hội chẩn'));
+        }
+      } catch (err) {
+        console.error('Lỗi quickAddBriefingTk4Consult:', err);
+        alert('Có lỗi xảy ra khi thêm bệnh nhân vào hội chẩn mổ!');
+      }
     }
 
     function onTk4PatientSelectChange(mabn) {
