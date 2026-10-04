@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="styles.css?v=20261004_consult" />
+  <link rel="stylesheet" href="styles.css?v=20261004_v2" />
   <script src="auth-client.js" defer></script>
 </head>
 <body>
@@ -339,8 +339,6 @@
         </div>
       </div>
 
-      <!-- 1. Thanh KPI Dashboard thống kê nhanh -->
-      <div class="dept-consult-kpi-bar" id="dept-consult-kpi-bar"></div>
 
       <!-- 2. Bộ lọc theo phòng -->
       <div class="dept-consult-room-filters" id="dept-consult-room-filters">
@@ -813,7 +811,7 @@
     </div>
   </dialog>
 
-  <script src="ward-tk1.js?v=20261004_consult"></script>
+  <script src="ward-tk1.js?v=20261004_v2"></script>
   <script>
     const WARD_ROOMS_CONFIG = [
       { key: 'tk1',  name: 'Thần kinh 1',       isHstk: false },
@@ -934,11 +932,9 @@
         // Xử lý riêng cho tab Hội Chẩn Khoa
         if (room.isConsultTab) {
           let consultCount = 0;
-          let surgCount = 0;
           if (window.TK1Module && window.TK1Module.getDeptConsultStatsForDate) {
             const stats = window.TK1Module.getDeptConsultStatsForDate(todayKey);
             consultCount = stats.total;
-            surgCount = stats.surg;
           }
 
           if (isSelected) {
@@ -951,20 +947,18 @@
                 style="background:linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);border-color:#16a34a;"
               >
                 <div>
-                  <div class="ward-room-top" style="display:flex;align-items:center;gap:6px;">
-                    <span style="font-size:1.15rem;">👨‍⚕️</span>
-                    <div class="ward-room-name" style="color:#15803d;font-weight:900;">HỘI CHẨN KHOA</div>
-                    <span class="ward-consult-active-pill">Đang mở</span>
+                  <div class="ward-room-top">
+                    <div class="ward-room-name" style="color:#15803d;font-weight:900;">👨‍⚕️ Hội chẩn khoa</div>
                   </div>
-                  <div class="ward-room-docs" style="margin-top:0.2rem;color:#166534;">
-                    Hội đồng duyệt mổ & điều trị hằng ngày
+                  <div class="ward-room-docs" style="margin-top:0.15rem;color:#166534;">
+                    Duyệt mổ toàn khoa
                   </div>
                 </div>
 
                 <div class="ward-room-stats-row">
-                  <div class="ward-mini-stat" style="background:#dcfce7;border:1.5px solid #86efac;padding:2px 10px;border-radius:6px;">
-                    <span class="wms-lbl" style="font-weight:800;color:#166534;">Hôm nay:</span>
-                    <span class="wms-val" style="font-weight:900;color:#14532d;font-size:0.92rem;">${consultCount} ca (${surgCount} mổ)</span>
+                  <div class="ward-mini-stat" style="background:#dcfce7;border:1px solid #86efac;padding:2px 8px;border-radius:6px;">
+                    <span class="wms-lbl" style="font-weight:700;color:#166534;">Hôm nay:</span>
+                    <span class="wms-val" style="font-weight:900;color:#14532d;font-size:0.88rem;">${consultCount} ca</span>
                   </div>
                 </div>
               </div>
@@ -982,12 +976,12 @@
             >
               <div class="ward-room-top" style="display:flex;align-items:center;justify-content:space-between;gap:4px;">
                 <div class="ward-room-name" style="color:#15803d;font-weight:800;display:flex;align-items:center;gap:4px;">
-                  <span>👨‍⚕️</span> Hội chẩn khoa
+                  <span>👨‍⚕️</span> Hội chẩn
                 </div>
                 <span class="ward-compact-count-pill" style="background:#15803d;color:#ffffff;font-weight:800;">${consultCount} ca</span>
               </div>
               <div class="ward-room-docs" style="color:#166534;font-size:0.75rem;">
-                Duyệt mổ toàn khoa
+                Duyệt mổ
               </div>
             </div>
           `;

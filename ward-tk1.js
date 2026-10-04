@@ -245,6 +245,59 @@
     return null;
   }
 
+  // Lấy nhãn và lớp CSS hiển thị theo 4 option kết luận duyệt
+  function getDeptConsultTagMeta(decision) {
+    const d = (decision || '').trim();
+    if (d === 'Đồng ý phẫu thuật' || d === 'Đồng ý') {
+      return {
+        key: 'agree',
+        cls: 'tag-agree',
+        text: '✓ Đồng ý phẫu thuật',
+        bg: '#dcfce7',
+        color: '#15803d',
+        border: '#86efac'
+      };
+    }
+    if (d === 'Cần hội ý thêm' || d === 'Hội ý') {
+      return {
+        key: 'discuss',
+        cls: 'tag-discuss',
+        text: '💬 Cần hội ý thêm',
+        bg: '#fef3c7',
+        color: '#b45309',
+        border: '#fcd34d'
+      };
+    }
+    if (d === 'Không phẫu thuật' || d === 'Không đồng ý') {
+      return {
+        key: 'no-surg',
+        cls: 'tag-no-surg',
+        text: '✕ Không phẫu thuật',
+        bg: '#fee2e2',
+        color: '#b91c1c',
+        border: '#fca5a5'
+      };
+    }
+    if (d === 'Điều trị nội khoa') {
+      return {
+        key: 'medical',
+        cls: 'tag-medical',
+        text: '💊 Điều trị nội khoa',
+        bg: '#e0e7ff',
+        color: '#4338ca',
+        border: '#a5b4fc'
+      };
+    }
+    return {
+      key: 'pending',
+      cls: 'tag-pending',
+      text: '⏳ Chờ kết luận',
+      bg: '#f1f5f9',
+      color: '#475569',
+      border: '#cbd5e1'
+    };
+  }
+
   function getBedOfPatient(mabn) {
     for (const [bCode, m] of Object.entries(tk1State.bedAssignments || {})) {
       if (m === mabn) return bCode;
@@ -544,9 +597,9 @@
     const sc = getPatientSurgicalConsultation(rec, curDateKey);
     const isConsulted = Boolean(sc && sc.isConsulted);
     if (isConsulted) {
-      const isSurg = Boolean(sc.isSurgical !== undefined ? sc.isSurgical : (sc.decision === 'Đồng ý' || (sc.surgeryMethod && sc.surgeryMethod.length > 0)));
-      let badgeCls = isSurg ? 'is-surg' : 'is-nosurg';
-      let badgeText = isSurg ? '✓ Có phẫu thuật' : (sc.decision || 'Chờ duyệt');
+      const tagMeta = getDeptConsultTagMeta(sc.decision);
+      let badgeCls = tagMeta.cls;
+      let badgeText = tagMeta.text;
 
       const methodStr = sc.surgeryMethod ? ` · <strong>PP:</strong> ${sc.surgeryMethod}` : '';
       const diagStr = sc.postConsultDiagnosis ? ` · <strong>CĐ:</strong> ${sc.postConsultDiagnosis}` : '';
@@ -1081,60 +1134,6 @@
     const consultPts = getAllConsultPatientsForDate(activeDeptConsultDate);
     const stats = getDeptConsultStatsForDate(activeDeptConsultDate);
 
-    // 3. Render thanh KPI
-    const kpiEl = document.getElementById('dept-consult-kpi-bar');
-    if (kpiEl) {
-      kpiEl.innerHTML = `
-        <div class="dept-kpi-card" style="border-left:4px solid #15803d;">
-          <div class="dept-kpi-icon" style="background:#dcfce7;color:#15803d;">📋</div>
-          <div class="dept-kpi-info">
-            <span class="dept-kpi-label">Tổng ca hội chẩn</span>
-            <span class="dept-kpi-value" style="color:#15803d;">${stats.total} ca</span>
-          </div>
-        </div>
-
-        <div class="dept-kpi-card" style="border-left:4px solid #16a34a;">
-          <div class="dept-kpi-icon" style="background:#dcfce7;color:#16a34a;">🔪</div>
-          <div class="dept-kpi-info">
-            <span class="dept-kpi-label">Chỉ định phẫu thuật</span>
-            <span class="dept-kpi-value" style="color:#16a34a;">${stats.surg} ca</span>
-          </div>
-        </div>
-
-        <div class="dept-kpi-card" style="border-left:4px solid #64748b;">
-          <div class="dept-kpi-icon" style="background:#f1f5f9;color:#475569;">💊</div>
-          <div class="dept-kpi-info">
-            <span class="dept-kpi-label">Điều trị nội khoa</span>
-            <span class="dept-kpi-value" style="color:#475569;">${stats.noSurg} ca</span>
-          </div>
-        </div>
-
-        <div class="dept-kpi-card" style="border-left:4px solid #d97706;">
-          <div class="dept-kpi-icon" style="background:#fef3c7;color:#d97706;">💬</div>
-          <div class="dept-kpi-info">
-            <span class="dept-kpi-label">Cần hội ý thêm</span>
-            <span class="dept-kpi-value" style="color:#d97706;">${stats.discuss} ca</span>
-          </div>
-        </div>
-
-        <div class="dept-kpi-card" style="border-left:4px solid #ea580c;">
-          <div class="dept-kpi-icon" style="background:#ffedd5;color:#ea580c;">💰</div>
-          <div class="dept-kpi-info">
-            <span class="dept-kpi-label">Tổng tiền tạm ứng</span>
-            <span class="dept-kpi-value" style="color:#ea580c;">${stats.totalAdvance > 0 ? `${stats.totalAdvance} triệu` : '0 tr'}</span>
-          </div>
-        </div>
-
-        <div class="dept-kpi-card" style="border-left:4px solid #dc2626;">
-          <div class="dept-kpi-icon" style="background:#fee2e2;color:#dc2626;">🩸</div>
-          <div class="dept-kpi-info">
-            <span class="dept-kpi-label">Tổng máu dự trù</span>
-            <span class="dept-kpi-value" style="color:#dc2626;">${stats.totalBlood > 0 ? `${stats.totalBlood} ml` : '0 ml'}</span>
-          </div>
-        </div>
-      `;
-    }
-
     // 4. Cập nhật số đếm trên các filter pills
     const cntAll = document.getElementById('dept-filter-cnt-all');
     if (cntAll) cntAll.textContent = stats.total;
@@ -1212,18 +1211,18 @@
     containerEl.innerHTML = filteredList.map(p => renderDeptConsultPatientCard(p)).join('');
   }
 
-  // Render thẻ chi tiết bệnh nhân trong Tab Hội Chẩn Khoa (Đảm bảo Yêu cầu 5)
+  // Render thẻ chi tiết bệnh nhân trong Tab Hội Chẩn Khoa (1 thẻ nằm ngang fit trang)
   function renderDeptConsultPatientCard(p) {
     const c = p.consultData || {};
     const roomKey = p.patientRoomKey || 'tk1';
     const roomCls = `dc-room-${roomKey}`;
     const bedLabel = p.patientBedCode ? formatBedLabel(p.patientBedCode) : 'Chưa xếp giường';
-    const isSurg = Boolean(c.isSurgical !== undefined ? c.isSurgical : (c.decision === 'Đồng ý' || (c.surgeryMethod && c.surgeryMethod.length > 0)));
     const dec = c.decision || '';
+    const tagMeta = getDeptConsultTagMeta(dec);
 
     return `
-      <div class="dept-consult-card ${isSurg ? 'is-surg' : 'is-nonsurg'}" id="dc-card-${p.mabn}">
-        <!-- Card Header: Thông tin cơ bản -->
+      <div class="dept-consult-card ${tagMeta.cls}" id="dc-card-${p.mabn}">
+        <!-- Card Header: Thông tin cơ bản & Tag kết luận dựa trên 4 option -->
         <div class="dc-card-header">
           <div class="dc-card-title-group">
             <span class="dc-room-badge ${roomCls}">${p.patientRoomName}</span>
@@ -1234,60 +1233,30 @@
             <span class="dc-patient-meta">· ${p.tuoi || '--'} · SVV: <strong>${p.soVaoVien || p.maKcb || p.mabn}</strong> · Vào viện: ${p.ngayVaoStr || '--'}</span>
           </div>
           <div>
-            <span class="dc-tag-surg-status ${isSurg ? 'is-surg' : 'is-nosurg'}">
-              ${isSurg ? '✓ Có phẫu thuật' : (dec ? dec : 'Chờ duyệt')}
+            <span class="dc-tag-surg-status ${tagMeta.cls}" id="dc-tag-${p.mabn}">
+              ${tagMeta.text}
             </span>
           </div>
         </div>
 
-        <!-- Card Body -->
+        <!-- Card Body: Nằm ngang fit toàn bộ độ rộng trang -->
         <div class="dc-card-body">
-          <!-- Chẩn đoán ban đầu / HIS để đối chiếu -->
-          <div class="dc-initial-diag-row">
-            <strong>🔍 CĐ ban đầu (HIS):</strong> ${escapeHtml(p.chanDoanHis || p.customDiagnosis || 'Chưa có chẩn đoán ban đầu')}
-          </div>
-
-          <!-- Chẩn đoán sau hội chẩn (Yêu cầu 5) -->
-          <div class="dc-field-block">
-            <label class="dc-field-label" for="dc-diag-${p.mabn}">
-              📝 Chẩn đoán sau hội chẩn:
-            </label>
-            <input
-              type="text"
-              class="date-input"
-              id="dc-diag-${p.mabn}"
-              value="${escapeHtml(c.postConsultDiagnosis || p.customDiagnosis || p.chanDoanHis || '')}"
-              placeholder="Nhập kết luận chẩn đoán sau khi hội chẩn..."
-              style="width:100%;height:35px;font-size:0.85rem;font-weight:700;color:#0f172a;"
-            />
-          </div>
-
-          <!-- Phẫu thuật: tick có / không tick (Yêu cầu 5) + Kết luận duyệt mổ -->
-          <div class="dc-surg-toggle-row">
-            <label class="dc-surg-chk-label">
+          <!-- Hàng 1: Chẩn đoán sau hội chẩn, Phương pháp phẫu thuật, Tiền ứng, Máu (trên 1 hàng ngang) -->
+          <div class="dc-horizontal-fields-row">
+            <div class="dc-field-block">
+              <label class="dc-field-label" for="dc-diag-${p.mabn}">
+                📝 Chẩn đoán sau hội chẩn:
+              </label>
               <input
-                type="checkbox"
-                id="dc-surg-${p.mabn}"
-                ${isSurg ? 'checked' : ''}
-                onchange="window.TK1Module.toggleCardSurgStatus('${p.mabn}', this.checked)"
+                type="text"
+                class="date-input"
+                id="dc-diag-${p.mabn}"
+                value="${escapeHtml(c.postConsultDiagnosis || p.customDiagnosis || p.chanDoanHis || '')}"
+                placeholder="Nhập chẩn đoán sau khi hội chẩn..."
+                style="width:100%;height:35px;font-size:0.85rem;font-weight:700;color:#0f172a;"
               />
-              <span>Phẫu thuật</span>
-            </label>
-
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-size:0.75rem;font-weight:700;color:#166534;">Kết luận:</span>
-              <select class="dc-decision-select" id="dc-dec-${p.mabn}">
-                <option value="" ${!dec ? 'selected' : ''}>-- Kết luận duyệt --</option>
-                <option value="Đồng ý" ${dec === 'Đồng ý' ? 'selected' : ''} style="color:#15803d;font-weight:800;">✓ Đồng ý phẫu thuật</option>
-                <option value="Hội ý" ${dec === 'Hội ý' ? 'selected' : ''} style="color:#b45309;font-weight:800;">💬 Cần hội ý thêm</option>
-                <option value="Không đồng ý" ${dec === 'Không đồng ý' ? 'selected' : ''} style="color:#dc2626;font-weight:800;">✕ Không đồng ý</option>
-                <option value="Điều trị nội khoa" ${dec === 'Điều trị nội khoa' ? 'selected' : ''} style="color:#475569;font-weight:800;">💊 Điều trị nội khoa</option>
-              </select>
             </div>
-          </div>
 
-          <!-- Phương pháp phẫu thuật, Tiền ứng, Máu (Yêu cầu 5) -->
-          <div class="dc-surg-details-grid">
             <div class="dc-field-block">
               <label class="dc-field-label" for="dc-method-${p.mabn}">
                 🔪 Phương pháp phẫu thuật:
@@ -1304,14 +1273,14 @@
 
             <div class="dc-field-block">
               <label class="dc-field-label" for="dc-pay-${p.mabn}">
-                💰 Tiền ứng (triệu):
+                💰 Tiền ứng (tr):
               </label>
               <input
                 type="text"
                 class="date-input"
                 id="dc-pay-${p.mabn}"
                 value="${cleanPaymentForInput(c.advancePayment)}"
-                placeholder="VD: 5, 10..."
+                placeholder="VD: 5..."
                 title="Nhập số tiền ứng, đơn vị là triệu VNĐ"
                 style="width:100%;height:35px;font-size:0.83rem;font-weight:800;color:#b45309;"
               />
@@ -1326,14 +1295,32 @@
                 class="date-input"
                 id="dc-blood-${p.mabn}"
                 value="${cleanBloodForInput(c.bloodMl)}"
-                placeholder="VD: 250, 500..."
+                placeholder="VD: 250..."
                 title="Lượng máu cần dự trù (ml)"
                 style="width:100%;height:35px;font-size:0.83rem;font-weight:700;color:#b91c1c;"
               />
             </div>
           </div>
 
-          <!-- Hướng xử trí / Ghi chú (Đồng bộ với đi buồng) -->
+          <!-- Hàng 2: KẾT LUẬN HỘI CHẨN (ĐƯA XUỐNG DƯỚI, CHỈ NẰM TRÊN GHI CHÚ) -->
+          <div class="dc-field-block">
+            <label class="dc-field-label" for="dc-dec-${p.mabn}" style="color:#15803d;font-weight:800;">
+              ⚖️ Kết luận hội chẩn (Quyết định):
+            </label>
+            <select
+              class="dc-decision-select"
+              id="dc-dec-${p.mabn}"
+              onchange="window.TK1Module.onDeptDecisionChange('${p.mabn}', this.value)"
+            >
+              <option value="" ${!dec ? 'selected' : ''}>-- Chọn kết luận duyệt --</option>
+              <option value="Đồng ý phẫu thuật" ${dec === 'Đồng ý phẫu thuật' || dec === 'Đồng ý' ? 'selected' : ''} style="color:#15803d;font-weight:800;">✓ Đồng ý phẫu thuật</option>
+              <option value="Cần hội ý thêm" ${dec === 'Cần hội ý thêm' || dec === 'Hội ý' ? 'selected' : ''} style="color:#b45309;font-weight:800;">💬 Cần hội ý thêm</option>
+              <option value="Không phẫu thuật" ${dec === 'Không phẫu thuật' || dec === 'Không đồng ý' ? 'selected' : ''} style="color:#dc2626;font-weight:800;">✕ Không phẫu thuật</option>
+              <option value="Điều trị nội khoa" ${dec === 'Điều trị nội khoa' ? 'selected' : ''} style="color:#4338ca;font-weight:800;">💊 Điều trị nội khoa</option>
+            </select>
+          </div>
+
+          <!-- Hàng 3: HƯỚNG XỬ TRÍ / GHI CHÚ (NẰM NGAY DƯỚI KẾT LUẬN) -->
           <div class="dc-field-block">
             <label class="dc-field-label" for="dc-plan-${p.mabn}" style="color:#0369a1;">
               📋 Hướng xử trí / Ghi chú kết luận:
@@ -1344,7 +1331,7 @@
               id="dc-plan-${p.mabn}"
               value="${escapeHtml(c.treatmentPlan || p.tasksByDate?.[activeDeptConsultDate]?.note || p.consultDetails?.consultTreatment || '')}"
               placeholder="Hướng chuẩn bị, hội ý chuyên khoa, ghi chú xử trí..."
-              style="width:100%;height:33px;font-size:0.82rem;"
+              style="width:100%;height:34px;font-size:0.83rem;"
             />
           </div>
         </div>
@@ -1387,29 +1374,30 @@
     `;
   }
 
-  // Chuyển đổi trạng thái phẫu thuật trên thẻ
-  function toggleCardSurgStatus(mabn, isChecked) {
+  // Cập nhật tag và viền thẻ ngay khi thay đổi kết luận duyệt
+  function onDeptDecisionChange(mabn, newDecision) {
+    const tagMeta = getDeptConsultTagMeta(newDecision);
+    const tagEl = document.getElementById(`dc-tag-${mabn}`);
     const card = document.getElementById(`dc-card-${mabn}`);
-    const decSel = document.getElementById(`dc-dec-${mabn}`);
-    if (card) {
-      card.classList.toggle('is-surg', isChecked);
-      card.classList.toggle('is-nonsurg', !isChecked);
+    if (tagEl) {
+      tagEl.className = `dc-tag-surg-status ${tagMeta.cls}`;
+      tagEl.textContent = tagMeta.text;
     }
-    if (decSel) {
-      if (isChecked && !decSel.value) {
-        decSel.value = 'Đồng ý';
-      } else if (!isChecked && decSel.value === 'Đồng ý') {
-        decSel.value = 'Điều trị nội khoa';
-      }
+    if (card) {
+      card.classList.remove('tag-agree', 'tag-discuss', 'tag-no-surg', 'tag-medical', 'tag-pending');
+      card.classList.add(tagMeta.cls);
     }
   }
+
+  // Tương thích ngược
+  function toggleCardSurgStatus() {}
 
   // Lưu thẻ hội chẩn trong Tab Hội Chẩn Khoa
   async function saveDeptConsultCard(mabn, btnEl) {
     const dKey = activeDeptConsultDate || getSelectedDateKey();
     const diag = (document.getElementById(`dc-diag-${mabn}`)?.value || '').trim();
-    const isSurg = Boolean(document.getElementById(`dc-surg-${mabn}`)?.checked);
     const decision = document.getElementById(`dc-dec-${mabn}`)?.value || '';
+    const isSurg = Boolean(decision === 'Đồng ý phẫu thuật' || decision === 'Đồng ý');
     const method = (document.getElementById(`dc-method-${mabn}`)?.value || '').trim();
     const rawPayment = (document.getElementById(`dc-pay-${mabn}`)?.value || '').trim();
     const rawBlood = (document.getElementById(`dc-blood-${mabn}`)?.value || '').trim();
@@ -5007,6 +4995,8 @@
     saveDeptConsultCard,
     removePatientFromDeptConsult,
     toggleCardSurgStatus,
+    onDeptDecisionChange,
+    getDeptConsultTagMeta,
     goToDeptConsultDate,
     openDeptConsultPrintModal,
     // Legacy support
