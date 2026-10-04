@@ -1,5 +1,5 @@
 {
-  "version": 1791107874761,
+  "version": 1791107908469,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -276,7 +276,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 55520,
-      "uploadedAt": "16:12:34 4/10/2026",
+      "uploadedAt": "16:58:26 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -373,7 +373,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T09:12:35.324Z"
+    "updatedAt": "2026-10-04T09:58:27.667Z"
   },
   "wardRounds": {
     "tk1": {
@@ -428,7 +428,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "22/09/2026",
-          "hisBed": "H021",
+          "hisBed": "H030",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-10-04": {
@@ -607,7 +607,7 @@
           "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "25/09/2026",
-          "hisBed": "H024",
+          "hisBed": "H033",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-10-04": {
@@ -837,7 +837,7 @@
           "customDiagnosis": "S06.41-Xuất huyết ngoài màng cứng, có vết thương nội sọ hở",
           "bsDieuTri": "Lê Đức Nhật",
           "ngayVaoStr": "28/09/2026",
-          "hisBed": "H025",
+          "hisBed": "H104",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-10-04": {}
@@ -3080,7 +3080,33 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001420337",
+        "0001421064",
+        "0001421561",
+        "0001421945",
+        "0001421962",
+        "0001422158",
+        "0001032592",
+        "0001422706",
+        "0001423331",
+        "0000037245",
+        "0001423919",
+        "0001423930",
+        "0001245654",
+        "0001424352",
+        "0001424848",
+        "0001424868",
+        "0001424870",
+        "0001424881",
+        "0001424929",
+        "0001425070",
+        "0001425068",
+        "0001425123",
+        "0001425126",
+        "0001103734",
+        "0000757171"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -3096,7 +3122,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:57:54.756Z"
+      "updatedAt": "2026-10-04T09:58:27.667Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3145,7 +3171,7 @@
           "tuyenDangKy": "Trái tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "trung ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
+          "diaChi": "Trung Ái-Phường An Nhơn Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "customDiagnosis": "Hậu phẫu ngày 9 phẫu thuật TLIF L2-S1",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3206,7 +3232,7 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "01/02/2026",
           "hanTheDen": "31/12/2030",
-          "diaChi": "Xã Vạn Đức--Tỉnh Gia Lai",
+          "diaChi": "Vạn Hội 1-Xã Vạn Đức--Tỉnh Gia Lai",
           "chanDoanHis": "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
           "customDiagnosis": "Hậu phẫu ngày 9 phẫu thuật TLIF L3-L5",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -3456,7 +3482,7 @@
           "tuyenDangKy": "Đúng tuyến",
           "hanTheTu": "01/01/2026",
           "hanTheDen": "31/12/2026",
-          "diaChi": "suối cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
+          "diaChi": "Suối Cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
           "chanDoanHis": "D43.0-U tân sinh không tiên lượng được tiến triển và tính chất ở não, trên lều não",
           "customDiagnosis": "Hậu phẫu ngày 6 phẫu thuật U não",
           "bsDieuTri": "Đặng Ngọc Trí",
@@ -4379,12 +4405,12 @@
           "tuyenDangKy": "Đa tuyến đúng tuyến",
           "hanTheTu": "08/05/2026",
           "hanTheDen": "07/05/2027",
-          "diaChi": "cửu lợi đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
+          "diaChi": "Cửu Lợi Đông-Phường Hoài Nhơn--Tỉnh Gia Lai",
           "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
           "customDiagnosis": "Hậu phẫu ngày 1 phẫu thuật Mở sọ giảm áp",
-          "bsDieuTri": "Đặng Ngọc Trí",
-          "ngayVaoStr": "28/09/2026",
-          "hisBed": "H052",
+          "bsDieuTri": "Dương Minh Trí",
+          "ngayVaoStr": "03/10/2026",
+          "hisBed": "H044",
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-10-04": {
@@ -5377,7 +5403,32 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001265243",
+        "0001419943",
+        "0000462435",
+        "0000789370",
+        "0001422302",
+        "0001422775",
+        "0001325103",
+        "0001423438",
+        "0001423447",
+        "0001421947",
+        "0001423960",
+        "0000844175",
+        "0001423400",
+        "0001422360",
+        "0001420070",
+        "0001352007",
+        "0001424078",
+        "0001422435",
+        "0001424859",
+        "0001424892",
+        "0001420757",
+        "0001425022",
+        "0001424994",
+        "0001424989"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -5393,7 +5444,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:57:54.756Z"
+      "updatedAt": "2026-10-04T09:58:27.667Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6577,7 +6628,22 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001383920",
+        "0001327863",
+        "0001413514",
+        "0001422911",
+        "0001417494",
+        "0001420565",
+        "0001220543",
+        "0001423182",
+        "0001181071",
+        "0001262499",
+        "0001423451",
+        "0001423393",
+        "0001422326",
+        "0001424428"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -6593,7 +6659,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:57:54.756Z"
+      "updatedAt": "2026-10-04T09:58:27.668Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -7009,9 +7075,7 @@
             "advancePayment": "",
             "bloodMl": "",
             "updatedAt": "2026-10-04T09:57:48.163Z"
-          },
-          "soVaoVien": "2600366965",
-          "giuong": "1"
+          }
         },
         "0001422398": {
           "mabn": "0001422398",
@@ -7436,9 +7500,7 @@
             "advancePayment": "",
             "bloodMl": "",
             "updatedAt": "2026-10-04T09:57:54.756Z"
-          },
-          "soVaoVien": "2600371157",
-          "giuong": "29X"
+          }
         },
         "0001422572": {
           "mabn": "0001422572",
@@ -10381,7 +10443,47 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001415940",
+        "0001418784",
+        "0001411127",
+        "0001421285",
+        "0001418775",
+        "0001422079",
+        "0001422398",
+        "0001422488",
+        "0001200590",
+        "0001423036",
+        "0001423062",
+        "0001423344",
+        "0001423307",
+        "0001422572",
+        "0001423830",
+        "0001423904",
+        "0001423932",
+        "0001419899",
+        "0001424144",
+        "0001424276",
+        "0001424346",
+        "0001068291",
+        "0001424410",
+        "0001424436",
+        "0001424446",
+        "0000995488",
+        "0000811741",
+        "0001355818",
+        "0001383953",
+        "0001008234",
+        "0001424521",
+        "0001422464",
+        "0001424820",
+        "0001424939",
+        "0001424955",
+        "0001424966",
+        "0001425000",
+        "0001302334",
+        "0001425205"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -10397,7 +10499,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:57:54.756Z"
+      "updatedAt": "2026-10-04T09:58:27.668Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11275,7 +11377,17 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001412464",
+        "0001416828",
+        "0001420321",
+        "0001422339",
+        "0001423465",
+        "0001423868",
+        "0001421963",
+        "0001412378",
+        "0001425116"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -11291,11 +11403,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T09:57:54.756Z"
+      "updatedAt": "2026-10-04T09:58:27.668Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "16:12 ngày 04/10/2026",
+  "lastExcelUploadTime": "16:58 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -11566,8 +11678,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791105154418.4446,
-      "lastHisSyncTime": "2026-10-04T09:12:35.722Z"
+      "lastHisSyncTimeMs": 1791107906967.762,
+      "lastHisSyncTime": "2026-10-04T09:58:28.466Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
