@@ -1,5 +1,5 @@
 {
-  "version": 1791089031463,
+  "version": 1791089057166,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -610,7 +610,13 @@
           "khoaChuyenDen": "",
           "tasksByDate": {
             "2026-10-04": {
-              "note": "bs Văn sọ não 1, Esogos 4H022"
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": "Bổ sung Vinsolon + Esogas"
             }
           },
           "consultDetails": {
@@ -3011,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:43:51.462Z"
+      "updatedAt": "2026-10-04T04:44:17.165Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5052,7 +5058,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:43:51.462Z"
+      "updatedAt": "2026-10-04T04:44:17.165Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6267,7 +6273,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:43:51.462Z"
+      "updatedAt": "2026-10-04T04:44:17.165Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10200,7 +10206,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:43:51.462Z"
+      "updatedAt": "2026-10-04T04:44:17.166Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11104,7 +11110,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:43:51.463Z"
+      "updatedAt": "2026-10-04T04:44:17.166Z"
     }
   },
   "episodeConsultations": {},
