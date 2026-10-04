@@ -4146,21 +4146,41 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (action === 'DELETE_TK4_CONSULTATION') {
-      const { mabn, targetDate: explicitTargetDate } = body;
+      const { mabn, targetDate: explicitTargetDate, shiftDate } = body;
       const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : addDaysToKey(targetDate, 1));
-      const tk4 = db.wardRounds && db.wardRounds.tk4;
-      if (tk4 && tk4.patientRecords && tk4.patientRecords[mabn]) {
-        const rec = tk4.patientRecords[mabn];
-        if (rec.surgicalConsultationsByDate) {
-          delete rec.surgicalConsultationsByDate[consultDate];
-          delete rec.surgicalConsultationsByDate[targetDate];
+      const sDate = shiftDate || (explicitTargetDate ? addDaysToKey(explicitTargetDate, -1) : null);
+
+      const affectedRooms = ['tk4', 'tk1', 'tk2', 'tk3', 'hstk'];
+      let deletedNames = [];
+      for (const rk of affectedRooms) {
+        const room = db.wardRounds && db.wardRounds[rk];
+        if (!room || !room.patientRecords) continue;
+        const mabnList = (mabn === 'ALL') ? Object.keys(room.patientRecords) : (room.patientRecords[mabn] ? [mabn] : []);
+        for (const mId of mabnList) {
+          const rec = room.patientRecords[mId];
+          if (!rec) continue;
+          let changed = false;
+          if (rec.surgicalConsultationsByDate) {
+            if (rec.surgicalConsultationsByDate[consultDate]) { delete rec.surgicalConsultationsByDate[consultDate]; changed = true; }
+            if (explicitTargetDate && rec.surgicalConsultationsByDate[explicitTargetDate]) { delete rec.surgicalConsultationsByDate[explicitTargetDate]; changed = true; }
+            if (targetDate && rec.surgicalConsultationsByDate[targetDate]) { delete rec.surgicalConsultationsByDate[targetDate]; changed = true; }
+            if (sDate && rec.surgicalConsultationsByDate[sDate]) { delete rec.surgicalConsultationsByDate[sDate]; changed = true; }
+            if (shiftDate && rec.surgicalConsultationsByDate[shiftDate]) { delete rec.surgicalConsultationsByDate[shiftDate]; changed = true; }
+          }
+          if (rec.surgicalConsultation) {
+            delete rec.surgicalConsultation;
+            rec.surgicalConsultation = null;
+            changed = true;
+          }
+          if (changed) {
+            deletedNames.push(rec.hoten || mId);
+          }
         }
-        delete rec.surgicalConsultation;
-        saveDb();
-        broadcastState(`🗑️ Đã xóa BN ${rec.hoten} khỏi danh sách hội chẩn mổ Thần kinh 4`);
       }
+      saveDb();
+      broadcastState(`🗑️ Đã xóa hội chẩn mổ Thần kinh 4 (${deletedNames.length > 0 ? deletedNames.slice(0, 3).join(', ') + (deletedNames.length > 3 ? '...' : '') : 'thành công'})`);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate, targetDate) }));
+      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate, sDate) }));
       return;
     }
 

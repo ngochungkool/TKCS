@@ -3508,6 +3508,11 @@
                   ${khongDongYCount > 0 ? `<span style="background:#fee2e2;color:#991b1b;padding:3px 8px;border-radius:6px;border:1px solid #fca5a5;">Không ĐY: ${khongDongYCount}</span>` : ''}
                 </div>
                 <span id="tk4-autosave-indicator" style="font-size:0.8rem;color:#16a34a;font-weight:700;display:none;margin-right:8px;"><i class="fa-solid fa-circle-check"></i> Đã tự động lưu</span>
+                ${(tk4Consultations && tk4Consultations.length > 0) ? `
+                  <button type="button" class="btn-gb-action" style="background:#fee2e2;color:#b91c1c;border-color:#fca5a5;margin-right:6px;" onclick="clearAllTk4Consults()" title="Xoá toàn bộ danh sách duyệt mổ của ngày này">
+                    <i class="fa-solid fa-trash"></i> Xóa toàn bộ
+                  </button>
+                ` : ''}
                 <button type="button" class="btn-gb-action" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;" onclick="openAddTk4ConsultDialog()">
                   <i class="fa-solid fa-plus"></i> Thêm ca hội chẩn mổ
                 </button>
@@ -4799,15 +4804,48 @@
         });
         const data = await res.json();
         if (data.ok) {
-          tk4Consultations = (tk4Consultations || []).filter(c => c.mabn !== mabn);
+          if (Array.isArray(data.tk4Consultations)) {
+            tk4Consultations = data.tk4Consultations;
+          } else {
+            tk4Consultations = (tk4Consultations || []).filter(c => c.mabn !== mabn);
+          }
           renderCurrentView();
-          showToast(`🗑️ Đã xóa ca khỏi danh sách hội chẩn mổ ngày ${formatDateDMY(nextDateKey)}`);
+          showToast(`🗑️ Đã xóa vĩnh viễn ca khỏi danh sách hội chẩn mổ ngày ${formatDateDMY(nextDateKey)}`);
         } else {
           alert('Lỗi xóa ca hội chẩn: ' + (data.error || 'Server error'));
         }
       } catch (err) {
         console.error(err);
         alert('Lỗi kết nối khi xóa ca hội chẩn!');
+      }
+    }
+
+    async function clearAllTk4Consults() {
+      const nextDateKey = getNextDateKey(currentDateKey);
+      if (!confirm(`Bạn có chắc chắn muốn XOÁ TOÀN BỘ danh sách ca hội chẩn mổ Thần kinh 4 ngày ${formatDateDMY(nextDateKey)}?\n(Hành động này sẽ làm trống danh sách duyệt mổ của ngày).`)) return;
+
+      try {
+        const res = await fetch('/api/briefing-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'DELETE_TK4_CONSULTATION',
+            mabn: 'ALL',
+            targetDate: nextDateKey,
+            shiftDate: currentDateKey
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          tk4Consultations = [];
+          renderCurrentView();
+          showToast(`🗑️ Đã xóa toàn bộ danh sách hội chẩn mổ ngày ${formatDateDMY(nextDateKey)}`);
+        } else {
+          alert('Lỗi xóa: ' + (data.error || 'Server error'));
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Lỗi kết nối khi xóa danh sách hội chẩn!');
       }
     }
 
