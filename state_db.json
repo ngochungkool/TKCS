@@ -1,5 +1,5 @@
 {
-  "version": 1791089433859,
+  "version": 1791089453663,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:33.856Z"
+      "updatedAt": "2026-10-04T04:50:53.662Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3942,7 +3942,9 @@
               "xquang": [],
               "sieuAm": [],
               "hoiChan": [],
-              "thuThuat": [],
+              "thuThuat": [
+                "Rút dẫn lưu"
+              ],
               "note": ""
             }
           },
@@ -5169,7 +5171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:33.857Z"
+      "updatedAt": "2026-10-04T04:50:53.662Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6384,7 +6386,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:33.858Z"
+      "updatedAt": "2026-10-04T04:50:53.662Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10317,7 +10319,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:33.858Z"
+      "updatedAt": "2026-10-04T04:50:53.662Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11221,7 +11223,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:50:33.858Z"
+      "updatedAt": "2026-10-04T04:50:53.663Z"
     }
   },
   "episodeConsultations": {},
