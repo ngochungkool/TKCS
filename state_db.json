@@ -1,5 +1,5 @@
 {
-  "version": 1791089888861,
+  "version": 1791089897760,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3017,7 +3017,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:58:08.860Z"
+      "updatedAt": "2026-10-04T04:58:17.759Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3193,12 +3193,22 @@
           "hanTheDen": "15/06/2027",
           "diaChi": "Thạnh An-Xã Phù Mỹ Nam--Tỉnh Gia Lai",
           "chanDoanHis": "M51.0†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý tủy sống (G99.2*)",
-          "customDiagnosis": "M51.0†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý tủy sống (G99.2*)",
+          "customDiagnosis": "Hậu phẫu ngày 9 phẫu thuật TLIF L2-S1",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "25/09/2026",
           "hisBed": "H058",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-04": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
             "specialty": "",
             "consultDiagnosis": "",
@@ -3207,11 +3217,11 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "NONE",
-            "markedDate": "",
+            "status": "SCHEDULED",
+            "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": ""
+            "note": "Không hẹn tái khám"
           },
           "removed": {
             "isRemoved": false,
@@ -3221,8 +3231,8 @@
           },
           "surgeryInfo": {
             "isNonSurgical": false,
-            "surgeryName": "",
-            "surgeryDate": ""
+            "surgeryName": "TLIF L2-S1",
+            "surgeryDate": "2026-09-25"
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
@@ -5318,7 +5328,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:58:08.860Z"
+      "updatedAt": "2026-10-04T04:58:17.759Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6533,7 +6543,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:58:08.860Z"
+      "updatedAt": "2026-10-04T04:58:17.759Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10466,7 +10476,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:58:08.860Z"
+      "updatedAt": "2026-10-04T04:58:17.760Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11370,7 +11380,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:58:08.860Z"
+      "updatedAt": "2026-10-04T04:58:17.760Z"
     }
   },
   "episodeConsultations": {},
