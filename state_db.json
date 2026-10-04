@@ -1,5 +1,5 @@
 {
-  "version": 1791088507586,
+  "version": 1791088521662,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -276,7 +276,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 53903,
-      "uploadedAt": "11:10:47 4/10/2026",
+      "uploadedAt": "11:35:20 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -284,7 +284,7 @@
       "categoryCode": "VAO_KHOA",
       "savedPath": "/opt/render/project/src/uploads_his/vao_khoa.xlsx",
       "sizeBytes": 9648,
-      "uploadedAt": "11:10:46 4/10/2026",
+      "uploadedAt": "11:35:19 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -292,7 +292,7 @@
       "categoryCode": "RA_VIEN",
       "savedPath": "/opt/render/project/src/uploads_his/ra_vien.xlsx",
       "sizeBytes": 10938,
-      "uploadedAt": "11:10:45 4/10/2026",
+      "uploadedAt": "11:35:19 4/10/2026",
       "extractedPreview": null
     },
     {
@@ -373,7 +373,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-04T04:10:47.755Z"
+    "updatedAt": "2026-10-04T04:35:21.263Z"
   },
   "wardRounds": {
     "tk1": {
@@ -438,8 +438,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "15"
+          "surgicalConsultation": null
         },
         "0001421064": {
           "mabn": "0001421064",
@@ -493,8 +492,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "24"
+          "surgicalConsultation": null
         },
         "0001421561": {
           "mabn": "0001421561",
@@ -546,8 +544,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "21"
+          "surgicalConsultation": null
         },
         "0001421945": {
           "mabn": "0001421945",
@@ -601,8 +598,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "1"
+          "surgicalConsultation": null
         },
         "0001421962": {
           "mabn": "0001421962",
@@ -654,8 +650,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "12"
+          "surgicalConsultation": null
         },
         "0001422158": {
           "mabn": "0001422158",
@@ -707,8 +702,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "5"
+          "surgicalConsultation": null
         },
         "0001032592": {
           "mabn": "0001032592",
@@ -762,8 +756,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "16"
+          "surgicalConsultation": null
         },
         "0001422706": {
           "mabn": "0001422706",
@@ -815,8 +808,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "9"
+          "surgicalConsultation": null
         },
         "0001423331": {
           "mabn": "0001423331",
@@ -870,8 +862,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "19"
+          "surgicalConsultation": null
         },
         "0000037245": {
           "mabn": "0000037245",
@@ -923,8 +914,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "8"
+          "surgicalConsultation": null
         },
         "0001423919": {
           "mabn": "0001423919",
@@ -978,8 +968,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "22"
+          "surgicalConsultation": null
         },
         "0001423930": {
           "mabn": "0001423930",
@@ -1033,8 +1022,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "14"
+          "surgicalConsultation": null
         },
         "0001245654": {
           "mabn": "0001245654",
@@ -1086,8 +1074,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "7"
+          "surgicalConsultation": null
         },
         "0001424352": {
           "mabn": "0001424352",
@@ -1141,8 +1128,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "18"
+          "surgicalConsultation": null
         },
         "0001424848": {
           "mabn": "0001424848",
@@ -1196,8 +1182,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "2"
+          "surgicalConsultation": null
         },
         "0001424868": {
           "mabn": "0001424868",
@@ -1249,8 +1234,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "20"
+          "surgicalConsultation": null
         },
         "0001424870": {
           "mabn": "0001424870",
@@ -1304,8 +1288,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "13"
+          "surgicalConsultation": null
         },
         "0001424881": {
           "mabn": "0001424881",
@@ -1408,8 +1391,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "17"
+          "surgicalConsultation": null
         },
         "0001425070": {
           "mabn": "0001425070",
@@ -1461,8 +1443,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "11"
+          "surgicalConsultation": null
         },
         "0001425068": {
           "mabn": "0001425068",
@@ -1514,8 +1495,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "10"
+          "surgicalConsultation": null
         },
         "0001425123": {
           "mabn": "0001425123",
@@ -1569,8 +1549,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "23"
+          "surgicalConsultation": null
         },
         "0001425126": {
           "mabn": "0001425126",
@@ -1622,8 +1601,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "4"
+          "surgicalConsultation": null
         },
         "0001418457": {
           "mabn": "0001418457",
@@ -2868,7 +2846,31 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001420337",
+        "0001421064",
+        "0001421561",
+        "0001421945",
+        "0001421962",
+        "0001422158",
+        "0001032592",
+        "0001422706",
+        "0001423331",
+        "0000037245",
+        "0001423919",
+        "0001423930",
+        "0001245654",
+        "0001424352",
+        "0001424848",
+        "0001424868",
+        "0001424870",
+        "0001424881",
+        "0001424929",
+        "0001425070",
+        "0001425068",
+        "0001425123",
+        "0001425126"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -2884,7 +2886,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:07.585Z"
+      "updatedAt": "2026-10-04T04:35:21.263Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -4884,7 +4886,32 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001265243",
+        "0001419943",
+        "0000462435",
+        "0000789370",
+        "0001422302",
+        "0001422775",
+        "0001325103",
+        "0001423438",
+        "0001423447",
+        "0001421947",
+        "0001423960",
+        "0000844175",
+        "0001423400",
+        "0001422360",
+        "0001420070",
+        "0001352007",
+        "0001424078",
+        "0001422435",
+        "0001424859",
+        "0001424892",
+        "0001420757",
+        "0001425022",
+        "0001424994",
+        "0001424989"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -4900,7 +4927,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:07.585Z"
+      "updatedAt": "2026-10-04T04:35:21.263Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6084,7 +6111,22 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001383920",
+        "0001327863",
+        "0001413514",
+        "0001422911",
+        "0001417494",
+        "0001420565",
+        "0001220543",
+        "0001423182",
+        "0001181071",
+        "0001262499",
+        "0001423451",
+        "0001423393",
+        "0001422326",
+        "0001424428"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -6100,7 +6142,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:07.585Z"
+      "updatedAt": "2026-10-04T04:35:21.264Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6201,8 +6243,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "14"
+          "surgicalConsultation": null
         },
         "0001418784": {
           "mabn": "0001418784",
@@ -6284,8 +6325,7 @@
             "decision": "Đồng ý",
             "advancePayment": "10 triệu",
             "updatedAt": "2026-10-04T04:31:19.333Z"
-          },
-          "giuong": "21"
+          }
         },
         "0001411127": {
           "mabn": "0001411127",
@@ -6340,8 +6380,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "20"
+          "surgicalConsultation": null
         },
         "0001421285": {
           "mabn": "0001421285",
@@ -6396,8 +6435,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "30"
+          "surgicalConsultation": null
         },
         "0001418775": {
           "mabn": "0001418775",
@@ -6452,8 +6490,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "6"
+          "surgicalConsultation": null
         },
         "0001422079": {
           "mabn": "0001422079",
@@ -6535,8 +6572,7 @@
             "decision": "Đồng ý",
             "advancePayment": "10 triệu",
             "updatedAt": "2026-10-04T04:31:19.329Z"
-          },
-          "giuong": "1"
+          }
         },
         "0001422398": {
           "mabn": "0001422398",
@@ -6591,8 +6627,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "12"
+          "surgicalConsultation": null
         },
         "0001422488": {
           "mabn": "0001422488",
@@ -6674,8 +6709,7 @@
             "decision": "Hội ý",
             "advancePayment": "",
             "updatedAt": "2026-10-04T04:31:19.332Z"
-          },
-          "giuong": "11"
+          }
         },
         "0001200590": {
           "mabn": "0001200590",
@@ -6757,8 +6791,7 @@
             "decision": "Không đồng ý",
             "advancePayment": "",
             "updatedAt": "2026-10-04T04:31:19.333Z"
-          },
-          "giuong": "31"
+          }
         },
         "0001423036": {
           "mabn": "0001423036",
@@ -6840,8 +6873,7 @@
             "decision": "Hội ý",
             "advancePayment": "",
             "updatedAt": "2026-10-04T04:31:19.332Z"
-          },
-          "giuong": "2"
+          }
         },
         "0001423062": {
           "mabn": "0001423062",
@@ -6896,8 +6928,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "5"
+          "surgicalConsultation": null
         },
         "0001423344": {
           "mabn": "0001423344",
@@ -6952,8 +6983,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "30X"
+          "surgicalConsultation": null
         },
         "0001423307": {
           "mabn": "0001423307",
@@ -7008,8 +7038,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "29X"
+          "surgicalConsultation": null
         },
         "0001422572": {
           "mabn": "0001422572",
@@ -7064,8 +7093,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "9"
+          "surgicalConsultation": null
         },
         "0001423830": {
           "mabn": "0001423830",
@@ -7120,8 +7148,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "29"
+          "surgicalConsultation": null
         },
         "0001423904": {
           "mabn": "0001423904",
@@ -7176,8 +7203,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "10"
+          "surgicalConsultation": null
         },
         "0001423932": {
           "mabn": "0001423932",
@@ -7232,8 +7258,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "22"
+          "surgicalConsultation": null
         },
         "0001419899": {
           "mabn": "0001419899",
@@ -7315,8 +7340,7 @@
             "decision": "Đồng ý",
             "advancePayment": "10 triệu",
             "updatedAt": "2026-10-04T04:31:19.333Z"
-          },
-          "giuong": "25"
+          }
         },
         "0001424144": {
           "mabn": "0001424144",
@@ -7371,8 +7395,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "17"
+          "surgicalConsultation": null
         },
         "0001424276": {
           "mabn": "0001424276",
@@ -7454,8 +7477,7 @@
             "decision": "Đồng ý",
             "advancePayment": "10 triệu",
             "updatedAt": "2026-10-04T04:31:19.332Z"
-          },
-          "giuong": "7"
+          }
         },
         "0001424346": {
           "mabn": "0001424346",
@@ -7537,8 +7559,7 @@
             "decision": "Hội ý",
             "advancePayment": "",
             "updatedAt": "2026-10-04T04:31:19.333Z"
-          },
-          "giuong": "23"
+          }
         },
         "0001068291": {
           "mabn": "0001068291",
@@ -7593,8 +7614,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "26"
+          "surgicalConsultation": null
         },
         "0001424410": {
           "mabn": "0001424410",
@@ -7649,8 +7669,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "8"
+          "surgicalConsultation": null
         },
         "0001424436": {
           "mabn": "0001424436",
@@ -7732,8 +7751,7 @@
             "decision": "Hội ý",
             "advancePayment": "",
             "updatedAt": "2026-10-04T04:31:19.332Z"
-          },
-          "giuong": "15"
+          }
         },
         "0001424446": {
           "mabn": "0001424446",
@@ -7788,8 +7806,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "13"
+          "surgicalConsultation": null
         },
         "0000995488": {
           "mabn": "0000995488",
@@ -7844,8 +7861,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "18"
+          "surgicalConsultation": null
         },
         "0000811741": {
           "mabn": "0000811741",
@@ -7900,8 +7916,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "28"
+          "surgicalConsultation": null
         },
         "0001355818": {
           "mabn": "0001355818",
@@ -7956,8 +7971,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "27"
+          "surgicalConsultation": null
         },
         "0001383953": {
           "mabn": "0001383953",
@@ -8012,8 +8026,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "3"
+          "surgicalConsultation": null
         },
         "0001008234": {
           "mabn": "0001008234",
@@ -8095,8 +8108,7 @@
             "decision": "Hội ý",
             "advancePayment": "",
             "updatedAt": "2026-10-04T04:31:19.332Z"
-          },
-          "giuong": "16"
+          }
         },
         "0001424521": {
           "mabn": "0001424521",
@@ -8151,8 +8163,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "4X"
+          "surgicalConsultation": null
         },
         "0001422464": {
           "mabn": "0001422464",
@@ -8207,8 +8218,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "4"
+          "surgicalConsultation": null
         },
         "0001424820": {
           "mabn": "0001424820",
@@ -8263,8 +8273,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "20X"
+          "surgicalConsultation": null
         },
         "0001424939": {
           "mabn": "0001424939",
@@ -8346,8 +8355,7 @@
             "decision": "Hội ý",
             "advancePayment": "",
             "updatedAt": "2026-10-04T04:31:19.333Z"
-          },
-          "giuong": "15X"
+          }
         },
         "0001424955": {
           "mabn": "0001424955",
@@ -8402,8 +8410,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "19"
+          "surgicalConsultation": null
         },
         "0001424966": {
           "mabn": "0001424966",
@@ -8458,8 +8465,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "2X"
+          "surgicalConsultation": null
         },
         "0001425000": {
           "mabn": "0001425000",
@@ -8514,8 +8520,7 @@
             "surgeryDate": ""
           },
           "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null,
-          "giuong": "5X"
+          "surgicalConsultation": null
         },
         "0001413526": {
           "mabn": "0001413526",
@@ -10016,7 +10021,45 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001415940",
+        "0001418784",
+        "0001411127",
+        "0001421285",
+        "0001418775",
+        "0001422079",
+        "0001422398",
+        "0001422488",
+        "0001200590",
+        "0001423036",
+        "0001423062",
+        "0001423344",
+        "0001423307",
+        "0001422572",
+        "0001423830",
+        "0001423904",
+        "0001423932",
+        "0001419899",
+        "0001424144",
+        "0001424276",
+        "0001424346",
+        "0001068291",
+        "0001424410",
+        "0001424436",
+        "0001424446",
+        "0000995488",
+        "0000811741",
+        "0001355818",
+        "0001383953",
+        "0001008234",
+        "0001424521",
+        "0001422464",
+        "0001424820",
+        "0001424939",
+        "0001424955",
+        "0001424966",
+        "0001425000"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -10032,7 +10075,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:07.585Z"
+      "updatedAt": "2026-10-04T04:35:21.264Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -10910,7 +10953,17 @@
         }
       },
       "archivedRecords": {},
-      "latestExcelMabns": [],
+      "latestExcelMabns": [
+        "0001412464",
+        "0001416828",
+        "0001420321",
+        "0001422339",
+        "0001423465",
+        "0001423868",
+        "0001421963",
+        "0001412378",
+        "0001425116"
+      ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
@@ -10926,11 +10979,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T04:35:07.585Z"
+      "updatedAt": "2026-10-04T04:35:21.264Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "11:10 ngày 04/10/2026",
+  "lastExcelUploadTime": "11:35 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -11196,8 +11249,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791087047150.1267,
-      "lastHisSyncTime": "2026-10-04T04:10:48.251Z"
+      "lastHisSyncTimeMs": 1791088520958.7776,
+      "lastHisSyncTime": "2026-10-04T04:35:21.659Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
