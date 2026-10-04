@@ -1,5 +1,5 @@
 {
-  "version": 1791103782011,
+  "version": 1791103787297,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3096,7 +3096,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:49:42.008Z"
+      "updatedAt": "2026-10-04T08:49:47.287Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5393,7 +5393,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:49:42.008Z"
+      "updatedAt": "2026-10-04T08:49:47.287Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6593,7 +6593,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:49:42.008Z"
+      "updatedAt": "2026-10-04T08:49:47.287Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10392,7 +10392,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:49:42.008Z"
+      "updatedAt": "2026-10-04T08:49:47.287Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11286,7 +11286,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T08:49:42.008Z"
+      "updatedAt": "2026-10-04T08:49:47.287Z"
     }
   },
   "episodeConsultations": {},
@@ -11433,7 +11433,7 @@
           "roomKey": "tk4",
           "roomName": "Thần kinh 4",
           "status": "SUBMITTED",
-          "updatedAt": "2026-10-04T08:12:10.941Z",
+          "updatedAt": "2026-10-04T08:49:47.288Z",
           "personnel": {
             "nurses": "Linh - Hiếu",
             "nursesDay": "",
