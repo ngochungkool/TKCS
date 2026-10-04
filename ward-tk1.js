@@ -129,7 +129,14 @@
   // Chế độ bấm chọn nhanh 1 BN chưa phân giường rồi bấm trực tiếp vào ô giường bên dưới
   let quickAssignSelectedMabn = null;
 
-  let selectedDateKey = getTodayKey();
+  function getInitialDateKey() {
+    try {
+      const qDate = new URLSearchParams(window.location.search).get('date');
+      if (qDate && /^\d{4}-\d{2}-\d{2}$/.test(qDate)) return qDate;
+    } catch (e) {}
+    return getTodayKey();
+  }
+  let selectedDateKey = getInitialDateKey();
   function getSelectedDateKey() {
     return selectedDateKey || getTodayKey();
   }
@@ -232,10 +239,8 @@
     if (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[dKey]) {
       return rec.surgicalConsultationsByDate[dKey];
     }
-    if (rec.surgicalConsultation) {
-      if (!rec.surgicalConsultation.dateKey || rec.surgicalConsultation.dateKey === dKey) {
-        return rec.surgicalConsultation;
-      }
+    if (rec.surgicalConsultation && rec.surgicalConsultation.dateKey === dKey) {
+      return rec.surgicalConsultation;
     }
     return null;
   }

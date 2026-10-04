@@ -2912,7 +2912,7 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  function getTk4SurgicalConsultations(targetDateKey, fallbackDateKey = null) {
+  function getTk4SurgicalConsultations(targetDateKey) {
     try {
       const tk4 = db.wardRounds && db.wardRounds.tk4;
       if (!tk4 || !tk4.patientRecords) return [];
@@ -2920,15 +2920,8 @@ const server = http.createServer(async (req, res) => {
       const list = [];
       for (const [mabn, rec] of Object.entries(tk4.patientRecords)) {
         if (rec.removed && rec.removed.isRemoved) continue;
-        let sc = (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[dKey]) ||
-                 (rec.surgicalConsultation && rec.surgicalConsultation.dateKey === dKey ? rec.surgicalConsultation : null);
-        if (!sc && fallbackDateKey) {
-          sc = (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[fallbackDateKey]) ||
-               (rec.surgicalConsultation && rec.surgicalConsultation.dateKey === fallbackDateKey ? rec.surgicalConsultation : null);
-        }
-        if (!sc && rec.surgicalConsultation && !rec.surgicalConsultation.dateKey) {
-          sc = rec.surgicalConsultation;
-        }
+        const sc = (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[dKey]) ||
+                   (rec.surgicalConsultation && rec.surgicalConsultation.dateKey === dKey ? rec.surgicalConsultation : null);
         if (sc && sc.isConsulted) {
           list.push({
             mabn: rec.mabn || mabn,
@@ -4054,7 +4047,7 @@ const server = http.createServer(async (req, res) => {
       doctors: db.doctors || [],
       dutyDoctorsAbbr: dutyDocsShort.join(' – '),
       inpatientList: getAllInpatientsList(),
-      tk4Consultations: getTk4SurgicalConsultations(nextDate, qDate),
+      tk4Consultations: getTk4SurgicalConsultations(nextDate),
       availableDates: Object.keys(db.briefingReports || {})
     }));
     return;
@@ -4068,8 +4061,8 @@ const server = http.createServer(async (req, res) => {
     const report = getOrBuildBriefingReport(targetDate);
 
     if (action === 'SAVE_TK4_CONSULTATION') {
-      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, bloodMl, isConsulted, targetDate: explicitTargetDate, hoten, tuoi, gioiTinh, giuong, soVaoVien, maKcb } = body;
-      const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : addDaysToKey(targetDate, 1));
+      const { mabn, postConsultDiagnosis, surgeryMethod, decision, advancePayment, bloodMl, isConsulted, targetDate: explicitTargetDate, shiftDate, hoten, tuoi, gioiTinh, giuong, soVaoVien, maKcb } = body;
+      const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : (targetDate ? targetDate : getDateKey(new Date())));
       if (!db.wardRounds) db.wardRounds = {};
       if (!db.wardRounds.tk4) db.wardRounds.tk4 = { patientRecords: {}, bedAssignments: {} };
       if (!db.wardRounds.tk4.patientRecords) db.wardRounds.tk4.patientRecords = {};
@@ -4141,14 +4134,13 @@ const server = http.createServer(async (req, res) => {
       saveDb();
       broadcastState(`🔪 Đã lưu hội chẩn mổ Thần kinh 4 cho BN ${rec.hoten || mabn} (ngày ${consultDate})`);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate, targetDate) }));
+      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate) }));
       return;
     }
 
     if (action === 'DELETE_TK4_CONSULTATION') {
       const { mabn, targetDate: explicitTargetDate, shiftDate } = body;
-      const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : addDaysToKey(targetDate, 1));
-      const sDate = shiftDate || (explicitTargetDate ? addDaysToKey(explicitTargetDate, -1) : null);
+      const consultDate = explicitTargetDate || (shiftDate ? addDaysToKey(shiftDate, 1) : (targetDate ? targetDate : getDateKey(new Date())));
 
       const affectedRooms = ['tk4', 'tk1', 'tk2', 'tk3', 'hstk'];
       let deletedNames = [];
@@ -4160,14 +4152,11 @@ const server = http.createServer(async (req, res) => {
           const rec = room.patientRecords[mId];
           if (!rec) continue;
           let changed = false;
-          if (rec.surgicalConsultationsByDate) {
-            if (rec.surgicalConsultationsByDate[consultDate]) { delete rec.surgicalConsultationsByDate[consultDate]; changed = true; }
-            if (explicitTargetDate && rec.surgicalConsultationsByDate[explicitTargetDate]) { delete rec.surgicalConsultationsByDate[explicitTargetDate]; changed = true; }
-            if (targetDate && rec.surgicalConsultationsByDate[targetDate]) { delete rec.surgicalConsultationsByDate[targetDate]; changed = true; }
-            if (sDate && rec.surgicalConsultationsByDate[sDate]) { delete rec.surgicalConsultationsByDate[sDate]; changed = true; }
-            if (shiftDate && rec.surgicalConsultationsByDate[shiftDate]) { delete rec.surgicalConsultationsByDate[shiftDate]; changed = true; }
+          if (rec.surgicalConsultationsByDate && rec.surgicalConsultationsByDate[consultDate]) {
+            delete rec.surgicalConsultationsByDate[consultDate];
+            changed = true;
           }
-          if (rec.surgicalConsultation) {
+          if (rec.surgicalConsultation && rec.surgicalConsultation.dateKey === consultDate) {
             delete rec.surgicalConsultation;
             rec.surgicalConsultation = null;
             changed = true;
@@ -4180,7 +4169,7 @@ const server = http.createServer(async (req, res) => {
       saveDb();
       broadcastState(`🗑️ Đã xóa hội chẩn mổ Thần kinh 4 (${deletedNames.length > 0 ? deletedNames.slice(0, 3).join(', ') + (deletedNames.length > 3 ? '...' : '') : 'thành công'})`);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate, sDate) }));
+      res.end(JSON.stringify({ ok: true, tk4Consultations: getTk4SurgicalConsultations(consultDate) }));
       return;
     }
 
@@ -4251,7 +4240,7 @@ const server = http.createServer(async (req, res) => {
 
     saveDb();
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ ok: true, report, tk4Consultations: getTk4SurgicalConsultations(addDaysToKey(targetDate, 1), targetDate) }));
+    res.end(JSON.stringify({ ok: true, report, tk4Consultations: getTk4SurgicalConsultations(addDaysToKey(targetDate, 1)) }));
     return;
   }
 
