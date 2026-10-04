@@ -1,5 +1,5 @@
 {
-  "version": 1791079300526,
+  "version": 1791079323417,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -36,6 +36,21 @@
           "releasedBy": "Đào Văn Nhân",
           "releasedRole": "Trưởng khoa",
           "releasedAt": "2026-10-04T02:01:40.526Z"
+        },
+        {
+          "id": "u-1791079323405-na7c",
+          "roomName": "Thần kinh 1",
+          "startMin": 29851322,
+          "endMin": 29851323,
+          "lastConfirmedMin": 29851322,
+          "warnedAtMin": null,
+          "receivedBy": "Nguyễn Thị Mai",
+          "receivedRole": "Điều dưỡng trưởng",
+          "receivedAt": "2026-10-04T02:02:03.405Z",
+          "releasedEarly": true,
+          "releasedBy": "Nguyễn Thị Mai",
+          "releasedRole": "Điều dưỡng trưởng",
+          "releasedAt": "2026-10-04T02:02:03.417Z"
         }
       ],
       "currentRoom": null
