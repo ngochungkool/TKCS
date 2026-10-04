@@ -288,30 +288,30 @@ function getDoctorShiftInfoAtMinute(doc, epochMin) {
 
 // Quy tắc số 6 của đại ca:
 // Sắp xếp danh sách Bác sĩ theo thứ tự ưu tiên:
-// 1. Các user CÓ THỂ SỬ DỤNG ĐƯỢC (`isAvail`) đứng trước!
-//    - Trong đó: Các bác sĩ tại phòng đang chọn (`assignedRoom === targetRoom`) đứng trước!
-//    - Sau đó: Các bác sĩ phòng khác, xếp theo thứ tự từ lớn tới nhỏ (`seniority 1 -> 14`)
-// 2. Các user đang được chính phòng đang chọn sử dụng (`active.roomName === targetRoom`) đứng kế tiếp (để tiện bấm Trả user)
-// 3. Các user KHÔNG SỬ DỤNG ĐƯỢC đứng sau (cũng ưu tiên bác sĩ thuộc phòng đó trước, rồi theo `seniority 1 -> 14`)
+// 1. User ĐANG ĐƯỢC CHÍNH PHÒNG NÀY SỬ DỤNG -> ƯU TIÊN SỐ 1 LÊN ĐẦU TIÊN (để tiện quan sát & bấm Trả user)
+// 2. Các user CÓ THỂ SỬ DỤNG ĐƯỢC (`isAvail`) đứng tiếp theo
+//    - Ưu tiên Bác sĩ thuộc phòng đó (`assignedRoom === targetRoom`) trước
+//    - Sau đó: Xếp theo seniority 1 -> 14
+// 3. Các user KHÔNG SỬ DỤNG ĐƯỢC (đang dùng phòng khác, đang mổ, ngoài giờ trực) đứng sau cùng
+//    - Ưu tiên bác sĩ thuộc phòng đó trước, rồi theo seniority 1 -> 14
 function sortDoctorsByPriorityAndRoom(doctorsList, targetRoom, checkEpochMin) {
   return [...doctorsList].sort((a, b) => {
     const actA = getActiveUsageAt(a, checkEpochMin);
     const actB = getActiveUsageAt(b, checkEpochMin);
+
+    // 1. Ưu tiên số 1: User đang sử dụng tại chính phòng đó lên đầu tiên
+    const ownedByRoomA = Boolean(actA && actA.roomName === targetRoom);
+    const ownedByRoomB = Boolean(actB && actB.roomName === targetRoom);
+    if (ownedByRoomA !== ownedByRoomB) {
+      return ownedByRoomA ? -1 : 1;
+    }
+
     const availA = !actA && isDoctorAllowedAtMinute(a, checkEpochMin);
     const availB = !actB && isDoctorAllowedAtMinute(b, checkEpochMin);
 
-    // 1. Có thể sử dụng được đứng trước
+    // 2. Các user có thể sử dụng được đứng tiếp theo
     if (availA !== availB) {
       return availA ? -1 : 1;
-    }
-
-    // 2. Nếu cả hai cùng "Không sử dụng được", ưu tiên bác sĩ đang được chính targetRoom giữ lên trước để dễ bấm Trả user
-    if (!availA && !availB) {
-      const ownedByRoomA = actA && actA.roomName === targetRoom;
-      const ownedByRoomB = actB && actB.roomName === targetRoom;
-      if (ownedByRoomA !== ownedByRoomB) {
-        return ownedByRoomA ? -1 : 1;
-      }
     }
 
     // 3. Bác sĩ thường xuyên công tác tại phòng đó (`assignedRoom === targetRoom`) đứng trước
@@ -412,6 +412,28 @@ function renderGlobal60mWarnings() {
     .join('');
 }
 
+function getRoomIconHtml(room) {
+  if (room.isSurgery || room.name === 'Đang mổ') {
+    return `<span class="room-icon room-icon-surgery" title="Dao mổ"><svg xmlns="http://www.w3.org/2000/svg" width="1.18em" height="1.18em" viewBox="0 0 32 32" style="display:inline-block;vertical-align:-0.18em;"><path fill="currentColor" d="M28.83 5.17a4.1 4.1 0 0 0-5.66 0L.34 28h9.25a5 5 0 0 0 3.53-1.46l15.71-15.71a4 4 0 0 0 0-5.66M12.29 18.88l2.09-2.09l2.83 2.83l-2.09 2.09Zm-.58 6.24a3 3 0 0 1-2.12.88H5.17l5.71-5.71l2.83 2.83Zm15.7-15.71l-8.79 8.8l-2.83-2.83l8.8-8.79a2 2 0 0 1 2.82 0a2 2 0 0 1 0 2.82"/></svg></span>`;
+  }
+  if (room.name === 'Hồi sức thần kinh') {
+    return `<span class="room-icon room-icon-hstk" title="Đèn cấp cứu">🚨</span>`;
+  }
+  if (room.name === 'Thần kinh 1') {
+    return `<span class="room-icon room-icon-num" title="Số 1">1</span>`;
+  }
+  if (room.name === 'Thần kinh 2') {
+    return `<span class="room-icon room-icon-num" title="Số 2">2</span>`;
+  }
+  if (room.name === 'Thần kinh 3') {
+    return `<span class="room-icon room-icon-num" title="Số 3">3</span>`;
+  }
+  if (room.name === 'Thần kinh 4') {
+    return `<span class="room-icon room-icon-num" title="Số 4">4</span>`;
+  }
+  return `<span class="room-icon">🏢</span>`;
+}
+
 // Render 5 Department Rooms + "Đang mổ" Card (with large "+ Báo mổ" button)
 function renderRoomsGrid() {
   const container = document.getElementById('rooms-grid-container');
@@ -426,7 +448,7 @@ function renderRoomsGrid() {
     const count = activeDocsInRoom.length;
     const hasActive = count > 0;
     const isSelected = room.name === selectedRoomName;
-    const icon = room.isSurgery ? '🩺' : '🏢';
+    const iconHtml = getRoomIconHtml(room);
 
     const countLabel = room.isSurgery
       ? count === 0
@@ -445,7 +467,7 @@ function renderRoomsGrid() {
       >
         <div class="room-title-row">
           <div class="room-title">
-            <span class="room-icon">${icon}</span>
+            ${iconHtml}
             <span>${room.name}</span>
           </div>
           ${isSelected ? `<span class="room-selected-pill">✓ Đang chọn</span>` : ''}
