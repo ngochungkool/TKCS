@@ -1,5 +1,5 @@
 {
-  "version": 1791159689917,
+  "version": 1791159786521,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3368,7 +3368,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:21:29.320Z"
+      "updatedAt": "2026-10-05T00:23:06.229Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5686,7 +5686,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:21:29.320Z"
+      "updatedAt": "2026-10-05T00:23:06.230Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6914,7 +6914,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:21:29.320Z"
+      "updatedAt": "2026-10-05T00:23:06.230Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10958,7 +10958,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:21:29.321Z"
+      "updatedAt": "2026-10-05T00:23:06.230Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11921,7 +11921,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:21:29.321Z"
+      "updatedAt": "2026-10-05T00:23:06.230Z"
     }
   },
   "episodeConsultations": {
@@ -11960,14 +11960,14 @@
           },
           "census": {
             "benhCu": 23,
-            "vaoKK": 4,
+            "vaoKK": 5,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 27,
+            "hienCo": 28,
             "bhyt": 24
           },
           "admissions": [
@@ -12042,6 +12042,23 @@
               "isHighlight": false,
               "category": "",
               "notesBs": ""
+            },
+            {
+              "id": "adm-tk1-5",
+              "stt": 5,
+              "mabn": "0001425307",
+              "soVaoVien": "2600377739",
+              "maKcb": "2600377739",
+              "svv": "2600377739",
+              "hoten": "ĐOÀN VĂN TRUNG",
+              "tuoi": "44",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "54 trần bình trọng-Phường Tuy Hòa--Tỉnh Đắk Lắk",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
             }
           ],
           "discharges": [],
@@ -12068,7 +12085,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 24,
+            "benhCu": 20,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -12076,8 +12093,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 24,
-            "bhyt": 22
+            "hienCo": 20,
+            "bhyt": 18
           },
           "admissions": [],
           "discharges": [],
@@ -12134,15 +12151,15 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 37,
-            "vaoKK": 2,
+            "benhCu": 36,
+            "vaoKK": 4,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 39,
+            "hienCo": 40,
             "bhyt": 38
           },
           "admissions": [
@@ -12181,6 +12198,40 @@
               "isHighlight": false,
               "category": "",
               "notesBs": ""
+            },
+            {
+              "id": "adm-tk4-3",
+              "stt": 3,
+              "mabn": "0001425262",
+              "soVaoVien": "2600377663",
+              "maKcb": "2600377663",
+              "svv": "2600377663",
+              "hoten": "ĐINH THỊ BLON",
+              "tuoi": "80",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M48.36-Bệnh lý đốt sống do chấn thương, vùng thắt lưng",
+              "diaChi": "làng kon lanh te-Xã Đak Rong--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-4",
+              "stt": 4,
+              "mabn": "0001425286",
+              "soVaoVien": "2600377709",
+              "maKcb": "2600377709",
+              "svv": "2600377709",
+              "hoten": "VÕ TRƯỜNG HIỆP",
+              "tuoi": "27",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M48.33-Bệnh lý đốt sống do chấn thương, vùng cổ - ngực",
+              "diaChi": "bình an 2-Xã Tuy Phước Tây--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
             }
           ],
           "discharges": [],
@@ -12204,9 +12255,9 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 8,
+            "benhCu": 7,
             "vaoKK": 0,
-            "vaoKhac": 0,
+            "vaoKhac": 1,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
@@ -12215,7 +12266,25 @@
             "hienCo": 8,
             "bhyt": 8
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-hstk-1",
+              "stt": 1,
+              "mabn": "0001415940",
+              "soVaoVien": "2600343822",
+              "maKcb": "2600343822",
+              "svv": "2600343822",
+              "hoten": "PHAN THỊ KHÁNH",
+              "tuoi": "77",
+              "cause": "TNGT",
+              "source": "Khoa Thần kinh - Đột quỵ",
+              "chanDoan": "I61.1-Xuất huyết não tại bán cầu, vùng vỏ",
+              "diaChi": "thanh liêm-Phường An Nhơn Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -12229,22 +12298,22 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 106,
-          "vaoKK": 6,
-          "vaoKhac": 0,
+          "benhCu": 100,
+          "vaoKK": 9,
+          "vaoKhac": 1,
           "moCT": 0,
           "moCC": 0,
           "raRH": 0,
           "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 112,
-          "bhyt": 104
+          "hienCo": 110,
+          "bhyt": 100
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791123852476.1426,
-      "lastHisSyncTime": "2026-10-04T14:24:13.477Z"
+      "lastHisSyncTimeMs": 1791159688516.4187,
+      "lastHisSyncTime": "2026-10-05T00:23:06.521Z"
     },
     "2026-09-30": {
       "dateKey": "2026-09-30",
