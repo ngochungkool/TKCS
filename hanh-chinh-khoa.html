@@ -30,6 +30,9 @@
 
       <!-- Right Header Group: Navigation + Realtime Clock -->
       <div class="header-right-group">
+        <a href="/quan-ly-user.html" class="btn-tool-lookup" style="text-decoration: none; font-weight: 700; color: #0284c7; border-color: #0284c7;">
+          <i class="fa-solid fa-users"></i> Quản Lý User
+        </a>
         <a href="/" class="btn-tool-lookup" style="text-decoration: none;">
           ← Về Trang Chủ
         </a>
@@ -123,7 +126,7 @@
           <div class="admin-hero-stats" id="adminQuickStats">
             <div class="admin-stat-box">
               <span class="stat-num" id="statDutyCount">0</span>
-              <span class="stat-lbl">Trực (07h-07h)</span>
+              <span class="stat-lbl">Trực</span>
             </div>
             <div class="admin-stat-box">
               <span class="stat-num" id="statWorkCount">0</span>
@@ -507,11 +510,33 @@
 
     const SCHEDULE_OPTIONS = [
       { code: 'LAM_NGAY', label: 'Làm ngày', cls: 'sched-btn-work', badgeBg: '#059669', badgeText: '#ffffff' },
-      { code: 'TRUC', label: 'Trực (07h-07h)', cls: 'sched-btn-duty', badgeBg: '#dc2626', badgeText: '#ffffff' },
-      { code: 'RA_TRUC', label: 'Ra trực (sau 07h)', cls: 'sched-btn-postduty', badgeBg: '#d97706', badgeText: '#ffffff' },
+      { code: 'TRUC', label: 'Trực', cls: 'sched-btn-duty', badgeBg: '#dc2626', badgeText: '#ffffff' },
+      { code: 'RA_TRUC', label: 'Ra trực', cls: 'sched-btn-postduty', badgeBg: '#d97706', badgeText: '#ffffff' },
       { code: 'PHONG_KHAM', label: 'Phòng khám', cls: 'sched-btn-clinic', badgeBg: '#0284c7', badgeText: '#ffffff' },
       { code: 'NGHI', label: 'Nghỉ', cls: 'sched-btn-off', badgeBg: '#475569', badgeText: '#ffffff' }
     ];
+
+    function canEditSchedule() {
+      let authUser = null;
+      if (window.TKCSAuth && typeof window.TKCSAuth.getUser === 'function') {
+        authUser = window.TKCSAuth.getUser();
+      }
+      if (!authUser) {
+        try {
+          authUser = JSON.parse(localStorage.getItem('auth_user') || 'null');
+        } catch (e) {}
+      }
+      if (!authUser) return false;
+      const username = (authUser.username || '').toLowerCase();
+      const name = (authUser.name || authUser.fullName || '').toLowerCase();
+      // 1. Tôi / Admin: BS Huỳnh Ngọc Hưng (hnhung) hoặc role admin
+      if (authUser.role === 'admin' || username === 'hnhung' || name.includes('ngọc hưng')) return true;
+      // 2. Điều dưỡng Hồng Nhi: nthnhi
+      if (username === 'nthnhi' || name.includes('hồng nhi')) return true;
+      // 3. Điều dưỡng An: ptan
+      if (username === 'ptan' || name.includes('thúy an') || name.includes('thuý an') || name.endsWith(' an')) return true;
+      return false;
+    }
 
     function showToast(msg) {
       const box = document.getElementById('toast-box');
@@ -781,6 +806,10 @@
     }
 
     async function autoFillScheduleFromPrevDay() {
+      if (!canEditSchedule()) {
+        showToast('🔒 Chỉ Điều dưỡng An, Điều dưỡng Hồng Nhi và Ban Quản trị mới được tự động lấy lịch chấm công!');
+        return;
+      }
       try {
         const res = await fetch('/api/auto-fill-schedule-date', {
           method: 'POST',
@@ -790,6 +819,8 @@
         const data = await res.json();
         if (data.ok) {
           showToast(`⚡ Đã lấy lịch Ra trực từ ngày ${data.prevDateKey} sang ngày ${data.dateKey} (${data.autoPostDutyCount} BS Ra trực)`);
+        } else {
+          showToast('❌ ' + (data.error || 'Không thể tự động lấy lịch từ ngày trước'));
         }
       } catch (err) {
         showToast('❌ Không thể tự động lấy lịch từ ngày trước');
@@ -888,8 +919,12 @@
     // CHẤM CÔNG & QUẢN LÝ BÁC SĨ THEO NGÀY ĐANG CHỌN
     // =========================================================================
     async function changeDoctorSchedule(doctorId, scheduleCode) {
+      if (!canEditSchedule()) {
+        showToast('🔒 Chỉ Điều dưỡng An, Điều dưỡng Hồng Nhi và Ban Quản trị mới được chỉnh sửa bảng chấm công!');
+        return;
+      }
       try {
-        await fetch('/api/update-schedule', {
+        const res = await fetch('/api/update-schedule', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -898,6 +933,10 @@
             dateKey: selectedAdminDateKey
           })
         });
+        const data = await res.json();
+        if (!data.ok) {
+          showToast('❌ ' + (data.error || 'Lỗi cập nhật lịch làm việc'));
+        }
       } catch (err) {
         showToast('❌ Lỗi cập nhật lịch làm việc');
       }
@@ -1212,7 +1251,7 @@
       ctx.textAlign = 'left';
 
       const summaryGroups = [
-        { code: 'TRUC', title: 'TRỰC (24H)', countColor: '#dc2626' },
+        { code: 'TRUC', title: 'TRỰC', countColor: '#dc2626' },
         { code: 'LAM_NGAY', title: 'LÀM NGÀY', countColor: '#059669' },
         { code: 'PHONG_KHAM', title: 'PHÒNG KHÁM', countColor: '#0284c7' },
         { code: 'RA_TRUC', title: 'RA TRỰC', countColor: '#d97706' },

@@ -747,20 +747,46 @@ function renderTimelineRows() {
           `;
         } else if (isSameRoomOwner) {
           actionBtnHtml = `
-            <button type="button" class="btn-action-release" data-action="release-user" data-doc-id="${doc.id}">
-              Trả user ✕
-            </button>
+            <div style="display:flex;gap:4px;align-items:center;justify-content:flex-end;flex-wrap:wrap;">
+              <button type="button" class="btn-action-release" data-action="release-user" data-doc-id="${doc.id}">
+                Trả user ✕
+              </button>
+              <button
+                type="button"
+                class="btn-action-edit-surg"
+                data-action="open-edit-surgery-time"
+                data-doc-id="${doc.id}"
+                data-usage-id="${activeUsage.id}"
+                title="Chỉnh sửa giờ nhận / giờ trả User"
+                style="background: #ffffff; border: 1.5px solid #0284c7; color: #0284c7; padding: 5px 9px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;"
+              >
+                ✏️ Sửa giờ
+              </button>
+            </div>
           `;
         } else {
           actionBtnHtml = `
-            <button
-              type="button"
-              class="btn-action-disabled"
-              disabled
-              title="Chỉ phòng [${activeUsage.roomName}] mới được trả User này"
-            >
-              Đang ở ${activeUsage.roomName}
-            </button>
+            <div style="display:flex;gap:4px;align-items:center;justify-content:flex-end;flex-wrap:wrap;">
+              <button
+                type="button"
+                class="btn-action-disabled"
+                disabled
+                title="Chỉ phòng [${activeUsage.roomName}] mới được trả User này"
+              >
+                Đang ở ${activeUsage.roomName}
+              </button>
+              <button
+                type="button"
+                class="btn-action-edit-surg"
+                data-action="open-edit-surgery-time"
+                data-doc-id="${doc.id}"
+                data-usage-id="${activeUsage.id}"
+                title="Chỉnh sửa giờ nhận / giờ trả User"
+                style="background: #ffffff; border: 1.5px solid #0284c7; color: #0284c7; padding: 5px 9px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;"
+              >
+                ✏️ Sửa
+              </button>
+            </div>
           `;
         }
       } else if (selectedRoomName === 'Đang mổ') {
@@ -782,9 +808,28 @@ function renderTimelineRows() {
       } else if (allowedRightNow) {
         statusBadgeHtml = `<span class="status-badge available">● Có thể dùng</span>`;
         const todayDateKey = getDateKey(new Date(nowMin * 60000));
-        const intervals = getAllowedIntervalsForDate(doc, todayDateKey);
-        const activeIv = intervals.find(([s, e]) => nowMin >= s && nowMin < e);
-        const timeRange = activeIv ? `${formatHHMM(activeIv[0])} – ${formatHHMM(activeIv[1])}` : '07:00 – 11:30';
+        const prevDateKey = addDaysToKey(todayDateKey, -1);
+        const dt = new Date(nowMin * 60000 + VN_OFFSET_MS);
+        const minsOfDay = dt.getUTCHours() * 60 + dt.getUTCMinutes();
+        const todayShift = (doc.scheduleByDate && doc.scheduleByDate[todayDateKey]) || '';
+        const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevDateKey]) || '';
+
+        let timeRange = '07:00 – 11:30';
+        if (minsOfDay >= 420 && todayShift === 'TRUC') {
+          timeRange = '07:00 – 07:00 hôm sau';
+        } else if (minsOfDay < 420 && prevShift === 'TRUC') {
+          timeRange = '07:00 hôm qua – 07:00 hôm nay';
+        } else {
+          const intervals = getAllowedIntervalsForDate(doc, todayDateKey);
+          const activeIv = intervals.find(([s, e]) => nowMin >= s && nowMin < e);
+          if (activeIv) {
+            if (activeIv[1] % 1440 === 0 && todayShift === 'TRUC') {
+              timeRange = `${formatHHMM(activeIv[0])} – 07:00 hôm sau`;
+            } else {
+              timeRange = `${formatHHMM(activeIv[0])} – ${formatHHMM(activeIv[1])}`;
+            }
+          }
+        }
         statusSubHtml = `<span class="status-subtext time-concise">${timeRange}</span>`;
         actionBtnHtml = `
           <button
@@ -850,14 +895,16 @@ function renderTimelineRows() {
           return `
             <div
               class="usage-block ${isSurg ? 'usage-block-surgery' : ''}"
-              style="left: ${leftPct}%; width: ${widthPct}%; z-index: 4;"
-              ${isSurg ? `data-action="open-edit-surgery-time" data-doc-id="${doc.id}" data-usage-id="${u.id}"` : ''}
+              style="left: ${leftPct}%; width: ${widthPct}%; z-index: 4; cursor: pointer;"
+              data-action="open-edit-surgery-time"
+              data-doc-id="${doc.id}"
+              data-usage-id="${u.id}"
               title="${u.roomName}: ${formatHHMM(u.startMin)} -> ${
             u.endMin !== null ? formatHHMM(u.endMin) : 'Đang sử dụng'
-          }${isSurg ? ' (Bấm để chỉnh sửa giờ mổ)' : ''}"
+          } (Bấm để chỉnh sửa giờ)"
             >
               <strong>${u.roomName}</strong>
-              <span>${timeLabel}${isSurg ? ' ✏️' : ''}</span>
+              <span>${timeLabel} ✏️</span>
             </div>
           `;
         })
@@ -867,9 +914,7 @@ function renderTimelineRows() {
         .map((u) => {
           const endStr = u.endMin !== null ? formatHHMM(u.endMin) : 'Đang dùng';
           const isSurg = u.roomName === 'Đang mổ';
-          const editBtn = isSurg
-            ? ` <button type="button" class="btn-mini-edit-surg" data-action="open-edit-surgery-time" data-doc-id="${doc.id}" data-usage-id="${u.id}" style="background:none;border:none;color:#0284c7;cursor:pointer;font-weight:700;padding:0 3px;" title="Chỉnh sửa giờ mổ">✏️</button>`
-            : '';
+          const editBtn = ` <button type="button" class="btn-mini-edit-surg" data-action="open-edit-surgery-time" data-doc-id="${doc.id}" data-usage-id="${u.id}" style="background:none;border:none;color:#0284c7;cursor:pointer;font-weight:700;padding:0 3px;" title="Chỉnh sửa giờ">✏️</button>`;
           return `<span class="usage-caption-item ${isSurg ? 'caption-surgery' : ''}">${u.roomName} · <b>${formatHHMM(
             u.startMin
           )} &rarr; ${endStr}</b>${editBtn}</span>`;
@@ -1030,7 +1075,7 @@ function openQuickSurgeryDialog(preselectedDocId = null) {
   document.getElementById('surgery-quick-dialog').showModal();
 }
 
-// Box 2B: Open Edit Surgery Time Dialog
+// Box 2B: Open Edit Usage / Surgery Time Dialog
 function openEditSurgeryTimeDialog(docId, usageId = null) {
   const doc = dbState.doctors.find((d) => d.id === docId);
   if (!doc) return;
@@ -1044,16 +1089,16 @@ function openEditSurgeryTimeDialog(docId, usageId = null) {
   }
   if (!targetUsage) {
     const act = getActiveUsage(doc);
-    if (act && act.roomName === 'Đang mổ') {
+    if (act) {
       targetUsage = act;
     } else {
-      const surgUsages = (doc.usages || []).filter((u) => u.roomName === 'Đang mổ');
-      if (surgUsages.length > 0) targetUsage = surgUsages[surgUsages.length - 1];
+      const allUsages = doc.usages || [];
+      if (allUsages.length > 0) targetUsage = allUsages[allUsages.length - 1];
     }
   }
 
   if (!targetUsage) {
-    showToast('⚠️ Không tìm thấy phiên báo mổ của bác sĩ!');
+    showToast('⚠️ Không tìm thấy phiên sử dụng của bác sĩ!');
     return;
   }
 
@@ -1062,19 +1107,31 @@ function openEditSurgeryTimeDialog(docId, usageId = null) {
   if (docIdInput) docIdInput.value = doc.id;
   if (usageIdInput) usageIdInput.value = targetUsage.id || '';
 
+  const roomSelect = document.getElementById('edit-surg-room-select');
+  if (roomSelect) {
+    roomSelect.value = targetUsage.roomName || 'Đang mổ';
+  }
+
+  const isSurg = targetUsage.roomName === 'Đang mổ';
+  const modalTitle = document.getElementById('edit-usage-modal-title');
+  if (modalTitle) {
+    modalTitle.innerHTML = `<span>✏️</span> Chỉnh sửa giờ sử dụng User`;
+  }
+
   const summaryEl = document.getElementById('edit-surg-doc-summary');
   if (summaryEl) {
     const staffText = targetUsage.receivedBy
       ? `${targetUsage.receivedRole || 'ĐD'} ${targetUsage.receivedBy}`
-      : 'Kíp phẫu thuật';
+      : (isSurg ? 'Kíp phẫu thuật' : 'Chưa ghi danh');
+    const statusText = targetUsage.endMin !== null
+      ? `Đã kết thúc (${formatHHMM(targetUsage.endMin)})`
+      : (isSurg ? 'Đang mổ' : 'Đang sử dụng');
     summaryEl.innerHTML = `
       <div style="display:flex;align-items:center;gap:10px;">
-        <span style="font-size:1.4rem;">🩺</span>
+        <span style="font-size:1.4rem;">${isSurg ? '🩺' : '📋'}</span>
         <div>
           <div style="font-weight:800;color:#0369a1;font-size:0.95rem;">BS ${doc.name} (${doc.handle})</div>
-          <div style="font-size:0.8rem;color:#64748b;">Người báo mổ: <b>${staffText}</b> · Trạng thái: <b>${
-      targetUsage.endMin !== null ? 'Đã kết thúc (' + formatHHMM(targetUsage.endMin) + ')' : 'Đang mổ'
-    }</b></div>
+          <div style="font-size:0.8rem;color:#64748b;">Phòng: <b>${targetUsage.roomName}</b> · Người nhận: <b>${staffText}</b> · Trạng thái: <b>${statusText}</b></div>
         </div>
       </div>
     `;
@@ -1221,7 +1278,7 @@ function renderHistoryLookupTable() {
   if (!tbody) return;
 
   if (allRecords.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#64748b; padding: 1.2rem;">Chưa có dữ liệu lịch sử phù hợp bộ lọc.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#64748b; padding: 1.2rem;">Chưa có dữ liệu lịch sử phù hợp bộ lọc.</td></tr>`;
     return;
   }
 
@@ -1248,6 +1305,19 @@ function renderHistoryLookupTable() {
           <td><b>${endLabel}</b></td>
           <td>${rec.durationMins} phút</td>
           <td>${statusPill}</td>
+          <td style="text-align: center;">
+            <button
+              type="button"
+              class="btn-secondary"
+              data-action="open-edit-surgery-time"
+              data-doc-id="${rec.doc.id}"
+              data-usage-id="${rec.usage.id}"
+              style="font-size: 0.76rem; padding: 3px 8px; border-color: #0284c7; color: #0284c7; font-weight: 700; cursor: pointer; border-radius: 4px;"
+              title="Chỉnh sửa giờ của phiên sử dụng này"
+            >
+              ✏️ Sửa
+            </button>
+          </td>
         </tr>
       `;
     })
@@ -1530,11 +1600,12 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const docId = document.getElementById('edit-surg-doc-id').value;
     const usageId = document.getElementById('edit-surg-usage-id').value;
+    const roomName = document.getElementById('edit-surg-room-select')?.value;
     const startStr = document.getElementById('edit-surg-start-time').value.trim();
     const endStr = document.getElementById('edit-surg-end-time').value.trim();
 
     if (!startStr) {
-      showToast('⚠️ Vui lòng nhập giờ bắt đầu mổ!');
+      showToast('⚠️ Vui lòng nhập giờ bắt đầu!');
       return;
     }
 
@@ -1546,9 +1617,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const { staffName, staffRole } = getCurrentStaffAuth();
-    postApi('/api/update-surgery-time', {
+    postApi('/api/update-usage-time', {
       docId,
       usageId,
+      roomName,
       startMin,
       endMin,
       startStr,
@@ -1558,6 +1630,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     editSurgeryDialog?.close();
+  });
+
+  // Click on Sửa button in history table
+  document.getElementById('history-table-body')?.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('[data-action="open-edit-surgery-time"]');
+    if (editBtn) {
+      const docId = editBtn.getAttribute('data-doc-id');
+      const usageId = editBtn.getAttribute('data-usage-id');
+      openEditSurgeryTimeDialog(docId, usageId);
+    }
   });
 
   // Box 3: Availability Lookup Dialog

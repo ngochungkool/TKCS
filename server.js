@@ -853,6 +853,23 @@ function isUserAuthorizedForAnnouncement(user) {
   return false;
 }
 
+function isUserAuthorizedForSchedule(user) {
+  if (!user) return false;
+  const username = (user.username || '').toLowerCase();
+  const name = (user.name || '').toLowerCase();
+
+  // 1. Điều dưỡng Hồng Nhi: nthnhi
+  if (username === 'nthnhi' || name.includes('hồng nhi')) return true;
+
+  // 2. Điều dưỡng An: ptan
+  if (username === 'ptan' || name.includes('thúy an') || name.includes('thuý an') || name.endsWith(' an')) return true;
+
+  // 3. Tôi (Admin): BS Huỳnh Ngọc Hưng (hnhung) hoặc Ban quản trị (role === 'admin')
+  if (user.role === 'admin' || username === 'hnhung' || name.includes('ngọc hưng')) return true;
+
+  return false;
+}
+
 const server = http.createServer(async (req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   const pathname = decodeURIComponent(parsedUrl.pathname);
@@ -1011,8 +1028,8 @@ const server = http.createServer(async (req, res) => {
 
   if (pathname.startsWith('/api/') && !isPublicApi) {
     const authUser = getAuthUser(req);
-    // Báo mổ khẩn cấp (/api/receive), Mổ xong (/api/release), Sửa giờ mổ (/api/update-surgery-time), Tiếp nhận cảnh báo (/api/acknowledge-surgery-alert) được chuyển tiếp xuống handler để xử lý linh hoạt
-    if (!authUser && pathname !== '/api/receive' && pathname !== '/api/release' && pathname !== '/api/update-surgery-time' && pathname !== '/api/acknowledge-surgery-alert') {
+    // Báo mổ khẩn cấp (/api/receive), Mổ xong (/api/release), Sửa giờ mổ/dùng (/api/update-surgery-time, /api/update-usage-time), Tiếp nhận cảnh báo (/api/acknowledge-surgery-alert) được chuyển tiếp xuống handler để xử lý linh hoạt
+    if (!authUser && pathname !== '/api/receive' && pathname !== '/api/release' && pathname !== '/api/update-surgery-time' && pathname !== '/api/update-usage-time' && pathname !== '/api/acknowledge-surgery-alert') {
       res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         ok: false,
@@ -1237,11 +1254,12 @@ const server = http.createServer(async (req, res) => {
     if (alertedRooms.length > 0) {
       alertMsg = ` ⚠️ [CẢNH BÁO TRÙNG GIỜ]: ` + alertedRooms.map(a => `Phòng ${a.roomName} (BS ${a.docName} đã chuyển sang phòng mổ)`).join('; ');
     }
-    broadcastState(
-      roomName === 'Đang mổ'
-        ? `🩺 ${staffPrefix}Đã báo mổ cho BS: ${assignedNames.join(', ')}${alertMsg}`
-        : `✅ ${staffPrefix}Phòng [${roomName}] đã nhận User BS ${assignedNames.join(', ')}`
-    );
+    const timeStr = formatHHMM(actualStart);
+    const endStr = actualEnd !== null ? ` - trả ${formatHHMM(actualEnd)}` : '';
+    const conciseReceiveMsg = roomName === 'Đang mổ'
+      ? `🩺 BS ${assignedNames.join(', ')} nhận ${timeStr}${endStr} [Phòng mổ]${alertMsg}`
+      : `✅ BS ${assignedNames.join(', ')} nhận ${timeStr}${endStr} [${roomName}]`;
+    broadcastState(conciseReceiveMsg);
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, db }));
     return;
@@ -1302,8 +1320,9 @@ const server = http.createServer(async (req, res) => {
     active.releasedRole = finalStaffRole;
     active.releasedAt = new Date().toISOString();
 
-    const staffPrefix = finalStaffName ? `[${finalStaffRole} ${finalStaffName}] ` : '';
-    broadcastState(`🔓 ${staffPrefix}[${active.roomName}] đã trả User BS ${doc.shortName || doc.name}`);
+    const startStr = formatHHMM(active.startMin);
+    const endStr = formatHHMM(active.endMin);
+    broadcastState(`🔓 BS ${doc.shortName || doc.name} nhận ${startStr} - trả ${endStr} [${active.roomName}]`);
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, db }));
@@ -1327,9 +1346,9 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // POST update surgery time (Chỉnh sửa giờ báo mổ)
-  if (req.method === 'POST' && pathname === '/api/update-surgery-time') {
-    const { docId, usageId, startMin, endMin, startStr, endStr, staffName, staffRole } = await readBody(req);
+  // POST update usage time (Chỉnh sửa giờ sử dụng user ở tất cả các phòng & phòng mổ)
+  if (req.method === 'POST' && (pathname === '/api/update-usage-time' || pathname === '/api/update-surgery-time')) {
+    const { docId, usageId, roomName, startMin, endMin, startStr, endStr, staffName, staffRole } = await readBody(req);
     const nowMin = getNowEpochMinutes();
     const doc = db.doctors.find((d) => d.id === docId);
 
@@ -1344,20 +1363,20 @@ const server = http.createServer(async (req, res) => {
       targetUsage = (doc.usages || []).find((u) => u.id === usageId);
     }
     if (!targetUsage) {
-      const activeSurgery = getActiveUsageAt(doc, nowMin);
-      if (activeSurgery && activeSurgery.roomName === 'Đang mổ') {
-        targetUsage = activeSurgery;
+      const active = getActiveUsageAt(doc, nowMin);
+      if (active) {
+        targetUsage = active;
       } else {
-        const surgeryUsages = (doc.usages || []).filter((u) => u.roomName === 'Đang mổ');
-        if (surgeryUsages.length > 0) {
-          targetUsage = surgeryUsages[surgeryUsages.length - 1];
+        const allUsages = doc.usages || [];
+        if (allUsages.length > 0) {
+          targetUsage = allUsages[allUsages.length - 1];
         }
       }
     }
 
-    if (!targetUsage || targetUsage.roomName !== 'Đang mổ') {
+    if (!targetUsage) {
       res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ ok: false, error: 'Không tìm thấy phiên Báo mổ của bác sĩ này để chỉnh sửa!' }));
+      res.end(JSON.stringify({ ok: false, error: 'Không tìm thấy phiên sử dụng của bác sĩ này để chỉnh sửa!' }));
       return;
     }
 
@@ -1370,42 +1389,55 @@ const server = http.createServer(async (req, res) => {
       finalEnd += 1440;
     }
 
-    // Check if new start time causes conflict with any ward room usage
+    const targetRoom = roomName || targetUsage.roomName;
+
+    // Check if new start/end conflicts with other usages of the same doctor
     for (const u of doc.usages || []) {
       if (u === targetUsage || u.releasedEarly) continue;
       const uEnd = u.endMin !== null ? u.endMin : Math.max(u.startMin + 1, nowMin + 1440);
       const effectiveNewEnd = finalEnd !== null ? finalEnd : Math.max(finalStart + 1, nowMin + 1440);
       if (finalStart < uEnd && effectiveNewEnd > u.startMin) {
-        const prevRoom = u.roomName;
-        u.endMin = Math.max(u.startMin + 1, finalStart);
-        u.releasedEarly = true;
-        u.releasedBy = staffName || 'Hệ thống Báo mổ';
-        u.releasedRole = staffRole || 'Báo mổ';
-        u.releasedAt = new Date().toISOString();
+        if (targetRoom === 'Đang mổ') {
+          // If editing a surgery session, auto-terminate overlapping ward usage and alert ward
+          const prevRoom = u.roomName;
+          u.endMin = Math.max(u.startMin + 1, finalStart);
+          u.releasedEarly = true;
+          u.releasedBy = staffName || 'Hệ thống Báo mổ';
+          u.releasedRole = staffRole || 'Báo mổ';
+          u.releasedAt = new Date().toISOString();
 
-        if (prevRoom && prevRoom !== 'Đang mổ') {
-          if (!Array.isArray(db.surgeryAlerts)) db.surgeryAlerts = [];
-          const alertItem = {
-            id: 'sa-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
-            roomName: prevRoom,
-            docId: doc.id,
-            docName: doc.name,
-            docShortName: doc.shortName || doc.name,
-            handle: doc.handle,
-            startMin: finalStart,
-            startTimeStr: formatHHMM(finalStart),
-            reportedBy: staffName || 'Kíp phẫu thuật',
-            reportedRole: staffRole || 'Báo mổ',
-            createdAt: new Date().toISOString(),
-            acknowledged: false,
-            message: `Bác sĩ ${doc.shortName || doc.name} (${doc.handle}) đã được điều chỉnh giờ Báo mổ lúc ${formatHHMM(finalStart)}. Tài khoản tại phòng [${prevRoom}] đã chuyển sang phòng mổ!`
-          };
-          db.surgeryAlerts.unshift(alertItem);
-          if (db.surgeryAlerts.length > 50) db.surgeryAlerts.length = 50;
+          if (prevRoom && prevRoom !== 'Đang mổ') {
+            if (!Array.isArray(db.surgeryAlerts)) db.surgeryAlerts = [];
+            const alertItem = {
+              id: 'sa-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+              roomName: prevRoom,
+              docId: doc.id,
+              docName: doc.name,
+              docShortName: doc.shortName || doc.name,
+              handle: doc.handle,
+              startMin: finalStart,
+              startTimeStr: formatHHMM(finalStart),
+              reportedBy: staffName || 'Kíp phẫu thuật',
+              reportedRole: staffRole || 'Báo mổ',
+              createdAt: new Date().toISOString(),
+              acknowledged: false,
+              message: `Bác sĩ ${doc.shortName || doc.name} (${doc.handle}) đã được điều chỉnh giờ Báo mổ lúc ${formatHHMM(finalStart)}. Tài khoản tại phòng [${prevRoom}] đã chuyển sang phòng mổ!`
+            };
+            db.surgeryAlerts.unshift(alertItem);
+            if (db.surgeryAlerts.length > 50) db.surgeryAlerts.length = 50;
+          }
+        } else {
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({
+            ok: false,
+            error: `Khung giờ này của BS ${doc.shortName || doc.name} bị trùng với phiên tại [${u.roomName}] (${formatHHMM(u.startMin)} - ${u.endMin ? formatHHMM(u.endMin) : 'đang mở'})!`
+          }));
+          return;
         }
       }
     }
 
+    targetUsage.roomName = targetRoom;
     targetUsage.startMin = finalStart;
     targetUsage.endMin = finalEnd;
     targetUsage.lastConfirmedMin = finalStart;
@@ -1413,8 +1445,8 @@ const server = http.createServer(async (req, res) => {
     if (finalEnd !== null) {
       if (finalEnd <= nowMin) {
         targetUsage.releasedEarly = true;
-        targetUsage.releasedBy = staffName || targetUsage.releasedBy || 'Kíp phẫu thuật';
-        targetUsage.releasedRole = staffRole || targetUsage.releasedRole || 'Báo mổ';
+        targetUsage.releasedBy = staffName || targetUsage.releasedBy || 'Điều dưỡng';
+        targetUsage.releasedRole = staffRole || targetUsage.releasedRole || 'Điều dưỡng';
         targetUsage.releasedAt = targetUsage.releasedAt || new Date().toISOString();
       } else {
         targetUsage.releasedEarly = false;
@@ -1427,11 +1459,13 @@ const server = http.createServer(async (req, res) => {
     }
 
     targetUsage.updatedAt = new Date().toISOString();
-    targetUsage.updatedBy = staffName ? `[${staffRole || 'ĐD'}] ${staffName}` : 'Kíp phẫu thuật';
+    targetUsage.updatedBy = staffName ? `[${staffRole || 'ĐD'}] ${staffName}` : 'Người dùng';
 
     saveDb();
-    const endText = finalEnd !== null ? formatHHMM(finalEnd) : 'Đang mổ';
-    broadcastState(`🩺 Đã cập nhật giờ mổ BS ${doc.shortName || doc.name}: ${formatHHMM(finalStart)} → ${endText}`);
+    const endText = finalEnd !== null ? formatHHMM(finalEnd) : (targetRoom === 'Đang mổ' ? 'Đang mổ' : 'đang dùng');
+    const prefixIcon = targetRoom === 'Đang mổ' ? '🩺' : '✏️';
+    const conciseNote = `${prefixIcon} BS ${doc.shortName || doc.name} nhận ${formatHHMM(finalStart)} - trả ${endText} [${targetRoom}]`;
+    broadcastState(conciseNote);
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, usage: targetUsage, db }));
     return;
@@ -1464,6 +1498,21 @@ const server = http.createServer(async (req, res) => {
 
   // POST update schedule from Hành chính khoa subpage (supports any selected dateKey YYYY-MM-DD)
   if (req.method === 'POST' && pathname === '/api/update-schedule') {
+    const authUser = getAuthUser(req);
+    if (!authUser) {
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Vui lòng đăng nhập để thực hiện!' }));
+      return;
+    }
+    if (!isUserAuthorizedForSchedule(authUser)) {
+      res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        ok: false,
+        error: 'Bạn không có quyền chỉnh sửa bảng chấm công! Quyền hạn chỉ dành cho: Điều dưỡng An, Điều dưỡng Hồng Nhi và Ban Quản trị.'
+      }));
+      return;
+    }
+
     const { doctorId, scheduleCode, dateKey } = await readBody(req);
     const nowMin = getNowEpochMinutes();
     const targetDateKey = dateKey || getDateKey(new Date(nowMin * 60000));
@@ -1497,7 +1546,20 @@ const server = http.createServer(async (req, res) => {
 
   // POST auto-fill schedule for a target date based on previous day's TRUC -> RA_TRUC
   if (req.method === 'POST' && pathname === '/api/auto-fill-schedule-date') {
-    const { dateKey } = await readBody(req);
+    const authUser = getAuthUser(req);
+    if (!authUser) {
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Vui lòng đăng nhập để thực hiện!' }));
+      return;
+    }
+    if (!isUserAuthorizedForSchedule(authUser)) {
+      res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        ok: false,
+        error: 'Bạn không có quyền tự động lấy lịch chấm công! Quyền hạn chỉ dành cho: Điều dưỡng An, Điều dưỡng Hồng Nhi và Ban Quản trị.'
+      }));
+      return;
+    }
     const nowMin = getNowEpochMinutes();
     const targetDateKey = dateKey || getDateKey(new Date(nowMin * 60000));
     const prevDateKey = addDaysToKey(targetDateKey, -1);
