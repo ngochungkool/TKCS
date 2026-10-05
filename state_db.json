@@ -1,5 +1,5 @@
 {
-  "version": 1791159494019,
+  "version": 1791159508753,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1376,14 +1376,25 @@
           "hisBed": "H027",
           "khoaChuyenDen": "",
           "tasksByDate": {
-            "2026-10-04": {}
+            "2026-10-04": {},
+            "2026-10-05": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [
+                "Chấn thương"
+              ],
+              "thuThuat": [],
+              "note": ""
+            }
           },
           "consultDetails": {
-            "specialty": "",
+            "specialty": "Chấn thương",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Chấn thương chỉnh hình"
           },
           "discharge": {
             "status": "NONE",
@@ -3277,7 +3288,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:14.018Z"
+      "updatedAt": "2026-10-05T00:18:28.753Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5574,7 +5585,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:14.018Z"
+      "updatedAt": "2026-10-05T00:18:28.753Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6787,7 +6798,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:14.018Z"
+      "updatedAt": "2026-10-05T00:18:28.753Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10661,7 +10672,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:14.018Z"
+      "updatedAt": "2026-10-05T00:18:28.753Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11564,10 +11575,21 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:14.018Z"
+      "updatedAt": "2026-10-05T00:18:28.753Z"
     }
   },
-  "episodeConsultations": {},
+  "episodeConsultations": {
+    "2600376919": [
+      {
+        "id": "ep-tk1-2026-10-05",
+        "roomName": "Thần kinh 1",
+        "dateKey": "2026-10-05",
+        "specialty": "Chấn thương",
+        "consultDiagnosis": "",
+        "consultTreatment": ""
+      }
+    ]
+  },
   "lastExcelUploadTime": "21:24 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
