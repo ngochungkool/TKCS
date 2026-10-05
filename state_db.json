@@ -1,5 +1,5 @@
 {
-  "version": 1791221131573,
+  "version": 1791221140876,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -4171,7 +4171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:25:31.572Z"
+      "updatedAt": "2026-10-05T17:25:40.371Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6697,7 +6697,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:25:31.572Z"
+      "updatedAt": "2026-10-05T17:25:40.371Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8028,7 +8028,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:25:31.572Z"
+      "updatedAt": "2026-10-05T17:25:40.371Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -12614,7 +12614,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:25:31.572Z"
+      "updatedAt": "2026-10-05T17:25:40.372Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -13680,7 +13680,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:25:31.573Z"
+      "updatedAt": "2026-10-05T17:25:40.372Z"
     }
   },
   "episodeConsultations": {},
@@ -14438,18 +14438,138 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 25,
-            "vaoKK": 0,
+            "benhCu": 24,
+            "vaoKK": 7,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 25,
-            "bhyt": 22
+            "hienCo": 31,
+            "bhyt": 28
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-tk1-1",
+              "stt": 1,
+              "mabn": "0001425649",
+              "soVaoVien": "2600379221",
+              "maKcb": "2600379221",
+              "svv": "2600379221",
+              "hoten": "TRẦN VĂN ĐẠT",
+              "tuoi": "33",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "Chánh Thạnh-Phường An Nhơn Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-2",
+              "stt": 2,
+              "mabn": "0001425732",
+              "soVaoVien": "2600379446",
+              "maKcb": "2600379446",
+              "svv": "2600379446",
+              "hoten": "NGUYỄN THỊ THU THỦY",
+              "tuoi": "51",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "Khối 2-Xã Tây Sơn--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-3",
+              "stt": 3,
+              "mabn": "0001425769",
+              "soVaoVien": "2600379551",
+              "maKcb": "2600379551",
+              "svv": "2600379551",
+              "hoten": "NGUYỄN TỐ KHẢI",
+              "tuoi": "17",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "R45.6-Bạo lực thể xác",
+              "diaChi": "Xã Ô Loan--Tỉnh Đắk Lắk",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-4",
+              "stt": 4,
+              "mabn": "0001425807",
+              "soVaoVien": "2600379750",
+              "maKcb": "2600379750",
+              "svv": "2600379750",
+              "hoten": "NGÔ THỊ LẠI",
+              "tuoi": "67",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.01-Chấn động não, có vết thương nội sọ hở",
+              "diaChi": "khánh phước-Xã Hòa Hội--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-5",
+              "stt": 5,
+              "mabn": "0001121759",
+              "soVaoVien": "2600379771",
+              "maKcb": "2600379771",
+              "svv": "2600379771",
+              "hoten": "VÕ MINH KHUÊ",
+              "tuoi": "67",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "Khánh Phước-Xã Hòa Hội--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-6",
+              "stt": 6,
+              "mabn": "0001425913",
+              "soVaoVien": "2600380070",
+              "maKcb": "2600380070",
+              "svv": "2600380070",
+              "hoten": "ĐINH VĂN ĐÔNG",
+              "tuoi": "58",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "Xã Tuy Phước--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk1-7",
+              "stt": 7,
+              "mabn": "0001425918",
+              "soVaoVien": "2600380085",
+              "maKcb": "2600380085",
+              "svv": "2600380085",
+              "hoten": "NGUYỄN THỊ CHINH",
+              "tuoi": "70",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "đoàn kết-Xã Ia Dreh--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -14471,18 +14591,87 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 24,
-            "vaoKK": 0,
-            "vaoKhac": 0,
+            "benhCu": 20,
+            "vaoKK": 2,
+            "vaoKhac": 2,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
             "hienCo": 24,
-            "bhyt": 22
+            "bhyt": 23
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-tk2-1",
+              "stt": 1,
+              "mabn": "0001181071",
+              "soVaoVien": "2600364957",
+              "maKcb": "2600364957",
+              "svv": "2600364957",
+              "hoten": "NGUYỄN THỊ HỒNG SƯƠNG",
+              "tuoi": "85",
+              "cause": "TNGT",
+              "source": "Khoa Nội tiết",
+              "chanDoan": "M47.96-Thoái hóa đốt sống, không xác định, vùng thắt lưng",
+              "diaChi": "An Hòa-Phường Bình Định--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk2-2",
+              "stt": 2,
+              "mabn": "0001423954",
+              "soVaoVien": "2600373321",
+              "maKcb": "2600373321",
+              "svv": "2600373321",
+              "hoten": "ĐINH VĂN HỢI",
+              "tuoi": "37",
+              "cause": "TNGT",
+              "source": "Khoa Gây mê hồi sức",
+              "chanDoan": "S12.70-Gãy cột sống cổ, nhiều đốt xương và/hoặc nhiều vị trí, gãy kín",
+              "diaChi": "thôn 3-Xã An Vinh--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk2-3",
+              "stt": 3,
+              "mabn": "0001425823",
+              "soVaoVien": "2600379819",
+              "maKcb": "2600379819",
+              "svv": "2600379819",
+              "hoten": "PHAN THỊ SƯƠNG",
+              "tuoi": "34",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+              "diaChi": "Xã An Hòa--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk2-4",
+              "stt": 4,
+              "mabn": "0001419899",
+              "soVaoVien": "2600374182",
+              "maKcb": "2600374182",
+              "svv": "2600374182",
+              "hoten": "HUỲNH NGỌC TÁNH",
+              "tuoi": "71",
+              "cause": "Bệnh",
+              "source": "KK",
+              "chanDoan": "M51.2-Thoát vị đĩa đệm cột sống xác định khác",
+              "diaChi": "Trung Lý, Nhơn Phong, An Nhơn, Bình Định-Phường An Nhơn Bắc--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -14504,18 +14693,53 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 14,
-            "vaoKK": 0,
+            "benhCu": 13,
+            "vaoKK": 2,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 14,
-            "bhyt": 12
+            "hienCo": 15,
+            "bhyt": 13
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-tk3-1",
+              "stt": 1,
+              "mabn": "0001373701",
+              "soVaoVien": "2600379658",
+              "maKcb": "2600379658",
+              "svv": "2600379658",
+              "hoten": "DƯƠNG THỊ CẦM",
+              "tuoi": "83",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+              "diaChi": "an long 2-Xã Canh Vinh--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk3-2",
+              "stt": 2,
+              "mabn": "0001425912",
+              "soVaoVien": "2600380069",
+              "maKcb": "2600380069",
+              "svv": "2600380069",
+              "hoten": "ĐẶNG TRƯƠNG TƯỜNG VI",
+              "tuoi": "53",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "Đệ Đức 1-Phường Hoài Nhơn Nam--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -14537,18 +14761,206 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 39,
-            "vaoKK": 0,
+            "benhCu": 38,
+            "vaoKK": 11,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 39,
-            "bhyt": 38
+            "hienCo": 49,
+            "bhyt": 48
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-tk4-1",
+              "stt": 1,
+              "mabn": "0001355398",
+              "soVaoVien": "2600378196",
+              "maKcb": "2600378196",
+              "svv": "2600378196",
+              "hoten": "TRẦN ĐÌNH HÙNG",
+              "tuoi": "75",
+              "cause": "Bệnh",
+              "source": "KK",
+              "chanDoan": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
+              "diaChi": "Tổ 46 Khu phố 9-Phường Quy Nhơn--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-2",
+              "stt": 2,
+              "mabn": "0001246451",
+              "soVaoVien": "2600378455",
+              "maKcb": "2600378455",
+              "svv": "2600378455",
+              "hoten": "ĐỖ THỊ THU NGA",
+              "tuoi": "67",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "D32.9-U lành ở màng não, không xác định",
+              "diaChi": "tổ 17 kv 3-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-3",
+              "stt": 3,
+              "mabn": "0001425397",
+              "soVaoVien": "2600378168",
+              "maKcb": "2600378168",
+              "svv": "2600378168",
+              "hoten": "TRƯƠNG THỊ DÂN",
+              "tuoi": "66",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+              "diaChi": "Thôn Phước Nhuận-Xã Xuân Phước--Tỉnh Đắk Lắk",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-4",
+              "stt": 4,
+              "mabn": "0001425448",
+              "soVaoVien": "2600378407",
+              "maKcb": "2600378407",
+              "svv": "2600378407",
+              "hoten": "LÊ VĂN KỶ",
+              "tuoi": "76",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+              "diaChi": "Xã Hoài Ân--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-5",
+              "stt": 5,
+              "mabn": "0001032081",
+              "soVaoVien": "2600378527",
+              "maKcb": "2600378527",
+              "svv": "2600378527",
+              "hoten": "PHẠM VĂN ĐẨU",
+              "tuoi": "64",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+              "diaChi": "Tân Dương-Phường An Nhơn Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-6",
+              "stt": 6,
+              "mabn": "0001424529",
+              "soVaoVien": "2600378557",
+              "maKcb": "2600378557",
+              "svv": "2600378557",
+              "hoten": "NGUYỄN THỊ MẬN",
+              "tuoi": "76",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
+              "diaChi": "35/2/28 Lý Thái Tổ-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-7",
+              "stt": 7,
+              "mabn": "0001423015",
+              "soVaoVien": "2600378458",
+              "maKcb": "2600378458",
+              "svv": "2600378458",
+              "hoten": "NGUYỄN THỊ ĐIỂM",
+              "tuoi": "73",
+              "cause": "Bệnh",
+              "source": "KK",
+              "chanDoan": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
+              "diaChi": "Thôn Thuận Đức, Nhơn Mỹ, An Nhơn, Bình Định-Phường An Nhơn--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-8",
+              "stt": 8,
+              "mabn": "0001425367",
+              "soVaoVien": "2600378051",
+              "maKcb": "2600378051",
+              "svv": "2600378051",
+              "hoten": "GIÁP VĂN KHẢI",
+              "tuoi": "39",
+              "cause": "Bệnh",
+              "source": "KK",
+              "chanDoan": "M50.2-Thoát vị đĩa đệm cột sống cổ khác",
+              "diaChi": "Xã Phù Mỹ Bắc--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-9",
+              "stt": 9,
+              "mabn": "0001424151",
+              "soVaoVien": "2600379311",
+              "maKcb": "2600379311",
+              "svv": "2600379311",
+              "hoten": "NGUYỄN THỊ TRẮC",
+              "tuoi": "90",
+              "cause": "Bệnh",
+              "source": "KK",
+              "chanDoan": "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
+              "diaChi": "Xã Hòa Hội--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-10",
+              "stt": 10,
+              "mabn": "0000910367",
+              "soVaoVien": "2600379335",
+              "maKcb": "2600379335",
+              "svv": "2600379335",
+              "hoten": "LÊ KIM SƠN",
+              "tuoi": "80",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "M54.80-Đau lưng khác, nhiều vị trí của cột sống",
+              "diaChi": "Thanh Mai-Phường An Nhơn Bắc--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-tk4-11",
+              "stt": 11,
+              "mabn": "0001425776",
+              "soVaoVien": "2600379583",
+              "maKcb": "2600379583",
+              "svv": "2600379583",
+              "hoten": "TRƯƠNG SÁU",
+              "tuoi": "54",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "T81.4-Nhiễm trùng sau can thiệp, không phân loại mục khác",
+              "diaChi": "an đức-Xã Phù Cát--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -14570,9 +14982,9 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 9,
+            "benhCu": 7,
             "vaoKK": 0,
-            "vaoKhac": 0,
+            "vaoKhac": 2,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
@@ -14581,7 +14993,42 @@
             "hienCo": 9,
             "bhyt": 9
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-hstk-1",
+              "stt": 1,
+              "mabn": "0001425669",
+              "soVaoVien": "2600379282",
+              "maKcb": "2600379282",
+              "svv": "2600379282",
+              "hoten": "VÕ THANH QUANG",
+              "tuoi": "56",
+              "cause": "TNGT",
+              "source": "Khoa Thần kinh - Đột quỵ",
+              "chanDoan": "I61.2-Xuất huyết não tại bán cầu, không xác định",
+              "diaChi": "Xã Tuy Phước Đông--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "adm-hstk-2",
+              "stt": 2,
+              "mabn": "0001386779",
+              "soVaoVien": "2600366229",
+              "maKcb": "2600366229",
+              "svv": "2600366229",
+              "hoten": "NGUYỄN THỊ PHIN",
+              "tuoi": "63",
+              "cause": "Bệnh",
+              "source": "Khoa Thần kinh - Đột quỵ",
+              "chanDoan": "I63.8-Nhồi máu não khác",
+              "diaChi": "Nghĩa Sơn-Xã Kim Sơn--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -14595,22 +15042,22 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 111,
-          "vaoKK": 0,
-          "vaoKhac": 0,
+          "benhCu": 102,
+          "vaoKK": 22,
+          "vaoKhac": 4,
           "moCT": 0,
           "moCC": 0,
           "raRH": 0,
           "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 111,
-          "bhyt": 103
+          "hienCo": 128,
+          "bhyt": 121
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791100614318.4583,
-      "lastHisSyncTime": "2026-10-04T08:07:15.425Z"
+      "lastHisSyncTimeMs": 1791220773776.9248,
+      "lastHisSyncTime": "2026-10-05T17:25:40.876Z"
     },
     "2026-10-06": {
       "dateKey": "2026-10-06",
