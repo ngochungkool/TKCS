@@ -1,5 +1,5 @@
 {
-  "version": 1791209809871,
+  "version": 1791210239286,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3716,7 +3716,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T14:16:28.513Z"
+      "updatedAt": "2026-10-05T14:23:58.921Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6013,7 +6013,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T14:16:28.513Z"
+      "updatedAt": "2026-10-05T14:23:58.922Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7226,7 +7226,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T14:16:28.513Z"
+      "updatedAt": "2026-10-05T14:23:58.922Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11100,7 +11100,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T14:16:28.513Z"
+      "updatedAt": "2026-10-05T14:23:58.922Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -12003,7 +12003,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T14:16:28.513Z"
+      "updatedAt": "2026-10-05T14:23:58.922Z"
     }
   },
   "episodeConsultations": {},
@@ -12934,197 +12934,6 @@
       },
       "lastHisSyncTimeMs": 1791100614318.4583,
       "lastHisSyncTime": "2026-10-04T08:07:15.425Z"
-    },
-    "2026-10-06": {
-      "dateKey": "2026-10-06",
-      "updatedAt": "2026-10-05T12:37:47.127Z",
-      "roomReports": {
-        "tk1": {
-          "roomKey": "tk1",
-          "roomName": "Thần kinh 1",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-05T12:37:47.127Z",
-          "personnel": {
-            "nurses": "",
-            "nursesDay": "",
-            "nursesNight": "",
-            "orderly": "",
-            "xuatVien": 0,
-            "chamSocCap2": 0,
-            "hoiChan": 0,
-            "tangTren": 0,
-            "tangDuoi": 0
-          },
-          "census": {
-            "benhCu": 0,
-            "vaoKK": 0,
-            "vaoKhac": 0,
-            "moCT": 0,
-            "moCC": 0,
-            "raRH": 0,
-            "raKhac": 0,
-            "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
-          },
-          "admissions": [],
-          "discharges": [],
-          "emergencySurgeries": [],
-          "criticalNotes": ""
-        },
-        "tk2": {
-          "roomKey": "tk2",
-          "roomName": "Thần kinh 2",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-05T12:37:47.127Z",
-          "personnel": {
-            "nurses": "",
-            "nursesDay": "",
-            "nursesNight": "",
-            "orderly": "",
-            "xuatVien": 0,
-            "chamSocCap2": 0,
-            "hoiChan": 0,
-            "tangTren": 0,
-            "tangDuoi": 0
-          },
-          "census": {
-            "benhCu": 0,
-            "vaoKK": 0,
-            "vaoKhac": 0,
-            "moCT": 0,
-            "moCC": 0,
-            "raRH": 0,
-            "raKhac": 0,
-            "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
-          },
-          "admissions": [],
-          "discharges": [],
-          "emergencySurgeries": [],
-          "criticalNotes": ""
-        },
-        "tk3": {
-          "roomKey": "tk3",
-          "roomName": "Thần kinh 3",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-05T12:37:47.127Z",
-          "personnel": {
-            "nurses": "",
-            "nursesDay": "",
-            "nursesNight": "",
-            "orderly": "",
-            "xuatVien": 0,
-            "chamSocCap2": 0,
-            "hoiChan": 0,
-            "tangTren": 0,
-            "tangDuoi": 0
-          },
-          "census": {
-            "benhCu": 0,
-            "vaoKK": 0,
-            "vaoKhac": 0,
-            "moCT": 0,
-            "moCC": 0,
-            "raRH": 0,
-            "raKhac": 0,
-            "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
-          },
-          "admissions": [],
-          "discharges": [],
-          "emergencySurgeries": [],
-          "criticalNotes": ""
-        },
-        "tk4": {
-          "roomKey": "tk4",
-          "roomName": "Thần kinh 4",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-05T12:37:47.127Z",
-          "personnel": {
-            "nurses": "",
-            "nursesDay": "",
-            "nursesNight": "",
-            "orderly": "",
-            "xuatVien": 0,
-            "chamSocCap2": 0,
-            "hoiChan": 0,
-            "tangTren": 0,
-            "tangDuoi": 0
-          },
-          "census": {
-            "benhCu": 0,
-            "vaoKK": 0,
-            "vaoKhac": 0,
-            "moCT": 0,
-            "moCC": 0,
-            "raRH": 0,
-            "raKhac": 0,
-            "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
-          },
-          "admissions": [],
-          "discharges": [],
-          "emergencySurgeries": [],
-          "criticalNotes": ""
-        },
-        "hstk": {
-          "roomKey": "hstk",
-          "roomName": "Hồi sức thần kinh",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-05T12:37:47.127Z",
-          "personnel": {
-            "nurses": "",
-            "nursesDay": "",
-            "nursesNight": "",
-            "orderly": "",
-            "xuatVien": 0,
-            "chamSocCap2": 0,
-            "hoiChan": 0,
-            "tangTren": 0,
-            "tangDuoi": 0
-          },
-          "census": {
-            "benhCu": 0,
-            "vaoKK": 0,
-            "vaoKhac": 0,
-            "moCT": 0,
-            "moCC": 0,
-            "raRH": 0,
-            "raKhac": 0,
-            "tuVong": 0,
-            "hienCo": 0,
-            "bhyt": 0
-          },
-          "admissions": [],
-          "discharges": [],
-          "emergencySurgeries": [],
-          "criticalNotes": ""
-        }
-      },
-      "highlightCases": [],
-      "overall": {
-        "doctorsOnDuty": [],
-        "grandCensus": {
-          "benhCu": 0,
-          "vaoKK": 0,
-          "vaoKhac": 0,
-          "moCT": 0,
-          "moCC": 0,
-          "raRH": 0,
-          "raKhac": 0,
-          "tuVong": 0,
-          "hienCo": 0,
-          "bhyt": 0
-        },
-        "doctorNotes": "",
-        "approvedBy": ""
-      },
-      "lastHisSyncTimeMs": 1791203867127,
-      "lastHisSyncTime": "2026-10-05T12:37:47.127Z"
     }
   },
   "announcement": {
