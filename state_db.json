@@ -1,5 +1,5 @@
 {
-  "version": 1791162601799,
+  "version": 1791162649683,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -223,7 +223,23 @@
         "2026-09-30": "TRUC",
         "2026-10-01": "RA_TRUC"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791162583513-ojz9",
+          "roomName": "Đang mổ",
+          "startMin": 29852709,
+          "endMin": 29852710,
+          "lastConfirmedMin": 29852709,
+          "warnedAtMin": null,
+          "receivedBy": "Kíp phẫu thuật",
+          "receivedRole": "Báo mổ",
+          "receivedAt": "2026-10-05T01:09:43.513Z",
+          "releasedEarly": true,
+          "releasedBy": "Kíp phẫu thuật",
+          "releasedRole": "Báo mổ",
+          "releasedAt": "2026-10-05T01:09:43.625Z"
+        }
+      ],
       "currentRoom": null
     },
     {
@@ -3378,7 +3394,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:09:57.643Z"
+      "updatedAt": "2026-10-05T01:10:49.479Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5675,7 +5691,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:09:57.643Z"
+      "updatedAt": "2026-10-05T01:10:49.480Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6888,7 +6904,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:09:57.643Z"
+      "updatedAt": "2026-10-05T01:10:49.480Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10762,7 +10778,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:09:57.643Z"
+      "updatedAt": "2026-10-05T01:10:49.481Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11665,7 +11681,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:09:57.643Z"
+      "updatedAt": "2026-10-05T01:10:49.481Z"
     }
   },
   "episodeConsultations": {},
