@@ -1,5 +1,5 @@
 {
-  "version": 1791220263073,
+  "version": 1791220377290,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3716,7 +3716,9 @@
       },
       "archivedRecords": {},
       "latestExcelMabns": [],
-      "acknowledgedMissingMabns": {},
+      "acknowledgedMissingMabns": {
+        "0001424848": true
+      },
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
       "census": {
@@ -3731,7 +3733,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:11:03.071Z"
+      "updatedAt": "2026-10-05T17:12:57.289Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6028,7 +6030,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:11:03.071Z"
+      "updatedAt": "2026-10-05T17:12:57.289Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7241,7 +7243,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:11:03.071Z"
+      "updatedAt": "2026-10-05T17:12:57.289Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11115,7 +11117,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:11:03.071Z"
+      "updatedAt": "2026-10-05T17:12:57.289Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -12018,7 +12020,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:11:03.071Z"
+      "updatedAt": "2026-10-05T17:12:57.289Z"
     }
   },
   "episodeConsultations": {},
@@ -13122,7 +13124,11 @@
       },
       "highlightCases": [],
       "overall": {
-        "doctorsOnDuty": [],
+        "doctorsOnDuty": [
+          "HẢI",
+          "NHẬT",
+          "LUÂN"
+        ],
         "grandCensus": {
           "benhCu": 0,
           "vaoKK": 0,
