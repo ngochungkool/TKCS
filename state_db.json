@@ -1,5 +1,5 @@
 {
-  "version": 1791159609131,
+  "version": 1791159640502,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3288,7 +3288,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:20:09.131Z"
+      "updatedAt": "2026-10-05T00:20:40.502Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5585,7 +5585,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:20:09.131Z"
+      "updatedAt": "2026-10-05T00:20:40.502Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6798,7 +6798,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:20:09.131Z"
+      "updatedAt": "2026-10-05T00:20:40.502Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8025,7 +8025,7 @@
           "hanTheDen": "31/12/2030",
           "diaChi": "an cửu-Xã An Nhơn Tây--Tỉnh Gia Lai",
           "chanDoanHis": "M48.30-Bệnh lý đốt sống do chấn thương, nhiều vị trí của cột sống",
-          "customDiagnosis": "ĐAU LƯNG",
+          "customDiagnosis": "TVDD L4L5",
           "bsDieuTri": "Nguyễn Xuân Tịnh",
           "ngayVaoStr": "01/10/2026",
           "hisBed": "H099",
@@ -8063,32 +8063,32 @@
           "surgicalConsultationsByDate": {
             "2026-10-06": {
               "isConsulted": true,
-              "isSurgical": false,
+              "isSurgical": true,
               "dateKey": "2026-10-06",
-              "postConsultDiagnosis": "",
-              "surgeryMethod": "",
-              "decision": "",
-              "advancePayment": "",
-              "bloodMl": "",
+              "postConsultDiagnosis": "TVDD L4L5",
+              "surgeryMethod": "TLIF L4L5",
+              "decision": "Đồng ý",
+              "advancePayment": "10 triệu",
+              "bloodMl": "250 ml",
               "treatmentPlan": "",
               "roomKey": "tk4",
               "roomName": "Thần kinh 4",
-              "updatedAt": "2026-10-05T00:20:09.131Z"
+              "updatedAt": "2026-10-05T00:20:40.502Z"
             }
           },
           "surgicalConsultation": {
             "isConsulted": true,
-            "isSurgical": false,
+            "isSurgical": true,
             "dateKey": "2026-10-06",
-            "postConsultDiagnosis": "",
-            "surgeryMethod": "",
-            "decision": "",
-            "advancePayment": "",
-            "bloodMl": "",
+            "postConsultDiagnosis": "TVDD L4L5",
+            "surgeryMethod": "TLIF L4L5",
+            "decision": "Đồng ý",
+            "advancePayment": "10 triệu",
+            "bloodMl": "250 ml",
             "treatmentPlan": "",
             "roomKey": "tk4",
             "roomName": "Thần kinh 4",
-            "updatedAt": "2026-10-05T00:20:09.131Z"
+            "updatedAt": "2026-10-05T00:20:40.502Z"
           }
         },
         "0001424276": {
@@ -10700,7 +10700,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:20:09.131Z"
+      "updatedAt": "2026-10-05T00:20:40.502Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11603,7 +11603,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:20:09.131Z"
+      "updatedAt": "2026-10-05T00:20:40.502Z"
     }
   },
   "episodeConsultations": {
