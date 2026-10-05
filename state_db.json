@@ -1,5 +1,5 @@
 {
-  "version": 1791165978921,
+  "version": 1791166372299,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3422,7 +3422,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:06:12.307Z"
+      "updatedAt": "2026-10-05T02:12:52.299Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5719,7 +5719,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:06:12.307Z"
+      "updatedAt": "2026-10-05T02:12:52.299Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6932,7 +6932,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:06:12.307Z"
+      "updatedAt": "2026-10-05T02:12:52.299Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10806,14 +10806,13 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:06:12.307Z"
+      "updatedAt": "2026-10-05T02:12:52.299Z"
     },
     "hstk": {
       "roomKey": "hstk",
       "roomName": "Hồi sức thần kinh",
       "initializedSeed": true,
       "bedAssignments": {
-        "1": "0001423868",
         "2": "0001416828",
         "3": "0001412378",
         "4": "0001420321",
@@ -11117,10 +11116,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1791166372299
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -11709,7 +11707,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:06:12.307Z"
+      "updatedAt": "2026-10-05T02:12:52.299Z"
     }
   },
   "episodeConsultations": {},
