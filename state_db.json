@@ -1,5 +1,5 @@
 {
-  "version": 1791188956400,
+  "version": 1791189047065,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -346,6 +346,17 @@
           "receivedBy": "Lê Đức Nhật",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T06:22:44.915Z"
+        },
+        {
+          "id": "u-1791189047065-ud1f",
+          "roomName": "Đang mổ",
+          "startMin": 29853180,
+          "endMin": 29853210,
+          "lastConfirmedMin": 29853180,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T08:30:47.065Z"
         }
       ],
       "currentRoom": null
@@ -739,6 +750,17 @@
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T08:26:42.433Z"
+        },
+        {
+          "id": "u-1791189047065-6kwq",
+          "roomName": "Đang mổ",
+          "startMin": 29853180,
+          "endMin": 29853210,
+          "lastConfirmedMin": 29853180,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T08:30:47.065Z"
         }
       ],
       "currentRoom": null
