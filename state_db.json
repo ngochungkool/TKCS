@@ -1,5 +1,5 @@
 {
-  "version": 1791159324072,
+  "version": 1791159494019,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1423,7 +1423,7 @@
           "hanTheDen": "26/09/2027",
           "diaChi": "vĩnh bình-Xã Bình Dương--Tỉnh Gia Lai",
           "chanDoanHis": "S06.90-Tổn thương nội sọ, không xác định, không có vết thương nội sọ hở",
-          "customDiagnosis": "S06.90-Tổn thương nội sọ, không xác định, không có vết thương nội sọ hở",
+          "customDiagnosis": "tụ máu ngoài màng cứng",
           "bsDieuTri": "Đặng Ngọc Trí",
           "ngayVaoStr": "02/10/2026",
           "hisBed": "H013",
@@ -1439,6 +1439,19 @@
               "hoiChan": [],
               "thuThuat": [],
               "note": "ĐGĐ (Đổi giường đến)"
+            },
+            "2026-10-05": {
+              "xetNghiem": [
+                "Điện giải đồ"
+              ],
+              "ct": [
+                "Sọ não"
+              ],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
             }
           },
           "consultDetails": {
@@ -3264,7 +3277,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:15:11.309Z"
+      "updatedAt": "2026-10-05T00:18:14.018Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5561,7 +5574,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:15:11.309Z"
+      "updatedAt": "2026-10-05T00:18:14.018Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6774,7 +6787,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:15:11.309Z"
+      "updatedAt": "2026-10-05T00:18:14.018Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10648,7 +10661,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:15:11.309Z"
+      "updatedAt": "2026-10-05T00:18:14.018Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11551,7 +11564,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:15:11.309Z"
+      "updatedAt": "2026-10-05T00:18:14.018Z"
     }
   },
   "episodeConsultations": {},
