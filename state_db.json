@@ -1,5 +1,5 @@
 {
-  "version": 1791221992775,
+  "version": 1791222036277,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -4171,7 +4171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:52.681Z"
+      "updatedAt": "2026-10-05T17:40:36.181Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6697,7 +6697,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:52.681Z"
+      "updatedAt": "2026-10-05T17:40:36.181Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8028,7 +8028,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:52.681Z"
+      "updatedAt": "2026-10-05T17:40:36.182Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -12614,7 +12614,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:52.681Z"
+      "updatedAt": "2026-10-05T17:40:36.182Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -13680,7 +13680,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:52.681Z"
+      "updatedAt": "2026-10-05T17:40:36.270Z"
     }
   },
   "episodeConsultations": {},
@@ -14664,8 +14664,8 @@
         "tk2": {
           "roomKey": "tk2",
           "roomName": "Thần kinh 2",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-04T08:07:15.223Z",
+          "status": "SUBMITTED",
+          "updatedAt": "2026-10-05T17:40:36.270Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "",
@@ -14738,8 +14738,8 @@
               "chanDoan": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
               "diaChi": "Xã An Hòa--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": ""
+              "isHighlight": true,
+              "category": "MO_CT"
             },
             {
               "id": "adm-tk2-4",
@@ -15209,6 +15209,21 @@
           "roomName": "Thần kinh 1",
           "category": "THEO_DOI",
           "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "dienBien": "TNGT: Tỉnh",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [],
+          "notesBs": ""
+        },
+        {
+          "id": "case-1791222036270-qg4t",
+          "mabn": "0001425823",
+          "hoten": "PHAN THỊ SƯƠNG",
+          "tuoi": "34",
+          "roomKey": "tk2",
+          "roomName": "Thần kinh 2",
+          "category": "MO_CT",
+          "chanDoan": "M51.1†-Rối loạn đĩa đệm cột sống thắt lưng và/hoặc đĩa đệm đốt sống khác kèm bệnh lý rễ thần kinh (G55.1*)",
           "dienBien": "TNGT: Tỉnh",
           "kipMo": "",
           "selectedForSlide": true,
