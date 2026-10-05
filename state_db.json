@@ -1,5 +1,5 @@
 {
-  "version": 1791188802433,
+  "version": 1791188956400,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3672,7 +3672,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T08:24:52.401Z"
+      "updatedAt": "2026-10-05T08:28:22.073Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5969,7 +5969,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T08:24:52.401Z"
+      "updatedAt": "2026-10-05T08:28:22.073Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7182,7 +7182,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T08:24:52.401Z"
+      "updatedAt": "2026-10-05T08:28:22.073Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11056,7 +11056,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T08:24:52.401Z"
+      "updatedAt": "2026-10-05T08:28:22.073Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11959,7 +11959,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T08:24:52.401Z"
+      "updatedAt": "2026-10-05T08:28:22.073Z"
     }
   },
   "episodeConsultations": {},
@@ -12912,8 +12912,9 @@
       "reportedBy": "Huỳnh Ngọc Hưng",
       "reportedRole": "Bác sĩ",
       "createdAt": "2026-10-05T07:53:34.481Z",
-      "acknowledged": false,
-      "message": "Bác sĩ Nhật (@ldnhat) đã được Báo mổ lúc 14:55. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!"
+      "acknowledged": true,
+      "message": "Bác sĩ Nhật (@ldnhat) đã được Báo mổ lúc 14:55. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!",
+      "acknowledgedAt": "2026-10-05T08:29:16.394Z"
     },
     {
       "id": "sa-1791185876465-dca95",
