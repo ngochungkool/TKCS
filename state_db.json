@@ -1,5 +1,5 @@
 {
-  "version": 1791161892948,
+  "version": 1791162179143,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -56,12 +56,42 @@
           "id": "u-1791161892948-vu1z",
           "roomName": "Đang mổ",
           "startMin": 29852698,
-          "endMin": null,
+          "endMin": 29852702,
           "lastConfirmedMin": 29852698,
           "warnedAtMin": null,
           "receivedBy": "Lê Thị Thu Mỹ",
           "receivedRole": "Điều dưỡng",
-          "receivedAt": "2026-10-05T00:58:12.948Z"
+          "receivedAt": "2026-10-05T00:58:12.948Z",
+          "releasedEarly": true,
+          "releasedBy": "Lê Thị Thu Mỹ",
+          "releasedRole": "Điều dưỡng",
+          "releasedAt": "2026-10-05T01:02:58.995Z"
+        },
+        {
+          "id": "u-1791162178995-735f",
+          "roomName": "Đang mổ",
+          "startMin": 29852702,
+          "endMin": 29852703,
+          "lastConfirmedMin": 29852702,
+          "warnedAtMin": null,
+          "receivedBy": "Lê Thị Thu Mỹ",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-05T01:02:58.995Z",
+          "releasedEarly": true,
+          "releasedBy": "Lê Thị Thu Mỹ",
+          "releasedRole": "Điều dưỡng",
+          "releasedAt": "2026-10-05T01:02:59.065Z"
+        },
+        {
+          "id": "u-1791162179065-0owm",
+          "roomName": "Đang mổ",
+          "startMin": 29852703,
+          "endMin": null,
+          "lastConfirmedMin": 29852703,
+          "warnedAtMin": null,
+          "receivedBy": "Lê Thị Thu Mỹ",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-05T01:02:59.065Z"
         }
       ],
       "currentRoom": null
@@ -81,7 +111,19 @@
         "2026-10-01": "LAM_NGAY",
         "2026-10-05": "NGHI"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791162179143-khre",
+          "roomName": "Đang mổ",
+          "startMin": 29852702,
+          "endMin": null,
+          "lastConfirmedMin": 29852702,
+          "warnedAtMin": null,
+          "receivedBy": "Kíp phẫu thuật",
+          "receivedRole": "Báo mổ",
+          "receivedAt": "2026-10-05T01:02:59.143Z"
+        }
+      ],
       "currentRoom": null
     },
     {
