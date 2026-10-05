@@ -1,5 +1,5 @@
 {
-  "version": 1791163457655,
+  "version": 1791163141501,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -158,38 +158,6 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T01:10:00.645Z"
-        },
-        {
-          "id": "u-1791163457318-rvp0",
-          "roomName": "Thần kinh 1",
-          "startMin": 29852709,
-          "endMin": 29852719,
-          "lastConfirmedMin": 29852709,
-          "warnedAtMin": null,
-          "receivedBy": "Lê Thị Trà My",
-          "receivedRole": "Điều dưỡng",
-          "receivedAt": "2026-10-05T01:24:17.318Z",
-          "releasedEarly": true,
-          "releasedBy": "Kíp mổ Cấp cứu",
-          "releasedRole": "Bác sĩ phẫu thuật",
-          "releasedAt": "2026-10-05T01:24:17.379Z"
-        },
-        {
-          "id": "u-1791163457379-hcss",
-          "roomName": "Đang mổ",
-          "startMin": 29852700,
-          "endMin": 29852724,
-          "lastConfirmedMin": 29852700,
-          "warnedAtMin": null,
-          "receivedBy": "Kíp mổ Cấp cứu",
-          "receivedRole": "Bác sĩ phẫu thuật",
-          "receivedAt": "2026-10-05T01:24:17.380Z",
-          "releasedEarly": true,
-          "updatedAt": "2026-10-05T01:24:17.459Z",
-          "updatedBy": "[Phẫu thuật viên chính] BS Kíp mổ",
-          "releasedBy": "Lê Thị Thu Mỹ",
-          "releasedRole": "Điều dưỡng",
-          "releasedAt": "2026-10-05T01:24:17.655Z"
         }
       ],
       "currentRoom": null
@@ -3429,7 +3397,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:17:14.901Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5726,7 +5694,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:17:14.901Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6939,7 +6907,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:17:14.901Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10813,7 +10781,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:17:14.901Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11716,7 +11684,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:17:14.901Z"
     }
   },
   "episodeConsultations": {},
@@ -12655,23 +12623,5 @@
     "updatedAt": "2026-10-04T01:53:49.233Z",
     "updatedBy": "Huỳnh Ngọc Hưng",
     "updatedRole": "Bác sĩ"
-  },
-  "surgeryAlerts": [
-    {
-      "id": "sa-1791163457379-116ba",
-      "roomName": "Thần kinh 1",
-      "docId": "doc-1",
-      "docName": "Đào Văn Nhân",
-      "docShortName": "Nhân",
-      "handle": "@dvnhan",
-      "startMin": 29852719,
-      "startTimeStr": "08:19",
-      "reportedBy": "Kíp mổ Cấp cứu",
-      "reportedRole": "Bác sĩ phẫu thuật",
-      "createdAt": "2026-10-05T01:24:17.379Z",
-      "acknowledged": true,
-      "message": "Bác sĩ Nhân (@dvnhan) đã được Báo mổ lúc 08:19. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!",
-      "acknowledgedAt": "2026-10-05T01:24:17.560Z"
-    }
-  ]
+  }
 }
