@@ -1,5 +1,5 @@
 {
-  "version": 1791163528351,
+  "version": 1791163581215,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -241,6 +241,17 @@
           "releasedBy": "Kíp phẫu thuật",
           "releasedRole": "Báo mổ",
           "releasedAt": "2026-10-05T01:09:43.625Z"
+        },
+        {
+          "id": "u-1791163581215-9ozw",
+          "roomName": "Đang mổ",
+          "startMin": 29852730,
+          "endMin": 29852780,
+          "lastConfirmedMin": 29852730,
+          "warnedAtMin": null,
+          "receivedBy": "Lê Đức Nhật",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T01:26:21.215Z"
         }
       ],
       "currentRoom": null
@@ -3397,7 +3408,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:25:27.856Z"
+      "updatedAt": "2026-10-05T01:25:48.467Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5694,7 +5705,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:25:27.858Z"
+      "updatedAt": "2026-10-05T01:25:48.467Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6907,7 +6918,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:25:27.858Z"
+      "updatedAt": "2026-10-05T01:25:48.467Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10781,7 +10792,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:25:27.858Z"
+      "updatedAt": "2026-10-05T01:25:48.467Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11684,7 +11695,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:25:27.858Z"
+      "updatedAt": "2026-10-05T01:25:48.467Z"
     }
   },
   "episodeConsultations": {},
