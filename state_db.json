@@ -1,5 +1,5 @@
 {
-  "version": 1791166372299,
+  "version": 1791166552196,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3422,7 +3422,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:12:52.299Z"
+      "updatedAt": "2026-10-05T02:15:52.196Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5719,7 +5719,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:12:52.299Z"
+      "updatedAt": "2026-10-05T02:15:52.196Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6932,7 +6932,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:12:52.299Z"
+      "updatedAt": "2026-10-05T02:15:52.196Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10806,7 +10806,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:12:52.299Z"
+      "updatedAt": "2026-10-05T02:15:52.196Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11150,13 +11150,25 @@
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H010",
           "khoaChuyenDen": "",
-          "tasksByDate": {},
+          "tasksByDate": {
+            "2026-10-05": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [
+                "Nội tiết"
+              ],
+              "thuThuat": [],
+              "note": ""
+            }
+          },
           "consultDetails": {
-            "specialty": "",
+            "specialty": "Nội tiết",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "",
-            "followUpClinic": ""
+            "followUpDays": "7",
+            "followUpClinic": "Phòng khám Nội tiết"
           },
           "discharge": {
             "status": "NONE",
@@ -11707,10 +11719,21 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T02:12:52.299Z"
+      "updatedAt": "2026-10-05T02:15:52.196Z"
     }
   },
-  "episodeConsultations": {},
+  "episodeConsultations": {
+    "2600366702": [
+      {
+        "id": "ep-hstk-2026-10-05",
+        "roomName": "Hồi sức thần kinh",
+        "dateKey": "2026-10-05",
+        "specialty": "Nội tiết",
+        "consultDiagnosis": "",
+        "consultTreatment": ""
+      }
+    ]
+  },
   "lastExcelUploadTime": "21:24 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
