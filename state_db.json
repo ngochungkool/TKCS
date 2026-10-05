@@ -1,5 +1,5 @@
 {
-  "version": 1791159547884,
+  "version": 1791159609131,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3288,7 +3288,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:19:07.884Z"
+      "updatedAt": "2026-10-05T00:20:09.131Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5585,7 +5585,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:19:07.884Z"
+      "updatedAt": "2026-10-05T00:20:09.131Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6798,7 +6798,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:19:07.884Z"
+      "updatedAt": "2026-10-05T00:20:09.131Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -8060,8 +8060,36 @@
             "surgeryName": "",
             "surgeryDate": ""
           },
-          "surgicalConsultationsByDate": {},
-          "surgicalConsultation": null
+          "surgicalConsultationsByDate": {
+            "2026-10-06": {
+              "isConsulted": true,
+              "isSurgical": false,
+              "dateKey": "2026-10-06",
+              "postConsultDiagnosis": "",
+              "surgeryMethod": "",
+              "decision": "",
+              "advancePayment": "",
+              "bloodMl": "",
+              "treatmentPlan": "",
+              "roomKey": "tk4",
+              "roomName": "Thần kinh 4",
+              "updatedAt": "2026-10-05T00:20:09.131Z"
+            }
+          },
+          "surgicalConsultation": {
+            "isConsulted": true,
+            "isSurgical": false,
+            "dateKey": "2026-10-06",
+            "postConsultDiagnosis": "",
+            "surgeryMethod": "",
+            "decision": "",
+            "advancePayment": "",
+            "bloodMl": "",
+            "treatmentPlan": "",
+            "roomKey": "tk4",
+            "roomName": "Thần kinh 4",
+            "updatedAt": "2026-10-05T00:20:09.131Z"
+          }
         },
         "0001424276": {
           "mabn": "0001424276",
@@ -10672,7 +10700,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:19:07.884Z"
+      "updatedAt": "2026-10-05T00:20:09.131Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11575,7 +11603,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:19:07.884Z"
+      "updatedAt": "2026-10-05T00:20:09.131Z"
     }
   },
   "episodeConsultations": {
