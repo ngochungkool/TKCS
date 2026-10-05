@@ -1,5 +1,5 @@
 {
-  "version": 1791161049765,
+  "version": 1791161616310,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -119,7 +119,19 @@
         "2026-10-05": "TRUC",
         "2026-10-06": "RA_TRUC"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791161616310-cx7c",
+          "roomName": "Đang mổ",
+          "startMin": 29852641,
+          "endMin": 29852642,
+          "lastConfirmedMin": 29852641,
+          "warnedAtMin": null,
+          "receivedBy": "Đặng Ngọc Trí",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T00:53:36.310Z"
+        }
+      ],
       "currentRoom": null
     },
     {
@@ -3395,7 +3407,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:42:45.329Z"
+      "updatedAt": "2026-10-05T00:53:27.230Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5713,7 +5725,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:42:45.329Z"
+      "updatedAt": "2026-10-05T00:53:27.231Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6969,7 +6981,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:42:45.329Z"
+      "updatedAt": "2026-10-05T00:53:27.231Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11011,7 +11023,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:42:45.330Z"
+      "updatedAt": "2026-10-05T00:53:27.231Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11974,7 +11986,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:42:45.330Z"
+      "updatedAt": "2026-10-05T00:53:27.231Z"
     }
   },
   "episodeConsultations": {
