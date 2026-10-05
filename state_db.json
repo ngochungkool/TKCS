@@ -1,5 +1,5 @@
 {
-  "version": 1791163107294,
+  "version": 1791163141501,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -19,7 +19,9 @@
       "scheduleByDate": {
         "2026-09-27": "TRUC",
         "2026-09-28": "RA_TRUC",
-        "2026-09-29": "LAM_NGAY"
+        "2026-09-29": "LAM_NGAY",
+        "2026-10-05": "RA_TRUC",
+        "2026-10-04": "TRUC"
       },
       "usages": [
         {
