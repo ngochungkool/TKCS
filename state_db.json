@@ -1,5 +1,5 @@
 {
-  "version": 1791189068461,
+  "version": 1791189098029,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -758,24 +758,31 @@
         {
           "id": "u-1791189047065-6kwq",
           "roomName": "Đang mổ",
-          "startMin": 29853180,
+          "startMin": 29853160,
           "endMin": 29853210,
-          "lastConfirmedMin": 29853180,
+          "lastConfirmedMin": 29853160,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T08:30:47.065Z"
+          "receivedAt": "2026-10-05T08:30:47.065Z",
+          "releasedEarly": false,
+          "updatedAt": "2026-10-05T08:31:38.023Z",
+          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
         },
         {
           "id": "u-1791189068461-kpjj",
           "roomName": "Hồi sức thần kinh",
           "startMin": 29853165,
-          "endMin": 29853170,
+          "endMin": 29853166,
           "lastConfirmedMin": 29853165,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T08:31:08.461Z"
+          "receivedAt": "2026-10-05T08:31:08.461Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T08:31:38.023Z"
         }
       ],
       "currentRoom": null
@@ -12937,6 +12944,21 @@
     "updatedRole": "Bác sĩ"
   },
   "surgeryAlerts": [
+    {
+      "id": "sa-1791189098023-d57cw",
+      "roomName": "Hồi sức thần kinh",
+      "docId": "doc-14",
+      "docName": "Ngô Văn Ri",
+      "docShortName": "Ri",
+      "handle": "@nvri",
+      "startMin": 29853160,
+      "startTimeStr": "15:40",
+      "reportedBy": "Huỳnh Ngọc Hưng",
+      "reportedRole": "Bác sĩ",
+      "createdAt": "2026-10-05T08:31:38.023Z",
+      "acknowledged": false,
+      "message": "Bác sĩ Ri (@nvri) đã được điều chỉnh giờ Báo mổ lúc 15:40. Tài khoản tại phòng [Hồi sức thần kinh] đã chuyển sang phòng mổ!"
+    },
     {
       "id": "sa-1791186814481-k62qz",
       "roomName": "Thần kinh 1",
