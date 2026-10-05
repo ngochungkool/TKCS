@@ -1,5 +1,5 @@
 {
-  "version": 1791220381657,
+  "version": 1791220555283,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1789,6 +1789,15 @@
               "hoiChan": [],
               "thuThuat": [],
               "note": "ổn chuyển ngoại ct, CT sọ + TTGB"
+            },
+            "2026-10-06": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
             }
           },
           "consultDetails": {
@@ -2238,7 +2247,16 @@
           "hisBed": "H034",
           "khoaChuyenDen": "",
           "tasksByDate": {
-            "2026-10-04": {}
+            "2026-10-04": {},
+            "2026-10-06": {
+              "xetNghiem": [],
+              "ct": [],
+              "xquang": [],
+              "sieuAm": [],
+              "hoiChan": [],
+              "thuThuat": [],
+              "note": ""
+            }
           },
           "consultDetails": {
             "specialty": "",
@@ -3734,7 +3752,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:13:01.657Z"
+      "updatedAt": "2026-10-05T17:15:55.283Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6031,7 +6049,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:13:01.657Z"
+      "updatedAt": "2026-10-05T17:15:55.283Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7244,7 +7262,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:13:01.657Z"
+      "updatedAt": "2026-10-05T17:15:55.283Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11118,7 +11136,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:13:01.657Z"
+      "updatedAt": "2026-10-05T17:15:55.283Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -12021,7 +12039,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:13:01.657Z"
+      "updatedAt": "2026-10-05T17:15:55.283Z"
     }
   },
   "episodeConsultations": {},
