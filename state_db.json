@@ -1,5 +1,5 @@
 {
-  "version": 1791158077919,
+  "version": 1791158400332,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1678,7 +1678,7 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "SCHEDULED",
+            "status": "MORNING_DISCHARGE",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
@@ -3214,7 +3214,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T23:53:58.810Z"
+      "updatedAt": "2026-10-04T23:56:53.383Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3415,7 +3415,7 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "SCHEDULED",
+            "status": "MORNING_DISCHARGE",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
@@ -3478,7 +3478,7 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "SCHEDULED",
+            "status": "MORNING_DISCHARGE",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
@@ -3539,7 +3539,7 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "SCHEDULED",
+            "status": "MORNING_DISCHARGE",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
@@ -3722,7 +3722,7 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "SCHEDULED",
+            "status": "MORNING_DISCHARGE",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
@@ -5511,7 +5511,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T23:53:58.810Z"
+      "updatedAt": "2026-10-04T23:56:53.383Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6724,7 +6724,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T23:53:58.810Z"
+      "updatedAt": "2026-10-04T23:56:53.383Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10598,7 +10598,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T23:53:58.810Z"
+      "updatedAt": "2026-10-04T23:56:53.383Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11501,7 +11501,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T23:53:58.810Z"
+      "updatedAt": "2026-10-04T23:56:53.383Z"
     }
   },
   "episodeConsultations": {},
