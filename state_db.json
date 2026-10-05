@@ -1,5 +1,5 @@
 {
-  "version": 1791188176571,
+  "version": 1791210153493,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -346,6 +346,17 @@
           "receivedBy": "Lê Đức Nhật",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T06:22:44.915Z"
+        },
+        {
+          "id": "u-1791189047065-ud1f",
+          "roomName": "Đang mổ",
+          "startMin": 29853180,
+          "endMin": 29853210,
+          "lastConfirmedMin": 29853180,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T08:30:47.065Z"
         }
       ],
       "currentRoom": null
@@ -459,12 +470,16 @@
           "id": "u-1791187500790-uob0",
           "roomName": "Thần kinh 2",
           "startMin": 29853140,
-          "endMin": 29853170,
+          "endMin": 29853145,
           "lastConfirmedMin": 29853140,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T08:05:00.790Z"
+          "receivedAt": "2026-10-05T08:05:00.790Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T08:25:05.465Z"
         }
       ],
       "currentRoom": null
@@ -502,6 +517,21 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T01:09:54.329Z"
+        },
+        {
+          "id": "u-1791188369775-acl5",
+          "roomName": "Thần kinh 3",
+          "startMin": 29853139,
+          "endMin": 29853145,
+          "lastConfirmedMin": 29853139,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T08:19:29.775Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T08:25:07.200Z"
         }
       ],
       "currentRoom": null
@@ -612,12 +642,16 @@
           "id": "u-1791166605388-99az",
           "roomName": "Đang mổ",
           "startMin": 29852760,
-          "endMin": null,
+          "endMin": 29853145,
           "lastConfirmedMin": 29852760,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T02:16:45.388Z"
+          "receivedAt": "2026-10-05T02:16:45.388Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T08:25:51.929Z"
         }
       ],
       "currentRoom": null
@@ -705,6 +739,50 @@
           "receivedBy": "Lê Đức Nhật",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T06:23:10.450Z"
+        },
+        {
+          "id": "u-1791188802433-u2zk",
+          "roomName": "Hồi sức thần kinh",
+          "startMin": 29853145,
+          "endMin": 29853150,
+          "lastConfirmedMin": 29853145,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T08:26:42.433Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T08:30:57.298Z"
+        },
+        {
+          "id": "u-1791189047065-6kwq",
+          "roomName": "Đang mổ",
+          "startMin": 29853160,
+          "endMin": 29853210,
+          "lastConfirmedMin": 29853160,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T08:30:47.065Z",
+          "releasedEarly": false,
+          "updatedAt": "2026-10-05T08:31:38.023Z",
+          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
+        },
+        {
+          "id": "u-1791189068461-kpjj",
+          "roomName": "Hồi sức thần kinh",
+          "startMin": 29853165,
+          "endMin": 29853166,
+          "lastConfirmedMin": 29853165,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T08:31:08.461Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T08:31:38.023Z"
         }
       ],
       "currentRoom": null
@@ -12867,6 +12945,22 @@
   },
   "surgeryAlerts": [
     {
+      "id": "sa-1791189098023-d57cw",
+      "roomName": "Hồi sức thần kinh",
+      "docId": "doc-14",
+      "docName": "Ngô Văn Ri",
+      "docShortName": "Ri",
+      "handle": "@nvri",
+      "startMin": 29853160,
+      "startTimeStr": "15:40",
+      "reportedBy": "Huỳnh Ngọc Hưng",
+      "reportedRole": "Bác sĩ",
+      "createdAt": "2026-10-05T08:31:38.023Z",
+      "acknowledged": true,
+      "message": "Bác sĩ Ri (@nvri) đã được điều chỉnh giờ Báo mổ lúc 15:40. Tài khoản tại phòng [Hồi sức thần kinh] đã chuyển sang phòng mổ!",
+      "acknowledgedAt": "2026-10-05T14:16:49.866Z"
+    },
+    {
       "id": "sa-1791186814481-k62qz",
       "roomName": "Thần kinh 1",
       "docId": "doc-10",
@@ -12878,8 +12972,9 @@
       "reportedBy": "Huỳnh Ngọc Hưng",
       "reportedRole": "Bác sĩ",
       "createdAt": "2026-10-05T07:53:34.481Z",
-      "acknowledged": false,
-      "message": "Bác sĩ Nhật (@ldnhat) đã được Báo mổ lúc 14:55. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!"
+      "acknowledged": true,
+      "message": "Bác sĩ Nhật (@ldnhat) đã được Báo mổ lúc 14:55. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!",
+      "acknowledgedAt": "2026-10-05T08:29:16.394Z"
     },
     {
       "id": "sa-1791185876465-dca95",
@@ -12893,8 +12988,9 @@
       "reportedBy": "Kíp phẫu thuật A",
       "reportedRole": "Báo mổ",
       "createdAt": "2026-10-05T07:37:56.465Z",
-      "acknowledged": false,
-      "message": "Bác sĩ Hải (@pnhai) đã được Báo mổ lúc 14:37. Tài khoản tại phòng [Thần kinh 4] đã chuyển sang phòng mổ!"
+      "acknowledged": true,
+      "message": "Bác sĩ Hải (@pnhai) đã được Báo mổ lúc 14:37. Tài khoản tại phòng [Thần kinh 4] đã chuyển sang phòng mổ!",
+      "acknowledgedAt": "2026-10-05T14:16:47.420Z"
     }
   ]
 }

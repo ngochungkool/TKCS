@@ -248,9 +248,9 @@ function isDoctorAllowedAtMinute(doc, epochMin) {
 }
 
 function getDoctorShiftInfoAtMinute(doc, epochMin) {
-  const dt = new Date(epochMin * 60000 + VN_OFFSET_MS);
-  const dateKey = getDateKey(dt);
+  const dateKey = getDateKey(new Date(epochMin * 60000));
   const prevKey = addDaysToKey(dateKey, -1);
+  const dt = new Date(epochMin * 60000 + VN_OFFSET_MS);
   const hh = dt.getUTCHours();
   const mm = dt.getUTCMinutes();
   const minsOfDay = hh * 60 + mm;
@@ -844,8 +844,8 @@ function renderTimelineRows() {
         `;
       } else {
         statusBadgeHtml = `<span class="status-badge unavailable">● Không dùng</span>`;
-        const dt = new Date(nowMin * 60000);
-        const minsOfDay = dt.getHours() * 60 + dt.getMinutes();
+        const dt = new Date(nowMin * 60000 + VN_OFFSET_MS);
+        const minsOfDay = dt.getUTCHours() * 60 + dt.getUTCMinutes();
         let unavailTime = 'Ngoài giờ';
         if (minsOfDay >= 11 * 60 + 30 && minsOfDay < 13 * 60 + 30) {
           unavailTime = '11:30 – 13:30';

@@ -676,8 +676,14 @@
       showToast('∑ Đã cộng tổng 5 phòng lên số liệu Toàn Khoa!');
     }
 
-    function getDateKey(dt) {
-      return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+    const VN_OFFSET_MS = 7 * 60 * 60 * 1000;
+    function getDateKey(dateObj = new Date()) {
+      const ms = dateObj instanceof Date ? dateObj.getTime() : Number(dateObj);
+      const vnDate = new Date(ms + VN_OFFSET_MS);
+      const yyyy = vnDate.getUTCFullYear();
+      const mm = String(vnDate.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(vnDate.getUTCDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
     }
 
     function addDaysToKey(dateKey, offsetDays) {
