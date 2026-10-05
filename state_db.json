@@ -1,5 +1,5 @@
 {
-  "version": 1791162583625,
+  "version": 1791162594329,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -141,6 +141,17 @@
           "releasedBy": "Kíp phẫu thuật",
           "releasedRole": "Báo mổ",
           "releasedAt": "2026-10-05T01:05:02.754Z"
+        },
+        {
+          "id": "u-1791162500572-8556",
+          "roomName": "Đang mổ",
+          "startMin": 29852708,
+          "endMin": 29853000,
+          "lastConfirmedMin": 29852708,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T01:08:20.572Z"
         }
       ],
       "currentRoom": null
@@ -208,23 +219,7 @@
         "2026-09-30": "TRUC",
         "2026-10-01": "RA_TRUC"
       },
-      "usages": [
-        {
-          "id": "u-1791162583513-ojz9",
-          "roomName": "Đang mổ",
-          "startMin": 29852709,
-          "endMin": 29852710,
-          "lastConfirmedMin": 29852709,
-          "warnedAtMin": null,
-          "receivedBy": "Kíp phẫu thuật",
-          "receivedRole": "Báo mổ",
-          "receivedAt": "2026-10-05T01:09:43.513Z",
-          "releasedEarly": true,
-          "releasedBy": "Kíp phẫu thuật",
-          "releasedRole": "Báo mổ",
-          "releasedAt": "2026-10-05T01:09:43.625Z"
-        }
-      ],
+      "usages": [],
       "currentRoom": null
     },
     {
@@ -315,7 +310,23 @@
         "2026-10-05": "TRUC",
         "2026-10-06": "RA_TRUC"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791162500573-o766",
+          "roomName": "Đang mổ",
+          "startMin": 29852708,
+          "endMin": 29852709,
+          "lastConfirmedMin": 29852708,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T01:08:20.573Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T01:09:54.329Z"
+        }
+      ],
       "currentRoom": null
     },
     {
@@ -415,7 +426,19 @@
         "2026-10-05": "TRUC",
         "2026-10-06": "RA_TRUC"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791162500573-87qy",
+          "roomName": "Đang mổ",
+          "startMin": 29852708,
+          "endMin": 29853000,
+          "lastConfirmedMin": 29852708,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T01:08:20.573Z"
+        }
+      ],
       "currentRoom": null
     }
   ],
@@ -3347,7 +3370,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:09:21.619Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5644,7 +5667,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:09:21.619Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6857,7 +6880,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:09:21.619Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10731,7 +10754,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:09:21.619Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11634,7 +11657,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-04T14:45:14.543Z"
+      "updatedAt": "2026-10-05T01:09:21.619Z"
     }
   },
   "episodeConsultations": {},
