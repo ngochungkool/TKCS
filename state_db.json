@@ -1,5 +1,5 @@
 {
-  "version": 1791159508753,
+  "version": 1791159539933,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1391,8 +1391,8 @@
           },
           "consultDetails": {
             "specialty": "Chấn thương",
-            "consultDiagnosis": "",
-            "consultTreatment": "",
+            "consultDiagnosis": "cbsacbsnacs",
+            "consultTreatment": "ưaeewadsads",
             "followUpDays": "7",
             "followUpClinic": "Phòng khám Chấn thương chỉnh hình"
           },
@@ -3288,7 +3288,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:28.753Z"
+      "updatedAt": "2026-10-05T00:18:59.932Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5585,7 +5585,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:28.753Z"
+      "updatedAt": "2026-10-05T00:18:59.932Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6798,7 +6798,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:28.753Z"
+      "updatedAt": "2026-10-05T00:18:59.932Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10672,7 +10672,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:28.753Z"
+      "updatedAt": "2026-10-05T00:18:59.932Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11575,7 +11575,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:18:28.753Z"
+      "updatedAt": "2026-10-05T00:18:59.932Z"
     }
   },
   "episodeConsultations": {
