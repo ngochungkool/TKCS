@@ -1,5 +1,5 @@
 {
-  "version": 1791203867127,
+  "version": 1791209809871,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3716,7 +3716,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T12:37:47.126Z"
+      "updatedAt": "2026-10-05T14:16:28.513Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6013,7 +6013,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T12:37:47.126Z"
+      "updatedAt": "2026-10-05T14:16:28.513Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7226,7 +7226,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T12:37:47.126Z"
+      "updatedAt": "2026-10-05T14:16:28.513Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11100,7 +11100,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T12:37:47.126Z"
+      "updatedAt": "2026-10-05T14:16:28.513Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -12003,7 +12003,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T12:37:47.126Z"
+      "updatedAt": "2026-10-05T14:16:28.513Z"
     }
   },
   "episodeConsultations": {},
@@ -13147,8 +13147,9 @@
       "reportedBy": "Huỳnh Ngọc Hưng",
       "reportedRole": "Bác sĩ",
       "createdAt": "2026-10-05T08:31:38.023Z",
-      "acknowledged": false,
-      "message": "Bác sĩ Ri (@nvri) đã được điều chỉnh giờ Báo mổ lúc 15:40. Tài khoản tại phòng [Hồi sức thần kinh] đã chuyển sang phòng mổ!"
+      "acknowledged": true,
+      "message": "Bác sĩ Ri (@nvri) đã được điều chỉnh giờ Báo mổ lúc 15:40. Tài khoản tại phòng [Hồi sức thần kinh] đã chuyển sang phòng mổ!",
+      "acknowledgedAt": "2026-10-05T14:16:49.866Z"
     },
     {
       "id": "sa-1791186814481-k62qz",
@@ -13178,8 +13179,9 @@
       "reportedBy": "Kíp phẫu thuật A",
       "reportedRole": "Báo mổ",
       "createdAt": "2026-10-05T07:37:56.465Z",
-      "acknowledged": false,
-      "message": "Bác sĩ Hải (@pnhai) đã được Báo mổ lúc 14:37. Tài khoản tại phòng [Thần kinh 4] đã chuyển sang phòng mổ!"
+      "acknowledged": true,
+      "message": "Bác sĩ Hải (@pnhai) đã được Báo mổ lúc 14:37. Tài khoản tại phòng [Thần kinh 4] đã chuyển sang phòng mổ!",
+      "acknowledgedAt": "2026-10-05T14:16:47.420Z"
     }
   ]
 }
