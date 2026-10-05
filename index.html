@@ -259,7 +259,7 @@
       if (todayShift === 'TRUC') return true;
 
       // Ra trực buổi sáng ngày thường (07:00 - 11:30)
-      if ((todayShift === 'RA_TRUC' || prevShift === 'TRUC') && !isWeekend && minOfDay >= 420 && minOfDay < 690) return true;
+      if (todayShift === 'RA_TRUC' && !isWeekend && minOfDay >= 420 && minOfDay < 690) return true;
 
       // Làm ngày thông thường
       if (todayShift === 'LAM_NGAY' && ((minOfDay >= 420 && minOfDay < 690) || (minOfDay >= 810 && minOfDay < 1020))) return true;
@@ -424,7 +424,9 @@
             else if (active) inUse++;
             else if (isDoctorAllowedNow(d, now)) usable++;
 
-            const shift = (d.scheduleByDate && d.scheduleByDate[todayKey]) || 'LAM_NGAY';
+            const prevDt = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+            const prevKey = getDateKey(prevDt);
+            const shift = getEffectiveShift(d, todayKey, prevKey);
             if (shift === 'TRUC' || shift === 'RA_TRUC') onDuty++;
             if (shift === 'LAM_NGAY' || shift === 'PHONG_KHAM') dayWork++;
           }

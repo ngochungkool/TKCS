@@ -37,6 +37,8 @@ let dbState = {
 };
 
 let selectedRoomName = 'Thần kinh 1';
+const VN_OFFSET_MS = 7 * 60 * 60 * 1000; // GMT+7 (Asia/Ho_Chi_Minh)
+
 let windowOffsetMinutes = 0;
 let selectedSurgeryDocIds = new Set();
 
@@ -45,17 +47,19 @@ function getNowEpochMinutes() {
 }
 
 function formatHHMM(epochMin) {
-  const d = new Date(epochMin * 60000);
-  const hh = String(d.getHours()).padStart(2, '0');
-  const mm = String(d.getMinutes()).padStart(2, '0');
+  if (typeof epochMin !== 'number' || isNaN(epochMin)) return '';
+  const vnDate = new Date(epochMin * 60000 + VN_OFFSET_MS);
+  const hh = String(vnDate.getUTCHours()).padStart(2, '0');
+  const mm = String(vnDate.getUTCMinutes()).padStart(2, '0');
   return `${hh}:${mm}`;
 }
 
 function formatDateVN(epochMin) {
-  const d = new Date(epochMin * 60000);
-  const dd = String(d.getDate()).padStart(2, '0');
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const yyyy = d.getFullYear();
+  if (typeof epochMin !== 'number' || isNaN(epochMin)) return '';
+  const vnDate = new Date(epochMin * 60000 + VN_OFFSET_MS);
+  const dd = String(vnDate.getUTCDate()).padStart(2, '0');
+  const mm = String(vnDate.getUTCMonth() + 1).padStart(2, '0');
+  const yyyy = vnDate.getUTCFullYear();
   return `${dd}/${mm}/${yyyy}`;
 }
 
@@ -85,18 +89,22 @@ function getCurrentStaffAuth() {
   };
 }
 
-function getDateKey(dateObj) {
-  const yyyy = dateObj.getFullYear();
-  const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
-  const dd = String(dateObj.getDate()).padStart(2, '0');
+function getDateKey(dateObj = new Date()) {
+  const ms = dateObj instanceof Date ? dateObj.getTime() : Number(dateObj);
+  const vnDate = new Date(ms + VN_OFFSET_MS);
+  const yyyy = vnDate.getUTCFullYear();
+  const mm = String(vnDate.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(vnDate.getUTCDate()).padStart(2, '0');
   return `${yyyy}-${mm}-${dd}`;
 }
 
 function addDaysToKey(dateKey, offsetDays) {
-  const [y, m, d] = dateKey.split('-').map(Number);
-  const dt = new Date(y, m - 1, d);
-  dt.setDate(dt.getDate() + offsetDays);
-  return getDateKey(dt);
+  const [y, m, d] = String(dateKey).split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d, 12, 0, 0) + offsetDays * 86400000);
+  const yyyy = dt.getUTCFullYear();
+  const mm = String(dt.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(dt.getUTCDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
 }
 
 function normalize24hTimeStr(raw, fallbackEmpty = true) {
@@ -169,15 +177,15 @@ function getEffectiveShiftForDate(doc, dateKey) {
 }
 
 function getAllowedIntervalsForDate(doc, dateKey) {
-  const [y, m, d] = dateKey.split('-').map(Number);
-  const dayStartMs = new Date(y, m - 1, d, 0, 0, 0, 0).getTime();
+  const [y, m, d] = String(dateKey).split('-').map(Number);
+  const dayStartMs = Date.UTC(y, m - 1, d, 0, 0, 0, 0) - VN_OFFSET_MS;
   const dayStartMin = Math.floor(dayStartMs / 60000);
-  const dayOfWeek = new Date(y, m - 1, d).getDay();
+  const dayOfWeek = new Date(Date.UTC(y, m - 1, d, 12, 0, 0)).getUTCDay();
   const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
   const prevDateKey = addDaysToKey(dateKey, -1);
-  const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevDateKey]) || '';
-  const todayShift = (doc.scheduleByDate && doc.scheduleByDate[dateKey]) || (prevShift === 'TRUC' ? 'RA_TRUC' : 'LAM_NGAY');
+  const prevShift = getEffectiveShiftForDate(doc, prevDateKey);
+  const todayShift = getEffectiveShiftForDate(doc, dateKey);
 
   const intervals = [];
 
@@ -190,7 +198,7 @@ function getAllowedIntervalsForDate(doc, dateKey) {
   if (todayShift === 'TRUC') {
     // Tua trực bắt đầu từ 07:00 sáng hôm nay đến hết ngày hôm nay (tiếp tục sang sáng hôm sau)
     intervals.push([dayStartMin + 420, dayStartMin + 1440]); // 07:00 -> 24:00
-  } else if (todayShift === 'RA_TRUC' || prevShift === 'TRUC') {
+  } else if (todayShift === 'RA_TRUC') {
     // Sau 07:00: Ra trực buổi sáng ngày thường (giao ban & giải quyết hồ sơ bệnh án)
     if (!isWeekend) {
       intervals.push([dayStartMin + 420, dayStartMin + 690]); // 07:00 -> 11:30
@@ -240,15 +248,18 @@ function isDoctorAllowedAtMinute(doc, epochMin) {
 }
 
 function getDoctorShiftInfoAtMinute(doc, epochMin) {
-  const dt = new Date(epochMin * 60000);
+  const dt = new Date(epochMin * 60000 + VN_OFFSET_MS);
   const dateKey = getDateKey(dt);
   const prevKey = addDaysToKey(dateKey, -1);
-  const hh = dt.getHours();
-  const mm = dt.getMinutes();
+  const hh = dt.getUTCHours();
+  const mm = dt.getUTCMinutes();
   const minsOfDay = hh * 60 + mm;
+  const dayOfWeek = dt.getUTCDay();
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
   const prevShift = (doc.scheduleByDate && doc.scheduleByDate[prevKey]) || '';
   const todayShift = (doc.scheduleByDate && doc.scheduleByDate[dateKey]) || '';
+  const effectiveTodayShift = todayShift || (prevShift === 'TRUC' ? 'RA_TRUC' : 'LAM_NGAY');
 
   // TRƯỜNG HỢP 1: TRƯỚC 07:00 SÁNG (00:00 - 06:59)
   // Thuộc về ca trực của ngày hôm qua (bắt đầu từ 07:00 hôm qua đến 07:00 hôm nay)
@@ -269,7 +280,7 @@ function getDoctorShiftInfoAtMinute(doc, epochMin) {
 
   // TRƯỜNG HỢP 2: TỪ 07:00 SÁNG TRỞ ĐI (07:00 - 23:59)
   // 2.1. Bác sĩ hôm nay TRỰC (bắt đầu từ 07:00 hôm nay đến 07:00 hôm sau):
-  if (todayShift === 'TRUC') {
+  if (effectiveTodayShift === 'TRUC') {
     return {
       badgeText: 'Trực',
       badgeCls: 'badge-truc',
@@ -277,10 +288,8 @@ function getDoctorShiftInfoAtMinute(doc, epochMin) {
     };
   }
 
-  // 2.2. Bác sĩ trực hôm qua -> Sau 07:00 hôm nay chuyển sang RA TRỰC:
-  if (prevShift === 'TRUC' || todayShift === 'RA_TRUC') {
-    const dayOfWeek = dt.getDay();
-    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+  // 2.2. Bác sĩ ra trực (hoặc trực hôm qua nhưng hôm nay không có lịch khác):
+  if (effectiveTodayShift === 'RA_TRUC') {
     if (!isWeekend && minsOfDay < 690) { // Trước 11:30 ngày thường
       return {
         badgeText: 'Ra trực',
@@ -296,8 +305,7 @@ function getDoctorShiftInfoAtMinute(doc, epochMin) {
   }
 
   // 2.3. Các ca làm việc khác trong ngày:
-  const effectiveShift = todayShift || 'LAM_NGAY';
-  const meta = SHIFT_METADATA[effectiveShift] || { label: effectiveShift, badgeCls: 'badge-off', desc: '' };
+  const meta = SHIFT_METADATA[effectiveTodayShift] || { label: effectiveTodayShift, badgeCls: 'badge-off', desc: '' };
   return {
     badgeText: meta.label,
     badgeCls: meta.badgeCls,

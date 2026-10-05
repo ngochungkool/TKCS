@@ -655,6 +655,26 @@
       return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
     }
 
+    function addDaysToKey(dateKey, offsetDays) {
+      const [y, m, d] = String(dateKey).split('-').map(Number);
+      const dt = new Date(Date.UTC(y, m - 1, d, 12, 0, 0) + offsetDays * 86400000);
+      const yyyy = dt.getUTCFullYear();
+      const mm = String(dt.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(dt.getUTCDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function getEffectiveShiftForDate(doc, dateKey) {
+      if (doc && doc.scheduleByDate && doc.scheduleByDate[dateKey]) {
+        return doc.scheduleByDate[dateKey];
+      }
+      const prevKey = addDaysToKey(dateKey, -1);
+      if (doc && doc.scheduleByDate && doc.scheduleByDate[prevKey] === 'TRUC') {
+        return 'RA_TRUC';
+      }
+      return 'LAM_NGAY';
+    }
+
     let selectedAdminDateKey = getDateKey(new Date());
     let patientStatsByDateCache = {};
     let defaultPatientStatsFallback = null;
@@ -952,7 +972,7 @@
       const nowMin = Math.floor(now.getTime() / 60000);
       const targetDateKey = selectedAdminDateKey || getDateKey(now);
       const sorted = [...doctors].sort((a, b) => a.seniority - b.seniority);
-      const getShift = (d) => (d.scheduleByDate && d.scheduleByDate[targetDateKey]) || 'LAM_NGAY';
+      const getShift = (d) => getEffectiveShiftForDate(d, targetDateKey);
 
       const presentDocs = sorted.filter(d => getShift(d) !== 'NGHI');
       let activeSurgeryNow = 0;
@@ -1028,7 +1048,7 @@
       const targetDateKey = selectedAdminDateKey || getDateKey(new Date());
       const sorted = [...doctors].sort((a, b) => a.seniority - b.seniority);
 
-      const getShift = (d) => (d.scheduleByDate && d.scheduleByDate[targetDateKey]) || 'LAM_NGAY';
+      const getShift = (d) => getEffectiveShiftForDate(d, targetDateKey);
 
       document.getElementById('statWorkCount').textContent = sorted.filter(d => getShift(d) === 'LAM_NGAY').length;
       document.getElementById('statDutyCount').textContent = sorted.filter(d => getShift(d) === 'TRUC').length;
@@ -1115,7 +1135,7 @@
       const yStr = targetDateObj.getFullYear();
       const fullDateLabel = `${days[targetDateObj.getDay()]}, ngày ${dStr}/${mStr}/${yStr}`;
 
-      const getShift = (d) => (d.scheduleByDate && d.scheduleByDate[targetDateKey]) || 'LAM_NGAY';
+      const getShift = (d) => getEffectiveShiftForDate(d, targetDateKey);
 
       const GROUP_PRIORITY = {
         TRUC: 1,

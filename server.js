@@ -196,7 +196,7 @@ function getAllowedIntervalsForDate(doc, dateKey) {
   if (todayShift === 'TRUC') {
     // Tua trực bắt đầu từ 07:00 sáng hôm nay đến hết ngày hôm nay (tiếp tục sang 07:00 sáng hôm sau qua prevShift)
     intervals.push([dayStartMin + 420, dayStartMin + 1440]); // 07:00 -> 24:00
-  } else if (todayShift === 'RA_TRUC' || prevShift === 'TRUC') {
+  } else if (todayShift === 'RA_TRUC') {
     // Sau 07:00: Ra trực buổi sáng ngày thường (giao ban & giải quyết hồ sơ bệnh án)
     if (!isWeekend) {
       intervals.push([dayStartMin + 420, dayStartMin + 690]); // 07:00 -> 11:30
@@ -439,6 +439,15 @@ async function restoreDbFromCloudIfNewer() {
             if (cloudDb.patientStats) {
               db.patientStats = { ...(cloudDb.patientStats || {}), ...(db.patientStats || {}) };
             }
+            if (cloudDb.wardRounds) {
+              db.wardRounds = { ...(cloudDb.wardRounds || {}), ...(db.wardRounds || {}) };
+            }
+            if (Array.isArray(cloudDb.surgeryAlerts)) {
+              db.surgeryAlerts = cloudDb.surgeryAlerts;
+            }
+            if (cloudDb.announcement) {
+              db.announcement = cloudDb.announcement;
+            }
           }
           db.version = Math.max(Number(db.version || 0), Number(cloudDb.version || 0), Date.now());
           fs.writeFileSync(DATA_FILE, JSON.stringify(db, null, 2), 'utf-8');
@@ -655,6 +664,7 @@ function runRuleEngineTick() {
         note = `⚠️ User ${doc.name} tại [${active.roomName}] đã sử dụng 60 phút! Vui lòng xác nhận còn làm việc không.`;
       } else if (active.warnedAtMin && nowMin - active.warnedAtMin >= 5) {
         active.endMin = Math.max(active.startMin + 1, nowMin);
+        active.releasedEarly = true;
         active.warnedAtMin = null;
         changed = true;
         note = `🔓 Tự động trả User ${doc.name} tại [${active.roomName}] do quá 60p + 5p không xác nhận.`;
@@ -1494,7 +1504,7 @@ const server = http.createServer(async (req, res) => {
 
     for (const doc of db.doctors) {
       if (!doc.scheduleByDate) doc.scheduleByDate = {};
-      const prevShift = doc.scheduleByDate[prevDateKey] || 'LAM_NGAY';
+      const prevShift = getEffectiveShiftForDate(doc, prevDateKey);
       doc.scheduleByDate[targetDateKey] = prevShift === 'TRUC' ? 'RA_TRUC' : 'LAM_NGAY';
     }
 
