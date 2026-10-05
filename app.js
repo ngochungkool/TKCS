@@ -663,7 +663,7 @@ function renderTimelineRows() {
         statusBadgeHtml = `<span class="status-badge unavailable">● ${isGoingSurgery ? 'Đang mổ' : activeUsage.roomName}</span>`;
         statusSubHtml = `<span class="status-subtext time-concise">${formatHHMM(activeUsage.startMin)}${endStr}</span>`;
 
-        if (isSameRoomOwner) {
+        if (isSameRoomOwner || isGoingSurgery) {
           actionBtnHtml = `
             <button type="button" class="btn-action-release" data-action="release-user" data-doc-id="${doc.id}">
               ${isGoingSurgery ? 'Mổ xong ✕' : 'Trả user ✕'}
@@ -681,6 +681,21 @@ function renderTimelineRows() {
             </button>
           `;
         }
+      } else if (selectedRoomName === 'Đang mổ') {
+        statusBadgeHtml = `<span class="status-badge available" style="background: #e0f2fe; color: #0369a1; border-color: #7dd3fc;">● Sẵn sàng mổ</span>`;
+        statusSubHtml = `<span class="status-subtext time-concise">Phòng mổ</span>`;
+        actionBtnHtml = `
+          <button
+            type="button"
+            class="btn-action-receive"
+            data-action="open-surgery-for-doc"
+            data-doc-id="${doc.id}"
+            title="Báo mổ cho BS ${doc.shortName || doc.name}"
+            style="background: linear-gradient(135deg, #0284c7, #2563eb); border-color: #0284c7; color: #ffffff;"
+          >
+            🩺 Báo mổ &rarr;
+          </button>
+        `;
       } else if (allowedRightNow) {
         statusBadgeHtml = `<span class="status-badge available">● Có thể dùng</span>`;
         const todayDateKey = getDateKey(new Date(nowMin * 60000));
@@ -847,10 +862,18 @@ async function postApi(endpoint, payload) {
     } else if (data.db) {
       dbState = data.db;
       renderAll();
+      if (payload && payload.roomName === 'Đang mổ') {
+        showToast('🩺 Đã báo mổ thành công!');
+      } else if (endpoint === '/api/release') {
+        showToast('🔓 Đã hoàn thành và trả tài khoản!');
+      } else if (endpoint === '/api/receive') {
+        showToast('✅ Đã nhận sử dụng thành công!');
+      }
     }
     return data;
   } catch (err) {
     console.error('API Error:', err);
+    showToast('❌ Lỗi kết nối máy chủ');
   }
 }
 
@@ -887,8 +910,11 @@ function openReceiveTimeDialog(docId) {
 }
 
 // Box 2: Open Enlarged "+ Báo mổ" Dialog
-function openQuickSurgeryDialog() {
+function openQuickSurgeryDialog(preselectedDocId = null) {
   selectedSurgeryDocIds.clear();
+  if (preselectedDocId) {
+    selectedSurgeryDocIds.add(preselectedDocId);
+  }
   const nowMin = getNowEpochMinutes();
 
   const sortedDoctors = [...dbState.doctors].sort(
@@ -899,8 +925,9 @@ function openQuickSurgeryDialog() {
   gridEl.innerHTML = sortedDoctors
     .map((doc) => {
       const sName = doc.shortName || doc.name.split(' ').pop();
+      const isActive = selectedSurgeryDocIds.has(doc.id);
       return `
-        <button type="button" class="short-name-chip" data-surg-doc-id="${doc.id}">
+        <button type="button" class="short-name-chip ${isActive ? 'active' : ''}" data-surg-doc-id="${doc.id}">
           ${sName}
         </button>
       `;
@@ -1196,6 +1223,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (action === 'open-receive-box') {
       openReceiveTimeDialog(docId);
+    } else if (action === 'open-surgery-for-doc') {
+      openQuickSurgeryDialog(docId);
     } else if (action === 'release-user') {
       const { staffName, staffRole } = getCurrentStaffAuth();
       postApi('/api/release', { docId, requestRoomName: selectedRoomName, staffName, staffRole });
