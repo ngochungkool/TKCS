@@ -1,5 +1,5 @@
 {
-  "version": 1791221960582,
+  "version": 1791221992775,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -4171,7 +4171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:20.574Z"
+      "updatedAt": "2026-10-05T17:39:52.681Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6697,7 +6697,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:20.574Z"
+      "updatedAt": "2026-10-05T17:39:52.681Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8028,7 +8028,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:20.574Z"
+      "updatedAt": "2026-10-05T17:39:52.681Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -12614,7 +12614,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:20.574Z"
+      "updatedAt": "2026-10-05T17:39:52.681Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -13680,7 +13680,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:39:20.574Z"
+      "updatedAt": "2026-10-05T17:39:52.681Z"
     }
   },
   "episodeConsultations": {},
@@ -14493,8 +14493,8 @@
         "tk1": {
           "roomKey": "tk1",
           "roomName": "Thần kinh 1",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-04T08:07:15.223Z",
+          "status": "SUBMITTED",
+          "updatedAt": "2026-10-05T17:39:52.682Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "",
@@ -14519,6 +14519,24 @@
             "bhyt": 28
           },
           "admissions": [
+            {
+              "id": "adm-1791222036556-0a6c",
+              "mabn": "0001424848",
+              "hoten": "NGUYỄN VĂN NHỚ",
+              "tuoi": "39",
+              "gioiTinh": "Nam",
+              "diaChi": "Chánh Tường -Xã Cát Tiến--Tỉnh Gia Lai",
+              "chanDoan": "S06.01-Chấn động não, có vết thương nội sọ hở",
+              "cause": "Bệnh lý",
+              "category": "THEO_DOI",
+              "isHighlight": true,
+              "ngayVaoVien": "2026-10-05",
+              "gioPhauThuat": "08:00",
+              "ngayPhauThuatDate": "2026-10-05",
+              "ngayPhauThuat": "",
+              "ngayXinVe": "",
+              "dienBien": ""
+            },
             {
               "id": "adm-tk1-1",
               "stt": 1,
@@ -14635,8 +14653,8 @@
               "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
               "diaChi": "đoàn kết-Xã Ia Dreh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": ""
+              "isHighlight": true,
+              "category": "THEO_DOI"
             }
           ],
           "discharges": [],
@@ -15162,6 +15180,36 @@
           "category": "MO_CC",
           "chanDoan": "I63.8-Nhồi máu não khác",
           "dienBien": "Bệnh: Tỉnh",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [],
+          "notesBs": ""
+        },
+        {
+          "id": "case-1791221992682-likb",
+          "mabn": "0001424848",
+          "hoten": "NGUYỄN VĂN NHỚ",
+          "tuoi": "39",
+          "roomKey": "tk1",
+          "roomName": "Thần kinh 1",
+          "category": "THEO_DOI",
+          "chanDoan": "S06.01-Chấn động não, có vết thương nội sọ hở",
+          "dienBien": "Bệnh lý: ",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [],
+          "notesBs": ""
+        },
+        {
+          "id": "case-1791221992682-zk80",
+          "mabn": "0001425918",
+          "hoten": "NGUYỄN THỊ CHINH",
+          "tuoi": "70",
+          "roomKey": "tk1",
+          "roomName": "Thần kinh 1",
+          "category": "THEO_DOI",
+          "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "dienBien": "TNGT: Tỉnh",
           "kipMo": "",
           "selectedForSlide": true,
           "images": [],
