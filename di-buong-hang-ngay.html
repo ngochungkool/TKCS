@@ -10,6 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css?v=20261004_v5" />
+  <style>
+    @keyframes pulseAlert {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
+      70% { transform: scale(1.006); box-shadow: 0 0 0 8px rgba(225, 29, 72, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+    }
+    .ward-surgery-conflict-card {
+      animation: pulseAlert 2s infinite ease-in-out;
+    }
+  </style>
   <script src="auth-client.js" defer></script>
 </head>
 <body>
@@ -85,6 +95,9 @@
               </button>
             </div>
           </div>
+
+          <!-- CẢNH BÁO BÁO MỔ TRÙNG GIỜ CHO PHÒNG BUỒNG -->
+          <div id="ward-room-surgery-alert-container"></div>
 
           <!-- 1. THÔNG BÁN ĐẦU TRANG GỌN: BN chưa phân giường (Chọn sơ đồ giường trực quan) / BN không còn trong Excel / Hoàn tác xoá -->
           <div id="tk1-top-alerts" class="tk1-alerts-stack"></div>
@@ -984,6 +997,13 @@
 
         const st = byRoomStats[room.name] || { hienCo: 0, benhVao: 0, raVien: 0, dauCa: 0, chuyenDen: 0 };
 
+        const hasUnackAlert = (wardDbState.surgeryAlerts || []).some(
+          a => !a.acknowledged && a.roomName === room.name
+        );
+        const alertBadgeHtml = hasUnackAlert
+          ? `<span class="ward-surg-alert-badge" style="background:#e11d48;color:#fff;font-size:0.72rem;font-weight:800;padding:2px 7px;border-radius:999px;margin-left:6px;animation:pulseAlert 1.5s infinite;box-shadow:0 0 8px rgba(225,29,72,0.6);" title="Có bác sĩ phòng này vừa chuyển sang phòng mổ">🚨 BS Đi Mổ!</span>`
+          : '';
+
         if (isSelected) {
           return `
             <div
@@ -994,7 +1014,7 @@
             >
               <div>
                 <div class="ward-room-top">
-                  <div class="ward-room-name">${room.name}</div>
+                  <div class="ward-room-name">${room.name} ${alertBadgeHtml}</div>
                 </div>
                 <div class="ward-room-docs" style="margin-top:0.2rem;">
                   BS phụ trách: <strong>${docNames}</strong>
@@ -1021,7 +1041,7 @@
             title="Bấm để chuyển sang ${room.name}"
           >
             <div class="ward-room-top">
-              <div class="ward-room-name">${room.name}</div>
+              <div class="ward-room-name">${room.name} ${alertBadgeHtml}</div>
               <span class="ward-compact-count-pill">${st.hienCo ?? 0} BN</span>
             </div>
             <div class="ward-room-docs">
@@ -1036,7 +1056,60 @@
           selectWardRoom(card.getAttribute('data-select-room'));
         });
       });
+
+      renderWardSurgeryRoomAlerts();
     }
+
+    function renderWardSurgeryRoomAlerts() {
+      const container = document.getElementById('ward-room-surgery-alert-container');
+      if (!container) return;
+
+      const currentRoom = WARD_ROOMS_CONFIG.find(r => r.key === currentSelectedRoomKey);
+      if (!currentRoom || currentRoom.isConsultTab) {
+        container.innerHTML = '';
+        return;
+      }
+
+      const roomAlerts = (wardDbState.surgeryAlerts || []).filter(
+        a => !a.acknowledged && a.roomName === currentRoom.name
+      );
+      if (roomAlerts.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = roomAlerts.map(a => `
+        <div class="ward-surgery-conflict-card" style="background: linear-gradient(135deg, #fff1f2, #ffe4e6); border: 2px solid #e11d48; border-radius: 10px; padding: 12px 18px; margin-bottom: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 4px 14px rgba(225,29,72,0.18);">
+          <div style="display: flex; align-items: center; gap: 12px; flex: 1; min-width: 280px;">
+            <span style="font-size: 1.6rem;">🚨</span>
+            <div>
+              <div style="font-size: 0.95rem; font-weight: 800; color: #9f1239; display: flex; align-items: center; gap: 8px;">
+                <span>CẢNH BÁO BÁO MỔ TRÙNG GIỜ — PHÒNG [${a.roomName}]</span>
+              </div>
+              <div style="font-size: 0.86rem; color: #881337; margin-top: 3px; line-height: 1.45;">
+                Bác sĩ <b>${a.docName}</b> (${a.handle}) đã được <b>Báo mổ</b> lúc <b>${a.startTimeStr}</b> (do <i>${a.reportedRole || 'Kíp mổ'} ${a.reportedBy || ''}</i> báo).
+                <br>Tài khoản tại phòng <b>[${a.roomName}]</b> đã chuyển sang phòng mổ. Quý khoa phòng vui lòng lưu ý chuyển giao hồ sơ hoặc chọn tài khoản khác!
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn-ack-ward-surgery" data-ack-alert-id="${a.id}" style="background: #e11d48; color: #ffffff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.84rem; cursor: pointer; white-space: nowrap; box-shadow: 0 2px 6px rgba(225,29,72,0.3); transition: all 0.15s ease;">
+            Đã tiếp nhận ✕
+          </button>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('click', (e) => {
+      const ackBtn = e.target.closest('[data-ack-alert-id]');
+      if (ackBtn) {
+        const alertId = ackBtn.getAttribute('data-ack-alert-id');
+        fetch('/api/acknowledge-surgery-alert', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ alertId })
+        }).catch(() => {});
+      }
+    });
 
     function renderAllRoomWorkspaces() {
       const todayKey = getDateKey(new Date());
@@ -1100,6 +1173,11 @@
           renderAllRoomWorkspaces();
           if (window.TK1Module && window.TK1Module.onServerStateUpdate) {
             window.TK1Module.onServerStateUpdate(dbObj);
+          }
+        }
+        if (payload.eventNote && payload.eventNote.includes('CẢNH BÁO')) {
+          if (typeof showWardToast === 'function') {
+            showWardToast(payload.eventNote, 7000);
           }
         }
       } catch (e) {}

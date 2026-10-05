@@ -44,6 +44,25 @@ function getNowEpochMinutes() {
   return Math.floor(Date.now() / 60000);
 }
 
+function formatHHMM(epochMin) {
+  if (typeof epochMin !== 'number' || isNaN(epochMin)) return '';
+  const vnDate = new Date(epochMin * 60000 + VN_OFFSET_MS);
+  const hh = String(vnDate.getUTCHours()).padStart(2, '0');
+  const mm = String(vnDate.getUTCMinutes()).padStart(2, '0');
+  return `${hh}:${mm}`;
+}
+
+function timeStringToEpochMin(timeStr, baseEpochMin = getNowEpochMinutes()) {
+  if (!timeStr || !String(timeStr).includes(':')) return null;
+  const [hStr, mStr] = String(timeStr).trim().split(':');
+  const h = parseInt(hStr, 10);
+  const m = parseInt(mStr, 10);
+  if (isNaN(h) || isNaN(m)) return null;
+  const baseVn = new Date(baseEpochMin * 60000 + VN_OFFSET_MS);
+  const targetUtcMs = Date.UTC(baseVn.getUTCFullYear(), baseVn.getUTCMonth(), baseVn.getUTCDate(), h, m, 0) - VN_OFFSET_MS;
+  return Math.floor(targetUtcMs / 60000);
+}
+
 // Always compute YYYY-MM-DD in Vietnam Time (GMT+7) regardless of server OS timezone (e.g. Render UTC)
 function getDateKey(dateObj = new Date()) {
   const ms = dateObj instanceof Date ? dateObj.getTime() : Number(dateObj);
@@ -539,6 +558,7 @@ function loadDb() {
 }
 
 let db = loadDb();
+if (!Array.isArray(db.surgeryAlerts)) db.surgeryAlerts = [];
 const sseClients = new Set();
 
 // Khôi phục dữ liệu mới nhất từ nhánh cloud-data ngay khi khởi động server
@@ -981,8 +1001,8 @@ const server = http.createServer(async (req, res) => {
 
   if (pathname.startsWith('/api/') && !isPublicApi) {
     const authUser = getAuthUser(req);
-    // Báo mổ khẩn cấp (/api/receive) hoặc Mổ xong (/api/release) được chuyển tiếp xuống handler để xử lý linh hoạt
-    if (!authUser && pathname !== '/api/receive' && pathname !== '/api/release') {
+    // Báo mổ khẩn cấp (/api/receive), Mổ xong (/api/release), Sửa giờ mổ (/api/update-surgery-time), Tiếp nhận cảnh báo (/api/acknowledge-surgery-alert) được chuyển tiếp xuống handler để xử lý linh hoạt
+    if (!authUser && pathname !== '/api/receive' && pathname !== '/api/release' && pathname !== '/api/update-surgery-time' && pathname !== '/api/acknowledge-surgery-alert') {
       res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         ok: false,
@@ -1119,6 +1139,7 @@ const server = http.createServer(async (req, res) => {
     const finalStaffRole = (staffRole && String(staffRole).trim()) || authUserRole || (roomName === 'Đang mổ' ? 'Báo mổ' : 'Điều dưỡng');
 
     const assignedNames = [];
+    const alertedRooms = [];
 
     for (const id of targetIds) {
       const doc = db.doctors.find((d) => d.id === id);
@@ -1142,11 +1163,35 @@ const server = http.createServer(async (req, res) => {
           const uEnd = u.endMin !== null ? u.endMin : Math.max(u.startMin + 1, nowMin + 1440);
           const effectiveNewEnd = actualEnd !== null ? actualEnd : Math.max(actualStart + 1, nowMin + 1440);
           if (actualStart < uEnd && effectiveNewEnd > u.startMin) {
+            const prevRoom = u.roomName;
             u.endMin = Math.max(u.startMin + 1, actualStart);
             u.releasedEarly = true;
             u.releasedBy = finalStaffName || 'Hệ thống Báo mổ';
             u.releasedRole = finalStaffRole || 'Báo mổ';
             u.releasedAt = new Date().toISOString();
+
+            // Cảnh báo ngay cho phòng đó nếu trùng giờ user đang dùng ở phòng khác
+            if (prevRoom && prevRoom !== 'Đang mổ') {
+              if (!Array.isArray(db.surgeryAlerts)) db.surgeryAlerts = [];
+              const alertItem = {
+                id: 'sa-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+                roomName: prevRoom,
+                docId: doc.id,
+                docName: doc.name,
+                docShortName: doc.shortName || doc.name,
+                handle: doc.handle,
+                startMin: actualStart,
+                startTimeStr: formatHHMM(actualStart),
+                reportedBy: finalStaffName || 'Kíp phẫu thuật',
+                reportedRole: finalStaffRole || 'Báo mổ',
+                createdAt: new Date().toISOString(),
+                acknowledged: false,
+                message: `Bác sĩ ${doc.shortName || doc.name} (${doc.handle}) đã được Báo mổ lúc ${formatHHMM(actualStart)}. Tài khoản tại phòng [${prevRoom}] đã chuyển sang phòng mổ!`
+              };
+              db.surgeryAlerts.unshift(alertItem);
+              if (db.surgeryAlerts.length > 50) db.surgeryAlerts.length = 50;
+              alertedRooms.push({ roomName: prevRoom, docName: doc.shortName || doc.name });
+            }
           }
         }
       } else {
@@ -1178,9 +1223,13 @@ const server = http.createServer(async (req, res) => {
     }
 
     const staffPrefix = finalStaffName ? `[${finalStaffRole} ${finalStaffName}] ` : '';
+    let alertMsg = '';
+    if (alertedRooms.length > 0) {
+      alertMsg = ` ⚠️ [CẢNH BÁO TRÙNG GIỜ]: ` + alertedRooms.map(a => `Phòng ${a.roomName} (BS ${a.docName} đã chuyển sang phòng mổ)`).join('; ');
+    }
     broadcastState(
       roomName === 'Đang mổ'
-        ? `🩺 ${staffPrefix}Đã báo mổ cho BS: ${assignedNames.join(', ')}`
+        ? `🩺 ${staffPrefix}Đã báo mổ cho BS: ${assignedNames.join(', ')}${alertMsg}`
         : `✅ ${staffPrefix}Phòng [${roomName}] đã nhận User BS ${assignedNames.join(', ')}`
     );
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -1265,6 +1314,141 @@ const server = http.createServer(async (req, res) => {
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, db }));
+    return;
+  }
+
+  // POST update surgery time (Chỉnh sửa giờ báo mổ)
+  if (req.method === 'POST' && pathname === '/api/update-surgery-time') {
+    const { docId, usageId, startMin, endMin, startStr, endStr, staffName, staffRole } = await readBody(req);
+    const nowMin = getNowEpochMinutes();
+    const doc = db.doctors.find((d) => d.id === docId);
+
+    if (!doc) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Không tìm thấy thông tin bác sĩ!' }));
+      return;
+    }
+
+    let targetUsage = null;
+    if (usageId) {
+      targetUsage = (doc.usages || []).find((u) => u.id === usageId);
+    }
+    if (!targetUsage) {
+      const activeSurgery = getActiveUsageAt(doc, nowMin);
+      if (activeSurgery && activeSurgery.roomName === 'Đang mổ') {
+        targetUsage = activeSurgery;
+      } else {
+        const surgeryUsages = (doc.usages || []).filter((u) => u.roomName === 'Đang mổ');
+        if (surgeryUsages.length > 0) {
+          targetUsage = surgeryUsages[surgeryUsages.length - 1];
+        }
+      }
+    }
+
+    if (!targetUsage || targetUsage.roomName !== 'Đang mổ') {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Không tìm thấy phiên Báo mổ của bác sĩ này để chỉnh sửa!' }));
+      return;
+    }
+
+    const baseMin = targetUsage.startMin || nowMin;
+    let finalStart = typeof startMin === 'number' ? startMin : timeStringToEpochMin(startStr, baseMin);
+    if (finalStart === null) finalStart = targetUsage.startMin || nowMin;
+
+    let finalEnd = typeof endMin === 'number' ? endMin : (endStr ? timeStringToEpochMin(endStr, baseMin) : null);
+    if (finalEnd !== null && finalEnd <= finalStart) {
+      finalEnd += 1440;
+    }
+
+    // Check if new start time causes conflict with any ward room usage
+    for (const u of doc.usages || []) {
+      if (u === targetUsage || u.releasedEarly) continue;
+      const uEnd = u.endMin !== null ? u.endMin : Math.max(u.startMin + 1, nowMin + 1440);
+      const effectiveNewEnd = finalEnd !== null ? finalEnd : Math.max(finalStart + 1, nowMin + 1440);
+      if (finalStart < uEnd && effectiveNewEnd > u.startMin) {
+        const prevRoom = u.roomName;
+        u.endMin = Math.max(u.startMin + 1, finalStart);
+        u.releasedEarly = true;
+        u.releasedBy = staffName || 'Hệ thống Báo mổ';
+        u.releasedRole = staffRole || 'Báo mổ';
+        u.releasedAt = new Date().toISOString();
+
+        if (prevRoom && prevRoom !== 'Đang mổ') {
+          if (!Array.isArray(db.surgeryAlerts)) db.surgeryAlerts = [];
+          const alertItem = {
+            id: 'sa-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+            roomName: prevRoom,
+            docId: doc.id,
+            docName: doc.name,
+            docShortName: doc.shortName || doc.name,
+            handle: doc.handle,
+            startMin: finalStart,
+            startTimeStr: formatHHMM(finalStart),
+            reportedBy: staffName || 'Kíp phẫu thuật',
+            reportedRole: staffRole || 'Báo mổ',
+            createdAt: new Date().toISOString(),
+            acknowledged: false,
+            message: `Bác sĩ ${doc.shortName || doc.name} (${doc.handle}) đã được điều chỉnh giờ Báo mổ lúc ${formatHHMM(finalStart)}. Tài khoản tại phòng [${prevRoom}] đã chuyển sang phòng mổ!`
+          };
+          db.surgeryAlerts.unshift(alertItem);
+          if (db.surgeryAlerts.length > 50) db.surgeryAlerts.length = 50;
+        }
+      }
+    }
+
+    targetUsage.startMin = finalStart;
+    targetUsage.endMin = finalEnd;
+    targetUsage.lastConfirmedMin = finalStart;
+
+    if (finalEnd !== null) {
+      if (finalEnd <= nowMin) {
+        targetUsage.releasedEarly = true;
+        targetUsage.releasedBy = staffName || targetUsage.releasedBy || 'Kíp phẫu thuật';
+        targetUsage.releasedRole = staffRole || targetUsage.releasedRole || 'Báo mổ';
+        targetUsage.releasedAt = targetUsage.releasedAt || new Date().toISOString();
+      } else {
+        targetUsage.releasedEarly = false;
+      }
+    } else {
+      targetUsage.releasedEarly = false;
+      targetUsage.releasedBy = null;
+      targetUsage.releasedRole = null;
+      targetUsage.releasedAt = null;
+    }
+
+    targetUsage.updatedAt = new Date().toISOString();
+    targetUsage.updatedBy = staffName ? `[${staffRole || 'ĐD'}] ${staffName}` : 'Kíp phẫu thuật';
+
+    saveDb();
+    const endText = finalEnd !== null ? formatHHMM(finalEnd) : 'Đang mổ';
+    broadcastState(`🩺 Đã cập nhật giờ mổ BS ${doc.shortName || doc.name}: ${formatHHMM(finalStart)} → ${endText}`);
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, usage: targetUsage, db }));
+    return;
+  }
+
+  // POST acknowledge surgery alert
+  if (req.method === 'POST' && pathname === '/api/acknowledge-surgery-alert') {
+    const { alertId, roomName } = await readBody(req);
+    if (!Array.isArray(db.surgeryAlerts)) db.surgeryAlerts = [];
+
+    let count = 0;
+    for (const a of db.surgeryAlerts) {
+      if (alertId && a.id === alertId) {
+        a.acknowledged = true;
+        a.acknowledgedAt = new Date().toISOString();
+        count++;
+      } else if (roomName && a.roomName === roomName && !a.acknowledged) {
+        a.acknowledged = true;
+        a.acknowledgedAt = new Date().toISOString();
+        count++;
+      }
+    }
+
+    saveDb();
+    broadcastState(`Đã xác nhận tiếp nhận cảnh báo phòng ${roomName || ''}`);
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, count, surgeryAlerts: db.surgeryAlerts }));
     return;
   }
 

@@ -10,6 +10,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    @keyframes pulseAlert {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
+      70% { transform: scale(1.006); box-shadow: 0 0 0 8px rgba(225, 29, 72, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+    }
+    .surgery-conflict-alert-card {
+      animation: pulseAlert 2s infinite ease-in-out;
+    }
+    .btn-action-edit-surg:hover {
+      background: #e0f2fe !important;
+      border-color: #0369a1 !important;
+      color: #0369a1 !important;
+    }
+    .usage-block-surgery {
+      border: 1.5px dashed #38bdf8 !important;
+      cursor: pointer !important;
+    }
+    .usage-block-surgery:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.4);
+    }
+  </style>
   <script src="auth-client.js" defer></script>
 </head>
 <body>
@@ -38,6 +61,9 @@
         </div>
       </div>
     </header>
+
+    <!-- SURGERY CONFLICT ALERT BANNER FOR WARD ROOMS -->
+    <div id="surgery-room-alert-container"></div>
 
     <!-- GLOBAL 60-MINUTE + 5-MINUTE CONFIRMATION BANNER -->
     <div id="global-60m-warning-container"></div>
@@ -198,6 +224,51 @@
       <div class="modal-footer">
         <button type="button" class="btn-secondary btn-touch-lg" id="btn-cancel-surgery-dialog">Hủy</button>
         <button type="submit" class="btn-primary-sm btn-touch-lg">Xác nhận báo mổ</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- BOX 2B: CHỈNH SỬA GIỜ BÁO MỔ -->
+  <dialog id="edit-surgery-time-dialog" class="modal-dialog" style="max-width: 480px;">
+    <form method="dialog" id="edit-surgery-time-form">
+      <div class="modal-header" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: white;">
+        <h4 style="color: white; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+          <span>✏️</span> Chỉnh sửa giờ báo mổ
+        </h4>
+        <button type="button" class="btn-secondary" id="btn-close-edit-surgery-dialog" style="color: white; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.15);">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-surg-doc-id" />
+        <input type="hidden" id="edit-surg-usage-id" />
+        <div class="receive-summary-line" id="edit-surg-doc-summary" style="margin-bottom: 0.85rem; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 8px 12px;"></div>
+
+        <div class="time-form-row">
+          <div class="time-field">
+            <label for="edit-surg-start-time">Thời gian bắt đầu (24h)</label>
+            <input type="text" inputmode="numeric" maxlength="5" id="edit-surg-start-time" class="date-input time-big-input time-input-24h" autocomplete="off" required />
+          </div>
+          <div class="time-field">
+            <label for="edit-surg-end-time">Thời gian kết thúc (24h)</label>
+            <input type="text" inputmode="numeric" maxlength="5" placeholder="Để trống = Đang mổ" id="edit-surg-end-time" class="date-input time-big-input time-input-24h" autocomplete="off" />
+          </div>
+        </div>
+
+        <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button type="button" class="btn-secondary" id="btn-set-surg-end-now" style="font-size: 0.8rem; padding: 5px 11px; font-weight: 600;">
+            ⏱️ Đặt kết thúc = Hiện tại
+          </button>
+          <button type="button" class="btn-secondary" id="btn-clear-surg-end" style="font-size: 0.8rem; padding: 5px 11px; font-weight: 600;">
+            🔄 Xóa giờ kết thúc (Đang mổ)
+          </button>
+        </div>
+
+        <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.65rem; line-height: 1.4;">
+          💡 <i>Lưu ý: Nếu điều chỉnh giờ bắt đầu mổ trùng vào thời gian một phòng buồng khác đang sử dụng, hệ thống sẽ tự động cập nhật cảnh báo tức thì cho phòng buồng đó.</i>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="btn-cancel-edit-surgery-dialog">Hủy</button>
+        <button type="submit" class="btn-primary-sm" style="background: linear-gradient(135deg, #0284c7, #2563eb);">💾 Lưu giờ mổ</button>
       </div>
     </form>
   </dialog>
