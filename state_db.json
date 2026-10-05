@@ -1,5 +1,5 @@
 {
-  "version": 1791165600723,
+  "version": 1791165600769,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -158,6 +158,38 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T01:10:00.645Z"
+        },
+        {
+          "id": "u-1791163457318-rvp0",
+          "roomName": "Thần kinh 1",
+          "startMin": 29852709,
+          "endMin": 29852719,
+          "lastConfirmedMin": 29852709,
+          "warnedAtMin": null,
+          "receivedBy": "Lê Thị Trà My",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-05T01:24:17.318Z",
+          "releasedEarly": true,
+          "releasedBy": "Kíp mổ Cấp cứu",
+          "releasedRole": "Bác sĩ phẫu thuật",
+          "releasedAt": "2026-10-05T01:24:17.379Z"
+        },
+        {
+          "id": "u-1791163457379-hcss",
+          "roomName": "Đang mổ",
+          "startMin": 29852700,
+          "endMin": 29852724,
+          "lastConfirmedMin": 29852700,
+          "warnedAtMin": null,
+          "receivedBy": "Kíp mổ Cấp cứu",
+          "receivedRole": "Bác sĩ phẫu thuật",
+          "receivedAt": "2026-10-05T01:24:17.380Z",
+          "releasedEarly": true,
+          "updatedAt": "2026-10-05T01:24:17.459Z",
+          "updatedBy": "[Phẫu thuật viên chính] BS Kíp mổ",
+          "releasedBy": "Lê Thị Thu Mỹ",
+          "releasedRole": "Điều dưỡng",
+          "releasedAt": "2026-10-05T01:24:17.655Z"
         }
       ],
       "currentRoom": null
@@ -241,17 +273,6 @@
           "releasedBy": "Kíp phẫu thuật",
           "releasedRole": "Báo mổ",
           "releasedAt": "2026-10-05T01:09:43.625Z"
-        },
-        {
-          "id": "u-1791163581215-9ozw",
-          "roomName": "Đang mổ",
-          "startMin": 29852730,
-          "endMin": 29852780,
-          "lastConfirmedMin": 29852730,
-          "warnedAtMin": null,
-          "receivedBy": "Lê Đức Nhật",
-          "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T01:26:21.215Z"
         }
       ],
       "currentRoom": null
@@ -291,19 +312,7 @@
         "2026-10-05": "RA_TRUC",
         "2026-10-04": "TRUC"
       },
-      "usages": [
-        {
-          "id": "u-1791163646384-m3k8",
-          "roomName": "Đang mổ",
-          "startMin": 29852730,
-          "endMin": 29852780,
-          "lastConfirmedMin": 29852730,
-          "warnedAtMin": null,
-          "receivedBy": "Lê Đức Nhật",
-          "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T01:27:26.384Z"
-        }
-      ],
+      "usages": [],
       "currentRoom": null
     },
     {
@@ -419,9 +428,7 @@
         "2026-09-28": "RA_TRUC",
         "2026-09-29": "LAM_NGAY",
         "2026-09-30": "TRUC",
-        "2026-10-01": "RA_TRUC",
-        "2026-10-05": "RA_TRUC",
-        "2026-10-04": "TRUC"
+        "2026-10-01": "RA_TRUC"
       },
       "usages": [],
       "currentRoom": null
@@ -1890,7 +1897,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.719Z"
+            "releasedAt": "2026-10-05T02:00:00.758Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3422,7 +3429,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:27.265Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3624,7 +3631,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.722Z"
+            "releasedAt": "2026-10-05T02:00:00.768Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3688,7 +3695,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.722Z"
+            "releasedAt": "2026-10-05T02:00:00.768Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3750,7 +3757,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.722Z"
+            "releasedAt": "2026-10-05T02:00:00.768Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3934,7 +3941,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.722Z"
+            "releasedAt": "2026-10-05T02:00:00.768Z"
           },
           "removed": {
             "isRemoved": false,
@@ -5719,7 +5726,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:27.265Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6932,7 +6939,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:27.265Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10806,7 +10813,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:27.265Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11709,7 +11716,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:27.265Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     }
   },
   "episodeConsultations": {},
@@ -12649,5 +12656,22 @@
     "updatedBy": "Huỳnh Ngọc Hưng",
     "updatedRole": "Bác sĩ"
   },
-  "surgeryAlerts": []
+  "surgeryAlerts": [
+    {
+      "id": "sa-1791163457379-116ba",
+      "roomName": "Thần kinh 1",
+      "docId": "doc-1",
+      "docName": "Đào Văn Nhân",
+      "docShortName": "Nhân",
+      "handle": "@dvnhan",
+      "startMin": 29852719,
+      "startTimeStr": "08:19",
+      "reportedBy": "Kíp mổ Cấp cứu",
+      "reportedRole": "Bác sĩ phẫu thuật",
+      "createdAt": "2026-10-05T01:24:17.379Z",
+      "acknowledged": true,
+      "message": "Bác sĩ Nhân (@dvnhan) đã được Báo mổ lúc 08:19. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!",
+      "acknowledgedAt": "2026-10-05T01:24:17.560Z"
+    }
+  ]
 }
