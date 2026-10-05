@@ -1,5 +1,5 @@
 {
-  "version": 1791220555283,
+  "version": 1791220667437,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1789,15 +1789,6 @@
               "hoiChan": [],
               "thuThuat": [],
               "note": "ổn chuyển ngoại ct, CT sọ + TTGB"
-            },
-            "2026-10-06": {
-              "xetNghiem": [],
-              "ct": [],
-              "xquang": [],
-              "sieuAm": [],
-              "hoiChan": [],
-              "thuThuat": [],
-              "note": ""
             }
           },
           "consultDetails": {
@@ -2247,16 +2238,7 @@
           "hisBed": "H034",
           "khoaChuyenDen": "",
           "tasksByDate": {
-            "2026-10-04": {},
-            "2026-10-06": {
-              "xetNghiem": [],
-              "ct": [],
-              "xquang": [],
-              "sieuAm": [],
-              "hoiChan": [],
-              "thuThuat": [],
-              "note": ""
-            }
+            "2026-10-04": {}
           },
           "consultDetails": {
             "specialty": "",
@@ -3734,10 +3716,7 @@
       },
       "archivedRecords": {},
       "latestExcelMabns": [],
-      "acknowledgedMissingMabns": {
-        "0001424848": true,
-        "0001425126": true
-      },
+      "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
       "lastDeletedAction": null,
       "census": {
@@ -3752,7 +3731,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:15:55.283Z"
+      "updatedAt": "2026-10-05T17:17:47.435Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6049,7 +6028,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:15:55.283Z"
+      "updatedAt": "2026-10-05T17:17:47.435Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7262,7 +7241,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:15:55.283Z"
+      "updatedAt": "2026-10-05T17:17:47.435Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11136,7 +11115,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:15:55.283Z"
+      "updatedAt": "2026-10-05T17:17:47.435Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -12039,7 +12018,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:15:55.283Z"
+      "updatedAt": "2026-10-05T17:17:47.435Z"
     }
   },
   "episodeConsultations": {},
@@ -12973,13 +12952,13 @@
     },
     "2026-10-06": {
       "dateKey": "2026-10-06",
-      "updatedAt": "2026-10-05T17:11:03.073Z",
+      "updatedAt": "2026-10-05T17:17:47.437Z",
       "roomReports": {
         "tk1": {
           "roomKey": "tk1",
           "roomName": "Thần kinh 1",
           "status": "DRAFT",
-          "updatedAt": "2026-10-05T17:11:03.072Z",
+          "updatedAt": "2026-10-05T17:17:47.436Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "",
@@ -13012,7 +12991,7 @@
           "roomKey": "tk2",
           "roomName": "Thần kinh 2",
           "status": "DRAFT",
-          "updatedAt": "2026-10-05T17:11:03.072Z",
+          "updatedAt": "2026-10-05T17:17:47.436Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "",
@@ -13045,7 +13024,7 @@
           "roomKey": "tk3",
           "roomName": "Thần kinh 3",
           "status": "DRAFT",
-          "updatedAt": "2026-10-05T17:11:03.072Z",
+          "updatedAt": "2026-10-05T17:17:47.436Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "",
@@ -13078,7 +13057,7 @@
           "roomKey": "tk4",
           "roomName": "Thần kinh 4",
           "status": "DRAFT",
-          "updatedAt": "2026-10-05T17:11:03.072Z",
+          "updatedAt": "2026-10-05T17:17:47.436Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "",
@@ -13111,7 +13090,7 @@
           "roomKey": "hstk",
           "roomName": "Hồi sức thần kinh",
           "status": "DRAFT",
-          "updatedAt": "2026-10-05T17:11:03.072Z",
+          "updatedAt": "2026-10-05T17:17:47.436Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "",
@@ -13143,11 +13122,7 @@
       },
       "highlightCases": [],
       "overall": {
-        "doctorsOnDuty": [
-          "HẢI",
-          "NHẬT",
-          "LUÂN"
-        ],
+        "doctorsOnDuty": [],
         "grandCensus": {
           "benhCu": 0,
           "vaoKK": 0,
@@ -13163,8 +13138,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791220263073,
-      "lastHisSyncTime": "2026-10-05T17:11:03.073Z"
+      "lastHisSyncTimeMs": 1791220667437,
+      "lastHisSyncTime": "2026-10-05T17:17:47.437Z"
     }
   },
   "announcement": {
