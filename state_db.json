@@ -1,5 +1,5 @@
 {
-  "version": 1791222130416,
+  "version": 1791222142374,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -4171,7 +4171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:42:09.575Z"
+      "updatedAt": "2026-10-05T17:42:22.073Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6697,7 +6697,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:42:09.576Z"
+      "updatedAt": "2026-10-05T17:42:22.074Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8028,7 +8028,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:42:09.576Z"
+      "updatedAt": "2026-10-05T17:42:22.074Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -12614,7 +12614,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:42:09.576Z"
+      "updatedAt": "2026-10-05T17:42:22.074Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -13680,7 +13680,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:42:09.576Z"
+      "updatedAt": "2026-10-05T17:42:22.074Z"
     }
   },
   "episodeConsultations": {},
@@ -15198,7 +15198,15 @@
           "dienBien": "Bệnh: Tỉnh",
           "kipMo": "",
           "selectedForSlide": true,
-          "images": [],
+          "images": [
+            {
+              "id": "img-1791222142270-cym",
+              "title": "CT Sọ não",
+              "caption": "",
+              "url": "/uploads_clinical/2026-10-05/img_1791222142270_hcamp.png",
+              "uploadedAt": "2026-10-05T17:42:22.270Z"
+            }
+          ],
           "notesBs": ""
         },
         {
