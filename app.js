@@ -1731,4 +1731,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('btn-close-user-guide')?.addEventListener('click', () => guideDialog?.close());
   document.getElementById('btn-done-user-guide')?.addEventListener('click', () => guideDialog?.close());
+
+  // Manual Theme Toggle: Chuyển đổi thủ công Sáng / Tối (Trực đêm)
+  function updateThemeToggleButton() {
+    const isDark = document.body.classList.contains('dark-theme');
+    const iconEl = document.getElementById('theme-toggle-icon');
+    const textEl = document.getElementById('theme-toggle-text');
+    if (iconEl) iconEl.textContent = isDark ? '☀️' : '🌙';
+    if (textEl) textEl.textContent = isDark ? 'Ban ngày' : 'Trực đêm';
+    const btn = document.getElementById('btn-theme-toggle');
+    if (btn) btn.title = isDark ? 'Chuyển sang chế độ Sáng (Ban ngày)' : 'Chuyển sang chế độ Tối (Trực đêm)';
+  }
+
+  // Khôi phục trạng thái giao diện đã lưu
+  try {
+    const savedTheme = localStorage.getItem('tkcs_theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  } catch (e) {}
+  updateThemeToggleButton();
+
+  document.getElementById('btn-theme-toggle')?.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('dark-theme');
+    try {
+      localStorage.setItem('tkcs_theme', isDark ? 'dark' : 'light');
+    } catch (e) {}
+    updateThemeToggleButton();
+    showToast(isDark ? '🌙 Đã bật chế độ Trực đêm (Giao diện Tối)' : '☀️ Đã chuyển sang chế độ Ban ngày (Giao diện Sáng)');
+  });
 });
