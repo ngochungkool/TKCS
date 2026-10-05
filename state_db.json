@@ -1,5 +1,5 @@
 {
-  "version": 1791165600362,
+  "version": 1791165600723,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -241,6 +241,17 @@
           "releasedBy": "Kíp phẫu thuật",
           "releasedRole": "Báo mổ",
           "releasedAt": "2026-10-05T01:09:43.625Z"
+        },
+        {
+          "id": "u-1791163581215-9ozw",
+          "roomName": "Đang mổ",
+          "startMin": 29852730,
+          "endMin": 29852780,
+          "lastConfirmedMin": 29852730,
+          "warnedAtMin": null,
+          "receivedBy": "Lê Đức Nhật",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T01:26:21.215Z"
         }
       ],
       "currentRoom": null
@@ -280,7 +291,19 @@
         "2026-10-05": "RA_TRUC",
         "2026-10-04": "TRUC"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791163646384-m3k8",
+          "roomName": "Đang mổ",
+          "startMin": 29852730,
+          "endMin": 29852780,
+          "lastConfirmedMin": 29852730,
+          "warnedAtMin": null,
+          "receivedBy": "Lê Đức Nhật",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T01:27:26.384Z"
+        }
+      ],
       "currentRoom": null
     },
     {
@@ -396,7 +419,9 @@
         "2026-09-28": "RA_TRUC",
         "2026-09-29": "LAM_NGAY",
         "2026-09-30": "TRUC",
-        "2026-10-01": "RA_TRUC"
+        "2026-10-01": "RA_TRUC",
+        "2026-10-05": "RA_TRUC",
+        "2026-10-04": "TRUC"
       },
       "usages": [],
       "currentRoom": null
@@ -1865,7 +1890,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.359Z"
+            "releasedAt": "2026-10-05T02:00:00.719Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3397,7 +3422,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:28.718Z"
+      "updatedAt": "2026-10-05T01:55:27.265Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3599,7 +3624,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.360Z"
+            "releasedAt": "2026-10-05T02:00:00.722Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3663,7 +3688,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.360Z"
+            "releasedAt": "2026-10-05T02:00:00.722Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3725,7 +3750,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.360Z"
+            "releasedAt": "2026-10-05T02:00:00.722Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3909,7 +3934,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.360Z"
+            "releasedAt": "2026-10-05T02:00:00.722Z"
           },
           "removed": {
             "isRemoved": false,
@@ -5694,7 +5719,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:28.719Z"
+      "updatedAt": "2026-10-05T01:55:27.265Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6907,7 +6932,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:28.719Z"
+      "updatedAt": "2026-10-05T01:55:27.265Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10781,7 +10806,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:28.719Z"
+      "updatedAt": "2026-10-05T01:55:27.265Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11684,7 +11709,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:55:28.719Z"
+      "updatedAt": "2026-10-05T01:55:27.265Z"
     }
   },
   "episodeConsultations": {},
