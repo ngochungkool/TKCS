@@ -325,8 +325,9 @@ function sortDoctorsByPriorityAndRoom(doctorsList, targetRoom, checkEpochMin) {
       return ownedByRoomA ? -1 : 1;
     }
 
-    const availA = !actA && isDoctorAllowedAtMinute(a, checkEpochMin);
-    const availB = !actB && isDoctorAllowedAtMinute(b, checkEpochMin);
+    // Khi báo mổ: Bác sĩ trong giờ nghỉ vẫn có thể tham gia mổ (BHYT không xuất toán)
+    const availA = targetRoom === 'Đang mổ' ? !actA : (!actA && isDoctorAllowedAtMinute(a, checkEpochMin));
+    const availB = targetRoom === 'Đang mổ' ? !actB : (!actB && isDoctorAllowedAtMinute(b, checkEpochMin));
 
     // 2. Các user có thể sử dụng được đứng tiếp theo
     if (availA !== availB) {
@@ -682,15 +683,16 @@ function renderTimelineRows() {
           `;
         }
       } else if (selectedRoomName === 'Đang mổ') {
+        const isOffDuty = !allowedRightNow;
         statusBadgeHtml = `<span class="status-badge available" style="background: #e0f2fe; color: #0369a1; border-color: #7dd3fc;">● Sẵn sàng mổ</span>`;
-        statusSubHtml = `<span class="status-subtext time-concise">Phòng mổ</span>`;
+        statusSubHtml = `<span class="status-subtext time-concise">${isOffDuty ? 'Giờ nghỉ (Không xuất toán)' : 'Phòng mổ'}</span>`;
         actionBtnHtml = `
           <button
             type="button"
             class="btn-action-receive"
             data-action="open-surgery-for-doc"
             data-doc-id="${doc.id}"
-            title="Báo mổ cho BS ${doc.shortName || doc.name}"
+            title="Báo mổ cho BS ${doc.shortName || doc.name} (BHYT không xuất toán khi mổ)"
             style="background: linear-gradient(135deg, #0284c7, #2563eb); border-color: #0284c7; color: #ffffff;"
           >
             🩺 Báo mổ &rarr;
@@ -956,13 +958,17 @@ function renderAvailabilityLookupResults() {
     const activeAtTarget = getActiveUsageAt(doc, targetEpochMin);
     const allowedAtTarget = isDoctorAllowedAtMinute(doc, targetEpochMin);
     const shiftInfo = getDoctorShiftInfoAtMinute(doc, targetEpochMin);
-    const isSameRoom = doc.assignedRoom === roomName;
+    const isSurgeryRoom = roomName === 'Đang mổ';
+    const isAvail = isSurgeryRoom ? !activeAtTarget : (!activeAtTarget && allowedAtTarget);
 
-    if (!activeAtTarget && allowedAtTarget) {
+    if (isAvail) {
+      const reason = isSurgeryRoom && !allowedAtTarget
+        ? `Sẵn sàng mổ (${shiftInfo.badgeText} - Không xuất toán BHYT)`
+        : `${shiftInfo.badgeText} — ${shiftInfo.subText}`;
       availableList.push({
         doc,
         isSameRoom,
-        reason: `${shiftInfo.badgeText} — ${shiftInfo.subText}`
+        reason
       });
     } else {
       let reason = shiftInfo.subText;
