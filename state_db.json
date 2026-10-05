@@ -1,5 +1,5 @@
 {
-  "version": 1791164108363,
+  "version": 1791165600362,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -241,17 +241,6 @@
           "releasedBy": "Kíp phẫu thuật",
           "releasedRole": "Báo mổ",
           "releasedAt": "2026-10-05T01:09:43.625Z"
-        },
-        {
-          "id": "u-1791163581215-9ozw",
-          "roomName": "Đang mổ",
-          "startMin": 29852730,
-          "endMin": 29852780,
-          "lastConfirmedMin": 29852730,
-          "warnedAtMin": null,
-          "receivedBy": "Lê Đức Nhật",
-          "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T01:26:21.215Z"
         }
       ],
       "currentRoom": null
@@ -291,19 +280,7 @@
         "2026-10-05": "RA_TRUC",
         "2026-10-04": "TRUC"
       },
-      "usages": [
-        {
-          "id": "u-1791163646384-m3k8",
-          "roomName": "Đang mổ",
-          "startMin": 29852730,
-          "endMin": 29852780,
-          "lastConfirmedMin": 29852730,
-          "warnedAtMin": null,
-          "receivedBy": "Lê Đức Nhật",
-          "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T01:27:26.384Z"
-        }
-      ],
+      "usages": [],
       "currentRoom": null
     },
     {
@@ -419,9 +396,7 @@
         "2026-09-28": "RA_TRUC",
         "2026-09-29": "LAM_NGAY",
         "2026-09-30": "TRUC",
-        "2026-10-01": "RA_TRUC",
-        "2026-10-05": "RA_TRUC",
-        "2026-10-04": "TRUC"
+        "2026-10-01": "RA_TRUC"
       },
       "usages": [],
       "currentRoom": null
@@ -626,7 +601,6 @@
         "20": "0001424868",
         "21": "0001421561",
         "22": "0001423919",
-        "23": "0001425123",
         "24": "0001421064",
         "12X": "0001424881"
       },
@@ -1886,11 +1860,12 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "MORNING_DISCHARGE",
+            "status": "RELEASED_AFTER_9AM",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": "Không hẹn tái khám"
+            "note": "Không hẹn tái khám",
+            "releasedAt": "2026-10-05T02:00:00.359Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3422,7 +3397,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:31:53.993Z"
+      "updatedAt": "2026-10-05T01:55:28.718Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3430,7 +3405,6 @@
       "initializedSeed": true,
       "bedAssignments": {
         "1": "0001425022",
-        "3": "0001422302",
         "4": "0001420070",
         "5": "0001423447",
         "6": "0001422360",
@@ -3440,18 +3414,15 @@
         "10": "0001424859",
         "11": "0001422435",
         "12": "0001424892",
-        "13": "0000789370",
         "14": "0001352007",
         "15": "0001420757",
         "16": "0000844175",
         "17": "0001424994",
         "18": "0001423400",
         "19": "0001421947",
-        "20": "0001423438",
         "21": "0001422775",
         "22": "0001419943",
         "23": "0001424989",
-        "24": "0000462435",
         "25": "0001325103"
       },
       "hiddenFoldingBeds": {},
@@ -3623,11 +3594,12 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "MORNING_DISCHARGE",
+            "status": "RELEASED_AFTER_9AM",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": "Không hẹn tái khám"
+            "note": "Không hẹn tái khám",
+            "releasedAt": "2026-10-05T02:00:00.360Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3686,11 +3658,12 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "MORNING_DISCHARGE",
+            "status": "RELEASED_AFTER_9AM",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": "Không hẹn tái khám"
+            "note": "Không hẹn tái khám",
+            "releasedAt": "2026-10-05T02:00:00.360Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3747,11 +3720,12 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "MORNING_DISCHARGE",
+            "status": "RELEASED_AFTER_9AM",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": "Không hẹn tái khám"
+            "note": "Không hẹn tái khám",
+            "releasedAt": "2026-10-05T02:00:00.360Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3930,11 +3904,12 @@
             "followUpClinic": ""
           },
           "discharge": {
-            "status": "MORNING_DISCHARGE",
+            "status": "RELEASED_AFTER_9AM",
             "markedDate": "2026-10-04",
             "followUpDays": "",
             "followUpClinic": "",
-            "note": "Không hẹn tái khám"
+            "note": "Không hẹn tái khám",
+            "releasedAt": "2026-10-05T02:00:00.360Z"
           },
           "removed": {
             "isRemoved": false,
@@ -5719,7 +5694,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:31:53.993Z"
+      "updatedAt": "2026-10-05T01:55:28.719Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6932,7 +6907,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:31:53.993Z"
+      "updatedAt": "2026-10-05T01:55:28.719Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10806,7 +10781,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:31:53.993Z"
+      "updatedAt": "2026-10-05T01:55:28.719Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11709,7 +11684,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:31:53.993Z"
+      "updatedAt": "2026-10-05T01:55:28.719Z"
     }
   },
   "episodeConsultations": {},
