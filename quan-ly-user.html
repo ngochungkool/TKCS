@@ -152,6 +152,9 @@
       <button type="button" class="btn-tool-lookup" id="btn-open-history-lookup">
         📜 Tra cứu lịch sử sử dụng User
       </button>
+      <button type="button" class="btn-tool-lookup" id="btn-open-user-guide" style="border-color: #059669; color: #059669; font-weight: 700; background: #ecfdf5;">
+        📖 Hướng dẫn cho Điều dưỡng
+      </button>
     </footer>
   </div>
 
@@ -363,6 +366,74 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn-primary-sm" id="btn-done-history-dialog">Đóng</button>
+    </div>
+  </dialog>
+
+  <!-- BOX 5: SỔ TAY HƯỚNG DẪN CHO ĐIỀU DƯỠNG -->
+  <dialog id="user-guide-dialog" class="modal-dialog" style="max-width: 780px;">
+    <div class="modal-header" style="background: linear-gradient(135deg, #059669, #10b981); color: white;">
+      <h4 style="color: white; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+        <span>📖</span> Hướng dẫn sử dụng cho Điều dưỡng &amp; Kíp mổ
+      </h4>
+      <button type="button" class="btn-secondary" id="btn-close-user-guide" style="color: white; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.15);">✕</button>
+    </div>
+    <div class="modal-body" style="line-height: 1.6; color: #1e293b; max-height: 70vh; overflow-y: auto;">
+      <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 14px; margin-bottom: 1rem;">
+        <strong style="color: #166534; font-size: 0.95rem;">🎯 Mục đích chính:</strong>
+        <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #15803d;">
+          Chống trùng giờ khám/y lệnh giữa các phòng buồng &amp; phòng mổ, tránh bị Bảo hiểm Y tế (BHYT) xuất toán khi cùng 1 bác sĩ ký đơn ở 2 nơi cùng 1 phút.
+        </p>
+      </div>
+
+      <h5 style="color: #0369a1; font-size: 0.95rem; font-weight: 800; margin: 1rem 0 0.5rem 0;">⭐ QUY TẮC VÀNG (3 KHÔNG – 3 NÊN)</h5>
+      <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.88rem;">
+        <li><strong style="color: #dc2626;">❌ KHÔNG</strong> tự ý dùng tài khoản khi chưa bấm <b>Nhận sử dụng</b> trên phần mềm.</li>
+        <li><strong style="color: #dc2626;">❌ KHÔNG</strong> giữ tài khoản quá lâu sau khi đã in đơn/nhập máy xong (tránh treo tài khoản).</li>
+        <li><strong style="color: #dc2626;">❌ KHÔNG</strong> trả hộ tài khoản của phòng khác (chỉ phòng nhận mới được bấm trả).</li>
+        <li><strong style="color: #16a34a;">✅ NÊN</strong> chọn đúng <b>Phòng của mình</b> ở đầu trang trước khi thao tác.</li>
+        <li><strong style="color: #16a34a;">✅ NÊN</strong> bấm <b>Trả user ✕</b> ngay khi hoàn thành y lệnh / bệnh án.</li>
+        <li><strong style="color: #16a34a;">✅ NÊN</strong> dùng nút <b>✏️ Sửa giờ</b> nếu phát hiện sai lệch giờ hoặc lỡ quên bấm trả.</li>
+      </ul>
+
+      <h5 style="color: #0369a1; font-size: 0.95rem; font-weight: 800; margin: 1.2rem 0 0.5rem 0;">📱 CÁC THAO TÁC CƠ BẢN</h5>
+      
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 0.75rem;">
+        <strong style="color: #0284c7;">1. Nhận sử dụng User:</strong>
+        <div style="font-size: 0.86rem; color: #475569; margin-top: 3px;">
+          Bấm chọn phòng của bạn ở hàng nút trên cùng &rarr; Bấm <b>Nhận sử dụng &rarr;</b> tại Bác sĩ cần dùng &rarr; Chọn nhanh thời lượng (5p, 10p, 20p...) hoặc để trống giờ kết thúc &rarr; Bấm <b>Xác nhận Nhận User</b>.
+        </div>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 0.75rem;">
+        <strong style="color: #dc2626;">2. Trả User khi xong việc:</strong>
+        <div style="font-size: 0.86rem; color: #475569; margin-top: 3px;">
+          Sau khi nhập máy xong, bấm ngay nút <b>Trả user ✕</b> trên thẻ Bác sĩ để giải phóng tài khoản cho các phòng khác tiếp nhận.
+        </div>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 0.75rem;">
+        <strong style="color: #2563eb;">3. Chỉnh sửa giờ sử dụng (Tính năng mới):</strong>
+        <div style="font-size: 0.86rem; color: #475569; margin-top: 3px;">
+          Nếu lỡ quên trả hoặc gõ nhầm giờ: Bấm nút <b>✏️ Sửa giờ</b> trên thẻ hoặc bấm trực tiếp vào khối thời gian trên Timeline &rarr; Có thể đổi phòng, sửa giờ bắt đầu / giờ kết thúc &rarr; Bấm <b>💾 Lưu thay đổi</b>.
+        </div>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 0.75rem;">
+        <strong style="color: #e11d48;">4. Báo mổ (+ Báo mổ):</strong>
+        <div style="font-size: 0.86rem; color: #475569; margin-top: 3px;">
+          Bấm nút đỏ <b>+ BÁO MỔ</b> ở góc phải &rarr; Chọn 1 hoặc nhiều Bác sĩ tham gia mổ &rarr; Nhập giờ &rarr; Bấm xác nhận. Bác sĩ trong giờ nghỉ vẫn mổ bình thường và không bị xuất toán.
+        </div>
+      </div>
+
+      <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 12px; margin-top: 0.75rem;">
+        <strong style="color: #b45309;">⚠️ Cảnh báo trùng giờ mổ:</strong>
+        <div style="font-size: 0.86rem; color: #92400e; margin-top: 3px;">
+          Khi phòng mổ báo mổ một Bác sĩ mà phòng bạn đang dùng, màn hình phòng bạn sẽ hiện thanh cảnh báo màu đỏ cam. Tài khoản đã tự động chuyển sang Phòng mổ. Điều dưỡng bấm <b>Đã xem &amp; xác nhận</b> để đóng cảnh báo.
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-primary-sm" id="btn-done-user-guide" style="background: linear-gradient(135deg, #059669, #10b981);">Đã hiểu &amp; Đóng</button>
     </div>
   </dialog>
 

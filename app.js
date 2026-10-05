@@ -1723,4 +1723,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Box 5: User Guide Dialog
+  const guideDialog = document.getElementById('user-guide-dialog');
+  document.getElementById('btn-open-user-guide')?.addEventListener('click', () => {
+    guideDialog?.showModal();
+  });
+  document.getElementById('btn-close-user-guide')?.addEventListener('click', () => guideDialog?.close());
+  document.getElementById('btn-done-user-guide')?.addEventListener('click', () => guideDialog?.close());
 });
