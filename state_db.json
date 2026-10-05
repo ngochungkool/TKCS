@@ -1,5 +1,5 @@
 {
-  "version": 1791186800065,
+  "version": 1791186814481,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -547,12 +547,27 @@
           "id": "u-1791186800065-mccv",
           "roomName": "Thần kinh 1",
           "startMin": 29853114,
-          "endMin": 29853119,
+          "endMin": 29853115,
           "lastConfirmedMin": 29853114,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-05T07:53:20.065Z"
+          "receivedAt": "2026-10-05T07:53:20.065Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T07:53:34.481Z"
+        },
+        {
+          "id": "u-1791186814481-6694",
+          "roomName": "Đang mổ",
+          "startMin": 29853115,
+          "endMin": 29853150,
+          "lastConfirmedMin": 29853115,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T07:53:34.481Z"
         }
       ],
       "currentRoom": null
@@ -12836,6 +12851,21 @@
     "updatedRole": "Bác sĩ"
   },
   "surgeryAlerts": [
+    {
+      "id": "sa-1791186814481-k62qz",
+      "roomName": "Thần kinh 1",
+      "docId": "doc-10",
+      "docName": "Lê Đức Nhật",
+      "docShortName": "Nhật",
+      "handle": "@ldnhat",
+      "startMin": 29853115,
+      "startTimeStr": "14:55",
+      "reportedBy": "Huỳnh Ngọc Hưng",
+      "reportedRole": "Bác sĩ",
+      "createdAt": "2026-10-05T07:53:34.481Z",
+      "acknowledged": false,
+      "message": "Bác sĩ Nhật (@ldnhat) đã được Báo mổ lúc 14:55. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!"
+    },
     {
       "id": "sa-1791185876465-dca95",
       "roomName": "Thần kinh 4",
