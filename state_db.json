@@ -1,5 +1,5 @@
 {
-  "version": 1791160139027,
+  "version": 1791160402828,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3379,7 +3379,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:28:59.025Z"
+      "updatedAt": "2026-10-05T00:33:22.827Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5697,7 +5697,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:28:59.025Z"
+      "updatedAt": "2026-10-05T00:33:22.828Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6953,7 +6953,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:28:59.025Z"
+      "updatedAt": "2026-10-05T00:33:22.828Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -6973,7 +6973,6 @@
         "11": "0001422488",
         "12": "0001422398",
         "13": "0001424446",
-        "14": "0001415940",
         "15": "0001424436",
         "16": "0001008234",
         "17": "0001424144",
@@ -7042,10 +7041,9 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": false,
-            "reason": "",
-            "previousBed": "",
-            "removedAtMs": 0
+            "isRemoved": true,
+            "reason": "Không còn trong Excel mới nhất",
+            "removedAtMs": 1791160402828
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -10997,7 +10995,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:28:59.025Z"
+      "updatedAt": "2026-10-05T00:33:22.828Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11960,7 +11958,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T00:28:59.025Z"
+      "updatedAt": "2026-10-05T00:33:22.828Z"
     }
   },
   "episodeConsultations": {
