@@ -1,5 +1,5 @@
 {
-  "version": 1791185215732,
+  "version": 1791185834707,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -244,9 +244,10 @@
         "2026-09-29": "TRUC",
         "2026-09-30": "TRUC",
         "2026-10-01": "RA_TRUC",
-        "2026-10-06": "TRUC",
+        "2026-10-06": "LAM_NGAY",
         "2026-10-07": "RA_TRUC",
-        "2026-10-04": "NGHI"
+        "2026-10-04": "NGHI",
+        "2026-10-05": "LAM_NGAY"
       },
       "usages": [
         {
@@ -362,7 +363,23 @@
         "2026-10-08": "NGHI",
         "2026-10-04": "NGHI"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791185834658-n3g1",
+          "roomName": "Đang mổ",
+          "startMin": 29853097,
+          "endMin": 29853098,
+          "lastConfirmedMin": 29853097,
+          "warnedAtMin": null,
+          "receivedBy": "Kíp mổ Cấp cứu",
+          "receivedRole": "Bác sĩ phẫu thuật",
+          "receivedAt": "2026-10-05T07:37:14.658Z",
+          "releasedEarly": true,
+          "releasedBy": "Kíp mổ Cấp cứu",
+          "releasedRole": "Bác sĩ phẫu thuật",
+          "releasedAt": "2026-10-05T07:37:14.706Z"
+        }
+      ],
       "currentRoom": null
     },
     {
@@ -1997,7 +2014,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.719Z"
+            "releasedAt": "2026-10-05T02:00:00.758Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3529,7 +3546,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T07:26:53.112Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -3731,7 +3748,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.722Z"
+            "releasedAt": "2026-10-05T02:00:00.768Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3795,7 +3812,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.722Z"
+            "releasedAt": "2026-10-05T02:00:00.768Z"
           },
           "removed": {
             "isRemoved": false,
@@ -3857,7 +3874,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.722Z"
+            "releasedAt": "2026-10-05T02:00:00.768Z"
           },
           "removed": {
             "isRemoved": false,
@@ -4041,7 +4058,7 @@
             "followUpDays": "",
             "followUpClinic": "",
             "note": "Không hẹn tái khám",
-            "releasedAt": "2026-10-05T02:00:00.722Z"
+            "releasedAt": "2026-10-05T02:00:00.768Z"
           },
           "removed": {
             "isRemoved": false,
@@ -5826,7 +5843,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T07:26:53.112Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7039,7 +7056,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T07:26:53.112Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10913,13 +10930,14 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T07:26:53.112Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     },
     "hstk": {
       "roomKey": "hstk",
       "roomName": "Hồi sức thần kinh",
       "initializedSeed": true,
       "bedAssignments": {
+        "1": "0001423868",
         "2": "0001416828",
         "3": "0001412378",
         "4": "0001420321",
@@ -11223,9 +11241,10 @@
             "note": ""
           },
           "removed": {
-            "isRemoved": true,
-            "reason": "Không còn trong Excel mới nhất",
-            "removedAtMs": 1791166372299
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
           },
           "surgeryInfo": {
             "isNonSurgical": false,
@@ -11257,25 +11276,13 @@
           "ngayVaoStr": "03/10/2026",
           "hisBed": "H010",
           "khoaChuyenDen": "",
-          "tasksByDate": {
-            "2026-10-05": {
-              "xetNghiem": [],
-              "ct": [],
-              "xquang": [],
-              "sieuAm": [],
-              "hoiChan": [
-                "Nội tiết"
-              ],
-              "thuThuat": [],
-              "note": ""
-            }
-          },
+          "tasksByDate": {},
           "consultDetails": {
-            "specialty": "Nội tiết",
+            "specialty": "",
             "consultDiagnosis": "",
             "consultTreatment": "",
-            "followUpDays": "7",
-            "followUpClinic": "Phòng khám Nội tiết"
+            "followUpDays": "",
+            "followUpClinic": ""
           },
           "discharge": {
             "status": "NONE",
@@ -11826,21 +11833,10 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T07:26:53.112Z"
+      "updatedAt": "2026-10-04T14:45:14.543Z"
     }
   },
-  "episodeConsultations": {
-    "2600366702": [
-      {
-        "id": "ep-hstk-2026-10-05",
-        "roomName": "Hồi sức thần kinh",
-        "dateKey": "2026-10-05",
-        "specialty": "Nội tiết",
-        "consultDiagnosis": "",
-        "consultTreatment": ""
-      }
-    ]
-  },
+  "episodeConsultations": {},
   "lastExcelUploadTime": "21:24 ngày 04/10/2026",
   "briefingReports": {
     "2026-10-04": {
