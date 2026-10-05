@@ -1,5 +1,5 @@
 {
-  "version": 1791220697376,
+  "version": 1791220775382,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -809,7 +809,7 @@
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
       "sizeBytes": 61793,
-      "uploadedAt": "00:18:15 6/10/2026",
+      "uploadedAt": "00:19:33 6/10/2026",
       "extractedPreview": null
     },
     {
@@ -906,7 +906,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-05T17:18:16.775Z"
+    "updatedAt": "2026-10-05T17:19:34.775Z"
   },
   "wardRounds": {
     "tk1": {
@@ -4171,7 +4171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:18:16.775Z"
+      "updatedAt": "2026-10-05T17:19:34.775Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6697,7 +6697,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:18:16.775Z"
+      "updatedAt": "2026-10-05T17:19:34.775Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8028,7 +8028,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:18:16.775Z"
+      "updatedAt": "2026-10-05T17:19:34.776Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -12614,7 +12614,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:18:16.775Z"
+      "updatedAt": "2026-10-05T17:19:34.776Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -13680,11 +13680,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:18:16.775Z"
+      "updatedAt": "2026-10-05T17:19:34.776Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "00:18 ngày 06/10/2026",
+  "lastExcelUploadTime": "00:19 ngày 06/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -14804,8 +14804,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791220695970.5706,
-      "lastHisSyncTime": "2026-10-05T17:18:17.371Z"
+      "lastHisSyncTimeMs": 1791220773776.9248,
+      "lastHisSyncTime": "2026-10-05T17:19:35.375Z"
     }
   },
   "announcement": {
