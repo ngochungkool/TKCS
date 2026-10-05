@@ -1,5 +1,5 @@
 {
-  "version": 1791163141501,
+  "version": 1791163528351,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3397,7 +3397,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:17:14.901Z"
+      "updatedAt": "2026-10-05T01:25:27.856Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -5694,7 +5694,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:17:14.901Z"
+      "updatedAt": "2026-10-05T01:25:27.858Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -6907,7 +6907,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:17:14.901Z"
+      "updatedAt": "2026-10-05T01:25:27.858Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -10781,7 +10781,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:17:14.901Z"
+      "updatedAt": "2026-10-05T01:25:27.858Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -11684,7 +11684,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T01:17:14.901Z"
+      "updatedAt": "2026-10-05T01:25:27.858Z"
     }
   },
   "episodeConsultations": {},
@@ -12623,5 +12623,6 @@
     "updatedAt": "2026-10-04T01:53:49.233Z",
     "updatedBy": "Huỳnh Ngọc Hưng",
     "updatedRole": "Bác sĩ"
-  }
+  },
+  "surgeryAlerts": []
 }
