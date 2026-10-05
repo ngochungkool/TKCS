@@ -1,5 +1,5 @@
 {
-  "version": 1791188751929,
+  "version": 1791188802433,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -728,6 +728,17 @@
           "receivedBy": "Lê Đức Nhật",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T06:23:10.450Z"
+        },
+        {
+          "id": "u-1791188802433-u2zk",
+          "roomName": "Hồi sức thần kinh",
+          "startMin": 29853145,
+          "endMin": 29853155,
+          "lastConfirmedMin": 29853145,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T08:26:42.433Z"
         }
       ],
       "currentRoom": null
