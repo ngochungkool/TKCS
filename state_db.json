@@ -1,5 +1,5 @@
 {
-  "version": 1791168347816,
+  "version": 1791168387045,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -348,7 +348,8 @@
         "2026-09-28": "PHONG_KHAM",
         "2026-09-29": "TRUC",
         "2026-09-30": "RA_TRUC",
-        "2026-10-01": "LAM_NGAY"
+        "2026-10-01": "LAM_NGAY",
+        "2026-10-06": "PHONG_KHAM"
       },
       "usages": [],
       "currentRoom": null
