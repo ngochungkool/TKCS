@@ -1,5 +1,5 @@
 {
-  "version": 1791221874272,
+  "version": 1791221960582,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -4171,7 +4171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:37:54.271Z"
+      "updatedAt": "2026-10-05T17:39:20.574Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6697,7 +6697,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:37:54.271Z"
+      "updatedAt": "2026-10-05T17:39:20.574Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8028,7 +8028,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:37:54.271Z"
+      "updatedAt": "2026-10-05T17:39:20.574Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -12614,7 +12614,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:37:54.272Z"
+      "updatedAt": "2026-10-05T17:39:20.574Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -13680,7 +13680,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-05T17:37:54.272Z"
+      "updatedAt": "2026-10-05T17:39:20.574Z"
     }
   },
   "episodeConsultations": {},
@@ -15037,8 +15037,8 @@
         "hstk": {
           "roomKey": "hstk",
           "roomName": "Hồi sức thần kinh",
-          "status": "DRAFT",
-          "updatedAt": "2026-10-04T08:07:15.223Z",
+          "status": "SUBMITTED",
+          "updatedAt": "2026-10-05T17:39:20.575Z",
           "personnel": {
             "nurses": "",
             "nursesDay": "",
@@ -15064,6 +15064,24 @@
           },
           "admissions": [
             {
+              "id": "adm-1791221965244-g8fx",
+              "mabn": "0001425116",
+              "hoten": "TRẦN CÔNG DƯỠNG",
+              "tuoi": "23",
+              "gioiTinh": "Nam",
+              "diaChi": "Nghiễm Hòa-Phường An Nhơn Nam--Tỉnh Gia Lai",
+              "chanDoan": "S06.71-Tổn thương nội sọ có hôn mê kéo dài, có vết thương nội sọ hở",
+              "cause": "Bệnh lý",
+              "category": "XIN_VE",
+              "isHighlight": true,
+              "ngayVaoVien": "2026-10-05",
+              "gioPhauThuat": "08:00",
+              "ngayPhauThuatDate": "2026-10-05",
+              "ngayPhauThuat": "",
+              "ngayXinVe": "2026-10-05",
+              "dienBien": ""
+            },
+            {
               "id": "adm-hstk-1",
               "stt": 1,
               "mabn": "0001425669",
@@ -15077,8 +15095,8 @@
               "chanDoan": "I61.2-Xuất huyết não tại bán cầu, không xác định",
               "diaChi": "Xã Tuy Phước Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": ""
+              "isHighlight": true,
+              "category": "MO_CC"
             },
             {
               "id": "adm-hstk-2",
@@ -15094,8 +15112,8 @@
               "chanDoan": "I63.8-Nhồi máu não khác",
               "diaChi": "Nghĩa Sơn-Xã Kim Sơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
-              "isHighlight": false,
-              "category": ""
+              "isHighlight": true,
+              "category": "MO_CC"
             }
           ],
           "discharges": [],
@@ -15103,7 +15121,53 @@
           "criticalNotes": ""
         }
       },
-      "highlightCases": [],
+      "highlightCases": [
+        {
+          "id": "case-1791221960575-tray",
+          "mabn": "0001425116",
+          "hoten": "TRẦN CÔNG DƯỠNG",
+          "tuoi": "23",
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "category": "XIN_VE",
+          "chanDoan": "S06.71-Tổn thương nội sọ có hôn mê kéo dài, có vết thương nội sọ hở",
+          "dienBien": "Bệnh lý: ",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [],
+          "notesBs": ""
+        },
+        {
+          "id": "case-1791221960575-kvap",
+          "mabn": "0001425669",
+          "hoten": "VÕ THANH QUANG",
+          "tuoi": "56",
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "category": "MO_CC",
+          "chanDoan": "I61.2-Xuất huyết não tại bán cầu, không xác định",
+          "dienBien": "TNGT: Tỉnh",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [],
+          "notesBs": ""
+        },
+        {
+          "id": "case-1791221960575-0m82",
+          "mabn": "0001386779",
+          "hoten": "NGUYỄN THỊ PHIN",
+          "tuoi": "63",
+          "roomKey": "hstk",
+          "roomName": "Hồi sức thần kinh",
+          "category": "MO_CC",
+          "chanDoan": "I63.8-Nhồi máu não khác",
+          "dienBien": "Bệnh: Tỉnh",
+          "kipMo": "",
+          "selectedForSlide": true,
+          "images": [],
+          "notesBs": ""
+        }
+      ],
       "overall": {
         "doctorsOnDuty": [
           "HẢI",
