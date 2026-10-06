@@ -1,5 +1,5 @@
 {
-  "version": 1791306621031,
+  "version": 1791306844671,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -4936,7 +4936,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T17:07:13.273Z"
+      "updatedAt": "2026-10-06T17:14:04.179Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -7459,7 +7459,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T17:07:13.273Z"
+      "updatedAt": "2026-10-06T17:14:04.180Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8790,7 +8790,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T17:07:13.274Z"
+      "updatedAt": "2026-10-06T17:14:04.180Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -13376,7 +13376,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T17:07:13.274Z"
+      "updatedAt": "2026-10-06T17:14:04.180Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -14442,7 +14442,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T17:07:13.274Z"
+      "updatedAt": "2026-10-06T17:14:04.180Z"
     }
   },
   "episodeConsultations": {},
@@ -16353,7 +16353,7 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "",
-            "xuatVien": 0,
+            "xuatVien": 3,
             "chamSocCap2": 0,
             "hoiChan": 0,
             "tangTren": 0,
@@ -16365,14 +16365,54 @@
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 0,
+            "raRH": 3,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 24,
-            "bhyt": 23
+            "hienCo": 21,
+            "bhyt": 21
           },
           "admissions": [],
-          "discharges": [],
+          "discharges": [
+            {
+              "id": "dis-tk2-1",
+              "stt": 1,
+              "mabn": "0001265243",
+              "hoten": "NGÔ VĂN NHÂM",
+              "tuoi": "71",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600359189",
+              "note": "Ra viện (đối chiếu Đang điều trị)",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk2-2",
+              "stt": 2,
+              "mabn": "0001421947",
+              "hoten": "TRẦN VĂN QUYẾT",
+              "tuoi": "49",
+              "raHan": true,
+              "baoHiem": false,
+              "svv": "2600366664",
+              "note": "Ra viện (đối chiếu Đang điều trị)",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk2-3",
+              "stt": 3,
+              "mabn": "0001422435",
+              "hoten": "ĐÀM NGUYỄN QUỲNH HƯƠNG",
+              "tuoi": "14",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600367853",
+              "note": "Ra viện (đối chiếu Đang điều trị)",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "emergencySurgeries": [],
           "criticalNotes": ""
         },
@@ -16485,17 +16525,17 @@
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
-          "raRH": 0,
+          "raRH": 3,
           "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 128,
-          "bhyt": 121
+          "hienCo": 125,
+          "bhyt": 119
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791220773776.9248,
-      "lastHisSyncTime": "2026-10-05T17:25:55.685Z"
+      "lastHisSyncTimeMs": 1791245550273.4033,
+      "lastHisSyncTime": "2026-10-06T17:14:04.671Z"
     }
   },
   "announcement": {
