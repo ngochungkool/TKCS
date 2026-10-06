@@ -1,5 +1,5 @@
 {
-  "version": 1791251677300,
+  "version": 1791251691569,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -678,31 +678,31 @@
           "id": "u-1791251266005-cjk7",
           "roomName": "Thần kinh 1",
           "startMin": 29854187,
-          "endMin": 29854195,
+          "endMin": 29854190,
           "lastConfirmedMin": 29854187,
           "warnedAtMin": null,
           "receivedBy": "Nguyễn Thị Kim Diệu",
           "receivedRole": "Điều dưỡng",
           "receivedAt": "2026-10-06T01:47:46.005Z",
-          "releasedEarly": false,
-          "releasedBy": "Nguyễn Thị Kim Diệu",
-          "releasedRole": "Điều dưỡng",
-          "releasedAt": "2026-10-06T01:48:23.065Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-06T01:54:51.563Z",
           "updatedAt": "2026-10-06T01:54:37.294Z",
           "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
         },
         {
           "id": "u-1791251373557-liub",
           "roomName": "Đang mổ",
-          "startMin": 29854260,
+          "startMin": 29854190,
           "endMin": 29854440,
-          "lastConfirmedMin": 29854260,
+          "lastConfirmedMin": 29854190,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-06T01:49:33.557Z",
           "releasedEarly": false,
-          "updatedAt": "2026-10-06T01:50:25.528Z",
+          "updatedAt": "2026-10-06T01:54:51.564Z",
           "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
         }
       ],
@@ -16309,6 +16309,21 @@
     "updatedRole": "Bác sĩ"
   },
   "surgeryAlerts": [
+    {
+      "id": "sa-1791251691563-4uuy1",
+      "roomName": "Thần kinh 1",
+      "docId": "doc-10",
+      "docName": "Lê Đức Nhật",
+      "docShortName": "Nhật",
+      "handle": "@ldnhat",
+      "startMin": 29854190,
+      "startTimeStr": "08:50",
+      "reportedBy": "Huỳnh Ngọc Hưng",
+      "reportedRole": "Bác sĩ",
+      "createdAt": "2026-10-06T01:54:51.563Z",
+      "acknowledged": false,
+      "message": "Bác sĩ Nhật (@ldnhat) đã được điều chỉnh giờ Báo mổ lúc 08:50. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!"
+    },
     {
       "id": "sa-1791189098023-d57cw",
       "roomName": "Hồi sức thần kinh",
