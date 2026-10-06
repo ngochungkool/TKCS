@@ -341,9 +341,14 @@
           💡 <i>Lưu ý: Bạn có thể sửa giờ nhận/trả hoặc đổi phòng sử dụng. Nếu đổi sang Phòng mổ trùng giờ với phòng buồng, hệ thống sẽ tự động cập nhật cảnh báo tức thì.</i>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-secondary" id="btn-cancel-edit-surgery-dialog">Hủy</button>
-        <button type="submit" class="btn-primary-sm" style="background: linear-gradient(135deg, #0284c7, #2563eb);">💾 Lưu thay đổi</button>
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <button type="button" class="btn-danger" id="btn-delete-surg-usage" style="background: #ef4444; color: white; border: none; padding: 7px 13px; border-radius: 6px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-size: 0.85rem;" title="Xóa bỏ vĩnh viễn phiên này nếu báo nhầm hoặc trùng">
+          🗑️ Xóa phiên này
+        </button>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn-secondary" id="btn-cancel-edit-surgery-dialog">Hủy</button>
+          <button type="submit" class="btn-primary-sm" style="background: linear-gradient(135deg, #0284c7, #2563eb);">💾 Lưu thay đổi</button>
+        </div>
       </div>
     </form>
   </dialog>

@@ -1003,6 +1003,8 @@ async function postApi(endpoint, payload) {
         showToast('🔓 Đã hoàn thành và trả tài khoản!');
       } else if (endpoint === '/api/receive') {
         showToast('✅ Đã nhận sử dụng thành công!');
+      } else if (endpoint === '/api/delete-usage' || endpoint === '/api/delete-surgery') {
+        showToast('🗑️ Đã xóa phiên sử dụng thành công!');
       }
     }
     return data;
@@ -1379,18 +1381,31 @@ function renderHistoryLookupTable() {
           <td><b>${endLabel}</b></td>
           <td>${rec.durationMins} phút</td>
           <td>${statusPill}</td>
-          <td style="text-align: center;">
-            <button
-              type="button"
-              class="btn-secondary"
-              data-action="open-edit-surgery-time"
-              data-doc-id="${rec.doc.id}"
-              data-usage-id="${rec.usage.id}"
-              style="font-size: 0.76rem; padding: 3px 8px; border-color: #0284c7; color: #0284c7; font-weight: 700; cursor: pointer; border-radius: 4px;"
-              title="Chỉnh sửa giờ của phiên sử dụng này"
-            >
-              ✏️ Sửa
-            </button>
+          <td style="text-align: center; white-space: nowrap;">
+            <div style="display: inline-flex; gap: 5px; align-items: center; justify-content: center;">
+              <button
+                type="button"
+                class="btn-secondary"
+                data-action="open-edit-surgery-time"
+                data-doc-id="${rec.doc.id}"
+                data-usage-id="${rec.usage.id}"
+                style="font-size: 0.76rem; padding: 3px 8px; border-color: #0284c7; color: #0284c7; font-weight: 700; cursor: pointer; border-radius: 4px;"
+                title="Chỉnh sửa giờ của phiên sử dụng này"
+              >
+                ✏️ Sửa
+              </button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-action="delete-usage-entry"
+                data-doc-id="${rec.doc.id}"
+                data-usage-id="${rec.usage.id}"
+                style="font-size: 0.76rem; padding: 3px 7px; border-color: #ef4444; color: #ef4444; font-weight: 700; cursor: pointer; border-radius: 4px;"
+                title="Xóa phiên này"
+              >
+                🗑️ Xóa
+              </button>
+            </div>
           </td>
         </tr>
       `;
@@ -1795,13 +1810,62 @@ document.addEventListener('DOMContentLoaded', () => {
     editSurgeryDialog?.close();
   });
 
-  // Click on Sửa button in history table
-  document.getElementById('history-table-body')?.addEventListener('click', (e) => {
+  // Nút Xóa phiên này trong Popup Sửa giờ
+  document.getElementById('btn-delete-surg-usage')?.addEventListener('click', async () => {
+    const docId = document.getElementById('edit-surg-doc-id')?.value;
+    const usageId = document.getElementById('edit-surg-usage-id')?.value;
+    if (!docId || !usageId) return;
+
+    const doc = dbState.doctors.find((d) => d.id === docId);
+    const usage = (doc?.usages || []).find((u) => u.id === usageId);
+    const roomName = usage?.roomName || 'phiên này';
+    const timeInfo = usage ? ` (${formatHHMM(usage.startMin)}${usage.endMin !== null ? ' - ' + formatHHMM(usage.endMin) : ' - đang mở'})` : '';
+
+    if (!confirm(`Bạn có chắc chắn muốn XÓA vĩnh viễn phiên [${roomName}]${timeInfo} của BS ${doc?.shortName || doc?.name || ''} không?\n\n(Dữ liệu sau khi xóa sẽ được thu hồi khỏi hệ thống)`)) {
+      return;
+    }
+
+    const { staffName, staffRole } = getCurrentStaffAuth();
+    await postApi('/api/delete-usage', {
+      docId,
+      usageId,
+      staffName,
+      staffRole
+    });
+
+    editSurgeryDialog?.close();
+  });
+
+  // Click on Sửa hoặc Xóa button in history table
+  document.getElementById('history-table-body')?.addEventListener('click', async (e) => {
     const editBtn = e.target.closest('[data-action="open-edit-surgery-time"]');
     if (editBtn) {
       const docId = editBtn.getAttribute('data-doc-id');
       const usageId = editBtn.getAttribute('data-usage-id');
       openEditSurgeryTimeDialog(docId, usageId);
+      return;
+    }
+
+    const delBtn = e.target.closest('[data-action="delete-usage-entry"]');
+    if (delBtn) {
+      const docId = delBtn.getAttribute('data-doc-id');
+      const usageId = delBtn.getAttribute('data-usage-id');
+      const doc = dbState.doctors.find((d) => d.id === docId);
+      const usage = (doc?.usages || []).find((u) => u.id === usageId);
+      const roomName = usage?.roomName || 'phiên này';
+      const timeInfo = usage ? ` (${formatHHMM(usage.startMin)}${usage.endMin !== null ? ' - ' + formatHHMM(usage.endMin) : ' - đang mở'})` : '';
+
+      if (!confirm(`Bạn có chắc chắn muốn XÓA phiên [${roomName}]${timeInfo} của BS ${doc?.shortName || doc?.name || ''} không?`)) {
+        return;
+      }
+
+      const { staffName, staffRole } = getCurrentStaffAuth();
+      await postApi('/api/delete-usage', {
+        docId,
+        usageId,
+        staffName,
+        staffRole
+      });
     }
   });
 

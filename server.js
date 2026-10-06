@@ -1063,8 +1063,8 @@ const server = http.createServer(async (req, res) => {
 
   if (pathname.startsWith('/api/') && !isPublicApi) {
     const authUser = getAuthUser(req);
-    // Báo mổ khẩn cấp (/api/receive), Mổ xong (/api/release), Sửa giờ mổ/dùng (/api/update-surgery-time, /api/update-usage-time), Tiếp nhận cảnh báo (/api/acknowledge-surgery-alert) được chuyển tiếp xuống handler để xử lý linh hoạt
-    if (!authUser && pathname !== '/api/receive' && pathname !== '/api/release' && pathname !== '/api/update-surgery-time' && pathname !== '/api/update-usage-time' && pathname !== '/api/acknowledge-surgery-alert') {
+    // Báo mổ khẩn cấp (/api/receive), Mổ xong (/api/release), Sửa giờ mổ/dùng (/api/update-surgery-time, /api/update-usage-time), Xóa phiên (/api/delete-usage), Tiếp nhận cảnh báo (/api/acknowledge-surgery-alert) được chuyển tiếp xuống handler để xử lý linh hoạt
+    if (!authUser && pathname !== '/api/receive' && pathname !== '/api/release' && pathname !== '/api/update-surgery-time' && pathname !== '/api/update-usage-time' && pathname !== '/api/delete-usage' && pathname !== '/api/delete-surgery' && pathname !== '/api/acknowledge-surgery-alert') {
       res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         ok: false,
@@ -1503,6 +1503,43 @@ const server = http.createServer(async (req, res) => {
     broadcastState(conciseNote);
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ ok: true, usage: targetUsage, db }));
+    return;
+  }
+
+  // POST delete usage (Xóa hoàn toàn một phiên sử dụng hoặc ca mổ nếu báo nhầm)
+  if (req.method === 'POST' && (pathname === '/api/delete-usage' || pathname === '/api/delete-surgery')) {
+    const { docId, usageId, staffName, staffRole } = await readBody(req);
+    const doc = db.doctors.find((d) => d.id === docId);
+
+    if (!doc) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Không tìm thấy thông tin bác sĩ!' }));
+      return;
+    }
+
+    if (!usageId) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Vui lòng cung cấp mã phiên sử dụng cần xóa!' }));
+      return;
+    }
+
+    const idx = (doc.usages || []).findIndex((u) => u.id === usageId);
+    if (idx === -1) {
+      res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: false, error: 'Không tìm thấy phiên sử dụng này để xóa!' }));
+      return;
+    }
+
+    const deleted = doc.usages.splice(idx, 1)[0];
+    saveDb();
+
+    const actor = staffName ? `[${staffRole || 'ĐD'} ${staffName}] ` : '';
+    const endStr = deleted.endMin !== null ? ` - trả ${formatHHMM(deleted.endMin)}` : '';
+    const note = `🗑️ ${actor}Đã xóa phiên [${deleted.roomName}] lúc ${formatHHMM(deleted.startMin)}${endStr} của BS ${doc.shortName || doc.name}`;
+    broadcastState(note);
+
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, deleted, db }));
     return;
   }
 
