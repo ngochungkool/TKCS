@@ -1,5 +1,5 @@
 {
-  "version": 1791258971122,
+  "version": 1791270435341,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -852,7 +852,19 @@
         "2026-10-08": "RA_TRUC",
         "2026-10-04": "NGHI"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791270435341-d1gy",
+          "roomName": "Thần kinh 1",
+          "startMin": 29854507,
+          "endMin": 29854680,
+          "lastConfirmedMin": 29854507,
+          "warnedAtMin": null,
+          "receivedBy": "Phạm Thúy An",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-06T07:07:15.341Z"
+        }
+      ],
       "currentRoom": null
     },
     {
@@ -4835,7 +4847,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T03:55:59.070Z"
+      "updatedAt": "2026-10-06T07:07:13.075Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -7358,7 +7370,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T03:55:59.070Z"
+      "updatedAt": "2026-10-06T07:07:13.075Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8689,7 +8701,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T03:55:59.070Z"
+      "updatedAt": "2026-10-06T07:07:13.075Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -13275,7 +13287,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T03:55:59.071Z"
+      "updatedAt": "2026-10-06T07:07:13.075Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -14341,7 +14353,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T03:55:59.071Z"
+      "updatedAt": "2026-10-06T07:07:13.075Z"
     }
   },
   "episodeConsultations": {},
