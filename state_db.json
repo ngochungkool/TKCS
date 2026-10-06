@@ -1,5 +1,5 @@
 {
-  "version": 1791312177967,
+  "version": 1791312242824,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -3963,7 +3963,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T18:42:57.939Z"
+      "updatedAt": "2026-10-06T18:44:02.806Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6260,7 +6260,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T18:42:57.939Z"
+      "updatedAt": "2026-10-06T18:44:02.806Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7473,7 +7473,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T18:42:57.939Z"
+      "updatedAt": "2026-10-06T18:44:02.806Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11358,7 +11358,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T18:42:57.939Z"
+      "updatedAt": "2026-10-06T18:44:02.806Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -12261,7 +12261,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T18:42:57.939Z"
+      "updatedAt": "2026-10-06T18:44:02.806Z"
     }
   },
   "episodeConsultations": {},
@@ -13201,7 +13201,7 @@
           "roomKey": "tk1",
           "roomName": "Thần kinh 1",
           "status": "SUBMITTED",
-          "updatedAt": "2026-10-06T18:30:19.050Z",
+          "updatedAt": "2026-10-06T18:44:02.848Z",
           "personnel": {
             "nurses": "ĐD AN",
             "xuatVien": 0
