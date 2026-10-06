@@ -1,5 +1,5 @@
 {
-  "version": 1791306451061,
+  "version": 1791306621031,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -775,15 +775,29 @@
           "id": "u-1791295644630-5p1e",
           "roomName": "Đang mổ",
           "startMin": 29856360,
-          "endMin": 29856550,
+          "endMin": 29856361,
           "lastConfirmedMin": 29856360,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-06T14:07:24.630Z",
-          "releasedEarly": false,
+          "releasedEarly": true,
           "updatedAt": "2026-10-06T17:07:31.046Z",
-          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
+          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng",
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-06T17:10:21.031Z"
+        },
+        {
+          "id": "u-1791306621031-7bbu",
+          "roomName": "Đang mổ",
+          "startMin": 29856360,
+          "endMin": 29856540,
+          "lastConfirmedMin": 29856360,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T17:10:21.031Z"
         }
       ],
       "currentRoom": null
@@ -861,15 +875,29 @@
           "id": "u-1791295644630-tk2t",
           "roomName": "Đang mổ",
           "startMin": 29856360,
-          "endMin": 29856550,
+          "endMin": 29856361,
           "lastConfirmedMin": 29856360,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-06T14:07:24.630Z",
-          "releasedEarly": false,
+          "releasedEarly": true,
           "updatedAt": "2026-10-06T17:07:20.977Z",
-          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
+          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng",
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-06T17:10:21.031Z"
+        },
+        {
+          "id": "u-1791306621031-pn4g",
+          "roomName": "Đang mổ",
+          "startMin": 29856360,
+          "endMin": 29856540,
+          "lastConfirmedMin": 29856360,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T17:10:21.031Z"
         }
       ],
       "currentRoom": null
