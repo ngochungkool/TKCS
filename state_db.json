@@ -1,5 +1,5 @@
 {
-  "version": 1791249953757,
+  "version": 1791249967395,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -662,6 +662,17 @@
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T07:53:34.481Z"
+        },
+        {
+          "id": "u-1791249967395-5udn",
+          "roomName": "Thần kinh 1",
+          "startMin": 29854080,
+          "endMin": 29854140,
+          "lastConfirmedMin": 29854080,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:26:07.395Z"
         }
       ],
       "currentRoom": null
