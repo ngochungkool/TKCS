@@ -1,5 +1,5 @@
 {
-  "version": 1791210153493,
+  "version": 1791308683043,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -178,6 +178,28 @@
           "releasedAt": "2026-10-05T06:44:09.232Z",
           "updatedAt": "2026-10-05T08:16:16.558Z",
           "updatedBy": "[Điều dưỡng] Phạm Thúy An"
+        },
+        {
+          "id": "u-1791258265162-uwex",
+          "roomName": "Đang mổ",
+          "startMin": 29854191,
+          "endMin": 29854240,
+          "lastConfirmedMin": 29854191,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T03:44:25.162Z"
+        },
+        {
+          "id": "u-1791258307371-vmft",
+          "roomName": "Đang mổ",
+          "startMin": 29854241,
+          "endMin": 29854380,
+          "lastConfirmedMin": 29854241,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T03:45:07.371Z"
         }
       ],
       "currentRoom": null
@@ -198,7 +220,8 @@
         "2026-10-05": "NGHI",
         "2026-10-04": "NGHI",
         "2026-10-07": "TRUC",
-        "2026-10-08": "RA_TRUC"
+        "2026-10-08": "RA_TRUC",
+        "2026-10-06": "NGHI"
       },
       "usages": [
         {
@@ -314,6 +337,17 @@
           "releasedAt": "2026-10-05T07:37:56.528Z",
           "updatedAt": "2026-10-05T07:37:56.528Z",
           "updatedBy": "[Phẫu thuật viên] Bác sĩ Hưng"
+        },
+        {
+          "id": "u-1791249931471-ckg1",
+          "roomName": "Đang mổ",
+          "startMin": 29854140,
+          "endMin": 29854190,
+          "lastConfirmedMin": 29854140,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:25:31.471Z"
         }
       ],
       "currentRoom": null
@@ -357,6 +391,21 @@
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T08:30:47.065Z"
+        },
+        {
+          "id": "u-1791212455932-6nyi",
+          "roomName": "Thần kinh 1",
+          "startMin": 29853540,
+          "endMin": 29853541,
+          "lastConfirmedMin": 29853540,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-05T15:00:55.932Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-05T15:01:04.208Z"
         }
       ],
       "currentRoom": null
@@ -391,6 +440,39 @@
           "receivedBy": "Lê Đức Nhật",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T01:27:26.384Z"
+        },
+        {
+          "id": "u-1791249931471-1tm4",
+          "roomName": "Đang mổ",
+          "startMin": 29854140,
+          "endMin": 29854190,
+          "lastConfirmedMin": 29854140,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:25:31.471Z"
+        },
+        {
+          "id": "u-1791258265162-my6y",
+          "roomName": "Đang mổ",
+          "startMin": 29854191,
+          "endMin": 29854240,
+          "lastConfirmedMin": 29854191,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T03:44:25.162Z"
+        },
+        {
+          "id": "u-1791281077817-xv21",
+          "roomName": "Đang mổ",
+          "startMin": 29854675,
+          "endMin": 29854740,
+          "lastConfirmedMin": 29854675,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T10:04:37.817Z"
         }
       ],
       "currentRoom": null
@@ -532,6 +614,28 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T08:25:07.200Z"
+        },
+        {
+          "id": "u-1791249953757-jjdi",
+          "roomName": "Đang mổ",
+          "startMin": 29854150,
+          "endMin": 29854180,
+          "lastConfirmedMin": 29854150,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:25:53.757Z"
+        },
+        {
+          "id": "u-1791258971122-gb1c",
+          "roomName": "Đang mổ",
+          "startMin": 29854320,
+          "endMin": 29854380,
+          "lastConfirmedMin": 29854320,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T03:56:11.122Z"
         }
       ],
       "currentRoom": null
@@ -613,6 +717,76 @@
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-05T07:53:34.481Z"
+        },
+        {
+          "id": "u-1791249967395-5udn",
+          "roomName": "Thần kinh 1",
+          "startMin": 29854080,
+          "endMin": 29854140,
+          "lastConfirmedMin": 29854080,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:26:07.395Z"
+        },
+        {
+          "id": "u-1791251266005-cjk7",
+          "roomName": "Thần kinh 1",
+          "startMin": 29854187,
+          "endMin": 29854190,
+          "lastConfirmedMin": 29854187,
+          "warnedAtMin": null,
+          "receivedBy": "Nguyễn Thị Kim Diệu",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-06T01:47:46.005Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-06T01:54:51.563Z",
+          "updatedAt": "2026-10-06T01:54:37.294Z",
+          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
+        },
+        {
+          "id": "u-1791251373557-liub",
+          "roomName": "Đang mổ",
+          "startMin": 29854241,
+          "endMin": 29854380,
+          "lastConfirmedMin": 29854241,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:49:33.557Z",
+          "releasedEarly": false,
+          "updatedAt": "2026-10-06T03:44:52.932Z",
+          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
+        },
+        {
+          "id": "u-1791291248929-okn0",
+          "roomName": "Thần kinh 3",
+          "startMin": 29854820,
+          "endMin": 29854830,
+          "lastConfirmedMin": 29854820,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T12:54:08.929Z"
+        },
+        {
+          "id": "u-1791306621031-7bbu",
+          "roomName": "Đang mổ",
+          "startMin": 29854920,
+          "endMin": 29855110,
+          "lastConfirmedMin": 29854920,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T17:10:21.031Z",
+          "releasedEarly": true,
+          "releasedBy": "Kíp phẫu thuật",
+          "releasedRole": "Báo mổ",
+          "releasedAt": "2026-10-06T17:16:07.149Z",
+          "updatedAt": "2026-10-06T17:42:56.541Z",
+          "updatedBy": "[Báo mổ] Kíp phẫu thuật"
         }
       ],
       "currentRoom": null
@@ -652,6 +826,56 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T08:25:51.929Z"
+        },
+        {
+          "id": "u-1791249953757-u3j2",
+          "roomName": "Đang mổ",
+          "startMin": 29854150,
+          "endMin": 29854180,
+          "lastConfirmedMin": 29854150,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:25:53.757Z"
+        },
+        {
+          "id": "u-1791258971122-nut7",
+          "roomName": "Đang mổ",
+          "startMin": 29854320,
+          "endMin": 29854380,
+          "lastConfirmedMin": 29854320,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T03:56:11.122Z"
+        },
+        {
+          "id": "u-1791281077817-sriv",
+          "roomName": "Đang mổ",
+          "startMin": 29854675,
+          "endMin": 29854740,
+          "lastConfirmedMin": 29854675,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T10:04:37.817Z"
+        },
+        {
+          "id": "u-1791306621031-pn4g",
+          "roomName": "Đang mổ",
+          "startMin": 29854920,
+          "endMin": 29855110,
+          "lastConfirmedMin": 29854920,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T17:10:21.031Z",
+          "releasedEarly": true,
+          "releasedBy": "Kíp phẫu thuật",
+          "releasedRole": "Báo mổ",
+          "releasedAt": "2026-10-06T17:42:56.646Z",
+          "updatedAt": "2026-10-06T17:42:56.646Z",
+          "updatedBy": "[Báo mổ] Kíp phẫu thuật"
         }
       ],
       "currentRoom": null
@@ -695,7 +919,19 @@
         "2026-10-08": "RA_TRUC",
         "2026-10-04": "NGHI"
       },
-      "usages": [],
+      "usages": [
+        {
+          "id": "u-1791270435341-d1gy",
+          "roomName": "Thần kinh 1",
+          "startMin": 29854507,
+          "endMin": 29854680,
+          "lastConfirmedMin": 29854507,
+          "warnedAtMin": null,
+          "receivedBy": "Phạm Thúy An",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-06T07:07:15.341Z"
+        }
+      ],
       "currentRoom": null
     },
     {
@@ -783,6 +1019,17 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T08:31:38.023Z"
+        },
+        {
+          "id": "u-1791258307371-587t",
+          "roomName": "Đang mổ",
+          "startMin": 29854241,
+          "endMin": 29854380,
+          "lastConfirmedMin": 29854241,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T03:45:07.371Z"
         }
       ],
       "currentRoom": null
@@ -12944,6 +13191,22 @@
     "updatedRole": "Bác sĩ"
   },
   "surgeryAlerts": [
+    {
+      "id": "sa-1791251691563-4uuy1",
+      "roomName": "Thần kinh 1",
+      "docId": "doc-10",
+      "docName": "Lê Đức Nhật",
+      "docShortName": "Nhật",
+      "handle": "@ldnhat",
+      "startMin": 29854190,
+      "startTimeStr": "08:50",
+      "reportedBy": "Huỳnh Ngọc Hưng",
+      "reportedRole": "Bác sĩ",
+      "createdAt": "2026-10-06T01:54:51.563Z",
+      "acknowledged": true,
+      "message": "Bác sĩ Nhật (@ldnhat) đã được điều chỉnh giờ Báo mổ lúc 08:50. Tài khoản tại phòng [Thần kinh 1] đã chuyển sang phòng mổ!",
+      "acknowledgedAt": "2026-10-06T02:39:01.790Z"
+    },
     {
       "id": "sa-1791189098023-d57cw",
       "roomName": "Hồi sức thần kinh",

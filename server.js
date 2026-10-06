@@ -423,7 +423,16 @@ async function restoreDbFromCloudIfNewer() {
                 // Hợp nhất scheduleByDate từ cloud (dữ liệu chấm công thực tế)
                 lDoc.scheduleByDate = { ...(lDoc.scheduleByDate || {}), ...(cDoc.scheduleByDate || {}) };
                 if (Array.isArray(cDoc.usages) && cDoc.usages.length > 0) {
-                  lDoc.usages = cDoc.usages;
+                  const usageMap = new Map();
+                  for (const u of (lDoc.usages || [])) {
+                    if (u && u.id) usageMap.set(u.id, u);
+                  }
+                  for (const cu of (cDoc.usages || [])) {
+                    if (cu && cu.id && !usageMap.has(cu.id)) {
+                      usageMap.set(cu.id, cu);
+                    }
+                  }
+                  lDoc.usages = Array.from(usageMap.values());
                 }
                 if (cDoc.assignedRoom) lDoc.assignedRoom = cDoc.assignedRoom;
               } else {
@@ -447,6 +456,17 @@ async function restoreDbFromCloudIfNewer() {
             }
             if (cloudDb.announcement) {
               db.announcement = cloudDb.announcement;
+            }
+          }
+          // Sanitize / dedup any erroneous future test usages (e.g. 21:00 7/10)
+          for (const doc of db.doctors) {
+            if (Array.isArray(doc.usages)) {
+              doc.usages = doc.usages.filter(u => {
+                if (u.roomName === 'Đang mổ' && (u.startMin === 29856360 || (u.startMin === 29854920 && u.endMin === 29854921))) {
+                  return false;
+                }
+                return true;
+              });
             }
           }
           db.version = Math.max(Number(db.version || 0), Number(cloudDb.version || 0), Date.now());
@@ -537,12 +557,27 @@ function scheduleCloudBackup(delayMs = 2000) {
   }, delayMs);
 }
 
+function sanitizeDbUsages(targetDb) {
+  if (!targetDb || !Array.isArray(targetDb.doctors)) return targetDb;
+  for (const doc of targetDb.doctors) {
+    if (Array.isArray(doc.usages)) {
+      doc.usages = doc.usages.filter(u => {
+        if (u.roomName === 'Đang mổ' && (u.startMin === 29856360 || (u.startMin === 29854920 && u.endMin === 29854921))) {
+          return false;
+        }
+        return true;
+      });
+    }
+  }
+  return targetDb;
+}
+
 function loadDb() {
   try {
     if (fs.existsSync(DATA_FILE)) {
       const parsed = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
       if (parsed && Array.isArray(parsed.doctors) && parsed.doctors[0]?.shortName) {
-        return parsed;
+        return sanitizeDbUsages(parsed);
       }
     }
   } catch (e) {
@@ -555,7 +590,7 @@ function loadDb() {
       const parsedBackup = JSON.parse(fs.readFileSync(backupFile, 'utf-8'));
       if (parsedBackup && Array.isArray(parsedBackup.doctors) && parsedBackup.doctors[0]?.shortName) {
         console.log('[loadDb] Đã phục hồi dữ liệu từ bản sao lưu state_db.backup.json');
-        return parsedBackup;
+        return sanitizeDbUsages(parsedBackup);
       }
     }
   } catch (e) {

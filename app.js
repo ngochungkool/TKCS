@@ -1044,6 +1044,42 @@ function openReceiveTimeDialog(docId) {
   document.getElementById('receive-time-dialog').showModal();
 }
 
+// Helper update overnight hint in quick surgery dialog
+function updateSurgeryOvernightHint() {
+  const startVal = normalize24hTimeStr(document.getElementById('surgery-start-time')?.value, false);
+  const endVal = normalize24hTimeStr(document.getElementById('surgery-end-time')?.value, false);
+  const hintEl = document.getElementById('surgery-overnight-hint');
+  const hintStart = document.getElementById('surgery-hint-start');
+  const hintEnd = document.getElementById('surgery-hint-end');
+
+  if (!hintEl) return;
+  if (startVal && endVal && endVal <= startVal) {
+    if (hintStart) hintStart.textContent = startVal;
+    if (hintEnd) hintEnd.textContent = endVal;
+    hintEl.style.display = 'block';
+  } else {
+    hintEl.style.display = 'none';
+  }
+}
+
+// Helper update overnight hint in edit usage dialog
+function updateEditUsageOvernightHint() {
+  const startVal = normalize24hTimeStr(document.getElementById('edit-surg-start-time')?.value, false);
+  const endVal = normalize24hTimeStr(document.getElementById('edit-surg-end-time')?.value, false);
+  const hintEl = document.getElementById('edit-surg-overnight-hint');
+  const hintStart = document.getElementById('edit-surg-hint-start');
+  const hintEnd = document.getElementById('edit-surg-hint-end');
+
+  if (!hintEl) return;
+  if (startVal && endVal && endVal <= startVal) {
+    if (hintStart) hintStart.textContent = startVal;
+    if (hintEnd) hintEnd.textContent = endVal;
+    hintEl.style.display = 'block';
+  } else {
+    hintEl.style.display = 'none';
+  }
+}
+
 // Box 2: Open Enlarged "+ Báo mổ" Dialog
 function openQuickSurgeryDialog(preselectedDocId = null) {
   selectedSurgeryDocIds.clear();
@@ -1051,6 +1087,9 @@ function openQuickSurgeryDialog(preselectedDocId = null) {
     selectedSurgeryDocIds.add(preselectedDocId);
   }
   const nowMin = getNowEpochMinutes();
+  const now = new Date(nowMin * 60000);
+  const todayKey = getDateKey(now);
+  const yesterdayKey = addDaysToKey(todayKey, -1);
 
   const sortedDoctors = [...dbState.doctors].sort(
     (a, b) => (a.seniority || 999) - (b.seniority || 999)
@@ -1069,8 +1108,24 @@ function openQuickSurgeryDialog(preselectedDocId = null) {
     })
     .join('');
 
+  const dateInput = document.getElementById('surgery-date');
+  if (dateInput) {
+    dateInput.value = todayKey;
+  }
+  const btnToday = document.getElementById('btn-surg-date-today');
+  const btnYesterday = document.getElementById('btn-surg-date-yesterday');
+  if (btnToday && btnYesterday) {
+    btnToday.style.background = '#e0f2fe';
+    btnToday.style.color = '#0284c7';
+    btnToday.style.borderColor = '#0284c7';
+    btnYesterday.style.background = '#fff';
+    btnYesterday.style.color = '#475569';
+    btnYesterday.style.borderColor = '#cbd5e1';
+  }
+
   document.getElementById('surgery-start-time').value = formatHHMM(nowMin);
   document.getElementById('surgery-end-time').value = '';
+  updateSurgeryOvernightHint();
 
   document.getElementById('surgery-quick-dialog').showModal();
 }
@@ -1137,11 +1192,30 @@ function openEditSurgeryTimeDialog(docId, usageId = null) {
     `;
   }
 
+  // Gắn ngày bắt đầu từ phiên sử dụng thực tế (thay vì luôn dùng ngày hôm nay)
+  const usageDateStr = getDateKey(new Date(targetUsage.startMin * 60000));
+  const editDateInput = document.getElementById('edit-surg-date');
+  if (editDateInput) editDateInput.value = usageDateStr;
+
+  const todayKey = getDateKey(new Date());
+  const btnToday = document.getElementById('btn-edit-surg-today');
+  const btnYesterday = document.getElementById('btn-edit-surg-yesterday');
+  if (btnToday && btnYesterday) {
+    const isToday = usageDateStr === todayKey;
+    btnToday.style.background = isToday ? '#e0f2fe' : '#fff';
+    btnToday.style.color = isToday ? '#0284c7' : '#475569';
+    btnToday.style.borderColor = isToday ? '#0284c7' : '#cbd5e1';
+    btnYesterday.style.background = !isToday ? '#e0f2fe' : '#fff';
+    btnYesterday.style.color = !isToday ? '#0284c7' : '#475569';
+    btnYesterday.style.borderColor = !isToday ? '#0284c7' : '#cbd5e1';
+  }
+
   const startInput = document.getElementById('edit-surg-start-time');
   const endInput = document.getElementById('edit-surg-end-time');
 
   if (startInput) startInput.value = formatHHMM(targetUsage.startMin);
   if (endInput) endInput.value = targetUsage.endMin !== null ? formatHHMM(targetUsage.endMin) : '';
+  updateEditUsageOvernightHint();
 
   dialog.showModal();
   if (startInput) {
@@ -1551,6 +1625,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Wire quick date toggle buttons for Báo mổ nhanh
+  document.getElementById('btn-surg-date-today')?.addEventListener('click', () => {
+    const todayKey = getDateKey(new Date());
+    const dateInput = document.getElementById('surgery-date');
+    if (dateInput) dateInput.value = todayKey;
+    const btnT = document.getElementById('btn-surg-date-today');
+    const btnY = document.getElementById('btn-surg-date-yesterday');
+    if (btnT && btnY) {
+      btnT.style.background = '#e0f2fe';
+      btnT.style.color = '#0284c7';
+      btnT.style.borderColor = '#0284c7';
+      btnY.style.background = '#fff';
+      btnY.style.color = '#475569';
+      btnY.style.borderColor = '#cbd5e1';
+    }
+  });
+
+  document.getElementById('btn-surg-date-yesterday')?.addEventListener('click', () => {
+    const yesterdayKey = addDaysToKey(getDateKey(new Date()), -1);
+    const dateInput = document.getElementById('surgery-date');
+    if (dateInput) dateInput.value = yesterdayKey;
+    const btnT = document.getElementById('btn-surg-date-today');
+    const btnY = document.getElementById('btn-surg-date-yesterday');
+    if (btnT && btnY) {
+      btnY.style.background = '#e0f2fe';
+      btnY.style.color = '#0284c7';
+      btnY.style.borderColor = '#0284c7';
+      btnT.style.background = '#fff';
+      btnT.style.color = '#475569';
+      btnT.style.borderColor = '#cbd5e1';
+    }
+  });
+
+  // Wire quick date toggle buttons for Sửa giờ
+  document.getElementById('btn-edit-surg-today')?.addEventListener('click', () => {
+    const todayKey = getDateKey(new Date());
+    const dateInput = document.getElementById('edit-surg-date');
+    if (dateInput) dateInput.value = todayKey;
+    const btnT = document.getElementById('btn-edit-surg-today');
+    const btnY = document.getElementById('btn-edit-surg-yesterday');
+    if (btnT && btnY) {
+      btnT.style.background = '#e0f2fe';
+      btnT.style.color = '#0284c7';
+      btnT.style.borderColor = '#0284c7';
+      btnY.style.background = '#fff';
+      btnY.style.color = '#475569';
+      btnY.style.borderColor = '#cbd5e1';
+    }
+  });
+
+  document.getElementById('btn-edit-surg-yesterday')?.addEventListener('click', () => {
+    const yesterdayKey = addDaysToKey(getDateKey(new Date()), -1);
+    const dateInput = document.getElementById('edit-surg-date');
+    if (dateInput) dateInput.value = yesterdayKey;
+    const btnT = document.getElementById('btn-edit-surg-today');
+    const btnY = document.getElementById('btn-edit-surg-yesterday');
+    if (btnT && btnY) {
+      btnY.style.background = '#e0f2fe';
+      btnY.style.color = '#0284c7';
+      btnY.style.borderColor = '#0284c7';
+      btnT.style.background = '#fff';
+      btnT.style.color = '#475569';
+      btnT.style.borderColor = '#cbd5e1';
+    }
+  });
+
+  document.getElementById('surgery-start-time')?.addEventListener('input', updateSurgeryOvernightHint);
+  document.getElementById('surgery-end-time')?.addEventListener('input', updateSurgeryOvernightHint);
+  document.getElementById('edit-surg-start-time')?.addEventListener('input', updateEditUsageOvernightHint);
+  document.getElementById('edit-surg-end-time')?.addEventListener('input', updateEditUsageOvernightHint);
+
   document.getElementById('surgery-quick-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (selectedSurgeryDocIds.size === 0) {
@@ -1559,13 +1704,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const nowMin = getNowEpochMinutes();
-    const startStr = document.getElementById('surgery-start-time').value;
-    const endStr = document.getElementById('surgery-end-time').value;
+    const todayKey = getDateKey(new Date(nowMin * 60000));
+    let surgDateKey = document.getElementById('surgery-date')?.value || todayKey;
+    const startStr = document.getElementById('surgery-start-time').value.trim();
+    const endStr = document.getElementById('surgery-end-time').value.trim();
 
-    const startMin = timeStringToEpochMin(startStr, nowMin) ?? nowMin;
-    let endMin = timeStringToEpochMin(endStr, nowMin);
+    let startMin = dateAndTimeToEpochMin(surgDateKey, startStr);
+    let endMin = endStr ? dateAndTimeToEpochMin(surgDateKey, endStr) : null;
     if (endMin !== null && endMin <= startMin) {
-      endMin += 1440;
+      endMin += 1440; // Ca mổ qua đêm sang ngày tiếp theo
+    }
+
+    // Smart auto-anchor: Nếu nhập vào buổi sáng sớm (trước 08h), để ngày hôm nay
+    // nhưng giờ bắt đầu là ban đêm (>= 18h) và giờ kết thúc <= hiện tại + 60p:
+    // Chắc chắn là ca mổ của đêm hôm qua!
+    const dtNow = new Date(nowMin * 60000 + VN_OFFSET_MS);
+    const curHour = dtNow.getUTCHours();
+    if (curHour < 8 && surgDateKey === todayKey && startMin > nowMin) {
+      startMin -= 1440;
+      if (endMin !== null) endMin -= 1440;
     }
 
     const { staffName, staffRole } = getCurrentStaffAuth();
@@ -1588,12 +1745,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('btn-set-surg-end-now')?.addEventListener('click', () => {
     const endInput = document.getElementById('edit-surg-end-time');
-    if (endInput) endInput.value = formatHHMM(getNowEpochMinutes());
+    if (endInput) {
+      endInput.value = formatHHMM(getNowEpochMinutes());
+      updateEditUsageOvernightHint();
+    }
   });
 
   document.getElementById('btn-clear-surg-end')?.addEventListener('click', () => {
     const endInput = document.getElementById('edit-surg-end-time');
-    if (endInput) endInput.value = '';
+    if (endInput) {
+      endInput.value = '';
+      updateEditUsageOvernightHint();
+    }
   });
 
   document.getElementById('edit-surgery-time-form')?.addEventListener('submit', (e) => {
@@ -1601,6 +1764,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const docId = document.getElementById('edit-surg-doc-id').value;
     const usageId = document.getElementById('edit-surg-usage-id').value;
     const roomName = document.getElementById('edit-surg-room-select')?.value;
+    const editDateKey = document.getElementById('edit-surg-date')?.value || getDateKey(new Date());
     const startStr = document.getElementById('edit-surg-start-time').value.trim();
     const endStr = document.getElementById('edit-surg-end-time').value.trim();
 
@@ -1609,9 +1773,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const nowMin = getNowEpochMinutes();
-    const startMin = timeStringToEpochMin(startStr, nowMin);
-    let endMin = endStr ? timeStringToEpochMin(endStr, nowMin) : null;
+    const startMin = dateAndTimeToEpochMin(editDateKey, startStr);
+    let endMin = endStr ? dateAndTimeToEpochMin(editDateKey, endStr) : null;
     if (endMin !== null && endMin <= startMin) {
       endMin += 1440; // qua đêm
     }
