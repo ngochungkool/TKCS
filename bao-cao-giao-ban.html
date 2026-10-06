@@ -2309,14 +2309,18 @@
     // Save Active Report
     async function saveActiveReport() {
       if (!currentReport) return;
+      if (document.activeElement && typeof document.activeElement.blur === 'function') {
+        document.activeElement.blur();
+      }
       try {
-        let payload = { dateKey: currentDateKey, roomKey: activeTab };
-        if (activeTab === 'overall') {
-          payload.overall = currentReport.overall;
-          payload.highlightCases = currentReport.highlightCases;
-        } else {
-          payload.roomReport = currentReport.roomReports[activeTab];
-        }
+        let payload = {
+          dateKey: currentDateKey,
+          roomKey: activeTab,
+          overall: currentReport.overall,
+          highlightCases: currentReport.highlightCases,
+          roomReport: (activeTab !== 'overall' && currentReport.roomReports) ? currentReport.roomReports[activeTab] : null,
+          roomReports: currentReport.roomReports
+        };
 
         const res = await fetch('/api/briefing-report', {
           method: 'POST',

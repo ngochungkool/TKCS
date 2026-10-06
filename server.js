@@ -451,6 +451,9 @@ async function restoreDbFromCloudIfNewer() {
             if (cloudDb.wardRounds) {
               db.wardRounds = { ...(cloudDb.wardRounds || {}), ...(db.wardRounds || {}) };
             }
+            if (cloudDb.briefingReports) {
+              db.briefingReports = { ...(cloudDb.briefingReports || {}), ...(db.briefingReports || {}) };
+            }
             if (Array.isArray(cloudDb.surgeryAlerts)) {
               db.surgeryAlerts = cloudDb.surgeryAlerts;
             }
@@ -1063,8 +1066,17 @@ const server = http.createServer(async (req, res) => {
 
   if (pathname.startsWith('/api/') && !isPublicApi) {
     const authUser = getAuthUser(req);
-    // Báo mổ khẩn cấp (/api/receive), Mổ xong (/api/release), Sửa giờ mổ/dùng (/api/update-surgery-time, /api/update-usage-time), Xóa phiên (/api/delete-usage), Tiếp nhận cảnh báo (/api/acknowledge-surgery-alert) được chuyển tiếp xuống handler để xử lý linh hoạt
-    if (!authUser && pathname !== '/api/receive' && pathname !== '/api/release' && pathname !== '/api/update-surgery-time' && pathname !== '/api/update-usage-time' && pathname !== '/api/delete-usage' && pathname !== '/api/delete-surgery' && pathname !== '/api/acknowledge-surgery-alert') {
+    // Báo mổ khẩn cấp (/api/receive), Mổ xong (/api/release), Sửa giờ mổ/dùng (/api/update-surgery-time, /api/update-usage-time), Xóa phiên (/api/delete-usage), Tiếp nhận cảnh báo (/api/acknowledge-surgery-alert), Báo cáo giao ban (/api/briefing-*) được chuyển tiếp xuống handler để xử lý linh hoạt
+    if (!authUser && pathname !== '/api/receive' && pathname !== '/api/release' && pathname !== '/api/update-surgery-time' && pathname !== '/api/update-usage-time' && pathname !== '/api/delete-usage' && pathname !== '/api/delete-surgery' && pathname !== '/api/acknowledge-surgery-alert'
+        && pathname !== '/api/briefing-report'
+        && pathname !== '/api/briefing-auto-fetch-his'
+        && pathname !== '/api/export-briefing-pptx'
+        && pathname !== '/api/export-briefing-excel'
+        && pathname !== '/api/upload-clinical-image'
+        && pathname !== '/api/delete-clinical-image'
+        && pathname !== '/api/briefing-period-summary'
+        && pathname !== '/api/briefing-history-dates'
+        && pathname !== '/api/export-briefing-summary-excel') {
       res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         ok: false,
@@ -4599,7 +4611,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && pathname === '/api/briefing-report') {
     try {
       const body = await readBody(req);
-    const { dateKey, roomKey, roomReport, overall, highlightCases, action, targetDate: reqTargetDate, shiftDate } = body;
+    const { dateKey, roomKey, roomReport, roomReports, overall, highlightCases, action, targetDate: reqTargetDate, shiftDate } = body;
     const targetDate = reqTargetDate || dateKey || getDateKey(new Date());
     const report = getOrBuildBriefingReport(targetDate);
 
@@ -4758,26 +4770,43 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (roomKey && roomKey !== 'all') {
-      if (roomReport && typeof roomReport === 'object') {
-        report.roomReports[roomKey] = {
-          ...report.roomReports[roomKey],
-          ...roomReport,
-          status: 'SUBMITTED',
-          updatedAt: new Date().toISOString()
-        };
-        syncRoomKeyCasesToMaster(report, roomKey, report.roomReports[roomKey]);
-        recalculateGrandCensus(report);
-        broadcastState(`📋 [${report.roomReports[roomKey].roomName}] đã báo cáo giao ban ngày ${targetDate}`);
+    // 1. Cập nhật báo cáo của phòng cụ thể nếu có
+    if (roomKey && roomKey !== 'overall' && roomKey !== 'all' && roomReport && typeof roomReport === 'object') {
+      report.roomReports[roomKey] = {
+        ...(report.roomReports[roomKey] || {}),
+        ...roomReport,
+        status: 'SUBMITTED',
+        updatedAt: new Date().toISOString()
+      };
+      syncRoomKeyCasesToMaster(report, roomKey, report.roomReports[roomKey]);
+      broadcastState(`📋 [${report.roomReports[roomKey].roomName || roomKey}] đã báo cáo giao ban ngày ${targetDate}`);
+    }
+
+    // 2. Cập nhật danh sách roomReports gửi kèm nếu có
+    if (roomReports && typeof roomReports === 'object') {
+      for (const [rk, rRep] of Object.entries(roomReports)) {
+        if (rk && rRep && typeof rRep === 'object' && ['tk1', 'tk2', 'tk3', 'tk4', 'hstk'].includes(rk)) {
+          report.roomReports[rk] = {
+            ...(report.roomReports[rk] || {}),
+            ...rRep
+          };
+          syncRoomKeyCasesToMaster(report, rk, report.roomReports[rk]);
+        }
       }
-    } else {
-      if (overall && typeof overall === 'object') {
-        report.overall = { ...report.overall, ...overall };
-      }
-      if (Array.isArray(highlightCases)) {
-        report.highlightCases = highlightCases;
-      }
-      recalculateGrandCensus(report);
+    }
+
+    // 3. Cập nhật Báo cáo Toàn khoa nếu có
+    if (overall && typeof overall === 'object') {
+      report.overall = { ...(report.overall || {}), ...overall };
+    }
+
+    // 4. Cập nhật Danh sách ca giao ban toàn khoa nếu có
+    if (Array.isArray(highlightCases)) {
+      report.highlightCases = highlightCases;
+    }
+
+    recalculateGrandCensus(report);
+    if (!roomKey || roomKey === 'overall' || roomKey === 'all') {
       broadcastState(`👨‍⚕️ Đã cập nhật & duyệt Báo cáo giao ban toàn khoa ngày ${targetDate}`);
     }
 
@@ -4908,11 +4937,12 @@ const server = http.createServer(async (req, res) => {
       console.warn('Could not auto-persist draft before PPTX export:', e);
     }
 
+    const scriptPath = path.join(ROOT, 'scripts', 'generate_briefing_pptx.py');
     const tempPptx = path.join(ROOT, `briefing_${qDate}_${Date.now()}.pptx`);
     const pyCmd = process.platform === 'win32' ? 'python' : 'python3';
-    const pythonCmd = `${pyCmd} "${scriptPath}" --date ${qDate} --out "${tempPptx}"`;
+    const pythonCmd = `"${pyCmd}" "${scriptPath}" --date "${qDate}" --out "${tempPptx}"`;
 
-    exec(pythonCmd, (err, stdout, stderr) => {
+    exec(pythonCmd, { env: { ...process.env, PYTHONUTF8: '1', PYTHONIOENCODING: 'utf-8' } }, (err, stdout, stderr) => {
       if (err || !fs.existsSync(tempPptx)) {
         console.error('PPTX export error:', err, stderr);
         res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });

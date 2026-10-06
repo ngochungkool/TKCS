@@ -12,10 +12,12 @@ import json
 import argparse
 from PIL import Image
 
-try:
-    sys.stdout.reconfigure(encoding='utf-8')
-except Exception:
-    pass
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
 
 try:
     import pptx
@@ -37,138 +39,19 @@ def format_date_display(date_str):
         pass
     return f"Ngày {date_str}"
 
-def generate_pptx_for_date(date_key, db_path, out_pptx_path):
-    with open(db_path, 'r', encoding='utf-8') as f:
-        db = json.load(f)
-
-    briefing_reports = db.get('briefingReports', {})
-    report = briefing_reports.get(date_key)
-    if not report:
-        report = {
-            "dateKey": date_key,
-            "overall": {
-                "doctorsOnDuty": ["HẢI", "CƯ", "LUÂN"],
-                "grandCensus": {}
-            },
-            "highlightCases": []
-        }
-
-    prs = pptx.Presentation()
-    # 16:9 Widescreen standard
-    prs.slide_width = Inches(13.333)
-    prs.slide_height = Inches(7.5)
-    blank_layout = prs.slide_layouts[6]
-
-    overall = report.get('overall', {})
-    grand_census = overall.get('grandCensus', {})
-    highlight_cases = report.get('highlightCases', [])
-
-    # Doctors on duty string
-    docs = overall.get('doctorsOnDuty', [])
-    if isinstance(docs, list):
-        docs_str = ' – '.join([str(d).replace('BS.', '').replace('BS', '').strip() for d in docs if str(d).strip()])
-    else:
-        docs_str = str(docs).strip()
-    if not docs_str:
-        docs_str = "HẢI – CƯ – LUÂN – LƯƠNG"
-
-    # =========================================================================
-    # SLIDE 1: COVER & BẢNG 8 CHỈ SỐ GIAO BAN
-    # =========================================================================
-    s1 = prs.slides.add_slide(blank_layout)
-
-    # Title box
-    tx_box = s1.shapes.add_textbox(Inches(0.5), Inches(0.8), Inches(12.333), Inches(2.6))
-    tf = tx_box.text_frame
-    tf.word_wrap = True
-
-    p1 = tf.paragraphs[0]
-    p1.text = "BÁO CÁO GIAO BAN"
-    p1.font.name = "Times New Roman"
-    p1.font.size = Pt(40)
-    p1.font.bold = True
-    p1.font.color.rgb = RGBColor(15, 23, 42)
-    p1.alignment = PP_ALIGN.CENTER
-
-    p2 = tf.add_paragraph()
-    date_display = format_date_display(date_key)
-    p2.text = f"{date_display}   BS:{docs_str}"
-    p2.font.name = "Times New Roman"
-    p2.font.size = Pt(24)
-    p2.font.bold = True
-    p2.font.color.rgb = RGBColor(30, 41, 59)
-    p2.alignment = PP_ALIGN.CENTER
-
-    # Census Table: 2 rows x 8 cols
-    rows, cols = 2, 8
-    t_left, t_top, t_w, t_h = Inches(1.2), Inches(3.8), Inches(10.9), Inches(1.8)
-    tbl_shape = s1.shapes.add_table(rows, cols, t_left, t_top, t_w, t_h)
-    tbl = tbl_shape.table
-
-    # Column widths
-    for i in range(8):
-        tbl.columns[i].width = Inches(10.9 / 8)
-
-    headers = ['Bệnh cũ', 'Vào', 'Ra', 'Tử vong', 'Chuyển', 'Mổ', 'Hiện có', 'Bảo hiểm']
-    
-    # Calculate values
-    val_benh_cu = grand_census.get('benhCu', 0)
-    val_vao = grand_census.get('vao', grand_census.get('vaoKK', 0) + grand_census.get('vaoKhac', 0))
-    val_ra = grand_census.get('ra', grand_census.get('raRH', 0) + grand_census.get('raKhac', 0))
-    val_tu_vong = grand_census.get('tuVong', 0)
-    val_chuyen = grand_census.get('chuyen', grand_census.get('raKhac', 0))
-    val_mo = grand_census.get('mo', grand_census.get('moCT', 0) + grand_census.get('moCC', 0))
-    val_hien_co = grand_census.get('hienCo', 0)
-    val_bhyt = grand_census.get('bhyt', 0)
-
-    vals = [
-        str(val_benh_cu),
-        str(val_vao),
-        str(val_ra),
-        str(val_tu_vong),
-        str(val_chuyen),
-        str(val_mo),
-        str(val_hien_co),
-        str(val_bhyt)
-    ]
-
-    for col_idx, h_text in enumerate(headers):
-        cell = tbl.cell(0, col_idx)
-        cell.text = h_text
-        for cp in cell.text_frame.paragraphs:
-            cp.font.name = "Times New Roman"
-            cp.font.size = Pt(20)
-            cp.font.bold = True
-            cp.font.color.rgb = RGBColor(15, 23, 42)
-            cp.alignment = PP_ALIGN.CENTER
-
-    for col_idx, v_text in enumerate(vals):
-        cell = tbl.cell(1, col_idx)
-        cell.text = v_text
-        for cp in cell.text_frame.paragraphs:
-            cp.font.name = "Times New Roman"
-            cp.font.size = Pt(24)
-            cp.font.bold = True
-            # Highlight current and surgery in red / blue
-            if col_idx == 6: # Hiện có
-                cp.font.color.rgb = RGBColor(180, 83, 9)
-            elif col_idx in [1, 5]: # Vào, Mổ
-                cp.font.color.rgb = RGBColor(220, 38, 38)
-            else:
-                cp.font.color.rgb = RGBColor(15, 23, 42)
-            cp.alignment = PP_ALIGN.CENTER
-
 def get_tk4_surgical_consultations(db, date_key):
     try:
-        ward_rounds = db.get('wardRounds', {})
-        tk4 = ward_rounds.get('tk4', {})
-        records = tk4.get('patientRecords', {})
+        ward_rounds = db.get('wardRounds') or {}
+        tk4 = ward_rounds.get('tk4') or {}
+        records = tk4.get('patientRecords') or {}
         consults = []
         for mabn, rec in records.items():
+            if not rec or not isinstance(rec, dict):
+                continue
             if rec.get('removed', {}).get('isRemoved'):
                 continue
-            by_date = rec.get('surgicalConsultationsByDate', {})
-            sc = by_date.get(date_key) or (rec.get('surgicalConsultation') if (rec.get('surgicalConsultation', {}).get('dateKey') == date_key or not rec.get('surgicalConsultation', {}).get('dateKey')) else None)
+            by_date = rec.get('surgicalConsultationsByDate') or {}
+            sc = by_date.get(date_key) or (rec.get('surgicalConsultation') if (rec.get('surgicalConsultation') and (rec.get('surgicalConsultation', {}).get('dateKey') == date_key or not rec.get('surgicalConsultation', {}).get('dateKey'))) else None)
             if sc and sc.get('isConsulted'):
                 consults.append({
                     'mabn': rec.get('mabn', mabn),
@@ -240,22 +123,22 @@ def add_tk4_consult_slide(prs, blank_layout, consults, date_key):
             p.font.name = "Times New Roman"
             p.font.size = Pt(15)
             p.font.bold = True
-            p.font.color.rgb = RGBColor(15, 23, 42)
-            if idx in [0, 1, 3, 6]:
-                p.alignment = PP_ALIGN.CENTER
+            p.alignment = PP_ALIGN.CENTER
+            p.font.color.rgb = RGBColor(255, 255, 255)
 
-    for r_idx, item in enumerate(consults[:8], 1):
-        vals = [
-            str(r_idx),
-            str(item.get('bed', '--')),
-            item.get('hoten', '').upper(),
-            str(item.get('tuoi', '')),
-            item.get('chanDoan', '--'),
-            item.get('method', '--'),
-            item.get('decision', 'Đồng ý')
+    for r_idx, c_item in enumerate(consults[:8]):
+        row_idx = r_idx + 1
+        cells_data = [
+            str(r_idx + 1),
+            str(c_item.get('bed', '--')),
+            str(c_item.get('hoten', '')).upper(),
+            str(c_item.get('tuoi', '')),
+            str(c_item.get('chanDoan', '')),
+            str(c_item.get('method', '--')),
+            str(c_item.get('decision', 'Đồng ý'))
         ]
-        for c_idx, val in enumerate(vals):
-            cell = tbl.cell(r_idx, c_idx)
+        for c_idx, val in enumerate(cells_data):
+            cell = tbl.cell(row_idx, c_idx)
             cell.text = val
             for p in cell.text_frame.paragraphs:
                 p.font.name = "Times New Roman"
@@ -417,6 +300,127 @@ def add_patient_slides(c, stt_num, prs, blank_layout, project_root, date_key):
                 s_img.shapes.add_picture(current_path, Inches(0.5), Inches(0.5), width=Inches(12.33), height=Inches(6.5))
             i += 1
 
+def generate_pptx_for_date(date_key, db_path, out_pptx_path):
+    with open(db_path, 'r', encoding='utf-8') as f:
+        db = json.load(f)
+
+    briefing_reports = db.get('briefingReports', {})
+    report = briefing_reports.get(date_key)
+    if not report:
+        report = {
+            "dateKey": date_key,
+            "overall": {
+                "doctorsOnDuty": ["HẢI", "CƯ", "LUÂN"],
+                "grandCensus": {}
+            },
+            "highlightCases": []
+        }
+
+    prs = pptx.Presentation()
+    # 16:9 Widescreen standard
+    prs.slide_width = Inches(13.333)
+    prs.slide_height = Inches(7.5)
+    blank_layout = prs.slide_layouts[6]
+
+    overall = report.get('overall', {})
+    grand_census = overall.get('grandCensus', {})
+    highlight_cases = report.get('highlightCases', [])
+
+    # Doctors on duty string
+    docs = overall.get('doctorsOnDuty', [])
+    if isinstance(docs, list):
+        docs_str = ' – '.join([str(d).replace('BS.', '').replace('BS', '').strip() for d in docs if str(d).strip()])
+    else:
+        docs_str = str(docs).strip()
+    if not docs_str:
+        docs_str = "HẢI – CƯ – LUÂN – LƯƠNG"
+
+    # =========================================================================
+    # SLIDE 1: COVER & BẢNG 8 CHỈ SỐ GIAO BAN
+    # =========================================================================
+    s1 = prs.slides.add_slide(blank_layout)
+
+    # Title box
+    tx_box = s1.shapes.add_textbox(Inches(0.5), Inches(0.8), Inches(12.333), Inches(2.6))
+    tf = tx_box.text_frame
+    tf.word_wrap = True
+
+    p1 = tf.paragraphs[0]
+    p1.text = "BÁO CÁO GIAO BAN"
+    p1.font.name = "Times New Roman"
+    p1.font.size = Pt(40)
+    p1.font.bold = True
+    p1.font.color.rgb = RGBColor(15, 23, 42)
+    p1.alignment = PP_ALIGN.CENTER
+
+    p2 = tf.add_paragraph()
+    date_display = format_date_display(date_key)
+    p2.text = f"{date_display}   BS:{docs_str}"
+    p2.font.name = "Times New Roman"
+    p2.font.size = Pt(24)
+    p2.font.bold = True
+    p2.font.color.rgb = RGBColor(30, 41, 59)
+    p2.alignment = PP_ALIGN.CENTER
+
+    # Census Table: 2 rows x 8 cols
+    rows, cols = 2, 8
+    t_left, t_top, t_w, t_h = Inches(1.2), Inches(3.8), Inches(10.9), Inches(1.8)
+    tbl_shape = s1.shapes.add_table(rows, cols, t_left, t_top, t_w, t_h)
+    tbl = tbl_shape.table
+
+    # Column widths
+    for i in range(8):
+        tbl.columns[i].width = Inches(10.9 / 8)
+
+    headers = ['Bệnh cũ', 'Vào', 'Ra', 'Tử vong', 'Chuyển', 'Mổ', 'Hiện có', 'Bảo hiểm']
+    
+    # Calculate values
+    val_benh_cu = grand_census.get('benhCu', 0)
+    val_vao = grand_census.get('vao', grand_census.get('vaoKK', 0) + grand_census.get('vaoKhac', 0))
+    val_ra = grand_census.get('ra', grand_census.get('raRH', 0) + grand_census.get('raKhac', 0))
+    val_tu_vong = grand_census.get('tuVong', 0)
+    val_chuyen = grand_census.get('chuyen', grand_census.get('raKhac', 0))
+    val_mo = grand_census.get('mo', grand_census.get('moCT', 0) + grand_census.get('moCC', 0))
+    val_hien_co = grand_census.get('hienCo', 0)
+    val_bhyt = grand_census.get('bhyt', 0)
+
+    vals = [
+        str(val_benh_cu),
+        str(val_vao),
+        str(val_ra),
+        str(val_tu_vong),
+        str(val_chuyen),
+        str(val_mo),
+        str(val_hien_co),
+        str(val_bhyt)
+    ]
+
+    for col_idx, h_text in enumerate(headers):
+        cell = tbl.cell(0, col_idx)
+        cell.text = h_text
+        for cp in cell.text_frame.paragraphs:
+            cp.font.name = "Times New Roman"
+            cp.font.size = Pt(20)
+            cp.font.bold = True
+            cp.font.color.rgb = RGBColor(15, 23, 42)
+            cp.alignment = PP_ALIGN.CENTER
+
+    for col_idx, v_text in enumerate(vals):
+        cell = tbl.cell(1, col_idx)
+        cell.text = v_text
+        for cp in cell.text_frame.paragraphs:
+            cp.font.name = "Times New Roman"
+            cp.font.size = Pt(24)
+            cp.font.bold = True
+            # Highlight current and surgery in red / blue
+            if col_idx == 6: # Hiện có
+                cp.font.color.rgb = RGBColor(180, 83, 9)
+            elif col_idx in [1, 5]: # Vào, Mổ
+                cp.font.color.rgb = RGBColor(220, 38, 38)
+            else:
+                cp.font.color.rgb = RGBColor(15, 23, 42)
+            cp.alignment = PP_ALIGN.CENTER
+
     # =========================================================================
     # SLIDES CHO TỪNG CA BỆNH GIAO BAN THEO THỨ TỰ:
     # HSTK -> TK1 -> TK4 -> TK2 -> TK3
@@ -449,9 +453,6 @@ def add_patient_slides(c, stt_num, prs, blank_layout, project_root, date_key):
                     seen_keys.add(k)
                     add_patient_slides(c, stt_counter, prs, blank_layout, project_root, date_key)
                     stt_counter += 1
-
-            # Không báo HỘI CHẨN MỔ — THẦN KINH 4 trong slide giao ban (theo yêu cầu)
-            # add_tk4_consult_slide(prs, blank_layout, tk4_consults, date_key)
 
         elif r_key == 'tk2':
             # TK2: phòng hậu phẫu, báo tất cả Mổ chương trình (kể cả từ TK4/phòng khác), Mổ CC/mổ về, và Theo dõi
