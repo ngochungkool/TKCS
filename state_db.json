@@ -1,5 +1,5 @@
 {
-  "version": 1791249967395,
+  "version": 1791251266005,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -673,6 +673,17 @@
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-06T01:26:07.395Z"
+        },
+        {
+          "id": "u-1791251266005-cjk7",
+          "roomName": "Thần kinh 1",
+          "startMin": 29854187,
+          "endMin": null,
+          "lastConfirmedMin": 29854187,
+          "warnedAtMin": null,
+          "receivedBy": "Nguyễn Thị Kim Diệu",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-06T01:47:46.005Z"
         }
       ],
       "currentRoom": null
@@ -4738,7 +4749,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T01:25:17.877Z"
+      "updatedAt": "2026-10-06T01:47:15.179Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -7261,7 +7272,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T01:25:17.878Z"
+      "updatedAt": "2026-10-06T01:47:15.179Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8592,7 +8603,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T01:25:17.878Z"
+      "updatedAt": "2026-10-06T01:47:15.179Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -13178,7 +13189,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T01:25:17.878Z"
+      "updatedAt": "2026-10-06T01:47:15.179Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -14244,7 +14255,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T01:25:17.878Z"
+      "updatedAt": "2026-10-06T01:47:15.179Z"
     }
   },
   "episodeConsultations": {},
