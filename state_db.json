@@ -1,5 +1,5 @@
 {
-  "version": 1791251303065,
+  "version": 1791251373557,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -688,6 +688,17 @@
           "releasedBy": "Nguyễn Thị Kim Diệu",
           "releasedRole": "Điều dưỡng",
           "releasedAt": "2026-10-06T01:48:23.065Z"
+        },
+        {
+          "id": "u-1791251373557-liub",
+          "roomName": "Đang mổ",
+          "startMin": 29854187,
+          "endMin": 29854230,
+          "lastConfirmedMin": 29854187,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:49:33.557Z"
         }
       ],
       "currentRoom": null
