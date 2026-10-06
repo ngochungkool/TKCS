@@ -1,5 +1,5 @@
 {
-  "version": 1791270435341,
+  "version": 1791276696570,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -4847,7 +4847,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T07:07:13.075Z"
+      "updatedAt": "2026-10-06T08:51:35.682Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -7370,7 +7370,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T07:07:13.075Z"
+      "updatedAt": "2026-10-06T08:51:35.682Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -8701,7 +8701,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T07:07:13.075Z"
+      "updatedAt": "2026-10-06T08:51:35.682Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -13287,7 +13287,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T07:07:13.075Z"
+      "updatedAt": "2026-10-06T08:51:35.683Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -14353,7 +14353,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-06T07:07:13.075Z"
+      "updatedAt": "2026-10-06T08:51:35.683Z"
     }
   },
   "episodeConsultations": {},
@@ -15193,24 +15193,6 @@
           },
           "admissions": [
             {
-              "id": "adm-1791222036556-0a6c",
-              "mabn": "0001424848",
-              "hoten": "NGUYỄN VĂN NHỚ",
-              "tuoi": "39",
-              "gioiTinh": "Nam",
-              "diaChi": "Chánh Tường -Xã Cát Tiến--Tỉnh Gia Lai",
-              "chanDoan": "S06.01-Chấn động não, có vết thương nội sọ hở",
-              "cause": "Bệnh lý",
-              "category": "THEO_DOI",
-              "isHighlight": true,
-              "ngayVaoVien": "2026-10-05",
-              "gioPhauThuat": "08:00",
-              "ngayPhauThuatDate": "2026-10-05",
-              "ngayPhauThuat": "",
-              "ngayXinVe": "",
-              "dienBien": ""
-            },
-            {
               "id": "adm-tk1-1",
               "stt": 1,
               "mabn": "0001425649",
@@ -15225,7 +15207,8 @@
               "diaChi": "Chánh Thạnh-Phường An Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-2",
@@ -15242,7 +15225,8 @@
               "diaChi": "Khối 2-Xã Tây Sơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-3",
@@ -15259,7 +15243,8 @@
               "diaChi": "Xã Ô Loan--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-4",
@@ -15276,7 +15261,8 @@
               "diaChi": "khánh phước-Xã Hòa Hội--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-5",
@@ -15293,7 +15279,8 @@
               "diaChi": "Khánh Phước-Xã Hòa Hội--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-6",
@@ -15310,7 +15297,8 @@
               "diaChi": "Xã Tuy Phước--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-7",
@@ -15327,7 +15315,8 @@
               "diaChi": "đoàn kết-Xã Ia Dreh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": true,
-              "category": "THEO_DOI"
+              "category": "THEO_DOI",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -15344,7 +15333,7 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "",
-            "xuatVien": 0,
+            "xuatVien": 3,
             "chamSocCap2": 0,
             "hoiChan": 0,
             "tangTren": 0,
@@ -15356,11 +15345,11 @@
             "vaoKhac": 2,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 0,
+            "raRH": 3,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 24,
-            "bhyt": 23
+            "hienCo": 21,
+            "bhyt": 21
           },
           "admissions": [
             {
@@ -15378,7 +15367,8 @@
               "diaChi": "An Hòa-Phường Bình Định--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk2-2",
@@ -15395,7 +15385,8 @@
               "diaChi": "thôn 3-Xã An Vinh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk2-3",
@@ -15412,7 +15403,8 @@
               "diaChi": "Xã An Hòa--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": true,
-              "category": "MO_CT"
+              "category": "MO_CT",
+              "notesBs": ""
             },
             {
               "id": "adm-tk2-4",
@@ -15429,10 +15421,51 @@
               "diaChi": "Trung Lý, Nhơn Phong, An Nhơn, Bình Định-Phường An Nhơn Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
+              "category": "",
+              "notesBs": ""
+            }
+          ],
+          "discharges": [
+            {
+              "id": "dis-tk2-1",
+              "stt": 1,
+              "mabn": "0001265243",
+              "hoten": "NGÔ VĂN NHÂM",
+              "tuoi": "71",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600359189",
+              "note": "Ra viện (đối chiếu Đang điều trị)",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk2-2",
+              "stt": 2,
+              "mabn": "0001421947",
+              "hoten": "TRẦN VĂN QUYẾT",
+              "tuoi": "49",
+              "raHan": true,
+              "baoHiem": false,
+              "svv": "2600366664",
+              "note": "Ra viện (đối chiếu Đang điều trị)",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk2-3",
+              "stt": 3,
+              "mabn": "0001422435",
+              "hoten": "ĐÀM NGUYỄN QUỲNH HƯƠNG",
+              "tuoi": "14",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600367853",
+              "note": "Ra viện (đối chiếu Đang điều trị)",
+              "isHighlight": false,
               "category": ""
             }
           ],
-          "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
         },
@@ -15480,7 +15513,8 @@
               "diaChi": "an long 2-Xã Canh Vinh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk3-2",
@@ -15497,7 +15531,8 @@
               "diaChi": "Đệ Đức 1-Phường Hoài Nhơn Nam--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -15548,7 +15583,8 @@
               "diaChi": "Tổ 46 Khu phố 9-Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-2",
@@ -15565,7 +15601,8 @@
               "diaChi": "tổ 17 kv 3-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-3",
@@ -15582,7 +15619,8 @@
               "diaChi": "Thôn Phước Nhuận-Xã Xuân Phước--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-4",
@@ -15599,7 +15637,8 @@
               "diaChi": "Xã Hoài Ân--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-5",
@@ -15616,7 +15655,8 @@
               "diaChi": "Tân Dương-Phường An Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-6",
@@ -15633,7 +15673,8 @@
               "diaChi": "35/2/28 Lý Thái Tổ-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-7",
@@ -15650,7 +15691,8 @@
               "diaChi": "Thôn Thuận Đức, Nhơn Mỹ, An Nhơn, Bình Định-Phường An Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-8",
@@ -15667,7 +15709,8 @@
               "diaChi": "Xã Phù Mỹ Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-9",
@@ -15684,7 +15727,8 @@
               "diaChi": "Xã Hòa Hội--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-10",
@@ -15701,7 +15745,8 @@
               "diaChi": "Thanh Mai-Phường An Nhơn Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-11",
@@ -15718,7 +15763,8 @@
               "diaChi": "an đức-Xã Phù Cát--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -15755,24 +15801,6 @@
           },
           "admissions": [
             {
-              "id": "adm-1791221965244-g8fx",
-              "mabn": "0001425116",
-              "hoten": "TRẦN CÔNG DƯỠNG",
-              "tuoi": "23",
-              "gioiTinh": "Nam",
-              "diaChi": "Nghiễm Hòa-Phường An Nhơn Nam--Tỉnh Gia Lai",
-              "chanDoan": "S06.71-Tổn thương nội sọ có hôn mê kéo dài, có vết thương nội sọ hở",
-              "cause": "Bệnh lý",
-              "category": "XIN_VE",
-              "isHighlight": true,
-              "ngayVaoVien": "2026-10-05",
-              "gioPhauThuat": "08:00",
-              "ngayPhauThuatDate": "2026-10-05",
-              "ngayPhauThuat": "",
-              "ngayXinVe": "2026-10-05",
-              "dienBien": ""
-            },
-            {
               "id": "adm-hstk-1",
               "stt": 1,
               "mabn": "0001425669",
@@ -15787,7 +15815,8 @@
               "diaChi": "Xã Tuy Phước Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": true,
-              "category": "MO_CC"
+              "category": "MO_CC",
+              "notesBs": ""
             },
             {
               "id": "adm-hstk-2",
@@ -15804,7 +15833,8 @@
               "diaChi": "Nghĩa Sơn-Xã Kim Sơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": true,
-              "category": "MO_CC"
+              "category": "MO_CC",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -15940,17 +15970,17 @@
           "vaoKhac": 4,
           "moCT": 0,
           "moCC": 0,
-          "raRH": 0,
+          "raRH": 3,
           "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 128,
-          "bhyt": 121
+          "hienCo": 125,
+          "bhyt": 119
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791220773776.9248,
-      "lastHisSyncTime": "2026-10-05T17:25:40.876Z"
+      "lastHisSyncTimeMs": 1791245550273.4033,
+      "lastHisSyncTime": "2026-10-06T08:51:36.570Z"
     },
     "2026-10-06": {
       "dateKey": "2026-10-06",
