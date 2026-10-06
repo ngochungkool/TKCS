@@ -1,5 +1,5 @@
 {
-  "version": 1791249931471,
+  "version": 1791249953757,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -570,6 +570,17 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T08:25:07.200Z"
+        },
+        {
+          "id": "u-1791249953757-jjdi",
+          "roomName": "Đang mổ",
+          "startMin": 29854150,
+          "endMin": 29854180,
+          "lastConfirmedMin": 29854150,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:25:53.757Z"
         }
       ],
       "currentRoom": null
@@ -690,6 +701,17 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T08:25:51.929Z"
+        },
+        {
+          "id": "u-1791249953757-u3j2",
+          "roomName": "Đang mổ",
+          "startMin": 29854150,
+          "endMin": 29854180,
+          "lastConfirmedMin": 29854150,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-06T01:25:53.757Z"
         }
       ],
       "currentRoom": null
