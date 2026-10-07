@@ -1,5 +1,5 @@
 {
-  "version": 1791348579530,
+  "version": 1791348585921,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -996,12 +996,15 @@
           "id": "u-1791338923158-cj5a",
           "roomName": "Đang mổ",
           "startMin": 29855640,
-          "endMin": null,
+          "endMin": 29855820,
           "lastConfirmedMin": 29855640,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-07T02:08:43.158Z"
+          "receivedAt": "2026-10-07T02:08:43.158Z",
+          "releasedEarly": false,
+          "updatedAt": "2026-10-07T04:49:45.913Z",
+          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
         }
       ],
       "currentRoom": null
