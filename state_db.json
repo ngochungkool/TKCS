@@ -1,5 +1,5 @@
 {
-  "version": 1791333554386,
+  "version": 1791336389928,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -349,6 +349,17 @@
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
           "receivedAt": "2026-10-06T01:25:31.471Z"
+        },
+        {
+          "id": "u-1791336389927-zvr1",
+          "roomName": "Đang mổ",
+          "startMin": 29855585,
+          "endMin": null,
+          "lastConfirmedMin": 29855585,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-07T01:26:29.927Z"
         }
       ],
       "currentRoom": null
@@ -563,6 +574,17 @@
           "releasedBy": "Huỳnh Ngọc Hưng",
           "releasedRole": "Bác sĩ",
           "releasedAt": "2026-10-05T08:25:05.465Z"
+        },
+        {
+          "id": "u-1791336389928-ohwf",
+          "roomName": "Đang mổ",
+          "startMin": 29855585,
+          "endMin": null,
+          "lastConfirmedMin": 29855585,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-07T01:26:29.928Z"
         }
       ],
       "currentRoom": null
@@ -5650,7 +5672,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:38:35.423Z"
+      "updatedAt": "2026-10-07T01:23:12.118Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -8431,7 +8453,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:38:35.423Z"
+      "updatedAt": "2026-10-07T01:23:12.118Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -9916,7 +9938,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:38:35.423Z"
+      "updatedAt": "2026-10-07T01:23:12.119Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -14863,7 +14885,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:38:35.424Z"
+      "updatedAt": "2026-10-07T01:23:12.119Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -15929,7 +15951,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:38:35.424Z"
+      "updatedAt": "2026-10-07T01:23:12.119Z"
     }
   },
   "episodeConsultations": {},
