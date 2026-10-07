@@ -1,5 +1,5 @@
 {
-  "version": 1791336389928,
+  "version": 1791336787785,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -254,6 +254,17 @@
           "releasedBy": "Kíp phẫu thuật",
           "releasedRole": "Báo mổ",
           "releasedAt": "2026-10-05T01:05:02.796Z"
+        },
+        {
+          "id": "u-1791336787785-bbw6",
+          "roomName": "Thần kinh 1",
+          "startMin": 29855520,
+          "endMin": 29855580,
+          "lastConfirmedMin": 29855520,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-07T01:33:07.785Z"
         }
       ],
       "currentRoom": null
