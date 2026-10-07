@@ -1,5 +1,5 @@
 {
-  "version": 1791331650732,
+  "version": 1791331806928,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1060,6 +1060,357 @@
   ],
   "uploadedHisFiles": [
     {
+      "fileName": "a2.xlsx → [Chuyển khoa: 12 dòng]",
+      "categoryCode": "CHUYEN_KHOA",
+      "savedPath": "/opt/render/project/src/uploads_his/chuyen_khoa.xlsx",
+      "sizeBytes": 13680,
+      "uploadedAt": "07:10:05 7/10/2026",
+      "extractedPreview": {
+        "sheetNames": [
+          "Sheet1"
+        ],
+        "rowCount": 13,
+        "sampleRows": [
+          [
+            "ct",
+            "makk",
+            "tenkk",
+            "maphong",
+            "tenphong",
+            "madonnguyen",
+            "tendonnguyen",
+            "mabn",
+            "mayte",
+            "Mã KCB",
+            "Ngày vào",
+            "Họ tên",
+            "NS",
+            "Tuổi",
+            "maphai",
+            "GT",
+            "madoituong",
+            "Đối tượng",
+            "manghenghiep",
+            "Nghề nghiệp",
+            "dangdieutri",
+            "Địa chỉ",
+            "dienthoai",
+            "Số thẻ",
+            "diachithe",
+            "Hạn thẻ từ",
+            "Hạn thẻ đến",
+            "manv",
+            "Bác sỹ điều trị",
+            "NG",
+            "madieutri",
+            "machuyenkhoa",
+            "malydo",
+            "Ngày chuyển",
+            "ngayrv",
+            "ravien",
+            "ngaytt",
+            "thanhtoan",
+            "mahinhthucden",
+            "Hình thức đến"
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            340,
+            "Buồng Ngoại TK - CS 2",
+            12,
+            "Ngoại TK - CS 2",
+            "0001400167",
+            "525200126354565",
+            "2600354565",
+            46282.3888888889,
+            "HUỲNH VĂN TẠNG",
+            "1965",
+            "61 tuổi",
+            1,
+            "Nam",
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            1,
+            "Mỹ An-Xã Bình An--Tỉnh Gia Lai",
+            "0325234944",
+            "GD4525220788550",
+            "Mỹ An, Xã Bình An, Tỉnh Gia Lai",
+            46043,
+            46407,
+            662,
+            "Đặng Ngọc Trí",
+            0,
+            "",
+            "",
+            "",
+            46295.2916666667,
+            46295.2916666667,
+            1,
+            46295.3333333333,
+            1,
+            1,
+            "Tự đến"
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            340,
+            "Buồng Ngoại TK - CS 2",
+            12,
+            "Ngoại TK - CS 2",
+            "0000948030",
+            "525200126360917",
+            "2600360917",
+            46287.4444444444,
+            "TRẦN THỊ THU BÍCH",
+            "1983",
+            "43 tuổi",
+            2,
+            "Nữ",
+            1,
+            "BHYT",
+            70,
+            "Lao động giản đơn khác chưa được phân vào đâu",
+            1,
+            "Trung Tín 1-Xã Tuy Phước--Tỉnh Gia Lai",
+            "0774563598",
+            "GD4525221346458",
+            "Trung Tín 1, Xã Tuy Phước, Tỉnh Gia Lai",
+            46257,
+            46621,
+            662,
+            "Đặng Ngọc Trí",
+            0,
+            "",
+            "",
+            "",
+            46296.2916666667,
+            46296.2916666667,
+            1,
+            46296.3333333333,
+            1,
+            1,
+            "Tự đến"
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            342,
+            "Buồng Ngoại TK - CS 4",
+            14,
+            "Ngoại TK - CS 4",
+            "0001197225",
+            "525200126371283",
+            "2600371283",
+            46294.625,
+            "TÔ VĂN THÂU",
+            "1961",
+            "65 tuổi",
+            1,
+            "Nam",
+            1,
+            "BHYT",
+            70,
+            "Lao động giản đơn khác chưa được phân vào đâu",
+            1,
+            "Làng Hiệp Hưng-Xã Canh Vinh--Tỉnh Gia Lai",
+            "0348818018",
+            "DK2525221473720",
+            "Hiệp Hưng, Xã Canh Vinh, Tỉnh Gia Lai",
+            46113,
+            46387,
+            680,
+            "Nguyễn Xuân Tịnh",
+            0,
+            "",
+            "",
+            "",
+            46296.2916666667,
+            46296.2916666667,
+            1,
+            46296.3645833333,
+            1,
+            1,
+            "Tự đến"
+          ],
+          [
+            2610,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            412,
+            "PK Ngoại Thần Kinh(P103)",
+            99,
+            "PK Ngoại Thần Kinh - P103",
+            "0001371574",
+            "",
+            "2600373604",
+            "",
+            "NGUYỄN THỊ HÒA",
+            "1970",
+            "56 tuổi",
+            2,
+            "Nữ",
+            1,
+            "BHYT",
+            70,
+            "Lao động giản đơn khác chưa được phân vào đâu",
+            0,
+            "mỹ an-Xã Bình An--Tỉnh Gia Lai",
+            "0357395660",
+            "BT2525220859925",
+            "Mỹ An, Xã Bình An, Tỉnh Gia Lai",
+            46023,
+            47483,
+            631,
+            "Lê Đức Nhật",
+            0,
+            "",
+            "",
+            "",
+            46296.3197222222,
+            46296.3229166667,
+            1,
+            46296.3256944444,
+            1,
+            2,
+            "Có giấy chuyển tuyến"
+          ],
+          [
+            2610,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            412,
+            "PK Ngoại Thần Kinh(P103)",
+            99,
+            "PK Ngoại Thần Kinh - P103",
+            "0000727710",
+            "",
+            "2600374398",
+            "",
+            "NGUYỄN HOÀNG QUÂN",
+            "2012",
+            "14 tuổi",
+            1,
+            "Nam",
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            0,
+            "Định Tân-Xã Vĩnh Thạnh--Tỉnh Gia Lai",
+            "0984007927          ",
+            "BT2525220751874",
+            "Định Tân, Thị trấn Vĩnh Thạnh, Huyện Vĩnh Thạnh, Tỉnh Gia Lai",
+            45839,
+            46752,
+            631,
+            "Lê Đức Nhật",
+            0,
+            "",
+            "",
+            "",
+            46296.4194791667,
+            46296.4208333333,
+            1,
+            46296.4243055556,
+            1,
+            2,
+            "Có giấy chuyển tuyến"
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            342,
+            "Buồng Ngoại TK - CS 4",
+            14,
+            "Ngoại TK - CS 4",
+            "0001423683",
+            "525200126372521",
+            "2600372521",
+            46295.3923611111,
+            "ĐỖ THỊ THU THẢO",
+            "1958",
+            "68 tuổi",
+            2,
+            "Nữ",
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            1,
+            "Trung Hóa-Phường Hoài Nhơn--Tỉnh Gia Lai",
+            "0905421489",
+            "GD4525220281741",
+            "Trung Hóa, Phường Hoài Nhơn, Tỉnh Gia Lai",
+            46075,
+            46439,
+            681,
+            "Phạm Ngọc Hải",
+            0,
+            "",
+            "",
+            "",
+            46297.2916666667,
+            46297.2916666667,
+            1,
+            46297.4423611111,
+            1,
+            1,
+            "Tự đến"
+          ],
+          [
+            2610,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            412,
+            "PK Ngoại Thần Kinh(P103)",
+            99,
+            "PK Ngoại Thần Kinh - P103",
+            "0000054041",
+            "",
+            "2600378541",
+            "",
+            "TRẦN VĂN CẢNH",
+            "1960",
+            "66 tuổi",
+            1,
+            "Nam",
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            0,
+            "22/1 Phan Bội Châu, Tổ 29A, Khu Vực 7, Lê Lợi, Quy Nhơn, Bình Định-Phường Quy Nhơn--Tỉnh Gia Lai",
+            "0905725711",
+            "HT2525213007678",
+            "22/1 Phan Bội Châu, Phường Quy Nhơn, Tỉnh Gia Lai",
+            46234,
+            47848,
+            1690,
+            "Dương Minh Trí",
+            0,
+            "",
+            "",
+            "",
+            46300.3925694444,
+            46300.4388888889,
+            1,
+            46300.4409722222,
+            1,
+            1,
+            "Tự đến"
+          ]
+        ]
+      }
+    },
+    {
       "fileName": "1.xlsx → [Đang điều trị: 112 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
@@ -1082,86 +1433,78 @@
       "sizeBytes": 10938,
       "uploadedAt": "11:35:19 4/10/2026",
       "extractedPreview": null
-    },
-    {
-      "fileName": "chuyển khoa.xlsx → [Chuyển khoa: 3 dòng]",
-      "categoryCode": "CHUYEN_KHOA",
-      "savedPath": "D:\\Antigravity\\Phần mềm quản lý khoa\\uploads_his\\chuyen_khoa.xlsx",
-      "sizeBytes": 10118,
-      "uploadedAt": "10:03:21 4/10/2026",
-      "extractedPreview": null
     }
   ],
   "patientStats": {
     "total": {
-      "dauCa": 106,
-      "benhVao": 6,
+      "dauCa": 1,
+      "benhVao": 0,
       "raVien": 0,
       "chuyenDen": 0,
-      "chuyenDi": 0,
+      "chuyenDi": 1,
       "tuVong": 0,
       "benhMo": 0,
-      "hienCo": 112,
-      "baoHiem": 104
+      "hienCo": 0,
+      "baoHiem": 0
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 23,
-        "benhVao": 4,
+        "dauCa": 1,
+        "benhVao": 0,
         "raVien": 0,
         "chuyenDen": 0,
-        "chuyenDi": 0,
+        "chuyenDi": 1,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 27,
-        "baoHiem": 24
+        "hienCo": 0,
+        "baoHiem": 0
       },
       "Thần kinh 2": {
-        "dauCa": 24,
+        "dauCa": 0,
         "benhVao": 0,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 24,
-        "baoHiem": 22
+        "hienCo": 0,
+        "baoHiem": 0
       },
       "Thần kinh 3": {
-        "dauCa": 14,
+        "dauCa": 0,
         "benhVao": 0,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 14,
-        "baoHiem": 12
+        "hienCo": 0,
+        "baoHiem": 0
       },
       "Thần kinh 4": {
-        "dauCa": 37,
-        "benhVao": 2,
-        "raVien": 0,
-        "chuyenDen": 0,
-        "chuyenDi": 0,
-        "tuVong": 0,
-        "benhMo": 0,
-        "hienCo": 39,
-        "baoHiem": 38
-      },
-      "Hồi sức thần kinh": {
-        "dauCa": 8,
+        "dauCa": 0,
         "benhVao": 0,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 8,
-        "baoHiem": 8
+        "hienCo": 0,
+        "baoHiem": 0
+      },
+      "Hồi sức thần kinh": {
+        "dauCa": 0,
+        "benhVao": 0,
+        "raVien": 0,
+        "chuyenDen": 0,
+        "chuyenDi": 0,
+        "tuVong": 0,
+        "benhMo": 0,
+        "hienCo": 0,
+        "baoHiem": 0
       }
     },
-    "updatedAt": "2026-10-04T14:24:13.171Z"
+    "updatedAt": "2026-10-07T00:10:06.808Z"
   },
   "wardRounds": {
     "tk1": {
@@ -3986,7 +4329,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:06:45.798Z"
+      "updatedAt": "2026-10-07T00:10:06.921Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -6283,7 +6626,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:06:45.798Z"
+      "updatedAt": "2026-10-07T00:10:06.921Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -7496,7 +7839,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:06:45.798Z"
+      "updatedAt": "2026-10-07T00:10:06.921Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -11381,7 +11724,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:06:45.798Z"
+      "updatedAt": "2026-10-07T00:10:06.921Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -12284,11 +12627,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T00:06:45.798Z"
+      "updatedAt": "2026-10-07T00:10:06.921Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "21:24 ngày 04/10/2026",
+  "lastExcelUploadTime": "07:10 ngày 07/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -13230,19 +13573,33 @@
             "xuatVien": 0
           },
           "census": {
-            "hienCo": 32,
-            "benhCu": 32,
-            "bhyt": 25,
+            "hienCo": 0,
+            "benhCu": 1,
+            "bhyt": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "raRH": 0,
-            "raKhac": 0,
+            "raKhac": 1,
             "tuVong": 0,
             "moCT": 0,
             "moCC": 0
           },
           "admissions": [],
-          "discharges": [],
+          "discharges": [
+            {
+              "id": "dis-tk1-1",
+              "stt": 1,
+              "mabn": "0001424928",
+              "hoten": "TRẦN THỊ THANH",
+              "tuoi": "36",
+              "raHan": false,
+              "baoHiem": true,
+              "svv": "2600381413",
+              "note": "Chuyển Khoa khác",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "emergencySurgeries": [],
           "criticalNotes": ""
         },
@@ -13263,7 +13620,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 22,
+            "benhCu": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -13271,8 +13628,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 22,
-            "bhyt": 21
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
           "discharges": [],
@@ -13296,7 +13653,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 13,
+            "benhCu": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -13304,8 +13661,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 13,
-            "bhyt": 13
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
           "discharges": [],
@@ -13329,7 +13686,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 37,
+            "benhCu": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -13337,8 +13694,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 37,
-            "bhyt": 36
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
           "discharges": [],
@@ -13362,7 +13719,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 12,
+            "benhCu": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -13370,8 +13727,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 12,
-            "bhyt": 10
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
           "discharges": [],
@@ -13387,22 +13744,22 @@
           "LUÂN"
         ],
         "grandCensus": {
-          "benhCu": 116,
+          "benhCu": 1,
           "vaoKK": 0,
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
           "raRH": 0,
-          "raKhac": 0,
+          "raKhac": 1,
           "tuVong": 0,
-          "hienCo": 116,
-          "bhyt": 105
+          "hienCo": 0,
+          "bhyt": 0
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791083004515.284,
-      "lastHisSyncTime": "2026-10-06T18:31:44.826Z"
+      "lastHisSyncTimeMs": 1791331805828.972,
+      "lastHisSyncTime": "2026-10-07T00:10:06.928Z"
     },
     "2026-10-07": {
       "dateKey": "2026-10-07",
@@ -13425,19 +13782,46 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 32,
+            "benhCu": 2,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
-            "raKhac": 0,
+            "raKhac": 2,
             "tuVong": 0,
-            "hienCo": 32,
-            "bhyt": 25
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
-          "discharges": [],
+          "discharges": [
+            {
+              "id": "dis-tk1-1",
+              "stt": 1,
+              "mabn": "0000844175",
+              "hoten": "ĐINH HỒNG VINH",
+              "tuoi": "53",
+              "raHan": false,
+              "baoHiem": true,
+              "svv": "2600337367",
+              "note": "Chuyển Khoa khác",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-2",
+              "stt": 2,
+              "mabn": "0001420070",
+              "hoten": "TRƯƠNG DƯƠNG",
+              "tuoi": "72",
+              "raHan": false,
+              "baoHiem": true,
+              "svv": "2600359133",
+              "note": "Chuyển Khoa khác",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "emergencySurgeries": [],
           "criticalNotes": ""
         },
@@ -13458,7 +13842,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 22,
+            "benhCu": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -13466,8 +13850,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 22,
-            "bhyt": 21
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
           "discharges": [],
@@ -13491,7 +13875,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 13,
+            "benhCu": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -13499,8 +13883,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 13,
-            "bhyt": 13
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
           "discharges": [],
@@ -13524,7 +13908,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 37,
+            "benhCu": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -13532,8 +13916,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 37,
-            "bhyt": 36
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
           "discharges": [],
@@ -13557,7 +13941,7 @@
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 12,
+            "benhCu": 0,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
@@ -13565,8 +13949,8 @@
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 12,
-            "bhyt": 10
+            "hienCo": 0,
+            "bhyt": 0
           },
           "admissions": [],
           "discharges": [],
@@ -13582,22 +13966,22 @@
           "MINH TRÍ"
         ],
         "grandCensus": {
-          "benhCu": 116,
+          "benhCu": 2,
           "vaoKK": 0,
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
           "raRH": 0,
-          "raKhac": 0,
+          "raKhac": 2,
           "tuVong": 0,
-          "hienCo": 116,
-          "bhyt": 105
+          "hienCo": 0,
+          "bhyt": 0
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791083004515.284,
-      "lastHisSyncTime": "2026-10-06T18:31:43.752Z"
+      "lastHisSyncTimeMs": 1791331805828.972,
+      "lastHisSyncTime": "2026-10-07T00:10:06.125Z"
     }
   },
   "announcement": {
