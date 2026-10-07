@@ -1,5 +1,5 @@
 {
-  "version": 1791353682610,
+  "version": 1791353809075,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -235,12 +235,27 @@
           "id": "u-1791353682610-atcy",
           "roomName": "Đang mổ",
           "startMin": 29855940,
-          "endMin": null,
+          "endMin": 29855941,
           "lastConfirmedMin": 29855940,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-07T06:14:42.610Z"
+          "receivedAt": "2026-10-07T06:14:42.610Z",
+          "releasedEarly": true,
+          "releasedBy": "Huỳnh Ngọc Hưng",
+          "releasedRole": "Bác sĩ",
+          "releasedAt": "2026-10-07T06:16:49.075Z"
+        },
+        {
+          "id": "u-1791353809075-y6v1",
+          "roomName": "Đang mổ",
+          "startMin": 29855940,
+          "endMin": 29856120,
+          "lastConfirmedMin": 29855940,
+          "warnedAtMin": null,
+          "receivedBy": "Huỳnh Ngọc Hưng",
+          "receivedRole": "Bác sĩ",
+          "receivedAt": "2026-10-07T06:16:49.075Z"
         }
       ],
       "currentRoom": null
@@ -5877,7 +5892,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T06:13:12.025Z"
+      "updatedAt": "2026-10-07T06:14:52.149Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -8658,7 +8673,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T06:13:12.025Z"
+      "updatedAt": "2026-10-07T06:14:52.149Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -10143,7 +10158,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T06:13:12.025Z"
+      "updatedAt": "2026-10-07T06:14:52.150Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -15090,7 +15105,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T06:13:12.025Z"
+      "updatedAt": "2026-10-07T06:14:52.218Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -16156,7 +16171,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-07T06:13:12.026Z"
+      "updatedAt": "2026-10-07T06:14:52.218Z"
     }
   },
   "episodeConsultations": {},
