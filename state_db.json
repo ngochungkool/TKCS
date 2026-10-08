@@ -1,5 +1,5 @@
 {
-  "version": 1791423162273,
+  "version": 1791423201744,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1043,13 +1043,16 @@
         {
           "id": "u-1791423162273-3gy9",
           "roomName": "Đang mổ",
-          "startMin": 29856965,
-          "endMin": 29857020,
-          "lastConfirmedMin": 29856965,
+          "startMin": 29857020,
+          "endMin": 29857140,
+          "lastConfirmedMin": 29857020,
           "warnedAtMin": null,
           "receivedBy": "Huỳnh Ngọc Hưng",
           "receivedRole": "Bác sĩ",
-          "receivedAt": "2026-10-08T01:32:42.273Z"
+          "receivedAt": "2026-10-08T01:32:42.273Z",
+          "releasedEarly": false,
+          "updatedAt": "2026-10-08T01:33:21.734Z",
+          "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
         }
       ],
       "currentRoom": null
@@ -6618,7 +6621,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:32:38.127Z"
+      "updatedAt": "2026-10-08T01:33:15.725Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -9596,7 +9599,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:32:38.127Z"
+      "updatedAt": "2026-10-08T01:33:15.725Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -11127,7 +11130,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:32:38.127Z"
+      "updatedAt": "2026-10-08T01:33:15.725Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -16629,7 +16632,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:32:38.127Z"
+      "updatedAt": "2026-10-08T01:33:15.726Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -17797,7 +17800,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:32:38.128Z"
+      "updatedAt": "2026-10-08T01:33:15.726Z"
     }
   },
   "episodeConsultations": {},
