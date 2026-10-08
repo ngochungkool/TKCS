@@ -1,5 +1,5 @@
 {
-  "version": 1791422240943,
+  "version": 1791423135243,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1024,6 +1024,17 @@
           "releasedAt": "2026-10-07T23:45:38.081Z",
           "updatedAt": "2026-10-07T23:45:38.081Z",
           "updatedBy": "[Bác sĩ] Huỳnh Ngọc Hưng"
+        },
+        {
+          "id": "u-1791423135243-cx25",
+          "roomName": "Thần kinh 1",
+          "startMin": 29856960,
+          "endMin": 29856970,
+          "lastConfirmedMin": 29856960,
+          "warnedAtMin": null,
+          "receivedBy": "Nguyễn Thị Thu Hà",
+          "receivedRole": "Điều dưỡng",
+          "receivedAt": "2026-10-08T01:32:15.243Z"
         }
       ],
       "currentRoom": null
@@ -6592,7 +6603,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:17:14.723Z"
+      "updatedAt": "2026-10-08T01:32:15.227Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -9570,7 +9581,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:17:14.724Z"
+      "updatedAt": "2026-10-08T01:32:15.229Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -11101,7 +11112,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:17:14.724Z"
+      "updatedAt": "2026-10-08T01:32:15.230Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -16603,7 +16614,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:17:14.724Z"
+      "updatedAt": "2026-10-08T01:32:15.236Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -17771,7 +17782,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T01:17:14.724Z"
+      "updatedAt": "2026-10-08T01:32:15.237Z"
     }
   },
   "episodeConsultations": {},
