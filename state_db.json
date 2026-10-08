@@ -1,5 +1,5 @@
 {
-  "version": 1791419453525,
+  "version": 1791419492674,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1341,6 +1341,429 @@
   ],
   "uploadedHisFiles": [
     {
+      "fileName": "9.xlsx → [Ra viện: 141 dòng]",
+      "categoryCode": "RA_VIEN",
+      "savedPath": "/opt/render/project/src/uploads_his/ra_vien.xlsx",
+      "sizeBytes": 59061,
+      "uploadedAt": "07:31:30 8/10/2026",
+      "extractedPreview": {
+        "sheetNames": [
+          "Sheet1"
+        ],
+        "rowCount": 142,
+        "sampleRows": [
+          [
+            "ct",
+            "makk",
+            "tenkk",
+            "maphong",
+            "tenphong",
+            "madonnguyen",
+            "tendonnguyen",
+            "mabn",
+            "mayte",
+            "Mã KCB",
+            "Ngày vào",
+            "Họ tên",
+            "NS",
+            "Tuổi",
+            "maphai",
+            "GT",
+            "madoituong",
+            "Đối tượng",
+            "manghenghiep",
+            "Nghề nghiệp",
+            "dangdieutri",
+            "Địa chỉ",
+            "dienthoai",
+            "Số thẻ",
+            "diachithe",
+            "Hạn thẻ từ",
+            "Hạn thẻ đến",
+            "manvdt",
+            "Bác sỹ điều trị",
+            "manvrv",
+            "tennvrv",
+            "NG",
+            "madieutri",
+            "machuyenkhoa",
+            "malydo",
+            "ngaycv",
+            "Ngày ra",
+            "chandoan",
+            "ngaytt",
+            "thanhtoan",
+            "manvtt",
+            "tennvtt",
+            "mahinhthucden",
+            "Hình thức đến",
+            "songaydieutri",
+            "songaydieutrint",
+            "tongchiphi",
+            "tongung",
+            "tienbenhnhanphainop"
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            342,
+            "Buồng Ngoại TK - CS 4",
+            14,
+            "Ngoại TK - CS 4",
+            "0001421329",
+            "525200126364092",
+            "2600364092",
+            46294.6666666667,
+            "TRẦN THỊ HÀNG",
+            "1967",
+            "59 tuổi",
+            2,
+            "Nữ",
+            1,
+            "BHYT",
+            70,
+            "Lao động giản đơn khác chưa được phân vào đâu",
+            1,
+            "Xã Bình An--Tỉnh Gia Lai",
+            "0974438739",
+            "HT3523896034350",
+            "Tân Phong, Phường An Bình, Tỉnh Gia Lai",
+            46023,
+            47848,
+            681,
+            "Phạm Ngọc Hải",
+            681,
+            "Phạm Ngọc Hải",
+            0,
+            948898,
+            "",
+            "",
+            "",
+            46296.2916666667,
+            "D17.7-U mỡ lành tính ở vị trí khác",
+            46296.3381944444,
+            1,
+            205,
+            "Nguyễn Thị Mỹ Trang",
+            2,
+            "Có giấy chuyển tuyến",
+            8,
+            "",
+            6356986,
+            1000000,
+            618058.7
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            342,
+            "Buồng Ngoại TK - CS 4",
+            14,
+            "Ngoại TK - CS 4",
+            "0001377524",
+            "525200126357793",
+            "2600357793",
+            46290.4166666667,
+            "THÁI ÁI NGỌC",
+            "1997",
+            "29 tuổi",
+            2,
+            "Nữ",
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            1,
+            "Văn Quang-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
+            "0968337731",
+            "GD4525221421709",
+            "Thôn Văn Quang, Xã Tuy Phước Bắc, Tỉnh Gia Lai",
+            46112,
+            46295,
+            681,
+            "Phạm Ngọc Hải",
+            681,
+            "Phạm Ngọc Hải",
+            0,
+            946480,
+            "",
+            "",
+            "",
+            46296.2916666667,
+            "L02.8-Áp xe da, nhọt và/hoặc cụm nhọt ở vị trí khác",
+            46296.3229166667,
+            1,
+            205,
+            "Nguyễn Thị Mỹ Trang",
+            1,
+            "Tự đến",
+            12,
+            "",
+            7953880.4,
+            2000000,
+            1621276.4
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            340,
+            "Buồng Ngoại TK - CS 2",
+            12,
+            "Ngoại TK - CS 2",
+            "0001418920",
+            "525200126363831",
+            "2600363831",
+            46289.3333333333,
+            "TRƯƠNG THỊ CẢNH",
+            "1953",
+            "73 tuổi",
+            2,
+            "Nữ",
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            1,
+            "KP 3-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
+            "0971093480",
+            "GD4525220002056",
+            "KP 3, Phường Quy Nhơn Nam, Tỉnh Gia Lai",
+            45995,
+            46359,
+            681,
+            "Phạm Ngọc Hải",
+            662,
+            "Đặng Ngọc Trí",
+            0,
+            945782,
+            "",
+            "",
+            "",
+            46296.2916666667,
+            "M48.06-Hẹp ống sống, vùng thắt lưng",
+            46296.4625,
+            1,
+            205,
+            "Nguyễn Thị Mỹ Trang",
+            1,
+            "Tự đến",
+            8,
+            "",
+            95269358.6,
+            19025300,
+            18729175.8
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            340,
+            "Buồng Ngoại TK - CS 2",
+            12,
+            "Ngoại TK - CS 2",
+            "0000948030",
+            "525200126360917",
+            "2600360917",
+            46287.4444444444,
+            "TRẦN THỊ THU BÍCH",
+            "1983",
+            "43 tuổi",
+            2,
+            "Nữ",
+            1,
+            "BHYT",
+            70,
+            "Lao động giản đơn khác chưa được phân vào đâu",
+            1,
+            "Trung Tín 1-Xã Tuy Phước--Tỉnh Gia Lai",
+            "0774563598",
+            "GD4525221346458",
+            "Trung Tín 1, Xã Tuy Phước, Tỉnh Gia Lai",
+            46257,
+            46621,
+            672,
+            "Ngô Văn Cư",
+            662,
+            "Đặng Ngọc Trí",
+            0,
+            944869,
+            "",
+            "",
+            46296.2916666667,
+            46296.2916666667,
+            "M48.30-Bệnh lý đốt sống do chấn thương, nhiều vị trí của cột sống",
+            46296.3333333333,
+            1,
+            205,
+            "Nguyễn Thị Mỹ Trang",
+            1,
+            "Tự đến",
+            10,
+            "",
+            56685549,
+            12000000,
+            11171585
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            342,
+            "Buồng Ngoại TK - CS 4",
+            14,
+            "Ngoại TK - CS 4",
+            "0001421838",
+            "525200126366187",
+            "2600366187",
+            46290.4375,
+            "NGUYỄN VĂN SUNG",
+            "1996",
+            "30 tuổi",
+            1,
+            "Nam",
+            1,
+            "BHYT",
+            70,
+            "Lao động giản đơn khác chưa được phân vào đâu",
+            1,
+            "An Dõng-Xã Bình An--Tỉnh Gia Lai",
+            "0385492524",
+            "GD4525220788717",
+            "An Dõng, Xã Bình An, Tỉnh Gia Lai",
+            46235,
+            46599,
+            681,
+            "Phạm Ngọc Hải",
+            681,
+            "Phạm Ngọc Hải",
+            0,
+            946475,
+            "",
+            "",
+            "",
+            46296.2916666667,
+            "M48.32-Bệnh lý đốt sống do chấn thương, vùng cổ",
+            46296.3201388889,
+            1,
+            205,
+            "Nguyễn Thị Mỹ Trang",
+            2,
+            "Có giấy chuyển tuyến",
+            7,
+            "",
+            3244431.78,
+            2000000,
+            801537.9
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            342,
+            "Buồng Ngoại TK - CS 4",
+            14,
+            "Ngoại TK - CS 4",
+            "0001037354",
+            "525200126365765",
+            "2600365765",
+            46290.3958333333,
+            "NGUYỄN HỒNG MINH",
+            "1956",
+            "70 tuổi",
+            1,
+            "Nam",
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            1,
+            "An Cửu-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
+            "0352411469",
+            "KC2525221364451",
+            "An Cửu, Xã Phước Hưng, Huyện Tuy Phước, Tỉnh Bình Định",
+            45292,
+            47118,
+            680,
+            "Nguyễn Xuân Tịnh",
+            680,
+            "Nguyễn Xuân Tịnh",
+            0,
+            946402,
+            "",
+            "",
+            "",
+            46296.2916666667,
+            "M48.50-Xẹp đốt sống, không phân loại mục khác, nhiều vị trí của cột sống",
+            46296.3340277778,
+            1,
+            205,
+            "Nguyễn Thị Mỹ Trang",
+            1,
+            "Tự đến",
+            7,
+            "",
+            3759136.2,
+            500000,
+            165987
+          ],
+          [
+            2609,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            340,
+            "Buồng Ngoại TK - CS 2",
+            12,
+            "Ngoại TK - CS 2",
+            "0001423128",
+            "525200126370537",
+            "2600370537",
+            46294.3680555556,
+            "LÂM THỊ ĐÁNG",
+            "1954",
+            "72 tuổi",
+            2,
+            "Nữ",
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            1,
+            "Thiện Chánh 2-Phường Hoài Nhơn Bắc--Tỉnh Gia Lai",
+            "0792468579",
+            "KC2525220397544",
+            "Thiện Chánh 2, Phường Hoài Nhơn Bắc, Tỉnh Gia Lai",
+            45839,
+            47118,
+            681,
+            "Phạm Ngọc Hải",
+            662,
+            "Đặng Ngọc Trí",
+            0,
+            948558,
+            "",
+            "",
+            "",
+            46296.2916666667,
+            "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
+            46296.3326388889,
+            1,
+            205,
+            "Nguyễn Thị Mỹ Trang",
+            2,
+            "Có giấy chuyển tuyến",
+            3,
+            "",
+            65979386.4,
+            22000000,
+            18800274
+          ]
+        ]
+      }
+    },
+    {
       "fileName": "8.xlsx → [Đang điều trị: 96 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
@@ -2217,21 +2640,13 @@
       "sizeBytes": 9648,
       "uploadedAt": "11:35:19 4/10/2026",
       "extractedPreview": null
-    },
-    {
-      "fileName": "3.xlsx → [Ra viện: 3 dòng]",
-      "categoryCode": "RA_VIEN",
-      "savedPath": "/opt/render/project/src/uploads_his/ra_vien.xlsx",
-      "sizeBytes": 10938,
-      "uploadedAt": "11:35:19 4/10/2026",
-      "extractedPreview": null
     }
   ],
   "patientStats": {
     "total": {
-      "dauCa": 117,
+      "dauCa": 106,
       "benhVao": 18,
-      "raVien": 42,
+      "raVien": 31,
       "chuyenDen": 5,
       "chuyenDi": 2,
       "tuVong": 0,
@@ -2252,9 +2667,9 @@
         "baoHiem": 22
       },
       "Thần kinh 2": {
-        "dauCa": 26,
+        "dauCa": 24,
         "benhVao": 4,
-        "raVien": 11,
+        "raVien": 9,
         "chuyenDen": 0,
         "chuyenDi": 2,
         "tuVong": 0,
@@ -2263,9 +2678,9 @@
         "baoHiem": 17
       },
       "Thần kinh 3": {
-        "dauCa": 16,
+        "dauCa": 11,
         "benhVao": 0,
-        "raVien": 6,
+        "raVien": 1,
         "chuyenDen": 1,
         "chuyenDi": 0,
         "tuVong": 0,
@@ -2274,9 +2689,9 @@
         "baoHiem": 10
       },
       "Thần kinh 4": {
-        "dauCa": 37,
+        "dauCa": 33,
         "benhVao": 9,
-        "raVien": 13,
+        "raVien": 9,
         "chuyenDen": 2,
         "chuyenDi": 0,
         "tuVong": 0,
@@ -2296,7 +2711,7 @@
         "baoHiem": 9
       }
     },
-    "updatedAt": "2026-10-08T00:30:52.829Z"
+    "updatedAt": "2026-10-08T00:31:31.727Z"
   },
   "wardRounds": {
     "tk1": {
@@ -6166,7 +6581,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T00:30:52.829Z"
+      "updatedAt": "2026-10-08T00:31:31.727Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -9144,7 +9559,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T00:30:52.830Z"
+      "updatedAt": "2026-10-08T00:31:31.727Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -10675,7 +11090,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T00:30:52.830Z"
+      "updatedAt": "2026-10-08T00:31:31.727Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -16177,7 +16592,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T00:30:52.830Z"
+      "updatedAt": "2026-10-08T00:31:31.728Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -17345,11 +17760,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-08T00:30:52.830Z"
+      "updatedAt": "2026-10-08T00:31:31.728Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "07:30 ngày 08/10/2026",
+  "lastExcelUploadTime": "07:31 ngày 08/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -19162,19 +19577,19 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "",
-            "xuatVien": 11,
+            "xuatVien": 24,
             "chamSocCap2": 0,
             "hoiChan": 0,
             "tangTren": 0,
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 30,
+            "benhCu": 43,
             "vaoKK": 4,
             "vaoKhac": 1,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 11,
+            "raRH": 24,
             "raKhac": 0,
             "tuVong": 0,
             "hienCo": 24,
@@ -19196,7 +19611,8 @@
               "diaChi": "Xã Tây Hòa--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-2",
@@ -19213,7 +19629,8 @@
               "diaChi": "Tân Lệ-Xã Phù Cát--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-3",
@@ -19230,7 +19647,8 @@
               "diaChi": "37 nguyễn bèo-Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-4",
@@ -19247,7 +19665,8 @@
               "diaChi": "Thôn Bắc Nhạn Tháp-Phường An Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-5",
@@ -19264,13 +19683,183 @@
               "diaChi": "Phường Quy Nhơn Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [
             {
               "id": "dis-tk1-1",
               "stt": 1,
+              "mabn": "0001327863",
+              "hoten": "VĂN HIỆP",
+              "tuoi": "75",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600367001",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-2",
+              "stt": 2,
+              "mabn": "0001426270",
+              "hoten": "NGUYỄN THỊ NAM",
+              "tuoi": "54",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600381491",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-3",
+              "stt": 3,
+              "mabn": "0001422911",
+              "hoten": "NGUYỄN TRỌNG NHÂN KHOA",
+              "tuoi": "17",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600369698",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-4",
+              "stt": 4,
+              "mabn": "0001425022",
+              "hoten": "PHAN MINH CHÍ",
+              "tuoi": "35",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600377205",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-5",
+              "stt": 5,
+              "mabn": "0001426435",
+              "hoten": "ĐOÀN NGỌC NHỊ",
+              "tuoi": "85",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600382085",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-6",
+              "stt": 6,
+              "mabn": "0001424428",
+              "hoten": "PHẠM VĂN LỘC",
+              "tuoi": "44",
+              "raHan": true,
+              "baoHiem": false,
+              "svv": "2600375020",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-7",
+              "stt": 7,
+              "mabn": "0001068291",
+              "hoten": "NGUYỄN THỊ MAI",
+              "tuoi": "45",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600374952",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-8",
+              "stt": 8,
+              "mabn": "0000811741",
+              "hoten": "CHÂU HỒNG LOAN",
+              "tuoi": "85",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600375969",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-9",
+              "stt": 9,
+              "mabn": "0001426246",
+              "hoten": "NGUYỄN THỊ TRỌN",
+              "tuoi": "77",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600381421",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-10",
+              "stt": 10,
+              "mabn": "0001425397",
+              "hoten": "TRƯƠNG THỊ DÂN",
+              "tuoi": "66",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600378168",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-11",
+              "stt": 11,
+              "mabn": "0001325103",
+              "hoten": "NGUYỄN TUẤN DUNG",
+              "tuoi": "52",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600366626",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-12",
+              "stt": 12,
+              "mabn": "0001423447",
+              "hoten": "ĐÀO TẤN NAM",
+              "tuoi": "54",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600371631",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-13",
+              "stt": 13,
+              "mabn": "0001352007",
+              "hoten": "NGUYỄN THỊ TY",
+              "tuoi": "76",
+              "raHan": true,
+              "baoHiem": true,
+              "svv": "2600364368",
+              "note": "Xuất viện",
+              "isHighlight": false,
+              "category": ""
+            },
+            {
+              "id": "dis-tk1-14",
+              "stt": 14,
               "mabn": "0001421064",
               "hoten": "ĐẶNG THỊ THẠNH",
               "tuoi": "89",
@@ -19282,8 +19871,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-2",
-              "stt": 2,
+              "id": "dis-tk1-15",
+              "stt": 15,
               "mabn": "0001421945",
               "hoten": "HỒ TRỌNG THƯƠNG",
               "tuoi": "37",
@@ -19295,8 +19884,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-3",
-              "stt": 3,
+              "id": "dis-tk1-16",
+              "stt": 16,
               "mabn": "0001421962",
               "hoten": "VÕ THỊ KIM OANH",
               "tuoi": "40",
@@ -19308,8 +19897,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-4",
-              "stt": 4,
+              "id": "dis-tk1-17",
+              "stt": 17,
               "mabn": "0001032592",
               "hoten": "NGUYỄN KHẮC ĐIỆP",
               "tuoi": "32",
@@ -19321,8 +19910,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-5",
-              "stt": 5,
+              "id": "dis-tk1-18",
+              "stt": 18,
               "mabn": "0001424352",
               "hoten": "NGUYỄN THỊ QUÁ",
               "tuoi": "85",
@@ -19334,8 +19923,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-6",
-              "stt": 6,
+              "id": "dis-tk1-19",
+              "stt": 19,
               "mabn": "0001424868",
               "hoten": "NGUYỄN KHẢ HÂN",
               "tuoi": "10",
@@ -19347,8 +19936,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-7",
-              "stt": 7,
+              "id": "dis-tk1-20",
+              "stt": 20,
               "mabn": "0001425126",
               "hoten": "PHAN NGUYỄN NHẬT KHÔI",
               "tuoi": "21",
@@ -19360,8 +19949,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-8",
-              "stt": 8,
+              "id": "dis-tk1-21",
+              "stt": 21,
               "mabn": "0001425307",
               "hoten": "ĐOÀN VĂN CHUNG",
               "tuoi": "45",
@@ -19373,8 +19962,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-9",
-              "stt": 9,
+              "id": "dis-tk1-22",
+              "stt": 22,
               "mabn": "0001425732",
               "hoten": "NGUYỄN THỊ THU THỦY",
               "tuoi": "51",
@@ -19386,8 +19975,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-10",
-              "stt": 10,
+              "id": "dis-tk1-23",
+              "stt": 23,
               "mabn": "0001425769",
               "hoten": "NGUYỄN TỐ KHẢI",
               "tuoi": "17",
@@ -19399,8 +19988,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk1-11",
-              "stt": 11,
+              "id": "dis-tk1-24",
+              "stt": 24,
               "mabn": "0001121759",
               "hoten": "VÕ MINH KHUÊ",
               "tuoi": "67",
@@ -19425,19 +20014,19 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "",
-            "xuatVien": 11,
+            "xuatVien": 7,
             "chamSocCap2": 0,
             "hoiChan": 0,
             "tangTren": 0,
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 28,
+            "benhCu": 24,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 11,
+            "raRH": 7,
             "raKhac": 0,
             "tuVong": 0,
             "hienCo": 17,
@@ -19461,32 +20050,6 @@
             {
               "id": "dis-tk2-2",
               "stt": 2,
-              "mabn": "0001325103",
-              "hoten": "NGUYỄN TUẤN DUNG",
-              "tuoi": "52",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600366626",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk2-3",
-              "stt": 3,
-              "mabn": "0001423447",
-              "hoten": "ĐÀO TẤN NAM",
-              "tuoi": "54",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600371631",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk2-4",
-              "stt": 4,
               "mabn": "0001423960",
               "hoten": "NGUYỄN DUY",
               "tuoi": "49",
@@ -19498,8 +20061,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk2-5",
-              "stt": 5,
+              "id": "dis-tk2-3",
+              "stt": 3,
               "mabn": "0001422360",
               "hoten": "NGUYỄN THỊ THU SƯƠNG",
               "tuoi": "19",
@@ -19511,21 +20074,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk2-6",
-              "stt": 6,
-              "mabn": "0001352007",
-              "hoten": "NGUYỄN THỊ TY",
-              "tuoi": "76",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600364368",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk2-7",
-              "stt": 7,
+              "id": "dis-tk2-4",
+              "stt": 4,
               "mabn": "0001424078",
               "hoten": "NGUYỄN VĂN HÒA",
               "tuoi": "64",
@@ -19537,21 +20087,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk2-8",
-              "stt": 8,
-              "mabn": "0001425022",
-              "hoten": "PHAN MINH CHÍ",
-              "tuoi": "35",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600377205",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk2-9",
-              "stt": 9,
+              "id": "dis-tk2-5",
+              "stt": 5,
               "mabn": "0001424521",
               "hoten": "HÀ THỊ TIẾN",
               "tuoi": "50",
@@ -19563,8 +20100,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk2-10",
-              "stt": 10,
+              "id": "dis-tk2-6",
+              "stt": 6,
               "mabn": "0001424410",
               "hoten": "HUỲNH THỊ KIM ANH",
               "tuoi": "60",
@@ -19576,8 +20113,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk2-11",
-              "stt": 11,
+              "id": "dis-tk2-7",
+              "stt": 7,
               "mabn": "0001424346",
               "hoten": "NGUYỄN THỊ HƯƠNG",
               "tuoi": "68",
@@ -19602,19 +20139,19 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "",
-            "xuatVien": 6,
+            "xuatVien": 1,
             "chamSocCap2": 0,
             "hoiChan": 0,
             "tangTren": 0,
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 17,
+            "benhCu": 12,
             "vaoKK": 0,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 6,
+            "raRH": 1,
             "raKhac": 0,
             "tuVong": 0,
             "hienCo": 11,
@@ -19625,77 +20162,12 @@
             {
               "id": "dis-tk3-1",
               "stt": 1,
-              "mabn": "0001327863",
-              "hoten": "VĂN HIỆP",
-              "tuoi": "75",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600367001",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk3-2",
-              "stt": 2,
-              "mabn": "0001422911",
-              "hoten": "NGUYỄN TRỌNG NHÂN KHOA",
-              "tuoi": "17",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600369698",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk3-3",
-              "stt": 3,
               "mabn": "0001262499",
               "hoten": "TRƯƠNG THỊ AN",
               "tuoi": "83",
               "raHan": true,
               "baoHiem": true,
               "svv": "2600371423",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk3-4",
-              "stt": 4,
-              "mabn": "0001424428",
-              "hoten": "PHẠM VĂN LỘC",
-              "tuoi": "44",
-              "raHan": true,
-              "baoHiem": false,
-              "svv": "2600375020",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk3-5",
-              "stt": 5,
-              "mabn": "0001426270",
-              "hoten": "NGUYỄN THỊ NAM",
-              "tuoi": "54",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600381491",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk3-6",
-              "stt": 6,
-              "mabn": "0001426435",
-              "hoten": "ĐOÀN NGỌC NHỊ",
-              "tuoi": "85",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600382085",
               "note": "Ra viện (đối chiếu Đang điều trị)",
               "isHighlight": false,
               "category": ""
@@ -19714,19 +20186,19 @@
             "nursesDay": "",
             "nursesNight": "",
             "orderly": "",
-            "xuatVien": 13,
+            "xuatVien": 9,
             "chamSocCap2": 0,
             "hoiChan": 0,
             "tangTren": 0,
             "tangDuoi": 0
           },
           "census": {
-            "benhCu": 37,
+            "benhCu": 33,
             "vaoKK": 9,
             "vaoKhac": 2,
             "moCT": 0,
             "moCC": 0,
-            "raRH": 13,
+            "raRH": 9,
             "raKhac": 0,
             "tuVong": 0,
             "hienCo": 35,
@@ -19748,7 +20220,8 @@
               "diaChi": "Xã Bình Phú--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-2",
@@ -19765,7 +20238,8 @@
               "diaChi": "Phú Gia-Xã Xuân An--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-3",
@@ -19782,7 +20256,8 @@
               "diaChi": "Cẩm Văn-Phường An Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-4",
@@ -19799,7 +20274,8 @@
               "diaChi": "Vĩnh Phú-Phường An Nhơn Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-5",
@@ -19816,7 +20292,8 @@
               "diaChi": "tổ 4 tây sơn-Phường An Khê--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-6",
@@ -19833,7 +20310,8 @@
               "diaChi": "Phường An Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-7",
@@ -19850,7 +20328,8 @@
               "diaChi": "Tân Vinh-Xã Đồng Xuân--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-8",
@@ -19867,7 +20346,8 @@
               "diaChi": "An Hành Tây-Xã Phù Cát--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-9",
@@ -19884,7 +20364,8 @@
               "diaChi": "thôn 5-Xã Ea Wy--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-10",
@@ -19901,7 +20382,8 @@
               "diaChi": "Cù Lâm-Xã An Nhơn Tây--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-11",
@@ -19918,7 +20400,8 @@
               "diaChi": "Thịnh Văn 1-Xã Vân Canh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [
@@ -19977,32 +20460,6 @@
             {
               "id": "dis-tk4-5",
               "stt": 5,
-              "mabn": "0001068291",
-              "hoten": "NGUYỄN THỊ MAI",
-              "tuoi": "45",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600374952",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk4-6",
-              "stt": 6,
-              "mabn": "0000811741",
-              "hoten": "CHÂU HỒNG LOAN",
-              "tuoi": "85",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600375969",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk4-7",
-              "stt": 7,
               "mabn": "0001355398",
               "hoten": "TRẦN ĐÌNH HÙNG",
               "tuoi": "75",
@@ -20014,21 +20471,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk4-8",
-              "stt": 8,
-              "mabn": "0001425397",
-              "hoten": "TRƯƠNG THỊ DÂN",
-              "tuoi": "66",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600378168",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk4-9",
-              "stt": 9,
+              "id": "dis-tk4-6",
+              "stt": 6,
               "mabn": "0001425448",
               "hoten": "LÊ VĂN KỶ",
               "tuoi": "76",
@@ -20040,8 +20484,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk4-10",
-              "stt": 10,
+              "id": "dis-tk4-7",
+              "stt": 7,
               "mabn": "0001424529",
               "hoten": "NGUYỄN THỊ MẬN",
               "tuoi": "76",
@@ -20053,8 +20497,8 @@
               "category": ""
             },
             {
-              "id": "dis-tk4-11",
-              "stt": 11,
+              "id": "dis-tk4-8",
+              "stt": 8,
               "mabn": "0001423015",
               "hoten": "NGUYỄN THỊ ĐIỂM",
               "tuoi": "73",
@@ -20066,27 +20510,14 @@
               "category": ""
             },
             {
-              "id": "dis-tk4-12",
-              "stt": 12,
+              "id": "dis-tk4-9",
+              "stt": 9,
               "mabn": "0001425367",
               "hoten": "GIÁP VĂN KHẢI",
               "tuoi": "39",
               "raHan": true,
               "baoHiem": true,
               "svv": "2600378051",
-              "note": "Ra viện (đối chiếu Đang điều trị)",
-              "isHighlight": false,
-              "category": ""
-            },
-            {
-              "id": "dis-tk4-13",
-              "stt": 13,
-              "mabn": "0001426246",
-              "hoten": "NGUYỄN THỊ TRỌN",
-              "tuoi": "77",
-              "raHan": true,
-              "baoHiem": true,
-              "svv": "2600381421",
               "note": "Ra viện (đối chiếu Đang điều trị)",
               "isHighlight": false,
               "category": ""
@@ -20164,8 +20595,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791419452138.166,
-      "lastHisSyncTime": "2026-10-08T00:30:53.519Z"
+      "lastHisSyncTimeMs": 1791419490527.922,
+      "lastHisSyncTime": "2026-10-08T00:31:32.618Z"
     }
   },
   "announcement": {
