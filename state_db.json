@@ -1,5 +1,5 @@
 {
-  "version": 1791510328482,
+  "version": 1791510390123,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1474,8 +1474,8 @@
       "fileName": "1.xlsx → [Đang điều trị: 81 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
-      "sizeBytes": 46984,
-      "uploadedAt": "08:45:26 9/10/2026",
+      "sizeBytes": 46983,
+      "uploadedAt": "08:46:28 9/10/2026",
       "extractedPreview": {
         "sheetNames": [
           "Sheet1"
@@ -2841,7 +2841,7 @@
         "baoHiem": 6
       }
     },
-    "updatedAt": "2026-10-09T01:45:27.723Z"
+    "updatedAt": "2026-10-09T01:46:29.523Z"
   },
   "wardRounds": {
     "tk1": {
@@ -7074,7 +7074,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T01:45:27.723Z"
+      "updatedAt": "2026-10-09T01:46:29.523Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -10363,7 +10363,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T01:45:27.724Z"
+      "updatedAt": "2026-10-09T01:46:29.523Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -12049,7 +12049,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T01:45:27.724Z"
+      "updatedAt": "2026-10-09T01:46:29.523Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -17788,7 +17788,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T01:45:27.724Z"
+      "updatedAt": "2026-10-09T01:46:29.523Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -19056,11 +19056,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T01:45:27.724Z"
+      "updatedAt": "2026-10-09T01:46:29.523Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "08:45 ngày 09/10/2026",
+  "lastExcelUploadTime": "08:46 ngày 09/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -22707,8 +22707,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791510326924.2063,
-      "lastHisSyncTime": "2026-10-09T01:45:28.333Z"
+      "lastHisSyncTimeMs": 1791510388524.3748,
+      "lastHisSyncTime": "2026-10-09T01:46:30.028Z"
     }
   },
   "announcement": {
