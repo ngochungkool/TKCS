@@ -1,5 +1,5 @@
 {
-  "version": 1791512209128,
+  "version": 1791512697923,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1471,16 +1471,16 @@
   ],
   "uploadedHisFiles": [
     {
-      "fileName": "1.xlsx → [Đang điều trị: 81 dòng]",
+      "fileName": "e.xlsx → [Đang điều trị: 82 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
-      "sizeBytes": 47021,
-      "uploadedAt": "09:16:47 9/10/2026",
+      "sizeBytes": 47431,
+      "uploadedAt": "09:24:55 9/10/2026",
       "extractedPreview": {
         "sheetNames": [
           "Sheet1"
         ],
-        "rowCount": 82,
+        "rowCount": 83,
         "sampleRows": [
           [
             "chon",
@@ -1767,7 +1767,7 @@
             4,
             "Đa tuyến đúng tuyến",
             "Vạn Hội 1-Xã Vạn Đức--Tỉnh Gia Lai",
-            "M48.55-Xẹp đốt sống, không phân lo���i mục khác, vùng ngực - thắt lưng",
+            "M48.55-Xẹp đốt sống, không phân loại mục khác, vùng ngực - thắt lưng",
             "BT2525221866767",
             "Vạn Hội 1, Xã Vạn Đức, Tỉnh Gia Lai",
             46054,
@@ -2775,26 +2775,26 @@
   "patientStats": {
     "total": {
       "dauCa": 71,
-      "benhVao": 22,
+      "benhVao": 23,
       "raVien": 13,
       "chuyenDen": 2,
       "chuyenDi": 1,
       "tuVong": 0,
       "benhMo": 0,
-      "hienCo": 81,
-      "baoHiem": 74
+      "hienCo": 82,
+      "baoHiem": 75
     },
     "byRoom": {
       "Thần kinh 1": {
         "dauCa": 14,
-        "benhVao": 8,
+        "benhVao": 9,
         "raVien": 0,
         "chuyenDen": 0,
         "chuyenDi": 0,
         "tuVong": 0,
         "benhMo": 0,
-        "hienCo": 22,
-        "baoHiem": 17
+        "hienCo": 23,
+        "baoHiem": 18
       },
       "Thần kinh 2": {
         "dauCa": 24,
@@ -2841,7 +2841,7 @@
         "baoHiem": 6
       }
     },
-    "updatedAt": "2026-10-09T02:16:47.921Z"
+    "updatedAt": "2026-10-09T02:24:57.124Z"
   },
   "wardRounds": {
     "tk1": {
@@ -7032,6 +7032,57 @@
           },
           "surgicalConsultationsByDate": {},
           "surgicalConsultation": null
+        },
+        "0000950026": {
+          "mabn": "0000950026",
+          "episodeKey": "2600386583",
+          "maKcb": "2600386583",
+          "madieutri": "954944",
+          "soBA": "26079779",
+          "hoten": "TRẦN THỊ HỒNG THƠM",
+          "tuoi": "55 tuổi",
+          "namSinh": "1971",
+          "gioiTinh": "Nữ",
+          "doiTuong": "BHYT",
+          "soTheBhyt": "GD4525221171960",
+          "tuyenDangKy": "Đúng tuyến",
+          "hanTheTu": "26/09/2026",
+          "hanTheDen": "25/09/2027",
+          "diaChi": "Đông Lâm-Xã An Nhơn Tây--Tỉnh Gia Lai",
+          "chanDoanHis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "customDiagnosis": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+          "bsDieuTri": "Lê Đức Nhật",
+          "ngayVaoStr": "09/10/2026",
+          "hisBed": "H022",
+          "khoaChuyenDen": "",
+          "tasksByDate": {},
+          "consultDetails": {
+            "specialty": "",
+            "consultDiagnosis": "",
+            "consultTreatment": "",
+            "followUpDays": "",
+            "followUpClinic": ""
+          },
+          "discharge": {
+            "status": "NONE",
+            "markedDate": "",
+            "followUpDays": "",
+            "followUpClinic": "",
+            "note": ""
+          },
+          "removed": {
+            "isRemoved": false,
+            "reason": "",
+            "previousBed": "",
+            "removedAtMs": 0
+          },
+          "surgeryInfo": {
+            "isNonSurgical": false,
+            "surgeryName": "",
+            "surgeryDate": ""
+          },
+          "surgicalConsultationsByDate": {},
+          "surgicalConsultation": null
         }
       },
       "archivedRecords": {},
@@ -7057,7 +7108,8 @@
         "0001427429",
         "0001427448",
         "0001427511",
-        "0001427512"
+        "0001427512",
+        "0000950026"
       ],
       "acknowledgedMissingMabns": {},
       "dismissedHisAlertMabns": [],
@@ -7074,7 +7126,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T02:16:47.922Z"
+      "updatedAt": "2026-10-09T02:24:57.124Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -10363,7 +10415,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T02:16:47.922Z"
+      "updatedAt": "2026-10-09T02:24:57.124Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -12049,7 +12101,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T02:16:47.922Z"
+      "updatedAt": "2026-10-09T02:24:57.124Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -17788,7 +17840,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T02:16:47.922Z"
+      "updatedAt": "2026-10-09T02:24:57.125Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -19056,11 +19108,11 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-09T02:16:47.922Z"
+      "updatedAt": "2026-10-09T02:24:57.125Z"
     }
   },
   "episodeConsultations": {},
-  "lastExcelUploadTime": "09:16 ngày 09/10/2026",
+  "lastExcelUploadTime": "09:24 ngày 09/10/2026",
   "briefingReports": {
     "2026-10-04": {
       "dateKey": "2026-10-04",
@@ -22537,17 +22589,35 @@
           },
           "census": {
             "benhCu": 22,
-            "vaoKK": 0,
+            "vaoKK": 1,
             "vaoKhac": 0,
             "moCT": 0,
             "moCC": 0,
             "raRH": 0,
             "raKhac": 0,
             "tuVong": 0,
-            "hienCo": 22,
-            "bhyt": 17
+            "hienCo": 23,
+            "bhyt": 18
           },
-          "admissions": [],
+          "admissions": [
+            {
+              "id": "adm-tk1-1",
+              "stt": 1,
+              "mabn": "0000950026",
+              "soVaoVien": "2600386583",
+              "maKcb": "2600386583",
+              "svv": "2600386583",
+              "hoten": "TRẦN THỊ HỒNG THƠM",
+              "tuoi": "55",
+              "cause": "TNGT",
+              "source": "KK",
+              "chanDoan": "S06.00-Chấn động não, không có vết thương nội sọ hở",
+              "diaChi": "Đông Lâm-Xã An Nhơn Tây--Tỉnh Gia Lai",
+              "tinhTrang": "Tỉnh",
+              "isHighlight": false,
+              "category": ""
+            }
+          ],
           "discharges": [],
           "emergencySurgeries": [],
           "criticalNotes": ""
@@ -22694,21 +22764,21 @@
         ],
         "grandCensus": {
           "benhCu": 81,
-          "vaoKK": 0,
+          "vaoKK": 1,
           "vaoKhac": 0,
           "moCT": 0,
           "moCC": 0,
           "raRH": 0,
           "raKhac": 0,
           "tuVong": 0,
-          "hienCo": 81,
-          "bhyt": 74
+          "hienCo": 82,
+          "bhyt": 75
         },
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791512207229.4536,
-      "lastHisSyncTime": "2026-10-09T02:16:49.024Z"
+      "lastHisSyncTimeMs": 1791512695724.6174,
+      "lastHisSyncTime": "2026-10-09T02:24:57.825Z"
     }
   },
   "announcement": {
