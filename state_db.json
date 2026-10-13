@@ -1,5 +1,5 @@
 {
-  "version": 1791851005126,
+  "version": 1791851031118,
   "rooms": [
     "Thần kinh 1",
     "Thần kinh 2",
@@ -1471,6 +1471,245 @@
   ],
   "uploadedHisFiles": [
     {
+      "fileName": "a2.xlsx → [Chuyển khoa: 6 dòng]",
+      "categoryCode": "CHUYEN_KHOA",
+      "savedPath": "/opt/render/project/src/uploads_his/chuyen_khoa.xlsx",
+      "sizeBytes": 11389,
+      "uploadedAt": "07:23:48 13/10/2026",
+      "extractedPreview": {
+        "sheetNames": [
+          "Sheet1"
+        ],
+        "rowCount": 7,
+        "sampleRows": [
+          [
+            "ct",
+            "mayte",
+            "madieutri",
+            "makkc",
+            "tenkk",
+            "Ngày chuyển",
+            "mabn",
+            "Mã KCB",
+            "Họ tên",
+            "namsinh",
+            "Tuổi",
+            "maphai",
+            "GT",
+            "madoituong",
+            "dangdieutri",
+            "Đối tượng",
+            "manghenghiep",
+            "Nghề nghiệp",
+            "diachi",
+            "dienthoai",
+            "sothe",
+            "makk",
+            "Khoa chuyển đến",
+            "machuyenkhoa",
+            "maphong",
+            "madonnguyen",
+            "malydo",
+            "Chờ?",
+            "mahinhthucden",
+            "Hình thức đến"
+          ],
+          [
+            2609,
+            "665200126369089",
+            948152,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            46302.375,
+            "0001422775",
+            "2600369089",
+            "LA O THỊ LIÊN",
+            "1955",
+            "71 tuổi",
+            2,
+            "Nữ",
+            1,
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            "Suối Cối 2-Xã Phú Mỡ--Tỉnh Đắk Lắk",
+            "0389874641",
+            "KD2665420308676",
+            19,
+            "Khoa Ung bướu",
+            "",
+            "",
+            12,
+            0,
+            0,
+            1,
+            "Tự đến"
+          ],
+          [
+            2610,
+            "525200126374839",
+            950226,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            46302.6347222222,
+            "0001424352",
+            "2600374839",
+            "NGUYỄN THỊ QUÁ",
+            "1941",
+            "85 tuổi",
+            2,
+            "Nữ",
+            1,
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            "phú gia -Xã Xuân An--Tỉnh Gia Lai",
+            "0967771659",
+            "LH2525221888984",
+            11,
+            "Khoa Ngoại Chấn thương - Bỏng",
+            "",
+            "",
+            11,
+            0,
+            0,
+            2,
+            "Có giấy chuyển tuyến"
+          ],
+          [
+            2610,
+            "525200126376877",
+            950897,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            46303.6270833333,
+            "0001424848",
+            "2600376877",
+            "NGUYỄN VĂN NHỚ",
+            "1987",
+            "39 tuổi",
+            1,
+            "Nam",
+            1,
+            1,
+            "BHYT",
+            70,
+            "Lao động giản đơn khác chưa được phân vào đâu",
+            "Trung Lương-Xã Cát Tiến--Tỉnh Gia Lai",
+            "0383304996",
+            "GD4528924744790",
+            11,
+            "Khoa Ngoại Chấn thương - Bỏng",
+            "",
+            "",
+            11,
+            0,
+            0,
+            1,
+            "Tự đến"
+          ],
+          [
+            2610,
+            "525200126385704",
+            954585,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            46304.6041666667,
+            "0001427429",
+            "2600385704",
+            "ĐỖ VĂN HÂN",
+            "1984",
+            "42 tuổi",
+            1,
+            "Nam",
+            1,
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            "Khu Phố 7-Phường Quy Nhơn Bắc--Tỉnh Gia Lai",
+            "0368644975",
+            "GD4525220026464",
+            11,
+            "Khoa Ngoại Chấn thương - Bỏng",
+            "",
+            "",
+            11,
+            0,
+            0,
+            1,
+            "Tự đến"
+          ],
+          [
+            2610,
+            "525200126388402",
+            956026,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            46306.6881944444,
+            "0000137767",
+            "2600388402",
+            "NGUYỄN THỊ BỒNG LAI",
+            "1961",
+            "65 tuổi",
+            2,
+            "Nữ",
+            1,
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            "182 Quang Trung-Xã Tây Sơn--Tỉnh Gia Lai",
+            "0945507843          ",
+            "HT3523796000629",
+            11,
+            "Khoa Ngoại Chấn thương - Bỏng",
+            "",
+            "",
+            11,
+            0,
+            0,
+            2,
+            "Có giấy chuyển tuyến"
+          ],
+          [
+            2610,
+            "525200126380114",
+            954002,
+            10,
+            "Khoa Ngoại Thần kinh - Cột sống",
+            46307.625,
+            "0000718282",
+            "2600380114",
+            "TRẦN MINH PHƯƠNG",
+            "1995",
+            "31 tuổi",
+            1,
+            "Nam",
+            1,
+            1,
+            "BHYT",
+            74,
+            "Chưa phân loại",
+            "Tân Lệ-Xã Phù Cát--Tỉnh Gia Lai",
+            "0395171679          ",
+            "GD4525221037588",
+            11,
+            "Khoa Ngoại Chấn thương - Bỏng",
+            "",
+            "",
+            11,
+            0,
+            0,
+            1,
+            "Tự đến"
+          ]
+        ]
+      }
+    },
+    {
       "fileName": "a1.xlsx → [Đang điều trị: 99 dòng]",
       "categoryCode": "DANG_DIEU_TRI",
       "savedPath": "/opt/render/project/src/uploads_his/dang_dieu_tri.xlsx",
@@ -1990,357 +2229,6 @@
       }
     },
     {
-      "fileName": "4.xlsx → [Chuyển khoa: 13 dòng]",
-      "categoryCode": "CHUYEN_KHOA",
-      "savedPath": "/opt/render/project/src/uploads_his/chuyen_khoa.xlsx",
-      "sizeBytes": 13974,
-      "uploadedAt": "07:33:08 8/10/2026",
-      "extractedPreview": {
-        "sheetNames": [
-          "Sheet1"
-        ],
-        "rowCount": 14,
-        "sampleRows": [
-          [
-            "ct",
-            "makk",
-            "tenkk",
-            "maphong",
-            "tenphong",
-            "madonnguyen",
-            "tendonnguyen",
-            "mabn",
-            "mayte",
-            "Mã KCB",
-            "Ngày vào",
-            "Họ tên",
-            "NS",
-            "Tuổi",
-            "maphai",
-            "GT",
-            "madoituong",
-            "Đối tượng",
-            "manghenghiep",
-            "Nghề nghiệp",
-            "dangdieutri",
-            "Địa chỉ",
-            "dienthoai",
-            "Số thẻ",
-            "diachithe",
-            "Hạn thẻ từ",
-            "Hạn thẻ đến",
-            "manv",
-            "Bác sỹ điều trị",
-            "NG",
-            "madieutri",
-            "machuyenkhoa",
-            "malydo",
-            "Ngày chuyển",
-            "ngayrv",
-            "ravien",
-            "ngaytt",
-            "thanhtoan",
-            "mahinhthucden",
-            "Hình thức đến"
-          ],
-          [
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            340,
-            "Buồng Ngoại TK - CS 2",
-            12,
-            "Ngoại TK - CS 2",
-            "0000948030",
-            "525200126360917",
-            "2600360917",
-            46287.4444444444,
-            "TRẦN THỊ THU BÍCH",
-            "1983",
-            "43 tuổi",
-            2,
-            "Nữ",
-            1,
-            "BHYT",
-            70,
-            "Lao động giản đơn khác chưa được phân vào đâu",
-            1,
-            "Trung Tín 1-Xã Tuy Phước--Tỉnh Gia Lai",
-            "0774563598",
-            "GD4525221346458",
-            "Trung Tín 1, Xã Tuy Phước, Tỉnh Gia Lai",
-            46257,
-            46621,
-            662,
-            "Đặng Ngọc Trí",
-            0,
-            "",
-            "",
-            "",
-            46296.2916666667,
-            46296.2916666667,
-            1,
-            46296.3333333333,
-            1,
-            1,
-            "Tự đến"
-          ],
-          [
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            342,
-            "Buồng Ngoại TK - CS 4",
-            14,
-            "Ngoại TK - CS 4",
-            "0001197225",
-            "525200126371283",
-            "2600371283",
-            46294.625,
-            "TÔ VĂN THÂU",
-            "1961",
-            "65 tuổi",
-            1,
-            "Nam",
-            1,
-            "BHYT",
-            70,
-            "Lao động giản đơn khác chưa được phân vào đâu",
-            1,
-            "Làng Hiệp Hưng-Xã Canh Vinh--Tỉnh Gia Lai",
-            "0348818018",
-            "DK2525221473720",
-            "Hiệp Hưng, Xã Canh Vinh, Tỉnh Gia Lai",
-            46113,
-            46387,
-            680,
-            "Nguyễn Xuân Tịnh",
-            0,
-            "",
-            "",
-            "",
-            46296.2916666667,
-            46296.2916666667,
-            1,
-            46296.3645833333,
-            1,
-            1,
-            "Tự đến"
-          ],
-          [
-            2610,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            412,
-            "PK Ngoại Thần Kinh(P103)",
-            99,
-            "PK Ngoại Thần Kinh - P103",
-            "0001371574",
-            "",
-            "2600373604",
-            "",
-            "NGUYỄN THỊ HÒA",
-            "1970",
-            "56 tuổi",
-            2,
-            "Nữ",
-            1,
-            "BHYT",
-            70,
-            "Lao động giản đơn khác chưa được phân vào đâu",
-            0,
-            "mỹ an-Xã Bình An--Tỉnh Gia Lai",
-            "0357395660",
-            "BT2525220859925",
-            "Mỹ An, Xã Bình An, Tỉnh Gia Lai",
-            46023,
-            47483,
-            631,
-            "Lê Đức Nhật",
-            0,
-            "",
-            "",
-            "",
-            46296.3197222222,
-            46296.3229166667,
-            1,
-            46296.3256944444,
-            1,
-            2,
-            "Có giấy chuyển tuyến"
-          ],
-          [
-            2610,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            412,
-            "PK Ngoại Thần Kinh(P103)",
-            99,
-            "PK Ngoại Thần Kinh - P103",
-            "0000727710",
-            "",
-            "2600374398",
-            "",
-            "NGUYỄN HOÀNG QUÂN",
-            "2012",
-            "14 tuổi",
-            1,
-            "Nam",
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            0,
-            "Định Tân-Xã Vĩnh Thạnh--Tỉnh Gia Lai",
-            "0984007927          ",
-            "BT2525220751874",
-            "Định Tân, Thị trấn Vĩnh Thạnh, Huyện Vĩnh Thạnh, Tỉnh Gia Lai",
-            45839,
-            46752,
-            631,
-            "Lê Đức Nhật",
-            0,
-            "",
-            "",
-            "",
-            46296.4194791667,
-            46296.4208333333,
-            1,
-            46296.4243055556,
-            1,
-            2,
-            "Có giấy chuyển tuyến"
-          ],
-          [
-            2609,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            342,
-            "Buồng Ngoại TK - CS 4",
-            14,
-            "Ngoại TK - CS 4",
-            "0001423683",
-            "525200126372521",
-            "2600372521",
-            46295.3923611111,
-            "ĐỖ THỊ THU THẢO",
-            "1958",
-            "68 tuổi",
-            2,
-            "Nữ",
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            1,
-            "Trung Hóa-Phường Hoài Nhơn--Tỉnh Gia Lai",
-            "0905421489",
-            "GD4525220281741",
-            "Trung Hóa, Phường Hoài Nhơn, Tỉnh Gia Lai",
-            46075,
-            46439,
-            681,
-            "Phạm Ngọc Hải",
-            0,
-            "",
-            "",
-            "",
-            46297.2916666667,
-            46297.2916666667,
-            1,
-            46297.4423611111,
-            1,
-            1,
-            "Tự đến"
-          ],
-          [
-            2610,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            412,
-            "PK Ngoại Thần Kinh(P103)",
-            99,
-            "PK Ngoại Thần Kinh - P103",
-            "0000054041",
-            "",
-            "2600378541",
-            "",
-            "TRẦN VĂN CẢNH",
-            "1960",
-            "66 tuổi",
-            1,
-            "Nam",
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            0,
-            "22/1 Phan Bội Châu, Tổ 29A, Khu Vực 7, Lê Lợi, Quy Nhơn, Bình Định-Phường Quy Nhơn--Tỉnh Gia Lai",
-            "0905725711",
-            "HT2525213007678",
-            "22/1 Phan Bội Châu, Phường Quy Nhơn, Tỉnh Gia Lai",
-            46234,
-            47848,
-            1690,
-            "Dương Minh Trí",
-            0,
-            "",
-            "",
-            "",
-            46300.3925694444,
-            46300.4388888889,
-            1,
-            46300.4409722222,
-            1,
-            1,
-            "Tự đến"
-          ],
-          [
-            2610,
-            10,
-            "Khoa Ngoại Thần kinh - Cột sống",
-            412,
-            "PK Ngoại Thần Kinh(P103)",
-            99,
-            "PK Ngoại Thần Kinh - P103",
-            "0000945878",
-            "",
-            "2600378784",
-            "",
-            "ĐINH THỊ THU",
-            "1960",
-            "66 tuổi",
-            2,
-            "Nữ",
-            1,
-            "BHYT",
-            74,
-            "Chưa phân loại",
-            0,
-            "Diêu Trì-Xã Tuy Phước--Tỉnh Gia Lai",
-            "0975728779          ",
-            "BT2525221337533",
-            "Diêu Trì, Thị trấn Diêu Trì, Huyện Tuy Phước, Tỉnh Bình Định",
-            45839,
-            47118,
-            1690,
-            "Dương Minh Trí",
-            0,
-            "",
-            "",
-            "",
-            46300.40625,
-            46300.5763888889,
-            1,
-            46300.58125,
-            1,
-            2,
-            "Có giấy chuyển tuyến"
-          ]
-        ]
-      }
-    },
-    {
       "fileName": "9.xlsx → [Ra viện: 141 dòng]",
       "categoryCode": "RA_VIEN",
       "savedPath": "/opt/render/project/src/uploads_his/ra_vien.xlsx",
@@ -2774,11 +2662,11 @@
   ],
   "patientStats": {
     "total": {
-      "dauCa": 77,
+      "dauCa": 76,
       "benhVao": 48,
-      "raVien": 31,
+      "raVien": 29,
       "chuyenDen": 5,
-      "chuyenDi": 0,
+      "chuyenDi": 1,
       "tuVong": 0,
       "benhMo": 0,
       "hienCo": 99,
@@ -2786,11 +2674,11 @@
     },
     "byRoom": {
       "Thần kinh 1": {
-        "dauCa": 23,
+        "dauCa": 22,
         "benhVao": 13,
-        "raVien": 13,
+        "raVien": 11,
         "chuyenDen": 0,
-        "chuyenDi": 0,
+        "chuyenDi": 1,
         "tuVong": 0,
         "benhMo": 0,
         "hienCo": 23,
@@ -2841,7 +2729,7 @@
         "baoHiem": 8
       }
     },
-    "updatedAt": "2026-10-13T00:23:24.018Z"
+    "updatedAt": "2026-10-13T00:23:50.127Z"
   },
   "wardRounds": {
     "tk1": {
@@ -7789,7 +7677,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-13T00:23:24.018Z"
+      "updatedAt": "2026-10-13T00:23:50.127Z"
     },
     "tk2": {
       "roomKey": "tk2",
@@ -11691,7 +11579,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-13T00:23:24.018Z"
+      "updatedAt": "2026-10-13T00:23:50.127Z"
     },
     "tk3": {
       "roomKey": "tk3",
@@ -13633,7 +13521,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-13T00:23:24.019Z"
+      "updatedAt": "2026-10-13T00:23:50.127Z"
     },
     "tk4": {
       "roomKey": "tk4",
@@ -20507,7 +20395,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-13T00:23:24.019Z"
+      "updatedAt": "2026-10-13T00:23:50.128Z"
     },
     "hstk": {
       "roomKey": "hstk",
@@ -22134,7 +22022,7 @@
         "hienCo": 0,
         "bhyt": 0
       },
-      "updatedAt": "2026-10-13T00:23:24.019Z"
+      "updatedAt": "2026-10-13T00:23:50.218Z"
     }
   },
   "episodeConsultations": {},
@@ -26450,7 +26338,8 @@
               "diaChi": "Phong An-Xã Phù Cát--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-2",
@@ -26467,7 +26356,8 @@
               "diaChi": "Thạch Long 1-Xã Hoài Ân--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-3",
@@ -26484,7 +26374,8 @@
               "diaChi": "96/11 lê lợi-Phường Phú Yên--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-4",
@@ -26501,7 +26392,8 @@
               "diaChi": "Luật Chánh-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-5",
@@ -26518,7 +26410,8 @@
               "diaChi": "Chánh Định-Xã Ngô Mây--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-6",
@@ -26535,7 +26428,8 @@
               "diaChi": "An Kim-Xã Phù Cát--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-7",
@@ -26552,7 +26446,8 @@
               "diaChi": "Xã Xuân Lộc--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-8",
@@ -26569,7 +26464,8 @@
               "diaChi": "Thôn Vạn Ninh 2-Xã Phù Mỹ Nam--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-9",
@@ -26586,7 +26482,8 @@
               "diaChi": "Xã Hội Sơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-10",
@@ -26603,7 +26500,8 @@
               "diaChi": "Hoá Lạc-Xã Cát Tiến--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-11",
@@ -26620,7 +26518,8 @@
               "diaChi": "hẻm 1083 trần hưng đạo-Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-12",
@@ -26637,7 +26536,8 @@
               "diaChi": "Tổ 3, Khu phố 1 -Phường Quy Nhơn Nam--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk1-13",
@@ -26654,7 +26554,8 @@
               "diaChi": "Khu Vực Cẩm Văn-Phường An Nhơn Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [
@@ -26875,7 +26776,8 @@
               "diaChi": "phú thọ-Phường An Phú--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk2-2",
@@ -26892,7 +26794,8 @@
               "diaChi": "Hiệp Vinh 2-Xã Canh Vinh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk2-3",
@@ -26909,7 +26812,8 @@
               "diaChi": "Định Bình-Xã Vĩnh Thạnh--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk2-4",
@@ -26926,7 +26830,8 @@
               "diaChi": "Xã Hội Sơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [
@@ -27095,7 +27000,8 @@
               "diaChi": "KV5-Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk3-2",
@@ -27112,7 +27018,8 @@
               "diaChi": "lệ uyên-Phường Sông Cầu--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk3-3",
@@ -27129,7 +27036,8 @@
               "diaChi": "Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk3-4",
@@ -27146,7 +27054,8 @@
               "diaChi": "Thôn Lý Hưng-Phường Quy Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [
@@ -27250,7 +27159,8 @@
               "diaChi": "Phú Kim-Xã Phù Cát--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-2",
@@ -27267,7 +27177,8 @@
               "diaChi": "Tú Thuỷ 1-Xã Cửu An--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-3",
@@ -27284,7 +27195,8 @@
               "diaChi": "Bung Bang Hven-Xã Đak Pơ--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-4",
@@ -27301,7 +27213,8 @@
               "diaChi": "tổ 21-Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-5",
@@ -27318,7 +27231,8 @@
               "diaChi": "An Lạc Đông 1-Xã Phù Mỹ--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-6",
@@ -27335,7 +27249,8 @@
               "diaChi": "Tiên Châu-Xã Tuy An Bắc--Tỉnh Đắk Lắk",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-7",
@@ -27352,7 +27267,8 @@
               "diaChi": "phụng du 1-Phường Hoài Nhơn Tây--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-8",
@@ -27369,7 +27285,8 @@
               "diaChi": "Xã Tây Sơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-9",
@@ -27386,7 +27303,8 @@
               "diaChi": "hiếu đức-Xã Tuy Phước Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-10",
@@ -27403,7 +27321,8 @@
               "diaChi": "Xã An Nhơn Tây--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-11",
@@ -27420,7 +27339,8 @@
               "diaChi": "Kp2-Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-12",
@@ -27437,7 +27357,8 @@
               "diaChi": "Thôn 1-Xã Kông Bơ La--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-13",
@@ -27454,7 +27375,8 @@
               "diaChi": "an Phong-Xã Phù Cát--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-14",
@@ -27471,7 +27393,8 @@
               "diaChi": "Xã Cát Tiến--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-15",
@@ -27488,7 +27411,8 @@
               "diaChi": "Phường Quy Nhơn--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-16",
@@ -27505,7 +27429,8 @@
               "diaChi": "an vinh 2-Xã Bình An--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-17",
@@ -27522,7 +27447,8 @@
               "diaChi": "Tổ 24-Phường Quy Nhơn Nam--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-18",
@@ -27539,7 +27465,8 @@
               "diaChi": "Nam Tượng 3-Xã An Nhơn Tây--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-19",
@@ -27556,7 +27483,8 @@
               "diaChi": "Hữu Thành-Xã Tuy Phước Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-tk4-20",
@@ -27573,7 +27501,8 @@
               "diaChi": "Chánh Nhơn-Xã Xuân An--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [
@@ -27690,7 +27619,8 @@
               "diaChi": "bôn ph ama miơng-Xã Ia Sao--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-hstk-2",
@@ -27707,7 +27637,8 @@
               "diaChi": "Tài Lương 1-Phường Hoài Nhơn Đông--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-hstk-3",
@@ -27724,7 +27655,8 @@
               "diaChi": "Vĩnh Hội-Xã Cát Tiến--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-hstk-4",
@@ -27741,7 +27673,8 @@
               "diaChi": "vĩnh phú-Xã Ngô Mây--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-hstk-5",
@@ -27758,7 +27691,8 @@
               "diaChi": "tổ 9-Phường Diên Hồng--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-hstk-6",
@@ -27775,7 +27709,8 @@
               "diaChi": "srat-Xã Sơn Lang--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             },
             {
               "id": "adm-hstk-7",
@@ -27792,7 +27727,8 @@
               "diaChi": "KP3-Phường Quy Nhơn Bắc--Tỉnh Gia Lai",
               "tinhTrang": "Tỉnh",
               "isHighlight": false,
-              "category": ""
+              "category": "",
+              "notesBs": ""
             }
           ],
           "discharges": [],
@@ -27818,8 +27754,8 @@
         "doctorNotes": "",
         "approvedBy": ""
       },
-      "lastHisSyncTimeMs": 1791851002722.835,
-      "lastHisSyncTime": "2026-10-13T00:23:25.030Z"
+      "lastHisSyncTimeMs": 1791851028928.3035,
+      "lastHisSyncTime": "2026-10-13T00:23:51.021Z"
     }
   },
   "announcement": {
